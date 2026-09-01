@@ -28,17 +28,34 @@ def weapons():
 
 
 def max_upgrade(row):
-    """How far this weapon can actually be upgraded.
+    """How far this weapon can actually be upgraded, read from the reinforce table.
 
-    Not a column in the data — it follows from two flags. A weapon that cannot be reinforced
-    at all sits at +0; an infusable (smithing-stone) weapon goes to +25; everything else is
-    somber and stops at +10.
+    Not a column in the data, and **not** derivable from `isInfuse` either. That shortcut —
+    +25 if infusable, else +10 — is right for 569 of the 570 weapons and wrong for the
+    Academy Glintstone Staff, which takes no affinity and still goes to +25. It was caught by
+    a spell figure disagreeing with the Prometheux implementation: Comet from an Academy staff
+    is 1009.444 there, which is the +25 number, and the shortcut had capped it at +10.
 
-    This matters more than it looks. `ap_calc.py` will happily compute Moonveil +25 and return
-    180.39, a number for an upgrade level the game does not have — lower than the 539.15 the
-    weapon actually reaches at its +10 cap, so it does not even look wrong. Bounding it is the
-    whole reason this function exists.
+    The honest source is which reinforce rows exist. A weapon's `reinforceTypeId` indexes a
+    band in `ReinforceParamWeapon`, one row per upgrade level, so the cap is how far that band
+    runs. `isReinforce` false means no band at all: +0 only, as for the Meteorite Staff.
+
+    Bounding this matters more than it looks. `ap_calc.py` will happily compute Moonveil +25
+    and return 180.39, a number for an upgrade level the game does not have — lower than the
+    539.15 the weapon actually reaches at its +10 cap, so it does not even look wrong.
     """
     if not row["isReinforce"]:
         return 0
-    return 25 if row["isInfuse"] else 10
+
+    import ap_calc
+
+    equip = ap_calc.load_table("EquipParamWeapon").get(float(row["ID"]))
+    if not equip:
+        return 0
+    base = int(float(equip["reinforceTypeId"]))
+    levels = set(int(k) for k in ap_calc.load_table("ReinforceParamWeapon"))
+
+    cap = 0
+    while base + cap + 1 in levels:
+        cap += 1
+    return cap

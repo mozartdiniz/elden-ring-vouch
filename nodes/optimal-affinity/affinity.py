@@ -75,17 +75,30 @@ def main():
 
     # A row whose damage is None is an affinity this weapon cannot take. That is not a low
     # score to be ranked last; it is not a row at all.
-    ranked = [
-        {
-            "affinity": row_.affinity,
-            "damage": float(row_.damage),
-            "total_ap": float(row_.total_ap),
-            "split": row_.split or "",
-            **{e: float(getattr(row_, e) or 0.0) for e in ELEMENTS},
-        }
-        for row_ in r.rows
-        if row_.damage is not None
-    ]
+    ranked = []
+    for row_ in r.rows:
+        if row_.damage is None:
+            continue
+        precise = {e: float(getattr(row_, e) or 0.0) for e in ELEMENTS}
+        ranked.append(
+            {
+                "affinity": row_.affinity,
+                "damage": float(row_.damage),
+                "total_ap": float(row_.total_ap),
+                # The calculator's own display string, e.g. "409/0/411/0/0". Kept because it
+                # is how the game writes a split, and duplicated as numbers below because a
+                # figure inside a string is invisible to attestation: the ledger records
+                # numeric leaves, so a reader quoting "409" off this string would be quoting
+                # something no scalar can account for. That happened on an eval run.
+                "split": row_.split or "",
+                "shown": {
+                    "damage": int(row_.damage),
+                    "total_ap": int(row_.total_ap),
+                    **{e: int(precise[e]) for e in ELEMENTS},
+                },
+                **precise,
+            }
+        )
     print(f"{weapon}: {len(ranked)} affinities available", file=sys.stderr)
 
     infusable = bool(row["isInfuse"])

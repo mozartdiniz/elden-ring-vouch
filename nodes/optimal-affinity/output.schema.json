@@ -41,12 +41,24 @@
     "row": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["affinity", "damage", "total_ap", "split", "physical", "magic", "fire", "lightning", "holy"],
+      "required": ["affinity", "damage", "total_ap", "split", "shown", "physical", "magic", "fire", "lightning", "holy"],
       "properties": {
         "affinity": { "type": "string" },
         "damage": { "type": "number", "description": "Damage actually dealt to the target, after its defences and absorptions." },
         "total_ap": { "type": "number", "description": "Attack rating before the target is considered." },
-        "split": { "type": "string" },
+        "split": { "type": "string", "description": "The calculator's display string, e.g. '409/0/411/0/0'. Do not read figures out of it — quote `shown` instead, whose values are numbers a ledger can account for." },
+        "shown": {
+          "type": "object",
+          "description": "The same figures truncated, as the game displays them. Quote these rather than truncating the precise ones yourself.",
+          "additionalProperties": false,
+          "required": ["damage", "total_ap", "physical", "magic", "fire", "lightning", "holy"],
+          "properties": {
+            "damage": { "type": "integer" }, "total_ap": { "type": "integer" },
+            "physical": { "type": "integer" }, "magic": { "type": "integer" },
+            "fire": { "type": "integer" }, "lightning": { "type": "integer" },
+            "holy": { "type": "integer" }
+          }
+        },
         "physical": { "type": "number" }, "magic": { "type": "number" },
         "fire": { "type": "number" }, "lightning": { "type": "number" }, "holy": { "type": "number" }
       }

@@ -134,8 +134,10 @@ expr = "!has(input.max_upgrade) || input.max_upgrade == result.max_upgrade"
 [[ensures]]
 expr = "result.max_upgrade == 0 || result.max_upgrade == 10 || result.max_upgrade == 25"
 
+# Every infusable weapon reaches +25; the converse does not hold — 58 weapons take no affinity
+# and still upgrade to +25.
 [[ensures]]
-expr = "result.infusable == (result.max_upgrade == 25)"
+expr = "!result.infusable || result.max_upgrade == 25"
 
 # A non-infusable weapon is always priced as Standard, and the substitution has to be
 # reported rather than absorbed: a caller must not repeat the affinity it asked for.

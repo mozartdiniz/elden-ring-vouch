@@ -119,6 +119,21 @@ expr = "result.ranked.all(r, r.damage > 0.0 && r.total_ap > 0.0)"
 [[ensures]]
 expr = "result.affinities_available == size(result.ranked)"
 
+# Every displayed figure is its precise twin truncated, so quoting the shown value is quoting
+# the same number a reader would see in the game rather than a second, looser one.
+[[ensures]]
+expr = """
+result.ranked.all(r,
+  r.shown.damage <= r.damage && r.damage < r.shown.damage + 1 &&
+  r.shown.total_ap <= r.total_ap && r.total_ap < r.shown.total_ap + 1 &&
+  r.shown.physical <= r.physical && r.physical < r.shown.physical + 1 &&
+  r.shown.magic <= r.magic && r.magic < r.shown.magic + 1 &&
+  r.shown.fire <= r.fire && r.fire < r.shown.fire + 1 &&
+  r.shown.lightning <= r.lightning && r.lightning < r.shown.lightning + 1 &&
+  r.shown.holy <= r.holy && r.holy < r.shown.holy + 1
+)
+"""
+
 # Thirteen affinities if the weapon is infusable, exactly one if it is not.
 [[ensures]]
 expr = """

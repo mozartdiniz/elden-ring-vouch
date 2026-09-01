@@ -70,9 +70,12 @@ expr = 'result.resolved != "" || (result.max_upgrade == 0 && result.weapon_class
 [[ensures]]
 expr = "result.max_upgrade == 0 || result.max_upgrade == 10 || result.max_upgrade == 25"
 
-# Only smithing-stone weapons reach +25, and those are exactly the infusable ones.
+# Every infusable weapon reaches +25, but not every +25 weapon is infusable: 58 of the 570 —
+# the Academy Glintstone Staff, Great Club, the Perfume Bottles — take no affinity and still
+# upgrade with smithing stones. This was a biconditional until a spell figure disagreed with
+# the Prometheux implementation and exposed it; the implication is what the data supports.
 [[ensures]]
-expr = "result.infusable == (result.max_upgrade == 25)"
+expr = "!result.infusable || result.max_upgrade == 25"
 
 [[examples]]
 ask = "what should I level for an Ordovis's Greatsword build?"

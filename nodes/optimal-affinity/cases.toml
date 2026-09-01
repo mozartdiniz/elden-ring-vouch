@@ -51,3 +51,10 @@ expect = { "result.target" = "given" }
 name = "a stat above 99 is refused"
 input = { weapon = "Longsword", upgrade = 25, strength = 150, dexterity = 13, intelligence = 10, faith = 60, arcane = 9 }
 expect_code = 11
+
+# Added after an eval run quoted "409" out of the split string "409/0/411/0/0" — a figure the
+# node published, but inside a string, where the ledger's scalars cannot see it.
+[[case]]
+name = "displayed figures are numbers, not digits inside a string"
+input = { weapon = "Zweihander", upgrade = 25, max_upgrade = 25, strength = 60, dexterity = 12, intelligence = 10, faith = 10, arcane = 10, two_hand = true }
+expect = { "result.ranked[0].shown.physical" = 409, "result.ranked[0].shown.fire" = 411, "result.ranked[0].shown.damage" = 690, "result.ranked[0].split" = "409/0/411/0/0" }

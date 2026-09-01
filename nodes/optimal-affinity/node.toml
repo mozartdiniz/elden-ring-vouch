@@ -1,0 +1,146 @@
+name = "optimal-affinity"
+version = "0.1.0"
+
+purpose = "Rank every affinity a weapon can take by the damage it would actually deal to a target"
+
+use_when = [
+  "the question asks what to infuse a weapon with, or which affinity is best on a build",
+  "the question asks whether one affinity beats another on the same weapon",
+  "the user is choosing between infusions and wants the difference, not an opinion",
+]
+not_for = [
+  "attack rating for one affinity — call attack-power, which also gives scaling and requirements",
+  "resolving a weapon name — call weapon-lookup first",
+  "which weapon to use; this compares infusions of a single weapon",
+]
+
+run = ["python3", "affinity.py"]
+timeout_ms = 60000
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/WeaponData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/EquipParamWeapon.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/ReinforceParamWeapon.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/AttackElementCorrectParam.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/CalcCorrectGraphEz.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.weapon]
+guidance = "The exact catalogue name, from weapon-lookup's `resolved`."
+
+[params.upgrade]
+guidance = "Use weapon-lookup's `max_upgrade`. Comparing infusions at anything below a weapon's cap answers a question nobody asked."
+
+[params.max_upgrade]
+guidance = "Copy weapon-lookup's `max_upgrade`, so an impossible upgrade is refused before the node runs rather than caught after it."
+
+[params.strength]
+guidance = "The build's strength."
+
+[params.dexterity]
+guidance = "The build's dexterity."
+
+[params.intelligence]
+guidance = "The build's intelligence."
+
+[params.faith]
+guidance = "The build's faith."
+
+[params.arcane]
+guidance = "The build's arcane."
+
+[params.two_hand]
+guidance = "True if the weapon is held in both hands."
+
+[params.attack_mv]
+guidance = "Motion value of the attack being compared, as a percentage. Leave it out unless the user named a specific attack; the ranking rarely changes with it."
+
+[params.defense]
+guidance = "The target's defences, when the user named an enemy and you have real numbers for it. Omit it otherwise — do not invent defences, and say the ranking is against the standard reference."
+
+[params.avg_pve]
+guidance = "Average across the reference targets rather than one. Useful for 'what should I run generally', not for a named boss."
+
+[params.counter_hit]
+guidance = "Only when the user asked specifically about counter hits."
+
+[[requires]]
+expr = "input.upgrade >= 0 && input.upgrade <= 25"
+message = "upgrade must be between 0 and 25; call weapon-lookup for this weapon's actual cap"
+
+[[requires]]
+expr = "!has(input.max_upgrade) || input.upgrade <= input.max_upgrade"
+message = "this weapon cannot be upgraded that far; weapon-lookup reported a lower max_upgrade for it"
+
+[[requires]]
+expr = """
+input.strength >= 1 && input.strength <= 99 &&
+input.dexterity >= 1 && input.dexterity <= 99 &&
+input.intelligence >= 1 && input.intelligence <= 99 &&
+input.faith >= 1 && input.faith <= 99 &&
+input.arcane >= 1 && input.arcane <= 99
+"""
+message = "every stat must be between 1 and 99"
+
+# --- postconditions ---
+
+[[ensures]]
+expr = "result.upgrade <= result.max_upgrade"
+
+[[ensures]]
+expr = "!has(input.max_upgrade) || input.max_upgrade == result.max_upgrade"
+
+# `best` is a claim, not a position in an array: it has to be the top row *and* the maximum of
+# the whole list. Without the second half, a mis-sort would rename the winner silently.
+[[ensures]]
+expr = "result.ranked[0].affinity == result.best && result.ranked[0].damage == result.best_damage"
+
+[[ensures]]
+expr = "result.ranked.all(r, r.damage <= result.best_damage)"
+
+# An affinity a weapon cannot take is absent from the ranking, never a zero row that a reader
+# could mistake for a poor option.
+[[ensures]]
+expr = "result.ranked.all(r, r.damage > 0.0 && r.total_ap > 0.0)"
+
+[[ensures]]
+expr = "result.affinities_available == size(result.ranked)"
+
+# Thirteen affinities if the weapon is infusable, exactly one if it is not.
+[[ensures]]
+expr = """
+result.infusable
+  ? result.affinities_available == 13
+  : (result.affinities_available == 1 && result.best == "Standard")
+"""
+
+# The margin has to be the gap it claims to be, so "it is close" is a checked statement.
+[[ensures]]
+expr = """
+result.affinities_available == 1
+  ? (result.runner_up == "" && result.best_margin == 0.0)
+  : (result.runner_up == result.ranked[1].affinity &&
+     result.best_damage - result.ranked[1].damage - result.best_margin < 0.000001 &&
+     result.best_margin - (result.best_damage - result.ranked[1].damage) < 0.000001)
+"""
+
+[[examples]]
+ask = "what should I infuse my Longsword with at 60 faith?"
+call = { weapon = "Longsword", upgrade = 25, max_upgrade = 25, strength = 60, dexterity = 13, intelligence = 10, faith = 60, arcane = 9 }
+
+[[examples]]
+ask = "is Heavy or Keen better on a Zweihander for a strength build?"
+call = { weapon = "Zweihander", upgrade = 25, max_upgrade = 25, strength = 60, dexterity = 12, intelligence = 10, faith = 10, arcane = 10, two_hand = true }

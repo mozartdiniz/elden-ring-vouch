@@ -1,0 +1,53 @@
+# Node fixtures (§7.1). The rankings come from the calculator; what is pinned here is that a
+# ranking stays a ranking — the winner is the maximum, unavailable affinities are absent, and
+# a close call is reported as close.
+
+[[case]]
+name = "a faith build on an infusable weapon ranks all thirteen"
+input = { weapon = "Longsword", upgrade = 25, max_upgrade = 25, strength = 60, dexterity = 13, intelligence = 10, faith = 60, arcane = 9 }
+expect = { "result.affinities_available" = 13, "result.infusable" = true, "result.best" = "Flame Art", "result.runner_up" = "Sacred", "result.ranked[0].affinity" = "Flame Art" }
+
+# Close enough to matter: under four damage between first and second. An answer that calls
+# Flame Art the winner without saying it is a coin toss has lost the useful part.
+[[case]]
+name = "a close ranking reports a small margin"
+input = { weapon = "Longsword", upgrade = 25, max_upgrade = 25, strength = 60, dexterity = 13, intelligence = 10, faith = 60, arcane = 9 }
+expect = { "result.best_margin" = 3.68 }
+
+# The counter-intuitive one, and the reason this node earns its place: Fire beats Heavy on a
+# strength build against the reference target.
+[[case]]
+name = "a strength build does not simply want Heavy"
+input = { weapon = "Zweihander", upgrade = 25, max_upgrade = 25, strength = 60, dexterity = 12, intelligence = 10, faith = 10, arcane = 10, two_hand = true }
+expect = { "result.best" = "Fire", "result.runner_up" = "Heavy" }
+
+# A non-infusable weapon has one affinity, not thirteen with twelve blanks.
+[[case]]
+name = "a non-infusable weapon ranks exactly one affinity"
+input = { weapon = "Moonveil", upgrade = 10, max_upgrade = 10, strength = 20, dexterity = 20, intelligence = 60, faith = 10, arcane = 10 }
+expect = { "result.affinities_available" = 1, "result.best" = "Standard", "result.infusable" = false, "result.runner_up" = "", "result.best_margin" = 0.0 }
+
+[[case]]
+name = "an upgrade past the weapon's cap is refused"
+input = { weapon = "Moonveil", upgrade = 25, max_upgrade = 10, strength = 20, dexterity = 20, intelligence = 60, faith = 10, arcane = 10 }
+expect_code = 11
+
+[[case]]
+name = "a wrong declared cap is caught after the fact"
+input = { weapon = "Moonveil", upgrade = 25, max_upgrade = 25, strength = 20, dexterity = 20, intelligence = 60, faith = 10, arcane = 10 }
+expect_code = 13
+
+[[case]]
+name = "the default target is named as such"
+input = { weapon = "Longsword", upgrade = 25, strength = 60, dexterity = 13, intelligence = 10, faith = 60, arcane = 9 }
+expect = { "result.target" = "default" }
+
+[[case]]
+name = "supplied defences are named as such"
+input = { weapon = "Longsword", upgrade = 25, strength = 60, dexterity = 13, intelligence = 10, faith = 60, arcane = 9, defense = { physical = 162.0, magic = 147.0, fire = 189.0, lightning = 120.0, holy = 130.0 } }
+expect = { "result.target" = "given" }
+
+[[case]]
+name = "a stat above 99 is refused"
+input = { weapon = "Longsword", upgrade = 25, strength = 150, dexterity = 13, intelligence = 10, faith = 60, arcane = 9 }
+expect_code = 11

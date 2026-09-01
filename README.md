@@ -65,9 +65,28 @@ fixture.
 | `weapon-lookup` | Resolve a name across 570 weapons; report class, infusability and upgrade cap |
 | `character-build` | A starting class plus the stats a user named → the full spread, rune level, HP, FP, stamina, equip load |
 | `attack-power` | One weapon at one upgrade and stat spread → attack rating, scaling grades, requirements, status, guard |
+| `optimal-affinity` | All thirteen affinities of one weapon, ranked by damage against a target |
 
 The order is the routing: **character-build** when the user described a build by only some of
-its stats, **weapon-lookup** for any question naming a weapon, then **attack-power**.
+its stats, **weapon-lookup** for any question naming a weapon, then **attack-power** for what
+it hits for, or **optimal-affinity** for what to infuse it with.
+
+`optimal-affinity` is the one worth trying first. "What should I infuse this with" is thirteen
+comparisons against a target's defences — the shape of question a model answers from folk
+wisdom, and the folk wisdom is often wrong. On a 60-strength two-handed Zweihander it is Fire
+at 691, not Heavy at 662. On a 60-faith Longsword, Flame Art beats Sacred by 3.7 damage, which
+is a coin toss and gets reported as one:
+
+```console
+$ vouch -C . call optimal-affinity --input '{"weapon":"Longsword","upgrade":25,
+    "max_upgrade":25,"strength":60,"dexterity":13,"intelligence":10,"faith":60,"arcane":9}'
+{ "best": "Flame Art", "best_damage": 492.08, "runner_up": "Sacred", "best_margin": 3.68, ... }
+```
+
+It also does in one call what the Prometheux ontology this collection re-implements needs
+thirteen runs for: a Vadalog `${param}` concept cannot be spliced across thirteen affinities,
+so the ranking had to be assembled by the caller. A node is a subprocess, so it just returns
+the table.
 
 ## Three failures this is built around
 

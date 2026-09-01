@@ -38,6 +38,14 @@ expect_node = "weapon-lookup"
 expect_params = { query = "knight sword" }
 expect_stop = true
 
+# Thirteen comparisons against a target's defences: the question a model answers from vibes,
+# and the one where "Heavy for strength builds" is folk wisdom that the numbers disagree with.
+[[eval]]
+ask = "what affinity should I put on my Zweihander? I'm 60 strength, two-handing it."
+expect_node = "optimal-affinity"
+expect_params = { weapon = "Zweihander", two_hand = true }
+attest = true
+
 # Squarely outside the collection: nothing here knows where anything is, and a model asked
 # this without tools will happily invent a location.
 [[eval]]

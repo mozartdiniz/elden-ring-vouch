@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "optimal-affinity output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "weapon", "weapon_class", "upgrade", "max_upgrade", "two_hand", "infusable",
+    "affinities_available", "best", "best_damage", "runner_up", "best_margin",
+    "ranked", "target", "attack_mv"
+  ],
+  "properties": {
+    "weapon": { "type": "string" },
+    "weapon_class": { "type": "string" },
+    "upgrade": { "type": "integer", "minimum": 0, "maximum": 25 },
+    "max_upgrade": { "type": "integer", "minimum": 0, "maximum": 25 },
+    "two_hand": { "type": "boolean" },
+    "infusable": { "type": "boolean", "description": "False means Standard is the only affinity this weapon has, and the ranking is one row long." },
+    "affinities_available": { "type": "integer", "minimum": 1, "maximum": 13 },
+    "best": { "type": "string", "description": "The highest-damage affinity. A postcondition ties this to the maximum of `ranked`." },
+    "best_damage": { "type": "number", "exclusiveMinimum": 0 },
+    "runner_up": { "type": "string", "description": "Second place, or empty when there is only one affinity." },
+    "best_margin": {
+      "type": "number",
+      "minimum": 0,
+      "description": "How far the best beats the runner-up. A small margin means the choice is close and should be reported as close, not as a winner."
+    },
+    "ranked": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Every affinity this weapon can take, best first. Affinities it cannot take are absent, not zero.",
+      "items": { "$ref": "#/$defs/row" }
+    },
+    "target": {
+      "type": "string",
+      "enum": ["default", "given"],
+      "description": "Whether these numbers are against the calculator's standard PvE reference or defences the caller supplied. Say which; the same weapon ranks differently against different enemies."
+    },
+    "attack_mv": { "type": "number", "exclusiveMinimum": 0 }
+  },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["affinity", "damage", "total_ap", "split", "physical", "magic", "fire", "lightning", "holy"],
+      "properties": {
+        "affinity": { "type": "string" },
+        "damage": { "type": "number", "description": "Damage actually dealt to the target, after its defences and absorptions." },
+        "total_ap": { "type": "number", "description": "Attack rating before the target is considered." },
+        "split": { "type": "string" },
+        "physical": { "type": "number" }, "magic": { "type": "number" },
+        "fire": { "type": "number" }, "lightning": { "type": "number" }, "holy": { "type": "number" }
+      }
+    }
+  }
+}

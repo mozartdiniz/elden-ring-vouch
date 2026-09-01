@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "optimal-affinity input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["weapon", "upgrade", "strength", "dexterity", "intelligence", "faith", "arcane"],
+  "properties": {
+    "weapon": { "type": "string", "description": "Exact catalogue name, from weapon-lookup's `resolved`." },
+    "upgrade": { "type": "integer", "description": "Upgrade level. The weapon's own cap is checked by a postcondition; pass max_upgrade to have it checked before the node runs." },
+    "max_upgrade": { "type": "integer", "minimum": 0, "maximum": 25, "description": "This weapon's cap, copied from weapon-lookup." },
+    "strength": { "type": "integer" },
+    "dexterity": { "type": "integer" },
+    "intelligence": { "type": "integer" },
+    "faith": { "type": "integer" },
+    "arcane": { "type": "integer" },
+    "two_hand": { "type": "boolean", "description": "Default false." },
+    "attack_mv": { "type": "number", "exclusiveMinimum": 0, "description": "Motion value of the attack, as a percentage. Default 100." },
+    "avg_pve": { "type": "boolean", "description": "Average over the reference PvE targets instead of one. Default false." },
+    "counter_hit": { "type": "boolean", "description": "Score the comparison on a counter hit. Default false." },
+    "defense": {
+      "type": "object",
+      "description": "The target's defences. Omit for the calculator's standard PvE reference; the result says which was used.",
+      "additionalProperties": false,
+      "properties": {
+        "physical": { "type": "number" }, "strike": { "type": "number" },
+        "slash": { "type": "number" }, "pierce": { "type": "number" },
+        "magic": { "type": "number" }, "fire": { "type": "number" },
+        "lightning": { "type": "number" }, "holy": { "type": "number" }
+      }
+    }
+  }
+}

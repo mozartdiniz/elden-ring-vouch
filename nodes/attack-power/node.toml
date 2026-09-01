@@ -158,9 +158,30 @@ result.total_ar - (result.attack.physical + result.attack.magic + result.attack.
 result.attack.lightning + result.attack.holy) < 0.000001
 """
 
-# What the game displays is the full-precision figure truncated, never rounded up.
+# What the game displays is the full-precision figure truncated, never rounded up. The same
+# has to hold element by element, or `attack_shown` would be a second set of numbers rather
+# than the same ones as a reader sees them.
 [[ensures]]
 expr = "result.total_ar_rounded <= result.total_ar && result.total_ar < result.total_ar_rounded + 1"
+
+[[ensures]]
+expr = """
+result.attack_shown.physical <= result.attack.physical && result.attack.physical < result.attack_shown.physical + 1 &&
+result.attack_shown.magic <= result.attack.magic && result.attack.magic < result.attack_shown.magic + 1 &&
+result.attack_shown.fire <= result.attack.fire && result.attack.fire < result.attack_shown.fire + 1 &&
+result.attack_shown.lightning <= result.attack.lightning && result.attack.lightning < result.attack_shown.lightning + 1 &&
+result.attack_shown.holy <= result.attack.holy && result.attack.holy < result.attack_shown.holy + 1
+"""
+
+[[ensures]]
+expr = """
+result.status_shown.poison <= result.status.poison && result.status.poison < result.status_shown.poison + 1 &&
+result.status_shown.scarlet_rot <= result.status.scarlet_rot && result.status.scarlet_rot < result.status_shown.scarlet_rot + 1 &&
+result.status_shown.bleed <= result.status.bleed && result.status.bleed < result.status_shown.bleed + 1 &&
+result.status_shown.frost <= result.status.frost && result.status.frost < result.status_shown.frost + 1 &&
+result.status_shown.sleep <= result.status.sleep && result.status.sleep < result.status_shown.sleep + 1 &&
+result.status_shown.madness <= result.status.madness && result.status.madness < result.status_shown.madness + 1
+"""
 
 # `requirements_met` must agree with the per-stat flags rather than being set on its own —
 # the summary and the detail cannot be allowed to disagree.

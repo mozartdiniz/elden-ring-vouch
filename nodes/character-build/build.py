@@ -16,7 +16,10 @@ requirement is short of it for a reason the user can act on — pick another cla
 because an agent guessed.
 
 `level` is the rune level that spread costs, which is what a question phrased "at RL150" is
-really about.
+really about — and `target_level` answers the rest of that question. An eval run asked for a
+build "at RL150", got RL103 back, and wrote "47 levels spare"; attestation refused the 47,
+because subtracting is arithmetic and no node had returned it. A figure a reader will quote
+has to exist as a return value.
 """
 
 import json
@@ -40,6 +43,7 @@ STATS = (
 def main():
     request = json.load(sys.stdin)
     starting_class = request["starting_class"]
+    target_level = request.get("target_level")
 
     classes = planner.load_starting_classes()
     if starting_class not in classes:
@@ -90,6 +94,10 @@ def main():
         # would cost on the best-fitting class — directly comparable to `level` above, not a
         # saving on its own. The saving is the difference, so report that separately rather
         # than leaving a caller to subtract two numbers and quote a figure no node returned.
+        # Zero rather than absent when no target was given: a caller reading these gets a
+        # number either way, and a contract mentioning them stays evaluable.
+        "target_level": int(target_level or 0),
+        "levels_to_target": int(target_level - r.level) if target_level else 0,
         "optimal_class": r.optimal_class,
         "optimal_class_level": int(r.extra_levels),
         "levels_saved_by_optimal_class": int(r.level) - int(r.extra_levels),

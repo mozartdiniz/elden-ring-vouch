@@ -6,7 +6,8 @@
   "required": [
     "weapon", "weapon_class", "label", "affinity_requested", "affinity_applied",
     "affinity_ignored", "infusable", "upgrade", "max_upgrade", "two_hand",
-    "total_ar", "total_ar_rounded", "attack", "elements", "status", "status_effects",
+    "total_ar", "total_ar_rounded", "attack", "attack_shown", "elements",
+    "status", "status_shown", "status_effects",
     "scaling", "requirements_met", "guard_boost", "guard_negation"
   ],
   "properties": {
@@ -26,8 +27,10 @@
     "total_ar": { "type": "number", "description": "Attack rating, full precision, summed over the five damage types." },
     "total_ar_rounded": { "type": "integer", "description": "What the game displays: total_ar truncated toward zero." },
     "attack": { "$ref": "#/$defs/damage" },
+    "attack_shown": { "$ref": "#/$defs/damage_shown", "description": "Per-element attack as the game displays it, truncated. Quote these, or total_ar_rounded, rather than truncating the precise figures yourself." },
     "elements": { "type": "array", "items": { "type": "string" }, "description": "Damage types this weapon actually deals." },
     "status": { "$ref": "#/$defs/status" },
+    "status_shown": { "$ref": "#/$defs/status_shown", "description": "Status buildup as the game displays it, truncated." },
     "status_effects": { "type": "array", "items": { "type": "string" } },
     "requirements_met": { "type": "boolean", "description": "Whether the build meets every stat requirement. False means the attack figures already carry the penalty." },
     "guard_boost": { "type": "integer" },
@@ -54,6 +57,26 @@
         "physical": { "type": "number" }, "magic": { "type": "number" },
         "fire": { "type": "number" }, "lightning": { "type": "number" },
         "holy": { "type": "number" }
+      }
+    },
+    "damage_shown": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["physical", "magic", "fire", "lightning", "holy"],
+      "properties": {
+        "physical": { "type": "integer" }, "magic": { "type": "integer" },
+        "fire": { "type": "integer" }, "lightning": { "type": "integer" },
+        "holy": { "type": "integer" }
+      }
+    },
+    "status_shown": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["poison", "scarlet_rot", "bleed", "frost", "sleep", "madness"],
+      "properties": {
+        "poison": { "type": "integer" }, "scarlet_rot": { "type": "integer" },
+        "bleed": { "type": "integer" }, "frost": { "type": "integer" },
+        "sleep": { "type": "integer" }, "madness": { "type": "integer" }
       }
     },
     "status": {

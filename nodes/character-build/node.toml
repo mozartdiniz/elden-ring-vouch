@@ -33,6 +33,9 @@ schema = "output.schema.json"
 [params.starting_class]
 guidance = "Vagabond, Warrior, Hero, Bandit, Astrologer, Prophet, Samurai, Prisoner, Confessor, or Wretch. If the user did not name one, ask — or use Wretch, whose stats are all equal, and say that is what you did."
 
+[params.target_level]
+guidance = "The rune level the user named, e.g. 150 for 'an RL150 build'. Pass it: the levels left over then come back as a number instead of a subtraction you would have to do yourself."
+
 [params.vigor]
 guidance = "Omit any stat the user did not name. It comes back as the class minimum, and the result says which stats that happened to, so an answer can be honest about what was assumed. Never invent a value to fill the gap."
 
@@ -135,6 +138,16 @@ expr = "result.level == result.class_level + result.points_spent"
 [[ensures]]
 expr = "size(result.stats_given) + size(result.stats_from_class_minimum) == 8"
 
+# Whatever is left to spend has to be the difference this node computed, not one a reader
+# redoes — and with no target given, both are zero rather than a misleading count.
+[[ensures]]
+expr = """
+has(input.target_level)
+  ? (result.target_level == input.target_level &&
+     result.levels_to_target == result.target_level - result.level)
+  : (result.target_level == 0 && result.levels_to_target == 0)
+"""
+
 [[ensures]]
 expr = "result.optimal_class_level <= result.level"
 
@@ -147,6 +160,10 @@ expr = "result.hp > 0 && result.fp > 0 && result.stamina > 0 && result.equip_loa
 [[examples]]
 ask = "I want a strength and faith build at 60/60. What level is that?"
 call = { starting_class = "Hero", strength = 60, faith = 60 }
+
+[[examples]]
+ask = "how many levels do I have left on an RL150 strength-faith build at 60/60?"
+call = { starting_class = "Hero", strength = 60, faith = 60, target_level = 150 }
 
 [[examples]]
 ask = "what does an RL150 Astrologer with 60 intelligence and 40 vigor look like?"

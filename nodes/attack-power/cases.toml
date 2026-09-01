@@ -86,3 +86,10 @@ expect_code = 11
 name = "a weapon that cannot be reinforced reports a cap of zero"
 input = { weapon = "Meteorite Staff", affinity = "Standard", upgrade = 0, strength = 20, dexterity = 20, intelligence = 60, faith = 10, arcane = 10 }
 expect = { "result.max_upgrade" = 0, "result.infusable" = false }
+
+# Added after an eval run quoted "259 holy" from a 259.576275 — the displayed figure, which no
+# node had returned, and which attestation refused because 259.576275 rounds to 260.
+[[case]]
+name = "the displayed per-element figures are returned, not left to the caller"
+input = { weapon = "Ordovis's Greatsword", affinity = "Standard", upgrade = 10, strength = 60, dexterity = 13, intelligence = 10, faith = 60, arcane = 9 }
+expect = { "result.attack_shown.holy" = 259, "result.attack_shown.physical" = 549, "result.total_ar_rounded" = 809 }

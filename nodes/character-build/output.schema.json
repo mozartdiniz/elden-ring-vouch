@@ -5,7 +5,8 @@
   "additionalProperties": false,
   "required": [
     "starting_class", "level", "stats", "class_minimums", "stats_given",
-    "stats_from_class_minimum", "stats_raised_to_class_minimum", "class_level", "points_spent", "hp", "fp", "stamina", "equip_load",
+    "stats_from_class_minimum", "stats_raised_to_class_minimum", "class_level",
+    "target_level", "levels_to_target", "points_spent", "hp", "fp", "stamina", "equip_load",
     "optimal_class", "optimal_class_level", "levels_saved_by_optimal_class"
   ],
   "properties": {
@@ -31,6 +32,8 @@
     "fp": { "type": "integer", "minimum": 1 },
     "stamina": { "type": "integer", "minimum": 1 },
     "equip_load": { "type": "number", "exclusiveMinimum": 0 },
+    "target_level": { "type": "integer", "minimum": 0, "description": "The target that was asked for, or 0 if none was." },
+    "levels_to_target": { "type": "integer", "description": "target_level minus level: how many levels are left to spend. Negative means the build already costs more than the target. Zero when no target was given." },
     "optimal_class": { "type": "string", "description": "The class that reaches the specified stats at the lowest rune level." },
     "optimal_class_level": { "type": "integer", "minimum": 1, "description": "The rune level those same stats cost on that class. Comparable to `level`." },
     "levels_saved_by_optimal_class": { "type": "integer", "minimum": 0, "description": "level minus optimal_class_level. Zero when this class is already optimal." }

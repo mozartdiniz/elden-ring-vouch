@@ -20,6 +20,12 @@ ask for a Heavy Moonveil and the sheet quietly prices a Standard one. That is re
 **No nulls.** The oracle uses `null` for elements a weapon does not deal. A null would make
 every contract mentioning that field unevaluable, which fails closed and refuses the call, so
 absent damage is reported as `0.0`. `elements` names the ones the weapon actually has.
+
+**Both the precise figure and the displayed one.** `attack` carries full precision, as §8.3
+asks; `attack_shown` carries what the game puts on the screen, truncated. Returning only the
+first sounds stricter and is how a caller ends up doing the truncation itself: an eval run
+quoted "259 holy" off a `259.576275`, and attestation refused it, because rounding 259.576275
+to zero decimals is 260. A figure a reader will quote has to exist as a return value.
 """
 
 import json
@@ -85,6 +91,9 @@ def main():
 
     attack = {d: number((r.total or {}).get(d)) for d in DAMAGE}
     status = {s: number((r.total or {}).get(s)) for s in STATUS}
+    # What the game shows: truncated toward zero, never rounded up.
+    shown = {d: int(attack[d]) for d in DAMAGE}
+    status_shown = {s: int(status[s]) for s in STATUS}
 
     result = {
         "weapon": weapon,
@@ -100,10 +109,12 @@ def main():
         "total_ar": float(r.total_ar),
         "total_ar_rounded": int(r.total_ar_rounded),
         "attack": attack,
+        "attack_shown": shown,
         # The damage types this weapon actually deals, so a caller can see at a glance which
         # of the five zeros above are real.
         "elements": [d for d in DAMAGE if attack[d] > 0],
         "status": status,
+        "status_shown": status_shown,
         "status_effects": [s for s in STATUS if status[s] > 0],
         "scaling": {
             stat: {

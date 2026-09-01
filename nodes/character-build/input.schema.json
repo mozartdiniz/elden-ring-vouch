@@ -9,6 +9,11 @@
       "type": "string",
       "description": "One of the ten starting classes. The valid list is enforced by a precondition, not here, so a wrong one refuses with the list."
     },
+    "target_level": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "The rune level the user is building toward, e.g. 150. Pass it whenever they name one, so the levels left over are a returned figure rather than a subtraction someone does in their head."
+    },
     "vigor": { "type": "integer", "description": "Omit any stat the user did not name; it becomes the starting class's minimum." },
     "mind": { "type": "integer" },
     "endurance": { "type": "integer" },

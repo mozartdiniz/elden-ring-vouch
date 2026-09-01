@@ -53,3 +53,22 @@ expect_code = 11
 name = "a missing starting class is a caller error"
 input = { strength = 60 }
 expect_code = 10
+
+# Added after an eval run wrote "47 levels spare" — a subtraction the agent did itself, which
+# attestation refused because no node had returned it.
+[[case]]
+name = "a target level makes the levels left a returned figure"
+input = { starting_class = "Hero", strength = 60, faith = 60, target_level = 150 }
+expect = { "result.level" = 103, "result.target_level" = 150, "result.levels_to_target" = 47 }
+
+[[case]]
+name = "no target level means zero, not a misleading count"
+input = { starting_class = "Hero", strength = 60, faith = 60 }
+expect = { "result.target_level" = 0, "result.levels_to_target" = 0 }
+
+# A build that already costs more than the target is over budget, and says so with a sign
+# rather than by refusing: the user still needs to know by how much.
+[[case]]
+name = "a build over its target reports a negative remainder"
+input = { starting_class = "Hero", strength = 99, faith = 99, vigor = 60, target_level = 100 }
+expect = { "result.levels_to_target" = -127 }

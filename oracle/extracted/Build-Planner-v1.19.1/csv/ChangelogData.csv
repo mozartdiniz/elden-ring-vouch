@@ -1,0 +1,446 @@
+Discord:,cryptidtracker - Feel free to contact me if you have any questions; you can find me in the below server as well as several other Fromsoft game servers
+ER PvP Server:,https://discord.gg/vb2uWpmXhc
+Donation Link:,https://ko-fi.com/cryptidtracker
+,
+,"does not require an update for App Ver. 1.16 - Calibrations Ver. 1.16
+does not require an update for App Ver. 1.15 - Calibrations Ver. 1.15"
+,
+v1.19.2,"updated Talisman of Lord's Bestowal description
+updated Fine Crucible Feather Talisman description
+fixed Twinsage Glintstone Crown effect description"
+,
+v1.19.1,"removed Miranda's Prayer from reusables
+changed Call of Tibia category to consumable
+corrected attack ID for Call of Tibia consumable
+corrected attack ID for Hefty Rancor Pot consumable
+corrected effect description for Lazuli Glintstone Crown to mention its effect on intelligence
+- description was the only error; planner correctly increased the proper attributes
+changed subCategory names for Lusat's and Azur's sorceries
+fixed an issue where the 2h strength multiplier was being applied twice for meeting requirements check on the AP Calc page
+fixed an issue where loading a build that had talisman(s) in an invalid slot based on the previously selected criteria would lead to an erroneously empy talisman slot
+fixed an issue where loading a build that had spell(s) in an invalid slot based on previously selected criteria would lead to an erroneously empty spell slot"
+,
+v1.19.0,"updated for App Ver. 1.14 - Calibrations Ver. 1.14.1
+added Lamenter's Mask attack as a Reusable
+updated names for some spells
+updated Fine Crucible Feather Talisman description to 7 iframes instead of 11 iframes (30 fps)
+updated Oil-Soaked Tear description to include oil application to user
+updated descriptions for Crucible Feather Talisman and Windy Crystal Tear to note that their iframe benefits do not stack with each other
+added link to a spreadsheet with more information on ""continuous attack"" effects in their effect description
+added link to a spreadsheet that shows which weapons/critical attacks will trigger the Assassin's Crimson/Cerulean Dagger talismans once or twice"
+,
+v1.18.1,"added new 1.13 attack IDs for the following
+- Blades of Stone
+- Lightning Spear
+- Roar of Rugalea"
+,
+v1.18.0,"updated for App Ver. 1.13 - Calibrations Ver. 1.13.1
+changed Dryleaf Seal's bonus descriptor from ""Miquella's Light"" to ""Ring of Light"" to fit updated description in-game
+added distinction between Sleep and Eternal Sleep effect displays
+fixed error with Old Lord's Talisman not increasing duration of applicable spells
+fixed incorrect SpEffects being referenced for consumables
+fixed reference error for Scholar's Shield effect
+fixed Dragonbolt of Florissax description
+adjusted columns in spell section of Planner page to accommodate longer category strings"
+,
+v1.17.1,"updated scaling calculation on Planner and Optimal Affinity Calc pages to account for variable used on Golem Fist and Smithscript weapons with Flame Art, Sacred, Magic, and Cold affinities
+updated effects for App Ver. 1.12.3 - Calibrations Ver. 1.12.4 and fixed effect descriptions for the following
+- St. Trina's Smile
+- Glovewort Crystal Tear
+- a few spelling errors for others"
+,
+v1.17.0,"updated weapon and scaling data for App Ver. 1.12.3 - Calibrations Ver. 1.12.4
+- Golem Fist and Smithscript weapons with Flame Art, Sacred, Magic, and Cold affinities will not be calculated correctly on the Planner or Optimal Affinity Calc pages
+added DLC spell attack data
+added DLC consumable/reusable data
+updated/added descriptions for the following
+- Sharpshot Talisman
+- Rellana's Cameo
+- Deflecting Hardtear"
+,
+v1.16.1,"fixed Optimal Catalyst Calculator
+added DLC catalyst damage bonus categories
+added basic DLC spell data (no attack/effect data yet)
+updated rounding on tick count for spell effects
+updated Black Flame's Protection description to match post-nerf effect
+updated Terra Magica's description to match post-nerf effect
+updated status effect data
+updated several effect descriptions
+- Silver Tear Mask is now correctly stated as a physical attack power modifier
+- multiplier will properly affect the attack power of equipped weapons
+added effect descriptions for DLC equipment
+DLC equipment passives will now be factored into displayed stats"
+,
+v1.16.0,"updated for App Ver. 1.12 - Calibrations Ver. 1.12.1 (Shadow of the Erdtree)
+- status effect buildup may be inaccurate in some cases
+- passive effect data for DLC items has not been added yet
+- poise will not show its floating point error currently
+updated formatting for the description of several effects
+updated effect description for the following spells
+- Litany of Proper Death
+- Law of Causality
+changed the poise display to truncate to the 8th decimal place
+added dynamic header to include weapon name for scaling on the AP Calc page
+updated damage formula to what is used by the game thanks to Nymic_Razor
+added cells to input SpEffect Scaling Adjustment values on the AP Calc page"
+,
+v1.15.3,"corrected attack power calculation on AP Calc page for certain atkElementCorrectId overwrite values
+updated names for the following spells
+- Gavel of Haima
+updated effect description for the following
+- Black Dumpling
+- Kindred of Rot's Exultation
+- Lord of Blood's Exultation
+- Malenia's Great Rune
+- Mohg's Great Rune
+- Mushroom Crown
+- White Mask"
+,
+v1.15.2,"updated effect description for the following spells
+- Flame, Cleanse Me
+- Flame, Grant Me Strength
+added lacking requirement penalty calculation and toggle to ignore it to the Planner page
+added penalty to status effect scaling when arcane requirement is not met where applicable
+Blue Dancer Charm effect now factored into attack power of equipped spells
+cleaned up optimal starting class calculation
+corrected a bug created when adding Blue Dancer Charm's effect into AP calculation on the Planner page
+- fire, lightning, and holy attack power was not factoring in scaling in most cases"
+,
+v1.15.1,"corrected Roar Medallion's effect description to reflect changes made in 1.09
+- corrected Highland Axe's effect description to no longer be the 1.09 Roar Medallion effect
+updated attack names for the following spells
+- Carian Slicer
+- Carian Greatsword
+- Carian Piercer
+- Adula's Moonblade
+- Aspects of the Crucible: Tail
+- Aspects of the Crucible: Horns
+- Lansseax's Glaive
+- Fortissax's Lightning Spear
+- Placidusax's Ruin
+- Dragon Claw"
+,
+v1.15.0,"updated for App Ver. 1.10 - Calibrations ver. 1.10
+corrected Blue Dancer Charm effect from damage multiplier to attack power multiplier
+- Blue Dancer Charm effect now factored into attack power of equipped weapons"
+,
+v1.14.7,"fixed accidental reversion of EquipParamWeapon data
+added effect description for Guardian Garb (Full Bloom)"
+,
+v1.14.6,added attack IDs for Fire's Deadly Sin
+,
+v1.14.5,fixed incorrect SpEffectId being referenced by Chilling Mist and Poisonous Mist on the AP Calc page (for real this time)
+,
+v1.14.4,fixed incorrect SpEffectId being referenced by Chilling Mist and Poisonous Mist on the AP Calc page
+,
+,App Ver. 1.09.1 - Calibrations Ver. 1.09.1 did not change any data relevant to this sheet
+,
+v1.14.3,added missing Inescapable Frenzy attack ID
+,
+v1.14.2,"re-enabled scaling for self-inflected madness of Howl of Shabriri
+changed Cipher Ring summon ranges to match Way of Blue ranges from DS3; still untested, but is more likely the correct range than what was previously set"
+,
+v1.14.1,"added missing Law of Causality attack id
+fixed an issue where the [stat]-knot Crystal Tear effects were not being reflected in the ""Alter"" stats
+fixed an issue with Windy Crystal Tear's damage negation effect being inverted"
+,
+v1.14.0,"updated for App Ver. 1.09 - Calibrations Ver. 1.09
+added Attack Category display for spells"
+,
+v1.13.13,corrected Twinbird Kite Shield's low HP damage negation effect being inverted
+,
+v1.13.12,"optimized rollType calculations to save space; functionality should be unchanged
+corrected ""Terra Magicus"" for some displays to ""Terra Magica""
+corrected Guard Boost rounding to a TRUNC for Planner display
+corrected rounding for catalyst stamina cost modifier"
+,
+v1.13.11,"fixed an issue with user builds not being sorted properly when default builds are visible
+added separator between user builds and default builds in dropdown menu"
+,
+v1.13.10,"added Crystal Tear selection for the Flask of Wondrous Physick
+- added effect descriptions for all Crystal Tears
+- Crystal Tears with restore HP/FP effects have dynamic descriptions
+- reorganized toggles to accomodate
+- updated reset and save/load build scripts to accomodate
+added PvE/PvP default builds created by Punished ""Venom"" Emerald Wolf#9934, Lucaѕ#6069, Unlined-Betters#8518, and UnholuIsKanno#0007
+- added preference toggle to hide the default builds from dropdown menu; they will always be sorted at the bottom of your build list if visible
+capped weapon damage negation display at 100; only relevant for fire/flame art Fingerprint Stone Shield
+changed formatting for requirement values in the spell section of the Planner
+changed some formatting in Changelog
+fixed script error for the fix_updateBooleanFormat macro"
+,
+v1.13.9,made rounding for Matchmaking Calc (Beta) more accurate and fixed calculations for max level brackets
+,
+v1.13.8,"added Matchmaking Calc (Beta)
+preference toggles removed from planner reset script
+updated several formulas on ApCalcData to save some space; functionality should be unchanged
+added the ability to manually enter AR/SB/Status values on AP Calc G30:I45 without removing proper formulas
+- updated reset script to accommodate
+added overwrite entries on AP Calc page for Ash of War calculation
+- updated reset script to accomodate
+updated effect formulas on PlannerData page to make weapon name display more consistent in some cases
+updated AP Calc and Optimal Affinity Calc to display when selected weapon is invalid
+disabled Sacred Seal status scaling for self-inflicted madness on incantations; The Flame of Frenzy, Unendurable Frenzy, Frenzied Burst, Howl of Shabriri, and Enescapable Frenzy
+disabled Sacred Seal status scaling for lingering status effect spells; Bloodflame Talons, Bloodboon, and Bloodflame Blade
+disabled Sacred Seal status scaling for Poison Armament as it uses the weapon's arcane scaling instead
+updated some spell effect descriptions"
+,
+v1.13.7,"updated formulas and formatting for equip load; functionality should be unchanged
+added conditional formatting for equip load types
+removed status increase from Blue Dancer Charm's effect description"
+,
+v1.13.6,"fixed Blue Dancer Charm's effect description; it now auto-calculates the appropriate multiplier dynamically again
+fixed Spellblade set's effect descriptions"
+,
+v1.13.5,"altered some formulas relating to status calculation on PlannerData; functionality should be unchanged
+altered sorting formulas for Optimal Affinity Calc; functionality should be unchanged
+altered sorting and filtering formulas for Optimal Catalyst Calc; functionality should be unchanged
+changed Weapon AP Calc name to AP Calc
+- added link to an Attack Power Calculator that can calculate multiple weapon classes and affinities in simultaneously
+added conditional formatting on AP Calc to make scaling values red when lacking requirement penalties are in effect"
+,
+v1.13.4,"updated AP calculation formulas on WeaponApCalcData and Weapon AP Calc to better calculate AP penalty for lacking requirements
+- added toggle to ignore requirements on Weapon AP Calc
+  - updated clear selection script to include new toggle
+tweaked dropdown for status buff selection on Weapon AP Calc to remove ashes of war options from weapons that cannot have them applied
+fixed display issue for catalyst bonuses on Weapon AP Calc"
+,
+v1.13.3,"added missing Poison Armament duration
+Old Lord's Talisman will now be appropriately factored into displayed spell duration"
+,
+v1.13.2,updated Scholar's Shield and Greatshield Talisman effect descriptions
+,
+v1.13.1,"fixed some spell durations being set to #N/A
+added missing ""- Charged"" labeling for some incantations and changed all ""(Charged)"" spell labeling to ""- Charged"" for uniformity"
+,
+v1.13.0,"updated for App Ver. 1.08 - Calibrations Ver. 1.08
+added spell category display for selected sorceries/incantations"
+,
+v1.12.3,"updated general use builds for altered PvP poise breakpoints from App Ver. 1.07
+fixed some effect descriptions for equipment and spells
+added Vyke's Dragonbolt spell buff multiplier; was missing due to an oversight"
+,
+v1.12.2,updated FP cost of Inescapable Frenzy from 32 to 22 to match App Ver. 1.07 - Calibrations Ver. 1.07.1
+,
+v1.12.1,added missing attack ID for Gelmir's Fury that was added in 1.07
+,
+v1.12.0,"updated for App Ver. 1.07 - Calibrations Ver. 1.07
+added ""new"" checkboxes on Planner page to the reset script"
+,
+v1.11.2,"resized date and build name columns on the database builds page
+updated the following default damage type for the following weapons; only affects Optimal Affinity Calc page if you don't manually enter data:
+- Warpick (strike -> pierce)
+- Dragon Greatclaw (strike -> standard)
+- Fallingstar Beast Jaw (strike -> pierce)
+- Glaive (standard -> slash)
+- Nightrider Glaive (standard -> slash)
+- Pest's Glaive (standard -> slash)
+- Loretta's War Sickle (standard -> slash)"
+,
+v1.11.1,separated the rain/wet toggle into two separate toggles because standing in water while it is raining will result in the effects stacking
+,
+v1.11.0,updated for App Ver. 1.06 - Calibrations Ver. 1.06
+,
+v1.10.1,added toggle to change Optimal Class(es) display to show all classes and their required levels to reach the desired stat spread
+,
+v1.10.0,updated for App Ver. 1.05 - Calibrations Ver. 1.05
+,
+v1.9.24,fixed Howl of Shabriri effect description
+,
+v1.9.23,fixed some spell atk values being outdated
+,
+v1.9.22,fixed issue with overwrite scaling being higher than intended when using the overwrite functions on the Data page for the Weapon AP Calculator that were added in 1.8.2
+,
+v1.9.21,fixed issue with Scarab head slot items having incorrect damage negation modifiers
+,
+v1.9.20,fixed issue with the Optimal Affinity Calculator weapon selection drop-down menu not working correctly
+,
+v1.9.19,"improved the fix from 1.9.17; functionality should be unchanged
+added toggle for modifier applied when character is standing in water and/or it is raining to the Planner page"
+,
+v1.9.18,"fixed an issue with weapon IDs not being stored correctly
+fixed an issue with great rune IDs not being stored correctly
+fixed an issue with spell IDs not being stored correctly"
+,
+v1.9.17,fixed an issue with some equipment selections returning errors in the build ID conversion process
+,
+v1.9.16,added column to show when the build was made on the Database Builds page
+,
+v1.9.15,"reduced build ID segments; you'll need to convert old IDs to the new format with the converter linked below again, sorry for the inconvenience one more
+added ""Load Build"" button because the auto-loading feature has some quirks to it
+  - if you don't want to use scripts the auto-loading feature is still available
+  - auto-loading will be disabled when you use the ""Load Build"" button
+re-added the build database without the function that was a potential problem
+redid all images used for buttons to make the click box no longer extend beyond the visual"
+Build Converter,https://docs.google.com/spreadsheets/d/15HlwWTVuvfxlu3eN-aU8s3kjkzeMrnbMYa7akDlASR4/copy
+,
+v1.9.10,"added ""Save Build"" and  ""Delete Build"" buttons so you no longer need to manually complete these actions
+minor formatting chanages
+optimized all ""Clear Selection"" scripts
+fixed missing script for one of the ""Clear Group"" buttons on the Damage Calculator Page
+fixed issue with ""Unarmed"" being an invalid input with no Class selection on the Optimal Affinity Calculator page
+deleted excess rows from the Damage Calculator Page"
+,
+v1.9.7,removed all database functionality due to a potential security issue 😔
+,
+v1.9.6,fixed issue with database builds not being loaded properly
+,
+v1.9.5,"overhauled build storage stystem; you can convert any builds you've made to the new ID system using the link below, sorry for the inconvenience
+added ability to put your builds in a database that will be available in any future update
+fixed issue with upgrade and affinity cells on the Planner page not behaving as intended when a build was selected
+fixed issue with Stat Coeficients display on the Weapon AP Calculator page not referencing correct cells for dex, int, faith, or arc"
+Build Converter,https://docs.google.com/spreadsheets/d/15HlwWTVuvfxlu3eN-aU8s3kjkzeMrnbMYa7akDlASR4/copy
+,
+v1.9.0,"added the ability to save builds with the Builds page and recall them later with the Build Select dropdown on Planner
+added a button to quickly clear selections on the Planner, Weapon AP Calculator, Optimal Affinity Calculator, Optimal Catalyst Calculator, and Damage Calculator pages
+added a link to Sleep#1337's Poise Optimizer above armor selections
+revamped AR calculation on the Weapon AP Calculator page
+altered Celebrant's Flame Art Cleaver Blades to Celebrant's Flame Art Cleaver to reflect App Ver. 1.04.1 change
+altered Man-Serpent Shield with non-standard affinity capitalization to reflect App Ver. 1.04.1 change
+altered Nox Monk Bracelets to Nox Bracelets to reflect App Ver. 1.04.1 change
+altered Nox Monk Greaves to Nox Greaves to reflect App Ver. 1.04.1 change
+updated notes on ""Update Available:"" and ""Link to Original/Update:"" cells to include information on macros that will fix issues they sometimes have
+fixed issue with LH1-3 selections on Planner page not recieving Invalid flag when selecting invalid weapons"
+,
+v1.8.2,"added physical spell buff to the Weapon AP Calculator page; irrelevant from a practical standpoint as all spell buff types are equal in this game at the moment
+added functionality for Ash of War AR Calculation to the Weapon AP Calculator page
+  - requires manual input on the Data page at the moment (overwriteAttackElementCorrectId and below); use the motion value sheet's ash of war page to get relevant data
+changed all references to ""Default"" affinity to ""Standard"" to more accurately reflect the game
+tweaked letter scaling formula"
+"Motion Value Sheet -
+AoW Page",https://docs.google.com/spreadsheets/d/1j4bpTbsnp5Xsgw9TP2xv6d8R4qk0ErpE9r_5LGIDraU/edit#gid=362983777
+,
+v1.8.1,"updated layout/formatting of Optimal Affinity Calculator and Damage Calculator pages
+minor formatting changes on Planner page
+fixed issue with displaying spell buff on Damage Calculator page"
+,
+v1.8.0,overhauled layout/formatting of Planner page
+,
+v1.7.5,"corrected unintended behavior in cells that determine the weapon display name for Planner preventing ""Invalid Weapon"" as a result
+reinforcement level with no manual input on the Weapon AP Calculator and Optimal Affinity Calculator will now match the selection for RH1 on the Planner page
+corrected issue with stat caps being able to go above 99 with stat boosting gear"
+,
+v1.7.4,"corrected Lightning Strike being labeled as Lightning Spear (Charged)
+tweaked spell selection formulas to allow swapping to higher cost spells with limited slots remaining (swapping from a 2 slot spell with 1 slot remaining previously would have 3 slot spells hidden)
+altered formatting for spell section to accomodate longer spell names"
+,
+v1.7.3,"added tick count for Bloodflame Blade in selection menu
+fixed dropdowns for spell selection being invalid for slots 2-12 when having a selected spell
+fixed formatting for Dmg Negation on Optimal Affinity Calculator"
+,
+v1.7.2,"fixed several issues for Optimal Affinity Calculator with incorrect stats being used for scaling types
+added motion value sheet link on Optimal Affinity Calculator page"
+,
+1.7.1,corrected default physical atkAttribute for some weapons on the Optimal Affinity Calculator
+,
+v1.7.0,"added Optimal Affinity Calculator
+fixed issue whith choosing ""Select a Weapon Class"" on Planner page returning ""Bare Fist"""
+,
+v1.6.6,"fixed issue with Great Club, Troll's Hammer, and Treespear being able to have an affinity applied to them"
+,
+v1.6.5,"fixed arrayformula used for damage multiplier default value of 1 on the Damage Calculator page
+minor formatting changes"
+,
+v1.6.4,"changed rounding for the ""Weight Left"" display so it is more accurate
+changed all references of ""Bare Fist"" to ""Unarmed"" to more accurately reflect the game
+unupgraded weapons will no longer display ""+0"" after their name to more accurately reflect the game"
+,
+v1.6.3,fixed issue with Consumable/Reusable base attack not being referenced correctly
+,
+v1.6.2,fixed issues with MagicData updates
+,
+v1.6.1,fixed issues with CalcCorrectGraphEz updates
+,
+v1.6.0,updated for App Ver. 1.04 - Calibrations Ver. 1.04.1
+,
+v1.5.10,"fixed issue with magic, fire, lightning, and holy scaling referencing the incorrect graphs on the Planner page"
+,
+v1.5.9,"updated Omen Helm, Armor, Gauntlets, and Greaves effect description in right-hand panel"
+,
+v1.5.8,"added conditional formatting for invalid weapon selection on Planner page so it's more noticeable
+fixed issue with Optimal Catalyst Calculator not displaying bonys type and bonus amount properly for anything beyond the first result"
+,
+v1.5.7,"removed previous update changes as they were incorrect; correct cell formulas to accommodate Rot and Freezing Pots correctly
+fixed issue with weapon status effect not displaying in right-hand panel"
+,
+v1.5.6,"added consumable/reusable ""weapon class""; Rot Pot and Freezing Pot not working currently due to missing EquipParamWeaponIds
+altered logic for status buffs to prevent ashes of war being usable on invalid affinities
+fixed issue with weapon passives not displaying on the right-hand panel"
+,
+v1.5.5,"added a few more status buffs
+altered logic for status buffs to accomodate for ashes of war equip limitations"
+,
+v1.5.4,"added some status consumable buff options on the Weapon AP Calculator because the amount you get from scaling isn't visible in-game
+fixed issue with the status display on the Planner not showing poison"
+,
+v1.5.3,"overhauled the way status is handled in the backend in order to recreate bugs that exist in-game (looking at you, Cold Antspur Rapier)
+added sleep/madness scaling for the three weapons that use either
+added status display for spells with scaling for Dragon Communion Talisman and Albinauric Staff
+added special effect display for selected spells
+fixed issue with Weapon AP Calculator affinity selection not behaving as intended"
+,
+v1.5.2,"fixed issue with Weapon AR Calc 'Affinity' selection being anything other than Default returning errors
+fixed issue with Planner left hand armament 'Affinity' selections not working properly"
+,
+v1.5.1,fixed issues with catalyst selection for spell section not behaving as intended
+,
+v1.5.0,"merged Weapon AR Calculator and Optimal Casting Catalyst Calculator into this sheet with some quality of life features
+added a Damage Calculator with some quality of life features
+catalyst selection for spell section will no longer display weapons
+fixed issue with all weapons using RH1 affinity selection
+fixed issue with fire damage negation from armor always being 0
+fixed issue with spell fp and stamina costs not displaying with no catalyst selected
+changed all mentions of ""absorption"" to ""damage negation"" in the right-hand effect panel to more accurately reflect the game
+various (minor) formatting changes"
+,
+v1.1.0,"added FP cost increase for Azur's and Lusat's Glintstone Crown in right-hand panel
+FP cost multiplier from Azur's and Lusat's Glintstone Crown are now taken into account for spell FP
+fixed issue with weapon effects not being displayed on the right-hand panel
+removed unneeded columns from EquipParamAccessory, Equip ParamProtector, Equip ParamWeapon, and ReinforceParamWeapon; file size reduced"
+,
+v1.0.4,FP cost multiplier from Primal Glintstone Blade is now taken into account for spell FP
+,
+v1.0.3,fixed incorrect spell stamina cost rounding
+,
+v1.0.2,"added link to optimal catalyst calculator in the spell section
+changed label for the catalyst selection in the spell section
+corrected formatting for Memory Slot cell in the spell section"
+,
+v1.0.1,fixed issue with arcane requirement for spells not displaying
+,
+v1.0.0,"added spell AR calculation on the Planner page
+fixed display issue when more than 8 starting classes were optimal"
+,
+v0.16.5,fixed issue with an empty armor slot causing absorption from armor to be 0
+,
+v0.16.4,fixed issue with certain cells referencing Giant's Red Braid rather than Bare Fist
+,
+v0.16.3,added Lucerne and Erdtree Greatbow
+,
+v0.16.2,"fixed an issue with cold infusions not displaying increased buildup with reinforcement
+fixed an issue with some dual-status cold infusions not displaying both statuses"
+,
+v0.16.1,"removed unneeded columns from EquipParamAccessory, Equip ParamProtector, Equip ParamWeapon, and ReinforceParamWeapon
+fixed issue with weapon effects not being displayed on the right-hand panel"
+,
+v0.16.0,"fixed issue with some dual-status weapons not displaying both statuses
+fixed issue where Serpentbone Blade could be assigned an affinity"
+,
+v0.15.3,"added vdex effect to Azur's Glintstone Staff in right-hand panel
+corrected Scorpion Talisman PvP absorption values and updated right-hand panel effect to match
+changed Warhammer weapon class name to Great Hammer; not sure if this changed in-game at some point or if I'm losing it, but they're called Great Hammers now"
+,
+v0.15.2,fixed error with Okina Mask effect description in the right-hand panel listing its stat bonus as str rather than dex
+,
+v0.15.1,fixed error with holy using lightning graph and AttackElementCorrectionID not being retrieved correctly
+,
+v0.15.0,updated for App Ver. 1.03 Calibrations Ver. v.03.1; several heavy infusions now have proper scaling multipliers when fully upgraded and a few weapons that had invalid scaling data have been corrected by Fromsoft
+,
+v0.14.1,"corrected weapon effects with Demon, Hollow, and Abyssal bonus damage to Void, Ancient Draconic, and Draconic respectively in the right-hand panel when equipped"
+,
+v0.14.0,"added detailed effect for Radagon's Icon in the right-hand panel when equipped
+added detailed effect for Old Lord's Talisman in the right-hand panel when equipped
+corrected PvP value for Dragoncrest Shield Talisman
+corrected Companion Jar and Perfumer's Talisman effects being swapped in the right-hand panel when equipped
+adjusted Bull-Goat's Talisman modifier to reflect what it is in params; data accuracy unaffected
+added changelog"

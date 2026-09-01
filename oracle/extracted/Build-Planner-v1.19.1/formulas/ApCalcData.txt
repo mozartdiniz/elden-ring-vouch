@@ -1,0 +1,2166 @@
+SHEET: ApCalcData
+WORKBOOK: Copy of ER - Build Planner v1.19.1.xlsx
+USED RANGE: A1:AD47
+NONEMPTY CELLS: 608
+FORMULA CELLS: 382
+
+This file is for an LLM that must rebuild these calculations in another language. Treat formulas as the source of truth. Cached/fallback values are only for checking a port. Skip spill_cache cells; they are not logic.
+
+MERGED RANGES (2):
+  D1:E1
+  G1:H1
+
+STATIC / INPUT / LABEL CELLS (226):
+coord	value
+D1	Base
+G1	Modifiers
+N1	Strength
+O1	Dexterity
+P1	Intelligence
+Q1	Faith
+R1	Arcane
+V1	Available Infusions
+X1	Upgrade Level
+Z1	Status Buffs
+AA1	Usable
+AB1	Dropdown
+AD1	Defaults
+D2	attackBasePhysics
+G2	physicsAtkRate
+J2	correctType_Physics
+N2	strength
+O2	dexterity
+P2	magic
+Q2	faith
+R2	luck
+T2	Unarmed
+Z2	Poison Grease
+D3	attackBaseMagic
+G3	magicAtkRate
+J3	strengthCorrect_byPhysics
+M3	correct
+Z3	Rot Grease
+A4	Reinforcement Level
+D4	attackBaseFire
+G4	fireAtkRate
+J4	dexterityCorrect_byPhysics
+M4	correctRate
+Z4	Blood Grease
+A5	reinforceTypeId
+D5	attackBaseThunder
+G5	thunderAtkRate
+J5	magicCorrect_byPhysics
+Z5	Freezing Grease
+A6	attackElementCorrectId
+D6	attackBaseDark
+G6	darkAtkRate
+J6	faithCorrect_byPhysics
+M6	correct_byPhysics
+Z6	Soporific Grease
+A7	SpecialStatusSpEffectId
+J7	luckCorrect_byPhysics
+M7	correct_byMagic
+Z7	Drawstring Poison Grease
+A8	gemMountType
+D8	correctStrength
+G8	correctStrengthRate
+M8	correct_byFire
+Z8	Drawstring Rot Grease
+AD8	13.0
+A9	disableGemAttr
+D9	correctAgility
+G9	correctAgilityRate
+J9	correctType_Magic
+M9	correct_byThunder
+Z9	Drawstring Blood Grease
+AD9	9.0
+A10	Throwable
+D10	correctMagic
+G10	correctMagicRate
+J10	strengthCorrect_byMagic
+M10	correct_byDark
+Z10	Drawstring Soporific Grease
+AD10	9.0
+A11	isEnhance
+D11	correctFaith
+G11	correctFaithRate
+J11	dexterityCorrect_byMagic
+Z11	Frozen Armament
+AD11	7.0
+A12	enableMagic
+D12	correctLuck
+G12	correctLuckRate
+J12	magicCorrect_byMagic
+M12	isCorrect_byPhysics
+Z12	Poison Armament
+A13	enableMiracle
+J13	faithCorrect_byMagic
+M13	isCorrect_byMagic
+Z13	Bloodflame Blade (only bleed)
+A14	isDualBlade
+D14	physGuardCutRate
+G14	physicsGuardCutRate
+J14	luckCorrect_byMagic
+M14	isCorrect_byFire
+Z14	Seppuku (only bleed; +30 phys AP)
+A15	properStrength
+D15	magGuardCutRate
+G15	magicGuardCutRate
+M15	isCorrect_byThunder
+Z15	Poisonous Mist
+A16	properAgility
+D16	fireGuardCutRate
+G16	fireGuardCutRate
+J16	correctType_Fire
+M16	isCorrect_byDark
+Z16	Chilling Mist
+A17	properMagic
+D17	thunGuardCutRate
+G17	thunderGuardCutRate
+J17	strengthCorrect_byFire
+A18	properFaith
+D18	darkGuardCutRate
+G18	darkGuardCutRate
+J18	dexterityCorrect_byFire
+M18	overwriteCorrectRate_byPhysics
+A19	properLuck
+D19	poisonGuardResist
+G19	poisonGuardResistRate
+J19	magicCorrect_byFire
+M19	overwriteCorrectRate_byMagic
+A20	Strength
+D20	diseaseGuardResist
+G20	diseaseGuardResistRate
+J20	faithCorrect_byFire
+M20	overwriteCorrectRate_byFire
+A21	Dexterity
+D21	bloodGuardResist
+G21	bloodGuardResistRate
+J21	luckCorrect_byFire
+M21	overwriteCorrectRate_ByThunder
+A22	Intelligence
+D22	freezeGuardResist
+G22	freezeGuardDefRate
+M22	overwriteCorrectRate_byDark
+A23	Faith
+D23	sleepGuardResist
+G23	sleepGuardDefRate
+J23	correctType_Thunder
+A24	Arcane
+D24	madnessGuardResist
+G24	madnessGuardDefRate
+J24	strengthCorrect_byThunder
+M24	influenceCorrectRate_byPhysics
+A25	2h
+D25	curseGuardResist
+G25	curseGuardResistRate
+J25	dexterityCorrect_byThunder
+M25	influenceCorrectRate_byMagic
+A26	Str Requirements Met
+D26	staminaGuardDef
+G26	staminaGuardDefRate
+J26	magicCorrect_byThunder
+M26	influenceCorrectRate_byFire
+A27	Dex Requirements Met
+J27	faithCorrect_byThunder
+M27	influenceCorrectRate_byThunder
+A28	Int Requirements Met
+G28	baseAtkRate
+J28	luckCorrect_byThunder
+M28	influenceCorrectRate_byDark
+A29	Faith Requirements Met
+A30	Arc Requirements Met
+D30	spEffectBehaviorId0
+G30	spEffectBehaviorId1
+J30	correctType_Dark
+M30	correctRate_byPhysics
+A31	ignoreRequirements
+D31	spEffectId1
+G31	spEffectId2
+J31	strengthCorrect_byDark
+M31	correctRate_byMagic
+A32	Status Buff
+D32	poizonAttackPower
+G32	poizonAttackPower
+J32	dexterityCorrect_byDark
+M32	correctRate_byFire
+A33	Weapon Class
+D33	diseaseAttackPower
+G33	diseaseAttackPower
+J33	magicCorrect_byDark
+M33	correctRate_byThunder
+D34	bloodAttackPower
+G34	bloodAttackPower
+J34	faithCorrect_byDark
+M34	correctRate_byDark
+A35	overwriteAttackElementCorrectId
+D35	freezeAttackPower
+G35	freezeAttackPower
+J35	luckCorrect_byDark
+A36	overwriteAttackBasePhysics
+D36	sleepAttackPower
+G36	sleepAttackPower
+M36	lowStatus_AtkPowDown
+A37	overwriteAttackBaseMagic
+D37	madnessAttackPower
+G37	madnessAttackPower
+J37	correctType_Poison
+M37	physAtkPenalty
+P37	negPhysScale
+A38	overwriteAttackBaseFire
+J38	luckCorrect_byPoison
+M38	magAtkPenalty
+P38	negMagScale
+A39	overwriteAttackBaseThunder
+D39	StatusBuffSpEffectId
+M39	fireAtkPenalty
+P39	negFireScale
+A40	overwriteAttackBaseDark
+J40	correctType_Blood
+M40	thunAtkPenalty
+P40	negThunScale
+A41	baseAtkRate
+J41	luckCorrect_byBlood
+M41	darkAtkPenalty
+P41	negDarkScale
+A43	changeStrengthPoint
+J43	correctType_Sleep
+M43	statusAtkPenalty
+A44	changeAgilityPoint
+J44	luckCorrect_bySleep
+A45	changeMagicPoint
+N45	changeStrengthPoint
+O45	changeAgilityPoint
+P45	changeMagicPoint
+Q45	changeFaithPoint
+R45	changeLuckPoint
+A46	changeFaithPoint
+J46	correctType_Madness
+A47	changeLuckPoint
+J47	luckCorrect_byMadness
+
+CROSS-SHEET REFERENCES: AP Calc, AttackElementCorrectParam, CalcCorrectGraphEz, ConsumableData, EquipParamWeapon, Planner, PlannerData, PlayerCommonParam, ReinforceParamWeapon, StatusBuffData, StatusEffectData, WeaponData
+FORMULA KINDS: excel=377, excel_compat=3, google_sheets=2
+UNIQUE PATTERNS: 179
+
+========================================================================
+FORMULA PATTERNS (fill-down compressed)
+{r} is the row of the cell. Port the template once and apply per row.
+========================================================================
+
+PATTERN 1  kind=excel  array=False  A1
+  template: =VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$B,2,False)&IF($B$4=0,," +"&$B$4)
+  e.g. A1: =VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$B,2,False)&IF($B$4=0,," +"&$B$4)  cached='Unarmed'
+
+PATTERN 2  kind=excel  array=False  T1
+  context_label: Arcane
+  template: ='AP Calc'!$G$10
+  e.g. T1: ='AP Calc'!$G$10
+
+PATTERN 3  kind=excel_compat  array=True  A2
+  array_spill_ref: A2
+  template: =XLOOKUP('AP Calc'!$G$11,WeaponData!$B:$B,WeaponData!$B:$B,"Invalid")
+  note: Stored with Excel _xlfn/_xlws prefix (newer functions like XLOOKUP).
+  e.g. A2: =XLOOKUP('AP Calc'!$G$11,WeaponData!$B:$B,WeaponData!$B:$B,"Invalid")  cached='Unarmed'
+
+PATTERN 4  kind=excel  array=False  B2
+  template: =VLOOKUP($A$2,WeaponData!$B$2:$I48,2,False)
+  e.g. B2: =VLOOKUP($A$2,WeaponData!$B$2:$I48,2,False)  cached=110000
+
+PATTERN 5  kind=excel  array=False  E2
+  context_label: attackBasePhysics
+  template: =IFERROR(
+IF(ISBLANK($B36),
+IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D{r},ConsumableData!$1:$1,0),False),
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D{r},EquipParamWeapon!$1:$1,0),False)),
+$B36),
+0)
+  e.g. E2: =IFERROR(
+IF(ISBLANK($B36),
+IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D2,ConsumableData!$1:$1,0),False),
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D2,EquipParamWeapon!$1:$1,0),False)),
+$B36),
+0)  cached=20
+
+PATTERN 6  kind=excel  array=False  H2:H6 (5 cells)
+  context_label: physicsAtkRate
+  template: =IFERROR(
+IF($B$41,$H$28,
+VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G{r},ReinforceParamWeapon!$1:$1,0),False)),
+1)
+  e.g. H2: =IFERROR(
+IF($B$41,$H$28,
+VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G2,ReinforceParamWeapon!$1:$1,0),False)),
+1)  cached=1
+  e.g. H3: =IFERROR(
+IF($B$41,$H$28,
+VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G3,ReinforceParamWeapon!$1:$1,0),False)),
+1)  cached=1
+  e.g. H4: =IFERROR(
+IF($B$41,$H$28,
+VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G4,ReinforceParamWeapon!$1:$1,0),False)),
+1)  cached=1
+  ... 2 more of this pattern
+
+PATTERN 7  kind=excel  array=False  K2:K46 (9 cells)
+  context_label: correctType_Physics
+  template: =VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J{r},EquipParamWeapon!$1:$1,0),False)
+  e.g. K2: =VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J2,EquipParamWeapon!$1:$1,0),False)  cached=0
+  e.g. K9: =VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J9,EquipParamWeapon!$1:$1,0),False)  cached=0
+  e.g. K16: =VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J16,EquipParamWeapon!$1:$1,0),False)  cached=0
+  ... 6 more of this pattern
+
+PATTERN 8  kind=excel  array=True  V2
+  context_label: Unarmed
+  array_spill_ref: V2
+  template: =IFERROR(IF(VLOOKUP($A$2,WeaponData!$B$2:$F48,3,False),WeaponData!$O$2:$O48,WeaponData!$O$2),WeaponData!$O$2)
+  e.g. V2: =IFERROR(IF(VLOOKUP($A$2,WeaponData!$B$2:$F48,3,False),WeaponData!$O$2:$O48,WeaponData!$O$2),WeaponData!$O$2)  cached='Standard'
+
+PATTERN 9  kind=excel  array=True  X2
+  context_label: Unarmed
+  array_spill_ref: X2
+  template: =IFERROR(
+IF(VLOOKUP($A$2,WeaponData!$B$2:$I48,4,False),IF(VLOOKUP($A$2,WeaponData!$B$2:$I48,5,False),
+{0;1;2;3;4;5;6;7;8;9;10},
+{0;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21;22;23;24;25}),
+0)
+,"")
+  e.g. X2: =IFERROR(
+IF(VLOOKUP($A$2,WeaponData!$B$2:$I48,4,False),IF(VLOOKUP($A$2,WeaponData!$B$2:$I48,5,False),
+{0;1;2;3;4;5;6;7;8;9;10},
+{0;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21;22;23;24;25}),
+0)
+,"")  cached=0
+
+PATTERN 10  kind=excel  array=False  AA2:AA47 (46 cells)
+  context_label: Poison Grease
+  template: =
+IFERROR(IF(ISBLANK(Z{r}),,
+IF(VLOOKUP(Z{r},StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False),
+AND(VLOOKUP(Z{r},StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z{r},StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)),
+IF($B$11,AND(VLOOKUP(Z{r},StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z{r},StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False))
+),
+True)
+  e.g. AA2: =
+IFERROR(IF(ISBLANK(Z2),,
+IF(VLOOKUP(Z2,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False),
+AND(VLOOKUP(Z2,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z2,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)),
+IF($B$11,AND(VLOOKUP(Z2,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z2,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False))
+),
+True)  cached=False
+  e.g. AA3: =
+IFERROR(IF(ISBLANK(Z3),,
+IF(VLOOKUP(Z3,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False),
+AND(VLOOKUP(Z3,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z3,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)),
+IF($B$11,AND(VLOOKUP(Z3,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z3,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False))
+),
+True)  cached=False
+  e.g. AA4: =
+IFERROR(IF(ISBLANK(Z4),,
+IF(VLOOKUP(Z4,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False),
+AND(VLOOKUP(Z4,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z4,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)),
+IF($B$11,AND(VLOOKUP(Z4,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z4,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False))
+),
+True)  cached=False
+  ... 43 more of this pattern
+
+PATTERN 11  kind=excel  array=False  AB2
+  context_label: Poison Grease
+  template: =StatusBuffData!$A$2
+  e.g. AB2: =StatusBuffData!$A$2  cached='None'
+
+PATTERN 12  kind=excel  array=False  AD2
+  context_label: Poison Grease
+  template: =IF($A$2="Unarmed",,$B$33)
+  e.g. AD2: =IF($A$2="Unarmed",,$B$33)
+
+PATTERN 13  kind=excel  array=False  A3
+  template: ='AP Calc'!$G$12
+  e.g. A3: ='AP Calc'!$G$12  cached='Standard'
+
+PATTERN 14  kind=excel  array=False  B3
+  template: =IFERROR(
+IF(VLOOKUP($A$2,WeaponData!$B$2:$M48,3,False),
+VLOOKUP($A$3,WeaponData!$O$2:P48,2,False),0)
+,0)
+  e.g. B3: =IFERROR(
+IF(VLOOKUP($A$2,WeaponData!$B$2:$M48,3,False),
+VLOOKUP($A$3,WeaponData!$O$2:P48,2,False),0)
+,0)  cached=0
+
+PATTERN 15  kind=excel  array=False  E3
+  context_label: attackBaseMagic
+  template: =IFERROR(
+IF(ISBLANK($B37),
+IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D{r},ConsumableData!$1:$1,0),False),
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D{r},EquipParamWeapon!$1:$1,0),False)),
+$B37),
+0)
+  e.g. E3: =IFERROR(
+IF(ISBLANK($B37),
+IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D3,ConsumableData!$1:$1,0),False),
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D3,EquipParamWeapon!$1:$1,0),False)),
+$B37),
+0)  cached=0
+
+PATTERN 16  kind=excel  array=False  K3:K31 (5 cells)
+  context_label: strengthCorrect_byPhysics
+  template: =VLOOKUP($K{r-1},CalcCorrectGraphEz!$A:$EU,$B$20+1,False)
+  e.g. K3: =VLOOKUP($K2,CalcCorrectGraphEz!$A:$EU,$B$20+1,False)  cached=18.11896248
+  e.g. K10: =VLOOKUP($K9,CalcCorrectGraphEz!$A:$EU,$B$20+1,False)  cached=18.11896248
+  e.g. K17: =VLOOKUP($K16,CalcCorrectGraphEz!$A:$EU,$B$20+1,False)  cached=18.11896248
+  ... 2 more of this pattern
+
+PATTERN 17  kind=excel  array=False  N3
+  context_label: correct
+  template: =$E$8*0.01
+  e.g. N3: =$E$8*0.01  cached=0.5
+
+PATTERN 18  kind=excel  array=False  O3
+  context_label: correct
+  template: =$E$9*0.01
+  e.g. O3: =$E$9*0.01  cached=0.5
+
+PATTERN 19  kind=excel  array=False  P3
+  context_label: correct
+  template: =$E$10*0.01
+  e.g. P3: =$E$10*0.01  cached=0
+
+PATTERN 20  kind=excel  array=False  Q3
+  context_label: correct
+  template: =$E$11*0.01
+  e.g. Q3: =$E$11*0.01  cached=0
+
+PATTERN 21  kind=excel  array=False  R3
+  context_label: correct
+  template: =$E$12*0.01
+  e.g. R3: =$E$12*0.01  cached=0
+
+PATTERN 22  kind=google_sheets  array=False  T3
+  context_label: Unarmed
+  template: =IFERROR(FILTER(WeaponData!$B$2:$B48,T1=WeaponData!$A$2:$A48,NOT(IsBlank(WeaponData!$B$2:$B48))),"Select a Weapon Class")
+  note: Original Google Sheets formula recovered from DUMMYFUNCTION wrapper. Functions like FILTER, QUERY, UNIQUE, FLATTEN, IMPORTRANGE, GOOGLETRANSLATE are Sheets-only and must be reimplemented.
+  e.g. T3: =IFERROR(FILTER(WeaponData!$B$2:$B48,T1=WeaponData!$A$2:$A48,NOT(IsBlank(WeaponData!$B$2:$B48))),"Select a Weapon Class")  cached='Select a Weapon Class'
+
+PATTERN 23  kind=google_sheets  array=False  AB3
+  context_label: Rot Grease
+  template: =IFERROR(FILTER(Z{r-1}:Z48,AA{r-1}:AA48=True))
+  note: Original Google Sheets formula recovered from DUMMYFUNCTION wrapper. Functions like FILTER, QUERY, UNIQUE, FLATTEN, IMPORTRANGE, GOOGLETRANSLATE are Sheets-only and must be reimplemented.
+  e.g. AB3: =IFERROR(FILTER(Z2:Z48,AA2:AA48=True))
+
+PATTERN 24  kind=excel  array=False  AD3
+  context_label: Rot Grease
+  template: =IF(PlannerData!$R$2="Invalid","Unarmed",PlannerData!$R$2)
+  e.g. AD3: =IF(PlannerData!$R$2="Invalid","Unarmed",PlannerData!$R$2)  cached='Unarmed'
+
+PATTERN 25  kind=excel  array=False  B4
+  context_label: Reinforcement Level
+  template: =IF(ISBLANK('AP Calc'!$G$13),0,MAX(MIN('AP Calc'!$G$13,MAX($X$2:$X48)),0))
+  e.g. B4: =IF(ISBLANK('AP Calc'!$G$13),0,MAX(MIN('AP Calc'!$G$13,MAX($X$2:$X48)),0))  cached=0
+
+PATTERN 26  kind=excel  array=False  E4
+  context_label: attackBaseFire
+  template: =IFERROR(
+IF(ISBLANK($B38),
+IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D{r},ConsumableData!$1:$1,0),False),
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D{r},EquipParamWeapon!$1:$1,0),False)),
+$B38),
+0)
+  e.g. E4: =IFERROR(
+IF(ISBLANK($B38),
+IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D4,ConsumableData!$1:$1,0),False),
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D4,EquipParamWeapon!$1:$1,0),False)),
+$B38),
+0)  cached=0
+
+PATTERN 27  kind=excel  array=False  K4
+  context_label: dexterityCorrect_byPhysics
+  template: =VLOOKUP($K2,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)
+  e.g. K4: =VLOOKUP($K2,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)  cached=16.45958186
+
+PATTERN 28  kind=excel  array=False  N4
+  context_label: correctRate
+  template: =$H$8
+  e.g. N4: =$H$8  cached=1
+
+PATTERN 29  kind=excel  array=False  O4
+  context_label: correctRate
+  template: =$H$9
+  e.g. O4: =$H$9  cached=1
+
+PATTERN 30  kind=excel  array=False  P4
+  context_label: correctRate
+  template: =$H$10
+  e.g. P4: =$H$10  cached=1
+
+PATTERN 31  kind=excel  array=False  Q4
+  context_label: correctRate
+  template: =$H$11
+  e.g. Q4: =$H$11  cached=1
+
+PATTERN 32  kind=excel  array=False  R4
+  context_label: correctRate
+  template: =$H$12
+  e.g. R4: =$H$12  cached=1
+
+PATTERN 33  kind=excel_compat  array=True  AD4
+  context_label: Blood Grease
+  array_spill_ref: AD4
+  template: =IF($A$2=$AD$3,XLOOKUP(Planner!$Q$17,WeaponData!$O:$O,WeaponData!$O:O,WeaponData!$O$2),WeaponData!$O$2)
+  note: Stored with Excel _xlfn/_xlws prefix (newer functions like XLOOKUP).
+  e.g. AD4: =IF($A$2=$AD$3,XLOOKUP(Planner!$Q$17,WeaponData!$O:$O,WeaponData!$O:O,WeaponData!$O$2),WeaponData!$O$2)  cached='Standard'
+
+PATTERN 34  kind=excel  array=False  B5:B14 (7 cells)
+  context_label: reinforceTypeId
+  template: =VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A{r},EquipParamWeapon!$1:$1,0),False)
+  e.g. B5: =VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A5,EquipParamWeapon!$1:$1,0),False)  cached=3000
+  e.g. B8: =VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A8,EquipParamWeapon!$1:$1,0),False)  cached=0
+  e.g. B9: =VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A9,EquipParamWeapon!$1:$1,0),False)  cached=False
+  ... 4 more of this pattern
+
+PATTERN 35  kind=excel  array=False  E5
+  context_label: attackBaseThunder
+  template: =IFERROR(
+IF(ISBLANK($B39),
+IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D{r},ConsumableData!$1:$1,0),False),
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D{r},EquipParamWeapon!$1:$1,0),False)),
+$B39),
+0)
+  e.g. E5: =IFERROR(
+IF(ISBLANK($B39),
+IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D5,ConsumableData!$1:$1,0),False),
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D5,EquipParamWeapon!$1:$1,0),False)),
+$B39),
+0)  cached=0
+
+PATTERN 36  kind=excel  array=False  K5
+  context_label: magicCorrect_byPhysics
+  template: =VLOOKUP($K2,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)
+  e.g. K5: =VLOOKUP($K2,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)  cached=10.11834044
+
+PATTERN 37  kind=excel  array=False  AD5
+  context_label: Freezing Grease
+  template: =IF($A$2=$AD$3,Planner!$Q$18,MAX($X$2:$X48))
+  e.g. AD5: =IF($A$2=$AD$3,Planner!$Q$18,MAX($X$2:$X48))  cached=0
+
+PATTERN 38  kind=excel  array=False  B6
+  context_label: attackElementCorrectId
+  template: =IF(ISBLANK($B$35),
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A{r},EquipParamWeapon!$1:$1,0),False),
+$B$35)
+  e.g. B6: =IF(ISBLANK($B$35),
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A6,EquipParamWeapon!$1:$1,0),False),
+$B$35)  cached=10000
+
+PATTERN 39  kind=excel  array=False  E6
+  context_label: attackBaseDark
+  template: =IFERROR(
+IF(ISBLANK($B40),
+IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D{r},ConsumableData!$1:$1,0),False),
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D{r},EquipParamWeapon!$1:$1,0),False)),
+$B40),
+0)
+  e.g. E6: =IFERROR(
+IF(ISBLANK($B40),
+IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D6,ConsumableData!$1:$1,0),False),
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D6,EquipParamWeapon!$1:$1,0),False)),
+$B40),
+0)  cached=0
+
+PATTERN 40  kind=excel  array=False  K6
+  context_label: faithCorrect_byPhysics
+  template: =VLOOKUP($K2,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)
+  e.g. K6: =VLOOKUP($K2,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)  cached=10.11834044
+
+PATTERN 41  kind=excel  array=False  N6:N10 (5 cells)
+  context_label: correct_byPhysics
+  template: =VLOOKUP(N$2&$M{r},$J:$K,2,False)*0.01
+  e.g. N6: =VLOOKUP(N$2&$M6,$J:$K,2,False)*0.01  cached=0.1811896248
+  e.g. N7: =VLOOKUP(N$2&$M7,$J:$K,2,False)*0.01  cached=0.1811896248
+  e.g. N8: =VLOOKUP(N$2&$M8,$J:$K,2,False)*0.01  cached=0.1811896248
+  ... 2 more of this pattern
+
+PATTERN 42  kind=excel  array=False  O6:O10 (5 cells)
+  context_label: correct_byPhysics
+  template: =VLOOKUP(O$2&$M{r},$J:$K,2,False)*0.01
+  e.g. O6: =VLOOKUP(O$2&$M6,$J:$K,2,False)*0.01  cached=0.1645958186
+  e.g. O7: =VLOOKUP(O$2&$M7,$J:$K,2,False)*0.01  cached=0.1645958186
+  e.g. O8: =VLOOKUP(O$2&$M8,$J:$K,2,False)*0.01  cached=0.1645958186
+  ... 2 more of this pattern
+
+PATTERN 43  kind=excel  array=False  P6:P10 (5 cells)
+  context_label: correct_byPhysics
+  template: =VLOOKUP(P$2&$M{r},$J:$K,2,False)*0.01
+  e.g. P6: =VLOOKUP(P$2&$M6,$J:$K,2,False)*0.01  cached=0.1011834044
+  e.g. P7: =VLOOKUP(P$2&$M7,$J:$K,2,False)*0.01  cached=0.1011834044
+  e.g. P8: =VLOOKUP(P$2&$M8,$J:$K,2,False)*0.01  cached=0.1011834044
+  ... 2 more of this pattern
+
+PATTERN 44  kind=excel  array=False  Q6:Q10 (5 cells)
+  context_label: correct_byPhysics
+  template: =VLOOKUP(Q$2&$M{r},$J:$K,2,False)*0.01
+  e.g. Q6: =VLOOKUP(Q$2&$M6,$J:$K,2,False)*0.01  cached=0.1011834044
+  e.g. Q7: =VLOOKUP(Q$2&$M7,$J:$K,2,False)*0.01  cached=0.1011834044
+  e.g. Q8: =VLOOKUP(Q$2&$M8,$J:$K,2,False)*0.01  cached=0.1011834044
+  ... 2 more of this pattern
+
+PATTERN 45  kind=excel  array=False  R6:R10 (5 cells)
+  context_label: correct_byPhysics
+  template: =VLOOKUP(R$2&$M{r},$J:$K,2,False)*0.01
+  e.g. R6: =VLOOKUP(R$2&$M6,$J:$K,2,False)*0.01  cached=0.07164449132
+  e.g. R7: =VLOOKUP(R$2&$M7,$J:$K,2,False)*0.01  cached=0.07164449132
+  e.g. R8: =VLOOKUP(R$2&$M8,$J:$K,2,False)*0.01  cached=0.07164449132
+  ... 2 more of this pattern
+
+PATTERN 46  kind=excel  array=False  B7
+  context_label: SpecialStatusSpEffectId
+  template: =VLOOKUP($B$2,WeaponData!$C$2:$M48,8,False)
+  e.g. B7: =VLOOKUP($B$2,WeaponData!$C$2:$M48,8,False)
+
+PATTERN 47  kind=excel  array=False  K7
+  context_label: luckCorrect_byPhysics
+  template: =VLOOKUP($K2,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)
+  e.g. K7: =VLOOKUP($K2,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)  cached=7.164449132
+
+PATTERN 48  kind=excel  array=True  AD7
+  context_label: Drawstring Poison Grease
+  array_spill_ref: AD7:AD11
+  template: =PlannerData!$B$24:$B$28
+  e.g. AD7: =PlannerData!$B$24:$B$28  cached=14
+
+PATTERN 49  kind=excel  array=False  E8:E26 (18 cells)
+  context_label: correctStrength
+  template: =IFERROR(
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D{r},EquipParamWeapon!$1:$1,0),False),
+0)
+  e.g. E8: =IFERROR(
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D8,EquipParamWeapon!$1:$1,0),False),
+0)  cached=50
+  e.g. E9: =IFERROR(
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D9,EquipParamWeapon!$1:$1,0),False),
+0)  cached=50
+  e.g. E10: =IFERROR(
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D10,EquipParamWeapon!$1:$1,0),False),
+0)  cached=0
+  ... 15 more of this pattern
+
+PATTERN 50  kind=excel  array=False  H8:H26 (18 cells)
+  context_label: correctStrengthRate
+  template: =IFERROR(
+VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G{r},ReinforceParamWeapon!$1:$1,0),False),
+1)
+  e.g. H8: =IFERROR(
+VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G8,ReinforceParamWeapon!$1:$1,0),False),
+1)  cached=1
+  e.g. H9: =IFERROR(
+VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G9,ReinforceParamWeapon!$1:$1,0),False),
+1)  cached=1
+  e.g. H10: =IFERROR(
+VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G10,ReinforceParamWeapon!$1:$1,0),False),
+1)  cached=1
+  ... 15 more of this pattern
+
+PATTERN 51  kind=excel  array=False  B10
+  context_label: Throwable
+  template: =VLOOKUP($B$2,WeaponData!$C$2:$I48,6,False)
+  e.g. B10: =VLOOKUP($B$2,WeaponData!$C$2:$I48,6,False)  cached=False
+
+PATTERN 52  kind=excel  array=False  K11
+  context_label: dexterityCorrect_byMagic
+  template: =VLOOKUP($K9,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)
+  e.g. K11: =VLOOKUP($K9,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)  cached=16.45958186
+
+PATTERN 53  kind=excel  array=False  K12
+  context_label: magicCorrect_byMagic
+  template: =VLOOKUP($K9,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)
+  e.g. K12: =VLOOKUP($K9,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)  cached=10.11834044
+
+PATTERN 54  kind=excel  array=False  N12:N16 (5 cells)
+  context_label: isCorrect_byPhysics
+  template: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"is","is"&N$2),AttackElementCorrectParam!$1:$1,0),False),
+False)
+  e.g. N12: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M12,"is","is"&N$2),AttackElementCorrectParam!$1:$1,0),False),
+False)  cached=True
+  e.g. N13: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M13,"is","is"&N$2),AttackElementCorrectParam!$1:$1,0),False),
+False)  cached=False
+  e.g. N14: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M14,"is","is"&N$2),AttackElementCorrectParam!$1:$1,0),False),
+False)  cached=False
+  ... 2 more of this pattern
+
+PATTERN 55  kind=excel  array=False  O12:O16 (5 cells)
+  context_label: isCorrect_byPhysics
+  template: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"is","is"&O$2),AttackElementCorrectParam!$1:$1,0),False),
+False)
+  e.g. O12: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M12,"is","is"&O$2),AttackElementCorrectParam!$1:$1,0),False),
+False)  cached=True
+  e.g. O13: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M13,"is","is"&O$2),AttackElementCorrectParam!$1:$1,0),False),
+False)  cached=False
+  e.g. O14: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M14,"is","is"&O$2),AttackElementCorrectParam!$1:$1,0),False),
+False)  cached=False
+  ... 2 more of this pattern
+
+PATTERN 56  kind=excel  array=False  P12:P16 (5 cells)
+  context_label: isCorrect_byPhysics
+  template: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"is","is"&P$2),AttackElementCorrectParam!$1:$1,0),False),
+False)
+  e.g. P12: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M12,"is","is"&P$2),AttackElementCorrectParam!$1:$1,0),False),
+False)  cached=False
+  e.g. P13: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M13,"is","is"&P$2),AttackElementCorrectParam!$1:$1,0),False),
+False)  cached=True
+  e.g. P14: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M14,"is","is"&P$2),AttackElementCorrectParam!$1:$1,0),False),
+False)  cached=False
+  ... 2 more of this pattern
+
+PATTERN 57  kind=excel  array=False  Q12:Q16 (5 cells)
+  context_label: isCorrect_byPhysics
+  template: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"is","is"&Q$2),AttackElementCorrectParam!$1:$1,0),False),
+False)
+  e.g. Q12: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M12,"is","is"&Q$2),AttackElementCorrectParam!$1:$1,0),False),
+False)  cached=False
+  e.g. Q13: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M13,"is","is"&Q$2),AttackElementCorrectParam!$1:$1,0),False),
+False)  cached=False
+  e.g. Q14: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M14,"is","is"&Q$2),AttackElementCorrectParam!$1:$1,0),False),
+False)  cached=True
+  ... 2 more of this pattern
+
+PATTERN 58  kind=excel  array=False  R12:R16 (5 cells)
+  context_label: isCorrect_byPhysics
+  template: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"is","is"&R$2),AttackElementCorrectParam!$1:$1,0),False),
+False)
+  e.g. R12: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M12,"is","is"&R$2),AttackElementCorrectParam!$1:$1,0),False),
+False)  cached=False
+  e.g. R13: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M13,"is","is"&R$2),AttackElementCorrectParam!$1:$1,0),False),
+False)  cached=False
+  e.g. R14: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M14,"is","is"&R$2),AttackElementCorrectParam!$1:$1,0),False),
+False)  cached=False
+  ... 2 more of this pattern
+
+PATTERN 59  kind=excel  array=False  K13
+  context_label: faithCorrect_byMagic
+  template: =VLOOKUP($K9,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)
+  e.g. K13: =VLOOKUP($K9,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)  cached=10.11834044
+
+PATTERN 60  kind=excel  array=False  K14
+  context_label: luckCorrect_byMagic
+  template: =VLOOKUP($K9,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)
+  e.g. K14: =VLOOKUP($K9,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)  cached=7.164449132
+
+PATTERN 61  kind=excel  array=False  AD14
+  context_label: Seppuku (only bleed; +30 phys AP)
+  template: =StatusBuffData!$A$2
+  e.g. AD14: =StatusBuffData!$A$2  cached='None'
+
+PATTERN 62  kind=excel  array=False  B15:B19 (5 cells)
+  context_label: properStrength
+  template: =IFERROR(
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A{r},EquipParamWeapon!$1:$1,0),False),
+0)
+  e.g. B15: =IFERROR(
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A15,EquipParamWeapon!$1:$1,0),False),
+0)  cached=0
+  e.g. B16: =IFERROR(
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A16,EquipParamWeapon!$1:$1,0),False),
+0)  cached=0
+  e.g. B17: =IFERROR(
+VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A17,EquipParamWeapon!$1:$1,0),False),
+0)  cached=0
+  ... 2 more of this pattern
+
+PATTERN 63  kind=excel  array=False  K18
+  context_label: dexterityCorrect_byFire
+  template: =VLOOKUP($K16,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)
+  e.g. K18: =VLOOKUP($K16,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)  cached=16.45958186
+
+PATTERN 64  kind=excel  array=False  N18:N22 (5 cells)
+  context_label: overwriteCorrectRate_byPhysics
+  template: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)
+  e.g. N18: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)  cached=-1
+  e.g. N19: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)  cached=-1
+  e.g. N20: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)  cached=-1
+  ... 2 more of this pattern
+
+PATTERN 65  kind=excel  array=False  O18:O22 (5 cells)
+  context_label: overwriteCorrectRate_byPhysics
+  template: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)
+  e.g. O18: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)  cached=-1
+  e.g. O19: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)  cached=-1
+  e.g. O20: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)  cached=-1
+  ... 2 more of this pattern
+
+PATTERN 66  kind=excel  array=False  P18:P22 (5 cells)
+  context_label: overwriteCorrectRate_byPhysics
+  template: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)
+  e.g. P18: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)  cached=-1
+  e.g. P19: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)  cached=-1
+  e.g. P20: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)  cached=-1
+  ... 2 more of this pattern
+
+PATTERN 67  kind=excel  array=False  Q18:Q22 (5 cells)
+  context_label: overwriteCorrectRate_byPhysics
+  template: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)
+  e.g. Q18: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)  cached=-1
+  e.g. Q19: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)  cached=-1
+  e.g. Q20: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)  cached=-1
+  ... 2 more of this pattern
+
+PATTERN 68  kind=excel  array=False  R18:R22 (5 cells)
+  context_label: overwriteCorrectRate_byPhysics
+  template: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)
+  e.g. R18: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)  cached=-1
+  e.g. R19: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)  cached=-1
+  e.g. R20: =IFERROR(
+IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)>=0,
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1),
+-1)  cached=-1
+  ... 2 more of this pattern
+
+PATTERN 69  kind=excel  array=False  K19
+  context_label: magicCorrect_byFire
+  template: =VLOOKUP($K16,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)
+  e.g. K19: =VLOOKUP($K16,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)  cached=10.11834044
+
+PATTERN 70  kind=excel  array=False  B20
+  context_label: Strength
+  template: =TRUNC(MIN(MAX(TRUNC('AP Calc'!G15),1),99)
+*IF(B25,IF(VLOOKUP($A$2,WeaponData!$B$2:$M48,6,False),1.5,1),1))
+  e.g. B20: =TRUNC(MIN(MAX(TRUNC('AP Calc'!G15),1),99)
+*IF(B25,IF(VLOOKUP($A$2,WeaponData!$B$2:$M48,6,False),1.5,1),1))  cached=14
+
+PATTERN 71  kind=excel  array=False  K20
+  context_label: faithCorrect_byFire
+  template: =VLOOKUP($K16,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)
+  e.g. K20: =VLOOKUP($K16,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)  cached=10.11834044
+
+PATTERN 72  kind=excel  array=False  B21
+  context_label: Dexterity
+  template: =MIN(MAX(TRUNC('AP Calc'!G16),1),99)
+  e.g. B21: =MIN(MAX(TRUNC('AP Calc'!G16),1),99)  cached=13
+
+PATTERN 73  kind=excel  array=False  K21
+  context_label: luckCorrect_byFire
+  template: =VLOOKUP($K16,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)
+  e.g. K21: =VLOOKUP($K16,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)  cached=7.164449132
+
+PATTERN 74  kind=excel  array=False  B22
+  context_label: Intelligence
+  template: =MIN(MAX(TRUNC('AP Calc'!G17),1),99)
+  e.g. B22: =MIN(MAX(TRUNC('AP Calc'!G17),1),99)  cached=9
+
+PATTERN 75  kind=excel  array=False  B23
+  context_label: Faith
+  template: =MIN(MAX(TRUNC('AP Calc'!G18),1),99)
+  e.g. B23: =MIN(MAX(TRUNC('AP Calc'!G18),1),99)  cached=9
+
+PATTERN 76  kind=excel  array=False  B24
+  context_label: Arcane
+  template: =MIN(MAX(TRUNC('AP Calc'!G19),1),99)
+  e.g. B24: =MIN(MAX(TRUNC('AP Calc'!G19),1),99)  cached=7
+
+PATTERN 77  kind=excel  array=False  N24:N28 (5 cells)
+  context_label: influenceCorrectRate_byPhysics
+  template: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"influence","influence"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)
+  e.g. N24: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M24,"influence","influence"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)  cached=1
+  e.g. N25: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M25,"influence","influence"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)  cached=1
+  e.g. N26: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M26,"influence","influence"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)  cached=1
+  ... 2 more of this pattern
+
+PATTERN 78  kind=excel  array=False  O24:O28 (5 cells)
+  context_label: influenceCorrectRate_byPhysics
+  template: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"influence","influence"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)
+  e.g. O24: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M24,"influence","influence"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)  cached=1
+  e.g. O25: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M25,"influence","influence"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)  cached=1
+  e.g. O26: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M26,"influence","influence"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)  cached=1
+  ... 2 more of this pattern
+
+PATTERN 79  kind=excel  array=False  P24:P28 (5 cells)
+  context_label: influenceCorrectRate_byPhysics
+  template: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"influence","influence"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)
+  e.g. P24: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M24,"influence","influence"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)  cached=1
+  e.g. P25: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M25,"influence","influence"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)  cached=1
+  e.g. P26: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M26,"influence","influence"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)  cached=1
+  ... 2 more of this pattern
+
+PATTERN 80  kind=excel  array=False  Q24:Q28 (5 cells)
+  context_label: influenceCorrectRate_byPhysics
+  template: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"influence","influence"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)
+  e.g. Q24: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M24,"influence","influence"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)  cached=1
+  e.g. Q25: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M25,"influence","influence"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)  cached=1
+  e.g. Q26: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M26,"influence","influence"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)  cached=1
+  ... 2 more of this pattern
+
+PATTERN 81  kind=excel  array=False  R24:R28 (5 cells)
+  context_label: influenceCorrectRate_byPhysics
+  template: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M{r},"influence","influence"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)
+  e.g. R24: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M24,"influence","influence"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)  cached=1
+  e.g. R25: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M25,"influence","influence"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)  cached=1
+  e.g. R26: =IFERROR(
+VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M26,"influence","influence"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,
+1)  cached=1
+  ... 2 more of this pattern
+
+PATTERN 82  kind=excel  array=False  B25
+  context_label: 2h
+  template: ='AP Calc'!G20
+  e.g. B25: ='AP Calc'!G20  cached=False
+
+PATTERN 83  kind=excel  array=False  K25
+  context_label: dexterityCorrect_byThunder
+  template: =VLOOKUP($K23,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)
+  e.g. K25: =VLOOKUP($K23,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)  cached=16.45958186
+
+PATTERN 84  kind=excel  array=False  B26
+  context_label: Str Requirements Met
+  template: =IF($B$31,True,
+IF(TRUNC(MIN(MAX(TRUNC('AP Calc'!G15),1),99)*IF(B{r-1},1.5,1))>=B15,True,False))
+  e.g. B26: =IF($B$31,True,
+IF(TRUNC(MIN(MAX(TRUNC('AP Calc'!G15),1),99)*IF(B25,1.5,1))>=B15,True,False))  cached=True
+
+PATTERN 85  kind=excel  array=False  K26
+  context_label: magicCorrect_byThunder
+  template: =VLOOKUP($K23,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)
+  e.g. K26: =VLOOKUP($K23,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)  cached=10.11834044
+
+PATTERN 86  kind=excel  array=False  B27
+  context_label: Dex Requirements Met
+  template: =IF($B$31,True,
+IF(B21>=B16,True,False))
+  e.g. B27: =IF($B$31,True,
+IF(B21>=B16,True,False))  cached=True
+
+PATTERN 87  kind=excel  array=False  K27
+  context_label: faithCorrect_byThunder
+  template: =VLOOKUP($K23,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)
+  e.g. K27: =VLOOKUP($K23,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)  cached=10.11834044
+
+PATTERN 88  kind=excel  array=False  B28
+  context_label: Int Requirements Met
+  template: =IF($B$31,True,
+IF(B22>=B17,True,False))
+  e.g. B28: =IF($B$31,True,
+IF(B22>=B17,True,False))  cached=True
+
+PATTERN 89  kind=excel  array=False  H28
+  context_label: baseAtkRate
+  template: =IFERROR(
+VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A$2:$AF48,MATCH(G{r},ReinforceParamWeapon!$1:$1,0),False),
+1)
+  e.g. H28: =IFERROR(
+VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A$2:$AF48,MATCH(G28,ReinforceParamWeapon!$1:$1,0),False),
+1)  cached=1
+
+PATTERN 90  kind=excel  array=False  K28
+  context_label: luckCorrect_byThunder
+  template: =VLOOKUP($K23,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)
+  e.g. K28: =VLOOKUP($K23,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)  cached=7.164449132
+
+PATTERN 91  kind=excel  array=False  B29
+  context_label: Faith Requirements Met
+  template: =IF($B$31,True,
+IF(B23>=B18,True,False))
+  e.g. B29: =IF($B$31,True,
+IF(B23>=B18,True,False))  cached=True
+
+PATTERN 92  kind=excel  array=False  B30
+  context_label: Arc Requirements Met
+  template: =IF($B$31,True,
+IF(B24>=B19,True,False))
+  e.g. B30: =IF($B$31,True,
+IF(B24>=B19,True,False))  cached=True
+
+PATTERN 93  kind=excel  array=False  E30
+  context_label: spEffectBehaviorId0
+  template: =IF(ISBLANK($B$7),VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D{r},EquipParamWeapon!$1:$1,0),False),$B$7)
+  e.g. E30: =IF(ISBLANK($B$7),VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D30,EquipParamWeapon!$1:$1,0),False),$B$7)  cached=-1
+
+PATTERN 94  kind=excel  array=False  H30
+  context_label: spEffectBehaviorId1
+  template: =VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(G{r},EquipParamWeapon!$1:$1,0),False)
+  e.g. H30: =VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(G30,EquipParamWeapon!$1:$1,0),False)  cached=-1
+
+PATTERN 95  kind=excel  array=False  N30
+  context_label: correctRate_byPhysics
+  template: =IF(AND(N12,NOT($N37)),
+N24-1+(IF(N18>=0,N18,N$3)*N$4+N$46)*N6*N24,
+0)
+  e.g. N30: =IF(AND(N12,NOT($N37)),
+N24-1+(IF(N18>=0,N18,N$3)*N$4+N$46)*N6*N24,
+0)  cached=0.0905948124
+
+PATTERN 96  kind=excel  array=False  O30
+  context_label: correctRate_byPhysics
+  template: =IF(AND(O12,NOT($N37)),
+O24-1+(IF(O18>=0,O18,O$3)*O$4+O$46)*O6*O24,
+0)
+  e.g. O30: =IF(AND(O12,NOT($N37)),
+O24-1+(IF(O18>=0,O18,O$3)*O$4+O$46)*O6*O24,
+0)  cached=0.0822979093
+
+PATTERN 97  kind=excel  array=False  P30
+  context_label: correctRate_byPhysics
+  template: =IF(AND(P12,NOT($N37)),
+P24-1+(IF(P18>=0,P18,P$3)*P$4+P$46)*P6*P24,
+0)
+  e.g. P30: =IF(AND(P12,NOT($N37)),
+P24-1+(IF(P18>=0,P18,P$3)*P$4+P$46)*P6*P24,
+0)  cached=0
+
+PATTERN 98  kind=excel  array=False  Q30
+  context_label: correctRate_byPhysics
+  template: =IF(AND(Q12,NOT($N37)),
+Q24-1+(IF(Q18>=0,Q18,Q$3)*Q$4+Q$46)*Q6*Q24,
+0)
+  e.g. Q30: =IF(AND(Q12,NOT($N37)),
+Q24-1+(IF(Q18>=0,Q18,Q$3)*Q$4+Q$46)*Q6*Q24,
+0)  cached=0
+
+PATTERN 99  kind=excel  array=False  R30
+  context_label: correctRate_byPhysics
+  template: =IF(AND(R12,NOT($N37)),
+R24-1+(IF(R18>=0,R18,R$3)*R$4+R$46)*R6*R24,
+0)
+  e.g. R30: =IF(AND(R12,NOT($N37)),
+R24-1+(IF(R18>=0,R18,R$3)*R$4+R$46)*R6*R24,
+0)  cached=0
+
+PATTERN 100  kind=excel  array=False  B31
+  context_label: ignoreRequirements
+  template: ='AP Calc'!G21
+  e.g. B31: ='AP Calc'!G21  cached=False
+
+PATTERN 101  kind=excel  array=False  E31
+  context_label: spEffectId1
+  template: =IFERROR(
+VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(D{r},ReinforceParamWeapon!$1:$1,0),False),
+0)
+  e.g. E31: =IFERROR(
+VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(D31,ReinforceParamWeapon!$1:$1,0),False),
+0)  cached=0
+
+PATTERN 102  kind=excel  array=False  H31
+  context_label: spEffectId2
+  template: =IFERROR(
+VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G{r},ReinforceParamWeapon!$1:$1,0),False),
+0)
+  e.g. H31: =IFERROR(
+VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G31,ReinforceParamWeapon!$1:$1,0),False),
+0)  cached=0
+
+PATTERN 103  kind=excel  array=False  N31
+  context_label: correctRate_byMagic
+  template: =IF(AND(N13,NOT($N38)),
+N25-1+(IF(N19>=0,N19,N$3)*N$4+N$46)*N7*N25,
+0)
+  e.g. N31: =IF(AND(N13,NOT($N38)),
+N25-1+(IF(N19>=0,N19,N$3)*N$4+N$46)*N7*N25,
+0)  cached=0
+
+PATTERN 104  kind=excel  array=False  O31
+  context_label: correctRate_byMagic
+  template: =IF(AND(O13,NOT($N38)),
+O25-1+(IF(O19>=0,O19,O$3)*O$4+O$46)*O7*O25,
+0)
+  e.g. O31: =IF(AND(O13,NOT($N38)),
+O25-1+(IF(O19>=0,O19,O$3)*O$4+O$46)*O7*O25,
+0)  cached=0
+
+PATTERN 105  kind=excel  array=False  P31
+  context_label: correctRate_byMagic
+  template: =IF(AND(P13,NOT($N38)),
+P25-1+(IF(P19>=0,P19,P$3)*P$4+P$46)*P7*P25,
+0)
+  e.g. P31: =IF(AND(P13,NOT($N38)),
+P25-1+(IF(P19>=0,P19,P$3)*P$4+P$46)*P7*P25,
+0)  cached=0
+
+PATTERN 106  kind=excel  array=False  Q31
+  context_label: correctRate_byMagic
+  template: =IF(AND(Q13,NOT($N38)),
+Q25-1+(IF(Q19>=0,Q19,Q$3)*Q$4+Q$46)*Q7*Q25,
+0)
+  e.g. Q31: =IF(AND(Q13,NOT($N38)),
+Q25-1+(IF(Q19>=0,Q19,Q$3)*Q$4+Q$46)*Q7*Q25,
+0)  cached=0
+
+PATTERN 107  kind=excel  array=False  R31
+  context_label: correctRate_byMagic
+  template: =IF(AND(R13,NOT($N38)),
+R25-1+(IF(R19>=0,R19,R$3)*R$4+R$46)*R7*R25,
+0)
+  e.g. R31: =IF(AND(R13,NOT($N38)),
+R25-1+(IF(R19>=0,R19,R$3)*R$4+R$46)*R7*R25,
+0)  cached=0
+
+PATTERN 108  kind=excel  array=False  B32
+  context_label: Status Buff
+  template: ='AP Calc'!G22
+  e.g. B32: ='AP Calc'!G22  cached='None'
+
+PATTERN 109  kind=excel  array=False  E32:E37 (6 cells)
+  context_label: poizonAttackPower
+  template: =IFERROR(
+VLOOKUP(E$30+E$31,StatusEffectData!$A:$H,MATCH(D{r},StatusEffectData!$1:$1,0),False),
+0)
+  e.g. E32: =IFERROR(
+VLOOKUP(E$30+E$31,StatusEffectData!$A:$H,MATCH(D32,StatusEffectData!$1:$1,0),False),
+0)  cached=0
+  e.g. E33: =IFERROR(
+VLOOKUP(E$30+E$31,StatusEffectData!$A:$H,MATCH(D33,StatusEffectData!$1:$1,0),False),
+0)  cached=0
+  e.g. E34: =IFERROR(
+VLOOKUP(E$30+E$31,StatusEffectData!$A:$H,MATCH(D34,StatusEffectData!$1:$1,0),False),
+0)  cached=0
+  ... 3 more of this pattern
+
+PATTERN 110  kind=excel  array=False  H32:H37 (6 cells)
+  context_label: poizonAttackPower
+  template: =IFERROR(
+VLOOKUP(H$30+H$31,StatusEffectData!$A:$H,MATCH(G{r},StatusEffectData!$1:$1,0),False),
+0)
+  e.g. H32: =IFERROR(
+VLOOKUP(H$30+H$31,StatusEffectData!$A:$H,MATCH(G32,StatusEffectData!$1:$1,0),False),
+0)  cached=0
+  e.g. H33: =IFERROR(
+VLOOKUP(H$30+H$31,StatusEffectData!$A:$H,MATCH(G33,StatusEffectData!$1:$1,0),False),
+0)  cached=0
+  e.g. H34: =IFERROR(
+VLOOKUP(H$30+H$31,StatusEffectData!$A:$H,MATCH(G34,StatusEffectData!$1:$1,0),False),
+0)  cached=0
+  ... 3 more of this pattern
+
+PATTERN 111  kind=excel  array=False  K32
+  context_label: dexterityCorrect_byDark
+  template: =VLOOKUP($K30,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)
+  e.g. K32: =VLOOKUP($K30,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)  cached=16.45958186
+
+PATTERN 112  kind=excel  array=False  N32
+  context_label: correctRate_byFire
+  template: =IF(AND(N14,NOT($N39)),
+N26-1+(IF(N20>=0,N20,N$3)*N$4+N$46)*N8*N26,
+0)
+  e.g. N32: =IF(AND(N14,NOT($N39)),
+N26-1+(IF(N20>=0,N20,N$3)*N$4+N$46)*N8*N26,
+0)  cached=0
+
+PATTERN 113  kind=excel  array=False  O32
+  context_label: correctRate_byFire
+  template: =IF(AND(O14,NOT($N39)),
+O26-1+(IF(O20>=0,O20,O$3)*O$4+O$46)*O8*O26,
+0)
+  e.g. O32: =IF(AND(O14,NOT($N39)),
+O26-1+(IF(O20>=0,O20,O$3)*O$4+O$46)*O8*O26,
+0)  cached=0
+
+PATTERN 114  kind=excel  array=False  P32
+  context_label: correctRate_byFire
+  template: =IF(AND(P14,NOT($N39)),
+P26-1+(IF(P20>=0,P20,P$3)*P$4+P$46)*P8*P26,
+0)
+  e.g. P32: =IF(AND(P14,NOT($N39)),
+P26-1+(IF(P20>=0,P20,P$3)*P$4+P$46)*P8*P26,
+0)  cached=0
+
+PATTERN 115  kind=excel  array=False  Q32
+  context_label: correctRate_byFire
+  template: =IF(AND(Q14,NOT($N39)),
+Q26-1+(IF(Q20>=0,Q20,Q$3)*Q$4+Q$46)*Q8*Q26,
+0)
+  e.g. Q32: =IF(AND(Q14,NOT($N39)),
+Q26-1+(IF(Q20>=0,Q20,Q$3)*Q$4+Q$46)*Q8*Q26,
+0)  cached=0
+
+PATTERN 116  kind=excel  array=False  R32
+  context_label: correctRate_byFire
+  template: =IF(AND(R14,NOT($N39)),
+R26-1+(IF(R20>=0,R20,R$3)*R$4+R$46)*R8*R26,
+0)
+  e.g. R32: =IF(AND(R14,NOT($N39)),
+R26-1+(IF(R20>=0,R20,R$3)*R$4+R$46)*R8*R26,
+0)  cached=0
+
+PATTERN 117  kind=excel_compat  array=True  B33
+  context_label: Weapon Class
+  array_spill_ref: B33
+  template: =XLOOKUP($A$2,WeaponData!$B:$B,WeaponData!$A:$A,)
+  note: Stored with Excel _xlfn/_xlws prefix (newer functions like XLOOKUP).
+  e.g. B33: =XLOOKUP($A$2,WeaponData!$B:$B,WeaponData!$A:$A,)  cached='Fist'
+
+PATTERN 118  kind=excel  array=False  K33
+  context_label: magicCorrect_byDark
+  template: =VLOOKUP($K30,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)
+  e.g. K33: =VLOOKUP($K30,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)  cached=10.11834044
+
+PATTERN 119  kind=excel  array=False  N33
+  context_label: correctRate_byThunder
+  template: =IF(AND(N15,NOT($N40)),
+N27-1+(IF(N21>=0,N21,N$3)*N$4+N$46)*N9*N27,
+0)
+  e.g. N33: =IF(AND(N15,NOT($N40)),
+N27-1+(IF(N21>=0,N21,N$3)*N$4+N$46)*N9*N27,
+0)  cached=0
+
+PATTERN 120  kind=excel  array=False  O33
+  context_label: correctRate_byThunder
+  template: =IF(AND(O15,NOT($N40)),
+O27-1+(IF(O21>=0,O21,O$3)*O$4+O$46)*O9*O27,
+0)
+  e.g. O33: =IF(AND(O15,NOT($N40)),
+O27-1+(IF(O21>=0,O21,O$3)*O$4+O$46)*O9*O27,
+0)  cached=0.0822979093
+
+PATTERN 121  kind=excel  array=False  P33
+  context_label: correctRate_byThunder
+  template: =IF(AND(P15,NOT($N40)),
+P27-1+(IF(P21>=0,P21,P$3)*P$4+P$46)*P9*P27,
+0)
+  e.g. P33: =IF(AND(P15,NOT($N40)),
+P27-1+(IF(P21>=0,P21,P$3)*P$4+P$46)*P9*P27,
+0)  cached=0
+
+PATTERN 122  kind=excel  array=False  Q33
+  context_label: correctRate_byThunder
+  template: =IF(AND(Q15,NOT($N40)),
+Q27-1+(IF(Q21>=0,Q21,Q$3)*Q$4+Q$46)*Q9*Q27,
+0)
+  e.g. Q33: =IF(AND(Q15,NOT($N40)),
+Q27-1+(IF(Q21>=0,Q21,Q$3)*Q$4+Q$46)*Q9*Q27,
+0)  cached=0
+
+PATTERN 123  kind=excel  array=False  R33
+  context_label: correctRate_byThunder
+  template: =IF(AND(R15,NOT($N40)),
+R27-1+(IF(R21>=0,R21,R$3)*R$4+R$46)*R9*R27,
+0)
+  e.g. R33: =IF(AND(R15,NOT($N40)),
+R27-1+(IF(R21>=0,R21,R$3)*R$4+R$46)*R9*R27,
+0)  cached=0
+
+PATTERN 124  kind=excel  array=False  K34
+  context_label: faithCorrect_byDark
+  template: =VLOOKUP($K30,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)
+  e.g. K34: =VLOOKUP($K30,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)  cached=10.11834044
+
+PATTERN 125  kind=excel  array=False  N34
+  context_label: correctRate_byDark
+  template: =IF(AND(N16,NOT($N41)),
+N28-1+(IF(N22>=0,N22,N$3)*N$4+N$46)*N10*N28,
+0)
+  e.g. N34: =IF(AND(N16,NOT($N41)),
+N28-1+(IF(N22>=0,N22,N$3)*N$4+N$46)*N10*N28,
+0)  cached=0
+
+PATTERN 126  kind=excel  array=False  O34
+  context_label: correctRate_byDark
+  template: =IF(AND(O16,NOT($N41)),
+O28-1+(IF(O22>=0,O22,O$3)*O$4+O$46)*O10*O28,
+0)
+  e.g. O34: =IF(AND(O16,NOT($N41)),
+O28-1+(IF(O22>=0,O22,O$3)*O$4+O$46)*O10*O28,
+0)  cached=0
+
+PATTERN 127  kind=excel  array=False  P34
+  context_label: correctRate_byDark
+  template: =IF(AND(P16,NOT($N41)),
+P28-1+(IF(P22>=0,P22,P$3)*P$4+P$46)*P10*P28,
+0)
+  e.g. P34: =IF(AND(P16,NOT($N41)),
+P28-1+(IF(P22>=0,P22,P$3)*P$4+P$46)*P10*P28,
+0)  cached=0
+
+PATTERN 128  kind=excel  array=False  Q34
+  context_label: correctRate_byDark
+  template: =IF(AND(Q16,NOT($N41)),
+Q28-1+(IF(Q22>=0,Q22,Q$3)*Q$4+Q$46)*Q10*Q28,
+0)
+  e.g. Q34: =IF(AND(Q16,NOT($N41)),
+Q28-1+(IF(Q22>=0,Q22,Q$3)*Q$4+Q$46)*Q10*Q28,
+0)  cached=0
+
+PATTERN 129  kind=excel  array=False  R34
+  context_label: correctRate_byDark
+  template: =IF(AND(R16,NOT($N41)),
+R28-1+(IF(R22>=0,R22,R$3)*R$4+R$46)*R10*R28,
+0)
+  e.g. R34: =IF(AND(R16,NOT($N41)),
+R28-1+(IF(R22>=0,R22,R$3)*R$4+R$46)*R10*R28,
+0)  cached=0
+
+PATTERN 130  kind=excel  array=False  B35
+  context_label: overwriteAttackElementCorrectId
+  template: =IF('AP Calc'!$V11=-1,,'AP Calc'!$V11)
+  e.g. B35: =IF('AP Calc'!$V11=-1,,'AP Calc'!$V11)
+
+PATTERN 131  kind=excel  array=False  K35
+  context_label: luckCorrect_byDark
+  template: =VLOOKUP($K30,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)
+  e.g. K35: =VLOOKUP($K30,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)  cached=7.164449132
+
+PATTERN 132  kind=excel  array=False  B36
+  context_label: overwriteAttackBasePhysics
+  template: ='AP Calc'!$V12
+  e.g. B36: ='AP Calc'!$V12
+
+PATTERN 133  kind=excel  array=True  N36
+  context_label: lowStatus_AtkPowDown
+  array_spill_ref: N36
+  template: =ROUND(INDIRECT(ADDRESS(MATCH(0,PlayerCommonParam!$A:$A,0),MATCH(M{r},PlayerCommonParam!$1:$1,0),1,True,"PlayerCommonParam")),5)
+  e.g. N36: =ROUND(INDIRECT(ADDRESS(MATCH(0,PlayerCommonParam!$A:$A,0),MATCH(M36,PlayerCommonParam!$1:$1,0),1,True,"PlayerCommonParam")),5)  cached=0.4
+
+PATTERN 134  kind=excel  array=False  B37
+  context_label: overwriteAttackBaseMagic
+  template: ='AP Calc'!$V13
+  e.g. B37: ='AP Calc'!$V13
+
+PATTERN 135  kind=excel  array=False  N37
+  context_label: physAtkPenalty
+  template: =OR(
+AND(NOT($B$26),N12),
+AND(NOT($B$27),O12),
+AND(NOT($B$28),P12),
+AND(NOT($B$29),Q12),
+AND(NOT($B$30),R12))
+  e.g. N37: =OR(
+AND(NOT($B$26),N12),
+AND(NOT($B$27),O12),
+AND(NOT($B$28),P12),
+AND(NOT($B$29),Q12),
+AND(NOT($B$30),R12))  cached=False
+
+PATTERN 136  kind=excel  array=False  O37
+  context_label: physAtkPenalty
+  template: =MIN(
+0.6*(N24-1)-$N$36,
+0.6*(O24-1)-$N$36,
+0.6*(P24-1)-$N$36,
+0.6*(Q24-1)-$N$36,
+0.6*(R24-1)-$N$36,
+)
+  e.g. O37: =MIN(
+0.6*(N24-1)-$N$36,
+0.6*(O24-1)-$N$36,
+0.6*(P24-1)-$N$36,
+0.6*(Q24-1)-$N$36,
+0.6*(R24-1)-$N$36,
+)  cached=-0.4
+
+PATTERN 137  kind=excel  array=False  Q37
+  context_label: negPhysScale
+  template: =OR(N30<0,O30<0,P30<0,Q30<0,R30<0)
+  e.g. Q37: =OR(N30<0,O30<0,P30<0,Q30<0,R30<0)  cached=False
+
+PATTERN 138  kind=excel  array=False  R37
+  context_label: negPhysScale
+  template: =MIN(N30,O30,P30,Q30,R30,0)
+  e.g. R37: =MIN(N30,O30,P30,Q30,R30,0)  cached=0
+
+PATTERN 139  kind=excel  array=False  B38
+  context_label: overwriteAttackBaseFire
+  template: ='AP Calc'!$V14
+  e.g. B38: ='AP Calc'!$V14
+
+PATTERN 140  kind=excel  array=False  K38:K47 (4 cells)
+  context_label: luckCorrect_byPoison
+  template: =IFERROR(VLOOKUP($K{r-1},CalcCorrectGraphEz!$A:$EU,$B$24+1,False),0)
+  e.g. K38: =IFERROR(VLOOKUP($K37,CalcCorrectGraphEz!$A:$EU,$B$24+1,False),0)  cached=4.285714286
+  e.g. K41: =IFERROR(VLOOKUP($K40,CalcCorrectGraphEz!$A:$EU,$B$24+1,False),0)  cached=4.285714286
+  e.g. K44: =IFERROR(VLOOKUP($K43,CalcCorrectGraphEz!$A:$EU,$B$24+1,False),0)  cached=7.164449132
+  ... 1 more of this pattern
+
+PATTERN 141  kind=excel  array=False  N38
+  context_label: magAtkPenalty
+  template: =OR(
+AND(NOT($B$26),N13),
+AND(NOT($B$27),O13),
+AND(NOT($B$28),P13),
+AND(NOT($B$29),Q13),
+AND(NOT($B$30),R13))
+  e.g. N38: =OR(
+AND(NOT($B$26),N13),
+AND(NOT($B$27),O13),
+AND(NOT($B$28),P13),
+AND(NOT($B$29),Q13),
+AND(NOT($B$30),R13))  cached=False
+
+PATTERN 142  kind=excel  array=False  O38
+  context_label: magAtkPenalty
+  template: =MIN(
+0.6*(N25-1)-$N$36,
+0.6*(O25-1)-$N$36,
+0.6*(P25-1)-$N$36,
+0.6*(Q25-1)-$N$36,
+0.6*(R25-1)-$N$36,
+)
+  e.g. O38: =MIN(
+0.6*(N25-1)-$N$36,
+0.6*(O25-1)-$N$36,
+0.6*(P25-1)-$N$36,
+0.6*(Q25-1)-$N$36,
+0.6*(R25-1)-$N$36,
+)  cached=-0.4
+
+PATTERN 143  kind=excel  array=False  Q38
+  context_label: negMagScale
+  template: =OR(N31<0,O31<0,P31<0,Q31<0,R31<0)
+  e.g. Q38: =OR(N31<0,O31<0,P31<0,Q31<0,R31<0)  cached=False
+
+PATTERN 144  kind=excel  array=False  R38
+  context_label: negMagScale
+  template: =MIN(N31,O31,P31,Q31,R31,0)
+  e.g. R38: =MIN(N31,O31,P31,Q31,R31,0)  cached=0
+
+PATTERN 145  kind=excel  array=False  B39
+  context_label: overwriteAttackBaseThunder
+  template: ='AP Calc'!$V15
+  e.g. B39: ='AP Calc'!$V15
+
+PATTERN 146  kind=excel  array=False  E39
+  context_label: StatusBuffSpEffectId
+  template: =IF(IFERROR(VLOOKUP($B$32,$Z:$AA,2,False),False),
+VLOOKUP($B$32,StatusBuffData!$A:$B,2,False)
+,-1)
+  e.g. E39: =IF(IFERROR(VLOOKUP($B$32,$Z:$AA,2,False),False),
+VLOOKUP($B$32,StatusBuffData!$A:$B,2,False)
+,-1)  cached=-1
+
+PATTERN 147  kind=excel  array=False  N39
+  context_label: fireAtkPenalty
+  template: =OR(
+AND(NOT($B$26),N14),
+AND(NOT($B$27),O14),
+AND(NOT($B$28),P14),
+AND(NOT($B$29),Q14),
+AND(NOT($B$30),R14))
+  e.g. N39: =OR(
+AND(NOT($B$26),N14),
+AND(NOT($B$27),O14),
+AND(NOT($B$28),P14),
+AND(NOT($B$29),Q14),
+AND(NOT($B$30),R14))  cached=False
+
+PATTERN 148  kind=excel  array=False  O39
+  context_label: fireAtkPenalty
+  template: =MIN(
+0.6*(N26-1)-$N$36,
+0.6*(O26-1)-$N$36,
+0.6*(P26-1)-$N$36,
+0.6*(Q26-1)-$N$36,
+0.6*(R26-1)-$N$36,
+)
+  e.g. O39: =MIN(
+0.6*(N26-1)-$N$36,
+0.6*(O26-1)-$N$36,
+0.6*(P26-1)-$N$36,
+0.6*(Q26-1)-$N$36,
+0.6*(R26-1)-$N$36,
+)  cached=-0.4
+
+PATTERN 149  kind=excel  array=False  Q39
+  context_label: negFireScale
+  template: =OR(N32<0,O32<0,P32<0,Q32<0,R32<0)
+  e.g. Q39: =OR(N32<0,O32<0,P32<0,Q32<0,R32<0)  cached=False
+
+PATTERN 150  kind=excel  array=False  R39
+  context_label: negFireScale
+  template: =MIN(N32,O32,P32,Q32,R32,0)
+  e.g. R39: =MIN(N32,O32,P32,Q32,R32,0)  cached=0
+
+PATTERN 151  kind=excel  array=False  B40
+  context_label: overwriteAttackBaseDark
+  template: ='AP Calc'!$V16
+  e.g. B40: ='AP Calc'!$V16
+
+PATTERN 152  kind=excel  array=False  D40
+  context_label: overwriteAttackBaseDark
+  template: =D32
+  e.g. D40: =D32  cached='poizonAttackPower'
+
+PATTERN 153  kind=excel  array=False  E40:E45 (6 cells)
+  context_label: overwriteAttackBaseDark
+  template: =IFERROR(
+VLOOKUP(E$39,StatusEffectData!$A:$H,MATCH(D{r},StatusEffectData!$1:$1,0),False),
+0)
+  e.g. E40: =IFERROR(
+VLOOKUP(E$39,StatusEffectData!$A:$H,MATCH(D40,StatusEffectData!$1:$1,0),False),
+0)  cached=0
+  e.g. E41: =IFERROR(
+VLOOKUP(E$39,StatusEffectData!$A:$H,MATCH(D41,StatusEffectData!$1:$1,0),False),
+0)  cached=0
+  e.g. E42: =IFERROR(
+VLOOKUP(E$39,StatusEffectData!$A:$H,MATCH(D42,StatusEffectData!$1:$1,0),False),
+0)  cached=0
+  ... 3 more of this pattern
+
+PATTERN 154  kind=excel  array=False  N40
+  context_label: thunAtkPenalty
+  template: =OR(
+AND(NOT($B$26),N15),
+AND(NOT($B$27),O15),
+AND(NOT($B$28),P15),
+AND(NOT($B$29),Q15),
+AND(NOT($B$30),R15))
+  e.g. N40: =OR(
+AND(NOT($B$26),N15),
+AND(NOT($B$27),O15),
+AND(NOT($B$28),P15),
+AND(NOT($B$29),Q15),
+AND(NOT($B$30),R15))  cached=False
+
+PATTERN 155  kind=excel  array=False  O40
+  context_label: thunAtkPenalty
+  template: =MIN(
+0.6*(N27-1)-$N$36,
+0.6*(O27-1)-$N$36,
+0.6*(P27-1)-$N$36,
+0.6*(Q27-1)-$N$36,
+0.6*(R27-1)-$N$36,
+)
+  e.g. O40: =MIN(
+0.6*(N27-1)-$N$36,
+0.6*(O27-1)-$N$36,
+0.6*(P27-1)-$N$36,
+0.6*(Q27-1)-$N$36,
+0.6*(R27-1)-$N$36,
+)  cached=-0.4
+
+PATTERN 156  kind=excel  array=False  Q40
+  context_label: negThunScale
+  template: =OR(N33<0,O33<0,P33<0,Q33<0,R33<0)
+  e.g. Q40: =OR(N33<0,O33<0,P33<0,Q33<0,R33<0)  cached=False
+
+PATTERN 157  kind=excel  array=False  R40
+  context_label: negThunScale
+  template: =MIN(N33,O33,P33,Q33,R33,0)
+  e.g. R40: =MIN(N33,O33,P33,Q33,R33,0)  cached=0
+
+PATTERN 158  kind=excel  array=False  B41
+  context_label: baseAtkRate
+  template: ='AP Calc'!$V17
+  e.g. B41: ='AP Calc'!$V17  cached=False
+
+PATTERN 159  kind=excel  array=False  D41
+  context_label: baseAtkRate
+  template: =D33
+  e.g. D41: =D33  cached='diseaseAttackPower'
+
+PATTERN 160  kind=excel  array=False  N41
+  context_label: darkAtkPenalty
+  template: =OR(
+AND(NOT($B$26),N16),
+AND(NOT($B$27),O16),
+AND(NOT($B$28),P16),
+AND(NOT($B$29),Q16),
+AND(NOT($B$30),R16))
+  e.g. N41: =OR(
+AND(NOT($B$26),N16),
+AND(NOT($B$27),O16),
+AND(NOT($B$28),P16),
+AND(NOT($B$29),Q16),
+AND(NOT($B$30),R16))  cached=False
+
+PATTERN 161  kind=excel  array=False  O41
+  context_label: darkAtkPenalty
+  template: =MIN(
+0.6*(N28-1)-$N$36,
+0.6*(O28-1)-$N$36,
+0.6*(P28-1)-$N$36,
+0.6*(Q28-1)-$N$36,
+0.6*(R28-1)-$N$36,
+)
+  e.g. O41: =MIN(
+0.6*(N28-1)-$N$36,
+0.6*(O28-1)-$N$36,
+0.6*(P28-1)-$N$36,
+0.6*(Q28-1)-$N$36,
+0.6*(R28-1)-$N$36,
+)  cached=-0.4
+
+PATTERN 162  kind=excel  array=False  Q41
+  context_label: negDarkScale
+  template: =OR(N34<0,O34<0,P34<0,Q34<0,R34<0)
+  e.g. Q41: =OR(N34<0,O34<0,P34<0,Q34<0,R34<0)  cached=False
+
+PATTERN 163  kind=excel  array=False  R41
+  context_label: negDarkScale
+  template: =MIN(N34,O34,P34,Q34,R34,0)
+  e.g. R41: =MIN(N34,O34,P34,Q34,R34,0)  cached=0
+
+PATTERN 164  kind=excel  array=False  D42
+  context_label: StatusBuffSpEffectId
+  template: =D34
+  e.g. D42: =D34  cached='bloodAttackPower'
+
+PATTERN 165  kind=excel  array=False  B43
+  context_label: changeStrengthPoint
+  template: ='AP Calc'!$V20
+  e.g. B43: ='AP Calc'!$V20
+
+PATTERN 166  kind=excel  array=False  D43
+  context_label: changeStrengthPoint
+  template: =D35
+  e.g. D43: =D35  cached='freezeAttackPower'
+
+PATTERN 167  kind=excel  array=False  N43
+  context_label: statusAtkPenalty
+  template: =NOT($B$30)
+  e.g. N43: =NOT($B$30)  cached=False
+
+PATTERN 168  kind=excel  array=False  O43
+  context_label: statusAtkPenalty
+  template: =(-$N$36)
+  e.g. O43: =(-$N$36)  cached=-0.4
+
+PATTERN 169  kind=excel  array=False  B44
+  context_label: changeAgilityPoint
+  template: ='AP Calc'!$V21
+  e.g. B44: ='AP Calc'!$V21
+
+PATTERN 170  kind=excel  array=False  D44
+  context_label: changeAgilityPoint
+  template: =D36
+  e.g. D44: =D36  cached='sleepAttackPower'
+
+PATTERN 171  kind=excel  array=False  B45
+  context_label: changeMagicPoint
+  template: ='AP Calc'!$V22
+  e.g. B45: ='AP Calc'!$V22
+
+PATTERN 172  kind=excel  array=False  D45
+  context_label: changeMagicPoint
+  template: =D37
+  e.g. D45: =D37  cached='madnessAttackPower'
+
+PATTERN 173  kind=excel  array=False  B46
+  context_label: changeFaithPoint
+  template: ='AP Calc'!$V23
+  e.g. B46: ='AP Calc'!$V23
+
+PATTERN 174  kind=excel  array=False  N46
+  context_label: correctType_Madness
+  template: =0.01*$B$43
+  e.g. N46: =0.01*$B$43  cached=0
+
+PATTERN 175  kind=excel  array=False  O46
+  context_label: correctType_Madness
+  template: =0.01*$B$44
+  e.g. O46: =0.01*$B$44  cached=0
+
+PATTERN 176  kind=excel  array=False  P46
+  context_label: changeMagicPoint
+  template: =0.01*$B$45
+  e.g. P46: =0.01*$B$45  cached=0
+
+PATTERN 177  kind=excel  array=False  Q46
+  context_label: changeFaithPoint
+  template: =0.01*$B$46
+  e.g. Q46: =0.01*$B$46  cached=0
+
+PATTERN 178  kind=excel  array=False  R46
+  context_label: changeLuckPoint
+  template: =0.01*$B$47
+  e.g. R46: =0.01*$B$47  cached=0
+
+PATTERN 179  kind=excel  array=False  B47
+  context_label: changeLuckPoint
+  template: ='AP Calc'!$V24
+  e.g. B47: ='AP Calc'!$V24
+
+========================================================================
+ALL FORMULAS
+========================================================================
+cell	kind	array_ref	label	logic	stored	cached
+A1	excel			=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$B,2,False)&IF($B$4=0,," +"&$B$4)	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$B,2,False)&IF($B$4=0,," +"&$B$4)	Unarmed
+T1	excel		Arcane	='AP Calc'!$G$10	='AP Calc'!$G$10	
+A2	excel_compat	A2		=XLOOKUP('AP Calc'!$G$11,WeaponData!$B:$B,WeaponData!$B:$B,"Invalid")	=_xlfn.XLOOKUP('AP Calc'!$G$11,WeaponData!$B:$B,WeaponData!$B:$B,"Invalid")	Unarmed
+B2	excel			=VLOOKUP($A$2,WeaponData!$B$2:$I48,2,False)	=VLOOKUP($A$2,WeaponData!$B$2:$I48,2,False)	110000
+E2	excel		attackBasePhysics	=IFERROR( | IF(ISBLANK($B36), | IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D2,ConsumableData!$1:$1,0),False), | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D2,EquipParamWeapon!$1:$1,0),False)), | $B36), | 0)	=IFERROR( | IF(ISBLANK($B36), | IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D2,ConsumableData!$1:$1,0),False), | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D2,EquipParamWeapon!$1:$1,0),False)), | $B36), | 0)	20
+H2	excel		physicsAtkRate	=IFERROR( | IF($B$41,$H$28, | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G2,ReinforceParamWeapon!$1:$1,0),False)), | 1)	=IFERROR( | IF($B$41,$H$28, | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G2,ReinforceParamWeapon!$1:$1,0),False)), | 1)	1
+K2	excel		correctType_Physics	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J2,EquipParamWeapon!$1:$1,0),False)	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J2,EquipParamWeapon!$1:$1,0),False)	0
+V2	excel	V2	Unarmed	=IFERROR(IF(VLOOKUP($A$2,WeaponData!$B$2:$F48,3,False),WeaponData!$O$2:$O48,WeaponData!$O$2),WeaponData!$O$2)	=IFERROR(IF(VLOOKUP($A$2,WeaponData!$B$2:$F48,3,False),WeaponData!$O$2:$O48,WeaponData!$O$2),WeaponData!$O$2)	Standard
+X2	excel	X2	Unarmed	=IFERROR( | IF(VLOOKUP($A$2,WeaponData!$B$2:$I48,4,False),IF(VLOOKUP($A$2,WeaponData!$B$2:$I48,5,False), | {0;1;2;3;4;5;6;7;8;9;10}, | {0;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21;22;23;24;25}), | 0) | ,"")	=IFERROR( | IF(VLOOKUP($A$2,WeaponData!$B$2:$I48,4,False),IF(VLOOKUP($A$2,WeaponData!$B$2:$I48,5,False), | {0;1;2;3;4;5;6;7;8;9;10}, | {0;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21;22;23;24;25}), | 0) | ,"")	0
+AA2	excel		Poison Grease	= | IFERROR(IF(ISBLANK(Z2),, | IF(VLOOKUP(Z2,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z2,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z2,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z2,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z2,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z2),, | IF(VLOOKUP(Z2,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z2,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z2,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z2,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z2,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	FALSE
+AB2	excel		Poison Grease	=StatusBuffData!$A$2	=StatusBuffData!$A$2	None
+AD2	excel		Poison Grease	=IF($A$2="Unarmed",,$B$33)	=IF($A$2="Unarmed",,$B$33)	
+A3	excel			='AP Calc'!$G$12	='AP Calc'!$G$12	Standard
+B3	excel			=IFERROR( | IF(VLOOKUP($A$2,WeaponData!$B$2:$M48,3,False), | VLOOKUP($A$3,WeaponData!$O$2:P48,2,False),0) | ,0)	=IFERROR( | IF(VLOOKUP($A$2,WeaponData!$B$2:$M48,3,False), | VLOOKUP($A$3,WeaponData!$O$2:P48,2,False),0) | ,0)	0
+E3	excel		attackBaseMagic	=IFERROR( | IF(ISBLANK($B37), | IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D3,ConsumableData!$1:$1,0),False), | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D3,EquipParamWeapon!$1:$1,0),False)), | $B37), | 0)	=IFERROR( | IF(ISBLANK($B37), | IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D3,ConsumableData!$1:$1,0),False), | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D3,EquipParamWeapon!$1:$1,0),False)), | $B37), | 0)	0
+H3	excel		magicAtkRate	=IFERROR( | IF($B$41,$H$28, | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G3,ReinforceParamWeapon!$1:$1,0),False)), | 1)	=IFERROR( | IF($B$41,$H$28, | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G3,ReinforceParamWeapon!$1:$1,0),False)), | 1)	1
+K3	excel		strengthCorrect_byPhysics	=VLOOKUP($K2,CalcCorrectGraphEz!$A:$EU,$B$20+1,False)	=VLOOKUP($K2,CalcCorrectGraphEz!$A:$EU,$B$20+1,False)	18.11896248
+N3	excel		correct	=$E$8*0.01	=$E$8*0.01	0.5
+O3	excel		correct	=$E$9*0.01	=$E$9*0.01	0.5
+P3	excel		correct	=$E$10*0.01	=$E$10*0.01	0
+Q3	excel		correct	=$E$11*0.01	=$E$11*0.01	0
+R3	excel		correct	=$E$12*0.01	=$E$12*0.01	0
+T3	google_sheets		Unarmed	=IFERROR(FILTER(WeaponData!$B$2:$B48,T1=WeaponData!$A$2:$A48,NOT(IsBlank(WeaponData!$B$2:$B48))),"Select a Weapon Class")	=IFERROR(__xludf.DUMMYFUNCTION("IFERROR(FILTER(WeaponData!$B$2:$B48,T1=WeaponData!$A$2:$A48,NOT(IsBlank(WeaponData!$B$2:$B48))),""Select a Weapon Class"")"),"Select a Weapon Class")	Select a Weapon Class
+AA3	excel		Rot Grease	= | IFERROR(IF(ISBLANK(Z3),, | IF(VLOOKUP(Z3,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z3,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z3,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z3,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z3,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z3),, | IF(VLOOKUP(Z3,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z3,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z3,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z3,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z3,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	FALSE
+AB3	google_sheets		Rot Grease	=IFERROR(FILTER(Z2:Z48,AA2:AA48=True))	=IFERROR(__xludf.DUMMYFUNCTION("IFERROR(FILTER(Z2:Z48,AA2:AA48=True))"),"")	
+AD3	excel		Rot Grease	=IF(PlannerData!$R$2="Invalid","Unarmed",PlannerData!$R$2)	=IF(PlannerData!$R$2="Invalid","Unarmed",PlannerData!$R$2)	Unarmed
+B4	excel		Reinforcement Level	=IF(ISBLANK('AP Calc'!$G$13),0,MAX(MIN('AP Calc'!$G$13,MAX($X$2:$X48)),0))	=IF(ISBLANK('AP Calc'!$G$13),0,MAX(MIN('AP Calc'!$G$13,MAX($X$2:$X48)),0))	0
+E4	excel		attackBaseFire	=IFERROR( | IF(ISBLANK($B38), | IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D4,ConsumableData!$1:$1,0),False), | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D4,EquipParamWeapon!$1:$1,0),False)), | $B38), | 0)	=IFERROR( | IF(ISBLANK($B38), | IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D4,ConsumableData!$1:$1,0),False), | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D4,EquipParamWeapon!$1:$1,0),False)), | $B38), | 0)	0
+H4	excel		fireAtkRate	=IFERROR( | IF($B$41,$H$28, | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G4,ReinforceParamWeapon!$1:$1,0),False)), | 1)	=IFERROR( | IF($B$41,$H$28, | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G4,ReinforceParamWeapon!$1:$1,0),False)), | 1)	1
+K4	excel		dexterityCorrect_byPhysics	=VLOOKUP($K2,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)	=VLOOKUP($K2,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)	16.45958186
+N4	excel		correctRate	=$H$8	=$H$8	1
+O4	excel		correctRate	=$H$9	=$H$9	1
+P4	excel		correctRate	=$H$10	=$H$10	1
+Q4	excel		correctRate	=$H$11	=$H$11	1
+R4	excel		correctRate	=$H$12	=$H$12	1
+AA4	excel		Blood Grease	= | IFERROR(IF(ISBLANK(Z4),, | IF(VLOOKUP(Z4,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z4,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z4,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z4,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z4,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z4),, | IF(VLOOKUP(Z4,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z4,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z4,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z4,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z4,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	FALSE
+AD4	excel_compat	AD4	Blood Grease	=IF($A$2=$AD$3,XLOOKUP(Planner!$Q$17,WeaponData!$O:$O,WeaponData!$O:O,WeaponData!$O$2),WeaponData!$O$2)	=IF($A$2=$AD$3,_xlfn.XLOOKUP(Planner!$Q$17,WeaponData!$O:$O,WeaponData!$O:O,WeaponData!$O$2),WeaponData!$O$2)	Standard
+B5	excel		reinforceTypeId	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A5,EquipParamWeapon!$1:$1,0),False)	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A5,EquipParamWeapon!$1:$1,0),False)	3000
+E5	excel		attackBaseThunder	=IFERROR( | IF(ISBLANK($B39), | IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D5,ConsumableData!$1:$1,0),False), | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D5,EquipParamWeapon!$1:$1,0),False)), | $B39), | 0)	=IFERROR( | IF(ISBLANK($B39), | IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D5,ConsumableData!$1:$1,0),False), | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D5,EquipParamWeapon!$1:$1,0),False)), | $B39), | 0)	0
+H5	excel		thunderAtkRate	=IFERROR( | IF($B$41,$H$28, | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G5,ReinforceParamWeapon!$1:$1,0),False)), | 1)	=IFERROR( | IF($B$41,$H$28, | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G5,ReinforceParamWeapon!$1:$1,0),False)), | 1)	1
+K5	excel		magicCorrect_byPhysics	=VLOOKUP($K2,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)	=VLOOKUP($K2,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)	10.11834044
+AA5	excel		Freezing Grease	= | IFERROR(IF(ISBLANK(Z5),, | IF(VLOOKUP(Z5,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z5,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z5,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z5,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z5,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z5),, | IF(VLOOKUP(Z5,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z5,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z5,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z5,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z5,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	FALSE
+AD5	excel		Freezing Grease	=IF($A$2=$AD$3,Planner!$Q$18,MAX($X$2:$X48))	=IF($A$2=$AD$3,Planner!$Q$18,MAX($X$2:$X48))	0
+B6	excel		attackElementCorrectId	=IF(ISBLANK($B$35), | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A6,EquipParamWeapon!$1:$1,0),False), | $B$35)	=IF(ISBLANK($B$35), | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A6,EquipParamWeapon!$1:$1,0),False), | $B$35)	10000
+E6	excel		attackBaseDark	=IFERROR( | IF(ISBLANK($B40), | IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D6,ConsumableData!$1:$1,0),False), | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D6,EquipParamWeapon!$1:$1,0),False)), | $B40), | 0)	=IFERROR( | IF(ISBLANK($B40), | IF($B$10,VLOOKUP($A$2,ConsumableData!$A:$G,MATCH(D6,ConsumableData!$1:$1,0),False), | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D6,EquipParamWeapon!$1:$1,0),False)), | $B40), | 0)	0
+H6	excel		darkAtkRate	=IFERROR( | IF($B$41,$H$28, | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G6,ReinforceParamWeapon!$1:$1,0),False)), | 1)	=IFERROR( | IF($B$41,$H$28, | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G6,ReinforceParamWeapon!$1:$1,0),False)), | 1)	1
+K6	excel		faithCorrect_byPhysics	=VLOOKUP($K2,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)	=VLOOKUP($K2,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)	10.11834044
+N6	excel		correct_byPhysics	=VLOOKUP(N$2&$M6,$J:$K,2,False)*0.01	=VLOOKUP(N$2&$M6,$J:$K,2,False)*0.01	0.1811896248
+O6	excel		correct_byPhysics	=VLOOKUP(O$2&$M6,$J:$K,2,False)*0.01	=VLOOKUP(O$2&$M6,$J:$K,2,False)*0.01	0.1645958186
+P6	excel		correct_byPhysics	=VLOOKUP(P$2&$M6,$J:$K,2,False)*0.01	=VLOOKUP(P$2&$M6,$J:$K,2,False)*0.01	0.1011834044
+Q6	excel		correct_byPhysics	=VLOOKUP(Q$2&$M6,$J:$K,2,False)*0.01	=VLOOKUP(Q$2&$M6,$J:$K,2,False)*0.01	0.1011834044
+R6	excel		correct_byPhysics	=VLOOKUP(R$2&$M6,$J:$K,2,False)*0.01	=VLOOKUP(R$2&$M6,$J:$K,2,False)*0.01	0.07164449132
+AA6	excel		Soporific Grease	= | IFERROR(IF(ISBLANK(Z6),, | IF(VLOOKUP(Z6,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z6,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z6,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z6,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z6,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z6),, | IF(VLOOKUP(Z6,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z6,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z6,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z6,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z6,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	FALSE
+B7	excel		SpecialStatusSpEffectId	=VLOOKUP($B$2,WeaponData!$C$2:$M48,8,False)	=VLOOKUP($B$2,WeaponData!$C$2:$M48,8,False)	
+K7	excel		luckCorrect_byPhysics	=VLOOKUP($K2,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)	=VLOOKUP($K2,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)	7.164449132
+N7	excel		correct_byMagic	=VLOOKUP(N$2&$M7,$J:$K,2,False)*0.01	=VLOOKUP(N$2&$M7,$J:$K,2,False)*0.01	0.1811896248
+O7	excel		correct_byMagic	=VLOOKUP(O$2&$M7,$J:$K,2,False)*0.01	=VLOOKUP(O$2&$M7,$J:$K,2,False)*0.01	0.1645958186
+P7	excel		correct_byMagic	=VLOOKUP(P$2&$M7,$J:$K,2,False)*0.01	=VLOOKUP(P$2&$M7,$J:$K,2,False)*0.01	0.1011834044
+Q7	excel		correct_byMagic	=VLOOKUP(Q$2&$M7,$J:$K,2,False)*0.01	=VLOOKUP(Q$2&$M7,$J:$K,2,False)*0.01	0.1011834044
+R7	excel		correct_byMagic	=VLOOKUP(R$2&$M7,$J:$K,2,False)*0.01	=VLOOKUP(R$2&$M7,$J:$K,2,False)*0.01	0.07164449132
+AA7	excel		Drawstring Poison Grease	= | IFERROR(IF(ISBLANK(Z7),, | IF(VLOOKUP(Z7,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z7,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z7,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z7,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z7,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z7),, | IF(VLOOKUP(Z7,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z7,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z7,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z7,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z7,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	FALSE
+AD7	excel	AD7:AD11	Drawstring Poison Grease	=PlannerData!$B$24:$B$28	=PlannerData!$B$24:$B$28	14
+B8	excel		gemMountType	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A8,EquipParamWeapon!$1:$1,0),False)	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A8,EquipParamWeapon!$1:$1,0),False)	0
+E8	excel		correctStrength	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D8,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D8,EquipParamWeapon!$1:$1,0),False), | 0)	50
+H8	excel		correctStrengthRate	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G8,ReinforceParamWeapon!$1:$1,0),False), | 1)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G8,ReinforceParamWeapon!$1:$1,0),False), | 1)	1
+N8	excel		correct_byFire	=VLOOKUP(N$2&$M8,$J:$K,2,False)*0.01	=VLOOKUP(N$2&$M8,$J:$K,2,False)*0.01	0.1811896248
+O8	excel		correct_byFire	=VLOOKUP(O$2&$M8,$J:$K,2,False)*0.01	=VLOOKUP(O$2&$M8,$J:$K,2,False)*0.01	0.1645958186
+P8	excel		correct_byFire	=VLOOKUP(P$2&$M8,$J:$K,2,False)*0.01	=VLOOKUP(P$2&$M8,$J:$K,2,False)*0.01	0.1011834044
+Q8	excel		correct_byFire	=VLOOKUP(Q$2&$M8,$J:$K,2,False)*0.01	=VLOOKUP(Q$2&$M8,$J:$K,2,False)*0.01	0.1011834044
+R8	excel		correct_byFire	=VLOOKUP(R$2&$M8,$J:$K,2,False)*0.01	=VLOOKUP(R$2&$M8,$J:$K,2,False)*0.01	0.07164449132
+AA8	excel		Drawstring Rot Grease	= | IFERROR(IF(ISBLANK(Z8),, | IF(VLOOKUP(Z8,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z8,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z8,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z8,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z8,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z8),, | IF(VLOOKUP(Z8,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z8,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z8,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z8,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z8,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	FALSE
+B9	excel		disableGemAttr	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A9,EquipParamWeapon!$1:$1,0),False)	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A9,EquipParamWeapon!$1:$1,0),False)	FALSE
+E9	excel		correctAgility	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D9,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D9,EquipParamWeapon!$1:$1,0),False), | 0)	50
+H9	excel		correctAgilityRate	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G9,ReinforceParamWeapon!$1:$1,0),False), | 1)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G9,ReinforceParamWeapon!$1:$1,0),False), | 1)	1
+K9	excel		correctType_Magic	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J9,EquipParamWeapon!$1:$1,0),False)	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J9,EquipParamWeapon!$1:$1,0),False)	0
+N9	excel		correct_byThunder	=VLOOKUP(N$2&$M9,$J:$K,2,False)*0.01	=VLOOKUP(N$2&$M9,$J:$K,2,False)*0.01	0.1811896248
+O9	excel		correct_byThunder	=VLOOKUP(O$2&$M9,$J:$K,2,False)*0.01	=VLOOKUP(O$2&$M9,$J:$K,2,False)*0.01	0.1645958186
+P9	excel		correct_byThunder	=VLOOKUP(P$2&$M9,$J:$K,2,False)*0.01	=VLOOKUP(P$2&$M9,$J:$K,2,False)*0.01	0.1011834044
+Q9	excel		correct_byThunder	=VLOOKUP(Q$2&$M9,$J:$K,2,False)*0.01	=VLOOKUP(Q$2&$M9,$J:$K,2,False)*0.01	0.1011834044
+R9	excel		correct_byThunder	=VLOOKUP(R$2&$M9,$J:$K,2,False)*0.01	=VLOOKUP(R$2&$M9,$J:$K,2,False)*0.01	0.07164449132
+AA9	excel		Drawstring Blood Grease	= | IFERROR(IF(ISBLANK(Z9),, | IF(VLOOKUP(Z9,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z9,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z9,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z9,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z9,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z9),, | IF(VLOOKUP(Z9,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z9,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z9,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z9,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z9,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	FALSE
+B10	excel		Throwable	=VLOOKUP($B$2,WeaponData!$C$2:$I48,6,False)	=VLOOKUP($B$2,WeaponData!$C$2:$I48,6,False)	FALSE
+E10	excel		correctMagic	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D10,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D10,EquipParamWeapon!$1:$1,0),False), | 0)	0
+H10	excel		correctMagicRate	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G10,ReinforceParamWeapon!$1:$1,0),False), | 1)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G10,ReinforceParamWeapon!$1:$1,0),False), | 1)	1
+K10	excel		strengthCorrect_byMagic	=VLOOKUP($K9,CalcCorrectGraphEz!$A:$EU,$B$20+1,False)	=VLOOKUP($K9,CalcCorrectGraphEz!$A:$EU,$B$20+1,False)	18.11896248
+N10	excel		correct_byDark	=VLOOKUP(N$2&$M10,$J:$K,2,False)*0.01	=VLOOKUP(N$2&$M10,$J:$K,2,False)*0.01	0.1811896248
+O10	excel		correct_byDark	=VLOOKUP(O$2&$M10,$J:$K,2,False)*0.01	=VLOOKUP(O$2&$M10,$J:$K,2,False)*0.01	0.1645958186
+P10	excel		correct_byDark	=VLOOKUP(P$2&$M10,$J:$K,2,False)*0.01	=VLOOKUP(P$2&$M10,$J:$K,2,False)*0.01	0.1011834044
+Q10	excel		correct_byDark	=VLOOKUP(Q$2&$M10,$J:$K,2,False)*0.01	=VLOOKUP(Q$2&$M10,$J:$K,2,False)*0.01	0.1011834044
+R10	excel		correct_byDark	=VLOOKUP(R$2&$M10,$J:$K,2,False)*0.01	=VLOOKUP(R$2&$M10,$J:$K,2,False)*0.01	0.07164449132
+AA10	excel		Drawstring Soporific Grease	= | IFERROR(IF(ISBLANK(Z10),, | IF(VLOOKUP(Z10,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z10,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z10,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z10,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z10,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z10),, | IF(VLOOKUP(Z10,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z10,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z10,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z10,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z10,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	FALSE
+B11	excel		isEnhance	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A11,EquipParamWeapon!$1:$1,0),False)	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A11,EquipParamWeapon!$1:$1,0),False)	FALSE
+E11	excel		correctFaith	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D11,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D11,EquipParamWeapon!$1:$1,0),False), | 0)	0
+H11	excel		correctFaithRate	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G11,ReinforceParamWeapon!$1:$1,0),False), | 1)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G11,ReinforceParamWeapon!$1:$1,0),False), | 1)	1
+K11	excel		dexterityCorrect_byMagic	=VLOOKUP($K9,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)	=VLOOKUP($K9,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)	16.45958186
+AA11	excel		Frozen Armament	= | IFERROR(IF(ISBLANK(Z11),, | IF(VLOOKUP(Z11,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z11,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z11,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z11,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z11,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z11),, | IF(VLOOKUP(Z11,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z11,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z11,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z11,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z11,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	FALSE
+B12	excel		enableMagic	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A12,EquipParamWeapon!$1:$1,0),False)	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A12,EquipParamWeapon!$1:$1,0),False)	FALSE
+E12	excel		correctLuck	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D12,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D12,EquipParamWeapon!$1:$1,0),False), | 0)	0
+H12	excel		correctLuckRate	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G12,ReinforceParamWeapon!$1:$1,0),False), | 1)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G12,ReinforceParamWeapon!$1:$1,0),False), | 1)	1
+K12	excel		magicCorrect_byMagic	=VLOOKUP($K9,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)	=VLOOKUP($K9,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)	10.11834044
+N12	excel		isCorrect_byPhysics	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M12,"is","is"&N$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M12,"is","is"&N$2),AttackElementCorrectParam!$1:$1,0),False), | False)	TRUE
+O12	excel		isCorrect_byPhysics	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M12,"is","is"&O$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M12,"is","is"&O$2),AttackElementCorrectParam!$1:$1,0),False), | False)	TRUE
+P12	excel		isCorrect_byPhysics	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M12,"is","is"&P$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M12,"is","is"&P$2),AttackElementCorrectParam!$1:$1,0),False), | False)	FALSE
+Q12	excel		isCorrect_byPhysics	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M12,"is","is"&Q$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M12,"is","is"&Q$2),AttackElementCorrectParam!$1:$1,0),False), | False)	FALSE
+R12	excel		isCorrect_byPhysics	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M12,"is","is"&R$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M12,"is","is"&R$2),AttackElementCorrectParam!$1:$1,0),False), | False)	FALSE
+AA12	excel		Poison Armament	= | IFERROR(IF(ISBLANK(Z12),, | IF(VLOOKUP(Z12,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z12,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z12,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z12,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z12,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z12),, | IF(VLOOKUP(Z12,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z12,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z12,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z12,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z12,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	FALSE
+B13	excel		enableMiracle	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A13,EquipParamWeapon!$1:$1,0),False)	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A13,EquipParamWeapon!$1:$1,0),False)	FALSE
+K13	excel		faithCorrect_byMagic	=VLOOKUP($K9,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)	=VLOOKUP($K9,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)	10.11834044
+N13	excel		isCorrect_byMagic	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M13,"is","is"&N$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M13,"is","is"&N$2),AttackElementCorrectParam!$1:$1,0),False), | False)	FALSE
+O13	excel		isCorrect_byMagic	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M13,"is","is"&O$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M13,"is","is"&O$2),AttackElementCorrectParam!$1:$1,0),False), | False)	FALSE
+P13	excel		isCorrect_byMagic	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M13,"is","is"&P$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M13,"is","is"&P$2),AttackElementCorrectParam!$1:$1,0),False), | False)	TRUE
+Q13	excel		isCorrect_byMagic	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M13,"is","is"&Q$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M13,"is","is"&Q$2),AttackElementCorrectParam!$1:$1,0),False), | False)	FALSE
+R13	excel		isCorrect_byMagic	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M13,"is","is"&R$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M13,"is","is"&R$2),AttackElementCorrectParam!$1:$1,0),False), | False)	FALSE
+AA13	excel		Bloodflame Blade (only bleed)	= | IFERROR(IF(ISBLANK(Z13),, | IF(VLOOKUP(Z13,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z13,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z13,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z13,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z13,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z13),, | IF(VLOOKUP(Z13,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z13,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z13,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z13,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z13,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	FALSE
+B14	excel		isDualBlade	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A14,EquipParamWeapon!$1:$1,0),False)	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A14,EquipParamWeapon!$1:$1,0),False)	FALSE
+E14	excel		physGuardCutRate	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D14,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D14,EquipParamWeapon!$1:$1,0),False), | 0)	30
+H14	excel		physicsGuardCutRate	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G14,ReinforceParamWeapon!$1:$1,0),False), | 1)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G14,ReinforceParamWeapon!$1:$1,0),False), | 1)	1
+K14	excel		luckCorrect_byMagic	=VLOOKUP($K9,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)	=VLOOKUP($K9,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)	7.164449132
+N14	excel		isCorrect_byFire	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M14,"is","is"&N$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M14,"is","is"&N$2),AttackElementCorrectParam!$1:$1,0),False), | False)	FALSE
+O14	excel		isCorrect_byFire	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M14,"is","is"&O$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M14,"is","is"&O$2),AttackElementCorrectParam!$1:$1,0),False), | False)	FALSE
+P14	excel		isCorrect_byFire	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M14,"is","is"&P$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M14,"is","is"&P$2),AttackElementCorrectParam!$1:$1,0),False), | False)	FALSE
+Q14	excel		isCorrect_byFire	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M14,"is","is"&Q$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M14,"is","is"&Q$2),AttackElementCorrectParam!$1:$1,0),False), | False)	TRUE
+R14	excel		isCorrect_byFire	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M14,"is","is"&R$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M14,"is","is"&R$2),AttackElementCorrectParam!$1:$1,0),False), | False)	FALSE
+AA14	excel		Seppuku (only bleed; +30 phys AP)	= | IFERROR(IF(ISBLANK(Z14),, | IF(VLOOKUP(Z14,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z14,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z14,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z14,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z14,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z14),, | IF(VLOOKUP(Z14,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z14,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z14,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z14,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z14,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	FALSE
+AD14	excel		Seppuku (only bleed; +30 phys AP)	=StatusBuffData!$A$2	=StatusBuffData!$A$2	None
+B15	excel		properStrength	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A15,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A15,EquipParamWeapon!$1:$1,0),False), | 0)	0
+E15	excel		magGuardCutRate	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D15,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D15,EquipParamWeapon!$1:$1,0),False), | 0)	20
+H15	excel		magicGuardCutRate	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G15,ReinforceParamWeapon!$1:$1,0),False), | 1)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G15,ReinforceParamWeapon!$1:$1,0),False), | 1)	1
+N15	excel		isCorrect_byThunder	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M15,"is","is"&N$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M15,"is","is"&N$2),AttackElementCorrectParam!$1:$1,0),False), | False)	FALSE
+O15	excel		isCorrect_byThunder	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M15,"is","is"&O$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M15,"is","is"&O$2),AttackElementCorrectParam!$1:$1,0),False), | False)	TRUE
+P15	excel		isCorrect_byThunder	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M15,"is","is"&P$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M15,"is","is"&P$2),AttackElementCorrectParam!$1:$1,0),False), | False)	FALSE
+Q15	excel		isCorrect_byThunder	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M15,"is","is"&Q$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M15,"is","is"&Q$2),AttackElementCorrectParam!$1:$1,0),False), | False)	FALSE
+R15	excel		isCorrect_byThunder	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M15,"is","is"&R$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M15,"is","is"&R$2),AttackElementCorrectParam!$1:$1,0),False), | False)	FALSE
+AA15	excel		Poisonous Mist	= | IFERROR(IF(ISBLANK(Z15),, | IF(VLOOKUP(Z15,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z15,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z15,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z15,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z15,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z15),, | IF(VLOOKUP(Z15,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z15,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z15,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z15,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z15,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	FALSE
+B16	excel		properAgility	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A16,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A16,EquipParamWeapon!$1:$1,0),False), | 0)	0
+E16	excel		fireGuardCutRate	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D16,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D16,EquipParamWeapon!$1:$1,0),False), | 0)	20
+H16	excel		fireGuardCutRate	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G16,ReinforceParamWeapon!$1:$1,0),False), | 1)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G16,ReinforceParamWeapon!$1:$1,0),False), | 1)	1
+K16	excel		correctType_Fire	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J16,EquipParamWeapon!$1:$1,0),False)	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J16,EquipParamWeapon!$1:$1,0),False)	0
+N16	excel		isCorrect_byDark	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M16,"is","is"&N$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M16,"is","is"&N$2),AttackElementCorrectParam!$1:$1,0),False), | False)	FALSE
+O16	excel		isCorrect_byDark	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M16,"is","is"&O$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M16,"is","is"&O$2),AttackElementCorrectParam!$1:$1,0),False), | False)	FALSE
+P16	excel		isCorrect_byDark	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M16,"is","is"&P$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M16,"is","is"&P$2),AttackElementCorrectParam!$1:$1,0),False), | False)	FALSE
+Q16	excel		isCorrect_byDark	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M16,"is","is"&Q$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M16,"is","is"&Q$2),AttackElementCorrectParam!$1:$1,0),False), | False)	TRUE
+R16	excel		isCorrect_byDark	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M16,"is","is"&R$2),AttackElementCorrectParam!$1:$1,0),False), | False)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M16,"is","is"&R$2),AttackElementCorrectParam!$1:$1,0),False), | False)	FALSE
+AA16	excel		Chilling Mist	= | IFERROR(IF(ISBLANK(Z16),, | IF(VLOOKUP(Z16,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z16,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z16,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z16,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z16,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z16),, | IF(VLOOKUP(Z16,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z16,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z16,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z16,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z16,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	FALSE
+B17	excel		properMagic	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A17,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A17,EquipParamWeapon!$1:$1,0),False), | 0)	0
+E17	excel		thunGuardCutRate	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D17,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D17,EquipParamWeapon!$1:$1,0),False), | 0)	20
+H17	excel		thunderGuardCutRate	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G17,ReinforceParamWeapon!$1:$1,0),False), | 1)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G17,ReinforceParamWeapon!$1:$1,0),False), | 1)	1
+K17	excel		strengthCorrect_byFire	=VLOOKUP($K16,CalcCorrectGraphEz!$A:$EU,$B$20+1,False)	=VLOOKUP($K16,CalcCorrectGraphEz!$A:$EU,$B$20+1,False)	18.11896248
+AA17	excel			= | IFERROR(IF(ISBLANK(Z17),, | IF(VLOOKUP(Z17,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z17,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z17,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z17,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z17,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z17),, | IF(VLOOKUP(Z17,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z17,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z17,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z17,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z17,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B18	excel		properFaith	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A18,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A18,EquipParamWeapon!$1:$1,0),False), | 0)	0
+E18	excel		darkGuardCutRate	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D18,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D18,EquipParamWeapon!$1:$1,0),False), | 0)	20
+H18	excel		darkGuardCutRate	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G18,ReinforceParamWeapon!$1:$1,0),False), | 1)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G18,ReinforceParamWeapon!$1:$1,0),False), | 1)	1
+K18	excel		dexterityCorrect_byFire	=VLOOKUP($K16,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)	=VLOOKUP($K16,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)	16.45958186
+N18	excel		overwriteCorrectRate_byPhysics	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+O18	excel		overwriteCorrectRate_byPhysics	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+P18	excel		overwriteCorrectRate_byPhysics	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+Q18	excel		overwriteCorrectRate_byPhysics	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+R18	excel		overwriteCorrectRate_byPhysics	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M18,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+AA18	excel			= | IFERROR(IF(ISBLANK(Z18),, | IF(VLOOKUP(Z18,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z18,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z18,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z18,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z18,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z18),, | IF(VLOOKUP(Z18,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z18,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z18,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z18,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z18,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B19	excel		properLuck	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A19,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(A19,EquipParamWeapon!$1:$1,0),False), | 0)	0
+E19	excel		poisonGuardResist	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D19,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D19,EquipParamWeapon!$1:$1,0),False), | 0)	10
+H19	excel		poisonGuardResistRate	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G19,ReinforceParamWeapon!$1:$1,0),False), | 1)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G19,ReinforceParamWeapon!$1:$1,0),False), | 1)	1
+K19	excel		magicCorrect_byFire	=VLOOKUP($K16,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)	=VLOOKUP($K16,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)	10.11834044
+N19	excel		overwriteCorrectRate_byMagic	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+O19	excel		overwriteCorrectRate_byMagic	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+P19	excel		overwriteCorrectRate_byMagic	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+Q19	excel		overwriteCorrectRate_byMagic	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+R19	excel		overwriteCorrectRate_byMagic	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M19,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+AA19	excel			= | IFERROR(IF(ISBLANK(Z19),, | IF(VLOOKUP(Z19,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z19,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z19,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z19,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z19,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z19),, | IF(VLOOKUP(Z19,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z19,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z19,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z19,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z19,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B20	excel		Strength	=TRUNC(MIN(MAX(TRUNC('AP Calc'!G15),1),99) | *IF(B25,IF(VLOOKUP($A$2,WeaponData!$B$2:$M48,6,False),1.5,1),1))	=TRUNC(MIN(MAX(TRUNC('AP Calc'!G15),1),99) | *IF(B25,IF(VLOOKUP($A$2,WeaponData!$B$2:$M48,6,False),1.5,1),1))	14
+E20	excel		diseaseGuardResist	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D20,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D20,EquipParamWeapon!$1:$1,0),False), | 0)	10
+H20	excel		diseaseGuardResistRate	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G20,ReinforceParamWeapon!$1:$1,0),False), | 1)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G20,ReinforceParamWeapon!$1:$1,0),False), | 1)	1
+K20	excel		faithCorrect_byFire	=VLOOKUP($K16,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)	=VLOOKUP($K16,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)	10.11834044
+N20	excel		overwriteCorrectRate_byFire	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+O20	excel		overwriteCorrectRate_byFire	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+P20	excel		overwriteCorrectRate_byFire	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+Q20	excel		overwriteCorrectRate_byFire	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+R20	excel		overwriteCorrectRate_byFire	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M20,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+AA20	excel			= | IFERROR(IF(ISBLANK(Z20),, | IF(VLOOKUP(Z20,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z20,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z20,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z20,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z20,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z20),, | IF(VLOOKUP(Z20,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z20,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z20,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z20,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z20,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B21	excel		Dexterity	=MIN(MAX(TRUNC('AP Calc'!G16),1),99)	=MIN(MAX(TRUNC('AP Calc'!G16),1),99)	13
+E21	excel		bloodGuardResist	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D21,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D21,EquipParamWeapon!$1:$1,0),False), | 0)	10
+H21	excel		bloodGuardResistRate	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G21,ReinforceParamWeapon!$1:$1,0),False), | 1)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G21,ReinforceParamWeapon!$1:$1,0),False), | 1)	1
+K21	excel		luckCorrect_byFire	=VLOOKUP($K16,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)	=VLOOKUP($K16,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)	7.164449132
+N21	excel		overwriteCorrectRate_ByThunder	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+O21	excel		overwriteCorrectRate_ByThunder	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+P21	excel		overwriteCorrectRate_ByThunder	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+Q21	excel		overwriteCorrectRate_ByThunder	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+R21	excel		overwriteCorrectRate_ByThunder	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M21,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+AA21	excel			= | IFERROR(IF(ISBLANK(Z21),, | IF(VLOOKUP(Z21,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z21,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z21,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z21,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z21,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z21),, | IF(VLOOKUP(Z21,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z21,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z21,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z21,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z21,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B22	excel		Intelligence	=MIN(MAX(TRUNC('AP Calc'!G17),1),99)	=MIN(MAX(TRUNC('AP Calc'!G17),1),99)	9
+E22	excel		freezeGuardResist	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D22,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D22,EquipParamWeapon!$1:$1,0),False), | 0)	10
+H22	excel		freezeGuardDefRate	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G22,ReinforceParamWeapon!$1:$1,0),False), | 1)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G22,ReinforceParamWeapon!$1:$1,0),False), | 1)	1
+N22	excel		overwriteCorrectRate_byDark	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+O22	excel		overwriteCorrectRate_byDark	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+P22	excel		overwriteCorrectRate_byDark	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+Q22	excel		overwriteCorrectRate_byDark	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+R22	excel		overwriteCorrectRate_byDark	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	=IFERROR( | IF(VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)>=0, | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M22,"overwrite","overwrite"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01,-1), | -1)	-1
+AA22	excel			= | IFERROR(IF(ISBLANK(Z22),, | IF(VLOOKUP(Z22,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z22,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z22,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z22,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z22,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z22),, | IF(VLOOKUP(Z22,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z22,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z22,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z22,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z22,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B23	excel		Faith	=MIN(MAX(TRUNC('AP Calc'!G18),1),99)	=MIN(MAX(TRUNC('AP Calc'!G18),1),99)	9
+E23	excel		sleepGuardResist	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D23,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D23,EquipParamWeapon!$1:$1,0),False), | 0)	0
+H23	excel		sleepGuardDefRate	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G23,ReinforceParamWeapon!$1:$1,0),False), | 1)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G23,ReinforceParamWeapon!$1:$1,0),False), | 1)	1
+K23	excel		correctType_Thunder	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J23,EquipParamWeapon!$1:$1,0),False)	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J23,EquipParamWeapon!$1:$1,0),False)	0
+AA23	excel			= | IFERROR(IF(ISBLANK(Z23),, | IF(VLOOKUP(Z23,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z23,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z23,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z23,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z23,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z23),, | IF(VLOOKUP(Z23,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z23,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z23,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z23,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z23,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B24	excel		Arcane	=MIN(MAX(TRUNC('AP Calc'!G19),1),99)	=MIN(MAX(TRUNC('AP Calc'!G19),1),99)	7
+E24	excel		madnessGuardResist	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D24,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D24,EquipParamWeapon!$1:$1,0),False), | 0)	0
+H24	excel		madnessGuardDefRate	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G24,ReinforceParamWeapon!$1:$1,0),False), | 1)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G24,ReinforceParamWeapon!$1:$1,0),False), | 1)	1
+K24	excel		strengthCorrect_byThunder	=VLOOKUP($K23,CalcCorrectGraphEz!$A:$EU,$B$20+1,False)	=VLOOKUP($K23,CalcCorrectGraphEz!$A:$EU,$B$20+1,False)	18.11896248
+N24	excel		influenceCorrectRate_byPhysics	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M24,"influence","influence"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M24,"influence","influence"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+O24	excel		influenceCorrectRate_byPhysics	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M24,"influence","influence"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M24,"influence","influence"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+P24	excel		influenceCorrectRate_byPhysics	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M24,"influence","influence"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M24,"influence","influence"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+Q24	excel		influenceCorrectRate_byPhysics	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M24,"influence","influence"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M24,"influence","influence"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+R24	excel		influenceCorrectRate_byPhysics	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M24,"influence","influence"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M24,"influence","influence"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+AA24	excel			= | IFERROR(IF(ISBLANK(Z24),, | IF(VLOOKUP(Z24,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z24,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z24,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z24,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z24,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z24),, | IF(VLOOKUP(Z24,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z24,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z24,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z24,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z24,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B25	excel		2h	='AP Calc'!G20	='AP Calc'!G20	FALSE
+E25	excel		curseGuardResist	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D25,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D25,EquipParamWeapon!$1:$1,0),False), | 0)	10
+H25	excel		curseGuardResistRate	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G25,ReinforceParamWeapon!$1:$1,0),False), | 1)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G25,ReinforceParamWeapon!$1:$1,0),False), | 1)	1
+K25	excel		dexterityCorrect_byThunder	=VLOOKUP($K23,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)	=VLOOKUP($K23,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)	16.45958186
+N25	excel		influenceCorrectRate_byMagic	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M25,"influence","influence"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M25,"influence","influence"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+O25	excel		influenceCorrectRate_byMagic	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M25,"influence","influence"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M25,"influence","influence"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+P25	excel		influenceCorrectRate_byMagic	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M25,"influence","influence"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M25,"influence","influence"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+Q25	excel		influenceCorrectRate_byMagic	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M25,"influence","influence"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M25,"influence","influence"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+R25	excel		influenceCorrectRate_byMagic	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M25,"influence","influence"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M25,"influence","influence"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+AA25	excel			= | IFERROR(IF(ISBLANK(Z25),, | IF(VLOOKUP(Z25,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z25,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z25,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z25,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z25,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z25),, | IF(VLOOKUP(Z25,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z25,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z25,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z25,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z25,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B26	excel		Str Requirements Met	=IF($B$31,True, | IF(TRUNC(MIN(MAX(TRUNC('AP Calc'!G15),1),99)*IF(B25,1.5,1))>=B15,True,False))	=IF($B$31,True, | IF(TRUNC(MIN(MAX(TRUNC('AP Calc'!G15),1),99)*IF(B25,1.5,1))>=B15,True,False))	TRUE
+E26	excel		staminaGuardDef	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D26,EquipParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D26,EquipParamWeapon!$1:$1,0),False), | 0)	10
+H26	excel		staminaGuardDefRate	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G26,ReinforceParamWeapon!$1:$1,0),False), | 1)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G26,ReinforceParamWeapon!$1:$1,0),False), | 1)	1
+K26	excel		magicCorrect_byThunder	=VLOOKUP($K23,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)	=VLOOKUP($K23,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)	10.11834044
+N26	excel		influenceCorrectRate_byFire	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M26,"influence","influence"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M26,"influence","influence"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+O26	excel		influenceCorrectRate_byFire	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M26,"influence","influence"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M26,"influence","influence"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+P26	excel		influenceCorrectRate_byFire	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M26,"influence","influence"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M26,"influence","influence"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+Q26	excel		influenceCorrectRate_byFire	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M26,"influence","influence"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M26,"influence","influence"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+R26	excel		influenceCorrectRate_byFire	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M26,"influence","influence"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M26,"influence","influence"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+AA26	excel			= | IFERROR(IF(ISBLANK(Z26),, | IF(VLOOKUP(Z26,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z26,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z26,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z26,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z26,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z26),, | IF(VLOOKUP(Z26,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z26,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z26,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z26,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z26,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B27	excel		Dex Requirements Met	=IF($B$31,True, | IF(B21>=B16,True,False))	=IF($B$31,True, | IF(B21>=B16,True,False))	TRUE
+K27	excel		faithCorrect_byThunder	=VLOOKUP($K23,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)	=VLOOKUP($K23,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)	10.11834044
+N27	excel		influenceCorrectRate_byThunder	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M27,"influence","influence"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M27,"influence","influence"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+O27	excel		influenceCorrectRate_byThunder	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M27,"influence","influence"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M27,"influence","influence"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+P27	excel		influenceCorrectRate_byThunder	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M27,"influence","influence"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M27,"influence","influence"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+Q27	excel		influenceCorrectRate_byThunder	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M27,"influence","influence"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M27,"influence","influence"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+R27	excel		influenceCorrectRate_byThunder	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M27,"influence","influence"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M27,"influence","influence"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+AA27	excel			= | IFERROR(IF(ISBLANK(Z27),, | IF(VLOOKUP(Z27,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z27,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z27,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z27,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z27,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z27),, | IF(VLOOKUP(Z27,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z27,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z27,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z27,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z27,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B28	excel		Int Requirements Met	=IF($B$31,True, | IF(B22>=B17,True,False))	=IF($B$31,True, | IF(B22>=B17,True,False))	TRUE
+H28	excel		baseAtkRate	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A$2:$AF48,MATCH(G28,ReinforceParamWeapon!$1:$1,0),False), | 1)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A$2:$AF48,MATCH(G28,ReinforceParamWeapon!$1:$1,0),False), | 1)	1
+K28	excel		luckCorrect_byThunder	=VLOOKUP($K23,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)	=VLOOKUP($K23,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)	7.164449132
+N28	excel		influenceCorrectRate_byDark	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M28,"influence","influence"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M28,"influence","influence"&N$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+O28	excel		influenceCorrectRate_byDark	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M28,"influence","influence"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M28,"influence","influence"&O$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+P28	excel		influenceCorrectRate_byDark	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M28,"influence","influence"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M28,"influence","influence"&P$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+Q28	excel		influenceCorrectRate_byDark	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M28,"influence","influence"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M28,"influence","influence"&Q$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+R28	excel		influenceCorrectRate_byDark	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M28,"influence","influence"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	=IFERROR( | VLOOKUP($B$6,AttackElementCorrectParam!$A:$CA,MATCH(SUBSTITUTE($M28,"influence","influence"&R$2),AttackElementCorrectParam!$1:$1,0),False)*0.01, | 1)	1
+AA28	excel			= | IFERROR(IF(ISBLANK(Z28),, | IF(VLOOKUP(Z28,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z28,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z28,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z28,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z28,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z28),, | IF(VLOOKUP(Z28,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z28,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z28,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z28,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z28,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B29	excel		Faith Requirements Met	=IF($B$31,True, | IF(B23>=B18,True,False))	=IF($B$31,True, | IF(B23>=B18,True,False))	TRUE
+AA29	excel			= | IFERROR(IF(ISBLANK(Z29),, | IF(VLOOKUP(Z29,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z29,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z29,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z29,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z29,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z29),, | IF(VLOOKUP(Z29,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z29,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z29,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z29,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z29,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B30	excel		Arc Requirements Met	=IF($B$31,True, | IF(B24>=B19,True,False))	=IF($B$31,True, | IF(B24>=B19,True,False))	TRUE
+E30	excel		spEffectBehaviorId0	=IF(ISBLANK($B$7),VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D30,EquipParamWeapon!$1:$1,0),False),$B$7)	=IF(ISBLANK($B$7),VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(D30,EquipParamWeapon!$1:$1,0),False),$B$7)	-1
+H30	excel		spEffectBehaviorId1	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(G30,EquipParamWeapon!$1:$1,0),False)	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A:$BR,MATCH(G30,EquipParamWeapon!$1:$1,0),False)	-1
+K30	excel		correctType_Dark	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J30,EquipParamWeapon!$1:$1,0),False)	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J30,EquipParamWeapon!$1:$1,0),False)	0
+N30	excel		correctRate_byPhysics	=IF(AND(N12,NOT($N37)), | N24-1+(IF(N18>=0,N18,N$3)*N$4+N$46)*N6*N24, | 0)	=IF(AND(N12,NOT($N37)), | N24-1+(IF(N18>=0,N18,N$3)*N$4+N$46)*N6*N24, | 0)	0.0905948124
+O30	excel		correctRate_byPhysics	=IF(AND(O12,NOT($N37)), | O24-1+(IF(O18>=0,O18,O$3)*O$4+O$46)*O6*O24, | 0)	=IF(AND(O12,NOT($N37)), | O24-1+(IF(O18>=0,O18,O$3)*O$4+O$46)*O6*O24, | 0)	0.0822979093
+P30	excel		correctRate_byPhysics	=IF(AND(P12,NOT($N37)), | P24-1+(IF(P18>=0,P18,P$3)*P$4+P$46)*P6*P24, | 0)	=IF(AND(P12,NOT($N37)), | P24-1+(IF(P18>=0,P18,P$3)*P$4+P$46)*P6*P24, | 0)	0
+Q30	excel		correctRate_byPhysics	=IF(AND(Q12,NOT($N37)), | Q24-1+(IF(Q18>=0,Q18,Q$3)*Q$4+Q$46)*Q6*Q24, | 0)	=IF(AND(Q12,NOT($N37)), | Q24-1+(IF(Q18>=0,Q18,Q$3)*Q$4+Q$46)*Q6*Q24, | 0)	0
+R30	excel		correctRate_byPhysics	=IF(AND(R12,NOT($N37)), | R24-1+(IF(R18>=0,R18,R$3)*R$4+R$46)*R6*R24, | 0)	=IF(AND(R12,NOT($N37)), | R24-1+(IF(R18>=0,R18,R$3)*R$4+R$46)*R6*R24, | 0)	0
+AA30	excel			= | IFERROR(IF(ISBLANK(Z30),, | IF(VLOOKUP(Z30,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z30,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z30,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z30,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z30,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z30),, | IF(VLOOKUP(Z30,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z30,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z30,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z30,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z30,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B31	excel		ignoreRequirements	='AP Calc'!G21	='AP Calc'!G21	FALSE
+E31	excel		spEffectId1	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(D31,ReinforceParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(D31,ReinforceParamWeapon!$1:$1,0),False), | 0)	0
+H31	excel		spEffectId2	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G31,ReinforceParamWeapon!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP($B$5+$B$4,ReinforceParamWeapon!$A:$AF,MATCH(G31,ReinforceParamWeapon!$1:$1,0),False), | 0)	0
+K31	excel		strengthCorrect_byDark	=VLOOKUP($K30,CalcCorrectGraphEz!$A:$EU,$B$20+1,False)	=VLOOKUP($K30,CalcCorrectGraphEz!$A:$EU,$B$20+1,False)	18.11896248
+N31	excel		correctRate_byMagic	=IF(AND(N13,NOT($N38)), | N25-1+(IF(N19>=0,N19,N$3)*N$4+N$46)*N7*N25, | 0)	=IF(AND(N13,NOT($N38)), | N25-1+(IF(N19>=0,N19,N$3)*N$4+N$46)*N7*N25, | 0)	0
+O31	excel		correctRate_byMagic	=IF(AND(O13,NOT($N38)), | O25-1+(IF(O19>=0,O19,O$3)*O$4+O$46)*O7*O25, | 0)	=IF(AND(O13,NOT($N38)), | O25-1+(IF(O19>=0,O19,O$3)*O$4+O$46)*O7*O25, | 0)	0
+P31	excel		correctRate_byMagic	=IF(AND(P13,NOT($N38)), | P25-1+(IF(P19>=0,P19,P$3)*P$4+P$46)*P7*P25, | 0)	=IF(AND(P13,NOT($N38)), | P25-1+(IF(P19>=0,P19,P$3)*P$4+P$46)*P7*P25, | 0)	0
+Q31	excel		correctRate_byMagic	=IF(AND(Q13,NOT($N38)), | Q25-1+(IF(Q19>=0,Q19,Q$3)*Q$4+Q$46)*Q7*Q25, | 0)	=IF(AND(Q13,NOT($N38)), | Q25-1+(IF(Q19>=0,Q19,Q$3)*Q$4+Q$46)*Q7*Q25, | 0)	0
+R31	excel		correctRate_byMagic	=IF(AND(R13,NOT($N38)), | R25-1+(IF(R19>=0,R19,R$3)*R$4+R$46)*R7*R25, | 0)	=IF(AND(R13,NOT($N38)), | R25-1+(IF(R19>=0,R19,R$3)*R$4+R$46)*R7*R25, | 0)	0
+AA31	excel			= | IFERROR(IF(ISBLANK(Z31),, | IF(VLOOKUP(Z31,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z31,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z31,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z31,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z31,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z31),, | IF(VLOOKUP(Z31,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z31,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z31,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z31,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z31,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B32	excel		Status Buff	='AP Calc'!G22	='AP Calc'!G22	None
+E32	excel		poizonAttackPower	=IFERROR( | VLOOKUP(E$30+E$31,StatusEffectData!$A:$H,MATCH(D32,StatusEffectData!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP(E$30+E$31,StatusEffectData!$A:$H,MATCH(D32,StatusEffectData!$1:$1,0),False), | 0)	0
+H32	excel		poizonAttackPower	=IFERROR( | VLOOKUP(H$30+H$31,StatusEffectData!$A:$H,MATCH(G32,StatusEffectData!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP(H$30+H$31,StatusEffectData!$A:$H,MATCH(G32,StatusEffectData!$1:$1,0),False), | 0)	0
+K32	excel		dexterityCorrect_byDark	=VLOOKUP($K30,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)	=VLOOKUP($K30,CalcCorrectGraphEz!$A:$EU,$B$21+1,False)	16.45958186
+N32	excel		correctRate_byFire	=IF(AND(N14,NOT($N39)), | N26-1+(IF(N20>=0,N20,N$3)*N$4+N$46)*N8*N26, | 0)	=IF(AND(N14,NOT($N39)), | N26-1+(IF(N20>=0,N20,N$3)*N$4+N$46)*N8*N26, | 0)	0
+O32	excel		correctRate_byFire	=IF(AND(O14,NOT($N39)), | O26-1+(IF(O20>=0,O20,O$3)*O$4+O$46)*O8*O26, | 0)	=IF(AND(O14,NOT($N39)), | O26-1+(IF(O20>=0,O20,O$3)*O$4+O$46)*O8*O26, | 0)	0
+P32	excel		correctRate_byFire	=IF(AND(P14,NOT($N39)), | P26-1+(IF(P20>=0,P20,P$3)*P$4+P$46)*P8*P26, | 0)	=IF(AND(P14,NOT($N39)), | P26-1+(IF(P20>=0,P20,P$3)*P$4+P$46)*P8*P26, | 0)	0
+Q32	excel		correctRate_byFire	=IF(AND(Q14,NOT($N39)), | Q26-1+(IF(Q20>=0,Q20,Q$3)*Q$4+Q$46)*Q8*Q26, | 0)	=IF(AND(Q14,NOT($N39)), | Q26-1+(IF(Q20>=0,Q20,Q$3)*Q$4+Q$46)*Q8*Q26, | 0)	0
+R32	excel		correctRate_byFire	=IF(AND(R14,NOT($N39)), | R26-1+(IF(R20>=0,R20,R$3)*R$4+R$46)*R8*R26, | 0)	=IF(AND(R14,NOT($N39)), | R26-1+(IF(R20>=0,R20,R$3)*R$4+R$46)*R8*R26, | 0)	0
+AA32	excel			= | IFERROR(IF(ISBLANK(Z32),, | IF(VLOOKUP(Z32,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z32,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z32,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z32,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z32,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z32),, | IF(VLOOKUP(Z32,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z32,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z32,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z32,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z32,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B33	excel_compat	B33	Weapon Class	=XLOOKUP($A$2,WeaponData!$B:$B,WeaponData!$A:$A,)	=_xlfn.XLOOKUP($A$2,WeaponData!$B:$B,WeaponData!$A:$A,)	Fist
+E33	excel		diseaseAttackPower	=IFERROR( | VLOOKUP(E$30+E$31,StatusEffectData!$A:$H,MATCH(D33,StatusEffectData!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP(E$30+E$31,StatusEffectData!$A:$H,MATCH(D33,StatusEffectData!$1:$1,0),False), | 0)	0
+H33	excel		diseaseAttackPower	=IFERROR( | VLOOKUP(H$30+H$31,StatusEffectData!$A:$H,MATCH(G33,StatusEffectData!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP(H$30+H$31,StatusEffectData!$A:$H,MATCH(G33,StatusEffectData!$1:$1,0),False), | 0)	0
+K33	excel		magicCorrect_byDark	=VLOOKUP($K30,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)	=VLOOKUP($K30,CalcCorrectGraphEz!$A:$EU,$B$22+1,False)	10.11834044
+N33	excel		correctRate_byThunder	=IF(AND(N15,NOT($N40)), | N27-1+(IF(N21>=0,N21,N$3)*N$4+N$46)*N9*N27, | 0)	=IF(AND(N15,NOT($N40)), | N27-1+(IF(N21>=0,N21,N$3)*N$4+N$46)*N9*N27, | 0)	0
+O33	excel		correctRate_byThunder	=IF(AND(O15,NOT($N40)), | O27-1+(IF(O21>=0,O21,O$3)*O$4+O$46)*O9*O27, | 0)	=IF(AND(O15,NOT($N40)), | O27-1+(IF(O21>=0,O21,O$3)*O$4+O$46)*O9*O27, | 0)	0.0822979093
+P33	excel		correctRate_byThunder	=IF(AND(P15,NOT($N40)), | P27-1+(IF(P21>=0,P21,P$3)*P$4+P$46)*P9*P27, | 0)	=IF(AND(P15,NOT($N40)), | P27-1+(IF(P21>=0,P21,P$3)*P$4+P$46)*P9*P27, | 0)	0
+Q33	excel		correctRate_byThunder	=IF(AND(Q15,NOT($N40)), | Q27-1+(IF(Q21>=0,Q21,Q$3)*Q$4+Q$46)*Q9*Q27, | 0)	=IF(AND(Q15,NOT($N40)), | Q27-1+(IF(Q21>=0,Q21,Q$3)*Q$4+Q$46)*Q9*Q27, | 0)	0
+R33	excel		correctRate_byThunder	=IF(AND(R15,NOT($N40)), | R27-1+(IF(R21>=0,R21,R$3)*R$4+R$46)*R9*R27, | 0)	=IF(AND(R15,NOT($N40)), | R27-1+(IF(R21>=0,R21,R$3)*R$4+R$46)*R9*R27, | 0)	0
+AA33	excel			= | IFERROR(IF(ISBLANK(Z33),, | IF(VLOOKUP(Z33,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z33,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z33,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z33,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z33,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z33),, | IF(VLOOKUP(Z33,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z33,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z33,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z33,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z33,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+E34	excel		bloodAttackPower	=IFERROR( | VLOOKUP(E$30+E$31,StatusEffectData!$A:$H,MATCH(D34,StatusEffectData!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP(E$30+E$31,StatusEffectData!$A:$H,MATCH(D34,StatusEffectData!$1:$1,0),False), | 0)	0
+H34	excel		bloodAttackPower	=IFERROR( | VLOOKUP(H$30+H$31,StatusEffectData!$A:$H,MATCH(G34,StatusEffectData!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP(H$30+H$31,StatusEffectData!$A:$H,MATCH(G34,StatusEffectData!$1:$1,0),False), | 0)	0
+K34	excel		faithCorrect_byDark	=VLOOKUP($K30,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)	=VLOOKUP($K30,CalcCorrectGraphEz!$A:$EU,$B$23+1,False)	10.11834044
+N34	excel		correctRate_byDark	=IF(AND(N16,NOT($N41)), | N28-1+(IF(N22>=0,N22,N$3)*N$4+N$46)*N10*N28, | 0)	=IF(AND(N16,NOT($N41)), | N28-1+(IF(N22>=0,N22,N$3)*N$4+N$46)*N10*N28, | 0)	0
+O34	excel		correctRate_byDark	=IF(AND(O16,NOT($N41)), | O28-1+(IF(O22>=0,O22,O$3)*O$4+O$46)*O10*O28, | 0)	=IF(AND(O16,NOT($N41)), | O28-1+(IF(O22>=0,O22,O$3)*O$4+O$46)*O10*O28, | 0)	0
+P34	excel		correctRate_byDark	=IF(AND(P16,NOT($N41)), | P28-1+(IF(P22>=0,P22,P$3)*P$4+P$46)*P10*P28, | 0)	=IF(AND(P16,NOT($N41)), | P28-1+(IF(P22>=0,P22,P$3)*P$4+P$46)*P10*P28, | 0)	0
+Q34	excel		correctRate_byDark	=IF(AND(Q16,NOT($N41)), | Q28-1+(IF(Q22>=0,Q22,Q$3)*Q$4+Q$46)*Q10*Q28, | 0)	=IF(AND(Q16,NOT($N41)), | Q28-1+(IF(Q22>=0,Q22,Q$3)*Q$4+Q$46)*Q10*Q28, | 0)	0
+R34	excel		correctRate_byDark	=IF(AND(R16,NOT($N41)), | R28-1+(IF(R22>=0,R22,R$3)*R$4+R$46)*R10*R28, | 0)	=IF(AND(R16,NOT($N41)), | R28-1+(IF(R22>=0,R22,R$3)*R$4+R$46)*R10*R28, | 0)	0
+AA34	excel			= | IFERROR(IF(ISBLANK(Z34),, | IF(VLOOKUP(Z34,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z34,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z34,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z34,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z34,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z34),, | IF(VLOOKUP(Z34,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z34,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z34,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z34,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z34,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B35	excel		overwriteAttackElementCorrectId	=IF('AP Calc'!$V11=-1,,'AP Calc'!$V11)	=IF('AP Calc'!$V11=-1,,'AP Calc'!$V11)	
+E35	excel		freezeAttackPower	=IFERROR( | VLOOKUP(E$30+E$31,StatusEffectData!$A:$H,MATCH(D35,StatusEffectData!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP(E$30+E$31,StatusEffectData!$A:$H,MATCH(D35,StatusEffectData!$1:$1,0),False), | 0)	0
+H35	excel		freezeAttackPower	=IFERROR( | VLOOKUP(H$30+H$31,StatusEffectData!$A:$H,MATCH(G35,StatusEffectData!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP(H$30+H$31,StatusEffectData!$A:$H,MATCH(G35,StatusEffectData!$1:$1,0),False), | 0)	0
+K35	excel		luckCorrect_byDark	=VLOOKUP($K30,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)	=VLOOKUP($K30,CalcCorrectGraphEz!$A:$EU,$B$24+1,False)	7.164449132
+AA35	excel			= | IFERROR(IF(ISBLANK(Z35),, | IF(VLOOKUP(Z35,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z35,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z35,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z35,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z35,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z35),, | IF(VLOOKUP(Z35,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z35,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z35,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z35,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z35,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B36	excel		overwriteAttackBasePhysics	='AP Calc'!$V12	='AP Calc'!$V12	
+E36	excel		sleepAttackPower	=IFERROR( | VLOOKUP(E$30+E$31,StatusEffectData!$A:$H,MATCH(D36,StatusEffectData!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP(E$30+E$31,StatusEffectData!$A:$H,MATCH(D36,StatusEffectData!$1:$1,0),False), | 0)	0
+H36	excel		sleepAttackPower	=IFERROR( | VLOOKUP(H$30+H$31,StatusEffectData!$A:$H,MATCH(G36,StatusEffectData!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP(H$30+H$31,StatusEffectData!$A:$H,MATCH(G36,StatusEffectData!$1:$1,0),False), | 0)	0
+N36	excel	N36	lowStatus_AtkPowDown	=ROUND(INDIRECT(ADDRESS(MATCH(0,PlayerCommonParam!$A:$A,0),MATCH(M36,PlayerCommonParam!$1:$1,0),1,True,"PlayerCommonParam")),5)	=ROUND(INDIRECT(ADDRESS(MATCH(0,PlayerCommonParam!$A:$A,0),MATCH(M36,PlayerCommonParam!$1:$1,0),1,True,"PlayerCommonParam")),5)	0.4
+AA36	excel			= | IFERROR(IF(ISBLANK(Z36),, | IF(VLOOKUP(Z36,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z36,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z36,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z36,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z36,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z36),, | IF(VLOOKUP(Z36,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z36,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z36,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z36,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z36,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B37	excel		overwriteAttackBaseMagic	='AP Calc'!$V13	='AP Calc'!$V13	
+E37	excel		madnessAttackPower	=IFERROR( | VLOOKUP(E$30+E$31,StatusEffectData!$A:$H,MATCH(D37,StatusEffectData!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP(E$30+E$31,StatusEffectData!$A:$H,MATCH(D37,StatusEffectData!$1:$1,0),False), | 0)	0
+H37	excel		madnessAttackPower	=IFERROR( | VLOOKUP(H$30+H$31,StatusEffectData!$A:$H,MATCH(G37,StatusEffectData!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP(H$30+H$31,StatusEffectData!$A:$H,MATCH(G37,StatusEffectData!$1:$1,0),False), | 0)	0
+K37	excel		correctType_Poison	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J37,EquipParamWeapon!$1:$1,0),False)	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J37,EquipParamWeapon!$1:$1,0),False)	10
+N37	excel		physAtkPenalty	=OR( | AND(NOT($B$26),N12), | AND(NOT($B$27),O12), | AND(NOT($B$28),P12), | AND(NOT($B$29),Q12), | AND(NOT($B$30),R12))	=OR( | AND(NOT($B$26),N12), | AND(NOT($B$27),O12), | AND(NOT($B$28),P12), | AND(NOT($B$29),Q12), | AND(NOT($B$30),R12))	FALSE
+O37	excel		physAtkPenalty	=MIN( | 0.6*(N24-1)-$N$36, | 0.6*(O24-1)-$N$36, | 0.6*(P24-1)-$N$36, | 0.6*(Q24-1)-$N$36, | 0.6*(R24-1)-$N$36, | )	=MIN( | 0.6*(N24-1)-$N$36, | 0.6*(O24-1)-$N$36, | 0.6*(P24-1)-$N$36, | 0.6*(Q24-1)-$N$36, | 0.6*(R24-1)-$N$36, | )	-0.4
+Q37	excel		negPhysScale	=OR(N30<0,O30<0,P30<0,Q30<0,R30<0)	=OR(N30<0,O30<0,P30<0,Q30<0,R30<0)	FALSE
+R37	excel		negPhysScale	=MIN(N30,O30,P30,Q30,R30,0)	=MIN(N30,O30,P30,Q30,R30,0)	0
+AA37	excel			= | IFERROR(IF(ISBLANK(Z37),, | IF(VLOOKUP(Z37,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z37,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z37,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z37,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z37,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z37),, | IF(VLOOKUP(Z37,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z37,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z37,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z37,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z37,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B38	excel		overwriteAttackBaseFire	='AP Calc'!$V14	='AP Calc'!$V14	
+K38	excel		luckCorrect_byPoison	=IFERROR(VLOOKUP($K37,CalcCorrectGraphEz!$A:$EU,$B$24+1,False),0)	=IFERROR(VLOOKUP($K37,CalcCorrectGraphEz!$A:$EU,$B$24+1,False),0)	4.285714286
+N38	excel		magAtkPenalty	=OR( | AND(NOT($B$26),N13), | AND(NOT($B$27),O13), | AND(NOT($B$28),P13), | AND(NOT($B$29),Q13), | AND(NOT($B$30),R13))	=OR( | AND(NOT($B$26),N13), | AND(NOT($B$27),O13), | AND(NOT($B$28),P13), | AND(NOT($B$29),Q13), | AND(NOT($B$30),R13))	FALSE
+O38	excel		magAtkPenalty	=MIN( | 0.6*(N25-1)-$N$36, | 0.6*(O25-1)-$N$36, | 0.6*(P25-1)-$N$36, | 0.6*(Q25-1)-$N$36, | 0.6*(R25-1)-$N$36, | )	=MIN( | 0.6*(N25-1)-$N$36, | 0.6*(O25-1)-$N$36, | 0.6*(P25-1)-$N$36, | 0.6*(Q25-1)-$N$36, | 0.6*(R25-1)-$N$36, | )	-0.4
+Q38	excel		negMagScale	=OR(N31<0,O31<0,P31<0,Q31<0,R31<0)	=OR(N31<0,O31<0,P31<0,Q31<0,R31<0)	FALSE
+R38	excel		negMagScale	=MIN(N31,O31,P31,Q31,R31,0)	=MIN(N31,O31,P31,Q31,R31,0)	0
+AA38	excel			= | IFERROR(IF(ISBLANK(Z38),, | IF(VLOOKUP(Z38,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z38,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z38,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z38,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z38,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z38),, | IF(VLOOKUP(Z38,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z38,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z38,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z38,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z38,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B39	excel		overwriteAttackBaseThunder	='AP Calc'!$V15	='AP Calc'!$V15	
+E39	excel		StatusBuffSpEffectId	=IF(IFERROR(VLOOKUP($B$32,$Z:$AA,2,False),False), | VLOOKUP($B$32,StatusBuffData!$A:$B,2,False) | ,-1)	=IF(IFERROR(VLOOKUP($B$32,$Z:$AA,2,False),False), | VLOOKUP($B$32,StatusBuffData!$A:$B,2,False) | ,-1)	-1
+N39	excel		fireAtkPenalty	=OR( | AND(NOT($B$26),N14), | AND(NOT($B$27),O14), | AND(NOT($B$28),P14), | AND(NOT($B$29),Q14), | AND(NOT($B$30),R14))	=OR( | AND(NOT($B$26),N14), | AND(NOT($B$27),O14), | AND(NOT($B$28),P14), | AND(NOT($B$29),Q14), | AND(NOT($B$30),R14))	FALSE
+O39	excel		fireAtkPenalty	=MIN( | 0.6*(N26-1)-$N$36, | 0.6*(O26-1)-$N$36, | 0.6*(P26-1)-$N$36, | 0.6*(Q26-1)-$N$36, | 0.6*(R26-1)-$N$36, | )	=MIN( | 0.6*(N26-1)-$N$36, | 0.6*(O26-1)-$N$36, | 0.6*(P26-1)-$N$36, | 0.6*(Q26-1)-$N$36, | 0.6*(R26-1)-$N$36, | )	-0.4
+Q39	excel		negFireScale	=OR(N32<0,O32<0,P32<0,Q32<0,R32<0)	=OR(N32<0,O32<0,P32<0,Q32<0,R32<0)	FALSE
+R39	excel		negFireScale	=MIN(N32,O32,P32,Q32,R32,0)	=MIN(N32,O32,P32,Q32,R32,0)	0
+AA39	excel			= | IFERROR(IF(ISBLANK(Z39),, | IF(VLOOKUP(Z39,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z39,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z39,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z39,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z39,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z39),, | IF(VLOOKUP(Z39,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z39,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z39,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z39,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z39,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B40	excel		overwriteAttackBaseDark	='AP Calc'!$V16	='AP Calc'!$V16	
+D40	excel		overwriteAttackBaseDark	=D32	=D32	poizonAttackPower
+E40	excel		overwriteAttackBaseDark	=IFERROR( | VLOOKUP(E$39,StatusEffectData!$A:$H,MATCH(D40,StatusEffectData!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP(E$39,StatusEffectData!$A:$H,MATCH(D40,StatusEffectData!$1:$1,0),False), | 0)	0
+K40	excel		correctType_Blood	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J40,EquipParamWeapon!$1:$1,0),False)	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J40,EquipParamWeapon!$1:$1,0),False)	10
+N40	excel		thunAtkPenalty	=OR( | AND(NOT($B$26),N15), | AND(NOT($B$27),O15), | AND(NOT($B$28),P15), | AND(NOT($B$29),Q15), | AND(NOT($B$30),R15))	=OR( | AND(NOT($B$26),N15), | AND(NOT($B$27),O15), | AND(NOT($B$28),P15), | AND(NOT($B$29),Q15), | AND(NOT($B$30),R15))	FALSE
+O40	excel		thunAtkPenalty	=MIN( | 0.6*(N27-1)-$N$36, | 0.6*(O27-1)-$N$36, | 0.6*(P27-1)-$N$36, | 0.6*(Q27-1)-$N$36, | 0.6*(R27-1)-$N$36, | )	=MIN( | 0.6*(N27-1)-$N$36, | 0.6*(O27-1)-$N$36, | 0.6*(P27-1)-$N$36, | 0.6*(Q27-1)-$N$36, | 0.6*(R27-1)-$N$36, | )	-0.4
+Q40	excel		negThunScale	=OR(N33<0,O33<0,P33<0,Q33<0,R33<0)	=OR(N33<0,O33<0,P33<0,Q33<0,R33<0)	FALSE
+R40	excel		negThunScale	=MIN(N33,O33,P33,Q33,R33,0)	=MIN(N33,O33,P33,Q33,R33,0)	0
+AA40	excel			= | IFERROR(IF(ISBLANK(Z40),, | IF(VLOOKUP(Z40,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z40,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z40,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z40,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z40,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z40),, | IF(VLOOKUP(Z40,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z40,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z40,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z40,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z40,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B41	excel		baseAtkRate	='AP Calc'!$V17	='AP Calc'!$V17	FALSE
+D41	excel		baseAtkRate	=D33	=D33	diseaseAttackPower
+E41	excel		baseAtkRate	=IFERROR( | VLOOKUP(E$39,StatusEffectData!$A:$H,MATCH(D41,StatusEffectData!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP(E$39,StatusEffectData!$A:$H,MATCH(D41,StatusEffectData!$1:$1,0),False), | 0)	0
+K41	excel		luckCorrect_byBlood	=IFERROR(VLOOKUP($K40,CalcCorrectGraphEz!$A:$EU,$B$24+1,False),0)	=IFERROR(VLOOKUP($K40,CalcCorrectGraphEz!$A:$EU,$B$24+1,False),0)	4.285714286
+N41	excel		darkAtkPenalty	=OR( | AND(NOT($B$26),N16), | AND(NOT($B$27),O16), | AND(NOT($B$28),P16), | AND(NOT($B$29),Q16), | AND(NOT($B$30),R16))	=OR( | AND(NOT($B$26),N16), | AND(NOT($B$27),O16), | AND(NOT($B$28),P16), | AND(NOT($B$29),Q16), | AND(NOT($B$30),R16))	FALSE
+O41	excel		darkAtkPenalty	=MIN( | 0.6*(N28-1)-$N$36, | 0.6*(O28-1)-$N$36, | 0.6*(P28-1)-$N$36, | 0.6*(Q28-1)-$N$36, | 0.6*(R28-1)-$N$36, | )	=MIN( | 0.6*(N28-1)-$N$36, | 0.6*(O28-1)-$N$36, | 0.6*(P28-1)-$N$36, | 0.6*(Q28-1)-$N$36, | 0.6*(R28-1)-$N$36, | )	-0.4
+Q41	excel		negDarkScale	=OR(N34<0,O34<0,P34<0,Q34<0,R34<0)	=OR(N34<0,O34<0,P34<0,Q34<0,R34<0)	FALSE
+R41	excel		negDarkScale	=MIN(N34,O34,P34,Q34,R34,0)	=MIN(N34,O34,P34,Q34,R34,0)	0
+AA41	excel			= | IFERROR(IF(ISBLANK(Z41),, | IF(VLOOKUP(Z41,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z41,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z41,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z41,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z41,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z41),, | IF(VLOOKUP(Z41,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z41,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z41,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z41,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z41,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+D42	excel		StatusBuffSpEffectId	=D34	=D34	bloodAttackPower
+E42	excel			=IFERROR( | VLOOKUP(E$39,StatusEffectData!$A:$H,MATCH(D42,StatusEffectData!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP(E$39,StatusEffectData!$A:$H,MATCH(D42,StatusEffectData!$1:$1,0),False), | 0)	0
+AA42	excel			= | IFERROR(IF(ISBLANK(Z42),, | IF(VLOOKUP(Z42,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z42,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z42,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z42,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z42,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z42),, | IF(VLOOKUP(Z42,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z42,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z42,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z42,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z42,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B43	excel		changeStrengthPoint	='AP Calc'!$V20	='AP Calc'!$V20	
+D43	excel		changeStrengthPoint	=D35	=D35	freezeAttackPower
+E43	excel		changeStrengthPoint	=IFERROR( | VLOOKUP(E$39,StatusEffectData!$A:$H,MATCH(D43,StatusEffectData!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP(E$39,StatusEffectData!$A:$H,MATCH(D43,StatusEffectData!$1:$1,0),False), | 0)	0
+K43	excel		correctType_Sleep	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J43,EquipParamWeapon!$1:$1,0),False)	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J43,EquipParamWeapon!$1:$1,0),False)	0
+N43	excel		statusAtkPenalty	=NOT($B$30)	=NOT($B$30)	FALSE
+O43	excel		statusAtkPenalty	=(-$N$36)	=(-$N$36)	-0.4
+AA43	excel			= | IFERROR(IF(ISBLANK(Z43),, | IF(VLOOKUP(Z43,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z43,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z43,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z43,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z43,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z43),, | IF(VLOOKUP(Z43,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z43,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z43,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z43,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z43,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B44	excel		changeAgilityPoint	='AP Calc'!$V21	='AP Calc'!$V21	
+D44	excel		changeAgilityPoint	=D36	=D36	sleepAttackPower
+E44	excel		changeAgilityPoint	=IFERROR( | VLOOKUP(E$39,StatusEffectData!$A:$H,MATCH(D44,StatusEffectData!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP(E$39,StatusEffectData!$A:$H,MATCH(D44,StatusEffectData!$1:$1,0),False), | 0)	0
+K44	excel		luckCorrect_bySleep	=IFERROR(VLOOKUP($K43,CalcCorrectGraphEz!$A:$EU,$B$24+1,False),0)	=IFERROR(VLOOKUP($K43,CalcCorrectGraphEz!$A:$EU,$B$24+1,False),0)	7.164449132
+AA44	excel			= | IFERROR(IF(ISBLANK(Z44),, | IF(VLOOKUP(Z44,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z44,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z44,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z44,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z44,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z44),, | IF(VLOOKUP(Z44,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z44,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z44,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z44,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z44,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B45	excel		changeMagicPoint	='AP Calc'!$V22	='AP Calc'!$V22	
+D45	excel		changeMagicPoint	=D37	=D37	madnessAttackPower
+E45	excel		changeMagicPoint	=IFERROR( | VLOOKUP(E$39,StatusEffectData!$A:$H,MATCH(D45,StatusEffectData!$1:$1,0),False), | 0)	=IFERROR( | VLOOKUP(E$39,StatusEffectData!$A:$H,MATCH(D45,StatusEffectData!$1:$1,0),False), | 0)	0
+AA45	excel			= | IFERROR(IF(ISBLANK(Z45),, | IF(VLOOKUP(Z45,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z45,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z45,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z45,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z45,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z45),, | IF(VLOOKUP(Z45,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z45,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z45,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z45,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z45,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B46	excel		changeFaithPoint	='AP Calc'!$V23	='AP Calc'!$V23	
+K46	excel		correctType_Madness	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J46,EquipParamWeapon!$1:$1,0),False)	=VLOOKUP($B$2+$B$3,EquipParamWeapon!$A$2:$BR48,MATCH(J46,EquipParamWeapon!$1:$1,0),False)	0
+N46	excel		correctType_Madness	=0.01*$B$43	=0.01*$B$43	0
+O46	excel		correctType_Madness	=0.01*$B$44	=0.01*$B$44	0
+P46	excel		changeMagicPoint	=0.01*$B$45	=0.01*$B$45	0
+Q46	excel		changeFaithPoint	=0.01*$B$46	=0.01*$B$46	0
+R46	excel		changeLuckPoint	=0.01*$B$47	=0.01*$B$47	0
+AA46	excel			= | IFERROR(IF(ISBLANK(Z46),, | IF(VLOOKUP(Z46,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z46,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z46,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z46,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z46,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z46),, | IF(VLOOKUP(Z46,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z46,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z46,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z46,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z46,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	
+B47	excel		changeLuckPoint	='AP Calc'!$V24	='AP Calc'!$V24	
+K47	excel		luckCorrect_byMadness	=IFERROR(VLOOKUP($K46,CalcCorrectGraphEz!$A:$EU,$B$24+1,False),0)	=IFERROR(VLOOKUP($K46,CalcCorrectGraphEz!$A:$EU,$B$24+1,False),0)	7.164449132
+AA47	excel			= | IFERROR(IF(ISBLANK(Z47),, | IF(VLOOKUP(Z47,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z47,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z47,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z47,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z47,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	= | IFERROR(IF(ISBLANK(Z47),, | IF(VLOOKUP(Z47,StatusBuffData!$A:$AX,MATCH("isEnhanceIgnore",StatusBuffData!$1:$1,0),False), | AND(VLOOKUP(Z47,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z47,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False),NOT($B$9)), | IF($B$11,AND(VLOOKUP(Z47,StatusBuffData!$A:$AX,MATCH($B$33,StatusBuffData!$1:$1,0),False),VLOOKUP(Z47,StatusBuffData!$A:$AX,MATCH($A$3,StatusBuffData!$1:$1,0),False)),False)) | ), | True)	

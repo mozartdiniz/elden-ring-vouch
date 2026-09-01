@@ -1,0 +1,265 @@
+SHEET: RollTypeData
+WORKBOOK: Copy of ER - Build Planner v1.19.1.xlsx
+USED RANGE: A1:E100
+NONEMPTY CELLS: 208
+FORMULA CELLS: 103
+
+This file is for an LLM that must rebuild these calculations in another language. Treat formulas as the source of truth. Cached/fallback values are only for checking a port. Skip spill_cache cells; they are not logic.
+
+VISIBILITY: hidden
+STATIC / INPUT / LABEL CELLS (105):
+coord	value
+A1	Endurance
+B1	Equip Load
+A2	1.0
+D2	Equipped Weight
+A3	2.0
+D3	Equipload Modifier
+A4	3.0
+A5	4.0
+D5	Mid Roll
+A6	5.0
+D6	Light Roll
+A7	6.0
+A8	7.0
+A9	8.0
+A10	9.0
+A11	10.0
+A12	11.0
+A13	12.0
+A14	13.0
+A15	14.0
+A16	15.0
+A17	16.0
+A18	17.0
+A19	18.0
+A20	19.0
+A21	20.0
+A22	21.0
+A23	22.0
+A24	23.0
+A25	24.0
+A26	25.0
+A27	26.0
+A28	27.0
+A29	28.0
+A30	29.0
+A31	30.0
+A32	31.0
+A33	32.0
+A34	33.0
+A35	34.0
+A36	35.0
+A37	36.0
+A38	37.0
+A39	38.0
+A40	39.0
+A41	40.0
+A42	41.0
+A43	42.0
+A44	43.0
+A45	44.0
+A46	45.0
+A47	46.0
+A48	47.0
+A49	48.0
+A50	49.0
+A51	50.0
+A52	51.0
+A53	52.0
+A54	53.0
+A55	54.0
+A56	55.0
+A57	56.0
+A58	57.0
+A59	58.0
+A60	59.0
+A61	60.0
+A62	61.0
+A63	62.0
+A64	63.0
+A65	64.0
+A66	65.0
+A67	66.0
+A68	67.0
+A69	68.0
+A70	69.0
+A71	70.0
+A72	71.0
+A73	72.0
+A74	73.0
+A75	74.0
+A76	75.0
+A77	76.0
+A78	77.0
+A79	78.0
+A80	79.0
+A81	80.0
+A82	81.0
+A83	82.0
+A84	83.0
+A85	84.0
+A86	85.0
+A87	86.0
+A88	87.0
+A89	88.0
+A90	89.0
+A91	90.0
+A92	91.0
+A93	92.0
+A94	93.0
+A95	94.0
+A96	95.0
+A97	96.0
+A98	97.0
+A99	98.0
+A100	99.0
+
+CROSS-SHEET REFERENCES: CalcCorrectGraphEz, PlannerData
+FORMULA KINDS: excel=101, excel_compat=2
+UNIQUE PATTERNS: 5
+
+========================================================================
+FORMULA PATTERNS (fill-down compressed)
+{r} is the row of the cell. Port the template once and apply per row.
+========================================================================
+
+PATTERN 1  kind=excel  array=False  B2:B100 (99 cells)
+  context_label: Equip Load
+  template: =VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A{r}+1,False)
+  e.g. B2: =VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A2+1,False)  cached=45
+  e.g. B3: =VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A3+1,False)  cached=45
+  e.g. B4: =VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A4+1,False)  cached=45
+  ... 96 more of this pattern
+
+PATTERN 2  kind=excel  array=False  E2
+  context_label: Equipped Weight
+  template: =PlannerData!F26
+  e.g. E2: =PlannerData!F26  cached=0
+
+PATTERN 3  kind=excel  array=False  E3
+  context_label: Equipload Modifier
+  template: =PlannerData!K5
+  e.g. E3: =PlannerData!K5  cached=1
+
+PATTERN 4  kind=excel_compat  array=True  E5
+  context_label: Mid Roll
+  array_spill_ref: E5
+  template: =XLOOKUP(($E$2/$E$3/0.7),B:B,A:A,"Not Possible",1,-1)
+  note: Stored with Excel _xlfn/_xlws prefix (newer functions like XLOOKUP).
+  e.g. E5: =XLOOKUP(($E$2/$E$3/0.7),B:B,A:A,"Not Possible",1,-1)  cached=8
+
+PATTERN 5  kind=excel_compat  array=True  E6
+  context_label: Light Roll
+  array_spill_ref: E6
+  template: =XLOOKUP(($E$2/$E$3/0.3),B:B,A:A,"Not Possible",1,-1)
+  note: Stored with Excel _xlfn/_xlws prefix (newer functions like XLOOKUP).
+  e.g. E6: =XLOOKUP(($E$2/$E$3/0.3),B:B,A:A,"Not Possible",1,-1)  cached=8
+
+========================================================================
+ALL FORMULAS
+========================================================================
+cell	kind	array_ref	label	logic	stored	cached
+B2	excel		Equip Load	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A2+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A2+1,False)	45
+E2	excel		Equipped Weight	=PlannerData!F26	=PlannerData!F26	0
+B3	excel		Equip Load	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A3+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A3+1,False)	45
+E3	excel		Equipload Modifier	=PlannerData!K5	=PlannerData!K5	1
+B4	excel		Equip Load	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A4+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A4+1,False)	45
+B5	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A5+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A5+1,False)	45
+E5	excel_compat	E5	Mid Roll	=XLOOKUP(($E$2/$E$3/0.7),B:B,A:A,"Not Possible",1,-1)	=_xlfn.XLOOKUP(($E$2/$E$3/0.7),B:B,A:A,"Not Possible",1,-1)	8
+B6	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A6+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A6+1,False)	45
+E6	excel_compat	E6	Light Roll	=XLOOKUP(($E$2/$E$3/0.3),B:B,A:A,"Not Possible",1,-1)	=_xlfn.XLOOKUP(($E$2/$E$3/0.3),B:B,A:A,"Not Possible",1,-1)	8
+B7	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A7+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A7+1,False)	45
+B8	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A8+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A8+1,False)	45
+B9	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A9+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A9+1,False)	45
+B10	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A10+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A10+1,False)	46.58823529
+B11	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A11+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A11+1,False)	48.17647059
+B12	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A12+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A12+1,False)	49.76470588
+B13	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A13+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A13+1,False)	51.35294118
+B14	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A14+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A14+1,False)	52.94117647
+B15	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A15+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A15+1,False)	54.52941176
+B16	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A16+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A16+1,False)	56.11764706
+B17	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A17+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A17+1,False)	57.70588235
+B18	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A18+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A18+1,False)	59.29411765
+B19	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A19+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A19+1,False)	60.88235294
+B20	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A20+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A20+1,False)	62.47058824
+B21	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A21+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A21+1,False)	64.05882353
+B22	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A22+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A22+1,False)	65.64705882
+B23	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A23+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A23+1,False)	67.23529412
+B24	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A24+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A24+1,False)	68.82352941
+B25	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A25+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A25+1,False)	70.41176471
+B26	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A26+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A26+1,False)	72
+B27	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A27+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A27+1,False)	72.96109516
+B28	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A28+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A28+1,False)	74.06015257
+B29	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A29+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A29+1,False)	75.21810173
+B30	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A30+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A30+1,False)	76.4160337
+B31	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A31+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A31+1,False)	77.64460288
+B32	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A32+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A32+1,False)	78.89815207
+B33	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A33+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A33+1,False)	80.17286326
+B34	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A34+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A34+1,False)	81.46597546
+B35	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A35+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A35+1,False)	82.77539375
+B36	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A36+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A36+1,False)	84.09947116
+B37	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A37+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A37+1,False)	85.43687702
+B38	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A38+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A38+1,False)	86.78651265
+B39	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A39+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A39+1,False)	88.14745475
+B40	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A40+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A40+1,False)	89.5189159
+B41	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A41+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A41+1,False)	90.90021626
+B42	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A42+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A42+1,False)	92.29076259
+B43	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A43+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A43+1,False)	93.69003247
+B44	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A44+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A44+1,False)	95.09756214
+B45	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A45+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A45+1,False)	96.51293703
+B46	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A46+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A46+1,False)	97.93578419
+B47	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A47+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A47+1,False)	99.36576624
+B48	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A48+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A48+1,False)	100.8025764
+B49	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A49+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A49+1,False)	102.2459346
+B50	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A50+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A50+1,False)	103.6955837
+B51	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A51+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A51+1,False)	105.1512874
+B52	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A52+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A52+1,False)	106.612827
+B53	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A53+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A53+1,False)	108.08
+B54	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A54+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A54+1,False)	109.5526183
+B55	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A55+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A55+1,False)	111.0305064
+B56	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A56+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A56+1,False)	112.5135005
+B57	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A57+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A57+1,False)	114.0014469
+B58	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A58+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A58+1,False)	115.4942018
+B59	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A59+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A59+1,False)	116.9916295
+B60	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A60+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A60+1,False)	118.4936024
+B61	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A61+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A61+1,False)	120
+B62	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A62+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A62+1,False)	121.025641
+B63	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A63+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A63+1,False)	122.0512821
+B64	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A64+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A64+1,False)	123.0769231
+B65	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A65+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A65+1,False)	124.1025641
+B66	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A66+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A66+1,False)	125.1282051
+B67	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A67+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A67+1,False)	126.1538462
+B68	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A68+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A68+1,False)	127.1794872
+B69	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A69+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A69+1,False)	128.2051282
+B70	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A70+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A70+1,False)	129.2307692
+B71	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A71+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A71+1,False)	130.2564103
+B72	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A72+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A72+1,False)	131.2820513
+B73	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A73+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A73+1,False)	132.3076923
+B74	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A74+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A74+1,False)	133.3333333
+B75	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A75+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A75+1,False)	134.3589744
+B76	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A76+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A76+1,False)	135.3846154
+B77	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A77+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A77+1,False)	136.4102564
+B78	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A78+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A78+1,False)	137.4358974
+B79	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A79+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A79+1,False)	138.4615385
+B80	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A80+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A80+1,False)	139.4871795
+B81	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A81+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A81+1,False)	140.5128205
+B82	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A82+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A82+1,False)	141.5384615
+B83	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A83+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A83+1,False)	142.5641026
+B84	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A84+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A84+1,False)	143.5897436
+B85	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A85+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A85+1,False)	144.6153846
+B86	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A86+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A86+1,False)	145.6410256
+B87	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A87+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A87+1,False)	146.6666667
+B88	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A88+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A88+1,False)	147.6923077
+B89	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A89+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A89+1,False)	148.7179487
+B90	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A90+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A90+1,False)	149.7435897
+B91	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A91+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A91+1,False)	150.7692308
+B92	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A92+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A92+1,False)	151.7948718
+B93	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A93+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A93+1,False)	152.8205128
+B94	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A94+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A94+1,False)	153.8461538
+B95	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A95+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A95+1,False)	154.8717949
+B96	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A96+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A96+1,False)	155.8974359
+B97	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A97+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A97+1,False)	156.9230769
+B98	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A98+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A98+1,False)	157.9487179
+B99	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A99+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A99+1,False)	158.974359
+B100	excel			=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A100+1,False)	=VLOOKUP(220,CalcCorrectGraphEz!$A:$ADM,$A100+1,False)	160

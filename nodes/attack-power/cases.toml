@@ -1,0 +1,88 @@
+# Node fixtures (§7.1) — GENERATED, do not edit.
+#
+# Every expectation below comes from `ap_calc.SCREENSHOT_CASES`: inputs whose outputs were
+# read off the Build Planner spreadsheet by hand. They are the only numbers here that trace
+# back to the game rather than to code. Regenerate with:
+#
+#     python3 scripts/generate_cases.py
+#
+# The first block of cases pins the maths. The hand-written block at the end pins the things
+# the oracle has no opinion about, because they are what this collection adds: bounds,
+# affinity substitution, and the refusals.
+
+[[case]]
+name = "Longsword +25 Standard (STR 20)"
+input = { weapon = "Longsword", affinity = "Standard", upgrade = 25, strength = 20, dexterity = 13, intelligence = 80, faith = 7, arcane = 9, two_hand = false, ignore_require = false, status_buff = "None" }
+expect = { "result.total_ar_rounded" = 347, "result.scaling.strength.letter" = "C", "result.scaling.dexterity.letter" = "D", "result.scaling.intelligence.letter" = "-", "result.scaling.faith.letter" = "-", "result.scaling.arcane.letter" = "-", "result.scaling.strength.percent" = 0.75, "result.scaling.dexterity.percent" = 0.495, "result.attack.physical" = 347.7358868, "result.guard_boost" = 36, "result.guard_negation.physical" = 45.0, "result.guard_negation.magic" = 30.0 }
+
+[[case]]
+name = "Godslayer's Greatsword +10 (unmet DEX req)"
+input = { weapon = "Godslayer's Greatsword", affinity = "Standard", upgrade = 10, strength = 60, dexterity = 13, intelligence = 10, faith = 60, arcane = 9 }
+expect = { "result.total_ar_rounded" = 479, "result.scaling.strength.letter" = "D", "result.scaling.dexterity.letter" = "B", "result.scaling.faith.letter" = "C", "result.scaling.strength.percent" = 0.558, "result.scaling.dexterity.percent" = 1.008, "result.scaling.faith.percent" = 0.72, "result.attack.physical" = 174.93, "result.attack.fire" = 304.1038, "result.guard_boost" = 49, "result.guard_negation.physical" = 63.0, "result.guard_negation.fire" = 49.0 }
+
+[[case]]
+name = "Siluria's Tree +10"
+input = { weapon = "Siluria's Tree", affinity = "Standard", upgrade = 10, strength = 60, dexterity = 13, intelligence = 10, faith = 60, arcane = 9 }
+expect = { "result.total_ar_rounded" = 775, "result.scaling.strength.letter" = "B", "result.scaling.dexterity.letter" = "D", "result.scaling.faith.letter" = "C", "result.scaling.strength.percent" = 1.044, "result.scaling.dexterity.percent" = 0.27, "result.scaling.faith.percent" = 0.81, "result.attack.physical" = 402.9507121, "result.attack.holy" = 372.31425, "result.guard_boost" = 50, "result.guard_negation.physical" = 51.0, "result.guard_negation.holy" = 55.0 }
+
+[[case]]
+name = "Ordovis's Greatsword +10"
+input = { weapon = "Ordovis's Greatsword", affinity = "Standard", upgrade = 10, strength = 60, dexterity = 13, intelligence = 10, faith = 60, arcane = 9 }
+expect = { "result.total_ar_rounded" = 809, "result.scaling.strength.letter" = "A", "result.scaling.dexterity.letter" = "E", "result.scaling.faith.letter" = "C", "result.scaling.strength.percent" = 1.422, "result.scaling.dexterity.percent" = 0.18, "result.scaling.faith.percent" = 0.63, "result.attack.physical" = 549.4997579, "result.attack.holy" = 259.576275, "result.guard_boost" = 51, "result.guard_negation.physical" = 69.0, "result.guard_negation.holy" = 50.0 }
+
+[[case]]
+name = "Claymore +25 Standard (STR 55)"
+input = { weapon = "Claymore", affinity = "Standard", upgrade = 25, strength = 55, dexterity = 13, intelligence = 80, faith = 7, arcane = 9 }
+expect = { "result.total_ar_rounded" = 543, "result.scaling.strength.letter" = "C", "result.scaling.dexterity.letter" = "D", "result.scaling.strength.percent" = 0.735, "result.scaling.dexterity.percent" = 0.51, "result.attack.physical" = 543.1948141, "result.guard_boost" = 50, "result.guard_negation.physical" = 65.0, "result.guard_negation.magic" = 35.0 }
+
+[[case]]
+name = "Estoc +25 Standard (STR 60 / DEX 13)"
+input = { weapon = "Estoc", affinity = "Standard", upgrade = 25, strength = 60, dexterity = 13, intelligence = 80, faith = 7, arcane = 9 }
+expect = { "result.total_ar_rounded" = 342, "result.scaling.strength.letter" = "E", "result.scaling.dexterity.letter" = "B", "result.scaling.strength.percent" = 0.21, "result.scaling.dexterity.percent" = 0.9, "result.attack.physical" = 342.2725395, "result.guard_boost" = 28, "result.guard_negation.physical" = 54.0, "result.guard_negation.magic" = 36.0 }
+
+[[case]]
+name = "Estoc +25 Standard (STR 20 / DEX 60)"
+input = { weapon = "Estoc", affinity = "Standard", upgrade = 25, strength = 20, dexterity = 60, intelligence = 80, faith = 7, arcane = 9 }
+expect = { "result.total_ar_rounded" = 454, "result.scaling.strength.letter" = "E", "result.scaling.dexterity.letter" = "B", "result.scaling.strength.percent" = 0.21, "result.scaling.dexterity.percent" = 0.9, "result.attack.physical" = 454.4294378, "result.guard_boost" = 28, "result.guard_negation.physical" = 54.0 }
+
+[[case]]
+name = "Estoc +25 Standard Frozen Armament (STR 20 / DEX 80)"
+input = { weapon = "Estoc", affinity = "Standard", upgrade = 25, strength = 20, dexterity = 80, intelligence = 60, faith = 7, arcane = 9, status_buff = "Frozen Armament" }
+expect = { "result.total_ar_rounded" = 489, "result.scaling.strength.letter" = "E", "result.scaling.dexterity.letter" = "B", "result.scaling.strength.percent" = 0.21, "result.scaling.dexterity.percent" = 0.9, "result.attack.physical" = 489.8196878, "result.status.frost" = 63, "result.guard_boost" = 28, "result.guard_negation.physical" = 54.0 }
+
+# --- what the oracle does not check -------------------------------------------------
+
+# `ap_calc.py` computes this happily and returns 180.39 — an attack rating for an upgrade
+# level Moonveil does not have, and lower than the 643 it really reaches at its +10 cap, so it
+# does not even look wrong. With the cap declared it is a refusal that says what to do.
+[[case]]
+name = "an upgrade past the weapon's cap is refused when the cap is declared"
+input = { weapon = "Moonveil", affinity = "Standard", upgrade = 25, max_upgrade = 10, strength = 20, dexterity = 20, intelligence = 60, faith = 10, arcane = 10 }
+expect_code = 11
+
+# And a caller who declares a generous cap to get past that refusal is caught by the
+# postcondition, which uses the cap the node looked up itself. No value reaches stdout.
+[[case]]
+name = "a wrong declared cap is caught after the fact instead"
+input = { weapon = "Moonveil", affinity = "Standard", upgrade = 25, max_upgrade = 25, strength = 20, dexterity = 20, intelligence = 60, faith = 10, arcane = 10 }
+expect_code = 13
+
+[[case]]
+name = "an affinity on a non-infusable weapon is applied as Standard, and says so"
+input = { weapon = "Moonveil", affinity = "Heavy", upgrade = 10, strength = 20, dexterity = 20, intelligence = 60, faith = 10, arcane = 10 }
+expect = { "result.affinity_applied" = "Standard", "result.affinity_ignored" = true, "result.infusable" = false }
+
+[[case]]
+name = "an unknown affinity is refused with the thirteen names"
+input = { weapon = "Longsword", affinity = "Frostbite", upgrade = 25, strength = 20, dexterity = 20, intelligence = 10, faith = 10, arcane = 10 }
+expect_code = 11
+
+[[case]]
+name = "a stat above 99 is refused rather than computed"
+input = { weapon = "Longsword", affinity = "Standard", upgrade = 25, strength = 150, dexterity = 20, intelligence = 10, faith = 10, arcane = 10 }
+expect_code = 11
+
+[[case]]
+name = "a weapon that cannot be reinforced reports a cap of zero"
+input = { weapon = "Meteorite Staff", affinity = "Standard", upgrade = 0, strength = 20, dexterity = 20, intelligence = 60, faith = 10, arcane = 10 }
+expect = { "result.max_upgrade" = 0, "result.infusable" = false }

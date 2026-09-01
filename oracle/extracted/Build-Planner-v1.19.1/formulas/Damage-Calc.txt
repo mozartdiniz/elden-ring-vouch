@@ -1,0 +1,1755 @@
+SHEET: Damage Calc
+WORKBOOK: Copy of ER - Build Planner v1.19.1.xlsx
+USED RANGE: A1:AA122
+NONEMPTY CELLS: 1007
+FORMULA CELLS: 442
+
+This file is for an LLM that must rebuild these calculations in another language. Treat formulas as the source of truth. Cached/fallback values are only for checking a port. Skip spill_cache cells; they are not logic.
+
+MERGED RANGES (374):
+  Y47:Z47
+  V73:W73
+  V100:W100
+  V102:W102
+  T18:W18
+  Y21:Z21
+  V20:W20
+  S7:T7
+  Y113:Z113
+  T62:U62
+  G66:H66
+  Y50:Z50
+  T64:U64
+  T51:U51
+  Y52:Z52
+  V51:W51
+  G114:H114
+  E14:M14
+  T67:U67
+  G59:H59
+  Y103:Z103
+  T82:U82
+  T33:U33
+  G117:H117
+  V33:W33
+  G61:H61
+  Y118:Z118
+  X8:Y8
+  G48:H48
+  T35:U35
+  V35:W35
+  G112:H112
+  G62:H62
+  V74:W74
+  U7:V7
+  V39:W39
+  X5:Y5
+  V103:W103
+  V118:W118
+  U8:V8
+  E16:O16
+  G76:H76
+  Y116:Z116
+  U10:V10
+  Y66:Z66
+  V65:W65
+  V21:W21
+  Y53:Z53
+  V23:W23
+  Y117:Z117
+  V94:W94
+  Y55:Z55
+  V121:W121
+  T58:U58
+  V87:W87
+  T54:U54
+  V24:W24
+  V89:W89
+  G87:H87
+  O9:R9
+  Y119:Z119
+  V49:W49
+  V120:W120
+  T85:U85
+  Y37:Z37
+  V36:W36
+  G89:H89
+  T60:U60
+  G64:H64
+  V113:W113
+  G51:H51
+  V80:W80
+  V55:W55
+  Y63:Z63
+  Y74:Z74
+  T65:U65
+  Y67:Z67
+  G19:H19
+  V31:W31
+  T45:W45
+  ... 294 more
+
+COMMENTS (author notes on UI / semantics):
+  AA5: Sorcery/Incant Scaling
+  E6: If you don't care about the changes listed in Changelog you can:
+    
+    Go to the UpdateData page and edit cell D2 to equal the update version
+    
+    Doing so will remove the notification until the next update
+    
+    If this says TRUE or is highlighted green with no update you can run the fix_updateBooleanFormat macro to restore proper functionality
+  E7: See Changelog for details
+    
+    If this is giving an error you can run the fix_importRangeError macro to restore proper functionality
+  G18: Uses Planner defense values without a manual entry
+  J18: Uses Planner dmg negation values without a manual entry
+  E27: Uses Planner health value without a manual entry
+
+STATIC / INPUT / LABEL CELLS (565):
+coord	value
+E5	To use this sheet: File > Make a copy
+O5	Planner Selection Display
+S5	Physical AP
+U5	Magic AP
+W5	Fire AP
+X5	Lightning AP
+Z5	Holy AP
+AA5	Spell Buff
+E6	Update Available:
+E10	Thanks to Sir Halvard for the design and original damage formula.
+E11	Thanks to Nymic_Razor for updated damage formula.
+E13	Fill in the area in the green space; you don't need to fill in everything, just the relevant information.
+E14	MV = Motion Value. This is a link to a sheet with the values listed.
+E15	Motion Value is applied to all damage types unless specified; AP added by weapon buffs has a separate motion value.
+R15	Here are some basic calculators for your convenience.
+E16	If calculating spell damage you use the Sorcery/Incant Scaling as the AP; if using AP from Planner page just use 100 as the MV.
+R16	This link has various damage multipliers and damage negation modifiers on it.
+G18	Defense
+J18	Dmg Negation
+K18	AP
+L18	MV
+N18	Damage Dealt
+O18	Total Damage Negation [%]
+R18	Damage Multipliers
+T18	Combined Multiplier Calc
+Y18	Combined Damage Negation Calc
+E19	Physical
+G19	79.0
+J19	0.0
+R19	1.0
+T19	Multiplier 1
+V19	1.04
+Y19	Dmg Negation 1
+AA19	35.588
+E20	Strike
+G20	79.0
+J20	0.0
+R20	1.0
+T20	Multiplier 2
+V20	1.08
+Y20	Dmg Negation 2
+AA20	15.0
+E21	Slash
+G21	79.0
+J21	0.0
+R21	1.0
+T21	Multiplier 3
+Y21	Dmg Negation 3
+E22	Pierce
+G22	79.0
+J22	0.0
+R22	1.0
+T22	Multiplier 4
+Y22	Dmg Negation 4
+E23	Magic
+G23	93.0
+J23	0.0
+R23	1.0
+T23	Multiplier 5
+Y23	Dmg Negation 5
+E24	Fire
+G24	85.0
+J24	0.0
+R24	1.0
+T24	Multiplier 6
+Y24	Dmg Negation 6
+E25	Lightning
+G25	75.0
+J25	0.0
+R25	1.0
+T25	Multiplier 7
+Y25	Dmg Negation 7
+E26	Holy
+G26	89.0
+J26	0.0
+R26	1.0
+T26	Multiplier 8
+Y26	Dmg Negation 8
+E27	Health Points
+G27	522.0
+J27	Total:
+M27	Total:
+R27	1.0
+T27	Multiplier 9
+Y27	Dmg Negation 9
+M28	eff hp | hits to live:
+T28	Total:
+Y28	Total:
+G30	Defense
+J30	Dmg Negation
+K30	AP
+L30	MV
+N30	Damage Dealt
+O30	Total Damage Negation [%]
+R30	Damage Multipliers
+T30	Combined Multiplier Calc
+Y30	Combined Damage Negation Calc
+E31	Physical
+G31	79.0
+J31	0.0
+R31	1.0
+T31	Multiplier 1
+V31	1.3
+Y31	Dmg Negation 1
+AA31	35.588
+E32	Strike
+G32	79.0
+J32	0.0
+R32	1.0
+T32	Multiplier 2
+V32	1.15
+Y32	Dmg Negation 2
+AA32	-15.0
+E33	Slash
+G33	79.0
+J33	0.0
+R33	1.0
+T33	Multiplier 3
+Y33	Dmg Negation 3
+E34	Pierce
+G34	79.0
+J34	0.0
+R34	1.0
+T34	Multiplier 4
+Y34	Dmg Negation 4
+E35	Magic
+G35	93.0
+J35	0.0
+R35	1.0
+T35	Multiplier 5
+Y35	Dmg Negation 5
+E36	Fire
+G36	85.0
+J36	0.0
+R36	1.0
+T36	Multiplier 6
+Y36	Dmg Negation 6
+E37	Lightning
+G37	75.0
+J37	0.0
+R37	1.0
+T37	Multiplier 7
+Y37	Dmg Negation 7
+E38	Holy
+G38	89.0
+J38	0.0
+R38	1.0
+T38	Multiplier 8
+Y38	Dmg Negation 8
+E39	Health Points
+G39	522.0
+J39	Total:
+M39	Total:
+R39	1.0
+T39	Multiplier 9
+Y39	Dmg Negation 9
+M40	eff hp | hits to live:
+T40	Total:
+Y40	Total:
+M41	Damage Increase:
+G45	Defense
+J45	Dmg Negation
+K45	AP
+L45	MV
+N45	Damage Dealt
+O45	Total Damage Negation [%]
+R45	Damage Multipliers
+T45	Combined Multiplier Calc
+Y45	Combined Damage Negation Calc
+E46	Physical
+G46	79.0
+J46	0.0
+R46	1.0
+T46	Multiplier 1
+Y46	Dmg Negation 1
+E47	Strike
+G47	79.0
+J47	0.0
+R47	1.0
+T47	Multiplier 2
+Y47	Dmg Negation 2
+E48	Slash
+G48	79.0
+J48	0.0
+R48	1.0
+T48	Multiplier 3
+Y48	Dmg Negation 3
+E49	Pierce
+G49	79.0
+J49	0.0
+R49	1.0
+T49	Multiplier 4
+Y49	Dmg Negation 4
+E50	Magic
+G50	93.0
+J50	0.0
+R50	1.0
+T50	Multiplier 5
+Y50	Dmg Negation 5
+E51	Fire
+G51	85.0
+J51	0.0
+R51	1.0
+T51	Multiplier 6
+Y51	Dmg Negation 6
+E52	Lightning
+G52	75.0
+J52	0.0
+R52	1.0
+T52	Multiplier 7
+Y52	Dmg Negation 7
+E53	Holy
+G53	89.0
+J53	0.0
+R53	1.0
+T53	Multiplier 8
+Y53	Dmg Negation 8
+E54	Health Points
+G54	522.0
+J54	Total:
+M54	Total:
+R54	1.0
+T54	Multiplier 9
+Y54	Dmg Negation 9
+M55	eff hp | hits to live:
+T55	Total:
+Y55	Total:
+G57	Defense
+J57	Dmg Negation
+K57	AP
+L57	MV
+N57	Damage Dealt
+O57	Total Damage Negation [%]
+R57	Damage Multipliers
+T57	Combined Multiplier Calc
+Y57	Combined Damage Negation Calc
+E58	Physical
+G58	79.0
+J58	0.0
+R58	1.0
+T58	Multiplier 1
+Y58	Dmg Negation 1
+E59	Strike
+G59	79.0
+J59	0.0
+R59	1.0
+T59	Multiplier 2
+Y59	Dmg Negation 2
+E60	Slash
+G60	79.0
+J60	0.0
+R60	1.0
+T60	Multiplier 3
+Y60	Dmg Negation 3
+E61	Pierce
+G61	79.0
+J61	0.0
+R61	1.0
+T61	Multiplier 4
+Y61	Dmg Negation 4
+E62	Magic
+G62	93.0
+J62	0.0
+R62	1.0
+T62	Multiplier 5
+Y62	Dmg Negation 5
+E63	Fire
+G63	85.0
+J63	0.0
+R63	1.0
+T63	Multiplier 6
+Y63	Dmg Negation 6
+E64	Lightning
+G64	75.0
+J64	0.0
+R64	1.0
+T64	Multiplier 7
+Y64	Dmg Negation 7
+E65	Holy
+G65	89.0
+J65	0.0
+R65	1.0
+T65	Multiplier 8
+Y65	Dmg Negation 8
+E66	Health Points
+G66	522.0
+J66	Total:
+M66	Total:
+R66	1.0
+T66	Multiplier 9
+Y66	Dmg Negation 9
+M67	eff hp | hits to live:
+T67	Total:
+Y67	Total:
+M68	Damage Increase:
+G72	Defense
+J72	Dmg Negation
+K72	AP
+L72	MV
+N72	Damage Dealt
+O72	Total Damage Negation [%]
+R72	Damage Multipliers
+T72	Combined Multiplier Calc
+Y72	Combined Damage Negation Calc
+E73	Physical
+G73	79.0
+J73	0.0
+R73	1.0
+T73	Multiplier 1
+Y73	Dmg Negation 1
+E74	Strike
+G74	79.0
+J74	0.0
+R74	1.0
+T74	Multiplier 2
+Y74	Dmg Negation 2
+E75	Slash
+G75	79.0
+J75	0.0
+R75	1.0
+T75	Multiplier 3
+Y75	Dmg Negation 3
+E76	Pierce
+G76	79.0
+J76	0.0
+R76	1.0
+T76	Multiplier 4
+Y76	Dmg Negation 4
+E77	Magic
+G77	93.0
+J77	0.0
+R77	1.0
+T77	Multiplier 5
+Y77	Dmg Negation 5
+E78	Fire
+G78	85.0
+J78	0.0
+R78	1.0
+T78	Multiplier 6
+Y78	Dmg Negation 6
+E79	Lightning
+G79	75.0
+J79	0.0
+R79	1.0
+T79	Multiplier 7
+Y79	Dmg Negation 7
+E80	Holy
+G80	89.0
+J80	0.0
+R80	1.0
+T80	Multiplier 8
+Y80	Dmg Negation 8
+E81	Health Points
+G81	522.0
+J81	Total:
+M81	Total:
+R81	1.0
+T81	Multiplier 9
+Y81	Dmg Negation 9
+M82	eff hp | hits to live:
+T82	Total:
+Y82	Total:
+G84	Defense
+J84	Dmg Negation
+K84	AP
+L84	MV
+N84	Damage Dealt
+O84	Total Damage Negation [%]
+R84	Damage Multipliers
+T84	Combined Multiplier Calc
+Y84	Combined Damage Negation Calc
+E85	Physical
+G85	79.0
+J85	0.0
+R85	1.0
+T85	Multiplier 1
+Y85	Dmg Negation 1
+E86	Strike
+G86	79.0
+J86	0.0
+R86	1.0
+T86	Multiplier 2
+Y86	Dmg Negation 2
+E87	Slash
+G87	79.0
+J87	0.0
+R87	1.0
+T87	Multiplier 3
+Y87	Dmg Negation 3
+E88	Pierce
+G88	79.0
+J88	0.0
+R88	1.0
+T88	Multiplier 4
+Y88	Dmg Negation 4
+E89	Magic
+G89	93.0
+J89	0.0
+R89	1.0
+T89	Multiplier 5
+Y89	Dmg Negation 5
+E90	Fire
+G90	85.0
+J90	0.0
+R90	1.0
+T90	Multiplier 6
+Y90	Dmg Negation 6
+E91	Lightning
+G91	75.0
+J91	0.0
+R91	1.0
+T91	Multiplier 7
+Y91	Dmg Negation 7
+E92	Holy
+G92	89.0
+J92	0.0
+R92	1.0
+T92	Multiplier 8
+Y92	Dmg Negation 8
+E93	Health Points
+G93	522.0
+J93	Total:
+M93	Total:
+R93	1.0
+T93	Multiplier 9
+Y93	Dmg Negation 9
+M94	eff hp | hits to live:
+T94	Total:
+Y94	Total:
+M95	Damage Increase:
+G99	Defense
+J99	Dmg Negation
+K99	AP
+L99	MV
+N99	Damage Dealt
+O99	Total Damage Negation [%]
+R99	Damage Multipliers
+T99	Combined Multiplier Calc
+Y99	Combined Damage Negation Calc
+E100	Physical
+G100	79.0
+J100	0.0
+R100	1.0
+T100	Multiplier 1
+Y100	Dmg Negation 1
+E101	Strike
+G101	79.0
+J101	0.0
+R101	1.0
+T101	Multiplier 2
+Y101	Dmg Negation 2
+E102	Slash
+G102	79.0
+J102	0.0
+R102	1.0
+T102	Multiplier 3
+Y102	Dmg Negation 3
+E103	Pierce
+G103	79.0
+J103	0.0
+R103	1.0
+T103	Multiplier 4
+Y103	Dmg Negation 4
+E104	Magic
+G104	93.0
+J104	0.0
+R104	1.0
+T104	Multiplier 5
+Y104	Dmg Negation 5
+E105	Fire
+G105	85.0
+J105	0.0
+R105	1.0
+T105	Multiplier 6
+Y105	Dmg Negation 6
+E106	Lightning
+G106	75.0
+J106	0.0
+R106	1.0
+T106	Multiplier 7
+Y106	Dmg Negation 7
+E107	Holy
+G107	89.0
+J107	0.0
+R107	1.0
+T107	Multiplier 8
+Y107	Dmg Negation 8
+E108	Health Points
+G108	522.0
+J108	Total:
+M108	Total:
+R108	1.0
+T108	Multiplier 9
+Y108	Dmg Negation 9
+M109	eff hp | hits to live:
+T109	Total:
+Y109	Total:
+G111	Defense
+J111	Dmg Negation
+K111	AP
+L111	MV
+N111	Damage Dealt
+O111	Total Damage Negation [%]
+R111	Damage Multipliers
+T111	Combined Multiplier Calc
+Y111	Combined Damage Negation Calc
+E112	Physical
+G112	79.0
+J112	0.0
+R112	1.0
+T112	Multiplier 1
+Y112	Dmg Negation 1
+E113	Strike
+G113	79.0
+J113	0.0
+R113	1.0
+T113	Multiplier 2
+Y113	Dmg Negation 2
+E114	Slash
+G114	79.0
+J114	0.0
+R114	1.0
+T114	Multiplier 3
+Y114	Dmg Negation 3
+E115	Pierce
+G115	79.0
+J115	0.0
+R115	1.0
+T115	Multiplier 4
+Y115	Dmg Negation 4
+E116	Magic
+G116	93.0
+J116	0.0
+R116	1.0
+T116	Multiplier 5
+Y116	Dmg Negation 5
+E117	Fire
+G117	85.0
+J117	0.0
+R117	1.0
+T117	Multiplier 6
+Y117	Dmg Negation 6
+E118	Lightning
+G118	75.0
+J118	0.0
+R118	1.0
+T118	Multiplier 7
+Y118	Dmg Negation 7
+E119	Holy
+G119	89.0
+J119	0.0
+R119	1.0
+T119	Multiplier 8
+Y119	Dmg Negation 8
+E120	Health Points
+G120	522.0
+J120	Total:
+M120	Total:
+R120	1.0
+T120	Multiplier 9
+Y120	Dmg Negation 9
+M121	eff hp | hits to live:
+T121	Total:
+Y121	Total:
+M122	Damage Increase:
+
+CROSS-SHEET REFERENCES: PlannerData, UpdateData
+FORMULA KINDS: excel=442
+UNIQUE PATTERNS: 109
+
+========================================================================
+FORMULA PATTERNS (fill-down compressed)
+{r} is the row of the cell. Port the template once and apply per row.
+========================================================================
+
+PATTERN 1  kind=excel  array=False  R5
+  context_label: Planner Selection Display
+  template: ="2H: "
+&PlannerData!$R$8
+  e.g. R5: ="2H: "
+&PlannerData!$R$8  cached='2H: FALSE'
+
+PATTERN 2  kind=excel  array=False  G6
+  context_label: Update Available:
+  template: =IF(UpdateData!$D$2=UpdateData!$D$5,False,True)
+  e.g. G6: =IF(UpdateData!$D$2=UpdateData!$D$5,False,True)  cached=False
+
+PATTERN 3  kind=excel  array=False  O6
+  context_label: Planner Selection Display
+  template: ="RH 1: "&PlannerData!$R16
+  e.g. O6: ="RH 1: "&PlannerData!$R16  cached='RH 1: Unarmed'
+
+PATTERN 4  kind=excel  array=False  S6
+  context_label: Physical AP
+  template: =IF(PlannerData!S16>0,ROUND(PlannerData!S16,3),"-")
+  e.g. S6: =IF(PlannerData!S16>0,ROUND(PlannerData!S16,3),"-")  cached=23.458
+
+PATTERN 5  kind=excel  array=False  U6
+  context_label: Magic AP
+  template: =IF(PlannerData!T16>0,ROUND(PlannerData!T16,3),"-")
+  e.g. U6: =IF(PlannerData!T16>0,ROUND(PlannerData!T16,3),"-")  cached='-'
+
+PATTERN 6  kind=excel  array=False  W6
+  context_label: Fire AP
+  template: =IF(PlannerData!U16>0,ROUND(PlannerData!U16,3),"-")
+  e.g. W6: =IF(PlannerData!U16>0,ROUND(PlannerData!U16,3),"-")  cached='-'
+
+PATTERN 7  kind=excel  array=False  X6
+  context_label: Lightning AP
+  template: =IF(PlannerData!V16>0,ROUND(PlannerData!V16,3),"-")
+  e.g. X6: =IF(PlannerData!V16>0,ROUND(PlannerData!V16,3),"-")  cached='-'
+
+PATTERN 8  kind=excel  array=False  Z6
+  context_label: Holy AP
+  template: =IF(PlannerData!W16>0,ROUND(PlannerData!W16,3),"-")
+  e.g. Z6: =IF(PlannerData!W16>0,ROUND(PlannerData!W16,3),"-")  cached='-'
+
+PATTERN 9  kind=excel  array=False  AA6
+  context_label: Spell Buff
+  template: =IF(PlannerData!Y16>0,ROUND(PlannerData!Y16,3),"-")
+  e.g. AA6: =IF(PlannerData!Y16>0,ROUND(PlannerData!Y16,3),"-")  cached='-'
+
+PATTERN 10  kind=excel  array=False  E7
+  context_label: Update Available:
+  template: =IF(K{r-1},"Link to Update:","Link to Original:")
+  e.g. E7: =IF(K6,"Link to Update:","Link to Original:")  cached='Link to Original:'
+
+PATTERN 11  kind=excel  array=False  G7
+  template: =HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P{r}gdVMkPzFQX{r-1}OsjZcfyUjdGOj7Cjk9qFAVj-U/copy",
+UpdateData!D5&" - "&IF(J{r-1},"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))
+  e.g. G7: =HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U/copy",
+UpdateData!D5&" - "&IF(J6,"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))  cached='v1.19.1 - last updated 413 days ago'
+
+PATTERN 12  kind=excel  array=False  O7
+  context_label: Planner Selection Display
+  template: ="RH 2: "&PlannerData!$R17
+  e.g. O7: ="RH 2: "&PlannerData!$R17  cached='RH 2: Unarmed'
+
+PATTERN 13  kind=excel  array=False  S7
+  context_label: Physical AP
+  template: =IF(PlannerData!S17>0,ROUND(PlannerData!S17,3),"-")
+  e.g. S7: =IF(PlannerData!S17>0,ROUND(PlannerData!S17,3),"-")  cached=23.458
+
+PATTERN 14  kind=excel  array=False  U7
+  context_label: Magic AP
+  template: =IF(PlannerData!T17>0,ROUND(PlannerData!T17,3),"-")
+  e.g. U7: =IF(PlannerData!T17>0,ROUND(PlannerData!T17,3),"-")  cached='-'
+
+PATTERN 15  kind=excel  array=False  W7
+  context_label: Fire AP
+  template: =IF(PlannerData!U17>0,ROUND(PlannerData!U17,3),"-")
+  e.g. W7: =IF(PlannerData!U17>0,ROUND(PlannerData!U17,3),"-")  cached='-'
+
+PATTERN 16  kind=excel  array=False  X7
+  context_label: Lightning AP
+  template: =IF(PlannerData!V17>0,ROUND(PlannerData!V17,3),"-")
+  e.g. X7: =IF(PlannerData!V17>0,ROUND(PlannerData!V17,3),"-")  cached='-'
+
+PATTERN 17  kind=excel  array=False  Z7
+  context_label: Holy AP
+  template: =IF(PlannerData!W17>0,ROUND(PlannerData!W17,3),"-")
+  e.g. Z7: =IF(PlannerData!W17>0,ROUND(PlannerData!W17,3),"-")  cached='-'
+
+PATTERN 18  kind=excel  array=False  AA7
+  context_label: Spell Buff
+  template: =IF(PlannerData!Y17>0,ROUND(PlannerData!Y17,3),"-")
+  e.g. AA7: =IF(PlannerData!Y17>0,ROUND(PlannerData!Y17,3),"-")  cached='-'
+
+PATTERN 19  kind=excel  array=False  O8
+  context_label: Planner Selection Display
+  template: ="RH 3: "&PlannerData!$R18
+  e.g. O8: ="RH 3: "&PlannerData!$R18  cached='RH 3: Unarmed'
+
+PATTERN 20  kind=excel  array=False  S8
+  context_label: Physical AP
+  template: =IF(PlannerData!S18>0,ROUND(PlannerData!S18,3),"-")
+  e.g. S8: =IF(PlannerData!S18>0,ROUND(PlannerData!S18,3),"-")  cached=23.458
+
+PATTERN 21  kind=excel  array=False  U8
+  context_label: Magic AP
+  template: =IF(PlannerData!T18>0,ROUND(PlannerData!T18,3),"-")
+  e.g. U8: =IF(PlannerData!T18>0,ROUND(PlannerData!T18,3),"-")  cached='-'
+
+PATTERN 22  kind=excel  array=False  W8
+  context_label: Fire AP
+  template: =IF(PlannerData!U18>0,ROUND(PlannerData!U18,3),"-")
+  e.g. W8: =IF(PlannerData!U18>0,ROUND(PlannerData!U18,3),"-")  cached='-'
+
+PATTERN 23  kind=excel  array=False  X8
+  context_label: Lightning AP
+  template: =IF(PlannerData!V18>0,ROUND(PlannerData!V18,3),"-")
+  e.g. X8: =IF(PlannerData!V18>0,ROUND(PlannerData!V18,3),"-")  cached='-'
+
+PATTERN 24  kind=excel  array=False  Z8
+  context_label: Holy AP
+  template: =IF(PlannerData!W18>0,ROUND(PlannerData!W18,3),"-")
+  e.g. Z8: =IF(PlannerData!W18>0,ROUND(PlannerData!W18,3),"-")  cached='-'
+
+PATTERN 25  kind=excel  array=False  AA8
+  context_label: Spell Buff
+  template: =IF(PlannerData!Y18>0,ROUND(PlannerData!Y18,3),"-")
+  e.g. AA8: =IF(PlannerData!Y18>0,ROUND(PlannerData!Y18,3),"-")  cached='-'
+
+PATTERN 26  kind=excel  array=False  O9
+  template: ="LH 1: "&PlannerData!$R19
+  e.g. O9: ="LH 1: "&PlannerData!$R19  cached='LH 1: Unarmed'
+
+PATTERN 27  kind=excel  array=False  S9
+  template: =IF(PlannerData!S19>0,ROUND(PlannerData!S19,3),"-")
+  e.g. S9: =IF(PlannerData!S19>0,ROUND(PlannerData!S19,3),"-")  cached=23.458
+
+PATTERN 28  kind=excel  array=False  U9
+  template: =IF(PlannerData!T19>0,ROUND(PlannerData!T19,3),"-")
+  e.g. U9: =IF(PlannerData!T19>0,ROUND(PlannerData!T19,3),"-")  cached='-'
+
+PATTERN 29  kind=excel  array=False  W9
+  template: =IF(PlannerData!U19>0,ROUND(PlannerData!U19,3),"-")
+  e.g. W9: =IF(PlannerData!U19>0,ROUND(PlannerData!U19,3),"-")  cached='-'
+
+PATTERN 30  kind=excel  array=False  X9
+  template: =IF(PlannerData!V19>0,ROUND(PlannerData!V19,3),"-")
+  e.g. X9: =IF(PlannerData!V19>0,ROUND(PlannerData!V19,3),"-")  cached='-'
+
+PATTERN 31  kind=excel  array=False  Z9
+  template: =IF(PlannerData!W19>0,ROUND(PlannerData!W19,3),"-")
+  e.g. Z9: =IF(PlannerData!W19>0,ROUND(PlannerData!W19,3),"-")  cached='-'
+
+PATTERN 32  kind=excel  array=False  AA9
+  template: =IF(PlannerData!Y19>0,ROUND(PlannerData!Y19,3),"-")
+  e.g. AA9: =IF(PlannerData!Y19>0,ROUND(PlannerData!Y19,3),"-")  cached='-'
+
+PATTERN 33  kind=excel  array=False  O10
+  template: ="LH 2: "&PlannerData!$R20
+  e.g. O10: ="LH 2: "&PlannerData!$R20  cached='LH 2: Unarmed'
+
+PATTERN 34  kind=excel  array=False  S10
+  template: =IF(PlannerData!S20>0,ROUND(PlannerData!S20,3),"-")
+  e.g. S10: =IF(PlannerData!S20>0,ROUND(PlannerData!S20,3),"-")  cached=23.458
+
+PATTERN 35  kind=excel  array=False  U10
+  template: =IF(PlannerData!T20>0,ROUND(PlannerData!T20,3),"-")
+  e.g. U10: =IF(PlannerData!T20>0,ROUND(PlannerData!T20,3),"-")  cached='-'
+
+PATTERN 36  kind=excel  array=False  W10
+  template: =IF(PlannerData!U20>0,ROUND(PlannerData!U20,3),"-")
+  e.g. W10: =IF(PlannerData!U20>0,ROUND(PlannerData!U20,3),"-")  cached='-'
+
+PATTERN 37  kind=excel  array=False  X10
+  template: =IF(PlannerData!V20>0,ROUND(PlannerData!V20,3),"-")
+  e.g. X10: =IF(PlannerData!V20>0,ROUND(PlannerData!V20,3),"-")  cached='-'
+
+PATTERN 38  kind=excel  array=False  Z10
+  template: =IF(PlannerData!W20>0,ROUND(PlannerData!W20,3),"-")
+  e.g. Z10: =IF(PlannerData!W20>0,ROUND(PlannerData!W20,3),"-")  cached='-'
+
+PATTERN 39  kind=excel  array=False  AA10
+  template: =IF(PlannerData!Y20>0,ROUND(PlannerData!Y20,3),"-")
+  e.g. AA10: =IF(PlannerData!Y20>0,ROUND(PlannerData!Y20,3),"-")  cached='-'
+
+PATTERN 40  kind=excel  array=False  O11
+  template: ="LH 3: "&PlannerData!$R21
+  e.g. O11: ="LH 3: "&PlannerData!$R21  cached='LH 3: Unarmed'
+
+PATTERN 41  kind=excel  array=False  S11
+  template: =IF(PlannerData!S21>0,ROUND(PlannerData!S21,3),"-")
+  e.g. S11: =IF(PlannerData!S21>0,ROUND(PlannerData!S21,3),"-")  cached=23.458
+
+PATTERN 42  kind=excel  array=False  U11
+  template: =IF(PlannerData!T21>0,ROUND(PlannerData!T21,3),"-")
+  e.g. U11: =IF(PlannerData!T21>0,ROUND(PlannerData!T21,3),"-")  cached='-'
+
+PATTERN 43  kind=excel  array=False  W11
+  template: =IF(PlannerData!U21>0,ROUND(PlannerData!U21,3),"-")
+  e.g. W11: =IF(PlannerData!U21>0,ROUND(PlannerData!U21,3),"-")  cached='-'
+
+PATTERN 44  kind=excel  array=False  X11
+  template: =IF(PlannerData!V21>0,ROUND(PlannerData!V21,3),"-")
+  e.g. X11: =IF(PlannerData!V21>0,ROUND(PlannerData!V21,3),"-")  cached='-'
+
+PATTERN 45  kind=excel  array=False  Z11
+  template: =IF(PlannerData!W21>0,ROUND(PlannerData!W21,3),"-")
+  e.g. Z11: =IF(PlannerData!W21>0,ROUND(PlannerData!W21,3),"-")  cached='-'
+
+PATTERN 46  kind=excel  array=False  AA11
+  template: =IF(PlannerData!Y21>0,ROUND(PlannerData!Y21,3),"-")
+  e.g. AA11: =IF(PlannerData!Y21>0,ROUND(PlannerData!Y21,3),"-")  cached='-'
+
+PATTERN 47  kind=excel  array=True  F19:F115 (32 cells)
+  context_label: Physical
+  array_spill_ref: F19:G19
+  template: ={"",PlannerData!$J$7}
+  e.g. F19: ={"",PlannerData!$J$7}
+  e.g. F20: ={"",PlannerData!$J$7}
+  e.g. F21: ={"",PlannerData!$J$7}
+  ... 29 more of this pattern
+
+PATTERN 48  kind=excel  array=True  I19:I112 (8 cells)
+  context_label: Physical
+  array_spill_ref: I19:J19
+  template: ={"",100*(1-PlannerData!$L$23)}
+  e.g. I19: ={"",100*(1-PlannerData!$L$23)}
+  e.g. I31: ={"",100*(1-PlannerData!$L$23)}
+  e.g. I46: ={"",100*(1-PlannerData!$L$23)}
+  ... 5 more of this pattern
+
+PATTERN 49  kind=excel  array=False  N19:N119 (64 cells)
+  context_label: Damage Dealt
+  template: =(1-(J{r}/100))*
+IFERROR(IFS(
+(K{r}*(L{r}/100))/G{r}>=8,0.9*(K{r}*(L{r}/100)),
+(K{r}*(L{r}/100))/G{r}>2.5,(1-((((K{r}*(L{r}/100))/G{r}-8)^2*(20/30.25)+10)/100))*(K{r}*(L{r}/100)),
+(K{r}*(L{r}/100))/G{r}>=1,(1-((((K{r}*(L{r}/100))/G{r}-2.5)^2*(30/2.25)+30)/100))*(K{r}*(L{r}/100)),
+(K{r}*(L{r}/100))/G{r}>0.12,(1-((((K{r}*(L{r}/100))/G{r}-0.12)^2*(-30/0.7744)+90)/100))*(K{r}*(L{r}/100)),
+(K{r}*(L{r}/100))/G{r}<=0.12,0.1*(K{r}*(L{r}/100))),0)
+*R{r}
+  e.g. N19: =(1-(J19/100))*
+IFERROR(IFS(
+(K19*(L19/100))/G19>=8,0.9*(K19*(L19/100)),
+(K19*(L19/100))/G19>2.5,(1-((((K19*(L19/100))/G19-8)^2*(20/30.25)+10)/100))*(K19*(L19/100)),
+(K19*(L19/100))/G19>=1,(1-((((K19*(L19/100))/G19-2.5)^2*(30/2.25)+30)/100))*(K19*(L19/100)),
+(K19*(L19/100))/G19>0.12,(1-((((K19*(L19/100))/G19-0.12)^2*(-30/0.7744)+90)/100))*(K19*(L19/100)),
+(K19*(L19/100))/G19<=0.12,0.1*(K19*(L19/100))),0)
+*R19  cached=0
+  e.g. N20: =(1-(J20/100))*
+IFERROR(IFS(
+(K20*(L20/100))/G20>=8,0.9*(K20*(L20/100)),
+(K20*(L20/100))/G20>2.5,(1-((((K20*(L20/100))/G20-8)^2*(20/30.25)+10)/100))*(K20*(L20/100)),
+(K20*(L20/100))/G20>=1,(1-((((K20*(L20/100))/G20-2.5)^2*(30/2.25)+30)/100))*(K20*(L20/100)),
+(K20*(L20/100))/G20>0.12,(1-((((K20*(L20/100))/G20-0.12)^2*(-30/0.7744)+90)/100))*(K20*(L20/100)),
+(K20*(L20/100))/G20<=0.12,0.1*(K20*(L20/100))),0)
+*R20  cached=0
+  e.g. N21: =(1-(J21/100))*
+IFERROR(IFS(
+(K21*(L21/100))/G21>=8,0.9*(K21*(L21/100)),
+(K21*(L21/100))/G21>2.5,(1-((((K21*(L21/100))/G21-8)^2*(20/30.25)+10)/100))*(K21*(L21/100)),
+(K21*(L21/100))/G21>=1,(1-((((K21*(L21/100))/G21-2.5)^2*(30/2.25)+30)/100))*(K21*(L21/100)),
+(K21*(L21/100))/G21>0.12,(1-((((K21*(L21/100))/G21-0.12)^2*(-30/0.7744)+90)/100))*(K21*(L21/100)),
+(K21*(L21/100))/G21<=0.12,0.1*(K21*(L21/100))),0)
+*R21  cached=0
+  ... 61 more of this pattern
+
+PATTERN 50  kind=excel  array=False  O19:O119 (64 cells)
+  context_label: Total Damage Negation [%]
+  template: =IFERROR(IF(K{r}=0,0,(((K{r}*(L{r}/100))-N{r})/(K{r}*(L{r}/100)))*100),"No Motion Value")
+  e.g. O19: =IFERROR(IF(K19=0,0,(((K19*(L19/100))-N19)/(K19*(L19/100)))*100),"No Motion Value")  cached=0
+  e.g. O20: =IFERROR(IF(K20=0,0,(((K20*(L20/100))-N20)/(K20*(L20/100)))*100),"No Motion Value")  cached=0
+  e.g. O21: =IFERROR(IF(K21=0,0,(((K21*(L21/100))-N21)/(K21*(L21/100)))*100),"No Motion Value")  cached=0
+  ... 61 more of this pattern
+
+PATTERN 51  kind=excel  array=False  Q19:Q120 (72 cells)
+  template: ={"",1}
+  e.g. Q19: ={"",1}
+  e.g. Q20: ={"",1}
+  e.g. Q21: ={"",1}
+  ... 69 more of this pattern
+
+PATTERN 52  kind=excel  array=True  I20:I113 (8 cells)
+  context_label: Strike
+  array_spill_ref: I20:J20
+  template: ={"",100*(1-PlannerData!$L$24)}
+  e.g. I20: ={"",100*(1-PlannerData!$L$24)}
+  e.g. I32: ={"",100*(1-PlannerData!$L$24)}
+  e.g. I47: ={"",100*(1-PlannerData!$L$24)}
+  ... 5 more of this pattern
+
+PATTERN 53  kind=excel  array=True  I21:I114 (8 cells)
+  context_label: Slash
+  array_spill_ref: I21:J21
+  template: ={"",100*(1-PlannerData!$L$25)}
+  e.g. I21: ={"",100*(1-PlannerData!$L$25)}
+  e.g. I33: ={"",100*(1-PlannerData!$L$25)}
+  e.g. I48: ={"",100*(1-PlannerData!$L$25)}
+  ... 5 more of this pattern
+
+PATTERN 54  kind=excel  array=True  I22:I115 (8 cells)
+  context_label: Pierce
+  array_spill_ref: I22:J22
+  template: ={"",100*(1-PlannerData!$L$26)}
+  e.g. I22: ={"",100*(1-PlannerData!$L$26)}
+  e.g. I34: ={"",100*(1-PlannerData!$L$26)}
+  e.g. I49: ={"",100*(1-PlannerData!$L$26)}
+  ... 5 more of this pattern
+
+PATTERN 55  kind=excel  array=True  F23:F116 (8 cells)
+  context_label: Magic
+  array_spill_ref: F23:G23
+  template: ={"",PlannerData!$J$8}
+  e.g. F23: ={"",PlannerData!$J$8}
+  e.g. F35: ={"",PlannerData!$J$8}
+  e.g. F50: ={"",PlannerData!$J$8}
+  ... 5 more of this pattern
+
+PATTERN 56  kind=excel  array=True  I23:I116 (8 cells)
+  context_label: Magic
+  array_spill_ref: I23:J23
+  template: ={"",100*(1-PlannerData!$L$27)}
+  e.g. I23: ={"",100*(1-PlannerData!$L$27)}
+  e.g. I35: ={"",100*(1-PlannerData!$L$27)}
+  e.g. I50: ={"",100*(1-PlannerData!$L$27)}
+  ... 5 more of this pattern
+
+PATTERN 57  kind=excel  array=True  F24:F117 (8 cells)
+  context_label: Fire
+  array_spill_ref: F24:G24
+  template: ={"",PlannerData!$J$9}
+  e.g. F24: ={"",PlannerData!$J$9}
+  e.g. F36: ={"",PlannerData!$J$9}
+  e.g. F51: ={"",PlannerData!$J$9}
+  ... 5 more of this pattern
+
+PATTERN 58  kind=excel  array=True  I24:I117 (8 cells)
+  context_label: Fire
+  array_spill_ref: I24:J24
+  template: ={"",100*(1-PlannerData!$L$28)}
+  e.g. I24: ={"",100*(1-PlannerData!$L$28)}
+  e.g. I36: ={"",100*(1-PlannerData!$L$28)}
+  e.g. I51: ={"",100*(1-PlannerData!$L$28)}
+  ... 5 more of this pattern
+
+PATTERN 59  kind=excel  array=True  F25:F118 (8 cells)
+  context_label: Lightning
+  array_spill_ref: F25:G25
+  template: ={"",PlannerData!$J$10}
+  e.g. F25: ={"",PlannerData!$J$10}
+  e.g. F37: ={"",PlannerData!$J$10}
+  e.g. F52: ={"",PlannerData!$J$10}
+  ... 5 more of this pattern
+
+PATTERN 60  kind=excel  array=True  I25:I118 (8 cells)
+  context_label: Lightning
+  array_spill_ref: I25:J25
+  template: ={"",100*(1-PlannerData!$L$29)}
+  e.g. I25: ={"",100*(1-PlannerData!$L$29)}
+  e.g. I37: ={"",100*(1-PlannerData!$L$29)}
+  e.g. I52: ={"",100*(1-PlannerData!$L$29)}
+  ... 5 more of this pattern
+
+PATTERN 61  kind=excel  array=True  F26:F119 (8 cells)
+  context_label: Holy
+  array_spill_ref: F26:G26
+  template: ={"",PlannerData!$J$11}
+  e.g. F26: ={"",PlannerData!$J$11}
+  e.g. F38: ={"",PlannerData!$J$11}
+  e.g. F53: ={"",PlannerData!$J$11}
+  ... 5 more of this pattern
+
+PATTERN 62  kind=excel  array=True  I26:I119 (8 cells)
+  context_label: Holy
+  array_spill_ref: I26:J26
+  template: ={"",100*(1-PlannerData!$L$30)}
+  e.g. I26: ={"",100*(1-PlannerData!$L$30)}
+  e.g. I38: ={"",100*(1-PlannerData!$L$30)}
+  e.g. I53: ={"",100*(1-PlannerData!$L$30)}
+  ... 5 more of this pattern
+
+PATTERN 63  kind=excel  array=True  F27:F120 (8 cells)
+  context_label: Health Points
+  array_spill_ref: F27:G27
+  template: ={"",PlannerData!$L$2}
+  e.g. F27: ={"",PlannerData!$L$2}
+  e.g. F39: ={"",PlannerData!$L$2}
+  e.g. F54: ={"",PlannerData!$L$2}
+  ... 5 more of this pattern
+
+PATTERN 64  kind=excel  array=False  K27
+  context_label: Total:
+  template: =K19+K20+K21+K22+K23+K24+K25+K{r-1}
+  e.g. K27: =K19+K20+K21+K22+K23+K24+K25+K26  cached=0
+
+PATTERN 65  kind=excel  array=False  N27
+  context_label: Total:
+  template: =SUM(N19:N{r-1})*R{r}
+  e.g. N27: =SUM(N19:N26)*R27  cached=0
+
+PATTERN 66  kind=excel  array=False  O27
+  context_label: Total:
+  template: =IFERROR(IF((K{r})=0,0,((((K19*(L19/100))+(K20*(L20/100))+(K21*(L21/100))+(K22*(L22/100))+(K23*(L23/100))+(K24*(L24/100))+(K25*(L25/100))+(K{r-1}*(L{r-1}/100)))-N{r})/((K19*(L19/100))+(K20*(L20/100))+(K21*(L21/100))+(K22*(L22/100))+(K23*(L23/100))+(K24*(L24/100))+(K25*(L25/100))+(K{r-1}*(L{r-1}/100))))*100),0)
+  e.g. O27: =IFERROR(IF((K27)=0,0,((((K19*(L19/100))+(K20*(L20/100))+(K21*(L21/100))+(K22*(L22/100))+(K23*(L23/100))+(K24*(L24/100))+(K25*(L25/100))+(K26*(L26/100)))-N27)/((K19*(L19/100))+(K20*(L20/100))+(K21*(L21/100))+(K22*(L22/100))+(K23*(L23/100))+(K24*(L24/100))+(K25*(L25/100))+(K26*(L26/100))))*100),0)  cached=0
+
+PATTERN 67  kind=excel  array=False  N28:N121 (8 cells)
+  context_label: eff hp | hits to live:
+  template: =IFERROR(IF(O{r-1}=0,0,G{r-1}/(1-(O{r-1}/100))),0)
+  e.g. N28: =IFERROR(IF(O27=0,0,G27/(1-(O27/100))),0)  cached=0
+  e.g. N40: =IFERROR(IF(O39=0,0,G39/(1-(O39/100))),0)  cached=0
+  e.g. N55: =IFERROR(IF(O54=0,0,G54/(1-(O54/100))),0)  cached=0
+  ... 5 more of this pattern
+
+PATTERN 68  kind=excel  array=False  O28:O121 (8 cells)
+  context_label: eff hp | hits to live:
+  template: =IFERROR(G{r-1}/N{r-1},0)
+  e.g. O28: =IFERROR(G27/N27,0)  cached=0
+  e.g. O40: =IFERROR(G39/N39,0)  cached=0
+  e.g. O55: =IFERROR(G54/N54,0)  cached=0
+  ... 5 more of this pattern
+
+PATTERN 69  kind=excel  array=False  V28
+  context_label: Total:
+  template: =PRODUCT(V19:V{r-1})
+  e.g. V28: =PRODUCT(V19:V27)  cached=1.1232
+
+PATTERN 70  kind=excel  array=False  AA28
+  context_label: Total:
+  template: =100*(1-((1-AA19/100)*(1-AA20/100)*(1-AA21/100)*(1-AA22/100)*(1-AA23/100)*(1-AA24/100)*(1-AA25/100)*(1-AA26/100)*(1-AA{r-1}/100)))
+  e.g. AA28: =100*(1-((1-AA19/100)*(1-AA20/100)*(1-AA21/100)*(1-AA22/100)*(1-AA23/100)*(1-AA24/100)*(1-AA25/100)*(1-AA26/100)*(1-AA27/100)))  cached=45.2498
+
+PATTERN 71  kind=excel  array=False  K39
+  context_label: Total:
+  template: =K31+K32+K33+K34+K35+K36+K37+K{r-1}
+  e.g. K39: =K31+K32+K33+K34+K35+K36+K37+K38  cached=0
+
+PATTERN 72  kind=excel  array=False  N39
+  context_label: Total:
+  template: =SUM(N31:N{r-1})*R{r}
+  e.g. N39: =SUM(N31:N38)*R39  cached=0
+
+PATTERN 73  kind=excel  array=False  O39
+  context_label: Total:
+  template: =IFERROR(IF((K{r})=0,0,((((K31*(L31/100))+(K32*(L32/100))+(K33*(L33/100))+(K34*(L34/100))+(K35*(L35/100))+(K36*(L36/100))+(K37*(L37/100))+(K{r-1}*(L{r-1}/100)))-N{r})/((K31*(L31/100))+(K32*(L32/100))+(K33*(L33/100))+(K34*(L34/100))+(K35*(L35/100))+(K36*(L36/100))+(K37*(L37/100))+(K{r-1}*(L{r-1}/100))))*100),0)
+  e.g. O39: =IFERROR(IF((K39)=0,0,((((K31*(L31/100))+(K32*(L32/100))+(K33*(L33/100))+(K34*(L34/100))+(K35*(L35/100))+(K36*(L36/100))+(K37*(L37/100))+(K38*(L38/100)))-N39)/((K31*(L31/100))+(K32*(L32/100))+(K33*(L33/100))+(K34*(L34/100))+(K35*(L35/100))+(K36*(L36/100))+(K37*(L37/100))+(K38*(L38/100))))*100),0)  cached=0
+
+PATTERN 74  kind=excel  array=False  V40
+  context_label: Total:
+  template: =PRODUCT(V31:V{r-1})
+  e.g. V40: =PRODUCT(V31:V39)  cached=1.495
+
+PATTERN 75  kind=excel  array=False  AA40
+  context_label: Total:
+  template: =100*(1-((1-AA31/100)*(1-AA32/100)*(1-AA33/100)*(1-AA34/100)*(1-AA35/100)*(1-AA36/100)*(1-AA37/100)*(1-AA38/100)*(1-AA{r-1}/100)))
+  e.g. AA40: =100*(1-((1-AA31/100)*(1-AA32/100)*(1-AA33/100)*(1-AA34/100)*(1-AA35/100)*(1-AA36/100)*(1-AA37/100)*(1-AA38/100)*(1-AA39/100)))  cached=25.9262
+
+PATTERN 76  kind=excel  array=False  N41
+  context_label: Damage Increase:
+  template: =IFERROR(IF(N39>N27,N39/N27-1,0),0)
+  e.g. N41: =IFERROR(IF(N39>N27,N39/N27-1,0),0)  cached=0
+
+PATTERN 77  kind=excel  array=False  K54
+  context_label: Total:
+  template: =K46+K47+K48+K49+K50+K51+K52+K{r-1}
+  e.g. K54: =K46+K47+K48+K49+K50+K51+K52+K53  cached=0
+
+PATTERN 78  kind=excel  array=False  N54
+  context_label: Total:
+  template: =SUM(N46:N{r-1})*R{r}
+  e.g. N54: =SUM(N46:N53)*R54  cached=0
+
+PATTERN 79  kind=excel  array=False  O54
+  context_label: Total:
+  template: =IFERROR(IF((K{r})=0,0,((((K46*(L46/100))+(K47*(L47/100))+(K48*(L48/100))+(K49*(L49/100))+(K50*(L50/100))+(K51*(L51/100))+(K52*(L52/100))+(K{r-1}*(L{r-1}/100)))-N{r})/((K46*(L46/100))+(K47*(L47/100))+(K48*(L48/100))+(K49*(L49/100))+(K50*(L50/100))+(K51*(L51/100))+(K52*(L52/100))+(K{r-1}*(L{r-1}/100))))*100),0)
+  e.g. O54: =IFERROR(IF((K54)=0,0,((((K46*(L46/100))+(K47*(L47/100))+(K48*(L48/100))+(K49*(L49/100))+(K50*(L50/100))+(K51*(L51/100))+(K52*(L52/100))+(K53*(L53/100)))-N54)/((K46*(L46/100))+(K47*(L47/100))+(K48*(L48/100))+(K49*(L49/100))+(K50*(L50/100))+(K51*(L51/100))+(K52*(L52/100))+(K53*(L53/100))))*100),0)  cached=0
+
+PATTERN 80  kind=excel  array=False  V55
+  context_label: Total:
+  template: =PRODUCT(V46:V{r-1})
+  e.g. V55: =PRODUCT(V46:V54)  cached=0
+
+PATTERN 81  kind=excel  array=False  AA55
+  context_label: Total:
+  template: =100*(1-((1-AA46/100)*(1-AA47/100)*(1-AA48/100)*(1-AA49/100)*(1-AA50/100)*(1-AA51/100)*(1-AA52/100)*(1-AA53/100)*(1-AA{r-1}/100)))
+  e.g. AA55: =100*(1-((1-AA46/100)*(1-AA47/100)*(1-AA48/100)*(1-AA49/100)*(1-AA50/100)*(1-AA51/100)*(1-AA52/100)*(1-AA53/100)*(1-AA54/100)))  cached=0
+
+PATTERN 82  kind=excel  array=False  K66
+  context_label: Total:
+  template: =K58+K59+K60+K61+K62+K63+K64+K{r-1}
+  e.g. K66: =K58+K59+K60+K61+K62+K63+K64+K65  cached=0
+
+PATTERN 83  kind=excel  array=False  N66
+  context_label: Total:
+  template: =SUM(N58:N{r-1})*R{r}
+  e.g. N66: =SUM(N58:N65)*R66  cached=0
+
+PATTERN 84  kind=excel  array=False  O66
+  context_label: Total:
+  template: =IFERROR(IF((K{r})=0,0,((((K58*(L58/100))+(K59*(L59/100))+(K60*(L60/100))+(K61*(L61/100))+(K62*(L62/100))+(K63*(L63/100))+(K64*(L64/100))+(K{r-1}*(L{r-1}/100)))-N{r})/((K58*(L58/100))+(K59*(L59/100))+(K60*(L60/100))+(K61*(L61/100))+(K62*(L62/100))+(K63*(L63/100))+(K64*(L64/100))+(K{r-1}*(L{r-1}/100))))*100),0)
+  e.g. O66: =IFERROR(IF((K66)=0,0,((((K58*(L58/100))+(K59*(L59/100))+(K60*(L60/100))+(K61*(L61/100))+(K62*(L62/100))+(K63*(L63/100))+(K64*(L64/100))+(K65*(L65/100)))-N66)/((K58*(L58/100))+(K59*(L59/100))+(K60*(L60/100))+(K61*(L61/100))+(K62*(L62/100))+(K63*(L63/100))+(K64*(L64/100))+(K65*(L65/100))))*100),0)  cached=0
+
+PATTERN 85  kind=excel  array=False  V67
+  context_label: Total:
+  template: =PRODUCT(V58:V{r-1})
+  e.g. V67: =PRODUCT(V58:V66)  cached=0
+
+PATTERN 86  kind=excel  array=False  AA67
+  context_label: Total:
+  template: =100*(1-((1-AA58/100)*(1-AA59/100)*(1-AA60/100)*(1-AA61/100)*(1-AA62/100)*(1-AA63/100)*(1-AA64/100)*(1-AA65/100)*(1-AA{r-1}/100)))
+  e.g. AA67: =100*(1-((1-AA58/100)*(1-AA59/100)*(1-AA60/100)*(1-AA61/100)*(1-AA62/100)*(1-AA63/100)*(1-AA64/100)*(1-AA65/100)*(1-AA66/100)))  cached=0
+
+PATTERN 87  kind=excel  array=False  N68
+  context_label: Damage Increase:
+  template: =IFERROR(IF(N66>N54,N66/N54-1,0),0)
+  e.g. N68: =IFERROR(IF(N66>N54,N66/N54-1,0),0)  cached=0
+
+PATTERN 88  kind=excel  array=False  K81
+  context_label: Total:
+  template: =K73+K74+K75+K76+K77+K78+K79+K{r-1}
+  e.g. K81: =K73+K74+K75+K76+K77+K78+K79+K80  cached=0
+
+PATTERN 89  kind=excel  array=False  N81
+  context_label: Total:
+  template: =SUM(N73:N{r-1})*R{r}
+  e.g. N81: =SUM(N73:N80)*R81  cached=0
+
+PATTERN 90  kind=excel  array=False  O81
+  context_label: Total:
+  template: =IFERROR(IF((K{r})=0,0,((((K73*(L73/100))+(K74*(L74/100))+(K75*(L75/100))+(K76*(L76/100))+(K77*(L77/100))+(K78*(L78/100))+(K79*(L79/100))+(K{r-1}*(L{r-1}/100)))-N{r})/((K73*(L73/100))+(K74*(L74/100))+(K75*(L75/100))+(K76*(L76/100))+(K77*(L77/100))+(K78*(L78/100))+(K79*(L79/100))+(K{r-1}*(L{r-1}/100))))*100),0)
+  e.g. O81: =IFERROR(IF((K81)=0,0,((((K73*(L73/100))+(K74*(L74/100))+(K75*(L75/100))+(K76*(L76/100))+(K77*(L77/100))+(K78*(L78/100))+(K79*(L79/100))+(K80*(L80/100)))-N81)/((K73*(L73/100))+(K74*(L74/100))+(K75*(L75/100))+(K76*(L76/100))+(K77*(L77/100))+(K78*(L78/100))+(K79*(L79/100))+(K80*(L80/100))))*100),0)  cached=0
+
+PATTERN 91  kind=excel  array=False  V82
+  context_label: Total:
+  template: =PRODUCT(V73:V{r-1})
+  e.g. V82: =PRODUCT(V73:V81)  cached=0
+
+PATTERN 92  kind=excel  array=False  AA82
+  context_label: Total:
+  template: =100*(1-((1-AA73/100)*(1-AA74/100)*(1-AA75/100)*(1-AA76/100)*(1-AA77/100)*(1-AA78/100)*(1-AA79/100)*(1-AA80/100)*(1-AA{r-1}/100)))
+  e.g. AA82: =100*(1-((1-AA73/100)*(1-AA74/100)*(1-AA75/100)*(1-AA76/100)*(1-AA77/100)*(1-AA78/100)*(1-AA79/100)*(1-AA80/100)*(1-AA81/100)))  cached=0
+
+PATTERN 93  kind=excel  array=False  K93
+  context_label: Total:
+  template: =K85+K86+K87+K88+K89+K90+K91+K{r-1}
+  e.g. K93: =K85+K86+K87+K88+K89+K90+K91+K92  cached=0
+
+PATTERN 94  kind=excel  array=False  N93
+  context_label: Total:
+  template: =SUM(N85:N{r-1})*R{r}
+  e.g. N93: =SUM(N85:N92)*R93  cached=0
+
+PATTERN 95  kind=excel  array=False  O93
+  context_label: Total:
+  template: =IFERROR(IF((K{r})=0,0,((((K85*(L85/100))+(K86*(L86/100))+(K87*(L87/100))+(K88*(L88/100))+(K89*(L89/100))+(K90*(L90/100))+(K91*(L91/100))+(K{r-1}*(L{r-1}/100)))-N{r})/((K85*(L85/100))+(K86*(L86/100))+(K87*(L87/100))+(K88*(L88/100))+(K89*(L89/100))+(K90*(L90/100))+(K91*(L91/100))+(K{r-1}*(L{r-1}/100))))*100),0)
+  e.g. O93: =IFERROR(IF((K93)=0,0,((((K85*(L85/100))+(K86*(L86/100))+(K87*(L87/100))+(K88*(L88/100))+(K89*(L89/100))+(K90*(L90/100))+(K91*(L91/100))+(K92*(L92/100)))-N93)/((K85*(L85/100))+(K86*(L86/100))+(K87*(L87/100))+(K88*(L88/100))+(K89*(L89/100))+(K90*(L90/100))+(K91*(L91/100))+(K92*(L92/100))))*100),0)  cached=0
+
+PATTERN 96  kind=excel  array=False  V94
+  context_label: Total:
+  template: =PRODUCT(V85:V{r-1})
+  e.g. V94: =PRODUCT(V85:V93)  cached=0
+
+PATTERN 97  kind=excel  array=False  AA94
+  context_label: Total:
+  template: =100*(1-((1-AA85/100)*(1-AA86/100)*(1-AA87/100)*(1-AA88/100)*(1-AA89/100)*(1-AA90/100)*(1-AA91/100)*(1-AA92/100)*(1-AA{r-1}/100)))
+  e.g. AA94: =100*(1-((1-AA85/100)*(1-AA86/100)*(1-AA87/100)*(1-AA88/100)*(1-AA89/100)*(1-AA90/100)*(1-AA91/100)*(1-AA92/100)*(1-AA93/100)))  cached=0
+
+PATTERN 98  kind=excel  array=False  N95
+  context_label: Damage Increase:
+  template: =IFERROR(IF(N93>N81,N93/N81-1,0),0)
+  e.g. N95: =IFERROR(IF(N93>N81,N93/N81-1,0),0)  cached=0
+
+PATTERN 99  kind=excel  array=False  K108
+  context_label: Total:
+  template: =K100+K101+K102+K103+K104+K105+K106+K{r-1}
+  e.g. K108: =K100+K101+K102+K103+K104+K105+K106+K107  cached=0
+
+PATTERN 100  kind=excel  array=False  N108
+  context_label: Total:
+  template: =SUM(N100:N{r-1})*R{r}
+  e.g. N108: =SUM(N100:N107)*R108  cached=0
+
+PATTERN 101  kind=excel  array=False  O108
+  context_label: Total:
+  template: =IFERROR(IF((K{r})=0,0,((((K100*(L100/100))+(K101*(L101/100))+(K102*(L102/100))+(K103*(L103/100))+(K104*(L104/100))+(K105*(L105/100))+(K106*(L106/100))+(K{r-1}*(L{r-1}/100)))-N{r})/((K100*(L100/100))+(K101*(L101/100))+(K102*(L102/100))+(K103*(L103/100))+(K104*(L104/100))+(K105*(L105/100))+(K106*(L106/100))+(K{r-1}*(L{r-1}/100))))*100),0)
+  e.g. O108: =IFERROR(IF((K108)=0,0,((((K100*(L100/100))+(K101*(L101/100))+(K102*(L102/100))+(K103*(L103/100))+(K104*(L104/100))+(K105*(L105/100))+(K106*(L106/100))+(K107*(L107/100)))-N108)/((K100*(L100/100))+(K101*(L101/100))+(K102*(L102/100))+(K103*(L103/100))+(K104*(L104/100))+(K105*(L105/100))+(K106*(L106/100))+(K107*(L107/100))))*100),0)  cached=0
+
+PATTERN 102  kind=excel  array=False  V109
+  context_label: Total:
+  template: =PRODUCT(V100:V{r-1})
+  e.g. V109: =PRODUCT(V100:V108)  cached=0
+
+PATTERN 103  kind=excel  array=False  AA109
+  context_label: Total:
+  template: =100*(1-((1-AA100/100)*(1-AA101/100)*(1-AA102/100)*(1-AA103/100)*(1-AA104/100)*(1-AA105/100)*(1-AA106/100)*(1-AA107/100)*(1-AA{r-1}/100)))
+  e.g. AA109: =100*(1-((1-AA100/100)*(1-AA101/100)*(1-AA102/100)*(1-AA103/100)*(1-AA104/100)*(1-AA105/100)*(1-AA106/100)*(1-AA107/100)*(1-AA108/100)))  cached=0
+
+PATTERN 104  kind=excel  array=False  K120
+  context_label: Total:
+  template: =K112+K113+K114+K115+K116+K117+K118+K{r-1}
+  e.g. K120: =K112+K113+K114+K115+K116+K117+K118+K119  cached=0
+
+PATTERN 105  kind=excel  array=False  N120
+  context_label: Total:
+  template: =SUM(N112:N{r-1})*R{r}
+  e.g. N120: =SUM(N112:N119)*R120  cached=0
+
+PATTERN 106  kind=excel  array=False  O120
+  context_label: Total:
+  template: =IFERROR(IF((K{r})=0,0,((((K112*(L112/100))+(K113*(L113/100))+(K114*(L114/100))+(K115*(L115/100))+(K116*(L116/100))+(K117*(L117/100))+(K118*(L118/100))+(K{r-1}*(L{r-1}/100)))-N{r})/((K112*(L112/100))+(K113*(L113/100))+(K114*(L114/100))+(K115*(L115/100))+(K116*(L116/100))+(K117*(L117/100))+(K118*(L118/100))+(K{r-1}*(L{r-1}/100))))*100),0)
+  e.g. O120: =IFERROR(IF((K120)=0,0,((((K112*(L112/100))+(K113*(L113/100))+(K114*(L114/100))+(K115*(L115/100))+(K116*(L116/100))+(K117*(L117/100))+(K118*(L118/100))+(K119*(L119/100)))-N120)/((K112*(L112/100))+(K113*(L113/100))+(K114*(L114/100))+(K115*(L115/100))+(K116*(L116/100))+(K117*(L117/100))+(K118*(L118/100))+(K119*(L119/100))))*100),0)  cached=0
+
+PATTERN 107  kind=excel  array=False  V121
+  context_label: Total:
+  template: =PRODUCT(V112:V{r-1})
+  e.g. V121: =PRODUCT(V112:V120)  cached=0
+
+PATTERN 108  kind=excel  array=False  AA121
+  context_label: Total:
+  template: =100*(1-((1-AA112/100)*(1-AA113/100)*(1-AA114/100)*(1-AA115/100)*(1-AA116/100)*(1-AA117/100)*(1-AA118/100)*(1-AA119/100)*(1-AA{r-1}/100)))
+  e.g. AA121: =100*(1-((1-AA112/100)*(1-AA113/100)*(1-AA114/100)*(1-AA115/100)*(1-AA116/100)*(1-AA117/100)*(1-AA118/100)*(1-AA119/100)*(1-AA120/100)))  cached=0
+
+PATTERN 109  kind=excel  array=False  N122
+  context_label: Damage Increase:
+  template: =IFERROR(IF(N120>N108,N120/N108-1,0),0)
+  e.g. N122: =IFERROR(IF(N120>N108,N120/N108-1,0),0)  cached=0
+
+========================================================================
+ALL FORMULAS
+========================================================================
+cell	kind	array_ref	label	logic	stored	cached
+R5	excel		Planner Selection Display	="2H: " | &PlannerData!$R$8	="2H: " | &PlannerData!$R$8	2H: FALSE
+G6	excel		Update Available:	=IF(UpdateData!$D$2=UpdateData!$D$5,False,True)	=IF(UpdateData!$D$2=UpdateData!$D$5,False,True)	FALSE
+O6	excel		Planner Selection Display	="RH 1: "&PlannerData!$R16	="RH 1: "&PlannerData!$R16	RH 1: Unarmed
+S6	excel		Physical AP	=IF(PlannerData!S16>0,ROUND(PlannerData!S16,3),"-")	=IF(PlannerData!S16>0,ROUND(PlannerData!S16,3),"-")	23.458
+U6	excel		Magic AP	=IF(PlannerData!T16>0,ROUND(PlannerData!T16,3),"-")	=IF(PlannerData!T16>0,ROUND(PlannerData!T16,3),"-")	-
+W6	excel		Fire AP	=IF(PlannerData!U16>0,ROUND(PlannerData!U16,3),"-")	=IF(PlannerData!U16>0,ROUND(PlannerData!U16,3),"-")	-
+X6	excel		Lightning AP	=IF(PlannerData!V16>0,ROUND(PlannerData!V16,3),"-")	=IF(PlannerData!V16>0,ROUND(PlannerData!V16,3),"-")	-
+Z6	excel		Holy AP	=IF(PlannerData!W16>0,ROUND(PlannerData!W16,3),"-")	=IF(PlannerData!W16>0,ROUND(PlannerData!W16,3),"-")	-
+AA6	excel		Spell Buff	=IF(PlannerData!Y16>0,ROUND(PlannerData!Y16,3),"-")	=IF(PlannerData!Y16>0,ROUND(PlannerData!Y16,3),"-")	-
+E7	excel		Update Available:	=IF(K6,"Link to Update:","Link to Original:")	=IF(K6,"Link to Update:","Link to Original:")	Link to Original:
+G7	excel			=HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U/copy", | UpdateData!D5&" - "&IF(J6,"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))	=HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U/copy", | UpdateData!D5&" - "&IF(J6,"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))	v1.19.1 - last updated 413 days ago
+O7	excel		Planner Selection Display	="RH 2: "&PlannerData!$R17	="RH 2: "&PlannerData!$R17	RH 2: Unarmed
+S7	excel		Physical AP	=IF(PlannerData!S17>0,ROUND(PlannerData!S17,3),"-")	=IF(PlannerData!S17>0,ROUND(PlannerData!S17,3),"-")	23.458
+U7	excel		Magic AP	=IF(PlannerData!T17>0,ROUND(PlannerData!T17,3),"-")	=IF(PlannerData!T17>0,ROUND(PlannerData!T17,3),"-")	-
+W7	excel		Fire AP	=IF(PlannerData!U17>0,ROUND(PlannerData!U17,3),"-")	=IF(PlannerData!U17>0,ROUND(PlannerData!U17,3),"-")	-
+X7	excel		Lightning AP	=IF(PlannerData!V17>0,ROUND(PlannerData!V17,3),"-")	=IF(PlannerData!V17>0,ROUND(PlannerData!V17,3),"-")	-
+Z7	excel		Holy AP	=IF(PlannerData!W17>0,ROUND(PlannerData!W17,3),"-")	=IF(PlannerData!W17>0,ROUND(PlannerData!W17,3),"-")	-
+AA7	excel		Spell Buff	=IF(PlannerData!Y17>0,ROUND(PlannerData!Y17,3),"-")	=IF(PlannerData!Y17>0,ROUND(PlannerData!Y17,3),"-")	-
+O8	excel		Planner Selection Display	="RH 3: "&PlannerData!$R18	="RH 3: "&PlannerData!$R18	RH 3: Unarmed
+S8	excel		Physical AP	=IF(PlannerData!S18>0,ROUND(PlannerData!S18,3),"-")	=IF(PlannerData!S18>0,ROUND(PlannerData!S18,3),"-")	23.458
+U8	excel		Magic AP	=IF(PlannerData!T18>0,ROUND(PlannerData!T18,3),"-")	=IF(PlannerData!T18>0,ROUND(PlannerData!T18,3),"-")	-
+W8	excel		Fire AP	=IF(PlannerData!U18>0,ROUND(PlannerData!U18,3),"-")	=IF(PlannerData!U18>0,ROUND(PlannerData!U18,3),"-")	-
+X8	excel		Lightning AP	=IF(PlannerData!V18>0,ROUND(PlannerData!V18,3),"-")	=IF(PlannerData!V18>0,ROUND(PlannerData!V18,3),"-")	-
+Z8	excel		Holy AP	=IF(PlannerData!W18>0,ROUND(PlannerData!W18,3),"-")	=IF(PlannerData!W18>0,ROUND(PlannerData!W18,3),"-")	-
+AA8	excel		Spell Buff	=IF(PlannerData!Y18>0,ROUND(PlannerData!Y18,3),"-")	=IF(PlannerData!Y18>0,ROUND(PlannerData!Y18,3),"-")	-
+O9	excel			="LH 1: "&PlannerData!$R19	="LH 1: "&PlannerData!$R19	LH 1: Unarmed
+S9	excel			=IF(PlannerData!S19>0,ROUND(PlannerData!S19,3),"-")	=IF(PlannerData!S19>0,ROUND(PlannerData!S19,3),"-")	23.458
+U9	excel			=IF(PlannerData!T19>0,ROUND(PlannerData!T19,3),"-")	=IF(PlannerData!T19>0,ROUND(PlannerData!T19,3),"-")	-
+W9	excel			=IF(PlannerData!U19>0,ROUND(PlannerData!U19,3),"-")	=IF(PlannerData!U19>0,ROUND(PlannerData!U19,3),"-")	-
+X9	excel			=IF(PlannerData!V19>0,ROUND(PlannerData!V19,3),"-")	=IF(PlannerData!V19>0,ROUND(PlannerData!V19,3),"-")	-
+Z9	excel			=IF(PlannerData!W19>0,ROUND(PlannerData!W19,3),"-")	=IF(PlannerData!W19>0,ROUND(PlannerData!W19,3),"-")	-
+AA9	excel			=IF(PlannerData!Y19>0,ROUND(PlannerData!Y19,3),"-")	=IF(PlannerData!Y19>0,ROUND(PlannerData!Y19,3),"-")	-
+O10	excel			="LH 2: "&PlannerData!$R20	="LH 2: "&PlannerData!$R20	LH 2: Unarmed
+S10	excel			=IF(PlannerData!S20>0,ROUND(PlannerData!S20,3),"-")	=IF(PlannerData!S20>0,ROUND(PlannerData!S20,3),"-")	23.458
+U10	excel			=IF(PlannerData!T20>0,ROUND(PlannerData!T20,3),"-")	=IF(PlannerData!T20>0,ROUND(PlannerData!T20,3),"-")	-
+W10	excel			=IF(PlannerData!U20>0,ROUND(PlannerData!U20,3),"-")	=IF(PlannerData!U20>0,ROUND(PlannerData!U20,3),"-")	-
+X10	excel			=IF(PlannerData!V20>0,ROUND(PlannerData!V20,3),"-")	=IF(PlannerData!V20>0,ROUND(PlannerData!V20,3),"-")	-
+Z10	excel			=IF(PlannerData!W20>0,ROUND(PlannerData!W20,3),"-")	=IF(PlannerData!W20>0,ROUND(PlannerData!W20,3),"-")	-
+AA10	excel			=IF(PlannerData!Y20>0,ROUND(PlannerData!Y20,3),"-")	=IF(PlannerData!Y20>0,ROUND(PlannerData!Y20,3),"-")	-
+O11	excel			="LH 3: "&PlannerData!$R21	="LH 3: "&PlannerData!$R21	LH 3: Unarmed
+S11	excel			=IF(PlannerData!S21>0,ROUND(PlannerData!S21,3),"-")	=IF(PlannerData!S21>0,ROUND(PlannerData!S21,3),"-")	23.458
+U11	excel			=IF(PlannerData!T21>0,ROUND(PlannerData!T21,3),"-")	=IF(PlannerData!T21>0,ROUND(PlannerData!T21,3),"-")	-
+W11	excel			=IF(PlannerData!U21>0,ROUND(PlannerData!U21,3),"-")	=IF(PlannerData!U21>0,ROUND(PlannerData!U21,3),"-")	-
+X11	excel			=IF(PlannerData!V21>0,ROUND(PlannerData!V21,3),"-")	=IF(PlannerData!V21>0,ROUND(PlannerData!V21,3),"-")	-
+Z11	excel			=IF(PlannerData!W21>0,ROUND(PlannerData!W21,3),"-")	=IF(PlannerData!W21>0,ROUND(PlannerData!W21,3),"-")	-
+AA11	excel			=IF(PlannerData!Y21>0,ROUND(PlannerData!Y21,3),"-")	=IF(PlannerData!Y21>0,ROUND(PlannerData!Y21,3),"-")	-
+F19	excel	F19:G19	Physical	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I19	excel	I19:J19	Physical	={"",100*(1-PlannerData!$L$23)}	={"",100*(1-PlannerData!$L$23)}	
+N19	excel		Damage Dealt	=(1-(J19/100))* | IFERROR(IFS( | (K19*(L19/100))/G19>=8,0.9*(K19*(L19/100)), | (K19*(L19/100))/G19>2.5,(1-((((K19*(L19/100))/G19-8)^2*(20/30.25)+10)/100))*(K19*(L19/100)), | (K19*(L19/100))/G19>=1,(1-((((K19*(L19/100))/G19-2.5)^2*(30/2.25)+30)/100))*(K19*(L19/100)), | (K19*(L19/100))/G19>0.12,(1-((((K19*(L19/100))/G19-0.12)^2*(-30/0.7744)+90)/100))*(K19*(L19/100)), | (K19*(L19/100))/G19<=0.12,0.1*(K19*(L19/100))),0) | *R19	=(1-(J19/100))* | IFERROR(IFS( | (K19*(L19/100))/G19>=8,0.9*(K19*(L19/100)), | (K19*(L19/100))/G19>2.5,(1-((((K19*(L19/100))/G19-8)^2*(20/30.25)+10)/100))*(K19*(L19/100)), | (K19*(L19/100))/G19>=1,(1-((((K19*(L19/100))/G19-2.5)^2*(30/2.25)+30)/100))*(K19*(L19/100)), | (K19*(L19/100))/G19>0.12,(1-((((K19*(L19/100))/G19-0.12)^2*(-30/0.7744)+90)/100))*(K19*(L19/100)), | (K19*(L19/100))/G19<=0.12,0.1*(K19*(L19/100))),0) | *R19	0
+O19	excel		Total Damage Negation [%]	=IFERROR(IF(K19=0,0,(((K19*(L19/100))-N19)/(K19*(L19/100)))*100),"No Motion Value")	=IFERROR(IF(K19=0,0,(((K19*(L19/100))-N19)/(K19*(L19/100)))*100),"No Motion Value")	0
+Q19	excel			={"",1}	={"",1}	
+F20	excel	F20:G20	Strike	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I20	excel	I20:J20	Strike	={"",100*(1-PlannerData!$L$24)}	={"",100*(1-PlannerData!$L$24)}	
+N20	excel		Damage Dealt	=(1-(J20/100))* | IFERROR(IFS( | (K20*(L20/100))/G20>=8,0.9*(K20*(L20/100)), | (K20*(L20/100))/G20>2.5,(1-((((K20*(L20/100))/G20-8)^2*(20/30.25)+10)/100))*(K20*(L20/100)), | (K20*(L20/100))/G20>=1,(1-((((K20*(L20/100))/G20-2.5)^2*(30/2.25)+30)/100))*(K20*(L20/100)), | (K20*(L20/100))/G20>0.12,(1-((((K20*(L20/100))/G20-0.12)^2*(-30/0.7744)+90)/100))*(K20*(L20/100)), | (K20*(L20/100))/G20<=0.12,0.1*(K20*(L20/100))),0) | *R20	=(1-(J20/100))* | IFERROR(IFS( | (K20*(L20/100))/G20>=8,0.9*(K20*(L20/100)), | (K20*(L20/100))/G20>2.5,(1-((((K20*(L20/100))/G20-8)^2*(20/30.25)+10)/100))*(K20*(L20/100)), | (K20*(L20/100))/G20>=1,(1-((((K20*(L20/100))/G20-2.5)^2*(30/2.25)+30)/100))*(K20*(L20/100)), | (K20*(L20/100))/G20>0.12,(1-((((K20*(L20/100))/G20-0.12)^2*(-30/0.7744)+90)/100))*(K20*(L20/100)), | (K20*(L20/100))/G20<=0.12,0.1*(K20*(L20/100))),0) | *R20	0
+O20	excel		Total Damage Negation [%]	=IFERROR(IF(K20=0,0,(((K20*(L20/100))-N20)/(K20*(L20/100)))*100),"No Motion Value")	=IFERROR(IF(K20=0,0,(((K20*(L20/100))-N20)/(K20*(L20/100)))*100),"No Motion Value")	0
+Q20	excel			={"",1}	={"",1}	
+F21	excel	F21:G21	Slash	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I21	excel	I21:J21	Slash	={"",100*(1-PlannerData!$L$25)}	={"",100*(1-PlannerData!$L$25)}	
+N21	excel		Damage Dealt	=(1-(J21/100))* | IFERROR(IFS( | (K21*(L21/100))/G21>=8,0.9*(K21*(L21/100)), | (K21*(L21/100))/G21>2.5,(1-((((K21*(L21/100))/G21-8)^2*(20/30.25)+10)/100))*(K21*(L21/100)), | (K21*(L21/100))/G21>=1,(1-((((K21*(L21/100))/G21-2.5)^2*(30/2.25)+30)/100))*(K21*(L21/100)), | (K21*(L21/100))/G21>0.12,(1-((((K21*(L21/100))/G21-0.12)^2*(-30/0.7744)+90)/100))*(K21*(L21/100)), | (K21*(L21/100))/G21<=0.12,0.1*(K21*(L21/100))),0) | *R21	=(1-(J21/100))* | IFERROR(IFS( | (K21*(L21/100))/G21>=8,0.9*(K21*(L21/100)), | (K21*(L21/100))/G21>2.5,(1-((((K21*(L21/100))/G21-8)^2*(20/30.25)+10)/100))*(K21*(L21/100)), | (K21*(L21/100))/G21>=1,(1-((((K21*(L21/100))/G21-2.5)^2*(30/2.25)+30)/100))*(K21*(L21/100)), | (K21*(L21/100))/G21>0.12,(1-((((K21*(L21/100))/G21-0.12)^2*(-30/0.7744)+90)/100))*(K21*(L21/100)), | (K21*(L21/100))/G21<=0.12,0.1*(K21*(L21/100))),0) | *R21	0
+O21	excel		Total Damage Negation [%]	=IFERROR(IF(K21=0,0,(((K21*(L21/100))-N21)/(K21*(L21/100)))*100),"No Motion Value")	=IFERROR(IF(K21=0,0,(((K21*(L21/100))-N21)/(K21*(L21/100)))*100),"No Motion Value")	0
+Q21	excel			={"",1}	={"",1}	
+F22	excel	F22:G22	Pierce	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I22	excel	I22:J22	Pierce	={"",100*(1-PlannerData!$L$26)}	={"",100*(1-PlannerData!$L$26)}	
+N22	excel			=(1-(J22/100))* | IFERROR(IFS( | (K22*(L22/100))/G22>=8,0.9*(K22*(L22/100)), | (K22*(L22/100))/G22>2.5,(1-((((K22*(L22/100))/G22-8)^2*(20/30.25)+10)/100))*(K22*(L22/100)), | (K22*(L22/100))/G22>=1,(1-((((K22*(L22/100))/G22-2.5)^2*(30/2.25)+30)/100))*(K22*(L22/100)), | (K22*(L22/100))/G22>0.12,(1-((((K22*(L22/100))/G22-0.12)^2*(-30/0.7744)+90)/100))*(K22*(L22/100)), | (K22*(L22/100))/G22<=0.12,0.1*(K22*(L22/100))),0) | *R22	=(1-(J22/100))* | IFERROR(IFS( | (K22*(L22/100))/G22>=8,0.9*(K22*(L22/100)), | (K22*(L22/100))/G22>2.5,(1-((((K22*(L22/100))/G22-8)^2*(20/30.25)+10)/100))*(K22*(L22/100)), | (K22*(L22/100))/G22>=1,(1-((((K22*(L22/100))/G22-2.5)^2*(30/2.25)+30)/100))*(K22*(L22/100)), | (K22*(L22/100))/G22>0.12,(1-((((K22*(L22/100))/G22-0.12)^2*(-30/0.7744)+90)/100))*(K22*(L22/100)), | (K22*(L22/100))/G22<=0.12,0.1*(K22*(L22/100))),0) | *R22	0
+O22	excel			=IFERROR(IF(K22=0,0,(((K22*(L22/100))-N22)/(K22*(L22/100)))*100),"No Motion Value")	=IFERROR(IF(K22=0,0,(((K22*(L22/100))-N22)/(K22*(L22/100)))*100),"No Motion Value")	0
+Q22	excel			={"",1}	={"",1}	
+F23	excel	F23:G23	Magic	={"",PlannerData!$J$8}	={"",PlannerData!$J$8}	
+I23	excel	I23:J23	Magic	={"",100*(1-PlannerData!$L$27)}	={"",100*(1-PlannerData!$L$27)}	
+N23	excel			=(1-(J23/100))* | IFERROR(IFS( | (K23*(L23/100))/G23>=8,0.9*(K23*(L23/100)), | (K23*(L23/100))/G23>2.5,(1-((((K23*(L23/100))/G23-8)^2*(20/30.25)+10)/100))*(K23*(L23/100)), | (K23*(L23/100))/G23>=1,(1-((((K23*(L23/100))/G23-2.5)^2*(30/2.25)+30)/100))*(K23*(L23/100)), | (K23*(L23/100))/G23>0.12,(1-((((K23*(L23/100))/G23-0.12)^2*(-30/0.7744)+90)/100))*(K23*(L23/100)), | (K23*(L23/100))/G23<=0.12,0.1*(K23*(L23/100))),0) | *R23	=(1-(J23/100))* | IFERROR(IFS( | (K23*(L23/100))/G23>=8,0.9*(K23*(L23/100)), | (K23*(L23/100))/G23>2.5,(1-((((K23*(L23/100))/G23-8)^2*(20/30.25)+10)/100))*(K23*(L23/100)), | (K23*(L23/100))/G23>=1,(1-((((K23*(L23/100))/G23-2.5)^2*(30/2.25)+30)/100))*(K23*(L23/100)), | (K23*(L23/100))/G23>0.12,(1-((((K23*(L23/100))/G23-0.12)^2*(-30/0.7744)+90)/100))*(K23*(L23/100)), | (K23*(L23/100))/G23<=0.12,0.1*(K23*(L23/100))),0) | *R23	0
+O23	excel			=IFERROR(IF(K23=0,0,(((K23*(L23/100))-N23)/(K23*(L23/100)))*100),"No Motion Value")	=IFERROR(IF(K23=0,0,(((K23*(L23/100))-N23)/(K23*(L23/100)))*100),"No Motion Value")	0
+Q23	excel			={"",1}	={"",1}	
+F24	excel	F24:G24	Fire	={"",PlannerData!$J$9}	={"",PlannerData!$J$9}	
+I24	excel	I24:J24	Fire	={"",100*(1-PlannerData!$L$28)}	={"",100*(1-PlannerData!$L$28)}	
+N24	excel			=(1-(J24/100))* | IFERROR(IFS( | (K24*(L24/100))/G24>=8,0.9*(K24*(L24/100)), | (K24*(L24/100))/G24>2.5,(1-((((K24*(L24/100))/G24-8)^2*(20/30.25)+10)/100))*(K24*(L24/100)), | (K24*(L24/100))/G24>=1,(1-((((K24*(L24/100))/G24-2.5)^2*(30/2.25)+30)/100))*(K24*(L24/100)), | (K24*(L24/100))/G24>0.12,(1-((((K24*(L24/100))/G24-0.12)^2*(-30/0.7744)+90)/100))*(K24*(L24/100)), | (K24*(L24/100))/G24<=0.12,0.1*(K24*(L24/100))),0) | *R24	=(1-(J24/100))* | IFERROR(IFS( | (K24*(L24/100))/G24>=8,0.9*(K24*(L24/100)), | (K24*(L24/100))/G24>2.5,(1-((((K24*(L24/100))/G24-8)^2*(20/30.25)+10)/100))*(K24*(L24/100)), | (K24*(L24/100))/G24>=1,(1-((((K24*(L24/100))/G24-2.5)^2*(30/2.25)+30)/100))*(K24*(L24/100)), | (K24*(L24/100))/G24>0.12,(1-((((K24*(L24/100))/G24-0.12)^2*(-30/0.7744)+90)/100))*(K24*(L24/100)), | (K24*(L24/100))/G24<=0.12,0.1*(K24*(L24/100))),0) | *R24	0
+O24	excel			=IFERROR(IF(K24=0,0,(((K24*(L24/100))-N24)/(K24*(L24/100)))*100),"No Motion Value")	=IFERROR(IF(K24=0,0,(((K24*(L24/100))-N24)/(K24*(L24/100)))*100),"No Motion Value")	0
+Q24	excel			={"",1}	={"",1}	
+F25	excel	F25:G25	Lightning	={"",PlannerData!$J$10}	={"",PlannerData!$J$10}	
+I25	excel	I25:J25	Lightning	={"",100*(1-PlannerData!$L$29)}	={"",100*(1-PlannerData!$L$29)}	
+N25	excel			=(1-(J25/100))* | IFERROR(IFS( | (K25*(L25/100))/G25>=8,0.9*(K25*(L25/100)), | (K25*(L25/100))/G25>2.5,(1-((((K25*(L25/100))/G25-8)^2*(20/30.25)+10)/100))*(K25*(L25/100)), | (K25*(L25/100))/G25>=1,(1-((((K25*(L25/100))/G25-2.5)^2*(30/2.25)+30)/100))*(K25*(L25/100)), | (K25*(L25/100))/G25>0.12,(1-((((K25*(L25/100))/G25-0.12)^2*(-30/0.7744)+90)/100))*(K25*(L25/100)), | (K25*(L25/100))/G25<=0.12,0.1*(K25*(L25/100))),0) | *R25	=(1-(J25/100))* | IFERROR(IFS( | (K25*(L25/100))/G25>=8,0.9*(K25*(L25/100)), | (K25*(L25/100))/G25>2.5,(1-((((K25*(L25/100))/G25-8)^2*(20/30.25)+10)/100))*(K25*(L25/100)), | (K25*(L25/100))/G25>=1,(1-((((K25*(L25/100))/G25-2.5)^2*(30/2.25)+30)/100))*(K25*(L25/100)), | (K25*(L25/100))/G25>0.12,(1-((((K25*(L25/100))/G25-0.12)^2*(-30/0.7744)+90)/100))*(K25*(L25/100)), | (K25*(L25/100))/G25<=0.12,0.1*(K25*(L25/100))),0) | *R25	0
+O25	excel			=IFERROR(IF(K25=0,0,(((K25*(L25/100))-N25)/(K25*(L25/100)))*100),"No Motion Value")	=IFERROR(IF(K25=0,0,(((K25*(L25/100))-N25)/(K25*(L25/100)))*100),"No Motion Value")	0
+Q25	excel			={"",1}	={"",1}	
+F26	excel	F26:G26	Holy	={"",PlannerData!$J$11}	={"",PlannerData!$J$11}	
+I26	excel	I26:J26	Holy	={"",100*(1-PlannerData!$L$30)}	={"",100*(1-PlannerData!$L$30)}	
+N26	excel			=(1-(J26/100))* | IFERROR(IFS( | (K26*(L26/100))/G26>=8,0.9*(K26*(L26/100)), | (K26*(L26/100))/G26>2.5,(1-((((K26*(L26/100))/G26-8)^2*(20/30.25)+10)/100))*(K26*(L26/100)), | (K26*(L26/100))/G26>=1,(1-((((K26*(L26/100))/G26-2.5)^2*(30/2.25)+30)/100))*(K26*(L26/100)), | (K26*(L26/100))/G26>0.12,(1-((((K26*(L26/100))/G26-0.12)^2*(-30/0.7744)+90)/100))*(K26*(L26/100)), | (K26*(L26/100))/G26<=0.12,0.1*(K26*(L26/100))),0) | *R26	=(1-(J26/100))* | IFERROR(IFS( | (K26*(L26/100))/G26>=8,0.9*(K26*(L26/100)), | (K26*(L26/100))/G26>2.5,(1-((((K26*(L26/100))/G26-8)^2*(20/30.25)+10)/100))*(K26*(L26/100)), | (K26*(L26/100))/G26>=1,(1-((((K26*(L26/100))/G26-2.5)^2*(30/2.25)+30)/100))*(K26*(L26/100)), | (K26*(L26/100))/G26>0.12,(1-((((K26*(L26/100))/G26-0.12)^2*(-30/0.7744)+90)/100))*(K26*(L26/100)), | (K26*(L26/100))/G26<=0.12,0.1*(K26*(L26/100))),0) | *R26	0
+O26	excel			=IFERROR(IF(K26=0,0,(((K26*(L26/100))-N26)/(K26*(L26/100)))*100),"No Motion Value")	=IFERROR(IF(K26=0,0,(((K26*(L26/100))-N26)/(K26*(L26/100)))*100),"No Motion Value")	0
+Q26	excel			={"",1}	={"",1}	
+F27	excel	F27:G27	Health Points	={"",PlannerData!$L$2}	={"",PlannerData!$L$2}	
+K27	excel		Total:	=K19+K20+K21+K22+K23+K24+K25+K26	=K19+K20+K21+K22+K23+K24+K25+K26	0
+N27	excel		Total:	=SUM(N19:N26)*R27	=SUM(N19:N26)*R27	0
+O27	excel		Total:	=IFERROR(IF((K27)=0,0,((((K19*(L19/100))+(K20*(L20/100))+(K21*(L21/100))+(K22*(L22/100))+(K23*(L23/100))+(K24*(L24/100))+(K25*(L25/100))+(K26*(L26/100)))-N27)/((K19*(L19/100))+(K20*(L20/100))+(K21*(L21/100))+(K22*(L22/100))+(K23*(L23/100))+(K24*(L24/100))+(K25*(L25/100))+(K26*(L26/100))))*100),0)	=IFERROR(IF((K27)=0,0,((((K19*(L19/100))+(K20*(L20/100))+(K21*(L21/100))+(K22*(L22/100))+(K23*(L23/100))+(K24*(L24/100))+(K25*(L25/100))+(K26*(L26/100)))-N27)/((K19*(L19/100))+(K20*(L20/100))+(K21*(L21/100))+(K22*(L22/100))+(K23*(L23/100))+(K24*(L24/100))+(K25*(L25/100))+(K26*(L26/100))))*100),0)	0
+Q27	excel		Total:	={"",1}	={"",1}	
+N28	excel		eff hp | hits to live:	=IFERROR(IF(O27=0,0,G27/(1-(O27/100))),0)	=IFERROR(IF(O27=0,0,G27/(1-(O27/100))),0)	0
+O28	excel		eff hp | hits to live:	=IFERROR(G27/N27,0)	=IFERROR(G27/N27,0)	0
+V28	excel		Total:	=PRODUCT(V19:V27)	=PRODUCT(V19:V27)	1.1232
+AA28	excel		Total:	=100*(1-((1-AA19/100)*(1-AA20/100)*(1-AA21/100)*(1-AA22/100)*(1-AA23/100)*(1-AA24/100)*(1-AA25/100)*(1-AA26/100)*(1-AA27/100)))	=100*(1-((1-AA19/100)*(1-AA20/100)*(1-AA21/100)*(1-AA22/100)*(1-AA23/100)*(1-AA24/100)*(1-AA25/100)*(1-AA26/100)*(1-AA27/100)))	45.2498
+F31	excel	F31:G31	Physical	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I31	excel	I31:J31	Physical	={"",100*(1-PlannerData!$L$23)}	={"",100*(1-PlannerData!$L$23)}	
+N31	excel		Damage Dealt	=(1-(J31/100))* | IFERROR(IFS( | (K31*(L31/100))/G31>=8,0.9*(K31*(L31/100)), | (K31*(L31/100))/G31>2.5,(1-((((K31*(L31/100))/G31-8)^2*(20/30.25)+10)/100))*(K31*(L31/100)), | (K31*(L31/100))/G31>=1,(1-((((K31*(L31/100))/G31-2.5)^2*(30/2.25)+30)/100))*(K31*(L31/100)), | (K31*(L31/100))/G31>0.12,(1-((((K31*(L31/100))/G31-0.12)^2*(-30/0.7744)+90)/100))*(K31*(L31/100)), | (K31*(L31/100))/G31<=0.12,0.1*(K31*(L31/100))),0) | *R31	=(1-(J31/100))* | IFERROR(IFS( | (K31*(L31/100))/G31>=8,0.9*(K31*(L31/100)), | (K31*(L31/100))/G31>2.5,(1-((((K31*(L31/100))/G31-8)^2*(20/30.25)+10)/100))*(K31*(L31/100)), | (K31*(L31/100))/G31>=1,(1-((((K31*(L31/100))/G31-2.5)^2*(30/2.25)+30)/100))*(K31*(L31/100)), | (K31*(L31/100))/G31>0.12,(1-((((K31*(L31/100))/G31-0.12)^2*(-30/0.7744)+90)/100))*(K31*(L31/100)), | (K31*(L31/100))/G31<=0.12,0.1*(K31*(L31/100))),0) | *R31	0
+O31	excel		Total Damage Negation [%]	=IFERROR(IF(K31=0,0,(((K31*(L31/100))-N31)/(K31*(L31/100)))*100),"No Motion Value")	=IFERROR(IF(K31=0,0,(((K31*(L31/100))-N31)/(K31*(L31/100)))*100),"No Motion Value")	0
+Q31	excel			={"",1}	={"",1}	
+F32	excel	F32:G32	Strike	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I32	excel	I32:J32	Strike	={"",100*(1-PlannerData!$L$24)}	={"",100*(1-PlannerData!$L$24)}	
+N32	excel		Damage Dealt	=(1-(J32/100))* | IFERROR(IFS( | (K32*(L32/100))/G32>=8,0.9*(K32*(L32/100)), | (K32*(L32/100))/G32>2.5,(1-((((K32*(L32/100))/G32-8)^2*(20/30.25)+10)/100))*(K32*(L32/100)), | (K32*(L32/100))/G32>=1,(1-((((K32*(L32/100))/G32-2.5)^2*(30/2.25)+30)/100))*(K32*(L32/100)), | (K32*(L32/100))/G32>0.12,(1-((((K32*(L32/100))/G32-0.12)^2*(-30/0.7744)+90)/100))*(K32*(L32/100)), | (K32*(L32/100))/G32<=0.12,0.1*(K32*(L32/100))),0) | *R32	=(1-(J32/100))* | IFERROR(IFS( | (K32*(L32/100))/G32>=8,0.9*(K32*(L32/100)), | (K32*(L32/100))/G32>2.5,(1-((((K32*(L32/100))/G32-8)^2*(20/30.25)+10)/100))*(K32*(L32/100)), | (K32*(L32/100))/G32>=1,(1-((((K32*(L32/100))/G32-2.5)^2*(30/2.25)+30)/100))*(K32*(L32/100)), | (K32*(L32/100))/G32>0.12,(1-((((K32*(L32/100))/G32-0.12)^2*(-30/0.7744)+90)/100))*(K32*(L32/100)), | (K32*(L32/100))/G32<=0.12,0.1*(K32*(L32/100))),0) | *R32	0
+O32	excel		Total Damage Negation [%]	=IFERROR(IF(K32=0,0,(((K32*(L32/100))-N32)/(K32*(L32/100)))*100),"No Motion Value")	=IFERROR(IF(K32=0,0,(((K32*(L32/100))-N32)/(K32*(L32/100)))*100),"No Motion Value")	0
+Q32	excel			={"",1}	={"",1}	
+F33	excel	F33:G33	Slash	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I33	excel	I33:J33	Slash	={"",100*(1-PlannerData!$L$25)}	={"",100*(1-PlannerData!$L$25)}	
+N33	excel		Damage Dealt	=(1-(J33/100))* | IFERROR(IFS( | (K33*(L33/100))/G33>=8,0.9*(K33*(L33/100)), | (K33*(L33/100))/G33>2.5,(1-((((K33*(L33/100))/G33-8)^2*(20/30.25)+10)/100))*(K33*(L33/100)), | (K33*(L33/100))/G33>=1,(1-((((K33*(L33/100))/G33-2.5)^2*(30/2.25)+30)/100))*(K33*(L33/100)), | (K33*(L33/100))/G33>0.12,(1-((((K33*(L33/100))/G33-0.12)^2*(-30/0.7744)+90)/100))*(K33*(L33/100)), | (K33*(L33/100))/G33<=0.12,0.1*(K33*(L33/100))),0) | *R33	=(1-(J33/100))* | IFERROR(IFS( | (K33*(L33/100))/G33>=8,0.9*(K33*(L33/100)), | (K33*(L33/100))/G33>2.5,(1-((((K33*(L33/100))/G33-8)^2*(20/30.25)+10)/100))*(K33*(L33/100)), | (K33*(L33/100))/G33>=1,(1-((((K33*(L33/100))/G33-2.5)^2*(30/2.25)+30)/100))*(K33*(L33/100)), | (K33*(L33/100))/G33>0.12,(1-((((K33*(L33/100))/G33-0.12)^2*(-30/0.7744)+90)/100))*(K33*(L33/100)), | (K33*(L33/100))/G33<=0.12,0.1*(K33*(L33/100))),0) | *R33	0
+O33	excel		Total Damage Negation [%]	=IFERROR(IF(K33=0,0,(((K33*(L33/100))-N33)/(K33*(L33/100)))*100),"No Motion Value")	=IFERROR(IF(K33=0,0,(((K33*(L33/100))-N33)/(K33*(L33/100)))*100),"No Motion Value")	0
+Q33	excel			={"",1}	={"",1}	
+F34	excel	F34:G34	Pierce	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I34	excel	I34:J34	Pierce	={"",100*(1-PlannerData!$L$26)}	={"",100*(1-PlannerData!$L$26)}	
+N34	excel			=(1-(J34/100))* | IFERROR(IFS( | (K34*(L34/100))/G34>=8,0.9*(K34*(L34/100)), | (K34*(L34/100))/G34>2.5,(1-((((K34*(L34/100))/G34-8)^2*(20/30.25)+10)/100))*(K34*(L34/100)), | (K34*(L34/100))/G34>=1,(1-((((K34*(L34/100))/G34-2.5)^2*(30/2.25)+30)/100))*(K34*(L34/100)), | (K34*(L34/100))/G34>0.12,(1-((((K34*(L34/100))/G34-0.12)^2*(-30/0.7744)+90)/100))*(K34*(L34/100)), | (K34*(L34/100))/G34<=0.12,0.1*(K34*(L34/100))),0) | *R34	=(1-(J34/100))* | IFERROR(IFS( | (K34*(L34/100))/G34>=8,0.9*(K34*(L34/100)), | (K34*(L34/100))/G34>2.5,(1-((((K34*(L34/100))/G34-8)^2*(20/30.25)+10)/100))*(K34*(L34/100)), | (K34*(L34/100))/G34>=1,(1-((((K34*(L34/100))/G34-2.5)^2*(30/2.25)+30)/100))*(K34*(L34/100)), | (K34*(L34/100))/G34>0.12,(1-((((K34*(L34/100))/G34-0.12)^2*(-30/0.7744)+90)/100))*(K34*(L34/100)), | (K34*(L34/100))/G34<=0.12,0.1*(K34*(L34/100))),0) | *R34	0
+O34	excel			=IFERROR(IF(K34=0,0,(((K34*(L34/100))-N34)/(K34*(L34/100)))*100),"No Motion Value")	=IFERROR(IF(K34=0,0,(((K34*(L34/100))-N34)/(K34*(L34/100)))*100),"No Motion Value")	0
+Q34	excel			={"",1}	={"",1}	
+F35	excel	F35:G35	Magic	={"",PlannerData!$J$8}	={"",PlannerData!$J$8}	
+I35	excel	I35:J35	Magic	={"",100*(1-PlannerData!$L$27)}	={"",100*(1-PlannerData!$L$27)}	
+N35	excel			=(1-(J35/100))* | IFERROR(IFS( | (K35*(L35/100))/G35>=8,0.9*(K35*(L35/100)), | (K35*(L35/100))/G35>2.5,(1-((((K35*(L35/100))/G35-8)^2*(20/30.25)+10)/100))*(K35*(L35/100)), | (K35*(L35/100))/G35>=1,(1-((((K35*(L35/100))/G35-2.5)^2*(30/2.25)+30)/100))*(K35*(L35/100)), | (K35*(L35/100))/G35>0.12,(1-((((K35*(L35/100))/G35-0.12)^2*(-30/0.7744)+90)/100))*(K35*(L35/100)), | (K35*(L35/100))/G35<=0.12,0.1*(K35*(L35/100))),0) | *R35	=(1-(J35/100))* | IFERROR(IFS( | (K35*(L35/100))/G35>=8,0.9*(K35*(L35/100)), | (K35*(L35/100))/G35>2.5,(1-((((K35*(L35/100))/G35-8)^2*(20/30.25)+10)/100))*(K35*(L35/100)), | (K35*(L35/100))/G35>=1,(1-((((K35*(L35/100))/G35-2.5)^2*(30/2.25)+30)/100))*(K35*(L35/100)), | (K35*(L35/100))/G35>0.12,(1-((((K35*(L35/100))/G35-0.12)^2*(-30/0.7744)+90)/100))*(K35*(L35/100)), | (K35*(L35/100))/G35<=0.12,0.1*(K35*(L35/100))),0) | *R35	0
+O35	excel			=IFERROR(IF(K35=0,0,(((K35*(L35/100))-N35)/(K35*(L35/100)))*100),"No Motion Value")	=IFERROR(IF(K35=0,0,(((K35*(L35/100))-N35)/(K35*(L35/100)))*100),"No Motion Value")	0
+Q35	excel			={"",1}	={"",1}	
+F36	excel	F36:G36	Fire	={"",PlannerData!$J$9}	={"",PlannerData!$J$9}	
+I36	excel	I36:J36	Fire	={"",100*(1-PlannerData!$L$28)}	={"",100*(1-PlannerData!$L$28)}	
+N36	excel			=(1-(J36/100))* | IFERROR(IFS( | (K36*(L36/100))/G36>=8,0.9*(K36*(L36/100)), | (K36*(L36/100))/G36>2.5,(1-((((K36*(L36/100))/G36-8)^2*(20/30.25)+10)/100))*(K36*(L36/100)), | (K36*(L36/100))/G36>=1,(1-((((K36*(L36/100))/G36-2.5)^2*(30/2.25)+30)/100))*(K36*(L36/100)), | (K36*(L36/100))/G36>0.12,(1-((((K36*(L36/100))/G36-0.12)^2*(-30/0.7744)+90)/100))*(K36*(L36/100)), | (K36*(L36/100))/G36<=0.12,0.1*(K36*(L36/100))),0) | *R36	=(1-(J36/100))* | IFERROR(IFS( | (K36*(L36/100))/G36>=8,0.9*(K36*(L36/100)), | (K36*(L36/100))/G36>2.5,(1-((((K36*(L36/100))/G36-8)^2*(20/30.25)+10)/100))*(K36*(L36/100)), | (K36*(L36/100))/G36>=1,(1-((((K36*(L36/100))/G36-2.5)^2*(30/2.25)+30)/100))*(K36*(L36/100)), | (K36*(L36/100))/G36>0.12,(1-((((K36*(L36/100))/G36-0.12)^2*(-30/0.7744)+90)/100))*(K36*(L36/100)), | (K36*(L36/100))/G36<=0.12,0.1*(K36*(L36/100))),0) | *R36	0
+O36	excel			=IFERROR(IF(K36=0,0,(((K36*(L36/100))-N36)/(K36*(L36/100)))*100),"No Motion Value")	=IFERROR(IF(K36=0,0,(((K36*(L36/100))-N36)/(K36*(L36/100)))*100),"No Motion Value")	0
+Q36	excel			={"",1}	={"",1}	
+F37	excel	F37:G37	Lightning	={"",PlannerData!$J$10}	={"",PlannerData!$J$10}	
+I37	excel	I37:J37	Lightning	={"",100*(1-PlannerData!$L$29)}	={"",100*(1-PlannerData!$L$29)}	
+N37	excel			=(1-(J37/100))* | IFERROR(IFS( | (K37*(L37/100))/G37>=8,0.9*(K37*(L37/100)), | (K37*(L37/100))/G37>2.5,(1-((((K37*(L37/100))/G37-8)^2*(20/30.25)+10)/100))*(K37*(L37/100)), | (K37*(L37/100))/G37>=1,(1-((((K37*(L37/100))/G37-2.5)^2*(30/2.25)+30)/100))*(K37*(L37/100)), | (K37*(L37/100))/G37>0.12,(1-((((K37*(L37/100))/G37-0.12)^2*(-30/0.7744)+90)/100))*(K37*(L37/100)), | (K37*(L37/100))/G37<=0.12,0.1*(K37*(L37/100))),0) | *R37	=(1-(J37/100))* | IFERROR(IFS( | (K37*(L37/100))/G37>=8,0.9*(K37*(L37/100)), | (K37*(L37/100))/G37>2.5,(1-((((K37*(L37/100))/G37-8)^2*(20/30.25)+10)/100))*(K37*(L37/100)), | (K37*(L37/100))/G37>=1,(1-((((K37*(L37/100))/G37-2.5)^2*(30/2.25)+30)/100))*(K37*(L37/100)), | (K37*(L37/100))/G37>0.12,(1-((((K37*(L37/100))/G37-0.12)^2*(-30/0.7744)+90)/100))*(K37*(L37/100)), | (K37*(L37/100))/G37<=0.12,0.1*(K37*(L37/100))),0) | *R37	0
+O37	excel			=IFERROR(IF(K37=0,0,(((K37*(L37/100))-N37)/(K37*(L37/100)))*100),"No Motion Value")	=IFERROR(IF(K37=0,0,(((K37*(L37/100))-N37)/(K37*(L37/100)))*100),"No Motion Value")	0
+Q37	excel			={"",1}	={"",1}	
+F38	excel	F38:G38	Holy	={"",PlannerData!$J$11}	={"",PlannerData!$J$11}	
+I38	excel	I38:J38	Holy	={"",100*(1-PlannerData!$L$30)}	={"",100*(1-PlannerData!$L$30)}	
+N38	excel			=(1-(J38/100))* | IFERROR(IFS( | (K38*(L38/100))/G38>=8,0.9*(K38*(L38/100)), | (K38*(L38/100))/G38>2.5,(1-((((K38*(L38/100))/G38-8)^2*(20/30.25)+10)/100))*(K38*(L38/100)), | (K38*(L38/100))/G38>=1,(1-((((K38*(L38/100))/G38-2.5)^2*(30/2.25)+30)/100))*(K38*(L38/100)), | (K38*(L38/100))/G38>0.12,(1-((((K38*(L38/100))/G38-0.12)^2*(-30/0.7744)+90)/100))*(K38*(L38/100)), | (K38*(L38/100))/G38<=0.12,0.1*(K38*(L38/100))),0) | *R38	=(1-(J38/100))* | IFERROR(IFS( | (K38*(L38/100))/G38>=8,0.9*(K38*(L38/100)), | (K38*(L38/100))/G38>2.5,(1-((((K38*(L38/100))/G38-8)^2*(20/30.25)+10)/100))*(K38*(L38/100)), | (K38*(L38/100))/G38>=1,(1-((((K38*(L38/100))/G38-2.5)^2*(30/2.25)+30)/100))*(K38*(L38/100)), | (K38*(L38/100))/G38>0.12,(1-((((K38*(L38/100))/G38-0.12)^2*(-30/0.7744)+90)/100))*(K38*(L38/100)), | (K38*(L38/100))/G38<=0.12,0.1*(K38*(L38/100))),0) | *R38	0
+O38	excel			=IFERROR(IF(K38=0,0,(((K38*(L38/100))-N38)/(K38*(L38/100)))*100),"No Motion Value")	=IFERROR(IF(K38=0,0,(((K38*(L38/100))-N38)/(K38*(L38/100)))*100),"No Motion Value")	0
+Q38	excel			={"",1}	={"",1}	
+F39	excel	F39:G39	Health Points	={"",PlannerData!$L$2}	={"",PlannerData!$L$2}	
+K39	excel		Total:	=K31+K32+K33+K34+K35+K36+K37+K38	=K31+K32+K33+K34+K35+K36+K37+K38	0
+N39	excel		Total:	=SUM(N31:N38)*R39	=SUM(N31:N38)*R39	0
+O39	excel		Total:	=IFERROR(IF((K39)=0,0,((((K31*(L31/100))+(K32*(L32/100))+(K33*(L33/100))+(K34*(L34/100))+(K35*(L35/100))+(K36*(L36/100))+(K37*(L37/100))+(K38*(L38/100)))-N39)/((K31*(L31/100))+(K32*(L32/100))+(K33*(L33/100))+(K34*(L34/100))+(K35*(L35/100))+(K36*(L36/100))+(K37*(L37/100))+(K38*(L38/100))))*100),0)	=IFERROR(IF((K39)=0,0,((((K31*(L31/100))+(K32*(L32/100))+(K33*(L33/100))+(K34*(L34/100))+(K35*(L35/100))+(K36*(L36/100))+(K37*(L37/100))+(K38*(L38/100)))-N39)/((K31*(L31/100))+(K32*(L32/100))+(K33*(L33/100))+(K34*(L34/100))+(K35*(L35/100))+(K36*(L36/100))+(K37*(L37/100))+(K38*(L38/100))))*100),0)	0
+Q39	excel		Total:	={"",1}	={"",1}	
+N40	excel		eff hp | hits to live:	=IFERROR(IF(O39=0,0,G39/(1-(O39/100))),0)	=IFERROR(IF(O39=0,0,G39/(1-(O39/100))),0)	0
+O40	excel		eff hp | hits to live:	=IFERROR(G39/N39,0)	=IFERROR(G39/N39,0)	0
+V40	excel		Total:	=PRODUCT(V31:V39)	=PRODUCT(V31:V39)	1.495
+AA40	excel		Total:	=100*(1-((1-AA31/100)*(1-AA32/100)*(1-AA33/100)*(1-AA34/100)*(1-AA35/100)*(1-AA36/100)*(1-AA37/100)*(1-AA38/100)*(1-AA39/100)))	=100*(1-((1-AA31/100)*(1-AA32/100)*(1-AA33/100)*(1-AA34/100)*(1-AA35/100)*(1-AA36/100)*(1-AA37/100)*(1-AA38/100)*(1-AA39/100)))	25.9262
+N41	excel		Damage Increase:	=IFERROR(IF(N39>N27,N39/N27-1,0),0)	=IFERROR(IF(N39>N27,N39/N27-1,0),0)	0
+F46	excel	F46:G46	Physical	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I46	excel	I46:J46	Physical	={"",100*(1-PlannerData!$L$23)}	={"",100*(1-PlannerData!$L$23)}	
+N46	excel		Damage Dealt	=(1-(J46/100))* | IFERROR(IFS( | (K46*(L46/100))/G46>=8,0.9*(K46*(L46/100)), | (K46*(L46/100))/G46>2.5,(1-((((K46*(L46/100))/G46-8)^2*(20/30.25)+10)/100))*(K46*(L46/100)), | (K46*(L46/100))/G46>=1,(1-((((K46*(L46/100))/G46-2.5)^2*(30/2.25)+30)/100))*(K46*(L46/100)), | (K46*(L46/100))/G46>0.12,(1-((((K46*(L46/100))/G46-0.12)^2*(-30/0.7744)+90)/100))*(K46*(L46/100)), | (K46*(L46/100))/G46<=0.12,0.1*(K46*(L46/100))),0) | *R46	=(1-(J46/100))* | IFERROR(IFS( | (K46*(L46/100))/G46>=8,0.9*(K46*(L46/100)), | (K46*(L46/100))/G46>2.5,(1-((((K46*(L46/100))/G46-8)^2*(20/30.25)+10)/100))*(K46*(L46/100)), | (K46*(L46/100))/G46>=1,(1-((((K46*(L46/100))/G46-2.5)^2*(30/2.25)+30)/100))*(K46*(L46/100)), | (K46*(L46/100))/G46>0.12,(1-((((K46*(L46/100))/G46-0.12)^2*(-30/0.7744)+90)/100))*(K46*(L46/100)), | (K46*(L46/100))/G46<=0.12,0.1*(K46*(L46/100))),0) | *R46	0
+O46	excel		Total Damage Negation [%]	=IFERROR(IF(K46=0,0,(((K46*(L46/100))-N46)/(K46*(L46/100)))*100),"No Motion Value")	=IFERROR(IF(K46=0,0,(((K46*(L46/100))-N46)/(K46*(L46/100)))*100),"No Motion Value")	0
+Q46	excel			={"",1}	={"",1}	
+F47	excel	F47:G47	Strike	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I47	excel	I47:J47	Strike	={"",100*(1-PlannerData!$L$24)}	={"",100*(1-PlannerData!$L$24)}	
+N47	excel		Damage Dealt	=(1-(J47/100))* | IFERROR(IFS( | (K47*(L47/100))/G47>=8,0.9*(K47*(L47/100)), | (K47*(L47/100))/G47>2.5,(1-((((K47*(L47/100))/G47-8)^2*(20/30.25)+10)/100))*(K47*(L47/100)), | (K47*(L47/100))/G47>=1,(1-((((K47*(L47/100))/G47-2.5)^2*(30/2.25)+30)/100))*(K47*(L47/100)), | (K47*(L47/100))/G47>0.12,(1-((((K47*(L47/100))/G47-0.12)^2*(-30/0.7744)+90)/100))*(K47*(L47/100)), | (K47*(L47/100))/G47<=0.12,0.1*(K47*(L47/100))),0) | *R47	=(1-(J47/100))* | IFERROR(IFS( | (K47*(L47/100))/G47>=8,0.9*(K47*(L47/100)), | (K47*(L47/100))/G47>2.5,(1-((((K47*(L47/100))/G47-8)^2*(20/30.25)+10)/100))*(K47*(L47/100)), | (K47*(L47/100))/G47>=1,(1-((((K47*(L47/100))/G47-2.5)^2*(30/2.25)+30)/100))*(K47*(L47/100)), | (K47*(L47/100))/G47>0.12,(1-((((K47*(L47/100))/G47-0.12)^2*(-30/0.7744)+90)/100))*(K47*(L47/100)), | (K47*(L47/100))/G47<=0.12,0.1*(K47*(L47/100))),0) | *R47	0
+O47	excel		Total Damage Negation [%]	=IFERROR(IF(K47=0,0,(((K47*(L47/100))-N47)/(K47*(L47/100)))*100),"No Motion Value")	=IFERROR(IF(K47=0,0,(((K47*(L47/100))-N47)/(K47*(L47/100)))*100),"No Motion Value")	0
+Q47	excel			={"",1}	={"",1}	
+F48	excel	F48:G48	Slash	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I48	excel	I48:J48	Slash	={"",100*(1-PlannerData!$L$25)}	={"",100*(1-PlannerData!$L$25)}	
+N48	excel		Damage Dealt	=(1-(J48/100))* | IFERROR(IFS( | (K48*(L48/100))/G48>=8,0.9*(K48*(L48/100)), | (K48*(L48/100))/G48>2.5,(1-((((K48*(L48/100))/G48-8)^2*(20/30.25)+10)/100))*(K48*(L48/100)), | (K48*(L48/100))/G48>=1,(1-((((K48*(L48/100))/G48-2.5)^2*(30/2.25)+30)/100))*(K48*(L48/100)), | (K48*(L48/100))/G48>0.12,(1-((((K48*(L48/100))/G48-0.12)^2*(-30/0.7744)+90)/100))*(K48*(L48/100)), | (K48*(L48/100))/G48<=0.12,0.1*(K48*(L48/100))),0) | *R48	=(1-(J48/100))* | IFERROR(IFS( | (K48*(L48/100))/G48>=8,0.9*(K48*(L48/100)), | (K48*(L48/100))/G48>2.5,(1-((((K48*(L48/100))/G48-8)^2*(20/30.25)+10)/100))*(K48*(L48/100)), | (K48*(L48/100))/G48>=1,(1-((((K48*(L48/100))/G48-2.5)^2*(30/2.25)+30)/100))*(K48*(L48/100)), | (K48*(L48/100))/G48>0.12,(1-((((K48*(L48/100))/G48-0.12)^2*(-30/0.7744)+90)/100))*(K48*(L48/100)), | (K48*(L48/100))/G48<=0.12,0.1*(K48*(L48/100))),0) | *R48	0
+O48	excel		Total Damage Negation [%]	=IFERROR(IF(K48=0,0,(((K48*(L48/100))-N48)/(K48*(L48/100)))*100),"No Motion Value")	=IFERROR(IF(K48=0,0,(((K48*(L48/100))-N48)/(K48*(L48/100)))*100),"No Motion Value")	0
+Q48	excel			={"",1}	={"",1}	
+F49	excel	F49:G49	Pierce	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I49	excel	I49:J49	Pierce	={"",100*(1-PlannerData!$L$26)}	={"",100*(1-PlannerData!$L$26)}	
+N49	excel			=(1-(J49/100))* | IFERROR(IFS( | (K49*(L49/100))/G49>=8,0.9*(K49*(L49/100)), | (K49*(L49/100))/G49>2.5,(1-((((K49*(L49/100))/G49-8)^2*(20/30.25)+10)/100))*(K49*(L49/100)), | (K49*(L49/100))/G49>=1,(1-((((K49*(L49/100))/G49-2.5)^2*(30/2.25)+30)/100))*(K49*(L49/100)), | (K49*(L49/100))/G49>0.12,(1-((((K49*(L49/100))/G49-0.12)^2*(-30/0.7744)+90)/100))*(K49*(L49/100)), | (K49*(L49/100))/G49<=0.12,0.1*(K49*(L49/100))),0) | *R49	=(1-(J49/100))* | IFERROR(IFS( | (K49*(L49/100))/G49>=8,0.9*(K49*(L49/100)), | (K49*(L49/100))/G49>2.5,(1-((((K49*(L49/100))/G49-8)^2*(20/30.25)+10)/100))*(K49*(L49/100)), | (K49*(L49/100))/G49>=1,(1-((((K49*(L49/100))/G49-2.5)^2*(30/2.25)+30)/100))*(K49*(L49/100)), | (K49*(L49/100))/G49>0.12,(1-((((K49*(L49/100))/G49-0.12)^2*(-30/0.7744)+90)/100))*(K49*(L49/100)), | (K49*(L49/100))/G49<=0.12,0.1*(K49*(L49/100))),0) | *R49	0
+O49	excel			=IFERROR(IF(K49=0,0,(((K49*(L49/100))-N49)/(K49*(L49/100)))*100),"No Motion Value")	=IFERROR(IF(K49=0,0,(((K49*(L49/100))-N49)/(K49*(L49/100)))*100),"No Motion Value")	0
+Q49	excel			={"",1}	={"",1}	
+F50	excel	F50:G50	Magic	={"",PlannerData!$J$8}	={"",PlannerData!$J$8}	
+I50	excel	I50:J50	Magic	={"",100*(1-PlannerData!$L$27)}	={"",100*(1-PlannerData!$L$27)}	
+N50	excel			=(1-(J50/100))* | IFERROR(IFS( | (K50*(L50/100))/G50>=8,0.9*(K50*(L50/100)), | (K50*(L50/100))/G50>2.5,(1-((((K50*(L50/100))/G50-8)^2*(20/30.25)+10)/100))*(K50*(L50/100)), | (K50*(L50/100))/G50>=1,(1-((((K50*(L50/100))/G50-2.5)^2*(30/2.25)+30)/100))*(K50*(L50/100)), | (K50*(L50/100))/G50>0.12,(1-((((K50*(L50/100))/G50-0.12)^2*(-30/0.7744)+90)/100))*(K50*(L50/100)), | (K50*(L50/100))/G50<=0.12,0.1*(K50*(L50/100))),0) | *R50	=(1-(J50/100))* | IFERROR(IFS( | (K50*(L50/100))/G50>=8,0.9*(K50*(L50/100)), | (K50*(L50/100))/G50>2.5,(1-((((K50*(L50/100))/G50-8)^2*(20/30.25)+10)/100))*(K50*(L50/100)), | (K50*(L50/100))/G50>=1,(1-((((K50*(L50/100))/G50-2.5)^2*(30/2.25)+30)/100))*(K50*(L50/100)), | (K50*(L50/100))/G50>0.12,(1-((((K50*(L50/100))/G50-0.12)^2*(-30/0.7744)+90)/100))*(K50*(L50/100)), | (K50*(L50/100))/G50<=0.12,0.1*(K50*(L50/100))),0) | *R50	0
+O50	excel			=IFERROR(IF(K50=0,0,(((K50*(L50/100))-N50)/(K50*(L50/100)))*100),"No Motion Value")	=IFERROR(IF(K50=0,0,(((K50*(L50/100))-N50)/(K50*(L50/100)))*100),"No Motion Value")	0
+Q50	excel			={"",1}	={"",1}	
+F51	excel	F51:G51	Fire	={"",PlannerData!$J$9}	={"",PlannerData!$J$9}	
+I51	excel	I51:J51	Fire	={"",100*(1-PlannerData!$L$28)}	={"",100*(1-PlannerData!$L$28)}	
+N51	excel			=(1-(J51/100))* | IFERROR(IFS( | (K51*(L51/100))/G51>=8,0.9*(K51*(L51/100)), | (K51*(L51/100))/G51>2.5,(1-((((K51*(L51/100))/G51-8)^2*(20/30.25)+10)/100))*(K51*(L51/100)), | (K51*(L51/100))/G51>=1,(1-((((K51*(L51/100))/G51-2.5)^2*(30/2.25)+30)/100))*(K51*(L51/100)), | (K51*(L51/100))/G51>0.12,(1-((((K51*(L51/100))/G51-0.12)^2*(-30/0.7744)+90)/100))*(K51*(L51/100)), | (K51*(L51/100))/G51<=0.12,0.1*(K51*(L51/100))),0) | *R51	=(1-(J51/100))* | IFERROR(IFS( | (K51*(L51/100))/G51>=8,0.9*(K51*(L51/100)), | (K51*(L51/100))/G51>2.5,(1-((((K51*(L51/100))/G51-8)^2*(20/30.25)+10)/100))*(K51*(L51/100)), | (K51*(L51/100))/G51>=1,(1-((((K51*(L51/100))/G51-2.5)^2*(30/2.25)+30)/100))*(K51*(L51/100)), | (K51*(L51/100))/G51>0.12,(1-((((K51*(L51/100))/G51-0.12)^2*(-30/0.7744)+90)/100))*(K51*(L51/100)), | (K51*(L51/100))/G51<=0.12,0.1*(K51*(L51/100))),0) | *R51	0
+O51	excel			=IFERROR(IF(K51=0,0,(((K51*(L51/100))-N51)/(K51*(L51/100)))*100),"No Motion Value")	=IFERROR(IF(K51=0,0,(((K51*(L51/100))-N51)/(K51*(L51/100)))*100),"No Motion Value")	0
+Q51	excel			={"",1}	={"",1}	
+F52	excel	F52:G52	Lightning	={"",PlannerData!$J$10}	={"",PlannerData!$J$10}	
+I52	excel	I52:J52	Lightning	={"",100*(1-PlannerData!$L$29)}	={"",100*(1-PlannerData!$L$29)}	
+N52	excel			=(1-(J52/100))* | IFERROR(IFS( | (K52*(L52/100))/G52>=8,0.9*(K52*(L52/100)), | (K52*(L52/100))/G52>2.5,(1-((((K52*(L52/100))/G52-8)^2*(20/30.25)+10)/100))*(K52*(L52/100)), | (K52*(L52/100))/G52>=1,(1-((((K52*(L52/100))/G52-2.5)^2*(30/2.25)+30)/100))*(K52*(L52/100)), | (K52*(L52/100))/G52>0.12,(1-((((K52*(L52/100))/G52-0.12)^2*(-30/0.7744)+90)/100))*(K52*(L52/100)), | (K52*(L52/100))/G52<=0.12,0.1*(K52*(L52/100))),0) | *R52	=(1-(J52/100))* | IFERROR(IFS( | (K52*(L52/100))/G52>=8,0.9*(K52*(L52/100)), | (K52*(L52/100))/G52>2.5,(1-((((K52*(L52/100))/G52-8)^2*(20/30.25)+10)/100))*(K52*(L52/100)), | (K52*(L52/100))/G52>=1,(1-((((K52*(L52/100))/G52-2.5)^2*(30/2.25)+30)/100))*(K52*(L52/100)), | (K52*(L52/100))/G52>0.12,(1-((((K52*(L52/100))/G52-0.12)^2*(-30/0.7744)+90)/100))*(K52*(L52/100)), | (K52*(L52/100))/G52<=0.12,0.1*(K52*(L52/100))),0) | *R52	0
+O52	excel			=IFERROR(IF(K52=0,0,(((K52*(L52/100))-N52)/(K52*(L52/100)))*100),"No Motion Value")	=IFERROR(IF(K52=0,0,(((K52*(L52/100))-N52)/(K52*(L52/100)))*100),"No Motion Value")	0
+Q52	excel			={"",1}	={"",1}	
+F53	excel	F53:G53	Holy	={"",PlannerData!$J$11}	={"",PlannerData!$J$11}	
+I53	excel	I53:J53	Holy	={"",100*(1-PlannerData!$L$30)}	={"",100*(1-PlannerData!$L$30)}	
+N53	excel			=(1-(J53/100))* | IFERROR(IFS( | (K53*(L53/100))/G53>=8,0.9*(K53*(L53/100)), | (K53*(L53/100))/G53>2.5,(1-((((K53*(L53/100))/G53-8)^2*(20/30.25)+10)/100))*(K53*(L53/100)), | (K53*(L53/100))/G53>=1,(1-((((K53*(L53/100))/G53-2.5)^2*(30/2.25)+30)/100))*(K53*(L53/100)), | (K53*(L53/100))/G53>0.12,(1-((((K53*(L53/100))/G53-0.12)^2*(-30/0.7744)+90)/100))*(K53*(L53/100)), | (K53*(L53/100))/G53<=0.12,0.1*(K53*(L53/100))),0) | *R53	=(1-(J53/100))* | IFERROR(IFS( | (K53*(L53/100))/G53>=8,0.9*(K53*(L53/100)), | (K53*(L53/100))/G53>2.5,(1-((((K53*(L53/100))/G53-8)^2*(20/30.25)+10)/100))*(K53*(L53/100)), | (K53*(L53/100))/G53>=1,(1-((((K53*(L53/100))/G53-2.5)^2*(30/2.25)+30)/100))*(K53*(L53/100)), | (K53*(L53/100))/G53>0.12,(1-((((K53*(L53/100))/G53-0.12)^2*(-30/0.7744)+90)/100))*(K53*(L53/100)), | (K53*(L53/100))/G53<=0.12,0.1*(K53*(L53/100))),0) | *R53	0
+O53	excel			=IFERROR(IF(K53=0,0,(((K53*(L53/100))-N53)/(K53*(L53/100)))*100),"No Motion Value")	=IFERROR(IF(K53=0,0,(((K53*(L53/100))-N53)/(K53*(L53/100)))*100),"No Motion Value")	0
+Q53	excel			={"",1}	={"",1}	
+F54	excel	F54:G54	Health Points	={"",PlannerData!$L$2}	={"",PlannerData!$L$2}	
+K54	excel		Total:	=K46+K47+K48+K49+K50+K51+K52+K53	=K46+K47+K48+K49+K50+K51+K52+K53	0
+N54	excel		Total:	=SUM(N46:N53)*R54	=SUM(N46:N53)*R54	0
+O54	excel		Total:	=IFERROR(IF((K54)=0,0,((((K46*(L46/100))+(K47*(L47/100))+(K48*(L48/100))+(K49*(L49/100))+(K50*(L50/100))+(K51*(L51/100))+(K52*(L52/100))+(K53*(L53/100)))-N54)/((K46*(L46/100))+(K47*(L47/100))+(K48*(L48/100))+(K49*(L49/100))+(K50*(L50/100))+(K51*(L51/100))+(K52*(L52/100))+(K53*(L53/100))))*100),0)	=IFERROR(IF((K54)=0,0,((((K46*(L46/100))+(K47*(L47/100))+(K48*(L48/100))+(K49*(L49/100))+(K50*(L50/100))+(K51*(L51/100))+(K52*(L52/100))+(K53*(L53/100)))-N54)/((K46*(L46/100))+(K47*(L47/100))+(K48*(L48/100))+(K49*(L49/100))+(K50*(L50/100))+(K51*(L51/100))+(K52*(L52/100))+(K53*(L53/100))))*100),0)	0
+Q54	excel		Total:	={"",1}	={"",1}	
+N55	excel		eff hp | hits to live:	=IFERROR(IF(O54=0,0,G54/(1-(O54/100))),0)	=IFERROR(IF(O54=0,0,G54/(1-(O54/100))),0)	0
+O55	excel		eff hp | hits to live:	=IFERROR(G54/N54,0)	=IFERROR(G54/N54,0)	0
+V55	excel		Total:	=PRODUCT(V46:V54)	=PRODUCT(V46:V54)	0
+AA55	excel		Total:	=100*(1-((1-AA46/100)*(1-AA47/100)*(1-AA48/100)*(1-AA49/100)*(1-AA50/100)*(1-AA51/100)*(1-AA52/100)*(1-AA53/100)*(1-AA54/100)))	=100*(1-((1-AA46/100)*(1-AA47/100)*(1-AA48/100)*(1-AA49/100)*(1-AA50/100)*(1-AA51/100)*(1-AA52/100)*(1-AA53/100)*(1-AA54/100)))	0
+F58	excel	F58:G58	Physical	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I58	excel	I58:J58	Physical	={"",100*(1-PlannerData!$L$23)}	={"",100*(1-PlannerData!$L$23)}	
+N58	excel		Damage Dealt	=(1-(J58/100))* | IFERROR(IFS( | (K58*(L58/100))/G58>=8,0.9*(K58*(L58/100)), | (K58*(L58/100))/G58>2.5,(1-((((K58*(L58/100))/G58-8)^2*(20/30.25)+10)/100))*(K58*(L58/100)), | (K58*(L58/100))/G58>=1,(1-((((K58*(L58/100))/G58-2.5)^2*(30/2.25)+30)/100))*(K58*(L58/100)), | (K58*(L58/100))/G58>0.12,(1-((((K58*(L58/100))/G58-0.12)^2*(-30/0.7744)+90)/100))*(K58*(L58/100)), | (K58*(L58/100))/G58<=0.12,0.1*(K58*(L58/100))),0) | *R58	=(1-(J58/100))* | IFERROR(IFS( | (K58*(L58/100))/G58>=8,0.9*(K58*(L58/100)), | (K58*(L58/100))/G58>2.5,(1-((((K58*(L58/100))/G58-8)^2*(20/30.25)+10)/100))*(K58*(L58/100)), | (K58*(L58/100))/G58>=1,(1-((((K58*(L58/100))/G58-2.5)^2*(30/2.25)+30)/100))*(K58*(L58/100)), | (K58*(L58/100))/G58>0.12,(1-((((K58*(L58/100))/G58-0.12)^2*(-30/0.7744)+90)/100))*(K58*(L58/100)), | (K58*(L58/100))/G58<=0.12,0.1*(K58*(L58/100))),0) | *R58	0
+O58	excel		Total Damage Negation [%]	=IFERROR(IF(K58=0,0,(((K58*(L58/100))-N58)/(K58*(L58/100)))*100),"No Motion Value")	=IFERROR(IF(K58=0,0,(((K58*(L58/100))-N58)/(K58*(L58/100)))*100),"No Motion Value")	0
+Q58	excel			={"",1}	={"",1}	
+F59	excel	F59:G59	Strike	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I59	excel	I59:J59	Strike	={"",100*(1-PlannerData!$L$24)}	={"",100*(1-PlannerData!$L$24)}	
+N59	excel		Damage Dealt	=(1-(J59/100))* | IFERROR(IFS( | (K59*(L59/100))/G59>=8,0.9*(K59*(L59/100)), | (K59*(L59/100))/G59>2.5,(1-((((K59*(L59/100))/G59-8)^2*(20/30.25)+10)/100))*(K59*(L59/100)), | (K59*(L59/100))/G59>=1,(1-((((K59*(L59/100))/G59-2.5)^2*(30/2.25)+30)/100))*(K59*(L59/100)), | (K59*(L59/100))/G59>0.12,(1-((((K59*(L59/100))/G59-0.12)^2*(-30/0.7744)+90)/100))*(K59*(L59/100)), | (K59*(L59/100))/G59<=0.12,0.1*(K59*(L59/100))),0) | *R59	=(1-(J59/100))* | IFERROR(IFS( | (K59*(L59/100))/G59>=8,0.9*(K59*(L59/100)), | (K59*(L59/100))/G59>2.5,(1-((((K59*(L59/100))/G59-8)^2*(20/30.25)+10)/100))*(K59*(L59/100)), | (K59*(L59/100))/G59>=1,(1-((((K59*(L59/100))/G59-2.5)^2*(30/2.25)+30)/100))*(K59*(L59/100)), | (K59*(L59/100))/G59>0.12,(1-((((K59*(L59/100))/G59-0.12)^2*(-30/0.7744)+90)/100))*(K59*(L59/100)), | (K59*(L59/100))/G59<=0.12,0.1*(K59*(L59/100))),0) | *R59	0
+O59	excel		Total Damage Negation [%]	=IFERROR(IF(K59=0,0,(((K59*(L59/100))-N59)/(K59*(L59/100)))*100),"No Motion Value")	=IFERROR(IF(K59=0,0,(((K59*(L59/100))-N59)/(K59*(L59/100)))*100),"No Motion Value")	0
+Q59	excel			={"",1}	={"",1}	
+F60	excel	F60:G60	Slash	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I60	excel	I60:J60	Slash	={"",100*(1-PlannerData!$L$25)}	={"",100*(1-PlannerData!$L$25)}	
+N60	excel		Damage Dealt	=(1-(J60/100))* | IFERROR(IFS( | (K60*(L60/100))/G60>=8,0.9*(K60*(L60/100)), | (K60*(L60/100))/G60>2.5,(1-((((K60*(L60/100))/G60-8)^2*(20/30.25)+10)/100))*(K60*(L60/100)), | (K60*(L60/100))/G60>=1,(1-((((K60*(L60/100))/G60-2.5)^2*(30/2.25)+30)/100))*(K60*(L60/100)), | (K60*(L60/100))/G60>0.12,(1-((((K60*(L60/100))/G60-0.12)^2*(-30/0.7744)+90)/100))*(K60*(L60/100)), | (K60*(L60/100))/G60<=0.12,0.1*(K60*(L60/100))),0) | *R60	=(1-(J60/100))* | IFERROR(IFS( | (K60*(L60/100))/G60>=8,0.9*(K60*(L60/100)), | (K60*(L60/100))/G60>2.5,(1-((((K60*(L60/100))/G60-8)^2*(20/30.25)+10)/100))*(K60*(L60/100)), | (K60*(L60/100))/G60>=1,(1-((((K60*(L60/100))/G60-2.5)^2*(30/2.25)+30)/100))*(K60*(L60/100)), | (K60*(L60/100))/G60>0.12,(1-((((K60*(L60/100))/G60-0.12)^2*(-30/0.7744)+90)/100))*(K60*(L60/100)), | (K60*(L60/100))/G60<=0.12,0.1*(K60*(L60/100))),0) | *R60	0
+O60	excel		Total Damage Negation [%]	=IFERROR(IF(K60=0,0,(((K60*(L60/100))-N60)/(K60*(L60/100)))*100),"No Motion Value")	=IFERROR(IF(K60=0,0,(((K60*(L60/100))-N60)/(K60*(L60/100)))*100),"No Motion Value")	0
+Q60	excel			={"",1}	={"",1}	
+F61	excel	F61:G61	Pierce	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I61	excel	I61:J61	Pierce	={"",100*(1-PlannerData!$L$26)}	={"",100*(1-PlannerData!$L$26)}	
+N61	excel			=(1-(J61/100))* | IFERROR(IFS( | (K61*(L61/100))/G61>=8,0.9*(K61*(L61/100)), | (K61*(L61/100))/G61>2.5,(1-((((K61*(L61/100))/G61-8)^2*(20/30.25)+10)/100))*(K61*(L61/100)), | (K61*(L61/100))/G61>=1,(1-((((K61*(L61/100))/G61-2.5)^2*(30/2.25)+30)/100))*(K61*(L61/100)), | (K61*(L61/100))/G61>0.12,(1-((((K61*(L61/100))/G61-0.12)^2*(-30/0.7744)+90)/100))*(K61*(L61/100)), | (K61*(L61/100))/G61<=0.12,0.1*(K61*(L61/100))),0) | *R61	=(1-(J61/100))* | IFERROR(IFS( | (K61*(L61/100))/G61>=8,0.9*(K61*(L61/100)), | (K61*(L61/100))/G61>2.5,(1-((((K61*(L61/100))/G61-8)^2*(20/30.25)+10)/100))*(K61*(L61/100)), | (K61*(L61/100))/G61>=1,(1-((((K61*(L61/100))/G61-2.5)^2*(30/2.25)+30)/100))*(K61*(L61/100)), | (K61*(L61/100))/G61>0.12,(1-((((K61*(L61/100))/G61-0.12)^2*(-30/0.7744)+90)/100))*(K61*(L61/100)), | (K61*(L61/100))/G61<=0.12,0.1*(K61*(L61/100))),0) | *R61	0
+O61	excel			=IFERROR(IF(K61=0,0,(((K61*(L61/100))-N61)/(K61*(L61/100)))*100),"No Motion Value")	=IFERROR(IF(K61=0,0,(((K61*(L61/100))-N61)/(K61*(L61/100)))*100),"No Motion Value")	0
+Q61	excel			={"",1}	={"",1}	
+F62	excel	F62:G62	Magic	={"",PlannerData!$J$8}	={"",PlannerData!$J$8}	
+I62	excel	I62:J62	Magic	={"",100*(1-PlannerData!$L$27)}	={"",100*(1-PlannerData!$L$27)}	
+N62	excel			=(1-(J62/100))* | IFERROR(IFS( | (K62*(L62/100))/G62>=8,0.9*(K62*(L62/100)), | (K62*(L62/100))/G62>2.5,(1-((((K62*(L62/100))/G62-8)^2*(20/30.25)+10)/100))*(K62*(L62/100)), | (K62*(L62/100))/G62>=1,(1-((((K62*(L62/100))/G62-2.5)^2*(30/2.25)+30)/100))*(K62*(L62/100)), | (K62*(L62/100))/G62>0.12,(1-((((K62*(L62/100))/G62-0.12)^2*(-30/0.7744)+90)/100))*(K62*(L62/100)), | (K62*(L62/100))/G62<=0.12,0.1*(K62*(L62/100))),0) | *R62	=(1-(J62/100))* | IFERROR(IFS( | (K62*(L62/100))/G62>=8,0.9*(K62*(L62/100)), | (K62*(L62/100))/G62>2.5,(1-((((K62*(L62/100))/G62-8)^2*(20/30.25)+10)/100))*(K62*(L62/100)), | (K62*(L62/100))/G62>=1,(1-((((K62*(L62/100))/G62-2.5)^2*(30/2.25)+30)/100))*(K62*(L62/100)), | (K62*(L62/100))/G62>0.12,(1-((((K62*(L62/100))/G62-0.12)^2*(-30/0.7744)+90)/100))*(K62*(L62/100)), | (K62*(L62/100))/G62<=0.12,0.1*(K62*(L62/100))),0) | *R62	0
+O62	excel			=IFERROR(IF(K62=0,0,(((K62*(L62/100))-N62)/(K62*(L62/100)))*100),"No Motion Value")	=IFERROR(IF(K62=0,0,(((K62*(L62/100))-N62)/(K62*(L62/100)))*100),"No Motion Value")	0
+Q62	excel			={"",1}	={"",1}	
+F63	excel	F63:G63	Fire	={"",PlannerData!$J$9}	={"",PlannerData!$J$9}	
+I63	excel	I63:J63	Fire	={"",100*(1-PlannerData!$L$28)}	={"",100*(1-PlannerData!$L$28)}	
+N63	excel			=(1-(J63/100))* | IFERROR(IFS( | (K63*(L63/100))/G63>=8,0.9*(K63*(L63/100)), | (K63*(L63/100))/G63>2.5,(1-((((K63*(L63/100))/G63-8)^2*(20/30.25)+10)/100))*(K63*(L63/100)), | (K63*(L63/100))/G63>=1,(1-((((K63*(L63/100))/G63-2.5)^2*(30/2.25)+30)/100))*(K63*(L63/100)), | (K63*(L63/100))/G63>0.12,(1-((((K63*(L63/100))/G63-0.12)^2*(-30/0.7744)+90)/100))*(K63*(L63/100)), | (K63*(L63/100))/G63<=0.12,0.1*(K63*(L63/100))),0) | *R63	=(1-(J63/100))* | IFERROR(IFS( | (K63*(L63/100))/G63>=8,0.9*(K63*(L63/100)), | (K63*(L63/100))/G63>2.5,(1-((((K63*(L63/100))/G63-8)^2*(20/30.25)+10)/100))*(K63*(L63/100)), | (K63*(L63/100))/G63>=1,(1-((((K63*(L63/100))/G63-2.5)^2*(30/2.25)+30)/100))*(K63*(L63/100)), | (K63*(L63/100))/G63>0.12,(1-((((K63*(L63/100))/G63-0.12)^2*(-30/0.7744)+90)/100))*(K63*(L63/100)), | (K63*(L63/100))/G63<=0.12,0.1*(K63*(L63/100))),0) | *R63	0
+O63	excel			=IFERROR(IF(K63=0,0,(((K63*(L63/100))-N63)/(K63*(L63/100)))*100),"No Motion Value")	=IFERROR(IF(K63=0,0,(((K63*(L63/100))-N63)/(K63*(L63/100)))*100),"No Motion Value")	0
+Q63	excel			={"",1}	={"",1}	
+F64	excel	F64:G64	Lightning	={"",PlannerData!$J$10}	={"",PlannerData!$J$10}	
+I64	excel	I64:J64	Lightning	={"",100*(1-PlannerData!$L$29)}	={"",100*(1-PlannerData!$L$29)}	
+N64	excel			=(1-(J64/100))* | IFERROR(IFS( | (K64*(L64/100))/G64>=8,0.9*(K64*(L64/100)), | (K64*(L64/100))/G64>2.5,(1-((((K64*(L64/100))/G64-8)^2*(20/30.25)+10)/100))*(K64*(L64/100)), | (K64*(L64/100))/G64>=1,(1-((((K64*(L64/100))/G64-2.5)^2*(30/2.25)+30)/100))*(K64*(L64/100)), | (K64*(L64/100))/G64>0.12,(1-((((K64*(L64/100))/G64-0.12)^2*(-30/0.7744)+90)/100))*(K64*(L64/100)), | (K64*(L64/100))/G64<=0.12,0.1*(K64*(L64/100))),0) | *R64	=(1-(J64/100))* | IFERROR(IFS( | (K64*(L64/100))/G64>=8,0.9*(K64*(L64/100)), | (K64*(L64/100))/G64>2.5,(1-((((K64*(L64/100))/G64-8)^2*(20/30.25)+10)/100))*(K64*(L64/100)), | (K64*(L64/100))/G64>=1,(1-((((K64*(L64/100))/G64-2.5)^2*(30/2.25)+30)/100))*(K64*(L64/100)), | (K64*(L64/100))/G64>0.12,(1-((((K64*(L64/100))/G64-0.12)^2*(-30/0.7744)+90)/100))*(K64*(L64/100)), | (K64*(L64/100))/G64<=0.12,0.1*(K64*(L64/100))),0) | *R64	0
+O64	excel			=IFERROR(IF(K64=0,0,(((K64*(L64/100))-N64)/(K64*(L64/100)))*100),"No Motion Value")	=IFERROR(IF(K64=0,0,(((K64*(L64/100))-N64)/(K64*(L64/100)))*100),"No Motion Value")	0
+Q64	excel			={"",1}	={"",1}	
+F65	excel	F65:G65	Holy	={"",PlannerData!$J$11}	={"",PlannerData!$J$11}	
+I65	excel	I65:J65	Holy	={"",100*(1-PlannerData!$L$30)}	={"",100*(1-PlannerData!$L$30)}	
+N65	excel			=(1-(J65/100))* | IFERROR(IFS( | (K65*(L65/100))/G65>=8,0.9*(K65*(L65/100)), | (K65*(L65/100))/G65>2.5,(1-((((K65*(L65/100))/G65-8)^2*(20/30.25)+10)/100))*(K65*(L65/100)), | (K65*(L65/100))/G65>=1,(1-((((K65*(L65/100))/G65-2.5)^2*(30/2.25)+30)/100))*(K65*(L65/100)), | (K65*(L65/100))/G65>0.12,(1-((((K65*(L65/100))/G65-0.12)^2*(-30/0.7744)+90)/100))*(K65*(L65/100)), | (K65*(L65/100))/G65<=0.12,0.1*(K65*(L65/100))),0) | *R65	=(1-(J65/100))* | IFERROR(IFS( | (K65*(L65/100))/G65>=8,0.9*(K65*(L65/100)), | (K65*(L65/100))/G65>2.5,(1-((((K65*(L65/100))/G65-8)^2*(20/30.25)+10)/100))*(K65*(L65/100)), | (K65*(L65/100))/G65>=1,(1-((((K65*(L65/100))/G65-2.5)^2*(30/2.25)+30)/100))*(K65*(L65/100)), | (K65*(L65/100))/G65>0.12,(1-((((K65*(L65/100))/G65-0.12)^2*(-30/0.7744)+90)/100))*(K65*(L65/100)), | (K65*(L65/100))/G65<=0.12,0.1*(K65*(L65/100))),0) | *R65	0
+O65	excel			=IFERROR(IF(K65=0,0,(((K65*(L65/100))-N65)/(K65*(L65/100)))*100),"No Motion Value")	=IFERROR(IF(K65=0,0,(((K65*(L65/100))-N65)/(K65*(L65/100)))*100),"No Motion Value")	0
+Q65	excel			={"",1}	={"",1}	
+F66	excel	F66:G66	Health Points	={"",PlannerData!$L$2}	={"",PlannerData!$L$2}	
+K66	excel		Total:	=K58+K59+K60+K61+K62+K63+K64+K65	=K58+K59+K60+K61+K62+K63+K64+K65	0
+N66	excel		Total:	=SUM(N58:N65)*R66	=SUM(N58:N65)*R66	0
+O66	excel		Total:	=IFERROR(IF((K66)=0,0,((((K58*(L58/100))+(K59*(L59/100))+(K60*(L60/100))+(K61*(L61/100))+(K62*(L62/100))+(K63*(L63/100))+(K64*(L64/100))+(K65*(L65/100)))-N66)/((K58*(L58/100))+(K59*(L59/100))+(K60*(L60/100))+(K61*(L61/100))+(K62*(L62/100))+(K63*(L63/100))+(K64*(L64/100))+(K65*(L65/100))))*100),0)	=IFERROR(IF((K66)=0,0,((((K58*(L58/100))+(K59*(L59/100))+(K60*(L60/100))+(K61*(L61/100))+(K62*(L62/100))+(K63*(L63/100))+(K64*(L64/100))+(K65*(L65/100)))-N66)/((K58*(L58/100))+(K59*(L59/100))+(K60*(L60/100))+(K61*(L61/100))+(K62*(L62/100))+(K63*(L63/100))+(K64*(L64/100))+(K65*(L65/100))))*100),0)	0
+Q66	excel		Total:	={"",1}	={"",1}	
+N67	excel		eff hp | hits to live:	=IFERROR(IF(O66=0,0,G66/(1-(O66/100))),0)	=IFERROR(IF(O66=0,0,G66/(1-(O66/100))),0)	0
+O67	excel		eff hp | hits to live:	=IFERROR(G66/N66,0)	=IFERROR(G66/N66,0)	0
+V67	excel		Total:	=PRODUCT(V58:V66)	=PRODUCT(V58:V66)	0
+AA67	excel		Total:	=100*(1-((1-AA58/100)*(1-AA59/100)*(1-AA60/100)*(1-AA61/100)*(1-AA62/100)*(1-AA63/100)*(1-AA64/100)*(1-AA65/100)*(1-AA66/100)))	=100*(1-((1-AA58/100)*(1-AA59/100)*(1-AA60/100)*(1-AA61/100)*(1-AA62/100)*(1-AA63/100)*(1-AA64/100)*(1-AA65/100)*(1-AA66/100)))	0
+N68	excel		Damage Increase:	=IFERROR(IF(N66>N54,N66/N54-1,0),0)	=IFERROR(IF(N66>N54,N66/N54-1,0),0)	0
+F73	excel	F73:G73	Physical	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I73	excel	I73:J73	Physical	={"",100*(1-PlannerData!$L$23)}	={"",100*(1-PlannerData!$L$23)}	
+N73	excel		Damage Dealt	=(1-(J73/100))* | IFERROR(IFS( | (K73*(L73/100))/G73>=8,0.9*(K73*(L73/100)), | (K73*(L73/100))/G73>2.5,(1-((((K73*(L73/100))/G73-8)^2*(20/30.25)+10)/100))*(K73*(L73/100)), | (K73*(L73/100))/G73>=1,(1-((((K73*(L73/100))/G73-2.5)^2*(30/2.25)+30)/100))*(K73*(L73/100)), | (K73*(L73/100))/G73>0.12,(1-((((K73*(L73/100))/G73-0.12)^2*(-30/0.7744)+90)/100))*(K73*(L73/100)), | (K73*(L73/100))/G73<=0.12,0.1*(K73*(L73/100))),0) | *R73	=(1-(J73/100))* | IFERROR(IFS( | (K73*(L73/100))/G73>=8,0.9*(K73*(L73/100)), | (K73*(L73/100))/G73>2.5,(1-((((K73*(L73/100))/G73-8)^2*(20/30.25)+10)/100))*(K73*(L73/100)), | (K73*(L73/100))/G73>=1,(1-((((K73*(L73/100))/G73-2.5)^2*(30/2.25)+30)/100))*(K73*(L73/100)), | (K73*(L73/100))/G73>0.12,(1-((((K73*(L73/100))/G73-0.12)^2*(-30/0.7744)+90)/100))*(K73*(L73/100)), | (K73*(L73/100))/G73<=0.12,0.1*(K73*(L73/100))),0) | *R73	0
+O73	excel		Total Damage Negation [%]	=IFERROR(IF(K73=0,0,(((K73*(L73/100))-N73)/(K73*(L73/100)))*100),"No Motion Value")	=IFERROR(IF(K73=0,0,(((K73*(L73/100))-N73)/(K73*(L73/100)))*100),"No Motion Value")	0
+Q73	excel			={"",1}	={"",1}	
+F74	excel	F74:G74	Strike	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I74	excel	I74:J74	Strike	={"",100*(1-PlannerData!$L$24)}	={"",100*(1-PlannerData!$L$24)}	
+N74	excel		Damage Dealt	=(1-(J74/100))* | IFERROR(IFS( | (K74*(L74/100))/G74>=8,0.9*(K74*(L74/100)), | (K74*(L74/100))/G74>2.5,(1-((((K74*(L74/100))/G74-8)^2*(20/30.25)+10)/100))*(K74*(L74/100)), | (K74*(L74/100))/G74>=1,(1-((((K74*(L74/100))/G74-2.5)^2*(30/2.25)+30)/100))*(K74*(L74/100)), | (K74*(L74/100))/G74>0.12,(1-((((K74*(L74/100))/G74-0.12)^2*(-30/0.7744)+90)/100))*(K74*(L74/100)), | (K74*(L74/100))/G74<=0.12,0.1*(K74*(L74/100))),0) | *R74	=(1-(J74/100))* | IFERROR(IFS( | (K74*(L74/100))/G74>=8,0.9*(K74*(L74/100)), | (K74*(L74/100))/G74>2.5,(1-((((K74*(L74/100))/G74-8)^2*(20/30.25)+10)/100))*(K74*(L74/100)), | (K74*(L74/100))/G74>=1,(1-((((K74*(L74/100))/G74-2.5)^2*(30/2.25)+30)/100))*(K74*(L74/100)), | (K74*(L74/100))/G74>0.12,(1-((((K74*(L74/100))/G74-0.12)^2*(-30/0.7744)+90)/100))*(K74*(L74/100)), | (K74*(L74/100))/G74<=0.12,0.1*(K74*(L74/100))),0) | *R74	0
+O74	excel		Total Damage Negation [%]	=IFERROR(IF(K74=0,0,(((K74*(L74/100))-N74)/(K74*(L74/100)))*100),"No Motion Value")	=IFERROR(IF(K74=0,0,(((K74*(L74/100))-N74)/(K74*(L74/100)))*100),"No Motion Value")	0
+Q74	excel			={"",1}	={"",1}	
+F75	excel	F75:G75	Slash	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I75	excel	I75:J75	Slash	={"",100*(1-PlannerData!$L$25)}	={"",100*(1-PlannerData!$L$25)}	
+N75	excel		Damage Dealt	=(1-(J75/100))* | IFERROR(IFS( | (K75*(L75/100))/G75>=8,0.9*(K75*(L75/100)), | (K75*(L75/100))/G75>2.5,(1-((((K75*(L75/100))/G75-8)^2*(20/30.25)+10)/100))*(K75*(L75/100)), | (K75*(L75/100))/G75>=1,(1-((((K75*(L75/100))/G75-2.5)^2*(30/2.25)+30)/100))*(K75*(L75/100)), | (K75*(L75/100))/G75>0.12,(1-((((K75*(L75/100))/G75-0.12)^2*(-30/0.7744)+90)/100))*(K75*(L75/100)), | (K75*(L75/100))/G75<=0.12,0.1*(K75*(L75/100))),0) | *R75	=(1-(J75/100))* | IFERROR(IFS( | (K75*(L75/100))/G75>=8,0.9*(K75*(L75/100)), | (K75*(L75/100))/G75>2.5,(1-((((K75*(L75/100))/G75-8)^2*(20/30.25)+10)/100))*(K75*(L75/100)), | (K75*(L75/100))/G75>=1,(1-((((K75*(L75/100))/G75-2.5)^2*(30/2.25)+30)/100))*(K75*(L75/100)), | (K75*(L75/100))/G75>0.12,(1-((((K75*(L75/100))/G75-0.12)^2*(-30/0.7744)+90)/100))*(K75*(L75/100)), | (K75*(L75/100))/G75<=0.12,0.1*(K75*(L75/100))),0) | *R75	0
+O75	excel		Total Damage Negation [%]	=IFERROR(IF(K75=0,0,(((K75*(L75/100))-N75)/(K75*(L75/100)))*100),"No Motion Value")	=IFERROR(IF(K75=0,0,(((K75*(L75/100))-N75)/(K75*(L75/100)))*100),"No Motion Value")	0
+Q75	excel			={"",1}	={"",1}	
+F76	excel	F76:G76	Pierce	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I76	excel	I76:J76	Pierce	={"",100*(1-PlannerData!$L$26)}	={"",100*(1-PlannerData!$L$26)}	
+N76	excel			=(1-(J76/100))* | IFERROR(IFS( | (K76*(L76/100))/G76>=8,0.9*(K76*(L76/100)), | (K76*(L76/100))/G76>2.5,(1-((((K76*(L76/100))/G76-8)^2*(20/30.25)+10)/100))*(K76*(L76/100)), | (K76*(L76/100))/G76>=1,(1-((((K76*(L76/100))/G76-2.5)^2*(30/2.25)+30)/100))*(K76*(L76/100)), | (K76*(L76/100))/G76>0.12,(1-((((K76*(L76/100))/G76-0.12)^2*(-30/0.7744)+90)/100))*(K76*(L76/100)), | (K76*(L76/100))/G76<=0.12,0.1*(K76*(L76/100))),0) | *R76	=(1-(J76/100))* | IFERROR(IFS( | (K76*(L76/100))/G76>=8,0.9*(K76*(L76/100)), | (K76*(L76/100))/G76>2.5,(1-((((K76*(L76/100))/G76-8)^2*(20/30.25)+10)/100))*(K76*(L76/100)), | (K76*(L76/100))/G76>=1,(1-((((K76*(L76/100))/G76-2.5)^2*(30/2.25)+30)/100))*(K76*(L76/100)), | (K76*(L76/100))/G76>0.12,(1-((((K76*(L76/100))/G76-0.12)^2*(-30/0.7744)+90)/100))*(K76*(L76/100)), | (K76*(L76/100))/G76<=0.12,0.1*(K76*(L76/100))),0) | *R76	0
+O76	excel			=IFERROR(IF(K76=0,0,(((K76*(L76/100))-N76)/(K76*(L76/100)))*100),"No Motion Value")	=IFERROR(IF(K76=0,0,(((K76*(L76/100))-N76)/(K76*(L76/100)))*100),"No Motion Value")	0
+Q76	excel			={"",1}	={"",1}	
+F77	excel	F77:G77	Magic	={"",PlannerData!$J$8}	={"",PlannerData!$J$8}	
+I77	excel	I77:J77	Magic	={"",100*(1-PlannerData!$L$27)}	={"",100*(1-PlannerData!$L$27)}	
+N77	excel			=(1-(J77/100))* | IFERROR(IFS( | (K77*(L77/100))/G77>=8,0.9*(K77*(L77/100)), | (K77*(L77/100))/G77>2.5,(1-((((K77*(L77/100))/G77-8)^2*(20/30.25)+10)/100))*(K77*(L77/100)), | (K77*(L77/100))/G77>=1,(1-((((K77*(L77/100))/G77-2.5)^2*(30/2.25)+30)/100))*(K77*(L77/100)), | (K77*(L77/100))/G77>0.12,(1-((((K77*(L77/100))/G77-0.12)^2*(-30/0.7744)+90)/100))*(K77*(L77/100)), | (K77*(L77/100))/G77<=0.12,0.1*(K77*(L77/100))),0) | *R77	=(1-(J77/100))* | IFERROR(IFS( | (K77*(L77/100))/G77>=8,0.9*(K77*(L77/100)), | (K77*(L77/100))/G77>2.5,(1-((((K77*(L77/100))/G77-8)^2*(20/30.25)+10)/100))*(K77*(L77/100)), | (K77*(L77/100))/G77>=1,(1-((((K77*(L77/100))/G77-2.5)^2*(30/2.25)+30)/100))*(K77*(L77/100)), | (K77*(L77/100))/G77>0.12,(1-((((K77*(L77/100))/G77-0.12)^2*(-30/0.7744)+90)/100))*(K77*(L77/100)), | (K77*(L77/100))/G77<=0.12,0.1*(K77*(L77/100))),0) | *R77	0
+O77	excel			=IFERROR(IF(K77=0,0,(((K77*(L77/100))-N77)/(K77*(L77/100)))*100),"No Motion Value")	=IFERROR(IF(K77=0,0,(((K77*(L77/100))-N77)/(K77*(L77/100)))*100),"No Motion Value")	0
+Q77	excel			={"",1}	={"",1}	
+F78	excel	F78:G78	Fire	={"",PlannerData!$J$9}	={"",PlannerData!$J$9}	
+I78	excel	I78:J78	Fire	={"",100*(1-PlannerData!$L$28)}	={"",100*(1-PlannerData!$L$28)}	
+N78	excel			=(1-(J78/100))* | IFERROR(IFS( | (K78*(L78/100))/G78>=8,0.9*(K78*(L78/100)), | (K78*(L78/100))/G78>2.5,(1-((((K78*(L78/100))/G78-8)^2*(20/30.25)+10)/100))*(K78*(L78/100)), | (K78*(L78/100))/G78>=1,(1-((((K78*(L78/100))/G78-2.5)^2*(30/2.25)+30)/100))*(K78*(L78/100)), | (K78*(L78/100))/G78>0.12,(1-((((K78*(L78/100))/G78-0.12)^2*(-30/0.7744)+90)/100))*(K78*(L78/100)), | (K78*(L78/100))/G78<=0.12,0.1*(K78*(L78/100))),0) | *R78	=(1-(J78/100))* | IFERROR(IFS( | (K78*(L78/100))/G78>=8,0.9*(K78*(L78/100)), | (K78*(L78/100))/G78>2.5,(1-((((K78*(L78/100))/G78-8)^2*(20/30.25)+10)/100))*(K78*(L78/100)), | (K78*(L78/100))/G78>=1,(1-((((K78*(L78/100))/G78-2.5)^2*(30/2.25)+30)/100))*(K78*(L78/100)), | (K78*(L78/100))/G78>0.12,(1-((((K78*(L78/100))/G78-0.12)^2*(-30/0.7744)+90)/100))*(K78*(L78/100)), | (K78*(L78/100))/G78<=0.12,0.1*(K78*(L78/100))),0) | *R78	0
+O78	excel			=IFERROR(IF(K78=0,0,(((K78*(L78/100))-N78)/(K78*(L78/100)))*100),"No Motion Value")	=IFERROR(IF(K78=0,0,(((K78*(L78/100))-N78)/(K78*(L78/100)))*100),"No Motion Value")	0
+Q78	excel			={"",1}	={"",1}	
+F79	excel	F79:G79	Lightning	={"",PlannerData!$J$10}	={"",PlannerData!$J$10}	
+I79	excel	I79:J79	Lightning	={"",100*(1-PlannerData!$L$29)}	={"",100*(1-PlannerData!$L$29)}	
+N79	excel			=(1-(J79/100))* | IFERROR(IFS( | (K79*(L79/100))/G79>=8,0.9*(K79*(L79/100)), | (K79*(L79/100))/G79>2.5,(1-((((K79*(L79/100))/G79-8)^2*(20/30.25)+10)/100))*(K79*(L79/100)), | (K79*(L79/100))/G79>=1,(1-((((K79*(L79/100))/G79-2.5)^2*(30/2.25)+30)/100))*(K79*(L79/100)), | (K79*(L79/100))/G79>0.12,(1-((((K79*(L79/100))/G79-0.12)^2*(-30/0.7744)+90)/100))*(K79*(L79/100)), | (K79*(L79/100))/G79<=0.12,0.1*(K79*(L79/100))),0) | *R79	=(1-(J79/100))* | IFERROR(IFS( | (K79*(L79/100))/G79>=8,0.9*(K79*(L79/100)), | (K79*(L79/100))/G79>2.5,(1-((((K79*(L79/100))/G79-8)^2*(20/30.25)+10)/100))*(K79*(L79/100)), | (K79*(L79/100))/G79>=1,(1-((((K79*(L79/100))/G79-2.5)^2*(30/2.25)+30)/100))*(K79*(L79/100)), | (K79*(L79/100))/G79>0.12,(1-((((K79*(L79/100))/G79-0.12)^2*(-30/0.7744)+90)/100))*(K79*(L79/100)), | (K79*(L79/100))/G79<=0.12,0.1*(K79*(L79/100))),0) | *R79	0
+O79	excel			=IFERROR(IF(K79=0,0,(((K79*(L79/100))-N79)/(K79*(L79/100)))*100),"No Motion Value")	=IFERROR(IF(K79=0,0,(((K79*(L79/100))-N79)/(K79*(L79/100)))*100),"No Motion Value")	0
+Q79	excel			={"",1}	={"",1}	
+F80	excel	F80:G80	Holy	={"",PlannerData!$J$11}	={"",PlannerData!$J$11}	
+I80	excel	I80:J80	Holy	={"",100*(1-PlannerData!$L$30)}	={"",100*(1-PlannerData!$L$30)}	
+N80	excel			=(1-(J80/100))* | IFERROR(IFS( | (K80*(L80/100))/G80>=8,0.9*(K80*(L80/100)), | (K80*(L80/100))/G80>2.5,(1-((((K80*(L80/100))/G80-8)^2*(20/30.25)+10)/100))*(K80*(L80/100)), | (K80*(L80/100))/G80>=1,(1-((((K80*(L80/100))/G80-2.5)^2*(30/2.25)+30)/100))*(K80*(L80/100)), | (K80*(L80/100))/G80>0.12,(1-((((K80*(L80/100))/G80-0.12)^2*(-30/0.7744)+90)/100))*(K80*(L80/100)), | (K80*(L80/100))/G80<=0.12,0.1*(K80*(L80/100))),0) | *R80	=(1-(J80/100))* | IFERROR(IFS( | (K80*(L80/100))/G80>=8,0.9*(K80*(L80/100)), | (K80*(L80/100))/G80>2.5,(1-((((K80*(L80/100))/G80-8)^2*(20/30.25)+10)/100))*(K80*(L80/100)), | (K80*(L80/100))/G80>=1,(1-((((K80*(L80/100))/G80-2.5)^2*(30/2.25)+30)/100))*(K80*(L80/100)), | (K80*(L80/100))/G80>0.12,(1-((((K80*(L80/100))/G80-0.12)^2*(-30/0.7744)+90)/100))*(K80*(L80/100)), | (K80*(L80/100))/G80<=0.12,0.1*(K80*(L80/100))),0) | *R80	0
+O80	excel			=IFERROR(IF(K80=0,0,(((K80*(L80/100))-N80)/(K80*(L80/100)))*100),"No Motion Value")	=IFERROR(IF(K80=0,0,(((K80*(L80/100))-N80)/(K80*(L80/100)))*100),"No Motion Value")	0
+Q80	excel			={"",1}	={"",1}	
+F81	excel	F81:G81	Health Points	={"",PlannerData!$L$2}	={"",PlannerData!$L$2}	
+K81	excel		Total:	=K73+K74+K75+K76+K77+K78+K79+K80	=K73+K74+K75+K76+K77+K78+K79+K80	0
+N81	excel		Total:	=SUM(N73:N80)*R81	=SUM(N73:N80)*R81	0
+O81	excel		Total:	=IFERROR(IF((K81)=0,0,((((K73*(L73/100))+(K74*(L74/100))+(K75*(L75/100))+(K76*(L76/100))+(K77*(L77/100))+(K78*(L78/100))+(K79*(L79/100))+(K80*(L80/100)))-N81)/((K73*(L73/100))+(K74*(L74/100))+(K75*(L75/100))+(K76*(L76/100))+(K77*(L77/100))+(K78*(L78/100))+(K79*(L79/100))+(K80*(L80/100))))*100),0)	=IFERROR(IF((K81)=0,0,((((K73*(L73/100))+(K74*(L74/100))+(K75*(L75/100))+(K76*(L76/100))+(K77*(L77/100))+(K78*(L78/100))+(K79*(L79/100))+(K80*(L80/100)))-N81)/((K73*(L73/100))+(K74*(L74/100))+(K75*(L75/100))+(K76*(L76/100))+(K77*(L77/100))+(K78*(L78/100))+(K79*(L79/100))+(K80*(L80/100))))*100),0)	0
+Q81	excel		Total:	={"",1}	={"",1}	
+N82	excel		eff hp | hits to live:	=IFERROR(IF(O81=0,0,G81/(1-(O81/100))),0)	=IFERROR(IF(O81=0,0,G81/(1-(O81/100))),0)	0
+O82	excel		eff hp | hits to live:	=IFERROR(G81/N81,0)	=IFERROR(G81/N81,0)	0
+V82	excel		Total:	=PRODUCT(V73:V81)	=PRODUCT(V73:V81)	0
+AA82	excel		Total:	=100*(1-((1-AA73/100)*(1-AA74/100)*(1-AA75/100)*(1-AA76/100)*(1-AA77/100)*(1-AA78/100)*(1-AA79/100)*(1-AA80/100)*(1-AA81/100)))	=100*(1-((1-AA73/100)*(1-AA74/100)*(1-AA75/100)*(1-AA76/100)*(1-AA77/100)*(1-AA78/100)*(1-AA79/100)*(1-AA80/100)*(1-AA81/100)))	0
+F85	excel	F85:G85	Physical	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I85	excel	I85:J85	Physical	={"",100*(1-PlannerData!$L$23)}	={"",100*(1-PlannerData!$L$23)}	
+N85	excel		Damage Dealt	=(1-(J85/100))* | IFERROR(IFS( | (K85*(L85/100))/G85>=8,0.9*(K85*(L85/100)), | (K85*(L85/100))/G85>2.5,(1-((((K85*(L85/100))/G85-8)^2*(20/30.25)+10)/100))*(K85*(L85/100)), | (K85*(L85/100))/G85>=1,(1-((((K85*(L85/100))/G85-2.5)^2*(30/2.25)+30)/100))*(K85*(L85/100)), | (K85*(L85/100))/G85>0.12,(1-((((K85*(L85/100))/G85-0.12)^2*(-30/0.7744)+90)/100))*(K85*(L85/100)), | (K85*(L85/100))/G85<=0.12,0.1*(K85*(L85/100))),0) | *R85	=(1-(J85/100))* | IFERROR(IFS( | (K85*(L85/100))/G85>=8,0.9*(K85*(L85/100)), | (K85*(L85/100))/G85>2.5,(1-((((K85*(L85/100))/G85-8)^2*(20/30.25)+10)/100))*(K85*(L85/100)), | (K85*(L85/100))/G85>=1,(1-((((K85*(L85/100))/G85-2.5)^2*(30/2.25)+30)/100))*(K85*(L85/100)), | (K85*(L85/100))/G85>0.12,(1-((((K85*(L85/100))/G85-0.12)^2*(-30/0.7744)+90)/100))*(K85*(L85/100)), | (K85*(L85/100))/G85<=0.12,0.1*(K85*(L85/100))),0) | *R85	0
+O85	excel		Total Damage Negation [%]	=IFERROR(IF(K85=0,0,(((K85*(L85/100))-N85)/(K85*(L85/100)))*100),"No Motion Value")	=IFERROR(IF(K85=0,0,(((K85*(L85/100))-N85)/(K85*(L85/100)))*100),"No Motion Value")	0
+Q85	excel			={"",1}	={"",1}	
+F86	excel	F86:G86	Strike	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I86	excel	I86:J86	Strike	={"",100*(1-PlannerData!$L$24)}	={"",100*(1-PlannerData!$L$24)}	
+N86	excel		Damage Dealt	=(1-(J86/100))* | IFERROR(IFS( | (K86*(L86/100))/G86>=8,0.9*(K86*(L86/100)), | (K86*(L86/100))/G86>2.5,(1-((((K86*(L86/100))/G86-8)^2*(20/30.25)+10)/100))*(K86*(L86/100)), | (K86*(L86/100))/G86>=1,(1-((((K86*(L86/100))/G86-2.5)^2*(30/2.25)+30)/100))*(K86*(L86/100)), | (K86*(L86/100))/G86>0.12,(1-((((K86*(L86/100))/G86-0.12)^2*(-30/0.7744)+90)/100))*(K86*(L86/100)), | (K86*(L86/100))/G86<=0.12,0.1*(K86*(L86/100))),0) | *R86	=(1-(J86/100))* | IFERROR(IFS( | (K86*(L86/100))/G86>=8,0.9*(K86*(L86/100)), | (K86*(L86/100))/G86>2.5,(1-((((K86*(L86/100))/G86-8)^2*(20/30.25)+10)/100))*(K86*(L86/100)), | (K86*(L86/100))/G86>=1,(1-((((K86*(L86/100))/G86-2.5)^2*(30/2.25)+30)/100))*(K86*(L86/100)), | (K86*(L86/100))/G86>0.12,(1-((((K86*(L86/100))/G86-0.12)^2*(-30/0.7744)+90)/100))*(K86*(L86/100)), | (K86*(L86/100))/G86<=0.12,0.1*(K86*(L86/100))),0) | *R86	0
+O86	excel		Total Damage Negation [%]	=IFERROR(IF(K86=0,0,(((K86*(L86/100))-N86)/(K86*(L86/100)))*100),"No Motion Value")	=IFERROR(IF(K86=0,0,(((K86*(L86/100))-N86)/(K86*(L86/100)))*100),"No Motion Value")	0
+Q86	excel			={"",1}	={"",1}	
+F87	excel	F87:G87	Slash	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I87	excel	I87:J87	Slash	={"",100*(1-PlannerData!$L$25)}	={"",100*(1-PlannerData!$L$25)}	
+N87	excel		Damage Dealt	=(1-(J87/100))* | IFERROR(IFS( | (K87*(L87/100))/G87>=8,0.9*(K87*(L87/100)), | (K87*(L87/100))/G87>2.5,(1-((((K87*(L87/100))/G87-8)^2*(20/30.25)+10)/100))*(K87*(L87/100)), | (K87*(L87/100))/G87>=1,(1-((((K87*(L87/100))/G87-2.5)^2*(30/2.25)+30)/100))*(K87*(L87/100)), | (K87*(L87/100))/G87>0.12,(1-((((K87*(L87/100))/G87-0.12)^2*(-30/0.7744)+90)/100))*(K87*(L87/100)), | (K87*(L87/100))/G87<=0.12,0.1*(K87*(L87/100))),0) | *R87	=(1-(J87/100))* | IFERROR(IFS( | (K87*(L87/100))/G87>=8,0.9*(K87*(L87/100)), | (K87*(L87/100))/G87>2.5,(1-((((K87*(L87/100))/G87-8)^2*(20/30.25)+10)/100))*(K87*(L87/100)), | (K87*(L87/100))/G87>=1,(1-((((K87*(L87/100))/G87-2.5)^2*(30/2.25)+30)/100))*(K87*(L87/100)), | (K87*(L87/100))/G87>0.12,(1-((((K87*(L87/100))/G87-0.12)^2*(-30/0.7744)+90)/100))*(K87*(L87/100)), | (K87*(L87/100))/G87<=0.12,0.1*(K87*(L87/100))),0) | *R87	0
+O87	excel		Total Damage Negation [%]	=IFERROR(IF(K87=0,0,(((K87*(L87/100))-N87)/(K87*(L87/100)))*100),"No Motion Value")	=IFERROR(IF(K87=0,0,(((K87*(L87/100))-N87)/(K87*(L87/100)))*100),"No Motion Value")	0
+Q87	excel			={"",1}	={"",1}	
+F88	excel	F88:G88	Pierce	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I88	excel	I88:J88	Pierce	={"",100*(1-PlannerData!$L$26)}	={"",100*(1-PlannerData!$L$26)}	
+N88	excel			=(1-(J88/100))* | IFERROR(IFS( | (K88*(L88/100))/G88>=8,0.9*(K88*(L88/100)), | (K88*(L88/100))/G88>2.5,(1-((((K88*(L88/100))/G88-8)^2*(20/30.25)+10)/100))*(K88*(L88/100)), | (K88*(L88/100))/G88>=1,(1-((((K88*(L88/100))/G88-2.5)^2*(30/2.25)+30)/100))*(K88*(L88/100)), | (K88*(L88/100))/G88>0.12,(1-((((K88*(L88/100))/G88-0.12)^2*(-30/0.7744)+90)/100))*(K88*(L88/100)), | (K88*(L88/100))/G88<=0.12,0.1*(K88*(L88/100))),0) | *R88	=(1-(J88/100))* | IFERROR(IFS( | (K88*(L88/100))/G88>=8,0.9*(K88*(L88/100)), | (K88*(L88/100))/G88>2.5,(1-((((K88*(L88/100))/G88-8)^2*(20/30.25)+10)/100))*(K88*(L88/100)), | (K88*(L88/100))/G88>=1,(1-((((K88*(L88/100))/G88-2.5)^2*(30/2.25)+30)/100))*(K88*(L88/100)), | (K88*(L88/100))/G88>0.12,(1-((((K88*(L88/100))/G88-0.12)^2*(-30/0.7744)+90)/100))*(K88*(L88/100)), | (K88*(L88/100))/G88<=0.12,0.1*(K88*(L88/100))),0) | *R88	0
+O88	excel			=IFERROR(IF(K88=0,0,(((K88*(L88/100))-N88)/(K88*(L88/100)))*100),"No Motion Value")	=IFERROR(IF(K88=0,0,(((K88*(L88/100))-N88)/(K88*(L88/100)))*100),"No Motion Value")	0
+Q88	excel			={"",1}	={"",1}	
+F89	excel	F89:G89	Magic	={"",PlannerData!$J$8}	={"",PlannerData!$J$8}	
+I89	excel	I89:J89	Magic	={"",100*(1-PlannerData!$L$27)}	={"",100*(1-PlannerData!$L$27)}	
+N89	excel			=(1-(J89/100))* | IFERROR(IFS( | (K89*(L89/100))/G89>=8,0.9*(K89*(L89/100)), | (K89*(L89/100))/G89>2.5,(1-((((K89*(L89/100))/G89-8)^2*(20/30.25)+10)/100))*(K89*(L89/100)), | (K89*(L89/100))/G89>=1,(1-((((K89*(L89/100))/G89-2.5)^2*(30/2.25)+30)/100))*(K89*(L89/100)), | (K89*(L89/100))/G89>0.12,(1-((((K89*(L89/100))/G89-0.12)^2*(-30/0.7744)+90)/100))*(K89*(L89/100)), | (K89*(L89/100))/G89<=0.12,0.1*(K89*(L89/100))),0) | *R89	=(1-(J89/100))* | IFERROR(IFS( | (K89*(L89/100))/G89>=8,0.9*(K89*(L89/100)), | (K89*(L89/100))/G89>2.5,(1-((((K89*(L89/100))/G89-8)^2*(20/30.25)+10)/100))*(K89*(L89/100)), | (K89*(L89/100))/G89>=1,(1-((((K89*(L89/100))/G89-2.5)^2*(30/2.25)+30)/100))*(K89*(L89/100)), | (K89*(L89/100))/G89>0.12,(1-((((K89*(L89/100))/G89-0.12)^2*(-30/0.7744)+90)/100))*(K89*(L89/100)), | (K89*(L89/100))/G89<=0.12,0.1*(K89*(L89/100))),0) | *R89	0
+O89	excel			=IFERROR(IF(K89=0,0,(((K89*(L89/100))-N89)/(K89*(L89/100)))*100),"No Motion Value")	=IFERROR(IF(K89=0,0,(((K89*(L89/100))-N89)/(K89*(L89/100)))*100),"No Motion Value")	0
+Q89	excel			={"",1}	={"",1}	
+F90	excel	F90:G90	Fire	={"",PlannerData!$J$9}	={"",PlannerData!$J$9}	
+I90	excel	I90:J90	Fire	={"",100*(1-PlannerData!$L$28)}	={"",100*(1-PlannerData!$L$28)}	
+N90	excel			=(1-(J90/100))* | IFERROR(IFS( | (K90*(L90/100))/G90>=8,0.9*(K90*(L90/100)), | (K90*(L90/100))/G90>2.5,(1-((((K90*(L90/100))/G90-8)^2*(20/30.25)+10)/100))*(K90*(L90/100)), | (K90*(L90/100))/G90>=1,(1-((((K90*(L90/100))/G90-2.5)^2*(30/2.25)+30)/100))*(K90*(L90/100)), | (K90*(L90/100))/G90>0.12,(1-((((K90*(L90/100))/G90-0.12)^2*(-30/0.7744)+90)/100))*(K90*(L90/100)), | (K90*(L90/100))/G90<=0.12,0.1*(K90*(L90/100))),0) | *R90	=(1-(J90/100))* | IFERROR(IFS( | (K90*(L90/100))/G90>=8,0.9*(K90*(L90/100)), | (K90*(L90/100))/G90>2.5,(1-((((K90*(L90/100))/G90-8)^2*(20/30.25)+10)/100))*(K90*(L90/100)), | (K90*(L90/100))/G90>=1,(1-((((K90*(L90/100))/G90-2.5)^2*(30/2.25)+30)/100))*(K90*(L90/100)), | (K90*(L90/100))/G90>0.12,(1-((((K90*(L90/100))/G90-0.12)^2*(-30/0.7744)+90)/100))*(K90*(L90/100)), | (K90*(L90/100))/G90<=0.12,0.1*(K90*(L90/100))),0) | *R90	0
+O90	excel			=IFERROR(IF(K90=0,0,(((K90*(L90/100))-N90)/(K90*(L90/100)))*100),"No Motion Value")	=IFERROR(IF(K90=0,0,(((K90*(L90/100))-N90)/(K90*(L90/100)))*100),"No Motion Value")	0
+Q90	excel			={"",1}	={"",1}	
+F91	excel	F91:G91	Lightning	={"",PlannerData!$J$10}	={"",PlannerData!$J$10}	
+I91	excel	I91:J91	Lightning	={"",100*(1-PlannerData!$L$29)}	={"",100*(1-PlannerData!$L$29)}	
+N91	excel			=(1-(J91/100))* | IFERROR(IFS( | (K91*(L91/100))/G91>=8,0.9*(K91*(L91/100)), | (K91*(L91/100))/G91>2.5,(1-((((K91*(L91/100))/G91-8)^2*(20/30.25)+10)/100))*(K91*(L91/100)), | (K91*(L91/100))/G91>=1,(1-((((K91*(L91/100))/G91-2.5)^2*(30/2.25)+30)/100))*(K91*(L91/100)), | (K91*(L91/100))/G91>0.12,(1-((((K91*(L91/100))/G91-0.12)^2*(-30/0.7744)+90)/100))*(K91*(L91/100)), | (K91*(L91/100))/G91<=0.12,0.1*(K91*(L91/100))),0) | *R91	=(1-(J91/100))* | IFERROR(IFS( | (K91*(L91/100))/G91>=8,0.9*(K91*(L91/100)), | (K91*(L91/100))/G91>2.5,(1-((((K91*(L91/100))/G91-8)^2*(20/30.25)+10)/100))*(K91*(L91/100)), | (K91*(L91/100))/G91>=1,(1-((((K91*(L91/100))/G91-2.5)^2*(30/2.25)+30)/100))*(K91*(L91/100)), | (K91*(L91/100))/G91>0.12,(1-((((K91*(L91/100))/G91-0.12)^2*(-30/0.7744)+90)/100))*(K91*(L91/100)), | (K91*(L91/100))/G91<=0.12,0.1*(K91*(L91/100))),0) | *R91	0
+O91	excel			=IFERROR(IF(K91=0,0,(((K91*(L91/100))-N91)/(K91*(L91/100)))*100),"No Motion Value")	=IFERROR(IF(K91=0,0,(((K91*(L91/100))-N91)/(K91*(L91/100)))*100),"No Motion Value")	0
+Q91	excel			={"",1}	={"",1}	
+F92	excel	F92:G92	Holy	={"",PlannerData!$J$11}	={"",PlannerData!$J$11}	
+I92	excel	I92:J92	Holy	={"",100*(1-PlannerData!$L$30)}	={"",100*(1-PlannerData!$L$30)}	
+N92	excel			=(1-(J92/100))* | IFERROR(IFS( | (K92*(L92/100))/G92>=8,0.9*(K92*(L92/100)), | (K92*(L92/100))/G92>2.5,(1-((((K92*(L92/100))/G92-8)^2*(20/30.25)+10)/100))*(K92*(L92/100)), | (K92*(L92/100))/G92>=1,(1-((((K92*(L92/100))/G92-2.5)^2*(30/2.25)+30)/100))*(K92*(L92/100)), | (K92*(L92/100))/G92>0.12,(1-((((K92*(L92/100))/G92-0.12)^2*(-30/0.7744)+90)/100))*(K92*(L92/100)), | (K92*(L92/100))/G92<=0.12,0.1*(K92*(L92/100))),0) | *R92	=(1-(J92/100))* | IFERROR(IFS( | (K92*(L92/100))/G92>=8,0.9*(K92*(L92/100)), | (K92*(L92/100))/G92>2.5,(1-((((K92*(L92/100))/G92-8)^2*(20/30.25)+10)/100))*(K92*(L92/100)), | (K92*(L92/100))/G92>=1,(1-((((K92*(L92/100))/G92-2.5)^2*(30/2.25)+30)/100))*(K92*(L92/100)), | (K92*(L92/100))/G92>0.12,(1-((((K92*(L92/100))/G92-0.12)^2*(-30/0.7744)+90)/100))*(K92*(L92/100)), | (K92*(L92/100))/G92<=0.12,0.1*(K92*(L92/100))),0) | *R92	0
+O92	excel			=IFERROR(IF(K92=0,0,(((K92*(L92/100))-N92)/(K92*(L92/100)))*100),"No Motion Value")	=IFERROR(IF(K92=0,0,(((K92*(L92/100))-N92)/(K92*(L92/100)))*100),"No Motion Value")	0
+Q92	excel			={"",1}	={"",1}	
+F93	excel	F93:G93	Health Points	={"",PlannerData!$L$2}	={"",PlannerData!$L$2}	
+K93	excel		Total:	=K85+K86+K87+K88+K89+K90+K91+K92	=K85+K86+K87+K88+K89+K90+K91+K92	0
+N93	excel		Total:	=SUM(N85:N92)*R93	=SUM(N85:N92)*R93	0
+O93	excel		Total:	=IFERROR(IF((K93)=0,0,((((K85*(L85/100))+(K86*(L86/100))+(K87*(L87/100))+(K88*(L88/100))+(K89*(L89/100))+(K90*(L90/100))+(K91*(L91/100))+(K92*(L92/100)))-N93)/((K85*(L85/100))+(K86*(L86/100))+(K87*(L87/100))+(K88*(L88/100))+(K89*(L89/100))+(K90*(L90/100))+(K91*(L91/100))+(K92*(L92/100))))*100),0)	=IFERROR(IF((K93)=0,0,((((K85*(L85/100))+(K86*(L86/100))+(K87*(L87/100))+(K88*(L88/100))+(K89*(L89/100))+(K90*(L90/100))+(K91*(L91/100))+(K92*(L92/100)))-N93)/((K85*(L85/100))+(K86*(L86/100))+(K87*(L87/100))+(K88*(L88/100))+(K89*(L89/100))+(K90*(L90/100))+(K91*(L91/100))+(K92*(L92/100))))*100),0)	0
+Q93	excel		Total:	={"",1}	={"",1}	
+N94	excel		eff hp | hits to live:	=IFERROR(IF(O93=0,0,G93/(1-(O93/100))),0)	=IFERROR(IF(O93=0,0,G93/(1-(O93/100))),0)	0
+O94	excel		eff hp | hits to live:	=IFERROR(G93/N93,0)	=IFERROR(G93/N93,0)	0
+V94	excel		Total:	=PRODUCT(V85:V93)	=PRODUCT(V85:V93)	0
+AA94	excel		Total:	=100*(1-((1-AA85/100)*(1-AA86/100)*(1-AA87/100)*(1-AA88/100)*(1-AA89/100)*(1-AA90/100)*(1-AA91/100)*(1-AA92/100)*(1-AA93/100)))	=100*(1-((1-AA85/100)*(1-AA86/100)*(1-AA87/100)*(1-AA88/100)*(1-AA89/100)*(1-AA90/100)*(1-AA91/100)*(1-AA92/100)*(1-AA93/100)))	0
+N95	excel		Damage Increase:	=IFERROR(IF(N93>N81,N93/N81-1,0),0)	=IFERROR(IF(N93>N81,N93/N81-1,0),0)	0
+F100	excel	F100:G100	Physical	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I100	excel	I100:J100	Physical	={"",100*(1-PlannerData!$L$23)}	={"",100*(1-PlannerData!$L$23)}	
+N100	excel		Damage Dealt	=(1-(J100/100))* | IFERROR(IFS( | (K100*(L100/100))/G100>=8,0.9*(K100*(L100/100)), | (K100*(L100/100))/G100>2.5,(1-((((K100*(L100/100))/G100-8)^2*(20/30.25)+10)/100))*(K100*(L100/100)), | (K100*(L100/100))/G100>=1,(1-((((K100*(L100/100))/G100-2.5)^2*(30/2.25)+30)/100))*(K100*(L100/100)), | (K100*(L100/100))/G100>0.12,(1-((((K100*(L100/100))/G100-0.12)^2*(-30/0.7744)+90)/100))*(K100*(L100/100)), | (K100*(L100/100))/G100<=0.12,0.1*(K100*(L100/100))),0) | *R100	=(1-(J100/100))* | IFERROR(IFS( | (K100*(L100/100))/G100>=8,0.9*(K100*(L100/100)), | (K100*(L100/100))/G100>2.5,(1-((((K100*(L100/100))/G100-8)^2*(20/30.25)+10)/100))*(K100*(L100/100)), | (K100*(L100/100))/G100>=1,(1-((((K100*(L100/100))/G100-2.5)^2*(30/2.25)+30)/100))*(K100*(L100/100)), | (K100*(L100/100))/G100>0.12,(1-((((K100*(L100/100))/G100-0.12)^2*(-30/0.7744)+90)/100))*(K100*(L100/100)), | (K100*(L100/100))/G100<=0.12,0.1*(K100*(L100/100))),0) | *R100	0
+O100	excel		Total Damage Negation [%]	=IFERROR(IF(K100=0,0,(((K100*(L100/100))-N100)/(K100*(L100/100)))*100),"No Motion Value")	=IFERROR(IF(K100=0,0,(((K100*(L100/100))-N100)/(K100*(L100/100)))*100),"No Motion Value")	0
+Q100	excel			={"",1}	={"",1}	
+F101	excel	F101:G101	Strike	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I101	excel	I101:J101	Strike	={"",100*(1-PlannerData!$L$24)}	={"",100*(1-PlannerData!$L$24)}	
+N101	excel		Damage Dealt	=(1-(J101/100))* | IFERROR(IFS( | (K101*(L101/100))/G101>=8,0.9*(K101*(L101/100)), | (K101*(L101/100))/G101>2.5,(1-((((K101*(L101/100))/G101-8)^2*(20/30.25)+10)/100))*(K101*(L101/100)), | (K101*(L101/100))/G101>=1,(1-((((K101*(L101/100))/G101-2.5)^2*(30/2.25)+30)/100))*(K101*(L101/100)), | (K101*(L101/100))/G101>0.12,(1-((((K101*(L101/100))/G101-0.12)^2*(-30/0.7744)+90)/100))*(K101*(L101/100)), | (K101*(L101/100))/G101<=0.12,0.1*(K101*(L101/100))),0) | *R101	=(1-(J101/100))* | IFERROR(IFS( | (K101*(L101/100))/G101>=8,0.9*(K101*(L101/100)), | (K101*(L101/100))/G101>2.5,(1-((((K101*(L101/100))/G101-8)^2*(20/30.25)+10)/100))*(K101*(L101/100)), | (K101*(L101/100))/G101>=1,(1-((((K101*(L101/100))/G101-2.5)^2*(30/2.25)+30)/100))*(K101*(L101/100)), | (K101*(L101/100))/G101>0.12,(1-((((K101*(L101/100))/G101-0.12)^2*(-30/0.7744)+90)/100))*(K101*(L101/100)), | (K101*(L101/100))/G101<=0.12,0.1*(K101*(L101/100))),0) | *R101	0
+O101	excel		Total Damage Negation [%]	=IFERROR(IF(K101=0,0,(((K101*(L101/100))-N101)/(K101*(L101/100)))*100),"No Motion Value")	=IFERROR(IF(K101=0,0,(((K101*(L101/100))-N101)/(K101*(L101/100)))*100),"No Motion Value")	0
+Q101	excel			={"",1}	={"",1}	
+F102	excel	F102:G102	Slash	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I102	excel	I102:J102	Slash	={"",100*(1-PlannerData!$L$25)}	={"",100*(1-PlannerData!$L$25)}	
+N102	excel		Damage Dealt	=(1-(J102/100))* | IFERROR(IFS( | (K102*(L102/100))/G102>=8,0.9*(K102*(L102/100)), | (K102*(L102/100))/G102>2.5,(1-((((K102*(L102/100))/G102-8)^2*(20/30.25)+10)/100))*(K102*(L102/100)), | (K102*(L102/100))/G102>=1,(1-((((K102*(L102/100))/G102-2.5)^2*(30/2.25)+30)/100))*(K102*(L102/100)), | (K102*(L102/100))/G102>0.12,(1-((((K102*(L102/100))/G102-0.12)^2*(-30/0.7744)+90)/100))*(K102*(L102/100)), | (K102*(L102/100))/G102<=0.12,0.1*(K102*(L102/100))),0) | *R102	=(1-(J102/100))* | IFERROR(IFS( | (K102*(L102/100))/G102>=8,0.9*(K102*(L102/100)), | (K102*(L102/100))/G102>2.5,(1-((((K102*(L102/100))/G102-8)^2*(20/30.25)+10)/100))*(K102*(L102/100)), | (K102*(L102/100))/G102>=1,(1-((((K102*(L102/100))/G102-2.5)^2*(30/2.25)+30)/100))*(K102*(L102/100)), | (K102*(L102/100))/G102>0.12,(1-((((K102*(L102/100))/G102-0.12)^2*(-30/0.7744)+90)/100))*(K102*(L102/100)), | (K102*(L102/100))/G102<=0.12,0.1*(K102*(L102/100))),0) | *R102	0
+O102	excel		Total Damage Negation [%]	=IFERROR(IF(K102=0,0,(((K102*(L102/100))-N102)/(K102*(L102/100)))*100),"No Motion Value")	=IFERROR(IF(K102=0,0,(((K102*(L102/100))-N102)/(K102*(L102/100)))*100),"No Motion Value")	0
+Q102	excel			={"",1}	={"",1}	
+F103	excel	F103:G103	Pierce	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I103	excel	I103:J103	Pierce	={"",100*(1-PlannerData!$L$26)}	={"",100*(1-PlannerData!$L$26)}	
+N103	excel			=(1-(J103/100))* | IFERROR(IFS( | (K103*(L103/100))/G103>=8,0.9*(K103*(L103/100)), | (K103*(L103/100))/G103>2.5,(1-((((K103*(L103/100))/G103-8)^2*(20/30.25)+10)/100))*(K103*(L103/100)), | (K103*(L103/100))/G103>=1,(1-((((K103*(L103/100))/G103-2.5)^2*(30/2.25)+30)/100))*(K103*(L103/100)), | (K103*(L103/100))/G103>0.12,(1-((((K103*(L103/100))/G103-0.12)^2*(-30/0.7744)+90)/100))*(K103*(L103/100)), | (K103*(L103/100))/G103<=0.12,0.1*(K103*(L103/100))),0) | *R103	=(1-(J103/100))* | IFERROR(IFS( | (K103*(L103/100))/G103>=8,0.9*(K103*(L103/100)), | (K103*(L103/100))/G103>2.5,(1-((((K103*(L103/100))/G103-8)^2*(20/30.25)+10)/100))*(K103*(L103/100)), | (K103*(L103/100))/G103>=1,(1-((((K103*(L103/100))/G103-2.5)^2*(30/2.25)+30)/100))*(K103*(L103/100)), | (K103*(L103/100))/G103>0.12,(1-((((K103*(L103/100))/G103-0.12)^2*(-30/0.7744)+90)/100))*(K103*(L103/100)), | (K103*(L103/100))/G103<=0.12,0.1*(K103*(L103/100))),0) | *R103	0
+O103	excel			=IFERROR(IF(K103=0,0,(((K103*(L103/100))-N103)/(K103*(L103/100)))*100),"No Motion Value")	=IFERROR(IF(K103=0,0,(((K103*(L103/100))-N103)/(K103*(L103/100)))*100),"No Motion Value")	0
+Q103	excel			={"",1}	={"",1}	
+F104	excel	F104:G104	Magic	={"",PlannerData!$J$8}	={"",PlannerData!$J$8}	
+I104	excel	I104:J104	Magic	={"",100*(1-PlannerData!$L$27)}	={"",100*(1-PlannerData!$L$27)}	
+N104	excel			=(1-(J104/100))* | IFERROR(IFS( | (K104*(L104/100))/G104>=8,0.9*(K104*(L104/100)), | (K104*(L104/100))/G104>2.5,(1-((((K104*(L104/100))/G104-8)^2*(20/30.25)+10)/100))*(K104*(L104/100)), | (K104*(L104/100))/G104>=1,(1-((((K104*(L104/100))/G104-2.5)^2*(30/2.25)+30)/100))*(K104*(L104/100)), | (K104*(L104/100))/G104>0.12,(1-((((K104*(L104/100))/G104-0.12)^2*(-30/0.7744)+90)/100))*(K104*(L104/100)), | (K104*(L104/100))/G104<=0.12,0.1*(K104*(L104/100))),0) | *R104	=(1-(J104/100))* | IFERROR(IFS( | (K104*(L104/100))/G104>=8,0.9*(K104*(L104/100)), | (K104*(L104/100))/G104>2.5,(1-((((K104*(L104/100))/G104-8)^2*(20/30.25)+10)/100))*(K104*(L104/100)), | (K104*(L104/100))/G104>=1,(1-((((K104*(L104/100))/G104-2.5)^2*(30/2.25)+30)/100))*(K104*(L104/100)), | (K104*(L104/100))/G104>0.12,(1-((((K104*(L104/100))/G104-0.12)^2*(-30/0.7744)+90)/100))*(K104*(L104/100)), | (K104*(L104/100))/G104<=0.12,0.1*(K104*(L104/100))),0) | *R104	0
+O104	excel			=IFERROR(IF(K104=0,0,(((K104*(L104/100))-N104)/(K104*(L104/100)))*100),"No Motion Value")	=IFERROR(IF(K104=0,0,(((K104*(L104/100))-N104)/(K104*(L104/100)))*100),"No Motion Value")	0
+Q104	excel			={"",1}	={"",1}	
+F105	excel	F105:G105	Fire	={"",PlannerData!$J$9}	={"",PlannerData!$J$9}	
+I105	excel	I105:J105	Fire	={"",100*(1-PlannerData!$L$28)}	={"",100*(1-PlannerData!$L$28)}	
+N105	excel			=(1-(J105/100))* | IFERROR(IFS( | (K105*(L105/100))/G105>=8,0.9*(K105*(L105/100)), | (K105*(L105/100))/G105>2.5,(1-((((K105*(L105/100))/G105-8)^2*(20/30.25)+10)/100))*(K105*(L105/100)), | (K105*(L105/100))/G105>=1,(1-((((K105*(L105/100))/G105-2.5)^2*(30/2.25)+30)/100))*(K105*(L105/100)), | (K105*(L105/100))/G105>0.12,(1-((((K105*(L105/100))/G105-0.12)^2*(-30/0.7744)+90)/100))*(K105*(L105/100)), | (K105*(L105/100))/G105<=0.12,0.1*(K105*(L105/100))),0) | *R105	=(1-(J105/100))* | IFERROR(IFS( | (K105*(L105/100))/G105>=8,0.9*(K105*(L105/100)), | (K105*(L105/100))/G105>2.5,(1-((((K105*(L105/100))/G105-8)^2*(20/30.25)+10)/100))*(K105*(L105/100)), | (K105*(L105/100))/G105>=1,(1-((((K105*(L105/100))/G105-2.5)^2*(30/2.25)+30)/100))*(K105*(L105/100)), | (K105*(L105/100))/G105>0.12,(1-((((K105*(L105/100))/G105-0.12)^2*(-30/0.7744)+90)/100))*(K105*(L105/100)), | (K105*(L105/100))/G105<=0.12,0.1*(K105*(L105/100))),0) | *R105	0
+O105	excel			=IFERROR(IF(K105=0,0,(((K105*(L105/100))-N105)/(K105*(L105/100)))*100),"No Motion Value")	=IFERROR(IF(K105=0,0,(((K105*(L105/100))-N105)/(K105*(L105/100)))*100),"No Motion Value")	0
+Q105	excel			={"",1}	={"",1}	
+F106	excel	F106:G106	Lightning	={"",PlannerData!$J$10}	={"",PlannerData!$J$10}	
+I106	excel	I106:J106	Lightning	={"",100*(1-PlannerData!$L$29)}	={"",100*(1-PlannerData!$L$29)}	
+N106	excel			=(1-(J106/100))* | IFERROR(IFS( | (K106*(L106/100))/G106>=8,0.9*(K106*(L106/100)), | (K106*(L106/100))/G106>2.5,(1-((((K106*(L106/100))/G106-8)^2*(20/30.25)+10)/100))*(K106*(L106/100)), | (K106*(L106/100))/G106>=1,(1-((((K106*(L106/100))/G106-2.5)^2*(30/2.25)+30)/100))*(K106*(L106/100)), | (K106*(L106/100))/G106>0.12,(1-((((K106*(L106/100))/G106-0.12)^2*(-30/0.7744)+90)/100))*(K106*(L106/100)), | (K106*(L106/100))/G106<=0.12,0.1*(K106*(L106/100))),0) | *R106	=(1-(J106/100))* | IFERROR(IFS( | (K106*(L106/100))/G106>=8,0.9*(K106*(L106/100)), | (K106*(L106/100))/G106>2.5,(1-((((K106*(L106/100))/G106-8)^2*(20/30.25)+10)/100))*(K106*(L106/100)), | (K106*(L106/100))/G106>=1,(1-((((K106*(L106/100))/G106-2.5)^2*(30/2.25)+30)/100))*(K106*(L106/100)), | (K106*(L106/100))/G106>0.12,(1-((((K106*(L106/100))/G106-0.12)^2*(-30/0.7744)+90)/100))*(K106*(L106/100)), | (K106*(L106/100))/G106<=0.12,0.1*(K106*(L106/100))),0) | *R106	0
+O106	excel			=IFERROR(IF(K106=0,0,(((K106*(L106/100))-N106)/(K106*(L106/100)))*100),"No Motion Value")	=IFERROR(IF(K106=0,0,(((K106*(L106/100))-N106)/(K106*(L106/100)))*100),"No Motion Value")	0
+Q106	excel			={"",1}	={"",1}	
+F107	excel	F107:G107	Holy	={"",PlannerData!$J$11}	={"",PlannerData!$J$11}	
+I107	excel	I107:J107	Holy	={"",100*(1-PlannerData!$L$30)}	={"",100*(1-PlannerData!$L$30)}	
+N107	excel			=(1-(J107/100))* | IFERROR(IFS( | (K107*(L107/100))/G107>=8,0.9*(K107*(L107/100)), | (K107*(L107/100))/G107>2.5,(1-((((K107*(L107/100))/G107-8)^2*(20/30.25)+10)/100))*(K107*(L107/100)), | (K107*(L107/100))/G107>=1,(1-((((K107*(L107/100))/G107-2.5)^2*(30/2.25)+30)/100))*(K107*(L107/100)), | (K107*(L107/100))/G107>0.12,(1-((((K107*(L107/100))/G107-0.12)^2*(-30/0.7744)+90)/100))*(K107*(L107/100)), | (K107*(L107/100))/G107<=0.12,0.1*(K107*(L107/100))),0) | *R107	=(1-(J107/100))* | IFERROR(IFS( | (K107*(L107/100))/G107>=8,0.9*(K107*(L107/100)), | (K107*(L107/100))/G107>2.5,(1-((((K107*(L107/100))/G107-8)^2*(20/30.25)+10)/100))*(K107*(L107/100)), | (K107*(L107/100))/G107>=1,(1-((((K107*(L107/100))/G107-2.5)^2*(30/2.25)+30)/100))*(K107*(L107/100)), | (K107*(L107/100))/G107>0.12,(1-((((K107*(L107/100))/G107-0.12)^2*(-30/0.7744)+90)/100))*(K107*(L107/100)), | (K107*(L107/100))/G107<=0.12,0.1*(K107*(L107/100))),0) | *R107	0
+O107	excel			=IFERROR(IF(K107=0,0,(((K107*(L107/100))-N107)/(K107*(L107/100)))*100),"No Motion Value")	=IFERROR(IF(K107=0,0,(((K107*(L107/100))-N107)/(K107*(L107/100)))*100),"No Motion Value")	0
+Q107	excel			={"",1}	={"",1}	
+F108	excel	F108:G108	Health Points	={"",PlannerData!$L$2}	={"",PlannerData!$L$2}	
+K108	excel		Total:	=K100+K101+K102+K103+K104+K105+K106+K107	=K100+K101+K102+K103+K104+K105+K106+K107	0
+N108	excel		Total:	=SUM(N100:N107)*R108	=SUM(N100:N107)*R108	0
+O108	excel		Total:	=IFERROR(IF((K108)=0,0,((((K100*(L100/100))+(K101*(L101/100))+(K102*(L102/100))+(K103*(L103/100))+(K104*(L104/100))+(K105*(L105/100))+(K106*(L106/100))+(K107*(L107/100)))-N108)/((K100*(L100/100))+(K101*(L101/100))+(K102*(L102/100))+(K103*(L103/100))+(K104*(L104/100))+(K105*(L105/100))+(K106*(L106/100))+(K107*(L107/100))))*100),0)	=IFERROR(IF((K108)=0,0,((((K100*(L100/100))+(K101*(L101/100))+(K102*(L102/100))+(K103*(L103/100))+(K104*(L104/100))+(K105*(L105/100))+(K106*(L106/100))+(K107*(L107/100)))-N108)/((K100*(L100/100))+(K101*(L101/100))+(K102*(L102/100))+(K103*(L103/100))+(K104*(L104/100))+(K105*(L105/100))+(K106*(L106/100))+(K107*(L107/100))))*100),0)	0
+Q108	excel		Total:	={"",1}	={"",1}	
+N109	excel		eff hp | hits to live:	=IFERROR(IF(O108=0,0,G108/(1-(O108/100))),0)	=IFERROR(IF(O108=0,0,G108/(1-(O108/100))),0)	0
+O109	excel		eff hp | hits to live:	=IFERROR(G108/N108,0)	=IFERROR(G108/N108,0)	0
+V109	excel		Total:	=PRODUCT(V100:V108)	=PRODUCT(V100:V108)	0
+AA109	excel		Total:	=100*(1-((1-AA100/100)*(1-AA101/100)*(1-AA102/100)*(1-AA103/100)*(1-AA104/100)*(1-AA105/100)*(1-AA106/100)*(1-AA107/100)*(1-AA108/100)))	=100*(1-((1-AA100/100)*(1-AA101/100)*(1-AA102/100)*(1-AA103/100)*(1-AA104/100)*(1-AA105/100)*(1-AA106/100)*(1-AA107/100)*(1-AA108/100)))	0
+F112	excel	F112:G112	Physical	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I112	excel	I112:J112	Physical	={"",100*(1-PlannerData!$L$23)}	={"",100*(1-PlannerData!$L$23)}	
+N112	excel		Damage Dealt	=(1-(J112/100))* | IFERROR(IFS( | (K112*(L112/100))/G112>=8,0.9*(K112*(L112/100)), | (K112*(L112/100))/G112>2.5,(1-((((K112*(L112/100))/G112-8)^2*(20/30.25)+10)/100))*(K112*(L112/100)), | (K112*(L112/100))/G112>=1,(1-((((K112*(L112/100))/G112-2.5)^2*(30/2.25)+30)/100))*(K112*(L112/100)), | (K112*(L112/100))/G112>0.12,(1-((((K112*(L112/100))/G112-0.12)^2*(-30/0.7744)+90)/100))*(K112*(L112/100)), | (K112*(L112/100))/G112<=0.12,0.1*(K112*(L112/100))),0) | *R112	=(1-(J112/100))* | IFERROR(IFS( | (K112*(L112/100))/G112>=8,0.9*(K112*(L112/100)), | (K112*(L112/100))/G112>2.5,(1-((((K112*(L112/100))/G112-8)^2*(20/30.25)+10)/100))*(K112*(L112/100)), | (K112*(L112/100))/G112>=1,(1-((((K112*(L112/100))/G112-2.5)^2*(30/2.25)+30)/100))*(K112*(L112/100)), | (K112*(L112/100))/G112>0.12,(1-((((K112*(L112/100))/G112-0.12)^2*(-30/0.7744)+90)/100))*(K112*(L112/100)), | (K112*(L112/100))/G112<=0.12,0.1*(K112*(L112/100))),0) | *R112	0
+O112	excel		Total Damage Negation [%]	=IFERROR(IF(K112=0,0,(((K112*(L112/100))-N112)/(K112*(L112/100)))*100),"No Motion Value")	=IFERROR(IF(K112=0,0,(((K112*(L112/100))-N112)/(K112*(L112/100)))*100),"No Motion Value")	0
+Q112	excel			={"",1}	={"",1}	
+F113	excel	F113:G113	Strike	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I113	excel	I113:J113	Strike	={"",100*(1-PlannerData!$L$24)}	={"",100*(1-PlannerData!$L$24)}	
+N113	excel		Damage Dealt	=(1-(J113/100))* | IFERROR(IFS( | (K113*(L113/100))/G113>=8,0.9*(K113*(L113/100)), | (K113*(L113/100))/G113>2.5,(1-((((K113*(L113/100))/G113-8)^2*(20/30.25)+10)/100))*(K113*(L113/100)), | (K113*(L113/100))/G113>=1,(1-((((K113*(L113/100))/G113-2.5)^2*(30/2.25)+30)/100))*(K113*(L113/100)), | (K113*(L113/100))/G113>0.12,(1-((((K113*(L113/100))/G113-0.12)^2*(-30/0.7744)+90)/100))*(K113*(L113/100)), | (K113*(L113/100))/G113<=0.12,0.1*(K113*(L113/100))),0) | *R113	=(1-(J113/100))* | IFERROR(IFS( | (K113*(L113/100))/G113>=8,0.9*(K113*(L113/100)), | (K113*(L113/100))/G113>2.5,(1-((((K113*(L113/100))/G113-8)^2*(20/30.25)+10)/100))*(K113*(L113/100)), | (K113*(L113/100))/G113>=1,(1-((((K113*(L113/100))/G113-2.5)^2*(30/2.25)+30)/100))*(K113*(L113/100)), | (K113*(L113/100))/G113>0.12,(1-((((K113*(L113/100))/G113-0.12)^2*(-30/0.7744)+90)/100))*(K113*(L113/100)), | (K113*(L113/100))/G113<=0.12,0.1*(K113*(L113/100))),0) | *R113	0
+O113	excel		Total Damage Negation [%]	=IFERROR(IF(K113=0,0,(((K113*(L113/100))-N113)/(K113*(L113/100)))*100),"No Motion Value")	=IFERROR(IF(K113=0,0,(((K113*(L113/100))-N113)/(K113*(L113/100)))*100),"No Motion Value")	0
+Q113	excel			={"",1}	={"",1}	
+F114	excel	F114:G114	Slash	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I114	excel	I114:J114	Slash	={"",100*(1-PlannerData!$L$25)}	={"",100*(1-PlannerData!$L$25)}	
+N114	excel		Damage Dealt	=(1-(J114/100))* | IFERROR(IFS( | (K114*(L114/100))/G114>=8,0.9*(K114*(L114/100)), | (K114*(L114/100))/G114>2.5,(1-((((K114*(L114/100))/G114-8)^2*(20/30.25)+10)/100))*(K114*(L114/100)), | (K114*(L114/100))/G114>=1,(1-((((K114*(L114/100))/G114-2.5)^2*(30/2.25)+30)/100))*(K114*(L114/100)), | (K114*(L114/100))/G114>0.12,(1-((((K114*(L114/100))/G114-0.12)^2*(-30/0.7744)+90)/100))*(K114*(L114/100)), | (K114*(L114/100))/G114<=0.12,0.1*(K114*(L114/100))),0) | *R114	=(1-(J114/100))* | IFERROR(IFS( | (K114*(L114/100))/G114>=8,0.9*(K114*(L114/100)), | (K114*(L114/100))/G114>2.5,(1-((((K114*(L114/100))/G114-8)^2*(20/30.25)+10)/100))*(K114*(L114/100)), | (K114*(L114/100))/G114>=1,(1-((((K114*(L114/100))/G114-2.5)^2*(30/2.25)+30)/100))*(K114*(L114/100)), | (K114*(L114/100))/G114>0.12,(1-((((K114*(L114/100))/G114-0.12)^2*(-30/0.7744)+90)/100))*(K114*(L114/100)), | (K114*(L114/100))/G114<=0.12,0.1*(K114*(L114/100))),0) | *R114	0
+O114	excel		Total Damage Negation [%]	=IFERROR(IF(K114=0,0,(((K114*(L114/100))-N114)/(K114*(L114/100)))*100),"No Motion Value")	=IFERROR(IF(K114=0,0,(((K114*(L114/100))-N114)/(K114*(L114/100)))*100),"No Motion Value")	0
+Q114	excel			={"",1}	={"",1}	
+F115	excel	F115:G115	Pierce	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+I115	excel	I115:J115	Pierce	={"",100*(1-PlannerData!$L$26)}	={"",100*(1-PlannerData!$L$26)}	
+N115	excel			=(1-(J115/100))* | IFERROR(IFS( | (K115*(L115/100))/G115>=8,0.9*(K115*(L115/100)), | (K115*(L115/100))/G115>2.5,(1-((((K115*(L115/100))/G115-8)^2*(20/30.25)+10)/100))*(K115*(L115/100)), | (K115*(L115/100))/G115>=1,(1-((((K115*(L115/100))/G115-2.5)^2*(30/2.25)+30)/100))*(K115*(L115/100)), | (K115*(L115/100))/G115>0.12,(1-((((K115*(L115/100))/G115-0.12)^2*(-30/0.7744)+90)/100))*(K115*(L115/100)), | (K115*(L115/100))/G115<=0.12,0.1*(K115*(L115/100))),0) | *R115	=(1-(J115/100))* | IFERROR(IFS( | (K115*(L115/100))/G115>=8,0.9*(K115*(L115/100)), | (K115*(L115/100))/G115>2.5,(1-((((K115*(L115/100))/G115-8)^2*(20/30.25)+10)/100))*(K115*(L115/100)), | (K115*(L115/100))/G115>=1,(1-((((K115*(L115/100))/G115-2.5)^2*(30/2.25)+30)/100))*(K115*(L115/100)), | (K115*(L115/100))/G115>0.12,(1-((((K115*(L115/100))/G115-0.12)^2*(-30/0.7744)+90)/100))*(K115*(L115/100)), | (K115*(L115/100))/G115<=0.12,0.1*(K115*(L115/100))),0) | *R115	0
+O115	excel			=IFERROR(IF(K115=0,0,(((K115*(L115/100))-N115)/(K115*(L115/100)))*100),"No Motion Value")	=IFERROR(IF(K115=0,0,(((K115*(L115/100))-N115)/(K115*(L115/100)))*100),"No Motion Value")	0
+Q115	excel			={"",1}	={"",1}	
+F116	excel	F116:G116	Magic	={"",PlannerData!$J$8}	={"",PlannerData!$J$8}	
+I116	excel	I116:J116	Magic	={"",100*(1-PlannerData!$L$27)}	={"",100*(1-PlannerData!$L$27)}	
+N116	excel			=(1-(J116/100))* | IFERROR(IFS( | (K116*(L116/100))/G116>=8,0.9*(K116*(L116/100)), | (K116*(L116/100))/G116>2.5,(1-((((K116*(L116/100))/G116-8)^2*(20/30.25)+10)/100))*(K116*(L116/100)), | (K116*(L116/100))/G116>=1,(1-((((K116*(L116/100))/G116-2.5)^2*(30/2.25)+30)/100))*(K116*(L116/100)), | (K116*(L116/100))/G116>0.12,(1-((((K116*(L116/100))/G116-0.12)^2*(-30/0.7744)+90)/100))*(K116*(L116/100)), | (K116*(L116/100))/G116<=0.12,0.1*(K116*(L116/100))),0) | *R116	=(1-(J116/100))* | IFERROR(IFS( | (K116*(L116/100))/G116>=8,0.9*(K116*(L116/100)), | (K116*(L116/100))/G116>2.5,(1-((((K116*(L116/100))/G116-8)^2*(20/30.25)+10)/100))*(K116*(L116/100)), | (K116*(L116/100))/G116>=1,(1-((((K116*(L116/100))/G116-2.5)^2*(30/2.25)+30)/100))*(K116*(L116/100)), | (K116*(L116/100))/G116>0.12,(1-((((K116*(L116/100))/G116-0.12)^2*(-30/0.7744)+90)/100))*(K116*(L116/100)), | (K116*(L116/100))/G116<=0.12,0.1*(K116*(L116/100))),0) | *R116	0
+O116	excel			=IFERROR(IF(K116=0,0,(((K116*(L116/100))-N116)/(K116*(L116/100)))*100),"No Motion Value")	=IFERROR(IF(K116=0,0,(((K116*(L116/100))-N116)/(K116*(L116/100)))*100),"No Motion Value")	0
+Q116	excel			={"",1}	={"",1}	
+F117	excel	F117:G117	Fire	={"",PlannerData!$J$9}	={"",PlannerData!$J$9}	
+I117	excel	I117:J117	Fire	={"",100*(1-PlannerData!$L$28)}	={"",100*(1-PlannerData!$L$28)}	
+N117	excel			=(1-(J117/100))* | IFERROR(IFS( | (K117*(L117/100))/G117>=8,0.9*(K117*(L117/100)), | (K117*(L117/100))/G117>2.5,(1-((((K117*(L117/100))/G117-8)^2*(20/30.25)+10)/100))*(K117*(L117/100)), | (K117*(L117/100))/G117>=1,(1-((((K117*(L117/100))/G117-2.5)^2*(30/2.25)+30)/100))*(K117*(L117/100)), | (K117*(L117/100))/G117>0.12,(1-((((K117*(L117/100))/G117-0.12)^2*(-30/0.7744)+90)/100))*(K117*(L117/100)), | (K117*(L117/100))/G117<=0.12,0.1*(K117*(L117/100))),0) | *R117	=(1-(J117/100))* | IFERROR(IFS( | (K117*(L117/100))/G117>=8,0.9*(K117*(L117/100)), | (K117*(L117/100))/G117>2.5,(1-((((K117*(L117/100))/G117-8)^2*(20/30.25)+10)/100))*(K117*(L117/100)), | (K117*(L117/100))/G117>=1,(1-((((K117*(L117/100))/G117-2.5)^2*(30/2.25)+30)/100))*(K117*(L117/100)), | (K117*(L117/100))/G117>0.12,(1-((((K117*(L117/100))/G117-0.12)^2*(-30/0.7744)+90)/100))*(K117*(L117/100)), | (K117*(L117/100))/G117<=0.12,0.1*(K117*(L117/100))),0) | *R117	0
+O117	excel			=IFERROR(IF(K117=0,0,(((K117*(L117/100))-N117)/(K117*(L117/100)))*100),"No Motion Value")	=IFERROR(IF(K117=0,0,(((K117*(L117/100))-N117)/(K117*(L117/100)))*100),"No Motion Value")	0
+Q117	excel			={"",1}	={"",1}	
+F118	excel	F118:G118	Lightning	={"",PlannerData!$J$10}	={"",PlannerData!$J$10}	
+I118	excel	I118:J118	Lightning	={"",100*(1-PlannerData!$L$29)}	={"",100*(1-PlannerData!$L$29)}	
+N118	excel			=(1-(J118/100))* | IFERROR(IFS( | (K118*(L118/100))/G118>=8,0.9*(K118*(L118/100)), | (K118*(L118/100))/G118>2.5,(1-((((K118*(L118/100))/G118-8)^2*(20/30.25)+10)/100))*(K118*(L118/100)), | (K118*(L118/100))/G118>=1,(1-((((K118*(L118/100))/G118-2.5)^2*(30/2.25)+30)/100))*(K118*(L118/100)), | (K118*(L118/100))/G118>0.12,(1-((((K118*(L118/100))/G118-0.12)^2*(-30/0.7744)+90)/100))*(K118*(L118/100)), | (K118*(L118/100))/G118<=0.12,0.1*(K118*(L118/100))),0) | *R118	=(1-(J118/100))* | IFERROR(IFS( | (K118*(L118/100))/G118>=8,0.9*(K118*(L118/100)), | (K118*(L118/100))/G118>2.5,(1-((((K118*(L118/100))/G118-8)^2*(20/30.25)+10)/100))*(K118*(L118/100)), | (K118*(L118/100))/G118>=1,(1-((((K118*(L118/100))/G118-2.5)^2*(30/2.25)+30)/100))*(K118*(L118/100)), | (K118*(L118/100))/G118>0.12,(1-((((K118*(L118/100))/G118-0.12)^2*(-30/0.7744)+90)/100))*(K118*(L118/100)), | (K118*(L118/100))/G118<=0.12,0.1*(K118*(L118/100))),0) | *R118	0
+O118	excel			=IFERROR(IF(K118=0,0,(((K118*(L118/100))-N118)/(K118*(L118/100)))*100),"No Motion Value")	=IFERROR(IF(K118=0,0,(((K118*(L118/100))-N118)/(K118*(L118/100)))*100),"No Motion Value")	0
+Q118	excel			={"",1}	={"",1}	
+F119	excel	F119:G119	Holy	={"",PlannerData!$J$11}	={"",PlannerData!$J$11}	
+I119	excel	I119:J119	Holy	={"",100*(1-PlannerData!$L$30)}	={"",100*(1-PlannerData!$L$30)}	
+N119	excel			=(1-(J119/100))* | IFERROR(IFS( | (K119*(L119/100))/G119>=8,0.9*(K119*(L119/100)), | (K119*(L119/100))/G119>2.5,(1-((((K119*(L119/100))/G119-8)^2*(20/30.25)+10)/100))*(K119*(L119/100)), | (K119*(L119/100))/G119>=1,(1-((((K119*(L119/100))/G119-2.5)^2*(30/2.25)+30)/100))*(K119*(L119/100)), | (K119*(L119/100))/G119>0.12,(1-((((K119*(L119/100))/G119-0.12)^2*(-30/0.7744)+90)/100))*(K119*(L119/100)), | (K119*(L119/100))/G119<=0.12,0.1*(K119*(L119/100))),0) | *R119	=(1-(J119/100))* | IFERROR(IFS( | (K119*(L119/100))/G119>=8,0.9*(K119*(L119/100)), | (K119*(L119/100))/G119>2.5,(1-((((K119*(L119/100))/G119-8)^2*(20/30.25)+10)/100))*(K119*(L119/100)), | (K119*(L119/100))/G119>=1,(1-((((K119*(L119/100))/G119-2.5)^2*(30/2.25)+30)/100))*(K119*(L119/100)), | (K119*(L119/100))/G119>0.12,(1-((((K119*(L119/100))/G119-0.12)^2*(-30/0.7744)+90)/100))*(K119*(L119/100)), | (K119*(L119/100))/G119<=0.12,0.1*(K119*(L119/100))),0) | *R119	0
+O119	excel			=IFERROR(IF(K119=0,0,(((K119*(L119/100))-N119)/(K119*(L119/100)))*100),"No Motion Value")	=IFERROR(IF(K119=0,0,(((K119*(L119/100))-N119)/(K119*(L119/100)))*100),"No Motion Value")	0
+Q119	excel			={"",1}	={"",1}	
+F120	excel	F120:G120	Health Points	={"",PlannerData!$L$2}	={"",PlannerData!$L$2}	
+K120	excel		Total:	=K112+K113+K114+K115+K116+K117+K118+K119	=K112+K113+K114+K115+K116+K117+K118+K119	0
+N120	excel		Total:	=SUM(N112:N119)*R120	=SUM(N112:N119)*R120	0
+O120	excel		Total:	=IFERROR(IF((K120)=0,0,((((K112*(L112/100))+(K113*(L113/100))+(K114*(L114/100))+(K115*(L115/100))+(K116*(L116/100))+(K117*(L117/100))+(K118*(L118/100))+(K119*(L119/100)))-N120)/((K112*(L112/100))+(K113*(L113/100))+(K114*(L114/100))+(K115*(L115/100))+(K116*(L116/100))+(K117*(L117/100))+(K118*(L118/100))+(K119*(L119/100))))*100),0)	=IFERROR(IF((K120)=0,0,((((K112*(L112/100))+(K113*(L113/100))+(K114*(L114/100))+(K115*(L115/100))+(K116*(L116/100))+(K117*(L117/100))+(K118*(L118/100))+(K119*(L119/100)))-N120)/((K112*(L112/100))+(K113*(L113/100))+(K114*(L114/100))+(K115*(L115/100))+(K116*(L116/100))+(K117*(L117/100))+(K118*(L118/100))+(K119*(L119/100))))*100),0)	0
+Q120	excel		Total:	={"",1}	={"",1}	
+N121	excel		eff hp | hits to live:	=IFERROR(IF(O120=0,0,G120/(1-(O120/100))),0)	=IFERROR(IF(O120=0,0,G120/(1-(O120/100))),0)	0
+O121	excel		eff hp | hits to live:	=IFERROR(G120/N120,0)	=IFERROR(G120/N120,0)	0
+V121	excel		Total:	=PRODUCT(V112:V120)	=PRODUCT(V112:V120)	0
+AA121	excel		Total:	=100*(1-((1-AA112/100)*(1-AA113/100)*(1-AA114/100)*(1-AA115/100)*(1-AA116/100)*(1-AA117/100)*(1-AA118/100)*(1-AA119/100)*(1-AA120/100)))	=100*(1-((1-AA112/100)*(1-AA113/100)*(1-AA114/100)*(1-AA115/100)*(1-AA116/100)*(1-AA117/100)*(1-AA118/100)*(1-AA119/100)*(1-AA120/100)))	0
+N122	excel		Damage Increase:	=IFERROR(IF(N120>N108,N120/N108-1,0),0)	=IFERROR(IF(N120>N108,N120/N108-1,0),0)	0

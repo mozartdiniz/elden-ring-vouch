@@ -1,0 +1,47 @@
+Unarmed,,,Base,,,Modifiers,,,,,,,Strength,Dexterity,Intelligence,Faith,Arcane,,,,Available Infusions,,Upgrade Level,,Status Buffs,Usable,Dropdown,,Defaults
+Unarmed,110000,,attackBasePhysics,20,,physicsAtkRate,1,,correctType_Physics,0,,,strength,dexterity,magic,faith,luck,,Unarmed,,Standard,,0,,Poison Grease,FALSE,None,,
+Standard,0,,attackBaseMagic,0,,magicAtkRate,1,,strengthCorrect_byPhysics,18.11896248,,correct,0.5,0.5,0,0,0,,Select a Weapon Class,,,,,,Rot Grease,FALSE,,,Unarmed
+Reinforcement Level,0,,attackBaseFire,0,,fireAtkRate,1,,dexterityCorrect_byPhysics,16.45958186,,correctRate,1,1,1,1,1,,,,,,,,Blood Grease,FALSE,,,Standard
+reinforceTypeId,3000,,attackBaseThunder,0,,thunderAtkRate,1,,magicCorrect_byPhysics,10.11834044,,,,,,,,,,,,,,,Freezing Grease,FALSE,,,0
+attackElementCorrectId,10000,,attackBaseDark,0,,darkAtkRate,1,,faithCorrect_byPhysics,10.11834044,,correct_byPhysics,0.1811896248,0.1645958186,0.1011834044,0.1011834044,0.07164449132,,,,,,,,Soporific Grease,FALSE,,,
+SpecialStatusSpEffectId,,,,,,,,,luckCorrect_byPhysics,7.164449132,,correct_byMagic,0.1811896248,0.1645958186,0.1011834044,0.1011834044,0.07164449132,,,,,,,,Drawstring Poison Grease,FALSE,,,14
+gemMountType,0,,correctStrength,50,,correctStrengthRate,1,,,,,correct_byFire,0.1811896248,0.1645958186,0.1011834044,0.1011834044,0.07164449132,,,,,,,,Drawstring Rot Grease,FALSE,,,13.0
+disableGemAttr,FALSE,,correctAgility,50,,correctAgilityRate,1,,correctType_Magic,0,,correct_byThunder,0.1811896248,0.1645958186,0.1011834044,0.1011834044,0.07164449132,,,,,,,,Drawstring Blood Grease,FALSE,,,9.0
+Throwable,FALSE,,correctMagic,0,,correctMagicRate,1,,strengthCorrect_byMagic,18.11896248,,correct_byDark,0.1811896248,0.1645958186,0.1011834044,0.1011834044,0.07164449132,,,,,,,,Drawstring Soporific Grease,FALSE,,,9.0
+isEnhance,FALSE,,correctFaith,0,,correctFaithRate,1,,dexterityCorrect_byMagic,16.45958186,,,,,,,,,,,,,,,Frozen Armament,FALSE,,,7.0
+enableMagic,FALSE,,correctLuck,0,,correctLuckRate,1,,magicCorrect_byMagic,10.11834044,,isCorrect_byPhysics,TRUE,TRUE,FALSE,FALSE,FALSE,,,,,,,,Poison Armament,FALSE,,,
+enableMiracle,FALSE,,,,,,,,faithCorrect_byMagic,10.11834044,,isCorrect_byMagic,FALSE,FALSE,TRUE,FALSE,FALSE,,,,,,,,Bloodflame Blade (only bleed),FALSE,,,
+isDualBlade,FALSE,,physGuardCutRate,30,,physicsGuardCutRate,1,,luckCorrect_byMagic,7.164449132,,isCorrect_byFire,FALSE,FALSE,FALSE,TRUE,FALSE,,,,,,,,Seppuku (only bleed; +30 phys AP),FALSE,,,None
+properStrength,0,,magGuardCutRate,20,,magicGuardCutRate,1,,,,,isCorrect_byThunder,FALSE,TRUE,FALSE,FALSE,FALSE,,,,,,,,Poisonous Mist,FALSE,,,
+properAgility,0,,fireGuardCutRate,20,,fireGuardCutRate,1,,correctType_Fire,0,,isCorrect_byDark,FALSE,FALSE,FALSE,TRUE,FALSE,,,,,,,,Chilling Mist,FALSE,,,
+properMagic,0,,thunGuardCutRate,20,,thunderGuardCutRate,1,,strengthCorrect_byFire,18.11896248,,,,,,,,,,,,,,,,,,,
+properFaith,0,,darkGuardCutRate,20,,darkGuardCutRate,1,,dexterityCorrect_byFire,16.45958186,,overwriteCorrectRate_byPhysics,-1,-1,-1,-1,-1,,,,,,,,,,,,
+properLuck,0,,poisonGuardResist,10,,poisonGuardResistRate,1,,magicCorrect_byFire,10.11834044,,overwriteCorrectRate_byMagic,-1,-1,-1,-1,-1,,,,,,,,,,,,
+Strength,14,,diseaseGuardResist,10,,diseaseGuardResistRate,1,,faithCorrect_byFire,10.11834044,,overwriteCorrectRate_byFire,-1,-1,-1,-1,-1,,,,,,,,,,,,
+Dexterity,13,,bloodGuardResist,10,,bloodGuardResistRate,1,,luckCorrect_byFire,7.164449132,,overwriteCorrectRate_ByThunder,-1,-1,-1,-1,-1,,,,,,,,,,,,
+Intelligence,9,,freezeGuardResist,10,,freezeGuardDefRate,1,,,,,overwriteCorrectRate_byDark,-1,-1,-1,-1,-1,,,,,,,,,,,,
+Faith,9,,sleepGuardResist,0,,sleepGuardDefRate,1,,correctType_Thunder,0,,,,,,,,,,,,,,,,,,,
+Arcane,7,,madnessGuardResist,0,,madnessGuardDefRate,1,,strengthCorrect_byThunder,18.11896248,,influenceCorrectRate_byPhysics,1,1,1,1,1,,,,,,,,,,,,
+2h,FALSE,,curseGuardResist,10,,curseGuardResistRate,1,,dexterityCorrect_byThunder,16.45958186,,influenceCorrectRate_byMagic,1,1,1,1,1,,,,,,,,,,,,
+Str Requirements Met,TRUE,,staminaGuardDef,10,,staminaGuardDefRate,1,,magicCorrect_byThunder,10.11834044,,influenceCorrectRate_byFire,1,1,1,1,1,,,,,,,,,,,,
+Dex Requirements Met,TRUE,,,,,,,,faithCorrect_byThunder,10.11834044,,influenceCorrectRate_byThunder,1,1,1,1,1,,,,,,,,,,,,
+Int Requirements Met,TRUE,,,,,baseAtkRate,1,,luckCorrect_byThunder,7.164449132,,influenceCorrectRate_byDark,1,1,1,1,1,,,,,,,,,,,,
+Faith Requirements Met,TRUE,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Arc Requirements Met,TRUE,,spEffectBehaviorId0,-1,,spEffectBehaviorId1,-1,,correctType_Dark,0,,correctRate_byPhysics,0.0905948124,0.0822979093,0,0,0,,,,,,,,,,,,
+ignoreRequirements,FALSE,,spEffectId1,0,,spEffectId2,0,,strengthCorrect_byDark,18.11896248,,correctRate_byMagic,0,0,0,0,0,,,,,,,,,,,,
+Status Buff,None,,poizonAttackPower,0,,poizonAttackPower,0,,dexterityCorrect_byDark,16.45958186,,correctRate_byFire,0,0,0,0,0,,,,,,,,,,,,
+Weapon Class,Fist,,diseaseAttackPower,0,,diseaseAttackPower,0,,magicCorrect_byDark,10.11834044,,correctRate_byThunder,0,0.0822979093,0,0,0,,,,,,,,,,,,
+,,,bloodAttackPower,0,,bloodAttackPower,0,,faithCorrect_byDark,10.11834044,,correctRate_byDark,0,0,0,0,0,,,,,,,,,,,,
+overwriteAttackElementCorrectId,,,freezeAttackPower,0,,freezeAttackPower,0,,luckCorrect_byDark,7.164449132,,,,,,,,,,,,,,,,,,,
+overwriteAttackBasePhysics,,,sleepAttackPower,0,,sleepAttackPower,0,,,,,lowStatus_AtkPowDown,0.4,,,,,,,,,,,,,,,,
+overwriteAttackBaseMagic,,,madnessAttackPower,0,,madnessAttackPower,0,,correctType_Poison,10,,physAtkPenalty,FALSE,-0.4,negPhysScale,FALSE,0,,,,,,,,,,,,
+overwriteAttackBaseFire,,,,,,,,,luckCorrect_byPoison,4.285714286,,magAtkPenalty,FALSE,-0.4,negMagScale,FALSE,0,,,,,,,,,,,,
+overwriteAttackBaseThunder,,,StatusBuffSpEffectId,-1,,,,,,,,fireAtkPenalty,FALSE,-0.4,negFireScale,FALSE,0,,,,,,,,,,,,
+overwriteAttackBaseDark,,,poizonAttackPower,0,,,,,correctType_Blood,10,,thunAtkPenalty,FALSE,-0.4,negThunScale,FALSE,0,,,,,,,,,,,,
+baseAtkRate,FALSE,,diseaseAttackPower,0,,,,,luckCorrect_byBlood,4.285714286,,darkAtkPenalty,FALSE,-0.4,negDarkScale,FALSE,0,,,,,,,,,,,,
+,,,bloodAttackPower,0,,,,,,,,,,,,,,,,,,,,,,,,,
+changeStrengthPoint,,,freezeAttackPower,0,,,,,correctType_Sleep,0,,statusAtkPenalty,FALSE,-0.4,,,,,,,,,,,,,,,
+changeAgilityPoint,,,sleepAttackPower,0,,,,,luckCorrect_bySleep,7.164449132,,,,,,,,,,,,,,,,,,,
+changeMagicPoint,,,madnessAttackPower,0,,,,,,,,,changeStrengthPoint,changeAgilityPoint,changeMagicPoint,changeFaithPoint,changeLuckPoint,,,,,,,,,,,,
+changeFaithPoint,,,,,,,,,correctType_Madness,0,,,0,0,0,0,0,,,,,,,,,,,,
+changeLuckPoint,,,,,,,,,luckCorrect_byMadness,7.164449132,,,,,,,,,,,,,,,,,,,

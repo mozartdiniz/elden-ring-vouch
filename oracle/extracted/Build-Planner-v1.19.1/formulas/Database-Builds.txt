@@ -1,0 +1,948 @@
+SHEET: Database Builds
+WORKBOOK: Copy of ER - Build Planner v1.19.1.xlsx
+USED RANGE: A1:E43
+NONEMPTY CELLS: 205
+FORMULA CELLS: 195
+
+This file is for an LLM that must rebuild these calculations in another language. Treat formulas as the source of truth. Cached/fallback values are only for checking a port. Skip spill_cache cells; they are not logic.
+
+MERGED RANGES (1):
+  C1:D1
+
+COMMENTS (author notes on UI / semantics):
+  B2: Will only display builds with creator names that contain your input
+  C2: Will only display builds at this level
+  D2: Will only display builds containing your input in the name
+  A4: last updated
+
+STATIC / INPUT / LABEL CELLS (10):
+coord	value
+B1	Upload builds with this link
+C1	Grab the Build ID for a build you want to upload from the Builds page
+B2	Alias Filter
+C2	Level Filter
+D2	Name Filter
+A4	Date
+B4	Creator Alias
+C4	Build Level
+D4	Build Name
+E4	Build ID
+
+CROSS-SHEET REFERENCES: Export
+FORMULA KINDS: google_sheets=1, spill_cache=194
+UNIQUE PATTERNS: 129
+
+========================================================================
+FORMULA PATTERNS (fill-down compressed)
+{r} is the row of the cell. Port the template once and apply per row.
+========================================================================
+
+PATTERN 1  kind=google_sheets  array=False  A5
+  context_label: Date
+  template: =IFERROR(
+QUERY(IMPORTRANGE("https://docs.google.com/spreadsheets/d/1qSS0pcKiy1fWceaUiy6wmdTRYYOxRRUyz8pLXL3Lk7Q","Export!A2:E"),
+"Select Col5, Col3, Col4, Col1, Col2"
+&IF(ISBLANK(B3),," where lower(Col3) contains '"&LOWER(B3)&"'")
+&IF(ISBLANK(C3
+  note: Original Google Sheets formula recovered from DUMMYFUNCTION wrapper. Functions like FILTER, QUERY, UNIQUE, FLATTEN, IMPORTRANGE, GOOGLETRANSLATE are Sheets-only and must be reimplemented.
+  e.g. A5: =IFERROR(
+QUERY(IMPORTRANGE("https://docs.google.com/spreadsheets/d/1qSS0pcKiy1fWceaUiy6wmdTRYYOxRRUyz8pLXL3Lk7Q","Export!A2:E"),
+"Select Col5, Col3, Col4, Col1, Col2"
+&IF(ISBLANK(B3),," where lower(Col3) contains '"&LOWER(B3)&"'")
+&IF(ISBLANK(C3  cached=datetime.datetime(2022, 10, 23, 0, 0)
+
+PATTERN 2  kind=spill_cache  array=False  B5
+  context_label: Creator Alias
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"FunkMachine")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. B5: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"FunkMachine")  cached='FunkMachine'
+
+PATTERN 3  kind=spill_cache  array=False  C5:C21 (2 cells)
+  context_label: Build Level
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),40.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. C5: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),40.0)  cached=40
+  e.g. C21: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),40.0)  cached=40
+
+PATTERN 4  kind=spill_cache  array=False  D5
+  context_label: Build Name
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"2 worst katanas, rl40")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D5: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"2 worst katanas, rl40")  cached='2 worst katanas, rl40'
+
+PATTERN 5  kind=spill_cache  array=False  E5
+  context_label: Build ID
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-23-D-B-F-14-0-0-0-249F0-3A9E{r-1}-3AA48-24B1C-41B-4E2-1784-47E-0-8A65B3-FB907-1ADB0-8A8CC7-1C9C{r+1}A7-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E5: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-23-D-B-F-14-0-0-0-249F0-3A9E4-3AA48-24B1C-41B-4E2-1784-47E-0-8A65B3-FB907-1ADB0-8A8CC7-1C9C6A7-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0")  cached='A-23-D-B-F-14-0-0-0-249F0-3A9E4-3AA48-24B1C-41B-4E2-1784-47E-0-8A65B3-FB907-1ADB0-8A8CC7-1C9C6A7-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0'
+
+PATTERN 6  kind=spill_cache  array=False  A6
+  context_label: Date
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44870.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A6: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44870.0)  cached=datetime.datetime(2022, 11, 5, 0, 0)
+
+PATTERN 7  kind=spill_cache  array=False  B6:B38 (6 cells)
+  context_label: Creator Alias
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Amulya")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. B6: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Amulya")  cached='Amulya'
+  e.g. B31: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Amulya")  cached='Amulya'
+  e.g. B32: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Amulya")  cached='Amulya'
+  ... 3 more of this pattern
+
+PATTERN 8  kind=spill_cache  array=False  C6:C37 (4 cells)
+  context_label: Build Level
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),137.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. C6: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),137.0)  cached=137
+  e.g. C14: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),137.0)  cached=137
+  e.g. C31: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),137.0)  cached=137
+  ... 1 more of this pattern
+
+PATTERN 9  kind=spill_cache  array=False  D6
+  context_label: Build Name
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"70 Dex LIGHT ROLL Glass Cannon 137")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D6: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"70 Dex LIGHT ROLL Glass Cannon 137")  cached='70 Dex LIGHT ROLL Glass Cannon 137'
+
+PATTERN 10  kind=spill_cache  array=False  E6:E14 (2 cells)
+  context_label: Build ID
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-1F-14-46-0-0-0-113E10-E3134-A8818-113F3C-412-408-884-4E2-0-220961-1ADB0-1ADB0-220961-1ADB0-1ADB0-A-1AB8-193C-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E6: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-1F-14-46-0-0-0-113E10-E3134-A8818-113F3C-412-408-884-4E2-0-220961-1ADB0-1ADB0-220961-1ADB0-1ADB0-A-1AB8-193C-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0")  cached='A-3C-0-1F-14-46-0-0-0-113E10-E3134-A8818-113F3C-412-408-884-4E2-0-220961-1ADB0-1ADB0-220961-1ADB0-1ADB0-A-1AB8-193C-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0'
+  e.g. E14: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-1F-14-46-0-0-0-113E10-E3134-A8818-113F3C-412-408-884-4E2-0-220961-1ADB0-1ADB0-220961-1ADB0-1ADB0-A-1AB8-193C-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0")  cached='A-3C-0-1F-14-46-0-0-0-113E10-E3134-A8818-113F3C-412-408-884-4E2-0-220961-1ADB0-1ADB0-220961-1ADB0-1ADB0-A-1AB8-193C-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0'
+
+PATTERN 11  kind=spill_cache  array=False  A7:A18 (2 cells)
+  context_label: Date
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44685.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A7: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44685.0)  cached=datetime.datetime(2022, 5, 4, 0, 0)
+  e.g. A18: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44685.0)  cached=datetime.datetime(2022, 5, 4, 0, 0)
+
+PATTERN 12  kind=spill_cache  array=False  B7:B18 (2 cells)
+  context_label: Creator Alias
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Hv")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. B7: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Hv")  cached='Hv'
+  e.g. B18: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Hv")  cached='Hv'
+
+PATTERN 13  kind=spill_cache  array=False  C7:C43 (14 cells)
+  context_label: Build Level
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),125.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. C7: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),125.0)  cached=125
+  e.g. C12: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),125.0)  cached=125
+  e.g. C16: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),125.0)  cached=125
+  ... 11 more of this pattern
+
+PATTERN 14  kind=spill_cache  array=False  D7
+  context_label: Build Name
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"93 Poise Memeveil Dragonbolt")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D7: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"93 Poise Memeveil Dragonbolt")  cached='93 Poise Memeveil Dragonbolt'
+
+PATTERN 15  kind=spill_cache  array=False  E7
+  context_label: Build ID
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"46-3C-13-13-C-12-34-10-0-108A60-BE744-105478-BE80C-442-4BA-408-412-0-8A3EAA-2082C1A-1ADB0-1FB0CBA-1ADB0-1ADB0-A-1B3B-FAA-1162-FB5-1158-0-0-0-0-0-0-0-0-0-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E7: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"46-3C-13-13-C-12-34-10-0-108A60-BE744-105478-BE80C-442-4BA-408-412-0-8A3EAA-2082C1A-1ADB0-1FB0CBA-1ADB0-1ADB0-A-1B3B-FAA-1162-FB5-1158-0-0-0-0-0-0-0-0-0-0-0-0")  cached='46-3C-13-13-C-12-34-10-0-108A60-BE744-105478-BE80C-442-4BA-408-412-0-8A3EAA-2082C1A-1ADB0-1FB0CBA-1ADB0-1ADB0-A-1B3B-FAA-1162-FB5-1158-0-0-0-0-0-0-0-0-0-0-0-0'
+
+PATTERN 16  kind=spill_cache  array=False  A8:A40 (4 cells)
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45034.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A8: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45034.0)  cached=datetime.datetime(2023, 4, 18, 0, 0)
+  e.g. A10: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45034.0)  cached=datetime.datetime(2023, 4, 18, 0, 0)
+  e.g. A15: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45034.0)  cached=datetime.datetime(2023, 4, 18, 0, 0)
+  ... 1 more of this pattern
+
+PATTERN 17  kind=spill_cache  array=False  B8:B40 (5 cells)
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"chronofreak")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. B8: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"chronofreak")  cached='chronofreak'
+  e.g. B10: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"chronofreak")  cached='chronofreak'
+  e.g. B11: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"chronofreak")  cached='chronofreak'
+  ... 2 more of this pattern
+
+PATTERN 18  kind=spill_cache  array=False  C8:C42 (14 cells)
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),150.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. C8: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),150.0)  cached=150
+  e.g. C10: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),150.0)  cached=150
+  e.g. C11: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),150.0)  cached=150
+  ... 11 more of this pattern
+
+PATTERN 19  kind=spill_cache  array=False  D8
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Bloody Helice Dodge Spam")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D8: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Bloody Helice Dodge Spam")  cached='Bloody Helice Dodge Spam'
+
+PATTERN 20  kind=spill_cache  array=False  E8
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-28-24-32-10-14-1-F-2D-222E0-22344-57F{r}-2240C-47E-3FE-412-4CF-A-5B{r}D{r}A-1ADB0-1ADB0-208050A-1DB28B{r+1}-1ADB0-A-1AB{r}-17A2-1A{r+1}A-1AA4-1C2A-1C20-1B6C-1B76-1932-1798-0-0-0-1-0-0-0-2B02-2AF{r+1}-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E8: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-28-24-32-10-14-1-F-2D-222E0-22344-57F08-2240C-47E-3FE-412-4CF-A-5B8D8A-1ADB0-1ADB0-208050A-1DB28B9-1ADB0-A-1AB8-17A2-1A9A-1AA4-1C2A-1C20-1B6C-1B76-1932-1798-0-0-0-1-0-0-0-2B02-2AF9-0")  cached='1E-28-24-32-10-14-1-F-2D-222E0-22344-57F08-2240C-47E-3FE-412-4CF-A-5B8D8A-1ADB0-1ADB0-208050A-1DB28B9-1ADB0-A-1AB8-17A2-1A9A-1AA4-1C2A-1C20-1B6C-1B76-1932-1798-0-0-0-1-0-0-0-2B02-2AF9-0'
+
+PATTERN 21  kind=spill_cache  array=False  A9:A43 (4 cells)
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44921.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A9: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44921.0)  cached=datetime.datetime(2022, 12, 26, 0, 0)
+  e.g. A19: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44921.0)  cached=datetime.datetime(2022, 12, 26, 0, 0)
+  e.g. A36: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44921.0)  cached=datetime.datetime(2022, 12, 26, 0, 0)
+  ... 1 more of this pattern
+
+PATTERN 22  kind=spill_cache  array=False  B9:B43 (4 cells)
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Zanogre")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. B9: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Zanogre")  cached='Zanogre'
+  e.g. B19: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Zanogre")  cached='Zanogre'
+  e.g. B36: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Zanogre")  cached='Zanogre'
+  ... 1 more of this pattern
+
+PATTERN 23  kind=spill_cache  array=False  C9:C41 (2 cells)
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),200.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. C9: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),200.0)  cached=200
+  e.g. C41: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),200.0)  cached=200
+
+PATTERN 24  kind=spill_cache  array=False  D9
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Cringe lvl 200 Quality")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D9: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Cringe lvl 200 Quality")  cached='Cringe lvl 200 Quality'
+
+PATTERN 25  kind=spill_cache  array=False  E9
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-46-F-14-35-50-0-19-0-16E360-9CA4-13948-2240C-3EA-412-80C-4BA-0-308725-1ADB0-1ADB0-2082C1A-1C{r}C399-1ADB0-A-19C{r-1}-18BA-1AB{r-1}-1A90-1EDF-1770-1798-1917-0-0-0-0-0-1-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E9: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-46-F-14-35-50-0-19-0-16E360-9CA4-13948-2240C-3EA-412-80C-4BA-0-308725-1ADB0-1ADB0-2082C1A-1C9C399-1ADB0-A-19C8-18BA-1AB8-1A90-1EDF-1770-1798-1917-0-0-0-0-0-1-0-0-0")  cached='A-46-F-14-35-50-0-19-0-16E360-9CA4-13948-2240C-3EA-412-80C-4BA-0-308725-1ADB0-1ADB0-2082C1A-1C9C399-1ADB0-A-19C8-18BA-1AB8-1A90-1EDF-1770-1798-1917-0-0-0-0-0-1-0-0-0'
+
+PATTERN 26  kind=spill_cache  array=False  D10
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Crucible Knight")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D10: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Crucible Knight")  cached='Crucible Knight'
+
+PATTERN 27  kind=spill_cache  array=False  E10
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-10-29-35-D-0-1E-0-8B678-8B6DC-8B358-8B3BC-FA3-C12-4CF-408-1E-2EB12A-103B46A-1ADB0-1E8BD3A-20768D{r-1}-1ADB0-A-1AB8-1D56-1D4C-1D60-1A{r-1}A-1AA4-1AAE-19C8-17A2-18BA-0-0-0-0-0-0-0-2B03-2B12-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E10: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-10-29-35-D-0-1E-0-8B678-8B6DC-8B358-8B3BC-FA3-C12-4CF-408-1E-2EB12A-103B46A-1ADB0-1E8BD3A-20768D9-1ADB0-A-1AB8-1D56-1D4C-1D60-1A9A-1AA4-1AAE-19C8-17A2-18BA-0-0-0-0-0-0-0-2B03-2B12-0")  cached='A-3C-10-29-35-D-0-1E-0-8B678-8B6DC-8B358-8B3BC-FA3-C12-4CF-408-1E-2EB12A-103B46A-1ADB0-1E8BD3A-20768D9-1ADB0-A-1AB8-1D56-1D4C-1D60-1A9A-1AA4-1AAE-19C8-17A2-18BA-0-0-0-0-0-0-0-2B03-2B12-0'
+
+PATTERN 28  kind=spill_cache  array=False  A11
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45064.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A11: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45064.0)  cached=datetime.datetime(2023, 5, 18, 0, 0)
+
+PATTERN 29  kind=spill_cache  array=False  D11
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Crucible Knight (Erdtree Greatshield optional)")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D11: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Crucible Knight (Erdtree Greatshield optional)")  cached='Crucible Knight (Erdtree Greatshield optional)'
+
+PATTERN 30  kind=spill_cache  array=False  E11
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-10-2A-34-D-0-1E-0-8B290-8B2F4-8B358-8B3BC-FA3-C{r+1}-4CF-408-1E-2EB{r+1}A-103B46A-1ADB0-1E8BD3A-20768D9-1ADB0-A-1AB8-1D56-1D4C-1D60-1A9A-1AA4-1AAE-19C8-17A2-18BA-0-0-1-0-0-0-0-2B03-2B{r+1}-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E11: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-10-2A-34-D-0-1E-0-8B290-8B2F4-8B358-8B3BC-FA3-C12-4CF-408-1E-2EB12A-103B46A-1ADB0-1E8BD3A-20768D9-1ADB0-A-1AB8-1D56-1D4C-1D60-1A9A-1AA4-1AAE-19C8-17A2-18BA-0-0-1-0-0-0-0-2B03-2B12-0")  cached='A-3C-10-2A-34-D-0-1E-0-8B290-8B2F4-8B358-8B3BC-FA3-C12-4CF-408-1E-2EB12A-103B46A-1ADB0-1E8BD3A-20768D9-1ADB0-A-1AB8-1D56-1D4C-1D60-1A9A-1AA4-1AAE-19C8-17A2-18BA-0-0-1-0-0-0-0-2B03-2B12-0'
+
+PATTERN 31  kind=spill_cache  array=False  A12
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44684.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A12: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44684.0)  cached=datetime.datetime(2022, 5, 3, 0, 0)
+
+PATTERN 32  kind=spill_cache  array=False  B12:B16 (2 cells)
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Cryptid Tracker")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. B12: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Cryptid Tracker")  cached='Cryptid Tracker'
+  e.g. B16: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Cryptid Tracker")  cached='Cryptid Tracker'
+
+PATTERN 33  kind=spill_cache  array=False  D12
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Dark Moon Greatsword (Bull-Goat)")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D12: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Dark Moon Greatsword (Bull-Goat)")  cached='Dark Moon Greatsword (Bull-Goat)'
+
+PATTERN 34  kind=spill_cache  array=False  E12
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-26-10-E-32-0-0-222E0-22344-223A8-2240C-0-4BA-408-412-0-2F265A-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E12: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-26-10-E-32-0-0-222E0-22344-223A8-2240C-0-4BA-408-412-0-2F265A-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")  cached='A-3C-0-26-10-E-32-0-0-222E0-22344-223A8-2240C-0-4BA-408-412-0-2F265A-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0'
+
+PATTERN 35  kind=spill_cache  array=False  A13
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44727.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A13: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44727.0)  cached=datetime.datetime(2022, 6, 15, 0, 0)
+
+PATTERN 36  kind=spill_cache  array=False  B13:B27 (3 cells)
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Leon")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. B13: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Leon")  cached='Leon'
+  e.g. B20: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Leon")  cached='Leon'
+  e.g. B27: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Leon")  cached='Leon'
+
+PATTERN 37  kind=spill_cache  array=False  D13
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Death Poker/Carian Grandeur/Frost Mage Build ")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D13: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Death Poker/Carian Grandeur/Frost Mage Build ")  cached='Death Poker/Carian Grandeur/Frost Mage Build '
+
+PATTERN 38  kind=spill_cache  array=False  E13
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"32-2C-19-A-14-36-3C-7-9-F6950-1FC34-1FC98-1FCFC-1784-4CF-FA3-FD4-0-1ED5D9-30D40A-1ADB0-1FA9799-1ADB0-1ADB0-A-111D-FAA-FB5-1022-1018-10CD-114F-0-0-0-0-0-0-0-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E13: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"32-2C-19-A-14-36-3C-7-9-F6950-1FC34-1FC98-1FCFC-1784-4CF-FA3-FD4-0-1ED5D9-30D40A-1ADB0-1FA9799-1ADB0-1ADB0-A-111D-FAA-FB5-1022-1018-10CD-114F-0-0-0-0-0-0-0-0-0-0")  cached='32-2C-19-A-14-36-3C-7-9-F6950-1FC34-1FC98-1FCFC-1784-4CF-FA3-FD4-0-1ED5D9-30D40A-1ADB0-1FA9799-1ADB0-1ADB0-A-111D-FAA-FB5-1022-1018-10CD-114F-0-0-0-0-0-0-0-0-0-0'
+
+PATTERN 39  kind=spill_cache  array=False  A14
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44886.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A14: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44886.0)  cached=datetime.datetime(2022, 11, 21, 0, 0)
+
+PATTERN 40  kind=spill_cache  array=False  B14
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Aid")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. B14: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Aid")  cached='Aid'
+
+PATTERN 41  kind=spill_cache  array=False  D14
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"DEX")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D14: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"DEX")  cached='DEX'
+
+PATTERN 42  kind=spill_cache  array=False  D15
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Dual Giant-Crushers (Raptor of the Mists, Royal Knight's Resolve)")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D15: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Dual Giant-Crushers (Raptor of the Mists, Royal Knight's Resolve)")  cached="Dual Giant-Crushers (Raptor of the Mists, Royal Knight's Resolve)"
+
+PATTERN 43  kind=spill_cache  array=False  E15
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-3C-C-24-4E-0-0-F-C-1CD6D0-E3134-81718-16E48C-884-4BA-408-412-28-160A1ED-1ADB0-1ADB0-160A1ED-2082C1A-1ADB0-A-17A2-1AB8-193C-1932-1946-1950-1928-1798-1B6C-1B76-0-0-0-0-0-0-0-2B12-2B02-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E15: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-3C-C-24-4E-0-0-F-C-1CD6D0-E3134-81718-16E48C-884-4BA-408-412-28-160A1ED-1ADB0-1ADB0-160A1ED-2082C1A-1ADB0-A-17A2-1AB8-193C-1932-1946-1950-1928-1798-1B6C-1B76-0-0-0-0-0-0-0-2B12-2B02-0")  cached='1E-3C-C-24-4E-0-0-F-C-1CD6D0-E3134-81718-16E48C-884-4BA-408-412-28-160A1ED-1ADB0-1ADB0-160A1ED-2082C1A-1ADB0-A-17A2-1AB8-193C-1932-1946-1950-1928-1798-1B6C-1B76-0-0-0-0-0-0-0-2B12-2B02-0'
+
+PATTERN 44  kind=spill_cache  array=False  A16
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44728.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A16: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44728.0)  cached=datetime.datetime(2022, 6, 16, 0, 0)
+
+PATTERN 45  kind=spill_cache  array=False  D16
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Dual Vyke's War Spear v1")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D16: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Dual Vyke's War Spear v1")  cached="Dual Vyke's War Spear v1"
+
+PATTERN 46  kind=spill_cache  array=False  E16
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-1F-13-32-0-12-0-BE6E0-BE744-BE7A8-2240C-0-0-408-412-0-104299A-1ADB0-1ADB0-104299A-2082C1A-1ADB0-A-1AB8-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E16: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-1F-13-32-0-12-0-BE6E0-BE744-BE7A8-2240C-0-0-408-412-0-104299A-1ADB0-1ADB0-104299A-2082C1A-1ADB0-A-1AB8-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")  cached='A-3C-0-1F-13-32-0-12-0-BE6E0-BE744-BE7A8-2240C-0-0-408-412-0-104299A-1ADB0-1ADB0-104299A-2082C1A-1ADB0-A-1AB8-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0'
+
+PATTERN 47  kind=spill_cache  array=False  A17:A30 (4 cells)
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44764.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A17: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44764.0)  cached=datetime.datetime(2022, 7, 22, 0, 0)
+  e.g. A28: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44764.0)  cached=datetime.datetime(2022, 7, 22, 0, 0)
+  e.g. A29: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44764.0)  cached=datetime.datetime(2022, 7, 22, 0, 0)
+  ... 1 more of this pattern
+
+PATTERN 48  kind=spill_cache  array=False  B17:B30 (5 cells)
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Emerald Wolf")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. B17: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Emerald Wolf")  cached='Emerald Wolf'
+  e.g. B22: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Emerald Wolf")  cached='Emerald Wolf'
+  e.g. B28: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Emerald Wolf")  cached='Emerald Wolf'
+  ... 2 more of this pattern
+
+PATTERN 49  kind=spill_cache  array=False  D17
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"ERPvPcord Legal Optimal PSSS")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D17: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"ERPvPcord Legal Optimal PSSS")  cached='ERPvPcord Legal Optimal PSSS'
+
+PATTERN 50  kind=spill_cache  array=False  E17
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"64-3C-0-12-0-0-0-4C-0-E7EF0-BE744-0-BE80C-3EA-412-4E2-821-0-20323A-1ADB0-1ADB0-20323A-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E17: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"64-3C-0-12-0-0-0-4C-0-E7EF0-BE744-0-BE80C-3EA-412-4E2-821-0-20323A-1ADB0-1ADB0-20323A-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0")  cached='64-3C-0-12-0-0-0-4C-0-E7EF0-BE744-0-BE80C-3EA-412-4E2-821-0-20323A-1ADB0-1ADB0-20323A-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0'
+
+PATTERN 51  kind=spill_cache  array=False  D18
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Generic Str Optimized Armor 61poise")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D18: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Generic Str Optimized Armor 61poise")  cached='Generic Str Optimized Armor 61poise'
+
+PATTERN 52  kind=spill_cache  array=False  E18
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-20-3C-11-0-0-0-DBBA0-BE744-99DB8-BE80C-0-0-0-412-0-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E18: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-20-3C-11-0-0-0-DBBA0-BE744-99DB8-BE80C-0-0-0-412-0-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")  cached='A-3C-0-20-3C-11-0-0-0-DBBA0-BE744-99DB8-BE80C-0-0-0-412-0-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0'
+
+PATTERN 53  kind=spill_cache  array=False  D19
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Greatbow Focused, Str with a Halberd, 81 Poise")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D19: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Greatbow Focused, Str with a Halberd, 81 Poise")  cached='Greatbow Focused, Str with a Halberd, 81 Poise'
+
+PATTERN 54  kind=spill_cache  array=False  E19
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-2E-2B-14-0-0-0-31128-BE744-223A8-BE80C-866-4CF-3EA-412-0-1131F59-1ADB0-1ADB0-281059A-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E19: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-2E-2B-14-0-0-0-31128-BE744-223A8-BE80C-866-4CF-3EA-412-0-1131F59-1ADB0-1ADB0-281059A-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0-0")  cached='A-3C-0-2E-2B-14-0-0-0-31128-BE744-223A8-BE80C-866-4CF-3EA-412-0-1131F59-1ADB0-1ADB0-281059A-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0-0'
+
+PATTERN 55  kind=spill_cache  array=False  A20
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44725.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A20: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44725.0)  cached=datetime.datetime(2022, 6, 13, 0, 0)
+
+PATTERN 56  kind=spill_cache  array=False  D20
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Invincible Greatshield + Bolt Of Gransax Strength/Dex Build")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D20: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Invincible Greatshield + Bolt Of Gransax Strength/Dex Build")  cached='Invincible Greatshield + Bolt Of Gransax Strength/Dex Build'
+
+PATTERN 57  kind=spill_cache  array=False  E20
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-28-1A-1E-30-3C-9-9-7-108A60-8DA04-7F008-2240C-1784-1004-C12-4CF-1E-F5839A-1ADB0-1ADB0-1EA43E9-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E20: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-28-1A-1E-30-3C-9-9-7-108A60-8DA04-7F008-2240C-1784-1004-C12-4CF-1E-F5839A-1ADB0-1ADB0-1EA43E9-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")  cached='A-28-1A-1E-30-3C-9-9-7-108A60-8DA04-7F008-2240C-1784-1004-C12-4CF-1E-F5839A-1ADB0-1ADB0-1EA43E9-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0'
+
+PATTERN 58  kind=spill_cache  array=False  A21
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45478.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A21: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45478.0)  cached=datetime.datetime(2024, 7, 5, 0, 0)
+
+PATTERN 59  kind=spill_cache  array=False  B21
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Zano")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. B21: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Zano")  cached='Zano'
+
+PATTERN 60  kind=spill_cache  array=False  D21
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Light roll ")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D21: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Light roll ")  cached='Light roll '
+
+PATTERN 61  kind=spill_cache  array=False  E21
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-23-D-B-F-14-0-0-0-249F0-3A9E4-3AA48-24B1C-41B-4E2-1784-47E-0-8A65B3-FB907-1ADB0-8A8CC7-1C9C6A7-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E21: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-23-D-B-F-14-0-0-0-249F0-3A9E4-3AA48-24B1C-41B-4E2-1784-47E-0-8A65B3-FB907-1ADB0-8A8CC7-1C9C6A7-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0")  cached='A-23-D-B-F-14-0-0-0-249F0-3A9E4-3AA48-24B1C-41B-4E2-1784-47E-0-8A65B3-FB907-1ADB0-8A8CC7-1C9C6A7-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0'
+
+PATTERN 62  kind=spill_cache  array=False  A22
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44816.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A22: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44816.0)  cached=datetime.datetime(2022, 9, 12, 0, 0)
+
+PATTERN 63  kind=spill_cache  array=False  D22
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Meta 2022")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D22: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Meta 2022")  cached='Meta 2022'
+
+PATTERN 64  kind=spill_cache  array=False  E22
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-36-0-36-30-D-0-0-0-222E0-22344-223A8-2240C-408-412-3EA-4BA-0-4C72CD-1ADB0-1ADB0-1EA43E9-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E22: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-36-0-36-30-D-0-0-0-222E0-22344-223A8-2240C-408-412-3EA-4BA-0-4C72CD-1ADB0-1ADB0-1EA43E9-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")  cached='1E-36-0-36-30-D-0-0-0-222E0-22344-223A8-2240C-408-412-3EA-4BA-0-4C72CD-1ADB0-1ADB0-1EA43E9-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0'
+
+PATTERN 65  kind=spill_cache  array=False  A23:A41 (4 cells)
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44736.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A23: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44736.0)  cached=datetime.datetime(2022, 6, 24, 0, 0)
+  e.g. A24: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44736.0)  cached=datetime.datetime(2022, 6, 24, 0, 0)
+  e.g. A26: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44736.0)  cached=datetime.datetime(2022, 6, 24, 0, 0)
+  ... 1 more of this pattern
+
+PATTERN 66  kind=spill_cache  array=False  B23
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Mini-Mohg")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. B23: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Mini-Mohg")  cached='Mini-Mohg'
+
+PATTERN 67  kind=spill_cache  array=False  D23
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Mini-Mohg")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D23: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Mini-Mohg")  cached='Mini-Mohg'
+
+PATTERN 68  kind=spill_cache  array=False  E23
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-3C-14-12-17-E-7-11-46-1CD6D0-75364-223A8-2240C-3EA-408-FA3-870-0-1038D5A-1ADB0-1ADB0-208050A-1ADB0-1ADB0-A-189C-18A6-18B0-1C2A-1B94-1B58-1B6C-1B80-1B76-1B62-0-0-0-0-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E23: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-3C-14-12-17-E-7-11-46-1CD6D0-75364-223A8-2240C-3EA-408-FA3-870-0-1038D5A-1ADB0-1ADB0-208050A-1ADB0-1ADB0-A-189C-18A6-18B0-1C2A-1B94-1B58-1B6C-1B80-1B76-1B62-0-0-0-0-0-0-0")  cached='1E-3C-14-12-17-E-7-11-46-1CD6D0-75364-223A8-2240C-3EA-408-FA3-870-0-1038D5A-1ADB0-1ADB0-208050A-1ADB0-1ADB0-A-189C-18A6-18B0-1C2A-1B94-1B58-1B6C-1B80-1B76-1B62-0-0-0-0-0-0-0'
+
+PATTERN 69  kind=spill_cache  array=False  B24
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Mirai")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. B24: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Mirai")  cached='Mirai'
+
+PATTERN 70  kind=spill_cache  array=False  D24
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Mirai")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D24: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Mirai")  cached='Mirai'
+
+PATTERN 71  kind=spill_cache  array=False  E24
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"3C-3C-14-14-14-3C-7-20-A-30D40-30DA4-BE7A8-139AC-408-3EA-4CF-80C-0-F5839A-1ADB0-1ADB0-2082C1A-1ADB0-1ADB0-A-18B0-1B30-186A-1C98-1C8E-1C84-1916-190A-0-0-0-0-0-1-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E24: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"3C-3C-14-14-14-3C-7-20-A-30D40-30DA4-BE7A8-139AC-408-3EA-4CF-80C-0-F5839A-1ADB0-1ADB0-2082C1A-1ADB0-1ADB0-A-18B0-1B30-186A-1C98-1C8E-1C84-1916-190A-0-0-0-0-0-1-0-0-0")  cached='3C-3C-14-14-14-3C-7-20-A-30D40-30DA4-BE7A8-139AC-408-3EA-4CF-80C-0-F5839A-1ADB0-1ADB0-2082C1A-1ADB0-1ADB0-A-18B0-1B30-186A-1C98-1C8E-1C84-1916-190A-0-0-0-0-0-1-0-0-0'
+
+PATTERN 72  kind=spill_cache  array=False  A25
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44896.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A25: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44896.0)  cached=datetime.datetime(2022, 12, 1, 0, 0)
+
+PATTERN 73  kind=spill_cache  array=False  B25
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Eggwo")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. B25: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Eggwo")  cached='Eggwo'
+
+PATTERN 74  kind=spill_cache  array=False  D25
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Moonlit Paladin Level 150 Build")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D25: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Moonlit Paladin Level 150 Build")  cached='Moonlit Paladin Level 150 Build'
+
+PATTERN 75  kind=spill_cache  array=False  E25
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"50-3C-14-11-16-F-50-0-0-5A550-41F14-530E8-3F8CC-408-412-4BA-C12-0-2F265A-1ADB0-1ADB0-1FB0CBA-1ADB0-1ADB0-A-1158-1162-1271-10CD-1072-122A-1109-0-0-0-0-0-0-1-1-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E25: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"50-3C-14-11-16-F-50-0-0-5A550-41F14-530E8-3F8CC-408-412-4BA-C12-0-2F265A-1ADB0-1ADB0-1FB0CBA-1ADB0-1ADB0-A-1158-1162-1271-10CD-1072-122A-1109-0-0-0-0-0-0-1-1-0-0")  cached='50-3C-14-11-16-F-50-0-0-5A550-41F14-530E8-3F8CC-408-412-4BA-C12-0-2F265A-1ADB0-1ADB0-1FB0CBA-1ADB0-1ADB0-A-1158-1162-1271-10CD-1072-122A-1109-0-0-0-0-0-0-1-1-0-0'
+
+PATTERN 76  kind=spill_cache  array=False  B26
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Mordicar")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. B26: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Mordicar")  cached='Mordicar'
+
+PATTERN 77  kind=spill_cache  array=False  D26
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Mordicar")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D26: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Mordicar")  cached='Mordicar'
+
+PATTERN 78  kind=spill_cache  array=False  E26
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"50-3C-19-19-1A-12-3C-6-9-B98C0-382D4-38338-3839C-408-4BA-4CF-BB9-0-3DF36A-1ADB0-1ADB0-1FA2269-1ADB0-1ADB0-A-10CC-1018-10CE-1144-113A-114F-1130-111C-111D-120C-0-0-0-1-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E26: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"50-3C-19-19-1A-12-3C-6-9-B98C0-382D4-38338-3839C-408-4BA-4CF-BB9-0-3DF36A-1ADB0-1ADB0-1FA2269-1ADB0-1ADB0-A-10CC-1018-10CE-1144-113A-114F-1130-111C-111D-120C-0-0-0-1-0-0-0")  cached='50-3C-19-19-1A-12-3C-6-9-B98C0-382D4-38338-3839C-408-4BA-4CF-BB9-0-3DF36A-1ADB0-1ADB0-1FA2269-1ADB0-1ADB0-A-10CC-1018-10CE-1144-113A-114F-1130-111C-111D-120C-0-0-0-1-0-0-0'
+
+PATTERN 79  kind=spill_cache  array=False  A27
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44755.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A27: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44755.0)  cached=datetime.datetime(2022, 7, 13, 0, 0)
+
+PATTERN 80  kind=spill_cache  array=False  D27
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"NightWielder Build With Twist")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D27: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"NightWielder Build With Twist")  cached='NightWielder Build With Twist'
+
+PATTERN 81  kind=spill_cache  array=False  E27
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"50-2C-24-17-E-11-50-0-0-B98C0-382D4-38338-3839C-7D0-BB9-FA3-802-0-5BB7C9-1FBD019-1ADB0-1FBD019-1ADB0-1ADB0-A-1202-120C-1266-1022-1018-0-0-0-0-0-0-0-0-0-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E27: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"50-2C-24-17-E-11-50-0-0-B98C0-382D4-38338-3839C-7D0-BB9-FA3-802-0-5BB7C9-1FBD019-1ADB0-1FBD019-1ADB0-1ADB0-A-1202-120C-1266-1022-1018-0-0-0-0-0-0-0-0-0-0-0-0")  cached='50-2C-24-17-E-11-50-0-0-B98C0-382D4-38338-3839C-7D0-BB9-FA3-802-0-5BB7C9-1FBD019-1ADB0-1FBD019-1ADB0-1ADB0-A-1202-120C-1266-1022-1018-0-0-0-0-0-0-0-0-0-0-0-0'
+
+PATTERN 82  kind=spill_cache  array=False  D28
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Optimal 125 Bleed PvP")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D28: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Optimal 125 Bleed PvP")  cached='Optimal 125 Bleed PvP'
+
+PATTERN 83  kind=spill_cache  array=False  E28
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-3B-0-23-10-14-0-0-32-A6040-22344-223A8-2240C-870-3EA-408-412-0-F5D679-1ADB0-1ADB0-F5D679-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E28: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-3B-0-23-10-14-0-0-32-A6040-22344-223A8-2240C-870-3EA-408-412-0-F5D679-1ADB0-1ADB0-F5D679-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0")  cached='1E-3B-0-23-10-14-0-0-32-A6040-22344-223A8-2240C-870-3EA-408-412-0-F5D679-1ADB0-1ADB0-F5D679-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0'
+
+PATTERN 84  kind=spill_cache  array=False  D29
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Optimal 150 Bleed PvE")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D29: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Optimal 150 Bleed PvE")  cached='Optimal 150 Bleed PvE'
+
+PATTERN 85  kind=spill_cache  array=False  E29
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-3C-0-21-11-32-0-0-2D-A6040-E3134-223A8-2240C-821-4E2-884-870-1E-98C1F5-1ADB0-1ADB0-98C1F5-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E29: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-3C-0-21-11-32-0-0-2D-A6040-E3134-223A8-2240C-821-4E2-884-870-1E-98C1F5-1ADB0-1ADB0-98C1F5-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0-0-0")  cached='1E-3C-0-21-11-32-0-0-2D-A6040-E3134-223A8-2240C-821-4E2-884-870-1E-98C1F5-1ADB0-1ADB0-98C1F5-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0-0-0'
+
+PATTERN 86  kind=spill_cache  array=False  D30
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Optimal Morgott's Cursed Sword")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D30: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Optimal Morgott's Cursed Sword")  cached="Optimal Morgott's Cursed Sword"
+
+PATTERN 87  kind=spill_cache  array=False  E30
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-3C-0-11-E-2A-0-0-2D-0-BE744-0-ECE3C-802-3EA-FFA-412-0-7B98AA-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-1-1-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E30: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-3C-0-11-E-2A-0-0-2D-0-BE744-0-ECE3C-802-3EA-FFA-412-0-7B98AA-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-1-1-0-0")  cached='1E-3C-0-11-E-2A-0-0-2D-0-BE744-0-ECE3C-802-3EA-FFA-412-0-7B98AA-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-1-1-0-0'
+
+PATTERN 88  kind=spill_cache  array=False  A31
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44937.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A31: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44937.0)  cached=datetime.datetime(2023, 1, 11, 0, 0)
+
+PATTERN 89  kind=spill_cache  array=False  D31
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Optimised STR+LIGHT ROLL build 137")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D31: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Optimised STR+LIGHT ROLL build 137")  cached='Optimised STR+LIGHT ROLL build 137'
+
+PATTERN 90  kind=spill_cache  array=False  E31
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-38-32-F-0-0-0-1CD6D0-1BA29C-81718-41FDC-408-412-4BA-80C-0-103DB7A-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E31: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-38-32-F-0-0-0-1CD6D0-1BA29C-81718-41FDC-408-412-4BA-80C-0-103DB7A-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0-0")  cached='A-3C-0-38-32-F-0-0-0-1CD6D0-1BA29C-81718-41FDC-408-412-4BA-80C-0-103DB7A-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0-0'
+
+PATTERN 91  kind=spill_cache  array=False  A32
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44958.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A32: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44958.0)  cached=datetime.datetime(2023, 2, 1, 0, 0)
+
+PATTERN 92  kind=spill_cache  array=False  D32
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Pure INT Spellcaster 125")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D32: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Pure INT Spellcaster 125")  cached='Pure INT Spellcaster 125'
+
+PATTERN 93  kind=spill_cache  array=False  E32
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"32-3A-15-11-0-0-48-0-0-7C830-41F14-8B358-57F6C-408-412-BB9-438-0-1FB0CBA-1ADB0-1ADB0-1F8E9DA-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E32: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"32-3A-15-11-0-0-48-0-0-7C830-41F14-8B358-57F6C-408-412-BB9-438-0-1FB0CBA-1ADB0-1ADB0-1F8E9DA-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")  cached='32-3A-15-11-0-0-48-0-0-7C830-41F14-8B358-57F6C-408-412-BB9-438-0-1FB0CBA-1ADB0-1ADB0-1F8E9DA-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0'
+
+PATTERN 94  kind=spill_cache  array=False  A33
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45238.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A33: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45238.0)  cached=datetime.datetime(2023, 11, 8, 0, 0)
+
+PATTERN 95  kind=spill_cache  array=False  B33
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Soulcial")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. B33: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Soulcial")  cached='Soulcial'
+
+PATTERN 96  kind=spill_cache  array=False  D33
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"PvE - Glintstone Kris RL125")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D33: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"PvE - Glintstone Kris RL125")  cached='PvE - Glintstone Kris RL125'
+
+PATTERN 97  kind=spill_cache  array=False  E33
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"50-3C-F-D-B-14-46-6-9-1FBD0-ECD74-1FC98-1FCFC-C12-7D0-802-4CF-1E-1053BA-1ADB0-1ADB0-1F8E9DA-1ADB0-1ADB0-A-1022-1109-1018-111C-0-0-0-0-0-0-0-0-1-0-0-0-1-2B15-2B0F-1")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E33: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"50-3C-F-D-B-14-46-6-9-1FBD0-ECD74-1FC98-1FCFC-C12-7D0-802-4CF-1E-1053BA-1ADB0-1ADB0-1F8E9DA-1ADB0-1ADB0-A-1022-1109-1018-111C-0-0-0-0-0-0-0-0-1-0-0-0-1-2B15-2B0F-1")  cached='50-3C-F-D-B-14-46-6-9-1FBD0-ECD74-1FC98-1FCFC-C12-7D0-802-4CF-1E-1053BA-1ADB0-1ADB0-1F8E9DA-1ADB0-1ADB0-A-1022-1109-1018-111C-0-0-0-0-0-0-0-0-1-0-0-0-1-2B15-2B0F-1'
+
+PATTERN 98  kind=spill_cache  array=False  A34
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44866.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A34: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44866.0)  cached=datetime.datetime(2022, 11, 1, 0, 0)
+
+PATTERN 99  kind=spill_cache  array=False  B34
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Funkmachine ")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. B34: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Funkmachine ")  cached='Funkmachine '
+
+PATTERN 100  kind=spill_cache  array=False  C34
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),55.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. C34: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),55.0)  cached=55
+
+PATTERN 101  kind=spill_cache  array=False  D34
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Rl55 death blight invader")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D34: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Rl55 death blight invader")  cached='Rl55 death blight invader'
+
+PATTERN 102  kind=spill_cache  array=False  E34
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"32-1E-F-0-0-F-12-1E-0-0-1D9A84-0-D95BC-4E2-438-41B-BFE-0-6C5666-4982C-4982C-1F84D9F-207B6E6-D32E8-A-FAA-139C-1A2D-19C8-0-0-0-0-0-0-0-0-0-1-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E34: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"32-1E-F-0-0-F-12-1E-0-0-1D9A84-0-D95BC-4E2-438-41B-BFE-0-6C5666-4982C-4982C-1F84D9F-207B6E6-D32E8-A-FAA-139C-1A2D-19C8-0-0-0-0-0-0-0-0-0-1-0-0-0")  cached='32-1E-F-0-0-F-12-1E-0-0-1D9A84-0-D95BC-4E2-438-41B-BFE-0-6C5666-4982C-4982C-1F84D9F-207B6E6-D32E8-A-FAA-139C-1A2D-19C8-0-0-0-0-0-0-0-0-0-1-0-0-0'
+
+PATTERN 103  kind=spill_cache  array=False  A35:A38 (2 cells)
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44826.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A35: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44826.0)  cached=datetime.datetime(2022, 9, 22, 0, 0)
+  e.g. A38: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44826.0)  cached=datetime.datetime(2022, 9, 22, 0, 0)
+
+PATTERN 104  kind=spill_cache  array=False  C35
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),90.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. C35: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),90.0)  cached=90
+
+PATTERN 105  kind=spill_cache  array=False  D35
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Spell Blade Moonveil+ Cold zwei")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D35: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Spell Blade Moonveil+ Cold zwei")  cached='Spell Blade Moonveil+ Cold zwei'
+
+PATTERN 106  kind=spill_cache  array=False  E35
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-32-0-12-13-12-26-0-0-F1B30-BE744-24AB8-BE80C-BFE-412-408-80C-0-3DA8D5-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-1158-1162-114F-FD2-FAA-FF0-114E-0-0-0-0-0-0-1-1-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E35: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-32-0-12-13-12-26-0-0-F1B30-BE744-24AB8-BE80C-BFE-412-408-80C-0-3DA8D5-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-1158-1162-114F-FD2-FAA-FF0-114E-0-0-0-0-0-0-1-1-0-0")  cached='A-32-0-12-13-12-26-0-0-F1B30-BE744-24AB8-BE80C-BFE-412-408-80C-0-3DA8D5-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-1158-1162-114F-FD2-FAA-FF0-114E-0-0-0-0-0-0-1-1-0-0'
+
+PATTERN 107  kind=spill_cache  array=False  D36
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Str/Fai with some fashion, Trolls Greatsword + whatever miracles 25 fai can buy you")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D36: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Str/Fai with some fashion, Trolls Greatsword + whatever miracles 25 fai can buy you")  cached='Str/Fai with some fashion, Trolls Greatsword + whatever miracles 25 fai can buy you'
+
+PATTERN 108  kind=spill_cache  array=False  E36
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"3C-3C-F-18-35-A-0-19-0-BBFD0-92C0C-705A8-9EC3C-852-BFE-3EA-412-0-3D8105-1ADB0-1ADB0-20768D9-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E36: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"3C-3C-F-18-35-A-0-19-0-BBFD0-92C0C-705A8-9EC3C-852-BFE-3EA-412-0-3D8105-1ADB0-1ADB0-20768D9-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")  cached='3C-3C-F-18-35-A-0-19-0-BBFD0-92C0C-705A8-9EC3C-852-BFE-3EA-412-0-3D8105-1ADB0-1ADB0-20768D9-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0'
+
+PATTERN 109  kind=spill_cache  array=False  A37
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44855.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A37: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44855.0)  cached=datetime.datetime(2022, 10, 21, 0, 0)
+
+PATTERN 110  kind=spill_cache  array=False  D37
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Strength 137 (100+ poise)")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D37: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Strength 137 (100+ poise)")  cached='Strength 137 (100+ poise)'
+
+PATTERN 111  kind=spill_cache  array=False  E37
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-A-2A-3D-12-0-0-0-0-41F14-57F08-2240C-412-884-4CF-4BA-0-15EF3D9-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E37: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-A-2A-3D-12-0-0-0-0-41F14-57F08-2240C-412-884-4CF-4BA-0-15EF3D9-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")  cached='A-3C-A-2A-3D-12-0-0-0-0-41F14-57F08-2240C-412-884-4CF-4BA-0-15EF3D9-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0'
+
+PATTERN 112  kind=spill_cache  array=False  D38
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Strength Faith 125")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D38: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Strength Faith 125")  cached='Strength Faith 125'
+
+PATTERN 113  kind=spill_cache  array=False  E38
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-19-1E-10-0-2F-0-0-BE744-24AB8-BE80C-BFE-412-408-884-0-B9B31A-1ADB0-1ADB0-B9B31A-206F3A9-1ADB0-A-1AFE-1770-1771-1B8A-1AB8-17D4-18BA-0-0-0-0-0-0-0-1-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E38: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-19-1E-10-0-2F-0-0-BE744-24AB8-BE80C-BFE-412-408-884-0-B9B31A-1ADB0-1ADB0-B9B31A-206F3A9-1ADB0-A-1AFE-1770-1771-1B8A-1AB8-17D4-18BA-0-0-0-0-0-0-0-1-0-0")  cached='A-3C-0-19-1E-10-0-2F-0-0-BE744-24AB8-BE80C-BFE-412-408-884-0-B9B31A-1ADB0-1ADB0-B9B31A-206F3A9-1ADB0-A-1AFE-1770-1771-1B8A-1AB8-17D4-18BA-0-0-0-0-0-0-0-1-0-0'
+
+PATTERN 114  kind=spill_cache  array=False  A39
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44783.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A39: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44783.0)  cached=datetime.datetime(2022, 8, 10, 0, 0)
+
+PATTERN 115  kind=spill_cache  array=False  B39
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Friedslick6")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. B39: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Friedslick6")  cached='Friedslick6'
+
+PATTERN 116  kind=spill_cache  array=False  C39
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),100.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. C39: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),100.0)  cached=100
+
+PATTERN 117  kind=spill_cache  array=False  D39
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"The Thermal Griller v3 (1.05)")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D39: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"The Thermal Griller v3 (1.05)")  cached='The Thermal Griller v3 (1.05)'
+
+PATTERN 118  kind=spill_cache  array=False  E39
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"3C-18-11-17-11-1D-7-1C-22-A6040-E3134-9C4C8-2240C-412-FA3-41B-4BA-A-98C12D-FB789-1ADB0-208050A-98C1F5-1ADB0-8-1798-1C2A-1771-1842-1856-1C98-19C8-17A2-0-0-0-0-0-0-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E39: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"3C-18-11-17-11-1D-7-1C-22-A6040-E3134-9C4C8-2240C-412-FA3-41B-4BA-A-98C12D-FB789-1ADB0-208050A-98C1F5-1ADB0-8-1798-1C2A-1771-1842-1856-1C98-19C8-17A2-0-0-0-0-0-0-0-0-0")  cached='3C-18-11-17-11-1D-7-1C-22-A6040-E3134-9C4C8-2240C-412-FA3-41B-4BA-A-98C12D-FB789-1ADB0-208050A-98C1F5-1ADB0-8-1798-1C2A-1771-1842-1856-1C98-19C8-17A2-0-0-0-0-0-0-0-0-0'
+
+PATTERN 119  kind=spill_cache  array=False  D40
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Throwing Pots and Jump Attacks")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D40: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Throwing Pots and Jump Attacks")  cached='Throwing Pots and Jump Attacks'
+
+PATTERN 120  kind=spill_cache  array=False  E40
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-A-12-32-32-1-19-1-111700-E3134-24AB8-690DC-8A2-7E4-884-802-A-7A873A-2082C1A-1ADB0-1EA1CCA-CAA30-CB200-A-1AB8-19C8-17A2-186A-1B30-18BA-17AC-1EDF-1950-1798-0-0-0-0-0-0-0-2B14-2B16-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E40: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-A-12-32-32-1-19-1-111700-E3134-24AB8-690DC-8A2-7E4-884-802-A-7A873A-2082C1A-1ADB0-1EA1CCA-CAA30-CB200-A-1AB8-19C8-17A2-186A-1B30-18BA-17AC-1EDF-1950-1798-0-0-0-0-0-0-0-2B14-2B16-0")  cached='A-3C-A-12-32-32-1-19-1-111700-E3134-24AB8-690DC-8A2-7E4-884-802-A-7A873A-2082C1A-1ADB0-1EA1CCA-CAA30-CB200-A-1AB8-19C8-17A2-186A-1B30-18BA-17AC-1EDF-1950-1798-0-0-0-0-0-0-0-2B14-2B16-0'
+
+PATTERN 121  kind=spill_cache  array=False  B41
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Valdir")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. B41: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Valdir")  cached='Valdir'
+
+PATTERN 122  kind=spill_cache  array=False  D41
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Valdir200")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D41: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Valdir200")  cached='Valdir200'
+
+PATTERN 123  kind=spill_cache  array=False  E41
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"32-32-25-A-C-C-46-46-12-1D4C0-24A54-24AB8-24B1C-FA3-BFE-802-3EA-0-20A76A-1FA4979-207B6EA-1DBEC09-1ADB0-1ADB0-A-120C-1389-114F-1018-1C98-1770-1784-1AF4-1AFE-1A2D-0-0-0-0-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E41: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"32-32-25-A-C-C-46-46-12-1D4C0-24A54-24AB8-24B1C-FA3-BFE-802-3EA-0-20A76A-1FA4979-207B6EA-1DBEC09-1ADB0-1ADB0-A-120C-1389-114F-1018-1C98-1770-1784-1AF4-1AFE-1A2D-0-0-0-0-0-0-0")  cached='32-32-25-A-C-C-46-46-12-1D4C0-24A54-24AB8-24B1C-FA3-BFE-802-3EA-0-20A76A-1FA4979-207B6EA-1DBEC09-1ADB0-1ADB0-A-120C-1389-114F-1018-1C98-1770-1784-1AF4-1AFE-1A2D-0-0-0-0-0-0-0'
+
+PATTERN 124  kind=spill_cache  array=False  A42
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45350.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. A42: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45350.0)  cached=datetime.datetime(2024, 2, 28, 0, 0)
+
+PATTERN 125  kind=spill_cache  array=False  B42
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"willowy_wisp")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. B42: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"willowy_wisp")  cached='willowy_wisp'
+
+PATTERN 126  kind=spill_cache  array=False  D42
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Vyke War Spear")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D42: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Vyke War Spear")  cached='Vyke War Spear'
+
+PATTERN 127  kind=spill_cache  array=False  E42
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"14-3C-14-14-E-3C-A-23-A-1ED2A0-E3134-19F168-19F1CC-BEA-412-0-0-0-104299A-1ADB0-1ADB0-2082C1A-10477C9-1ADB0-A-1CA2-1C8E-1C98-1C84-1C8F-19C8-0-0-0-0-0-0-0-1-0-0-0-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E42: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"14-3C-14-14-E-3C-A-23-A-1ED2A0-E3134-19F168-19F1CC-BEA-412-0-0-0-104299A-1ADB0-1ADB0-2082C1A-10477C9-1ADB0-A-1CA2-1C8E-1C98-1C84-1C8F-19C8-0-0-0-0-0-0-0-1-0-0-0-0-0-0")  cached='14-3C-14-14-E-3C-A-23-A-1ED2A0-E3134-19F168-19F1CC-BEA-412-0-0-0-104299A-1ADB0-1ADB0-2082C1A-10477C9-1ADB0-A-1CA2-1C8E-1C98-1C84-1C8F-19C8-0-0-0-0-0-0-0-1-0-0-0-0-0-0'
+
+PATTERN 128  kind=spill_cache  array=False  D43
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Zanogre, Versatile Dex")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D43: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Zanogre, Versatile Dex")  cached='Zanogre, Versatile Dex'
+
+PATTERN 129  kind=spill_cache  array=False  E43
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-1D-14-3C-0-0-0-31128-9CA4-223A8-139AC-80C-4BA-3EA-412-0-3DA7B1-1ADB0-1ADB0-1ED511-2082C1A-1ADB0-A-1798-1AB8-1A90-0-0-0-0-0-0-0-0-0-0-0-0-0-0")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. E43: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-1D-14-3C-0-0-0-31128-9CA4-223A8-139AC-80C-4BA-3EA-412-0-3DA7B1-1ADB0-1ADB0-1ED511-2082C1A-1ADB0-A-1798-1AB8-1A90-0-0-0-0-0-0-0-0-0-0-0-0-0-0")  cached='A-3C-0-1D-14-3C-0-0-0-31128-9CA4-223A8-139AC-80C-4BA-3EA-412-0-3DA7B1-1ADB0-1ADB0-1ED511-2082C1A-1ADB0-A-1798-1AB8-1A90-0-0-0-0-0-0-0-0-0-0-0-0-0-0'
+
+========================================================================
+ALL FORMULAS
+========================================================================
+cell	kind	array_ref	label	logic	stored	cached
+A5	google_sheets		Date	=IFERROR( | QUERY(IMPORTRANGE("https://docs.google.com/spreadsheets/d/1qSS0pcKiy1fWceaUiy6wmdTRYYOxRRUyz8pLXL3Lk7Q","Export!A2:E"), | "Select Col5, Col3, Col4, Col1, Col2" | &IF(ISBLANK(B3),," where lower(Col3) contains '"&LOWER(B3)&"'") | &IF(ISBLANK(C3	=IFERROR(__xludf.DUMMYFUNCTION("IFERROR( | QUERY(IMPORTRANGE(""https://docs.google.com/spreadsheets/d/1qSS0pcKiy1fWceaUiy6wmdTRYYOxRRUyz8pLXL3Lk7Q"",""Export!A2:E""), | ""Select Col5, Col3, Col4, Col1, Col2"" | &IF(ISBLANK(B3),,"" where lower(Col3) contains '""&LOWER(B3)&""'"") | &IF(ISBLANK(C3"&"),,IF(ISBLANK(B3),"" where"","" and"")&"" Col4 = ""&C3) | &IF(ISBLANK(D3),,IF(AND(ISBLANK(B3),ISBLANK(C3)),"" where"","" and"")&"" lower(Col1) contains '""&lower(D3)&""'""), | 0), | {"""",""No builds matching search parameters""})"),44857.0)	2022-10-23 00:00:00
+B5	spill_cache		Creator Alias		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"FunkMachine")	FunkMachine
+C5	spill_cache		Build Level		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),40.0)	40
+D5	spill_cache		Build Name		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"2 worst katanas, rl40")	2 worst katanas, rl40
+E5	spill_cache		Build ID		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-23-D-B-F-14-0-0-0-249F0-3A9E4-3AA48-24B1C-41B-4E2-1784-47E-0-8A65B3-FB907-1ADB0-8A8CC7-1C9C6A7-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0")	A-23-D-B-F-14-0-0-0-249F0-3A9E4-3AA48-24B1C-41B-4E2-1784-47E-0-8A65B3-FB907-1ADB0-8A8CC7-1C9C6A7-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0
+A6	spill_cache		Date		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44870.0)	2022-11-05 00:00:00
+B6	spill_cache		Creator Alias		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Amulya")	Amulya
+C6	spill_cache		Build Level		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),137.0)	137
+D6	spill_cache		Build Name		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"70 Dex LIGHT ROLL Glass Cannon 137")	70 Dex LIGHT ROLL Glass Cannon 137
+E6	spill_cache		Build ID		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-1F-14-46-0-0-0-113E10-E3134-A8818-113F3C-412-408-884-4E2-0-220961-1ADB0-1ADB0-220961-1ADB0-1ADB0-A-1AB8-193C-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0")	A-3C-0-1F-14-46-0-0-0-113E10-E3134-A8818-113F3C-412-408-884-4E2-0-220961-1ADB0-1ADB0-220961-1ADB0-1ADB0-A-1AB8-193C-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0
+A7	spill_cache		Date		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44685.0)	2022-05-04 00:00:00
+B7	spill_cache		Creator Alias		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Hv")	Hv
+C7	spill_cache		Build Level		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),125.0)	125
+D7	spill_cache		Build Name		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"93 Poise Memeveil Dragonbolt")	93 Poise Memeveil Dragonbolt
+E7	spill_cache		Build ID		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"46-3C-13-13-C-12-34-10-0-108A60-BE744-105478-BE80C-442-4BA-408-412-0-8A3EAA-2082C1A-1ADB0-1FB0CBA-1ADB0-1ADB0-A-1B3B-FAA-1162-FB5-1158-0-0-0-0-0-0-0-0-0-0-0-0")	46-3C-13-13-C-12-34-10-0-108A60-BE744-105478-BE80C-442-4BA-408-412-0-8A3EAA-2082C1A-1ADB0-1FB0CBA-1ADB0-1ADB0-A-1B3B-FAA-1162-FB5-1158-0-0-0-0-0-0-0-0-0-0-0-0
+A8	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45034.0)	2023-04-18 00:00:00
+B8	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"chronofreak")	chronofreak
+C8	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),150.0)	150
+D8	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Bloody Helice Dodge Spam")	Bloody Helice Dodge Spam
+E8	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-28-24-32-10-14-1-F-2D-222E0-22344-57F08-2240C-47E-3FE-412-4CF-A-5B8D8A-1ADB0-1ADB0-208050A-1DB28B9-1ADB0-A-1AB8-17A2-1A9A-1AA4-1C2A-1C20-1B6C-1B76-1932-1798-0-0-0-1-0-0-0-2B02-2AF9-0")	1E-28-24-32-10-14-1-F-2D-222E0-22344-57F08-2240C-47E-3FE-412-4CF-A-5B8D8A-1ADB0-1ADB0-208050A-1DB28B9-1ADB0-A-1AB8-17A2-1A9A-1AA4-1C2A-1C20-1B6C-1B76-1932-1798-0-0-0-1-0-0-0-2B02-2AF9-0
+A9	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44921.0)	2022-12-26 00:00:00
+B9	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Zanogre")	Zanogre
+C9	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),200.0)	200
+D9	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Cringe lvl 200 Quality")	Cringe lvl 200 Quality
+E9	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-46-F-14-35-50-0-19-0-16E360-9CA4-13948-2240C-3EA-412-80C-4BA-0-308725-1ADB0-1ADB0-2082C1A-1C9C399-1ADB0-A-19C8-18BA-1AB8-1A90-1EDF-1770-1798-1917-0-0-0-0-0-1-0-0-0")	A-46-F-14-35-50-0-19-0-16E360-9CA4-13948-2240C-3EA-412-80C-4BA-0-308725-1ADB0-1ADB0-2082C1A-1C9C399-1ADB0-A-19C8-18BA-1AB8-1A90-1EDF-1770-1798-1917-0-0-0-0-0-1-0-0-0
+A10	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45034.0)	2023-04-18 00:00:00
+B10	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"chronofreak")	chronofreak
+C10	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),150.0)	150
+D10	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Crucible Knight")	Crucible Knight
+E10	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-10-29-35-D-0-1E-0-8B678-8B6DC-8B358-8B3BC-FA3-C12-4CF-408-1E-2EB12A-103B46A-1ADB0-1E8BD3A-20768D9-1ADB0-A-1AB8-1D56-1D4C-1D60-1A9A-1AA4-1AAE-19C8-17A2-18BA-0-0-0-0-0-0-0-2B03-2B12-0")	A-3C-10-29-35-D-0-1E-0-8B678-8B6DC-8B358-8B3BC-FA3-C12-4CF-408-1E-2EB12A-103B46A-1ADB0-1E8BD3A-20768D9-1ADB0-A-1AB8-1D56-1D4C-1D60-1A9A-1AA4-1AAE-19C8-17A2-18BA-0-0-0-0-0-0-0-2B03-2B12-0
+A11	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45064.0)	2023-05-18 00:00:00
+B11	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"chronofreak")	chronofreak
+C11	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),150.0)	150
+D11	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Crucible Knight (Erdtree Greatshield optional)")	Crucible Knight (Erdtree Greatshield optional)
+E11	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-10-2A-34-D-0-1E-0-8B290-8B2F4-8B358-8B3BC-FA3-C12-4CF-408-1E-2EB12A-103B46A-1ADB0-1E8BD3A-20768D9-1ADB0-A-1AB8-1D56-1D4C-1D60-1A9A-1AA4-1AAE-19C8-17A2-18BA-0-0-1-0-0-0-0-2B03-2B12-0")	A-3C-10-2A-34-D-0-1E-0-8B290-8B2F4-8B358-8B3BC-FA3-C12-4CF-408-1E-2EB12A-103B46A-1ADB0-1E8BD3A-20768D9-1ADB0-A-1AB8-1D56-1D4C-1D60-1A9A-1AA4-1AAE-19C8-17A2-18BA-0-0-1-0-0-0-0-2B03-2B12-0
+A12	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44684.0)	2022-05-03 00:00:00
+B12	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Cryptid Tracker")	Cryptid Tracker
+C12	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),125.0)	125
+D12	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Dark Moon Greatsword (Bull-Goat)")	Dark Moon Greatsword (Bull-Goat)
+E12	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-26-10-E-32-0-0-222E0-22344-223A8-2240C-0-4BA-408-412-0-2F265A-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")	A-3C-0-26-10-E-32-0-0-222E0-22344-223A8-2240C-0-4BA-408-412-0-2F265A-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0
+A13	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44727.0)	2022-06-15 00:00:00
+B13	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Leon")	Leon
+C13	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),150.0)	150
+D13	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Death Poker/Carian Grandeur/Frost Mage Build ")	Death Poker/Carian Grandeur/Frost Mage Build 
+E13	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"32-2C-19-A-14-36-3C-7-9-F6950-1FC34-1FC98-1FCFC-1784-4CF-FA3-FD4-0-1ED5D9-30D40A-1ADB0-1FA9799-1ADB0-1ADB0-A-111D-FAA-FB5-1022-1018-10CD-114F-0-0-0-0-0-0-0-0-0-0")	32-2C-19-A-14-36-3C-7-9-F6950-1FC34-1FC98-1FCFC-1784-4CF-FA3-FD4-0-1ED5D9-30D40A-1ADB0-1FA9799-1ADB0-1ADB0-A-111D-FAA-FB5-1022-1018-10CD-114F-0-0-0-0-0-0-0-0-0-0
+A14	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44886.0)	2022-11-21 00:00:00
+B14	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Aid")	Aid
+C14	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),137.0)	137
+D14	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"DEX")	DEX
+E14	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-1F-14-46-0-0-0-113E10-E3134-A8818-113F3C-412-408-884-4E2-0-220961-1ADB0-1ADB0-220961-1ADB0-1ADB0-A-1AB8-193C-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0")	A-3C-0-1F-14-46-0-0-0-113E10-E3134-A8818-113F3C-412-408-884-4E2-0-220961-1ADB0-1ADB0-220961-1ADB0-1ADB0-A-1AB8-193C-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0
+A15	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45034.0)	2023-04-18 00:00:00
+B15	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"chronofreak")	chronofreak
+C15	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),150.0)	150
+D15	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Dual Giant-Crushers (Raptor of the Mists, Royal Knight's Resolve)")	Dual Giant-Crushers (Raptor of the Mists, Royal Knight's Resolve)
+E15	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-3C-C-24-4E-0-0-F-C-1CD6D0-E3134-81718-16E48C-884-4BA-408-412-28-160A1ED-1ADB0-1ADB0-160A1ED-2082C1A-1ADB0-A-17A2-1AB8-193C-1932-1946-1950-1928-1798-1B6C-1B76-0-0-0-0-0-0-0-2B12-2B02-0")	1E-3C-C-24-4E-0-0-F-C-1CD6D0-E3134-81718-16E48C-884-4BA-408-412-28-160A1ED-1ADB0-1ADB0-160A1ED-2082C1A-1ADB0-A-17A2-1AB8-193C-1932-1946-1950-1928-1798-1B6C-1B76-0-0-0-0-0-0-0-2B12-2B02-0
+A16	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44728.0)	2022-06-16 00:00:00
+B16	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Cryptid Tracker")	Cryptid Tracker
+C16	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),125.0)	125
+D16	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Dual Vyke's War Spear v1")	Dual Vyke's War Spear v1
+E16	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-1F-13-32-0-12-0-BE6E0-BE744-BE7A8-2240C-0-0-408-412-0-104299A-1ADB0-1ADB0-104299A-2082C1A-1ADB0-A-1AB8-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")	A-3C-0-1F-13-32-0-12-0-BE6E0-BE744-BE7A8-2240C-0-0-408-412-0-104299A-1ADB0-1ADB0-104299A-2082C1A-1ADB0-A-1AB8-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0
+A17	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44764.0)	2022-07-22 00:00:00
+B17	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Emerald Wolf")	Emerald Wolf
+C17	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),125.0)	125
+D17	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"ERPvPcord Legal Optimal PSSS")	ERPvPcord Legal Optimal PSSS
+E17	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"64-3C-0-12-0-0-0-4C-0-E7EF0-BE744-0-BE80C-3EA-412-4E2-821-0-20323A-1ADB0-1ADB0-20323A-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0")	64-3C-0-12-0-0-0-4C-0-E7EF0-BE744-0-BE80C-3EA-412-4E2-821-0-20323A-1ADB0-1ADB0-20323A-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0
+A18	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44685.0)	2022-05-04 00:00:00
+B18	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Hv")	Hv
+C18	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),125.0)	125
+D18	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Generic Str Optimized Armor 61poise")	Generic Str Optimized Armor 61poise
+E18	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-20-3C-11-0-0-0-DBBA0-BE744-99DB8-BE80C-0-0-0-412-0-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")	A-3C-0-20-3C-11-0-0-0-DBBA0-BE744-99DB8-BE80C-0-0-0-412-0-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0
+A19	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44921.0)	2022-12-26 00:00:00
+B19	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Zanogre")	Zanogre
+C19	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),125.0)	125
+D19	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Greatbow Focused, Str with a Halberd, 81 Poise")	Greatbow Focused, Str with a Halberd, 81 Poise
+E19	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-2E-2B-14-0-0-0-31128-BE744-223A8-BE80C-866-4CF-3EA-412-0-1131F59-1ADB0-1ADB0-281059A-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0-0")	A-3C-0-2E-2B-14-0-0-0-31128-BE744-223A8-BE80C-866-4CF-3EA-412-0-1131F59-1ADB0-1ADB0-281059A-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0-0
+A20	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44725.0)	2022-06-13 00:00:00
+B20	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Leon")	Leon
+C20	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),150.0)	150
+D20	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Invincible Greatshield + Bolt Of Gransax Strength/Dex Build")	Invincible Greatshield + Bolt Of Gransax Strength/Dex Build
+E20	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-28-1A-1E-30-3C-9-9-7-108A60-8DA04-7F008-2240C-1784-1004-C12-4CF-1E-F5839A-1ADB0-1ADB0-1EA43E9-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")	A-28-1A-1E-30-3C-9-9-7-108A60-8DA04-7F008-2240C-1784-1004-C12-4CF-1E-F5839A-1ADB0-1ADB0-1EA43E9-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0
+A21	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45478.0)	2024-07-05 00:00:00
+B21	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Zano")	Zano
+C21	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),40.0)	40
+D21	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Light roll ")	Light roll 
+E21	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-23-D-B-F-14-0-0-0-249F0-3A9E4-3AA48-24B1C-41B-4E2-1784-47E-0-8A65B3-FB907-1ADB0-8A8CC7-1C9C6A7-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0")	A-23-D-B-F-14-0-0-0-249F0-3A9E4-3AA48-24B1C-41B-4E2-1784-47E-0-8A65B3-FB907-1ADB0-8A8CC7-1C9C6A7-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0
+A22	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44816.0)	2022-09-12 00:00:00
+B22	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Emerald Wolf")	Emerald Wolf
+C22	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),125.0)	125
+D22	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Meta 2022")	Meta 2022
+E22	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-36-0-36-30-D-0-0-0-222E0-22344-223A8-2240C-408-412-3EA-4BA-0-4C72CD-1ADB0-1ADB0-1EA43E9-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")	1E-36-0-36-30-D-0-0-0-222E0-22344-223A8-2240C-408-412-3EA-4BA-0-4C72CD-1ADB0-1ADB0-1EA43E9-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0
+A23	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44736.0)	2022-06-24 00:00:00
+B23	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Mini-Mohg")	Mini-Mohg
+C23	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),150.0)	150
+D23	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Mini-Mohg")	Mini-Mohg
+E23	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-3C-14-12-17-E-7-11-46-1CD6D0-75364-223A8-2240C-3EA-408-FA3-870-0-1038D5A-1ADB0-1ADB0-208050A-1ADB0-1ADB0-A-189C-18A6-18B0-1C2A-1B94-1B58-1B6C-1B80-1B76-1B62-0-0-0-0-0-0-0")	1E-3C-14-12-17-E-7-11-46-1CD6D0-75364-223A8-2240C-3EA-408-FA3-870-0-1038D5A-1ADB0-1ADB0-208050A-1ADB0-1ADB0-A-189C-18A6-18B0-1C2A-1B94-1B58-1B6C-1B80-1B76-1B62-0-0-0-0-0-0-0
+A24	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44736.0)	2022-06-24 00:00:00
+B24	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Mirai")	Mirai
+C24	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),150.0)	150
+D24	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Mirai")	Mirai
+E24	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"3C-3C-14-14-14-3C-7-20-A-30D40-30DA4-BE7A8-139AC-408-3EA-4CF-80C-0-F5839A-1ADB0-1ADB0-2082C1A-1ADB0-1ADB0-A-18B0-1B30-186A-1C98-1C8E-1C84-1916-190A-0-0-0-0-0-1-0-0-0")	3C-3C-14-14-14-3C-7-20-A-30D40-30DA4-BE7A8-139AC-408-3EA-4CF-80C-0-F5839A-1ADB0-1ADB0-2082C1A-1ADB0-1ADB0-A-18B0-1B30-186A-1C98-1C8E-1C84-1916-190A-0-0-0-0-0-1-0-0-0
+A25	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44896.0)	2022-12-01 00:00:00
+B25	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Eggwo")	Eggwo
+C25	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),150.0)	150
+D25	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Moonlit Paladin Level 150 Build")	Moonlit Paladin Level 150 Build
+E25	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"50-3C-14-11-16-F-50-0-0-5A550-41F14-530E8-3F8CC-408-412-4BA-C12-0-2F265A-1ADB0-1ADB0-1FB0CBA-1ADB0-1ADB0-A-1158-1162-1271-10CD-1072-122A-1109-0-0-0-0-0-0-1-1-0-0")	50-3C-14-11-16-F-50-0-0-5A550-41F14-530E8-3F8CC-408-412-4BA-C12-0-2F265A-1ADB0-1ADB0-1FB0CBA-1ADB0-1ADB0-A-1158-1162-1271-10CD-1072-122A-1109-0-0-0-0-0-0-1-1-0-0
+A26	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44736.0)	2022-06-24 00:00:00
+B26	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Mordicar")	Mordicar
+C26	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),150.0)	150
+D26	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Mordicar")	Mordicar
+E26	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"50-3C-19-19-1A-12-3C-6-9-B98C0-382D4-38338-3839C-408-4BA-4CF-BB9-0-3DF36A-1ADB0-1ADB0-1FA2269-1ADB0-1ADB0-A-10CC-1018-10CE-1144-113A-114F-1130-111C-111D-120C-0-0-0-1-0-0-0")	50-3C-19-19-1A-12-3C-6-9-B98C0-382D4-38338-3839C-408-4BA-4CF-BB9-0-3DF36A-1ADB0-1ADB0-1FA2269-1ADB0-1ADB0-A-10CC-1018-10CE-1144-113A-114F-1130-111C-111D-120C-0-0-0-1-0-0-0
+A27	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44755.0)	2022-07-13 00:00:00
+B27	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Leon")	Leon
+C27	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),150.0)	150
+D27	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"NightWielder Build With Twist")	NightWielder Build With Twist
+E27	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"50-2C-24-17-E-11-50-0-0-B98C0-382D4-38338-3839C-7D0-BB9-FA3-802-0-5BB7C9-1FBD019-1ADB0-1FBD019-1ADB0-1ADB0-A-1202-120C-1266-1022-1018-0-0-0-0-0-0-0-0-0-0-0-0")	50-2C-24-17-E-11-50-0-0-B98C0-382D4-38338-3839C-7D0-BB9-FA3-802-0-5BB7C9-1FBD019-1ADB0-1FBD019-1ADB0-1ADB0-A-1202-120C-1266-1022-1018-0-0-0-0-0-0-0-0-0-0-0-0
+A28	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44764.0)	2022-07-22 00:00:00
+B28	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Emerald Wolf")	Emerald Wolf
+C28	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),125.0)	125
+D28	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Optimal 125 Bleed PvP")	Optimal 125 Bleed PvP
+E28	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-3B-0-23-10-14-0-0-32-A6040-22344-223A8-2240C-870-3EA-408-412-0-F5D679-1ADB0-1ADB0-F5D679-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0")	1E-3B-0-23-10-14-0-0-32-A6040-22344-223A8-2240C-870-3EA-408-412-0-F5D679-1ADB0-1ADB0-F5D679-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0
+A29	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44764.0)	2022-07-22 00:00:00
+B29	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Emerald Wolf")	Emerald Wolf
+C29	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),150.0)	150
+D29	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Optimal 150 Bleed PvE")	Optimal 150 Bleed PvE
+E29	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-3C-0-21-11-32-0-0-2D-A6040-E3134-223A8-2240C-821-4E2-884-870-1E-98C1F5-1ADB0-1ADB0-98C1F5-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0-0-0")	1E-3C-0-21-11-32-0-0-2D-A6040-E3134-223A8-2240C-821-4E2-884-870-1E-98C1F5-1ADB0-1ADB0-98C1F5-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0-0-0
+A30	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44764.0)	2022-07-22 00:00:00
+B30	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Emerald Wolf")	Emerald Wolf
+C30	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),125.0)	125
+D30	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Optimal Morgott's Cursed Sword")	Optimal Morgott's Cursed Sword
+E30	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"1E-3C-0-11-E-2A-0-0-2D-0-BE744-0-ECE3C-802-3EA-FFA-412-0-7B98AA-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-1-1-0-0")	1E-3C-0-11-E-2A-0-0-2D-0-BE744-0-ECE3C-802-3EA-FFA-412-0-7B98AA-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-1-1-0-0
+A31	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44937.0)	2023-01-11 00:00:00
+B31	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Amulya")	Amulya
+C31	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),137.0)	137
+D31	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Optimised STR+LIGHT ROLL build 137")	Optimised STR+LIGHT ROLL build 137
+E31	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-38-32-F-0-0-0-1CD6D0-1BA29C-81718-41FDC-408-412-4BA-80C-0-103DB7A-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0-0")	A-3C-0-38-32-F-0-0-0-1CD6D0-1BA29C-81718-41FDC-408-412-4BA-80C-0-103DB7A-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-1-0-0-0
+A32	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44958.0)	2023-02-01 00:00:00
+B32	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Amulya")	Amulya
+C32	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),125.0)	125
+D32	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Pure INT Spellcaster 125")	Pure INT Spellcaster 125
+E32	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"32-3A-15-11-0-0-48-0-0-7C830-41F14-8B358-57F6C-408-412-BB9-438-0-1FB0CBA-1ADB0-1ADB0-1F8E9DA-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")	32-3A-15-11-0-0-48-0-0-7C830-41F14-8B358-57F6C-408-412-BB9-438-0-1FB0CBA-1ADB0-1ADB0-1F8E9DA-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0
+A33	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45238.0)	2023-11-08 00:00:00
+B33	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Soulcial")	Soulcial
+C33	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),125.0)	125
+D33	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"PvE - Glintstone Kris RL125")	PvE - Glintstone Kris RL125
+E33	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"50-3C-F-D-B-14-46-6-9-1FBD0-ECD74-1FC98-1FCFC-C12-7D0-802-4CF-1E-1053BA-1ADB0-1ADB0-1F8E9DA-1ADB0-1ADB0-A-1022-1109-1018-111C-0-0-0-0-0-0-0-0-1-0-0-0-1-2B15-2B0F-1")	50-3C-F-D-B-14-46-6-9-1FBD0-ECD74-1FC98-1FCFC-C12-7D0-802-4CF-1E-1053BA-1ADB0-1ADB0-1F8E9DA-1ADB0-1ADB0-A-1022-1109-1018-111C-0-0-0-0-0-0-0-0-1-0-0-0-1-2B15-2B0F-1
+A34	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44866.0)	2022-11-01 00:00:00
+B34	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Funkmachine ")	Funkmachine 
+C34	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),55.0)	55
+D34	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Rl55 death blight invader")	Rl55 death blight invader
+E34	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"32-1E-F-0-0-F-12-1E-0-0-1D9A84-0-D95BC-4E2-438-41B-BFE-0-6C5666-4982C-4982C-1F84D9F-207B6E6-D32E8-A-FAA-139C-1A2D-19C8-0-0-0-0-0-0-0-0-0-1-0-0-0")	32-1E-F-0-0-F-12-1E-0-0-1D9A84-0-D95BC-4E2-438-41B-BFE-0-6C5666-4982C-4982C-1F84D9F-207B6E6-D32E8-A-FAA-139C-1A2D-19C8-0-0-0-0-0-0-0-0-0-1-0-0-0
+A35	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44826.0)	2022-09-22 00:00:00
+B35	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Amulya")	Amulya
+C35	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),90.0)	90
+D35	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Spell Blade Moonveil+ Cold zwei")	Spell Blade Moonveil+ Cold zwei
+E35	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-32-0-12-13-12-26-0-0-F1B30-BE744-24AB8-BE80C-BFE-412-408-80C-0-3DA8D5-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-1158-1162-114F-FD2-FAA-FF0-114E-0-0-0-0-0-0-1-1-0-0")	A-32-0-12-13-12-26-0-0-F1B30-BE744-24AB8-BE80C-BFE-412-408-80C-0-3DA8D5-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-1158-1162-114F-FD2-FAA-FF0-114E-0-0-0-0-0-0-1-1-0-0
+A36	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44921.0)	2022-12-26 00:00:00
+B36	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Zanogre")	Zanogre
+C36	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),125.0)	125
+D36	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Str/Fai with some fashion, Trolls Greatsword + whatever miracles 25 fai can buy you")	Str/Fai with some fashion, Trolls Greatsword + whatever miracles 25 fai can buy you
+E36	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"3C-3C-F-18-35-A-0-19-0-BBFD0-92C0C-705A8-9EC3C-852-BFE-3EA-412-0-3D8105-1ADB0-1ADB0-20768D9-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")	3C-3C-F-18-35-A-0-19-0-BBFD0-92C0C-705A8-9EC3C-852-BFE-3EA-412-0-3D8105-1ADB0-1ADB0-20768D9-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0
+A37	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44855.0)	2022-10-21 00:00:00
+B37	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Amulya")	Amulya
+C37	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),137.0)	137
+D37	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Strength 137 (100+ poise)")	Strength 137 (100+ poise)
+E37	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-A-2A-3D-12-0-0-0-0-41F14-57F08-2240C-412-884-4CF-4BA-0-15EF3D9-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")	A-3C-A-2A-3D-12-0-0-0-0-41F14-57F08-2240C-412-884-4CF-4BA-0-15EF3D9-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0
+A38	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44826.0)	2022-09-22 00:00:00
+B38	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Amulya")	Amulya
+C38	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),125.0)	125
+D38	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Strength Faith 125")	Strength Faith 125
+E38	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-19-1E-10-0-2F-0-0-BE744-24AB8-BE80C-BFE-412-408-884-0-B9B31A-1ADB0-1ADB0-B9B31A-206F3A9-1ADB0-A-1AFE-1770-1771-1B8A-1AB8-17D4-18BA-0-0-0-0-0-0-0-1-0-0")	A-3C-0-19-1E-10-0-2F-0-0-BE744-24AB8-BE80C-BFE-412-408-884-0-B9B31A-1ADB0-1ADB0-B9B31A-206F3A9-1ADB0-A-1AFE-1770-1771-1B8A-1AB8-17D4-18BA-0-0-0-0-0-0-0-1-0-0
+A39	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44783.0)	2022-08-10 00:00:00
+B39	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Friedslick6")	Friedslick6
+C39	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),100.0)	100
+D39	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"The Thermal Griller v3 (1.05)")	The Thermal Griller v3 (1.05)
+E39	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"3C-18-11-17-11-1D-7-1C-22-A6040-E3134-9C4C8-2240C-412-FA3-41B-4BA-A-98C12D-FB789-1ADB0-208050A-98C1F5-1ADB0-8-1798-1C2A-1771-1842-1856-1C98-19C8-17A2-0-0-0-0-0-0-0-0-0")	3C-18-11-17-11-1D-7-1C-22-A6040-E3134-9C4C8-2240C-412-FA3-41B-4BA-A-98C12D-FB789-1ADB0-208050A-98C1F5-1ADB0-8-1798-1C2A-1771-1842-1856-1C98-19C8-17A2-0-0-0-0-0-0-0-0-0
+A40	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45034.0)	2023-04-18 00:00:00
+B40	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"chronofreak")	chronofreak
+C40	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),150.0)	150
+D40	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Throwing Pots and Jump Attacks")	Throwing Pots and Jump Attacks
+E40	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-A-12-32-32-1-19-1-111700-E3134-24AB8-690DC-8A2-7E4-884-802-A-7A873A-2082C1A-1ADB0-1EA1CCA-CAA30-CB200-A-1AB8-19C8-17A2-186A-1B30-18BA-17AC-1EDF-1950-1798-0-0-0-0-0-0-0-2B14-2B16-0")	A-3C-A-12-32-32-1-19-1-111700-E3134-24AB8-690DC-8A2-7E4-884-802-A-7A873A-2082C1A-1ADB0-1EA1CCA-CAA30-CB200-A-1AB8-19C8-17A2-186A-1B30-18BA-17AC-1EDF-1950-1798-0-0-0-0-0-0-0-2B14-2B16-0
+A41	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44736.0)	2022-06-24 00:00:00
+B41	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Valdir")	Valdir
+C41	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),200.0)	200
+D41	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Valdir200")	Valdir200
+E41	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"32-32-25-A-C-C-46-46-12-1D4C0-24A54-24AB8-24B1C-FA3-BFE-802-3EA-0-20A76A-1FA4979-207B6EA-1DBEC09-1ADB0-1ADB0-A-120C-1389-114F-1018-1C98-1770-1784-1AF4-1AFE-1A2D-0-0-0-0-0-0-0")	32-32-25-A-C-C-46-46-12-1D4C0-24A54-24AB8-24B1C-FA3-BFE-802-3EA-0-20A76A-1FA4979-207B6EA-1DBEC09-1ADB0-1ADB0-A-120C-1389-114F-1018-1C98-1770-1784-1AF4-1AFE-1A2D-0-0-0-0-0-0-0
+A42	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),45350.0)	2024-02-28 00:00:00
+B42	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"willowy_wisp")	willowy_wisp
+C42	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),150.0)	150
+D42	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Vyke War Spear")	Vyke War Spear
+E42	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"14-3C-14-14-E-3C-A-23-A-1ED2A0-E3134-19F168-19F1CC-BEA-412-0-0-0-104299A-1ADB0-1ADB0-2082C1A-10477C9-1ADB0-A-1CA2-1C8E-1C98-1C84-1C8F-19C8-0-0-0-0-0-0-0-1-0-0-0-0-0-0")	14-3C-14-14-E-3C-A-23-A-1ED2A0-E3134-19F168-19F1CC-BEA-412-0-0-0-104299A-1ADB0-1ADB0-2082C1A-10477C9-1ADB0-A-1CA2-1C8E-1C98-1C84-1C8F-19C8-0-0-0-0-0-0-0-1-0-0-0-0-0-0
+A43	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),44921.0)	2022-12-26 00:00:00
+B43	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Zanogre")	Zanogre
+C43	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),125.0)	125
+D43	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"Zanogre, Versatile Dex")	Zanogre, Versatile Dex
+E43	spill_cache				=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"A-3C-0-1D-14-3C-0-0-0-31128-9CA4-223A8-139AC-80C-4BA-3EA-412-0-3DA7B1-1ADB0-1ADB0-1ED511-2082C1A-1ADB0-A-1798-1AB8-1A90-0-0-0-0-0-0-0-0-0-0-0-0-0-0")	A-3C-0-1D-14-3C-0-0-0-31128-9CA4-223A8-139AC-80C-4BA-3EA-412-0-3DA7B1-1ADB0-1ADB0-1ED511-2082C1A-1ADB0-A-1798-1AB8-1A90-0-0-0-0-0-0-0-0-0-0-0-0-0-0

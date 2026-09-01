@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "weapon-lookup input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["query"],
+  "properties": {
+    "query": {
+      "type": "string",
+      "description": "A weapon name as the user wrote it: partial, misspelled, or exact. A minimum length is enforced by a precondition, not here, so a too-short query refuses (exit 11) rather than being rejected as malformed (exit 10)."
+    },
+    "weapon_class": {
+      "type": "string",
+      "description": "Optional. Restrict the search to one weapon class, e.g. 'Katana' or 'Colossal Sword'. Use it to narrow an ambiguous query, never to guess at one."
+    }
+  }
+}

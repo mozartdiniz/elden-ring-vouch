@@ -1,0 +1,682 @@
+SHEET: StartingClassData
+WORKBOOK: Copy of ER - Build Planner v1.19.1.xlsx
+USED RANGE: A1:J22
+NONEMPTY CELLS: 202
+FORMULA CELLS: 111
+
+This file is for an LLM that must rebuild these calculations in another language. Treat formulas as the source of truth. Cached/fallback values are only for checking a port. Skip spill_cache cells; they are not logic.
+
+VISIBILITY: hidden
+MERGED RANGES (1):
+  A10:J10
+
+STATIC / INPUT / LABEL CELLS (91):
+coord	value
+A1	Vagabond
+B1	Warrior
+C1	Hero
+D1	Bandit
+E1	Astrologer
+F1	Prophet
+G1	Samurai
+H1	Prisoner
+I1	Confessor
+J1	Wretch
+A2	15.0
+B2	11.0
+C2	14.0
+D2	10.0
+E2	9.0
+F2	10.0
+G2	12.0
+H2	11.0
+I2	10.0
+J2	10.0
+A3	10.0
+B3	12.0
+C3	9.0
+D3	11.0
+E3	15.0
+F3	14.0
+G3	11.0
+H3	12.0
+I3	13.0
+J3	10.0
+A4	11.0
+B4	11.0
+C4	12.0
+D4	10.0
+E4	9.0
+F4	8.0
+G4	13.0
+H4	11.0
+I4	10.0
+J4	10.0
+A5	14.0
+B5	10.0
+C5	16.0
+D5	9.0
+E5	8.0
+F5	11.0
+G5	12.0
+H5	11.0
+I5	12.0
+J5	10.0
+A6	13.0
+B6	16.0
+C6	9.0
+D6	13.0
+E6	12.0
+F6	10.0
+G6	15.0
+H6	14.0
+I6	12.0
+J6	10.0
+A7	9.0
+B7	10.0
+C7	7.0
+D7	9.0
+E7	16.0
+F7	7.0
+G7	9.0
+H7	14.0
+I7	9.0
+J7	10.0
+A8	9.0
+B8	8.0
+C8	8.0
+D8	8.0
+E8	7.0
+F8	16.0
+G8	8.0
+H8	6.0
+I8	14.0
+J8	10.0
+A9	7.0
+B9	9.0
+C9	11.0
+D9	14.0
+E9	9.0
+F9	10.0
+G9	8.0
+H9	9.0
+I9	9.0
+J9	10.0
+A10	Optimal Starting Class Calculation
+
+CROSS-SHEET REFERENCES: Planner
+FORMULA KINDS: excel=110, google_sheets=1
+UNIQUE PATTERNS: 111
+
+========================================================================
+FORMULA PATTERNS (fill-down compressed)
+{r} is the row of the cell. Port the template once and apply per row.
+========================================================================
+
+PATTERN 1  kind=excel  array=False  A11
+  context_label: Optimal Starting Class Calculation
+  template: =MAX(Planner!$I19,A2)
+  e.g. A11: =MAX(Planner!$I19,A2)  cached=15
+
+PATTERN 2  kind=excel  array=False  B11
+  template: =MAX(Planner!$I19,B2)
+  e.g. B11: =MAX(Planner!$I19,B2)  cached=11
+
+PATTERN 3  kind=excel  array=False  C11
+  template: =MAX(Planner!$I19,C2)
+  e.g. C11: =MAX(Planner!$I19,C2)  cached=14
+
+PATTERN 4  kind=excel  array=False  D11
+  template: =MAX(Planner!$I19,D2)
+  e.g. D11: =MAX(Planner!$I19,D2)  cached=10
+
+PATTERN 5  kind=excel  array=False  E11
+  template: =MAX(Planner!$I19,E2)
+  e.g. E11: =MAX(Planner!$I19,E2)  cached=9
+
+PATTERN 6  kind=excel  array=False  F11
+  template: =MAX(Planner!$I19,F2)
+  e.g. F11: =MAX(Planner!$I19,F2)  cached=10
+
+PATTERN 7  kind=excel  array=False  G11
+  template: =MAX(Planner!$I19,G2)
+  e.g. G11: =MAX(Planner!$I19,G2)  cached=12
+
+PATTERN 8  kind=excel  array=False  H11
+  template: =MAX(Planner!$I19,H2)
+  e.g. H11: =MAX(Planner!$I19,H2)  cached=11
+
+PATTERN 9  kind=excel  array=False  I11
+  template: =MAX(Planner!$I19,I2)
+  e.g. I11: =MAX(Planner!$I19,I2)  cached=10
+
+PATTERN 10  kind=excel  array=False  J11
+  template: =MAX(Planner!$I19,J2)
+  e.g. J11: =MAX(Planner!$I19,J2)  cached=10
+
+PATTERN 11  kind=excel  array=False  A12
+  context_label: Optimal Starting Class Calculation
+  template: =MAX(Planner!$I20,A3)
+  e.g. A12: =MAX(Planner!$I20,A3)  cached=10
+
+PATTERN 12  kind=excel  array=False  B12
+  template: =MAX(Planner!$I20,B3)
+  e.g. B12: =MAX(Planner!$I20,B3)  cached=12
+
+PATTERN 13  kind=excel  array=False  C12
+  template: =MAX(Planner!$I20,C3)
+  e.g. C12: =MAX(Planner!$I20,C3)  cached=9
+
+PATTERN 14  kind=excel  array=False  D12
+  template: =MAX(Planner!$I20,D3)
+  e.g. D12: =MAX(Planner!$I20,D3)  cached=11
+
+PATTERN 15  kind=excel  array=False  E12
+  template: =MAX(Planner!$I20,E3)
+  e.g. E12: =MAX(Planner!$I20,E3)  cached=15
+
+PATTERN 16  kind=excel  array=False  F12
+  template: =MAX(Planner!$I20,F3)
+  e.g. F12: =MAX(Planner!$I20,F3)  cached=14
+
+PATTERN 17  kind=excel  array=False  G12
+  template: =MAX(Planner!$I20,G3)
+  e.g. G12: =MAX(Planner!$I20,G3)  cached=11
+
+PATTERN 18  kind=excel  array=False  H12
+  template: =MAX(Planner!$I20,H3)
+  e.g. H12: =MAX(Planner!$I20,H3)  cached=12
+
+PATTERN 19  kind=excel  array=False  I12
+  template: =MAX(Planner!$I20,I3)
+  e.g. I12: =MAX(Planner!$I20,I3)  cached=13
+
+PATTERN 20  kind=excel  array=False  J12
+  template: =MAX(Planner!$I20,J3)
+  e.g. J12: =MAX(Planner!$I20,J3)  cached=10
+
+PATTERN 21  kind=excel  array=False  A13
+  context_label: Optimal Starting Class Calculation
+  template: =MAX(Planner!$I21,A4)
+  e.g. A13: =MAX(Planner!$I21,A4)  cached=11
+
+PATTERN 22  kind=excel  array=False  B13
+  template: =MAX(Planner!$I21,B4)
+  e.g. B13: =MAX(Planner!$I21,B4)  cached=11
+
+PATTERN 23  kind=excel  array=False  C13
+  template: =MAX(Planner!$I21,C4)
+  e.g. C13: =MAX(Planner!$I21,C4)  cached=12
+
+PATTERN 24  kind=excel  array=False  D13
+  template: =MAX(Planner!$I21,D4)
+  e.g. D13: =MAX(Planner!$I21,D4)  cached=10
+
+PATTERN 25  kind=excel  array=False  E13
+  template: =MAX(Planner!$I21,E4)
+  e.g. E13: =MAX(Planner!$I21,E4)  cached=9
+
+PATTERN 26  kind=excel  array=False  F13
+  template: =MAX(Planner!$I21,F4)
+  e.g. F13: =MAX(Planner!$I21,F4)  cached=8
+
+PATTERN 27  kind=excel  array=False  G13
+  template: =MAX(Planner!$I21,G4)
+  e.g. G13: =MAX(Planner!$I21,G4)  cached=13
+
+PATTERN 28  kind=excel  array=False  H13
+  template: =MAX(Planner!$I21,H4)
+  e.g. H13: =MAX(Planner!$I21,H4)  cached=11
+
+PATTERN 29  kind=excel  array=False  I13
+  template: =MAX(Planner!$I21,I4)
+  e.g. I13: =MAX(Planner!$I21,I4)  cached=10
+
+PATTERN 30  kind=excel  array=False  J13
+  template: =MAX(Planner!$I21,J4)
+  e.g. J13: =MAX(Planner!$I21,J4)  cached=10
+
+PATTERN 31  kind=excel  array=False  A14
+  template: =MAX(Planner!$I22,A5)
+  e.g. A14: =MAX(Planner!$I22,A5)  cached=14
+
+PATTERN 32  kind=excel  array=False  B14
+  template: =MAX(Planner!$I22,B5)
+  e.g. B14: =MAX(Planner!$I22,B5)  cached=10
+
+PATTERN 33  kind=excel  array=False  C14
+  template: =MAX(Planner!$I22,C5)
+  e.g. C14: =MAX(Planner!$I22,C5)  cached=16
+
+PATTERN 34  kind=excel  array=False  D14
+  template: =MAX(Planner!$I22,D5)
+  e.g. D14: =MAX(Planner!$I22,D5)  cached=9
+
+PATTERN 35  kind=excel  array=False  E14
+  template: =MAX(Planner!$I22,E5)
+  e.g. E14: =MAX(Planner!$I22,E5)  cached=8
+
+PATTERN 36  kind=excel  array=False  F14
+  template: =MAX(Planner!$I22,F5)
+  e.g. F14: =MAX(Planner!$I22,F5)  cached=11
+
+PATTERN 37  kind=excel  array=False  G14
+  template: =MAX(Planner!$I22,G5)
+  e.g. G14: =MAX(Planner!$I22,G5)  cached=12
+
+PATTERN 38  kind=excel  array=False  H14
+  template: =MAX(Planner!$I22,H5)
+  e.g. H14: =MAX(Planner!$I22,H5)  cached=11
+
+PATTERN 39  kind=excel  array=False  I14
+  template: =MAX(Planner!$I22,I5)
+  e.g. I14: =MAX(Planner!$I22,I5)  cached=12
+
+PATTERN 40  kind=excel  array=False  J14
+  template: =MAX(Planner!$I22,J5)
+  e.g. J14: =MAX(Planner!$I22,J5)  cached=10
+
+PATTERN 41  kind=excel  array=False  A15
+  template: =MAX(Planner!$I23,A6)
+  e.g. A15: =MAX(Planner!$I23,A6)  cached=13
+
+PATTERN 42  kind=excel  array=False  B15
+  template: =MAX(Planner!$I23,B6)
+  e.g. B15: =MAX(Planner!$I23,B6)  cached=16
+
+PATTERN 43  kind=excel  array=False  C15
+  template: =MAX(Planner!$I23,C6)
+  e.g. C15: =MAX(Planner!$I23,C6)  cached=9
+
+PATTERN 44  kind=excel  array=False  D15
+  template: =MAX(Planner!$I23,D6)
+  e.g. D15: =MAX(Planner!$I23,D6)  cached=13
+
+PATTERN 45  kind=excel  array=False  E15
+  template: =MAX(Planner!$I23,E6)
+  e.g. E15: =MAX(Planner!$I23,E6)  cached=12
+
+PATTERN 46  kind=excel  array=False  F15
+  template: =MAX(Planner!$I23,F6)
+  e.g. F15: =MAX(Planner!$I23,F6)  cached=10
+
+PATTERN 47  kind=excel  array=False  G15
+  template: =MAX(Planner!$I23,G6)
+  e.g. G15: =MAX(Planner!$I23,G6)  cached=15
+
+PATTERN 48  kind=excel  array=False  H15
+  template: =MAX(Planner!$I23,H6)
+  e.g. H15: =MAX(Planner!$I23,H6)  cached=14
+
+PATTERN 49  kind=excel  array=False  I15
+  template: =MAX(Planner!$I23,I6)
+  e.g. I15: =MAX(Planner!$I23,I6)  cached=12
+
+PATTERN 50  kind=excel  array=False  J15
+  template: =MAX(Planner!$I23,J6)
+  e.g. J15: =MAX(Planner!$I23,J6)  cached=10
+
+PATTERN 51  kind=excel  array=False  A16
+  template: =MAX(Planner!$I24,A7)
+  e.g. A16: =MAX(Planner!$I24,A7)  cached=9
+
+PATTERN 52  kind=excel  array=False  B16
+  template: =MAX(Planner!$I24,B7)
+  e.g. B16: =MAX(Planner!$I24,B7)  cached=10
+
+PATTERN 53  kind=excel  array=False  C16
+  template: =MAX(Planner!$I24,C7)
+  e.g. C16: =MAX(Planner!$I24,C7)  cached=7
+
+PATTERN 54  kind=excel  array=False  D16
+  template: =MAX(Planner!$I24,D7)
+  e.g. D16: =MAX(Planner!$I24,D7)  cached=9
+
+PATTERN 55  kind=excel  array=False  E16
+  template: =MAX(Planner!$I24,E7)
+  e.g. E16: =MAX(Planner!$I24,E7)  cached=16
+
+PATTERN 56  kind=excel  array=False  F16
+  template: =MAX(Planner!$I24,F7)
+  e.g. F16: =MAX(Planner!$I24,F7)  cached=7
+
+PATTERN 57  kind=excel  array=False  G16
+  template: =MAX(Planner!$I24,G7)
+  e.g. G16: =MAX(Planner!$I24,G7)  cached=9
+
+PATTERN 58  kind=excel  array=False  H16
+  template: =MAX(Planner!$I24,H7)
+  e.g. H16: =MAX(Planner!$I24,H7)  cached=14
+
+PATTERN 59  kind=excel  array=False  I16
+  template: =MAX(Planner!$I24,I7)
+  e.g. I16: =MAX(Planner!$I24,I7)  cached=9
+
+PATTERN 60  kind=excel  array=False  J16
+  template: =MAX(Planner!$I24,J7)
+  e.g. J16: =MAX(Planner!$I24,J7)  cached=10
+
+PATTERN 61  kind=excel  array=False  A17
+  template: =MAX(Planner!$I25,A8)
+  e.g. A17: =MAX(Planner!$I25,A8)  cached=9
+
+PATTERN 62  kind=excel  array=False  B17
+  template: =MAX(Planner!$I25,B8)
+  e.g. B17: =MAX(Planner!$I25,B8)  cached=8
+
+PATTERN 63  kind=excel  array=False  C17
+  template: =MAX(Planner!$I25,C8)
+  e.g. C17: =MAX(Planner!$I25,C8)  cached=8
+
+PATTERN 64  kind=excel  array=False  D17
+  template: =MAX(Planner!$I25,D8)
+  e.g. D17: =MAX(Planner!$I25,D8)  cached=8
+
+PATTERN 65  kind=excel  array=False  E17
+  template: =MAX(Planner!$I25,E8)
+  e.g. E17: =MAX(Planner!$I25,E8)  cached=7
+
+PATTERN 66  kind=excel  array=False  F17
+  template: =MAX(Planner!$I25,F8)
+  e.g. F17: =MAX(Planner!$I25,F8)  cached=16
+
+PATTERN 67  kind=excel  array=False  G17
+  template: =MAX(Planner!$I25,G8)
+  e.g. G17: =MAX(Planner!$I25,G8)  cached=8
+
+PATTERN 68  kind=excel  array=False  H17
+  template: =MAX(Planner!$I25,H8)
+  e.g. H17: =MAX(Planner!$I25,H8)  cached=6
+
+PATTERN 69  kind=excel  array=False  I17
+  template: =MAX(Planner!$I25,I8)
+  e.g. I17: =MAX(Planner!$I25,I8)  cached=14
+
+PATTERN 70  kind=excel  array=False  J17
+  template: =MAX(Planner!$I25,J8)
+  e.g. J17: =MAX(Planner!$I25,J8)  cached=10
+
+PATTERN 71  kind=excel  array=False  A18
+  template: =MAX(Planner!$I26,A9)
+  e.g. A18: =MAX(Planner!$I26,A9)  cached=7
+
+PATTERN 72  kind=excel  array=False  B18
+  template: =MAX(Planner!$I26,B9)
+  e.g. B18: =MAX(Planner!$I26,B9)  cached=9
+
+PATTERN 73  kind=excel  array=False  C18
+  template: =MAX(Planner!$I26,C9)
+  e.g. C18: =MAX(Planner!$I26,C9)  cached=11
+
+PATTERN 74  kind=excel  array=False  D18
+  template: =MAX(Planner!$I26,D9)
+  e.g. D18: =MAX(Planner!$I26,D9)  cached=14
+
+PATTERN 75  kind=excel  array=False  E18
+  template: =MAX(Planner!$I26,E9)
+  e.g. E18: =MAX(Planner!$I26,E9)  cached=9
+
+PATTERN 76  kind=excel  array=False  F18
+  template: =MAX(Planner!$I26,F9)
+  e.g. F18: =MAX(Planner!$I26,F9)  cached=10
+
+PATTERN 77  kind=excel  array=False  G18
+  template: =MAX(Planner!$I26,G9)
+  e.g. G18: =MAX(Planner!$I26,G9)  cached=8
+
+PATTERN 78  kind=excel  array=False  H18
+  template: =MAX(Planner!$I26,H9)
+  e.g. H18: =MAX(Planner!$I26,H9)  cached=9
+
+PATTERN 79  kind=excel  array=False  I18
+  template: =MAX(Planner!$I26,I9)
+  e.g. I18: =MAX(Planner!$I26,I9)  cached=9
+
+PATTERN 80  kind=excel  array=False  J18
+  template: =MAX(Planner!$I26,J9)
+  e.g. J18: =MAX(Planner!$I26,J9)  cached=10
+
+PATTERN 81  kind=excel  array=False  A19
+  template: =SUM(A11:A{r-1})-79
+  e.g. A19: =SUM(A11:A18)-79  cached=9
+
+PATTERN 82  kind=excel  array=False  B19
+  template: =SUM(B11:B{r-1})-79
+  e.g. B19: =SUM(B11:B18)-79  cached=8
+
+PATTERN 83  kind=excel  array=False  C19
+  template: =SUM(C11:C{r-1})-79
+  e.g. C19: =SUM(C11:C18)-79  cached=7
+
+PATTERN 84  kind=excel  array=False  D19
+  template: =SUM(D11:D{r-1})-79
+  e.g. D19: =SUM(D11:D18)-79  cached=5
+
+PATTERN 85  kind=excel  array=False  E19
+  template: =SUM(E11:E{r-1})-79
+  e.g. E19: =SUM(E11:E18)-79  cached=6
+
+PATTERN 86  kind=excel  array=False  F19
+  template: =SUM(F11:F{r-1})-79
+  e.g. F19: =SUM(F11:F18)-79  cached=7
+
+PATTERN 87  kind=excel  array=False  G19
+  template: =SUM(G11:G{r-1})-79
+  e.g. G19: =SUM(G11:G18)-79  cached=9
+
+PATTERN 88  kind=excel  array=False  H19
+  template: =SUM(H11:H{r-1})-79
+  e.g. H19: =SUM(H11:H18)-79  cached=9
+
+PATTERN 89  kind=excel  array=False  I19
+  template: =SUM(I11:I{r-1})-79
+  e.g. I19: =SUM(I11:I18)-79  cached=10
+
+PATTERN 90  kind=excel  array=False  J19
+  template: =SUM(J11:J{r-1})-79
+  e.g. J19: =SUM(J11:J18)-79  cached=1
+
+PATTERN 91  kind=excel  array=False  A20
+  template: =A{r-1}=MIN($A{r-1}:$J{r-1})
+  e.g. A20: =A19=MIN($A19:$J19)  cached=False
+
+PATTERN 92  kind=excel  array=False  B20
+  template: =B{r-1}=MIN($A{r-1}:$J{r-1})
+  e.g. B20: =B19=MIN($A19:$J19)  cached=False
+
+PATTERN 93  kind=excel  array=False  C20
+  template: =C{r-1}=MIN($A{r-1}:$J{r-1})
+  e.g. C20: =C19=MIN($A19:$J19)  cached=False
+
+PATTERN 94  kind=excel  array=False  D20
+  template: =D{r-1}=MIN($A{r-1}:$J{r-1})
+  e.g. D20: =D19=MIN($A19:$J19)  cached=False
+
+PATTERN 95  kind=excel  array=False  E20
+  template: =E{r-1}=MIN($A{r-1}:$J{r-1})
+  e.g. E20: =E19=MIN($A19:$J19)  cached=False
+
+PATTERN 96  kind=excel  array=False  F20
+  template: =F{r-1}=MIN($A{r-1}:$J{r-1})
+  e.g. F20: =F19=MIN($A19:$J19)  cached=False
+
+PATTERN 97  kind=excel  array=False  G20
+  template: =G{r-1}=MIN($A{r-1}:$J{r-1})
+  e.g. G20: =G19=MIN($A19:$J19)  cached=False
+
+PATTERN 98  kind=excel  array=False  H20
+  template: =H{r-1}=MIN($A{r-1}:$J{r-1})
+  e.g. H20: =H19=MIN($A19:$J19)  cached=False
+
+PATTERN 99  kind=excel  array=False  I20
+  template: =I{r-1}=MIN($A{r-1}:$J{r-1})
+  e.g. I20: =I19=MIN($A19:$J19)  cached=False
+
+PATTERN 100  kind=excel  array=False  J20
+  template: =J{r-1}=MIN($A{r-1}:$J{r-1})
+  e.g. J20: =J19=MIN($A19:$J19)  cached=True
+
+PATTERN 101  kind=google_sheets  array=False  A21
+  template: =IF(Planner!$AJ$37,
+TRANSPOSE(SORT(TRANSPOSE(FILTER(A$1:J$1,NOT(ISBLANK(A$1:J$1)))),TRANSPOSE(A$19:J$19),True)),
+FILTER(A$1:J$1,A$20:J$20=True))
+  note: Original Google Sheets formula recovered from DUMMYFUNCTION wrapper. Functions like FILTER, QUERY, UNIQUE, FLATTEN, IMPORTRANGE, GOOGLETRANSLATE are Sheets-only and must be reimplemented.
+  e.g. A21: =IF(Planner!$AJ$37,
+TRANSPOSE(SORT(TRANSPOSE(FILTER(A$1:J$1,NOT(ISBLANK(A$1:J$1)))),TRANSPOSE(A$19:J$19),True)),
+FILTER(A$1:J$1,A$20:J$20=True))  cached='Wretch'
+
+PATTERN 102  kind=excel  array=False  A22
+  template: =IFERROR(INDEX($A:$J,19,MATCH(A$21,$1:$1,0)),"")
+  e.g. A22: =IFERROR(INDEX($A:$J,19,MATCH(A$21,$1:$1,0)),"")  cached=1
+
+PATTERN 103  kind=excel  array=False  B22
+  template: =IFERROR(INDEX($A:$J,19,MATCH(B$21,$1:$1,0)),"")
+  e.g. B22: =IFERROR(INDEX($A:$J,19,MATCH(B$21,$1:$1,0)),"")
+
+PATTERN 104  kind=excel  array=False  C22
+  template: =IFERROR(INDEX($A:$J,19,MATCH(C$21,$1:$1,0)),"")
+  e.g. C22: =IFERROR(INDEX($A:$J,19,MATCH(C$21,$1:$1,0)),"")
+
+PATTERN 105  kind=excel  array=False  D22
+  template: =IFERROR(INDEX($A:$J,19,MATCH(D$21,$1:$1,0)),"")
+  e.g. D22: =IFERROR(INDEX($A:$J,19,MATCH(D$21,$1:$1,0)),"")
+
+PATTERN 106  kind=excel  array=False  E22
+  template: =IFERROR(INDEX($A:$J,19,MATCH(E$21,$1:$1,0)),"")
+  e.g. E22: =IFERROR(INDEX($A:$J,19,MATCH(E$21,$1:$1,0)),"")
+
+PATTERN 107  kind=excel  array=False  F22
+  template: =IFERROR(INDEX($A:$J,19,MATCH(F$21,$1:$1,0)),"")
+  e.g. F22: =IFERROR(INDEX($A:$J,19,MATCH(F$21,$1:$1,0)),"")
+
+PATTERN 108  kind=excel  array=False  G22
+  template: =IFERROR(INDEX($A:$J,19,MATCH(G$21,$1:$1,0)),"")
+  e.g. G22: =IFERROR(INDEX($A:$J,19,MATCH(G$21,$1:$1,0)),"")
+
+PATTERN 109  kind=excel  array=False  H22
+  template: =IFERROR(INDEX($A:$J,19,MATCH(H$21,$1:$1,0)),"")
+  e.g. H22: =IFERROR(INDEX($A:$J,19,MATCH(H$21,$1:$1,0)),"")
+
+PATTERN 110  kind=excel  array=False  I22
+  template: =IFERROR(INDEX($A:$J,19,MATCH(I$21,$1:$1,0)),"")
+  e.g. I22: =IFERROR(INDEX($A:$J,19,MATCH(I$21,$1:$1,0)),"")
+
+PATTERN 111  kind=excel  array=False  J22
+  template: =IFERROR(INDEX($A:$J,19,MATCH(J$21,$1:$1,0)),"")
+  e.g. J22: =IFERROR(INDEX($A:$J,19,MATCH(J$21,$1:$1,0)),"")
+
+========================================================================
+ALL FORMULAS
+========================================================================
+cell	kind	array_ref	label	logic	stored	cached
+A11	excel		Optimal Starting Class Calculation	=MAX(Planner!$I19,A2)	=MAX(Planner!$I19,A2)	15
+B11	excel			=MAX(Planner!$I19,B2)	=MAX(Planner!$I19,B2)	11
+C11	excel			=MAX(Planner!$I19,C2)	=MAX(Planner!$I19,C2)	14
+D11	excel			=MAX(Planner!$I19,D2)	=MAX(Planner!$I19,D2)	10
+E11	excel			=MAX(Planner!$I19,E2)	=MAX(Planner!$I19,E2)	9
+F11	excel			=MAX(Planner!$I19,F2)	=MAX(Planner!$I19,F2)	10
+G11	excel			=MAX(Planner!$I19,G2)	=MAX(Planner!$I19,G2)	12
+H11	excel			=MAX(Planner!$I19,H2)	=MAX(Planner!$I19,H2)	11
+I11	excel			=MAX(Planner!$I19,I2)	=MAX(Planner!$I19,I2)	10
+J11	excel			=MAX(Planner!$I19,J2)	=MAX(Planner!$I19,J2)	10
+A12	excel		Optimal Starting Class Calculation	=MAX(Planner!$I20,A3)	=MAX(Planner!$I20,A3)	10
+B12	excel			=MAX(Planner!$I20,B3)	=MAX(Planner!$I20,B3)	12
+C12	excel			=MAX(Planner!$I20,C3)	=MAX(Planner!$I20,C3)	9
+D12	excel			=MAX(Planner!$I20,D3)	=MAX(Planner!$I20,D3)	11
+E12	excel			=MAX(Planner!$I20,E3)	=MAX(Planner!$I20,E3)	15
+F12	excel			=MAX(Planner!$I20,F3)	=MAX(Planner!$I20,F3)	14
+G12	excel			=MAX(Planner!$I20,G3)	=MAX(Planner!$I20,G3)	11
+H12	excel			=MAX(Planner!$I20,H3)	=MAX(Planner!$I20,H3)	12
+I12	excel			=MAX(Planner!$I20,I3)	=MAX(Planner!$I20,I3)	13
+J12	excel			=MAX(Planner!$I20,J3)	=MAX(Planner!$I20,J3)	10
+A13	excel		Optimal Starting Class Calculation	=MAX(Planner!$I21,A4)	=MAX(Planner!$I21,A4)	11
+B13	excel			=MAX(Planner!$I21,B4)	=MAX(Planner!$I21,B4)	11
+C13	excel			=MAX(Planner!$I21,C4)	=MAX(Planner!$I21,C4)	12
+D13	excel			=MAX(Planner!$I21,D4)	=MAX(Planner!$I21,D4)	10
+E13	excel			=MAX(Planner!$I21,E4)	=MAX(Planner!$I21,E4)	9
+F13	excel			=MAX(Planner!$I21,F4)	=MAX(Planner!$I21,F4)	8
+G13	excel			=MAX(Planner!$I21,G4)	=MAX(Planner!$I21,G4)	13
+H13	excel			=MAX(Planner!$I21,H4)	=MAX(Planner!$I21,H4)	11
+I13	excel			=MAX(Planner!$I21,I4)	=MAX(Planner!$I21,I4)	10
+J13	excel			=MAX(Planner!$I21,J4)	=MAX(Planner!$I21,J4)	10
+A14	excel			=MAX(Planner!$I22,A5)	=MAX(Planner!$I22,A5)	14
+B14	excel			=MAX(Planner!$I22,B5)	=MAX(Planner!$I22,B5)	10
+C14	excel			=MAX(Planner!$I22,C5)	=MAX(Planner!$I22,C5)	16
+D14	excel			=MAX(Planner!$I22,D5)	=MAX(Planner!$I22,D5)	9
+E14	excel			=MAX(Planner!$I22,E5)	=MAX(Planner!$I22,E5)	8
+F14	excel			=MAX(Planner!$I22,F5)	=MAX(Planner!$I22,F5)	11
+G14	excel			=MAX(Planner!$I22,G5)	=MAX(Planner!$I22,G5)	12
+H14	excel			=MAX(Planner!$I22,H5)	=MAX(Planner!$I22,H5)	11
+I14	excel			=MAX(Planner!$I22,I5)	=MAX(Planner!$I22,I5)	12
+J14	excel			=MAX(Planner!$I22,J5)	=MAX(Planner!$I22,J5)	10
+A15	excel			=MAX(Planner!$I23,A6)	=MAX(Planner!$I23,A6)	13
+B15	excel			=MAX(Planner!$I23,B6)	=MAX(Planner!$I23,B6)	16
+C15	excel			=MAX(Planner!$I23,C6)	=MAX(Planner!$I23,C6)	9
+D15	excel			=MAX(Planner!$I23,D6)	=MAX(Planner!$I23,D6)	13
+E15	excel			=MAX(Planner!$I23,E6)	=MAX(Planner!$I23,E6)	12
+F15	excel			=MAX(Planner!$I23,F6)	=MAX(Planner!$I23,F6)	10
+G15	excel			=MAX(Planner!$I23,G6)	=MAX(Planner!$I23,G6)	15
+H15	excel			=MAX(Planner!$I23,H6)	=MAX(Planner!$I23,H6)	14
+I15	excel			=MAX(Planner!$I23,I6)	=MAX(Planner!$I23,I6)	12
+J15	excel			=MAX(Planner!$I23,J6)	=MAX(Planner!$I23,J6)	10
+A16	excel			=MAX(Planner!$I24,A7)	=MAX(Planner!$I24,A7)	9
+B16	excel			=MAX(Planner!$I24,B7)	=MAX(Planner!$I24,B7)	10
+C16	excel			=MAX(Planner!$I24,C7)	=MAX(Planner!$I24,C7)	7
+D16	excel			=MAX(Planner!$I24,D7)	=MAX(Planner!$I24,D7)	9
+E16	excel			=MAX(Planner!$I24,E7)	=MAX(Planner!$I24,E7)	16
+F16	excel			=MAX(Planner!$I24,F7)	=MAX(Planner!$I24,F7)	7
+G16	excel			=MAX(Planner!$I24,G7)	=MAX(Planner!$I24,G7)	9
+H16	excel			=MAX(Planner!$I24,H7)	=MAX(Planner!$I24,H7)	14
+I16	excel			=MAX(Planner!$I24,I7)	=MAX(Planner!$I24,I7)	9
+J16	excel			=MAX(Planner!$I24,J7)	=MAX(Planner!$I24,J7)	10
+A17	excel			=MAX(Planner!$I25,A8)	=MAX(Planner!$I25,A8)	9
+B17	excel			=MAX(Planner!$I25,B8)	=MAX(Planner!$I25,B8)	8
+C17	excel			=MAX(Planner!$I25,C8)	=MAX(Planner!$I25,C8)	8
+D17	excel			=MAX(Planner!$I25,D8)	=MAX(Planner!$I25,D8)	8
+E17	excel			=MAX(Planner!$I25,E8)	=MAX(Planner!$I25,E8)	7
+F17	excel			=MAX(Planner!$I25,F8)	=MAX(Planner!$I25,F8)	16
+G17	excel			=MAX(Planner!$I25,G8)	=MAX(Planner!$I25,G8)	8
+H17	excel			=MAX(Planner!$I25,H8)	=MAX(Planner!$I25,H8)	6
+I17	excel			=MAX(Planner!$I25,I8)	=MAX(Planner!$I25,I8)	14
+J17	excel			=MAX(Planner!$I25,J8)	=MAX(Planner!$I25,J8)	10
+A18	excel			=MAX(Planner!$I26,A9)	=MAX(Planner!$I26,A9)	7
+B18	excel			=MAX(Planner!$I26,B9)	=MAX(Planner!$I26,B9)	9
+C18	excel			=MAX(Planner!$I26,C9)	=MAX(Planner!$I26,C9)	11
+D18	excel			=MAX(Planner!$I26,D9)	=MAX(Planner!$I26,D9)	14
+E18	excel			=MAX(Planner!$I26,E9)	=MAX(Planner!$I26,E9)	9
+F18	excel			=MAX(Planner!$I26,F9)	=MAX(Planner!$I26,F9)	10
+G18	excel			=MAX(Planner!$I26,G9)	=MAX(Planner!$I26,G9)	8
+H18	excel			=MAX(Planner!$I26,H9)	=MAX(Planner!$I26,H9)	9
+I18	excel			=MAX(Planner!$I26,I9)	=MAX(Planner!$I26,I9)	9
+J18	excel			=MAX(Planner!$I26,J9)	=MAX(Planner!$I26,J9)	10
+A19	excel			=SUM(A11:A18)-79	=SUM(A11:A18)-79	9
+B19	excel			=SUM(B11:B18)-79	=SUM(B11:B18)-79	8
+C19	excel			=SUM(C11:C18)-79	=SUM(C11:C18)-79	7
+D19	excel			=SUM(D11:D18)-79	=SUM(D11:D18)-79	5
+E19	excel			=SUM(E11:E18)-79	=SUM(E11:E18)-79	6
+F19	excel			=SUM(F11:F18)-79	=SUM(F11:F18)-79	7
+G19	excel			=SUM(G11:G18)-79	=SUM(G11:G18)-79	9
+H19	excel			=SUM(H11:H18)-79	=SUM(H11:H18)-79	9
+I19	excel			=SUM(I11:I18)-79	=SUM(I11:I18)-79	10
+J19	excel			=SUM(J11:J18)-79	=SUM(J11:J18)-79	1
+A20	excel			=A19=MIN($A19:$J19)	=A19=MIN($A19:$J19)	FALSE
+B20	excel			=B19=MIN($A19:$J19)	=B19=MIN($A19:$J19)	FALSE
+C20	excel			=C19=MIN($A19:$J19)	=C19=MIN($A19:$J19)	FALSE
+D20	excel			=D19=MIN($A19:$J19)	=D19=MIN($A19:$J19)	FALSE
+E20	excel			=E19=MIN($A19:$J19)	=E19=MIN($A19:$J19)	FALSE
+F20	excel			=F19=MIN($A19:$J19)	=F19=MIN($A19:$J19)	FALSE
+G20	excel			=G19=MIN($A19:$J19)	=G19=MIN($A19:$J19)	FALSE
+H20	excel			=H19=MIN($A19:$J19)	=H19=MIN($A19:$J19)	FALSE
+I20	excel			=I19=MIN($A19:$J19)	=I19=MIN($A19:$J19)	FALSE
+J20	excel			=J19=MIN($A19:$J19)	=J19=MIN($A19:$J19)	TRUE
+A21	google_sheets			=IF(Planner!$AJ$37, | TRANSPOSE(SORT(TRANSPOSE(FILTER(A$1:J$1,NOT(ISBLANK(A$1:J$1)))),TRANSPOSE(A$19:J$19),True)), | FILTER(A$1:J$1,A$20:J$20=True))	=IFERROR(__xludf.DUMMYFUNCTION("IF(Planner!$AJ$37, | TRANSPOSE(SORT(TRANSPOSE(FILTER(A$1:J$1,NOT(ISBLANK(A$1:J$1)))),TRANSPOSE(A$19:J$19),True)), | FILTER(A$1:J$1,A$20:J$20=True))"),"Wretch")	Wretch
+A22	excel			=IFERROR(INDEX($A:$J,19,MATCH(A$21,$1:$1,0)),"")	=IFERROR(INDEX($A:$J,19,MATCH(A$21,$1:$1,0)),"")	1
+B22	excel			=IFERROR(INDEX($A:$J,19,MATCH(B$21,$1:$1,0)),"")	=IFERROR(INDEX($A:$J,19,MATCH(B$21,$1:$1,0)),"")	
+C22	excel			=IFERROR(INDEX($A:$J,19,MATCH(C$21,$1:$1,0)),"")	=IFERROR(INDEX($A:$J,19,MATCH(C$21,$1:$1,0)),"")	
+D22	excel			=IFERROR(INDEX($A:$J,19,MATCH(D$21,$1:$1,0)),"")	=IFERROR(INDEX($A:$J,19,MATCH(D$21,$1:$1,0)),"")	
+E22	excel			=IFERROR(INDEX($A:$J,19,MATCH(E$21,$1:$1,0)),"")	=IFERROR(INDEX($A:$J,19,MATCH(E$21,$1:$1,0)),"")	
+F22	excel			=IFERROR(INDEX($A:$J,19,MATCH(F$21,$1:$1,0)),"")	=IFERROR(INDEX($A:$J,19,MATCH(F$21,$1:$1,0)),"")	
+G22	excel			=IFERROR(INDEX($A:$J,19,MATCH(G$21,$1:$1,0)),"")	=IFERROR(INDEX($A:$J,19,MATCH(G$21,$1:$1,0)),"")	
+H22	excel			=IFERROR(INDEX($A:$J,19,MATCH(H$21,$1:$1,0)),"")	=IFERROR(INDEX($A:$J,19,MATCH(H$21,$1:$1,0)),"")	
+I22	excel			=IFERROR(INDEX($A:$J,19,MATCH(I$21,$1:$1,0)),"")	=IFERROR(INDEX($A:$J,19,MATCH(I$21,$1:$1,0)),"")	
+J22	excel			=IFERROR(INDEX($A:$J,19,MATCH(J$21,$1:$1,0)),"")	=IFERROR(INDEX($A:$J,19,MATCH(J$21,$1:$1,0)),"")	

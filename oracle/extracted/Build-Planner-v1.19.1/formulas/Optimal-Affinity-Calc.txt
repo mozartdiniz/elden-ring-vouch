@@ -1,0 +1,539 @@
+SHEET: Optimal Affinity Calc
+WORKBOOK: Copy of ER - Build Planner v1.19.1.xlsx
+USED RANGE: A1:Y40
+NONEMPTY CELLS: 155
+FORMULA CELLS: 52
+
+This file is for an LLM that must rebuild these calculations in another language. Treat formulas as the source of truth. Cached/fallback values are only for checking a port. Skip spill_cache cells; they are not logic.
+
+MERGED RANGES (131):
+  G38:I38
+  S21:T21
+  U32:W32
+  M40:O40
+  U37:W37
+  J28:K28
+  X34:Y34
+  X28:Y28
+  X37:Y37
+  E7:G7
+  P39:Q39
+  E5:K5
+  X30:Y30
+  G16:I16
+  S19:T19
+  X29:Y29
+  P32:Q32
+  U35:W35
+  X38:Y38
+  J31:K31
+  U34:W34
+  G12:O12
+  K25:M25
+  S35:T35
+  S30:T30
+  G36:I36
+  S20:T20
+  U27:W27
+  U36:W36
+  M39:O39
+  P33:Q33
+  U30:W30
+  S22:T22
+  G28:I28
+  P35:Q35
+  X40:Y40
+  G37:I37
+  M31:O31
+  G30:I30
+  E6:G6
+  P34:Q34
+  M28:O28
+  S39:T39
+  M37:O37
+  J34:K34
+  G14:I14
+  S23:T23
+  S38:T38
+  P36:Q36
+  J27:K27
+  J36:K36
+  U13:V13
+  M29:O29
+  U38:W38
+  G32:I32
+  M38:O38
+  S40:T40
+  S15:T15
+  P28:Q28
+  S33:T33
+  U40:W40
+  P37:Q37
+  V17:X17
+  G27:I27
+  P30:Q30
+  X31:Y31
+  G17:I17
+  M35:O35
+  X39:Y39
+  J29:K29
+  G19:I19
+  J38:K38
+  E10:Y10
+  G13:O13
+  X32:Y32
+  G34:I34
+  V15:X15
+  M30:O30
+  J40:K40
+  U28:W28
+  ... 51 more
+
+DATA VALIDATION / INPUTS:
+  G13  type=list  formula1=OptimalAffinityCalcData!$CU$2:$CU44
+  G23  type=list  formula1="Standard,Strike,Slash,Pierce"
+  G16:G20  type=custom  formula1=AND(G16>=1,G16<=99,G16=TRUNC(G16),ISNUMBER(G16))
+  G14  type=list  formula1=OptimalAffinityCalcData!$CW$2:$CW44
+  G12  type=list  formula1=OptimalAffinityCalcData!$CS$2:$CS44
+  G25  type=list  formula1=OptimalAffinityCalcData!$A44:$A$52
+These cells are user inputs (dropdowns or constraints), not calculated.
+
+COMMENTS (author notes on UI / semantics):
+  E6: If you don't care about the changes listed in Changelog you can:
+    
+    Go to the UpdateData page and edit cell D2 to equal the update version
+    
+    Doing so will remove the notification until the next update
+    
+    If this says TRUE or is highlighted green with no update you can run the fix_updateBooleanFormat macro to restore proper functionality
+  E7: See Changelog for details
+    
+    If this is giving an error you can run the fix_importRangeError macro to restore proper functionality
+  E13: Will use Planner RH1 selection with no manual input
+
+STATIC / INPUT / LABEL CELLS (103):
+coord	value
+E5	To use this sheet: File > Make a copy
+E6	Update Available:
+E10	MV = Motion Value. This is a link to a sheet with the values listed. You can also find PhysAtkType here.
+E12	Class
+S12	Str
+T12	Dex
+U12	Int
+W12	Fth
+X12	Arc
+G13	Unarmed
+Q13	Require
+E14	Upgrade
+G14	0.0
+M15	Def
+O15	Dmg Neg
+S15	Damage Mult
+V15	Counter Hit
+Y15	FALSE
+E16	Strength
+G16	14.0
+K16	Physical
+M16	79.0
+O16	0.0
+Q16	Physical
+S16	1.0
+V16	Leo Counter Hit
+Y16	FALSE
+E17	Dexterity
+G17	13.0
+K17	Strike
+M17	79.0
+O17	0.0
+Q17	Strike
+S17	1.0
+V17	Frost Debuff
+Y17	FALSE
+E18	Intelligence
+G18	9.0
+K18	Slash
+M18	79.0
+O18	0.0
+Q18	Slash
+S18	1.0
+V18	Rain Buff/Debuff
+Y18	FALSE
+E19	Faith
+G19	9.0
+K19	Pierce
+M19	79.0
+O19	0.0
+Q19	Pierce
+S19	1.0
+E20	Arcane
+G20	7.0
+K20	Magic
+M20	93.0
+O20	0.0
+Q20	Magic
+S20	1.0
+E21	2h
+G21	FALSE
+K21	Fire
+M21	85.0
+O21	0.0
+Q21	Fire
+S21	1.0
+E22	Attack MV
+G22	100.0
+K22	Lightning
+M22	75.0
+O22	0.0
+Q22	Lightning
+S22	1.0
+E23	PhysAtkType
+G23	Strike
+K23	Holy
+M23	89.0
+O23	0.0
+Q23	Holy
+S23	1.0
+E25	Sort By
+G25	Damage
+K25	Avg PvE Def/Neg
+O25	FALSE
+G27	Damage
+J27	Total AP
+M27	Physical AP
+P27	Magic AP
+S27	Fire AP
+U27	Lightning AP
+X27	Holy AP
+E29	Heavy
+E30	Keen
+E31	Quality
+E32	Fire
+E33	Flame Art
+E34	Lightning
+E35	Sacred
+E36	Magic
+E37	Cold
+E38	Poison
+E39	Blood
+E40	Occult
+
+CROSS-SHEET REFERENCES: OptimalAffinityCalcData, PlannerData, UpdateData
+FORMULA KINDS: excel=45, excel_compat=7
+UNIQUE PATTERNS: 42
+
+========================================================================
+FORMULA PATTERNS (fill-down compressed)
+{r} is the row of the cell. Port the template once and apply per row.
+========================================================================
+
+PATTERN 1  kind=excel  array=False  H6
+  context_label: Update Available:
+  template: =IF(UpdateData!$D$2=UpdateData!$D$5,False,True)
+  e.g. H6: =IF(UpdateData!$D$2=UpdateData!$D$5,False,True)  cached=False
+
+PATTERN 2  kind=excel  array=False  E7
+  context_label: Update Available:
+  template: =IF(H{r-1},"Link to Update:","Link to Original:")
+  e.g. E7: =IF(H6,"Link to Update:","Link to Original:")  cached='Link to Original:'
+
+PATTERN 3  kind=excel  array=False  H7
+  template: =HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P{r}gdVMkPzFQX{r-1}OsjZcfyUjdGOj7Cjk9qFAVj-U/copy",
+UpdateData!D5&" - "&IF(H{r-1},"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))
+  e.g. H7: =HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U/copy",
+UpdateData!D5&" - "&IF(H6,"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))  cached='v1.19.1 - last updated 413 days ago'
+
+PATTERN 4  kind=excel  array=True  F12
+  context_label: Class
+  array_spill_ref: F12:G12
+  template: ={"",OptimalAffinityCalcData!$CY2}
+  e.g. F12: ={"",OptimalAffinityCalcData!$CY2}
+
+PATTERN 5  kind=excel  array=False  E13
+  context_label: Class
+  template: =IF($E$28="Invalid","Invalid","Weapon")
+  e.g. E13: =IF($E$28="Invalid","Invalid","Weapon")  cached='Weapon'
+
+PATTERN 6  kind=excel  array=True  F13
+  array_spill_ref: F13:G13
+  template: ={"",OptimalAffinityCalcData!$CY3}
+  e.g. F13: ={"",OptimalAffinityCalcData!$CY3}
+
+PATTERN 7  kind=excel  array=False  S13
+  context_label: Require
+  template: =OptimalAffinityCalcData!$B$4
+  e.g. S13: =OptimalAffinityCalcData!$B$4  cached=0
+
+PATTERN 8  kind=excel  array=False  T13
+  context_label: Require
+  template: =OptimalAffinityCalcData!$B$5
+  e.g. T13: =OptimalAffinityCalcData!$B$5  cached=0
+
+PATTERN 9  kind=excel  array=False  U13
+  context_label: Require
+  template: =OptimalAffinityCalcData!$B$6
+  e.g. U13: =OptimalAffinityCalcData!$B$6  cached=0
+
+PATTERN 10  kind=excel  array=False  W13
+  context_label: Fth
+  template: =OptimalAffinityCalcData!$B$7
+  e.g. W13: =OptimalAffinityCalcData!$B$7  cached=0
+
+PATTERN 11  kind=excel  array=False  X13
+  context_label: Arc
+  template: =OptimalAffinityCalcData!$B$8
+  e.g. X13: =OptimalAffinityCalcData!$B$8  cached=0
+
+PATTERN 12  kind=excel  array=True  F14
+  context_label: Upgrade
+  array_spill_ref: F14:G14
+  template: ={"",OptimalAffinityCalcData!$CY4}
+  e.g. F14: ={"",OptimalAffinityCalcData!$CY4}
+
+PATTERN 13  kind=excel  array=True  F16
+  context_label: Strength
+  array_spill_ref: F16:G16
+  template: ={"",OptimalAffinityCalcData!$CY6}
+  e.g. F16: ={"",OptimalAffinityCalcData!$CY6}
+
+PATTERN 14  kind=excel  array=True  L16:L19 (4 cells)
+  context_label: Physical
+  array_spill_ref: L16:M16
+  template: ={"",PlannerData!$J$7}
+  e.g. L16: ={"",PlannerData!$J$7}
+  e.g. L17: ={"",PlannerData!$J$7}
+  e.g. L18: ={"",PlannerData!$J$7}
+  ... 1 more of this pattern
+
+PATTERN 15  kind=excel  array=True  N16
+  context_label: Physical
+  array_spill_ref: N16:O16
+  template: ={"",100*(1-PlannerData!$L$23)}
+  e.g. N16: ={"",100*(1-PlannerData!$L$23)}
+
+PATTERN 16  kind=excel  array=False  R16:R23 (8 cells)
+  context_label: Physical
+  template: ={"",1}
+  e.g. R16: ={"",1}
+  e.g. R17: ={"",1}
+  e.g. R18: ={"",1}
+  ... 5 more of this pattern
+
+PATTERN 17  kind=excel  array=True  F17
+  context_label: Dexterity
+  array_spill_ref: F17:G17
+  template: ={"",OptimalAffinityCalcData!$CY7}
+  e.g. F17: ={"",OptimalAffinityCalcData!$CY7}
+
+PATTERN 18  kind=excel  array=True  N17
+  context_label: Strike
+  array_spill_ref: N17:O17
+  template: ={"",100*(1-PlannerData!$L$24)}
+  e.g. N17: ={"",100*(1-PlannerData!$L$24)}
+
+PATTERN 19  kind=excel  array=True  F18
+  context_label: Intelligence
+  array_spill_ref: F18:G18
+  template: ={"",OptimalAffinityCalcData!$CY8}
+  e.g. F18: ={"",OptimalAffinityCalcData!$CY8}
+
+PATTERN 20  kind=excel  array=True  N18
+  context_label: Slash
+  array_spill_ref: N18:O18
+  template: ={"",100*(1-PlannerData!$L$25)}
+  e.g. N18: ={"",100*(1-PlannerData!$L$25)}
+
+PATTERN 21  kind=excel  array=True  F19
+  context_label: Faith
+  array_spill_ref: F19:G19
+  template: ={"",OptimalAffinityCalcData!$CY9}
+  e.g. F19: ={"",OptimalAffinityCalcData!$CY9}
+
+PATTERN 22  kind=excel  array=True  N19
+  context_label: Pierce
+  array_spill_ref: N19:O19
+  template: ={"",100*(1-PlannerData!$L$26)}
+  e.g. N19: ={"",100*(1-PlannerData!$L$26)}
+
+PATTERN 23  kind=excel  array=True  F20
+  context_label: Arcane
+  array_spill_ref: F20:G20
+  template: ={"",OptimalAffinityCalcData!$CY10}
+  e.g. F20: ={"",OptimalAffinityCalcData!$CY10}
+
+PATTERN 24  kind=excel  array=True  L20
+  context_label: Magic
+  array_spill_ref: L20:M20
+  template: ={"",PlannerData!$J$8}
+  e.g. L20: ={"",PlannerData!$J$8}
+
+PATTERN 25  kind=excel  array=True  N20
+  context_label: Magic
+  array_spill_ref: N20:O20
+  template: ={"",100*(1-PlannerData!$L$27)}
+  e.g. N20: ={"",100*(1-PlannerData!$L$27)}
+
+PATTERN 26  kind=excel  array=True  L21
+  context_label: Fire
+  array_spill_ref: L21:M21
+  template: ={"",PlannerData!$J$9}
+  e.g. L21: ={"",PlannerData!$J$9}
+
+PATTERN 27  kind=excel  array=True  N21
+  context_label: Fire
+  array_spill_ref: N21:O21
+  template: ={"",100*(1-PlannerData!$L$28)}
+  e.g. N21: ={"",100*(1-PlannerData!$L$28)}
+
+PATTERN 28  kind=excel  array=True  F22
+  context_label: Attack MV
+  array_spill_ref: F22:G22
+  template: ={"",OptimalAffinityCalcData!$CY12}
+  e.g. F22: ={"",OptimalAffinityCalcData!$CY12}
+
+PATTERN 29  kind=excel  array=True  L22
+  context_label: Lightning
+  array_spill_ref: L22:M22
+  template: ={"",PlannerData!$J$10}
+  e.g. L22: ={"",PlannerData!$J$10}
+
+PATTERN 30  kind=excel  array=True  N22
+  context_label: Lightning
+  array_spill_ref: N22:O22
+  template: ={"",100*(1-PlannerData!$L$29)}
+  e.g. N22: ={"",100*(1-PlannerData!$L$29)}
+
+PATTERN 31  kind=excel  array=True  F23
+  context_label: PhysAtkType
+  array_spill_ref: F23:G23
+  template: ={"",OptimalAffinityCalcData!$CY13}
+  e.g. F23: ={"",OptimalAffinityCalcData!$CY13}
+
+PATTERN 32  kind=excel  array=True  L23
+  context_label: Holy
+  array_spill_ref: L23:M23
+  template: ={"",PlannerData!$J$11}
+  e.g. L23: ={"",PlannerData!$J$11}
+
+PATTERN 33  kind=excel  array=True  N23
+  context_label: Holy
+  array_spill_ref: N23:O23
+  template: ={"",100*(1-PlannerData!$L$30)}
+  e.g. N23: ={"",100*(1-PlannerData!$L$30)}
+
+PATTERN 34  kind=excel  array=True  F25
+  context_label: Sort By
+  array_spill_ref: F25:G25
+  template: ={"","Damage"}
+  e.g. F25: ={"","Damage"}
+
+PATTERN 35  kind=excel  array=True  E28
+  context_label: Sort By
+  array_spill_ref: E28:E40
+  template: =OptimalAffinityCalcData!D2:D14
+  e.g. E28: =OptimalAffinityCalcData!D2:D14  cached='Standard'
+
+PATTERN 36  kind=excel_compat  array=True  G28
+  context_label: Damage
+  array_spill_ref: G28:G40
+  template: =IFERROR(XLOOKUP($E{r}:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CQ2:$CQ14,),"")
+  note: Stored with Excel _xlfn/_xlws prefix (newer functions like XLOOKUP).
+  e.g. G28: =IFERROR(XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CQ2:$CQ14,),"")  cached=2.617505281
+
+PATTERN 37  kind=excel_compat  array=True  J28
+  context_label: Total AP
+  array_spill_ref: J28:J40
+  template: =IFERROR(XLOOKUP($E{r}:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CG2:$CG14,),"")
+  note: Stored with Excel _xlfn/_xlws prefix (newer functions like XLOOKUP).
+  e.g. J28: =IFERROR(XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CG2:$CG14,),"")  cached=23.45785443
+
+PATTERN 38  kind=excel_compat  array=True  M28
+  context_label: Physical AP
+  array_spill_ref: M28:M40
+  template: =IFERROR(IF(XLOOKUP($E{r}:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CB2:$CB14,)>0,XLOOKUP($E{r}:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CB2:$CB14,),"-"),"")
+  note: Stored with Excel _xlfn/_xlws prefix (newer functions like XLOOKUP).
+  e.g. M28: =IFERROR(IF(XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CB2:$CB14,)>0,XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CB2:$CB14,),"-"),"")  cached=23.45785443
+
+PATTERN 39  kind=excel_compat  array=True  P28
+  context_label: Magic AP
+  array_spill_ref: P28:P40
+  template: =IFERROR(IF(XLOOKUP($E{r}:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CC2:$CC14,)>0,XLOOKUP($E{r}:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CC2:$CC14,),"-"),"")
+  note: Stored with Excel _xlfn/_xlws prefix (newer functions like XLOOKUP).
+  e.g. P28: =IFERROR(IF(XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CC2:$CC14,)>0,XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CC2:$CC14,),"-"),"")  cached='-'
+
+PATTERN 40  kind=excel_compat  array=True  S28
+  context_label: Fire AP
+  array_spill_ref: S28:S40
+  template: =IFERROR(IF(XLOOKUP($E{r}:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CD2:$CD14,)>0,XLOOKUP($E{r}:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CD2:$CD14,),"-"),"")
+  note: Stored with Excel _xlfn/_xlws prefix (newer functions like XLOOKUP).
+  e.g. S28: =IFERROR(IF(XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CD2:$CD14,)>0,XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CD2:$CD14,),"-"),"")  cached='-'
+
+PATTERN 41  kind=excel_compat  array=True  U28
+  context_label: Lightning AP
+  array_spill_ref: U28:U40
+  template: =IFERROR(IF(XLOOKUP($E{r}:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CE2:$CE14,)>0,XLOOKUP($E{r}:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CE2:$CE14,),"-"),"")
+  note: Stored with Excel _xlfn/_xlws prefix (newer functions like XLOOKUP).
+  e.g. U28: =IFERROR(IF(XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CE2:$CE14,)>0,XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CE2:$CE14,),"-"),"")  cached='-'
+
+PATTERN 42  kind=excel_compat  array=True  X28
+  context_label: Holy AP
+  array_spill_ref: X28:X40
+  template: =IFERROR(IF(XLOOKUP($E{r}:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CF2:$CF14,)>0,XLOOKUP($E{r}:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CF2:$CF14,),"-"),"")
+  note: Stored with Excel _xlfn/_xlws prefix (newer functions like XLOOKUP).
+  e.g. X28: =IFERROR(IF(XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CF2:$CF14,)>0,XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CF2:$CF14,),"-"),"")  cached='-'
+
+========================================================================
+ALL FORMULAS
+========================================================================
+cell	kind	array_ref	label	logic	stored	cached
+H6	excel		Update Available:	=IF(UpdateData!$D$2=UpdateData!$D$5,False,True)	=IF(UpdateData!$D$2=UpdateData!$D$5,False,True)	FALSE
+E7	excel		Update Available:	=IF(H6,"Link to Update:","Link to Original:")	=IF(H6,"Link to Update:","Link to Original:")	Link to Original:
+H7	excel			=HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U/copy", | UpdateData!D5&" - "&IF(H6,"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))	=HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U/copy", | UpdateData!D5&" - "&IF(H6,"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))	v1.19.1 - last updated 413 days ago
+F12	excel	F12:G12	Class	={"",OptimalAffinityCalcData!$CY2}	={"",OptimalAffinityCalcData!$CY2}	
+E13	excel		Class	=IF($E$28="Invalid","Invalid","Weapon")	=IF($E$28="Invalid","Invalid","Weapon")	Weapon
+F13	excel	F13:G13		={"",OptimalAffinityCalcData!$CY3}	={"",OptimalAffinityCalcData!$CY3}	
+S13	excel		Require	=OptimalAffinityCalcData!$B$4	=OptimalAffinityCalcData!$B$4	0
+T13	excel		Require	=OptimalAffinityCalcData!$B$5	=OptimalAffinityCalcData!$B$5	0
+U13	excel		Require	=OptimalAffinityCalcData!$B$6	=OptimalAffinityCalcData!$B$6	0
+W13	excel		Fth	=OptimalAffinityCalcData!$B$7	=OptimalAffinityCalcData!$B$7	0
+X13	excel		Arc	=OptimalAffinityCalcData!$B$8	=OptimalAffinityCalcData!$B$8	0
+F14	excel	F14:G14	Upgrade	={"",OptimalAffinityCalcData!$CY4}	={"",OptimalAffinityCalcData!$CY4}	
+F16	excel	F16:G16	Strength	={"",OptimalAffinityCalcData!$CY6}	={"",OptimalAffinityCalcData!$CY6}	
+L16	excel	L16:M16	Physical	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+N16	excel	N16:O16	Physical	={"",100*(1-PlannerData!$L$23)}	={"",100*(1-PlannerData!$L$23)}	
+R16	excel		Physical	={"",1}	={"",1}	
+F17	excel	F17:G17	Dexterity	={"",OptimalAffinityCalcData!$CY7}	={"",OptimalAffinityCalcData!$CY7}	
+L17	excel	L17:M17	Strike	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+N17	excel	N17:O17	Strike	={"",100*(1-PlannerData!$L$24)}	={"",100*(1-PlannerData!$L$24)}	
+R17	excel		Strike	={"",1}	={"",1}	
+F18	excel	F18:G18	Intelligence	={"",OptimalAffinityCalcData!$CY8}	={"",OptimalAffinityCalcData!$CY8}	
+L18	excel	L18:M18	Slash	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+N18	excel	N18:O18	Slash	={"",100*(1-PlannerData!$L$25)}	={"",100*(1-PlannerData!$L$25)}	
+R18	excel		Slash	={"",1}	={"",1}	
+F19	excel	F19:G19	Faith	={"",OptimalAffinityCalcData!$CY9}	={"",OptimalAffinityCalcData!$CY9}	
+L19	excel	L19:M19	Pierce	={"",PlannerData!$J$7}	={"",PlannerData!$J$7}	
+N19	excel	N19:O19	Pierce	={"",100*(1-PlannerData!$L$26)}	={"",100*(1-PlannerData!$L$26)}	
+R19	excel		Pierce	={"",1}	={"",1}	
+F20	excel	F20:G20	Arcane	={"",OptimalAffinityCalcData!$CY10}	={"",OptimalAffinityCalcData!$CY10}	
+L20	excel	L20:M20	Magic	={"",PlannerData!$J$8}	={"",PlannerData!$J$8}	
+N20	excel	N20:O20	Magic	={"",100*(1-PlannerData!$L$27)}	={"",100*(1-PlannerData!$L$27)}	
+R20	excel		Magic	={"",1}	={"",1}	
+L21	excel	L21:M21	Fire	={"",PlannerData!$J$9}	={"",PlannerData!$J$9}	
+N21	excel	N21:O21	Fire	={"",100*(1-PlannerData!$L$28)}	={"",100*(1-PlannerData!$L$28)}	
+R21	excel		Fire	={"",1}	={"",1}	
+F22	excel	F22:G22	Attack MV	={"",OptimalAffinityCalcData!$CY12}	={"",OptimalAffinityCalcData!$CY12}	
+L22	excel	L22:M22	Lightning	={"",PlannerData!$J$10}	={"",PlannerData!$J$10}	
+N22	excel	N22:O22	Lightning	={"",100*(1-PlannerData!$L$29)}	={"",100*(1-PlannerData!$L$29)}	
+R22	excel		Lightning	={"",1}	={"",1}	
+F23	excel	F23:G23	PhysAtkType	={"",OptimalAffinityCalcData!$CY13}	={"",OptimalAffinityCalcData!$CY13}	
+L23	excel	L23:M23	Holy	={"",PlannerData!$J$11}	={"",PlannerData!$J$11}	
+N23	excel	N23:O23	Holy	={"",100*(1-PlannerData!$L$30)}	={"",100*(1-PlannerData!$L$30)}	
+R23	excel		Holy	={"",1}	={"",1}	
+F25	excel	F25:G25	Sort By	={"","Damage"}	={"","Damage"}	
+E28	excel	E28:E40	Sort By	=OptimalAffinityCalcData!D2:D14	=OptimalAffinityCalcData!D2:D14	Standard
+G28	excel_compat	G28:G40	Damage	=IFERROR(XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CQ2:$CQ14,),"")	=IFERROR(_xlfn.XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CQ2:$CQ14,),"")	2.617505281
+J28	excel_compat	J28:J40	Total AP	=IFERROR(XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CG2:$CG14,),"")	=IFERROR(_xlfn.XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CG2:$CG14,),"")	23.45785443
+M28	excel_compat	M28:M40	Physical AP	=IFERROR(IF(XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CB2:$CB14,)>0,XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CB2:$CB14,),"-"),"")	=IFERROR(IF(_xlfn.XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CB2:$CB14,)>0,_xlfn.XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CB2:$CB14,),"-"),"")	23.45785443
+P28	excel_compat	P28:P40	Magic AP	=IFERROR(IF(XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CC2:$CC14,)>0,XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CC2:$CC14,),"-"),"")	=IFERROR(IF(_xlfn.XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CC2:$CC14,)>0,_xlfn.XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CC2:$CC14,),"-"),"")	-
+S28	excel_compat	S28:S40	Fire AP	=IFERROR(IF(XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CD2:$CD14,)>0,XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CD2:$CD14,),"-"),"")	=IFERROR(IF(_xlfn.XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CD2:$CD14,)>0,_xlfn.XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CD2:$CD14,),"-"),"")	-
+U28	excel_compat	U28:U40	Lightning AP	=IFERROR(IF(XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CE2:$CE14,)>0,XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CE2:$CE14,),"-"),"")	=IFERROR(IF(_xlfn.XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CE2:$CE14,)>0,_xlfn.XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CE2:$CE14,),"-"),"")	-
+X28	excel_compat	X28:X40	Holy AP	=IFERROR(IF(XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CF2:$CF14,)>0,XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CF2:$CF14,),"-"),"")	=IFERROR(IF(_xlfn.XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CF2:$CF14,)>0,_xlfn.XLOOKUP($E28:$E40,OptimalAffinityCalcData!$F2:$F14,OptimalAffinityCalcData!$CF2:$CF14,),"-"),"")	-

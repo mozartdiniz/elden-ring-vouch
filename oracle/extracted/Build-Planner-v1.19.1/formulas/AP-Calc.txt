@@ -1,0 +1,1620 @@
+SHEET: AP Calc
+WORKBOOK: Copy of ER - Build Planner v1.19.1.xlsx
+USED RANGE: A1:V52
+NONEMPTY CELLS: 378
+FORMULA CELLS: 222
+
+This file is for an LLM that must rebuild these calculations in another language. Treat formulas as the source of truth. Cached/fallback values are only for checking a port. Skip spill_cache cells; they are not logic.
+
+MERGED RANGES (47):
+  G38:I38
+  O10:S10
+  O28:S28
+  G19:I19
+  G13:I13
+  G37:I37
+  G11:K11
+  G18:I18
+  G49:I49
+  G34:I34
+  N48:S48
+  G30:I30
+  E6:G6
+  G15:I15
+  G33:I33
+  E48:L48
+  H7:S7
+  G45:I45
+  G12:J12
+  G10:K10
+  G35:I35
+  G20:I20
+  G29:I29
+  E7:G7
+  G16:I16
+  G32:I32
+  G50:I50
+  O16:S16
+  G44:I44
+  G41:I41
+  G31:I31
+  N5:S6
+  U6:V7
+  G40:I40
+  E27:I27
+  G21:I21
+  G43:I43
+  E26:I26
+  U8:V8
+  G36:I36
+  G42:I42
+  E5:J5
+  G39:I39
+  U10:V10
+  G17:I17
+  U19:V19
+  G22:K22
+
+DATA VALIDATION / INPUTS:
+  G13  type=list  formula1=ApCalcData!$X$2:$X56
+  G11  type=list  formula1=ApCalcData!$T$2:$T56
+  V12:V16  type=custom  formula1=AND(ISNUMBER(V12),V12>=0)
+  G30:G45  type=custom  formula1=OR(AND(ISNUMBER(G30),G30>=0),G30="-   ")
+  G15:G19  type=custom  formula1=AND(G15>=1,G15<=99,G15=TRUNC(G15),ISNUMBER(G15))
+  V11  type=custom  formula1=OR(AND(ISNUMBER(V11),V11>=0),V11=-1)
+  V20:V24  type=custom  formula1=ISNUMBER(V20)
+  G10  type=list  formula1=WeaponData!$A$2:$A56
+  G22  type=list  formula1=ApCalcData!$AB$2:$AB56
+  G12  type=list  formula1=ApCalcData!$V$2:$V56
+These cells are user inputs (dropdowns or constraints), not calculated.
+
+COMMENTS (author notes on UI / semantics):
+  E6: If you don't care about the changes listed in Changelog you can:
+    
+    Go to the UpdateData page and edit cell D2 to equal the update version
+    
+    Doing so will remove the notification until the next update
+    
+    If this says TRUE or is highlighted green with no update you can run the fix_updateBooleanFormat macro to restore proper functionality
+  E7: See Changelog for details
+    
+    If this is giving an error you can run the fix_importRangeError macro to restore proper functionality
+  U10: Make sure you clear/uncheck these cells when not calculating for an Ash of War
+  E11: Will use Planner RH1 selection with no manual input
+  U17: This should almost always be checked for attack power calculation
+    of Ashes of War that have innate attack power
+  U19: Currently only changeStrengthPoint is used
+    
+    Value of 5 for the following buffs:
+    - Roar
+    - Barbaric Roar
+    - War Cry
+    - Shriek of Sorrow
+    - Shriek of Milos
+  G29: You can enter a manual base value here if desired
+    
+    Manual value entry will slightly darken cell color and make text blue
+
+STATIC / INPUT / LABEL CELLS (156):
+coord	value
+A1	y
+E5	To use this sheet: File > Make a copy
+N5	Attack Power Calculator that can do multiple weapon classes & affinities at one time | Also includes automatic Ash of War attack power calculation
+E6	Update Available:
+U6	Use Overwrite Values for Ash of War Attack Power Calculation
+U8	Relevant Data can be found here
+E10	Class
+U10	Overwrite Values
+G11	Unarmed
+O11	Strength
+P11	Dexterity
+Q11	Intelligence
+R11	Faith
+S11	Arcane
+U11	AttackElementCorrectId
+E12	Affinity
+G12	Standard
+N12	Letter
+U12	Atk Physical
+E13	Upgrade
+G13	0.0
+N13	Percent
+U13	Atk Magic
+N14	Requirements
+U14	Atk Fire
+E15	Strength
+G15	14.0
+U15	Atk Lightning
+E16	Dexterity
+G16	13.0
+O16	Attribute Saturation
+U16	Atk Holy
+E17	Intelligence
+G17	9.0
+O17	Strength
+P17	Dexterity
+Q17	Intelligence
+R17	Faith
+S17	Arcane
+U17	Base Atk Rate
+V17	FALSE
+E18	Faith
+G18	9.0
+N18	Physical
+E19	Arcane
+G19	7.0
+N19	Magic
+U19	SpEffect Scaling Adjustment
+E20	2h
+G20	FALSE
+N20	Fire
+U20	changeStrengthPoint
+E21	Ignore Require
+G21	FALSE
+N21	Lightning
+U21	changeAgilityPoint
+E22	Status Buff
+G22	None
+N22	Holy
+U22	changeMagicPoint
+N23	Poison
+O23	-
+P23	-
+Q23	-
+R23	-
+U23	changeFaithPoint
+N24	Bleed
+O24	-
+P24	-
+Q24	-
+R24	-
+U24	changeLuckPoint
+N25	Sleep
+O25	-
+P25	-
+Q25	-
+R25	-
+N26	Madness
+O26	-
+P26	-
+Q26	-
+R26	-
+O28	Scaling Sub Totals
+G29	Base
+J29	Scaling
+K29	Total
+L29	Rounded
+O29	Strength
+P29	Dexterity
+Q29	Intelligence
+R29	Faith
+S29	Arcane
+E30	Physical AP
+G30	20.0
+N30	Physical AP
+E31	Magic AP
+G31	-   
+N31	Magic AP
+E32	Fire AP
+G32	-   
+N32	Fire AP
+E33	Lightning AP
+G33	-   
+N33	Lightning AP
+E34	Holy AP
+G34	-   
+N34	Holy AP
+E35	Physical SB
+G35	-   
+N35	Physical SB
+E36	Magic SB
+G36	-   
+N36	Magic SB
+E37	Fire SB
+G37	-   
+N37	Fire SB
+E38	Lightning SB
+G38	-   
+N38	Lightning SB
+E39	Holy SB
+G39	-   
+N39	Holy SB
+E40	Poison
+G40	-   
+N40	Poison
+E41	Scarlet Rot
+G41	-   
+N41	Scarlet Rot
+E42	Bleed
+G42	-   
+N42	Bleed
+E43	Frost
+G43	-   
+N43	Frost
+E44	Sleep
+G44	-   
+N44	Sleep
+E45	Madness
+G45	-   
+N45	Madness
+J46	Total AR
+E48	Guard Damage Negations
+N48	Guard Resistances
+E49	Physical
+G49	Magic
+J49	Fire
+K49	Lightning
+L49	Holy
+N49	Poison
+O49	Scarlet Rot
+P49	Bleed
+Q49	Frost
+R49	Sleep
+S49	Madness
+E51	Guard Boost
+N51	Death
+
+CROSS-SHEET REFERENCES: ApCalcData, UpdateData, WeaponData
+FORMULA KINDS: excel=222
+UNIQUE PATTERNS: 147
+
+========================================================================
+FORMULA PATTERNS (fill-down compressed)
+{r} is the row of the cell. Port the template once and apply per row.
+========================================================================
+
+PATTERN 1  kind=excel  array=False  H6
+  context_label: Update Available:
+  template: =IF(UpdateData!$D$2=UpdateData!$D$5,False,True)
+  e.g. H6: =IF(UpdateData!$D$2=UpdateData!$D$5,False,True)  cached=False
+
+PATTERN 2  kind=excel  array=False  E7
+  context_label: Update Available:
+  template: =IF(H{r-1},"Link to Update:","Link to Original:")
+  e.g. E7: =IF(H6,"Link to Update:","Link to Original:")  cached='Link to Original:'
+
+PATTERN 3  kind=excel  array=False  H7
+  template: =HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P{r}gdVMkPzFQX{r-1}OsjZcfyUjdGOj7Cjk9qFAVj-U/copy",
+UpdateData!D5&" - "&IF(H{r-1},"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))
+  e.g. H7: =HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U/copy",
+UpdateData!D5&" - "&IF(H6,"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))  cached='v1.19.1 - last updated 413 days ago'
+
+PATTERN 4  kind=excel  array=True  F10
+  context_label: Class
+  array_spill_ref: F10:G10
+  template: ={"",ApCalcData!$AD2}
+  e.g. F10: ={"",ApCalcData!$AD2}
+
+PATTERN 5  kind=excel  array=False  O10
+  template: =IFERROR(ApCalcData!$A$1&" Scaling","Scaling")
+  e.g. O10: =IFERROR(ApCalcData!$A$1&" Scaling","Scaling")  cached='Unarmed Scaling'
+
+PATTERN 6  kind=excel  array=False  E11
+  context_label: Class
+  template: =IF(ApCalcData!$A$2="Invalid","Invalid","Weapon")
+  e.g. E11: =IF(ApCalcData!$A$2="Invalid","Invalid","Weapon")  cached='Weapon'
+
+PATTERN 7  kind=excel  array=True  F11
+  array_spill_ref: F11:G11
+  template: ={"",ApCalcData!$AD3}
+  e.g. F11: ={"",ApCalcData!$AD3}
+
+PATTERN 8  kind=excel  array=True  F12
+  context_label: Affinity
+  array_spill_ref: F12:G12
+  template: ={"",ApCalcData!$AD4}
+  e.g. F12: ={"",ApCalcData!$AD4}
+
+PATTERN 9  kind=excel  array=False  O12
+  context_label: Letter
+  template: =IFS(
+ROUND(O{r+1},4)>=1.75,"S",
+ROUND(O{r+1},4)>=1.4,"A",
+ROUND(O{r+1},4)>=0.9,"B",
+ROUND(O{r+1},4)>=0.6,"C",
+ROUND(O{r+1},4)>=0.25,"D",
+ROUND(O{r+1},4)>=0.01,"E",
+ROUND(O{r+1},4)<0.01,"-"
+)
+  e.g. O12: =IFS(
+ROUND(O13,4)>=1.75,"S",
+ROUND(O13,4)>=1.4,"A",
+ROUND(O13,4)>=0.9,"B",
+ROUND(O13,4)>=0.6,"C",
+ROUND(O13,4)>=0.25,"D",
+ROUND(O13,4)>=0.01,"E",
+ROUND(O13,4)<0.01,"-"
+)  cached='D'
+
+PATTERN 10  kind=excel  array=False  P12
+  context_label: Letter
+  template: =IFS(
+ROUND(P{r+1},4)>=1.75,"S",
+ROUND(P{r+1},4)>=1.4,"A",
+ROUND(P{r+1},4)>=0.9,"B",
+ROUND(P{r+1},4)>=0.6,"C",
+ROUND(P{r+1},4)>=0.25,"D",
+ROUND(P{r+1},4)>=0.01,"E",
+ROUND(P{r+1},4)<0.01,"-"
+)
+  e.g. P12: =IFS(
+ROUND(P13,4)>=1.75,"S",
+ROUND(P13,4)>=1.4,"A",
+ROUND(P13,4)>=0.9,"B",
+ROUND(P13,4)>=0.6,"C",
+ROUND(P13,4)>=0.25,"D",
+ROUND(P13,4)>=0.01,"E",
+ROUND(P13,4)<0.01,"-"
+)  cached='D'
+
+PATTERN 11  kind=excel  array=False  Q12
+  context_label: Letter
+  template: =IFS(
+ROUND(Q{r+1},4)>=1.75,"S",
+ROUND(Q{r+1},4)>=1.4,"A",
+ROUND(Q{r+1},4)>=0.9,"B",
+ROUND(Q{r+1},4)>=0.6,"C",
+ROUND(Q{r+1},4)>=0.25,"D",
+ROUND(Q{r+1},4)>=0.01,"E",
+ROUND(Q{r+1},4)<0.01,"-"
+)
+  e.g. Q12: =IFS(
+ROUND(Q13,4)>=1.75,"S",
+ROUND(Q13,4)>=1.4,"A",
+ROUND(Q13,4)>=0.9,"B",
+ROUND(Q13,4)>=0.6,"C",
+ROUND(Q13,4)>=0.25,"D",
+ROUND(Q13,4)>=0.01,"E",
+ROUND(Q13,4)<0.01,"-"
+)  cached='-'
+
+PATTERN 12  kind=excel  array=False  R12
+  context_label: Letter
+  template: =IFS(
+ROUND(R{r+1},4)>=1.75,"S",
+ROUND(R{r+1},4)>=1.4,"A",
+ROUND(R{r+1},4)>=0.9,"B",
+ROUND(R{r+1},4)>=0.6,"C",
+ROUND(R{r+1},4)>=0.25,"D",
+ROUND(R{r+1},4)>=0.01,"E",
+ROUND(R{r+1},4)<0.01,"-"
+)
+  e.g. R12: =IFS(
+ROUND(R13,4)>=1.75,"S",
+ROUND(R13,4)>=1.4,"A",
+ROUND(R13,4)>=0.9,"B",
+ROUND(R13,4)>=0.6,"C",
+ROUND(R13,4)>=0.25,"D",
+ROUND(R13,4)>=0.01,"E",
+ROUND(R13,4)<0.01,"-"
+)  cached='-'
+
+PATTERN 13  kind=excel  array=False  S12
+  context_label: Letter
+  template: =IFS(
+ROUND(S{r+1},4)>=1.75,"S",
+ROUND(S{r+1},4)>=1.4,"A",
+ROUND(S{r+1},4)>=0.9,"B",
+ROUND(S{r+1},4)>=0.6,"C",
+ROUND(S{r+1},4)>=0.25,"D",
+ROUND(S{r+1},4)>=0.01,"E",
+ROUND(S{r+1},4)<0.01,"-"
+)
+  e.g. S12: =IFS(
+ROUND(S13,4)>=1.75,"S",
+ROUND(S13,4)>=1.4,"A",
+ROUND(S13,4)>=0.9,"B",
+ROUND(S13,4)>=0.6,"C",
+ROUND(S13,4)>=0.25,"D",
+ROUND(S13,4)>=0.01,"E",
+ROUND(S13,4)<0.01,"-"
+)  cached='-'
+
+PATTERN 14  kind=excel  array=True  F13
+  context_label: Upgrade
+  array_spill_ref: F13:G13
+  template: ={"",ApCalcData!$AD5}
+  e.g. F13: ={"",ApCalcData!$AD5}
+
+PATTERN 15  kind=excel  array=False  O13
+  context_label: Percent
+  template: =ApCalcData!N$3*ApCalcData!N$4+ApCalcData!N$46
+  e.g. O13: =ApCalcData!N$3*ApCalcData!N$4+ApCalcData!N$46  cached=0.5
+
+PATTERN 16  kind=excel  array=False  P13
+  context_label: Percent
+  template: =ApCalcData!O$3*ApCalcData!O$4+ApCalcData!O$46
+  e.g. P13: =ApCalcData!O$3*ApCalcData!O$4+ApCalcData!O$46  cached=0.5
+
+PATTERN 17  kind=excel  array=False  Q13
+  context_label: Percent
+  template: =ApCalcData!P$3*ApCalcData!P$4+ApCalcData!P$46
+  e.g. Q13: =ApCalcData!P$3*ApCalcData!P$4+ApCalcData!P$46  cached=0
+
+PATTERN 18  kind=excel  array=False  R13
+  context_label: Percent
+  template: =ApCalcData!Q$3*ApCalcData!Q$4+ApCalcData!Q$46
+  e.g. R13: =ApCalcData!Q$3*ApCalcData!Q$4+ApCalcData!Q$46  cached=0
+
+PATTERN 19  kind=excel  array=False  S13
+  context_label: Percent
+  template: =ApCalcData!R$3*ApCalcData!R$4+ApCalcData!R$46
+  e.g. S13: =ApCalcData!R$3*ApCalcData!R$4+ApCalcData!R$46  cached=0
+
+PATTERN 20  kind=excel  array=False  O14
+  context_label: Requirements
+  template: =IF(ApCalcData!$B$15>0,ApCalcData!$B$15,"-")
+  e.g. O14: =IF(ApCalcData!$B$15>0,ApCalcData!$B$15,"-")  cached='-'
+
+PATTERN 21  kind=excel  array=False  P14
+  context_label: Requirements
+  template: =IF(ApCalcData!$B$16>0,ApCalcData!$B$16,"-")
+  e.g. P14: =IF(ApCalcData!$B$16>0,ApCalcData!$B$16,"-")  cached='-'
+
+PATTERN 22  kind=excel  array=False  Q14
+  context_label: Requirements
+  template: =IF(ApCalcData!$B$17>0,ApCalcData!$B$17,"-")
+  e.g. Q14: =IF(ApCalcData!$B$17>0,ApCalcData!$B$17,"-")  cached='-'
+
+PATTERN 23  kind=excel  array=False  R14
+  context_label: Requirements
+  template: =IF(ApCalcData!$B$18>0,ApCalcData!$B$18,"-")
+  e.g. R14: =IF(ApCalcData!$B$18>0,ApCalcData!$B$18,"-")  cached='-'
+
+PATTERN 24  kind=excel  array=False  S14
+  context_label: Requirements
+  template: =IF(ApCalcData!$B$19>0,ApCalcData!$B$19,"-")
+  e.g. S14: =IF(ApCalcData!$B$19>0,ApCalcData!$B$19,"-")  cached='-'
+
+PATTERN 25  kind=excel  array=True  F15
+  context_label: Strength
+  array_spill_ref: F15:G15
+  template: ={"",ApCalcData!$AD7}
+  e.g. F15: ={"",ApCalcData!$AD7}
+
+PATTERN 26  kind=excel  array=True  F16
+  context_label: Dexterity
+  array_spill_ref: F16:G16
+  template: ={"",ApCalcData!$AD8}
+  e.g. F16: ={"",ApCalcData!$AD8}
+
+PATTERN 27  kind=excel  array=True  F17
+  context_label: Intelligence
+  array_spill_ref: F17:G17
+  template: ={"",ApCalcData!$AD9}
+  e.g. F17: ={"",ApCalcData!$AD9}
+
+PATTERN 28  kind=excel  array=True  F18
+  context_label: Faith
+  array_spill_ref: F18:G18
+  template: ={"",ApCalcData!$AD10}
+  e.g. F18: ={"",ApCalcData!$AD10}
+
+PATTERN 29  kind=excel  array=False  O18
+  context_label: Physical
+  template: =IF(ApCalcData!N12,ApCalcData!N6,0)
+  e.g. O18: =IF(ApCalcData!N12,ApCalcData!N6,0)  cached=0.1811896248
+
+PATTERN 30  kind=excel  array=False  P18
+  context_label: Physical
+  template: =IF(ApCalcData!O12,ApCalcData!O6,0)
+  e.g. P18: =IF(ApCalcData!O12,ApCalcData!O6,0)  cached=0.1645958186
+
+PATTERN 31  kind=excel  array=False  Q18
+  context_label: Physical
+  template: =IF(ApCalcData!P12,ApCalcData!P6,0)
+  e.g. Q18: =IF(ApCalcData!P12,ApCalcData!P6,0)  cached=0
+
+PATTERN 32  kind=excel  array=False  R18
+  context_label: Physical
+  template: =IF(ApCalcData!Q12,ApCalcData!Q6,0)
+  e.g. R18: =IF(ApCalcData!Q12,ApCalcData!Q6,0)  cached=0
+
+PATTERN 33  kind=excel  array=False  S18
+  context_label: Physical
+  template: =IF(ApCalcData!R12,ApCalcData!R6,0)
+  e.g. S18: =IF(ApCalcData!R12,ApCalcData!R6,0)  cached=0
+
+PATTERN 34  kind=excel  array=True  F19
+  context_label: Arcane
+  array_spill_ref: F19:G19
+  template: ={"",ApCalcData!$AD11}
+  e.g. F19: ={"",ApCalcData!$AD11}
+
+PATTERN 35  kind=excel  array=False  O19
+  context_label: Magic
+  template: =IF(ApCalcData!N13,ApCalcData!N7,0)
+  e.g. O19: =IF(ApCalcData!N13,ApCalcData!N7,0)  cached=0
+
+PATTERN 36  kind=excel  array=False  P19
+  context_label: Magic
+  template: =IF(ApCalcData!O13,ApCalcData!O7,0)
+  e.g. P19: =IF(ApCalcData!O13,ApCalcData!O7,0)  cached=0
+
+PATTERN 37  kind=excel  array=False  Q19
+  context_label: Magic
+  template: =IF(ApCalcData!P13,ApCalcData!P7,0)
+  e.g. Q19: =IF(ApCalcData!P13,ApCalcData!P7,0)  cached=0.1011834044
+
+PATTERN 38  kind=excel  array=False  R19
+  context_label: Magic
+  template: =IF(ApCalcData!Q13,ApCalcData!Q7,0)
+  e.g. R19: =IF(ApCalcData!Q13,ApCalcData!Q7,0)  cached=0
+
+PATTERN 39  kind=excel  array=False  S19
+  context_label: Magic
+  template: =IF(ApCalcData!R13,ApCalcData!R7,0)
+  e.g. S19: =IF(ApCalcData!R13,ApCalcData!R7,0)  cached=0
+
+PATTERN 40  kind=excel  array=False  O20
+  context_label: Fire
+  template: =IF(ApCalcData!N14,ApCalcData!N8,0)
+  e.g. O20: =IF(ApCalcData!N14,ApCalcData!N8,0)  cached=0
+
+PATTERN 41  kind=excel  array=False  P20
+  context_label: Fire
+  template: =IF(ApCalcData!O14,ApCalcData!O8,0)
+  e.g. P20: =IF(ApCalcData!O14,ApCalcData!O8,0)  cached=0
+
+PATTERN 42  kind=excel  array=False  Q20
+  context_label: Fire
+  template: =IF(ApCalcData!P14,ApCalcData!P8,0)
+  e.g. Q20: =IF(ApCalcData!P14,ApCalcData!P8,0)  cached=0
+
+PATTERN 43  kind=excel  array=False  R20
+  context_label: Fire
+  template: =IF(ApCalcData!Q14,ApCalcData!Q8,0)
+  e.g. R20: =IF(ApCalcData!Q14,ApCalcData!Q8,0)  cached=0.1011834044
+
+PATTERN 44  kind=excel  array=False  S20
+  context_label: Fire
+  template: =IF(ApCalcData!R14,ApCalcData!R8,0)
+  e.g. S20: =IF(ApCalcData!R14,ApCalcData!R8,0)  cached=0
+
+PATTERN 45  kind=excel  array=False  O21
+  context_label: Lightning
+  template: =IF(ApCalcData!N15,ApCalcData!N9,0)
+  e.g. O21: =IF(ApCalcData!N15,ApCalcData!N9,0)  cached=0
+
+PATTERN 46  kind=excel  array=False  P21
+  context_label: Lightning
+  template: =IF(ApCalcData!O15,ApCalcData!O9,0)
+  e.g. P21: =IF(ApCalcData!O15,ApCalcData!O9,0)  cached=0.1645958186
+
+PATTERN 47  kind=excel  array=False  Q21
+  context_label: Lightning
+  template: =IF(ApCalcData!P15,ApCalcData!P9,0)
+  e.g. Q21: =IF(ApCalcData!P15,ApCalcData!P9,0)  cached=0
+
+PATTERN 48  kind=excel  array=False  R21
+  context_label: Lightning
+  template: =IF(ApCalcData!Q15,ApCalcData!Q9,0)
+  e.g. R21: =IF(ApCalcData!Q15,ApCalcData!Q9,0)  cached=0
+
+PATTERN 49  kind=excel  array=False  S21
+  context_label: Lightning
+  template: =IF(ApCalcData!R15,ApCalcData!R9,0)
+  e.g. S21: =IF(ApCalcData!R15,ApCalcData!R9,0)  cached=0
+
+PATTERN 50  kind=excel  array=True  F22
+  context_label: Status Buff
+  array_spill_ref: F22:G22
+  template: ={"",ApCalcData!$AD14}
+  e.g. F22: ={"",ApCalcData!$AD14}
+
+PATTERN 51  kind=excel  array=False  O22
+  context_label: Holy
+  template: =IF(ApCalcData!N16,ApCalcData!N10,0)
+  e.g. O22: =IF(ApCalcData!N16,ApCalcData!N10,0)  cached=0
+
+PATTERN 52  kind=excel  array=False  P22
+  context_label: Holy
+  template: =IF(ApCalcData!O16,ApCalcData!O10,0)
+  e.g. P22: =IF(ApCalcData!O16,ApCalcData!O10,0)  cached=0
+
+PATTERN 53  kind=excel  array=False  Q22
+  context_label: Holy
+  template: =IF(ApCalcData!P16,ApCalcData!P10,0)
+  e.g. Q22: =IF(ApCalcData!P16,ApCalcData!P10,0)  cached=0
+
+PATTERN 54  kind=excel  array=False  R22
+  context_label: Holy
+  template: =IF(ApCalcData!Q16,ApCalcData!Q10,0)
+  e.g. R22: =IF(ApCalcData!Q16,ApCalcData!Q10,0)  cached=0.1011834044
+
+PATTERN 55  kind=excel  array=False  S22
+  context_label: Holy
+  template: =IF(ApCalcData!R16,ApCalcData!R10,0)
+  e.g. S22: =IF(ApCalcData!R16,ApCalcData!R10,0)  cached=0
+
+PATTERN 56  kind=excel  array=False  S23
+  context_label: -
+  template: =ApCalcData!$K$38*0.01
+  e.g. S23: =ApCalcData!$K$38*0.01  cached=0.04285714286
+
+PATTERN 57  kind=excel  array=False  S24
+  context_label: -
+  template: =ApCalcData!$K$41*0.01
+  e.g. S24: =ApCalcData!$K$41*0.01  cached=0.04285714286
+
+PATTERN 58  kind=excel  array=False  S25
+  context_label: -
+  template: =ApCalcData!$K$44*0.01
+  e.g. S25: =ApCalcData!$K$44*0.01  cached=0.07164449132
+
+PATTERN 59  kind=excel  array=False  E26
+  template: =IF(ISBLANK(E{r+1}),,"Casting Bonus Type")
+  e.g. E26: =IF(ISBLANK(E27),,"Casting Bonus Type")
+
+PATTERN 60  kind=excel  array=False  J26
+  template: =IF(ISBLANK(J{r+1}),,"Modifier")
+  e.g. J26: =IF(ISBLANK(J27),,"Modifier")
+
+PATTERN 61  kind=excel  array=False  S26
+  context_label: -
+  template: =ApCalcData!$K$47*0.01
+  e.g. S26: =ApCalcData!$K$47*0.01  cached=0.07164449132
+
+PATTERN 62  kind=excel  array=True  E27
+  array_spill_ref: E27
+  template: =IFERROR(IF(OR(INDEX(WeaponData!$A$1:$A56,MATCH($G$11,WeaponData!$B$1:$B56,0))="Glintstone Staff",INDEX(WeaponData!$A$1:$A56,MATCH($G$11,WeaponData!$B$1:$B56,0))="Sacred Seal"),
+VLOOKUP($G$11,WeaponData!$B$2:$M56,MATCH("CastingBonusType",WeaponData!$1:$1,0)-1,False),),)
+  e.g. E27: =IFERROR(IF(OR(INDEX(WeaponData!$A$1:$A56,MATCH($G$11,WeaponData!$B$1:$B56,0))="Glintstone Staff",INDEX(WeaponData!$A$1:$A56,MATCH($G$11,WeaponData!$B$1:$B56,0))="Sacred Seal"),
+VLOOKUP($G$11,WeaponData!$B$2:$M56,MATCH("CastingBonusType",WeaponData!$1:$1,0)-1,False),),)
+
+PATTERN 63  kind=excel  array=True  J27
+  array_spill_ref: J27
+  template: =IFERROR(IF(OR(INDEX(WeaponData!$A$1:$A56,MATCH($G$11,WeaponData!$B$1:$B56,0))="Glintstone Staff",INDEX(WeaponData!$A$1:$A56,MATCH($G$11,WeaponData!$B$1:$B56,0))="Sacred Seal"),
+VLOOKUP($G$11,WeaponData!$B$2:$M56,MATCH("CastingBonusRate",WeaponData!$1:$1,0)-1,False),),)
+  e.g. J27: =IFERROR(IF(OR(INDEX(WeaponData!$A$1:$A56,MATCH($G$11,WeaponData!$B$1:$B56,0))="Glintstone Staff",INDEX(WeaponData!$A$1:$A56,MATCH($G$11,WeaponData!$B$1:$B56,0))="Sacred Seal"),
+VLOOKUP($G$11,WeaponData!$B$2:$M56,MATCH("CastingBonusRate",WeaponData!$1:$1,0)-1,False),),)
+
+PATTERN 64  kind=excel  array=True  F30
+  context_label: Physical AP
+  array_spill_ref: F30:G30
+  template: ={"",IF(ApCalcData!$E2=0,"-   ",ApCalcData!$E2*ApCalcData!$H2)}
+  e.g. F30: ={"",IF(ApCalcData!$E2=0,"-   ",ApCalcData!$E2*ApCalcData!$H2)}
+
+PATTERN 65  kind=excel  array=False  J30
+  context_label: Physical AP
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},$G{r}
+*IFERROR(IFS(
+ApCalcData!$N37,ApCalcData!$O37,
+ApCalcData!$Q37,ApCalcData!$R37),
+ApCalcData!$N{r}+ApCalcData!$O{r}+ApCalcData!$P{r}+ApCalcData!$Q{r}+ApCalcData!$R{r}))
+  e.g. J30: =IF(NOT(ISNUMBER($G30)),$G30,$G30
+*IFERROR(IFS(
+ApCalcData!$N37,ApCalcData!$O37,
+ApCalcData!$Q37,ApCalcData!$R37),
+ApCalcData!$N30+ApCalcData!$O30+ApCalcData!$P30+ApCalcData!$Q30+ApCalcData!$R30))  cached=3.457854434
+
+PATTERN 66  kind=excel  array=False  K30:K39 (10 cells)
+  context_label: Total
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+$G{r}+$J{r})
+  e.g. K30: =IF(NOT(ISNUMBER($G30)),$G30,
+$G30+$J30)  cached=23.45785443
+  e.g. K31: =IF(NOT(ISNUMBER($G31)),$G31,
+$G31+$J31)  cached='-   '
+  e.g. K32: =IF(NOT(ISNUMBER($G32)),$G32,
+$G32+$J32)  cached='-   '
+  ... 7 more of this pattern
+
+PATTERN 67  kind=excel  array=False  L30:L45 (16 cells)
+  context_label: Rounded
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+TRUNC($K{r}))
+  e.g. L30: =IF(NOT(ISNUMBER($G30)),$G30,
+TRUNC($K30))  cached=23
+  e.g. L31: =IF(NOT(ISNUMBER($G31)),$G31,
+TRUNC($K31))  cached='-   '
+  e.g. L32: =IF(NOT(ISNUMBER($G32)),$G32,
+TRUNC($K32))  cached='-   '
+  ... 13 more of this pattern
+
+PATTERN 68  kind=excel  array=False  O30:O34 (5 cells)
+  context_label: Physical AP
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!N{r},3))
+  e.g. O30: =IF(NOT(ISNUMBER($G30)),$G30,
+ROUND($G30*ApCalcData!N30,3))  cached=1.812
+  e.g. O31: =IF(NOT(ISNUMBER($G31)),$G31,
+ROUND($G31*ApCalcData!N31,3))  cached='-   '
+  e.g. O32: =IF(NOT(ISNUMBER($G32)),$G32,
+ROUND($G32*ApCalcData!N32,3))  cached='-   '
+  ... 2 more of this pattern
+
+PATTERN 69  kind=excel  array=False  P30:P34 (5 cells)
+  context_label: Physical AP
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!O{r},3))
+  e.g. P30: =IF(NOT(ISNUMBER($G30)),$G30,
+ROUND($G30*ApCalcData!O30,3))  cached=1.646
+  e.g. P31: =IF(NOT(ISNUMBER($G31)),$G31,
+ROUND($G31*ApCalcData!O31,3))  cached='-   '
+  e.g. P32: =IF(NOT(ISNUMBER($G32)),$G32,
+ROUND($G32*ApCalcData!O32,3))  cached='-   '
+  ... 2 more of this pattern
+
+PATTERN 70  kind=excel  array=False  Q30:Q34 (5 cells)
+  context_label: Physical AP
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!P{r},3))
+  e.g. Q30: =IF(NOT(ISNUMBER($G30)),$G30,
+ROUND($G30*ApCalcData!P30,3))  cached=0
+  e.g. Q31: =IF(NOT(ISNUMBER($G31)),$G31,
+ROUND($G31*ApCalcData!P31,3))  cached='-   '
+  e.g. Q32: =IF(NOT(ISNUMBER($G32)),$G32,
+ROUND($G32*ApCalcData!P32,3))  cached='-   '
+  ... 2 more of this pattern
+
+PATTERN 71  kind=excel  array=False  R30:R34 (5 cells)
+  context_label: Physical AP
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!Q{r},3))
+  e.g. R30: =IF(NOT(ISNUMBER($G30)),$G30,
+ROUND($G30*ApCalcData!Q30,3))  cached=0
+  e.g. R31: =IF(NOT(ISNUMBER($G31)),$G31,
+ROUND($G31*ApCalcData!Q31,3))  cached='-   '
+  e.g. R32: =IF(NOT(ISNUMBER($G32)),$G32,
+ROUND($G32*ApCalcData!Q32,3))  cached='-   '
+  ... 2 more of this pattern
+
+PATTERN 72  kind=excel  array=False  S30:S34 (5 cells)
+  context_label: Physical AP
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!R{r},3))
+  e.g. S30: =IF(NOT(ISNUMBER($G30)),$G30,
+ROUND($G30*ApCalcData!R30,3))  cached=0
+  e.g. S31: =IF(NOT(ISNUMBER($G31)),$G31,
+ROUND($G31*ApCalcData!R31,3))  cached='-   '
+  e.g. S32: =IF(NOT(ISNUMBER($G32)),$G32,
+ROUND($G32*ApCalcData!R32,3))  cached='-   '
+  ... 2 more of this pattern
+
+PATTERN 73  kind=excel  array=True  F31
+  context_label: Magic AP
+  array_spill_ref: F31:G31
+  template: ={"",IF(ApCalcData!$E3=0,"-   ",ApCalcData!$E3*ApCalcData!$H3)}
+  e.g. F31: ={"",IF(ApCalcData!$E3=0,"-   ",ApCalcData!$E3*ApCalcData!$H3)}
+
+PATTERN 74  kind=excel  array=False  J31
+  context_label: -
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},$G{r}
+*IFERROR(IFS(
+ApCalcData!$N38,ApCalcData!$O38,
+ApCalcData!$Q38,ApCalcData!$R38),
+ApCalcData!$N{r}+ApCalcData!$O{r}+ApCalcData!$P{r}+ApCalcData!$Q{r}+ApCalcData!$R{r}))
+  e.g. J31: =IF(NOT(ISNUMBER($G31)),$G31,$G31
+*IFERROR(IFS(
+ApCalcData!$N38,ApCalcData!$O38,
+ApCalcData!$Q38,ApCalcData!$R38),
+ApCalcData!$N31+ApCalcData!$O31+ApCalcData!$P31+ApCalcData!$Q31+ApCalcData!$R31))  cached='-   '
+
+PATTERN 75  kind=excel  array=True  F32
+  context_label: Fire AP
+  array_spill_ref: F32:G32
+  template: ={"",IF(ApCalcData!$E4=0,"-   ",ApCalcData!$E4*ApCalcData!$H4)}
+  e.g. F32: ={"",IF(ApCalcData!$E4=0,"-   ",ApCalcData!$E4*ApCalcData!$H4)}
+
+PATTERN 76  kind=excel  array=False  J32
+  context_label: -
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},$G{r}
+*IFERROR(IFS(
+ApCalcData!$N39,ApCalcData!$O39,
+ApCalcData!$Q39,ApCalcData!$R39),
+ApCalcData!$N{r}+ApCalcData!$O{r}+ApCalcData!$P{r}+ApCalcData!$Q{r}+ApCalcData!$R{r}))
+  e.g. J32: =IF(NOT(ISNUMBER($G32)),$G32,$G32
+*IFERROR(IFS(
+ApCalcData!$N39,ApCalcData!$O39,
+ApCalcData!$Q39,ApCalcData!$R39),
+ApCalcData!$N32+ApCalcData!$O32+ApCalcData!$P32+ApCalcData!$Q32+ApCalcData!$R32))  cached='-   '
+
+PATTERN 77  kind=excel  array=True  F33
+  context_label: Lightning AP
+  array_spill_ref: F33:G33
+  template: ={"",IF(ApCalcData!$E5=0,"-   ",ApCalcData!$E5*ApCalcData!$H5)}
+  e.g. F33: ={"",IF(ApCalcData!$E5=0,"-   ",ApCalcData!$E5*ApCalcData!$H5)}
+
+PATTERN 78  kind=excel  array=False  J33
+  context_label: -
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},$G{r}
+*IFERROR(IFS(
+ApCalcData!$N40,ApCalcData!$O40,
+ApCalcData!$Q40,ApCalcData!$R40),
+ApCalcData!$N{r}+ApCalcData!$O{r}+ApCalcData!$P{r}+ApCalcData!$Q{r}+ApCalcData!$R{r}))
+  e.g. J33: =IF(NOT(ISNUMBER($G33)),$G33,$G33
+*IFERROR(IFS(
+ApCalcData!$N40,ApCalcData!$O40,
+ApCalcData!$Q40,ApCalcData!$R40),
+ApCalcData!$N33+ApCalcData!$O33+ApCalcData!$P33+ApCalcData!$Q33+ApCalcData!$R33))  cached='-   '
+
+PATTERN 79  kind=excel  array=True  F34
+  context_label: Holy AP
+  array_spill_ref: F34:G34
+  template: ={"",IF(ApCalcData!$E6=0,"-   ",ApCalcData!$E6*ApCalcData!$H6)}
+  e.g. F34: ={"",IF(ApCalcData!$E6=0,"-   ",ApCalcData!$E6*ApCalcData!$H6)}
+
+PATTERN 80  kind=excel  array=False  J34
+  context_label: -
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},$G{r}
+*IFERROR(IFS(
+ApCalcData!$N41,ApCalcData!$O41,
+ApCalcData!$Q41,ApCalcData!$R41),
+ApCalcData!$N{r}+ApCalcData!$O{r}+ApCalcData!$P{r}+ApCalcData!$Q{r}+ApCalcData!$R{r}))
+  e.g. J34: =IF(NOT(ISNUMBER($G34)),$G34,$G34
+*IFERROR(IFS(
+ApCalcData!$N41,ApCalcData!$O41,
+ApCalcData!$Q41,ApCalcData!$R41),
+ApCalcData!$N34+ApCalcData!$O34+ApCalcData!$P34+ApCalcData!$Q34+ApCalcData!$R34))  cached='-   '
+
+PATTERN 81  kind=excel  array=True  F35:F39 (5 cells)
+  context_label: Physical SB
+  array_spill_ref: F35:G35
+  template: ={"",
+IFERROR(IFS(
+ApCalcData!$B$12,100,
+ApCalcData!$B$13,100
+),"-   ")
+}
+  e.g. F35: ={"",
+IFERROR(IFS(
+ApCalcData!$B$12,100,
+ApCalcData!$B$13,100
+),"-   ")
+}
+  e.g. F36: ={"",
+IFERROR(IFS(
+ApCalcData!$B$12,100,
+ApCalcData!$B$13,100
+),"-   ")
+}
+  e.g. F37: ={"",
+IFERROR(IFS(
+ApCalcData!$B$12,100,
+ApCalcData!$B$13,100
+),"-   ")
+}
+  ... 2 more of this pattern
+
+PATTERN 82  kind=excel  array=False  J35
+  context_label: -
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},$G{r}
+*IFERROR(IFS(
+ApCalcData!$N37,ApCalcData!$O37,
+ApCalcData!$Q37,ApCalcData!$R37),
+ApCalcData!$N30+ApCalcData!$O30+ApCalcData!$P30+ApCalcData!$Q30+ApCalcData!$R30))
+  e.g. J35: =IF(NOT(ISNUMBER($G35)),$G35,$G35
+*IFERROR(IFS(
+ApCalcData!$N37,ApCalcData!$O37,
+ApCalcData!$Q37,ApCalcData!$R37),
+ApCalcData!$N30+ApCalcData!$O30+ApCalcData!$P30+ApCalcData!$Q30+ApCalcData!$R30))  cached='-   '
+
+PATTERN 83  kind=excel  array=False  O35
+  context_label: Physical SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!N30,3))
+  e.g. O35: =IF(NOT(ISNUMBER($G35)),$G35,
+ROUND($G35*ApCalcData!N30,3))  cached='-   '
+
+PATTERN 84  kind=excel  array=False  P35
+  context_label: Physical SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!O30,3))
+  e.g. P35: =IF(NOT(ISNUMBER($G35)),$G35,
+ROUND($G35*ApCalcData!O30,3))  cached='-   '
+
+PATTERN 85  kind=excel  array=False  Q35
+  context_label: Physical SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!P30,3))
+  e.g. Q35: =IF(NOT(ISNUMBER($G35)),$G35,
+ROUND($G35*ApCalcData!P30,3))  cached='-   '
+
+PATTERN 86  kind=excel  array=False  R35
+  context_label: Physical SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!Q30,3))
+  e.g. R35: =IF(NOT(ISNUMBER($G35)),$G35,
+ROUND($G35*ApCalcData!Q30,3))  cached='-   '
+
+PATTERN 87  kind=excel  array=False  S35
+  context_label: Physical SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!R30,3))
+  e.g. S35: =IF(NOT(ISNUMBER($G35)),$G35,
+ROUND($G35*ApCalcData!R30,3))  cached='-   '
+
+PATTERN 88  kind=excel  array=False  J36
+  context_label: -
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},$G{r}
+*IFERROR(IFS(
+ApCalcData!$N38,ApCalcData!$O38,
+ApCalcData!$Q38,ApCalcData!$R38),
+ApCalcData!$N31+ApCalcData!$O31+ApCalcData!$P31+ApCalcData!$Q31+ApCalcData!$R31))
+  e.g. J36: =IF(NOT(ISNUMBER($G36)),$G36,$G36
+*IFERROR(IFS(
+ApCalcData!$N38,ApCalcData!$O38,
+ApCalcData!$Q38,ApCalcData!$R38),
+ApCalcData!$N31+ApCalcData!$O31+ApCalcData!$P31+ApCalcData!$Q31+ApCalcData!$R31))  cached='-   '
+
+PATTERN 89  kind=excel  array=False  O36
+  context_label: Magic SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!N31,3))
+  e.g. O36: =IF(NOT(ISNUMBER($G36)),$G36,
+ROUND($G36*ApCalcData!N31,3))  cached='-   '
+
+PATTERN 90  kind=excel  array=False  P36
+  context_label: Magic SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!O31,3))
+  e.g. P36: =IF(NOT(ISNUMBER($G36)),$G36,
+ROUND($G36*ApCalcData!O31,3))  cached='-   '
+
+PATTERN 91  kind=excel  array=False  Q36
+  context_label: Magic SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!P31,3))
+  e.g. Q36: =IF(NOT(ISNUMBER($G36)),$G36,
+ROUND($G36*ApCalcData!P31,3))  cached='-   '
+
+PATTERN 92  kind=excel  array=False  R36
+  context_label: Magic SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!Q31,3))
+  e.g. R36: =IF(NOT(ISNUMBER($G36)),$G36,
+ROUND($G36*ApCalcData!Q31,3))  cached='-   '
+
+PATTERN 93  kind=excel  array=False  S36
+  context_label: Magic SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!R31,3))
+  e.g. S36: =IF(NOT(ISNUMBER($G36)),$G36,
+ROUND($G36*ApCalcData!R31,3))  cached='-   '
+
+PATTERN 94  kind=excel  array=False  J37
+  context_label: -
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},$G{r}
+*IFERROR(IFS(
+ApCalcData!$N39,ApCalcData!$O39,
+ApCalcData!$Q39,ApCalcData!$R39),
+ApCalcData!$N32+ApCalcData!$O32+ApCalcData!$P32+ApCalcData!$Q32+ApCalcData!$R32))
+  e.g. J37: =IF(NOT(ISNUMBER($G37)),$G37,$G37
+*IFERROR(IFS(
+ApCalcData!$N39,ApCalcData!$O39,
+ApCalcData!$Q39,ApCalcData!$R39),
+ApCalcData!$N32+ApCalcData!$O32+ApCalcData!$P32+ApCalcData!$Q32+ApCalcData!$R32))  cached='-   '
+
+PATTERN 95  kind=excel  array=False  O37
+  context_label: Fire SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!N32,3))
+  e.g. O37: =IF(NOT(ISNUMBER($G37)),$G37,
+ROUND($G37*ApCalcData!N32,3))  cached='-   '
+
+PATTERN 96  kind=excel  array=False  P37
+  context_label: Fire SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!O32,3))
+  e.g. P37: =IF(NOT(ISNUMBER($G37)),$G37,
+ROUND($G37*ApCalcData!O32,3))  cached='-   '
+
+PATTERN 97  kind=excel  array=False  Q37
+  context_label: Fire SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!P32,3))
+  e.g. Q37: =IF(NOT(ISNUMBER($G37)),$G37,
+ROUND($G37*ApCalcData!P32,3))  cached='-   '
+
+PATTERN 98  kind=excel  array=False  R37
+  context_label: Fire SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!Q32,3))
+  e.g. R37: =IF(NOT(ISNUMBER($G37)),$G37,
+ROUND($G37*ApCalcData!Q32,3))  cached='-   '
+
+PATTERN 99  kind=excel  array=False  S37
+  context_label: Fire SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!R32,3))
+  e.g. S37: =IF(NOT(ISNUMBER($G37)),$G37,
+ROUND($G37*ApCalcData!R32,3))  cached='-   '
+
+PATTERN 100  kind=excel  array=False  J38
+  context_label: -
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},$G{r}
+*IFERROR(IFS(
+ApCalcData!$N40,ApCalcData!$O40,
+ApCalcData!$Q40,ApCalcData!$R40),
+ApCalcData!$N33+ApCalcData!$O33+ApCalcData!$P33+ApCalcData!$Q33+ApCalcData!$R33))
+  e.g. J38: =IF(NOT(ISNUMBER($G38)),$G38,$G38
+*IFERROR(IFS(
+ApCalcData!$N40,ApCalcData!$O40,
+ApCalcData!$Q40,ApCalcData!$R40),
+ApCalcData!$N33+ApCalcData!$O33+ApCalcData!$P33+ApCalcData!$Q33+ApCalcData!$R33))  cached='-   '
+
+PATTERN 101  kind=excel  array=False  O38
+  context_label: Lightning SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!N33,3))
+  e.g. O38: =IF(NOT(ISNUMBER($G38)),$G38,
+ROUND($G38*ApCalcData!N33,3))  cached='-   '
+
+PATTERN 102  kind=excel  array=False  P38
+  context_label: Lightning SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!O33,3))
+  e.g. P38: =IF(NOT(ISNUMBER($G38)),$G38,
+ROUND($G38*ApCalcData!O33,3))  cached='-   '
+
+PATTERN 103  kind=excel  array=False  Q38
+  context_label: Lightning SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!P33,3))
+  e.g. Q38: =IF(NOT(ISNUMBER($G38)),$G38,
+ROUND($G38*ApCalcData!P33,3))  cached='-   '
+
+PATTERN 104  kind=excel  array=False  R38
+  context_label: Lightning SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!Q33,3))
+  e.g. R38: =IF(NOT(ISNUMBER($G38)),$G38,
+ROUND($G38*ApCalcData!Q33,3))  cached='-   '
+
+PATTERN 105  kind=excel  array=False  S38
+  context_label: Lightning SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!R33,3))
+  e.g. S38: =IF(NOT(ISNUMBER($G38)),$G38,
+ROUND($G38*ApCalcData!R33,3))  cached='-   '
+
+PATTERN 106  kind=excel  array=False  J39
+  context_label: -
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},$G{r}
+*IFERROR(IFS(
+ApCalcData!$N41,ApCalcData!$O41,
+ApCalcData!$Q41,ApCalcData!$R41),
+ApCalcData!$N34+ApCalcData!$O34+ApCalcData!$P34+ApCalcData!$Q34+ApCalcData!$R34))
+  e.g. J39: =IF(NOT(ISNUMBER($G39)),$G39,$G39
+*IFERROR(IFS(
+ApCalcData!$N41,ApCalcData!$O41,
+ApCalcData!$Q41,ApCalcData!$R41),
+ApCalcData!$N34+ApCalcData!$O34+ApCalcData!$P34+ApCalcData!$Q34+ApCalcData!$R34))  cached='-   '
+
+PATTERN 107  kind=excel  array=False  O39
+  context_label: Holy SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!N34,3))
+  e.g. O39: =IF(NOT(ISNUMBER($G39)),$G39,
+ROUND($G39*ApCalcData!N34,3))  cached='-   '
+
+PATTERN 108  kind=excel  array=False  P39
+  context_label: Holy SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!O34,3))
+  e.g. P39: =IF(NOT(ISNUMBER($G39)),$G39,
+ROUND($G39*ApCalcData!O34,3))  cached='-   '
+
+PATTERN 109  kind=excel  array=False  Q39
+  context_label: Holy SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!P34,3))
+  e.g. Q39: =IF(NOT(ISNUMBER($G39)),$G39,
+ROUND($G39*ApCalcData!P34,3))  cached='-   '
+
+PATTERN 110  kind=excel  array=False  R39
+  context_label: Holy SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!Q34,3))
+  e.g. R39: =IF(NOT(ISNUMBER($G39)),$G39,
+ROUND($G39*ApCalcData!Q34,3))  cached='-   '
+
+PATTERN 111  kind=excel  array=False  S39
+  context_label: Holy SB
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*ApCalcData!R34,3))
+  e.g. S39: =IF(NOT(ISNUMBER($G39)),$G39,
+ROUND($G39*ApCalcData!R34,3))  cached='-   '
+
+PATTERN 112  kind=excel  array=True  F40
+  context_label: Poison
+  array_spill_ref: F40:G40
+  template: ={"",
+IF(AND(ApCalcData!$E32=0,ApCalcData!$H32=0,ApCalcData!$E{r}=0),"-   ",
+IF(ApCalcData!$E32=0,ApCalcData!$H32,ApCalcData!$E32)+ApCalcData!$E{r})
+}
+  e.g. F40: ={"",
+IF(AND(ApCalcData!$E32=0,ApCalcData!$H32=0,ApCalcData!$E40=0),"-   ",
+IF(ApCalcData!$E32=0,ApCalcData!$H32,ApCalcData!$E32)+ApCalcData!$E40)
+}
+
+PATTERN 113  kind=excel  array=False  J40
+  context_label: -
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},$G{r}
+*IFERROR(IFS(
+ApCalcData!$N$43,ApCalcData!$O$43),
+(ApCalcData!$E$12*ApCalcData!$H$12*0.01)*(ApCalcData!$K$38*0.01)))
+  e.g. J40: =IF(NOT(ISNUMBER($G40)),$G40,$G40
+*IFERROR(IFS(
+ApCalcData!$N$43,ApCalcData!$O$43),
+(ApCalcData!$E$12*ApCalcData!$H$12*0.01)*(ApCalcData!$K$38*0.01)))  cached='-   '
+
+PATTERN 114  kind=excel  array=False  K40:K45 (6 cells)
+  context_label: -
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+TRUNC($G{r}+$J{r}))
+  e.g. K40: =IF(NOT(ISNUMBER($G40)),$G40,
+TRUNC($G40+$J40))  cached='-   '
+  e.g. K41: =IF(NOT(ISNUMBER($G41)),$G41,
+TRUNC($G41+$J41))  cached='-   '
+  e.g. K42: =IF(NOT(ISNUMBER($G42)),$G42,
+TRUNC($G42+$J42))  cached='-   '
+  ... 3 more of this pattern
+
+PATTERN 115  kind=excel  array=False  O40:O45 (6 cells)
+  context_label: Poison
+  template: ="-   "
+  e.g. O40: ="-   "  cached='-   '
+  e.g. O41: ="-   "  cached='-   '
+  e.g. O42: ="-   "  cached='-   '
+  ... 3 more of this pattern
+
+PATTERN 116  kind=excel  array=False  P40:P45 (6 cells)
+  context_label: Poison
+  template: ="-   "
+  e.g. P40: ="-   "  cached='-   '
+  e.g. P41: ="-   "  cached='-   '
+  e.g. P42: ="-   "  cached='-   '
+  ... 3 more of this pattern
+
+PATTERN 117  kind=excel  array=False  Q40:Q45 (6 cells)
+  context_label: Poison
+  template: ="-   "
+  e.g. Q40: ="-   "  cached='-   '
+  e.g. Q41: ="-   "  cached='-   '
+  e.g. Q42: ="-   "  cached='-   '
+  ... 3 more of this pattern
+
+PATTERN 118  kind=excel  array=False  R40:R45 (6 cells)
+  context_label: Poison
+  template: ="-   "
+  e.g. R40: ="-   "  cached='-   '
+  e.g. R41: ="-   "  cached='-   '
+  e.g. R42: ="-   "  cached='-   '
+  ... 3 more of this pattern
+
+PATTERN 119  kind=excel  array=False  S40
+  context_label: Poison
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*S$13*S23,3))
+  e.g. S40: =IF(NOT(ISNUMBER($G40)),$G40,
+ROUND($G40*S$13*S23,3))  cached='-   '
+
+PATTERN 120  kind=excel  array=True  F41
+  context_label: Scarlet Rot
+  array_spill_ref: F41:G41
+  template: ={"",
+IF(AND(ApCalcData!$E33=0,ApCalcData!$H33=0,ApCalcData!$E{r}=0),"-   ",
+IF(ApCalcData!$E33=0,ApCalcData!$H33,ApCalcData!$E33)+ApCalcData!$E{r})
+}
+  e.g. F41: ={"",
+IF(AND(ApCalcData!$E33=0,ApCalcData!$H33=0,ApCalcData!$E41=0),"-   ",
+IF(ApCalcData!$E33=0,ApCalcData!$H33,ApCalcData!$E33)+ApCalcData!$E41)
+}
+
+PATTERN 121  kind=excel  array=False  J41:J43 (2 cells)
+  context_label: -
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},0)
+  e.g. J41: =IF(NOT(ISNUMBER($G41)),$G41,0)  cached='-   '
+  e.g. J43: =IF(NOT(ISNUMBER($G43)),$G43,0)  cached='-   '
+
+PATTERN 122  kind=excel  array=False  S41:S43 (2 cells)
+  context_label: Scarlet Rot
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},0)
+  e.g. S41: =IF(NOT(ISNUMBER($G41)),$G41,0)  cached='-   '
+  e.g. S43: =IF(NOT(ISNUMBER($G43)),$G43,0)  cached='-   '
+
+PATTERN 123  kind=excel  array=True  F42
+  context_label: Bleed
+  array_spill_ref: F42:G42
+  template: ={"",
+IF(AND(ApCalcData!$E34=0,ApCalcData!$H34=0,ApCalcData!$E{r}=0),"-   ",
+IF(ApCalcData!$E34=0,ApCalcData!$H34,ApCalcData!$E34)+ApCalcData!$E{r})
+}
+  e.g. F42: ={"",
+IF(AND(ApCalcData!$E34=0,ApCalcData!$H34=0,ApCalcData!$E42=0),"-   ",
+IF(ApCalcData!$E34=0,ApCalcData!$H34,ApCalcData!$E34)+ApCalcData!$E42)
+}
+
+PATTERN 124  kind=excel  array=False  J42
+  context_label: -
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},$G{r}
+*IFERROR(IFS(
+ApCalcData!$N$43,ApCalcData!$O$43),
+(ApCalcData!$E$12*ApCalcData!$H$12*0.01)*(ApCalcData!$K$41*0.01)))
+  e.g. J42: =IF(NOT(ISNUMBER($G42)),$G42,$G42
+*IFERROR(IFS(
+ApCalcData!$N$43,ApCalcData!$O$43),
+(ApCalcData!$E$12*ApCalcData!$H$12*0.01)*(ApCalcData!$K$41*0.01)))  cached='-   '
+
+PATTERN 125  kind=excel  array=False  S42
+  context_label: Bleed
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*S$13*S24,3))
+  e.g. S42: =IF(NOT(ISNUMBER($G42)),$G42,
+ROUND($G42*S$13*S24,3))  cached='-   '
+
+PATTERN 126  kind=excel  array=True  F43
+  context_label: Frost
+  array_spill_ref: F43:G43
+  template: ={"",
+IF(AND(ApCalcData!$E35=0,ApCalcData!$H35=0,ApCalcData!$E{r}=0),"-   ",
+IF(ApCalcData!$E35=0,ApCalcData!$H35,ApCalcData!$E35)+ApCalcData!$E{r})
+}
+  e.g. F43: ={"",
+IF(AND(ApCalcData!$E35=0,ApCalcData!$H35=0,ApCalcData!$E43=0),"-   ",
+IF(ApCalcData!$E35=0,ApCalcData!$H35,ApCalcData!$E35)+ApCalcData!$E43)
+}
+
+PATTERN 127  kind=excel  array=True  F44
+  context_label: Sleep
+  array_spill_ref: F44:G44
+  template: ={"",
+IF(AND(ApCalcData!$E36=0,ApCalcData!$H36=0,ApCalcData!$E{r}=0),"-   ",
+IF(ApCalcData!$E36=0,ApCalcData!$H36,ApCalcData!$E36)+ApCalcData!$E{r})
+}
+  e.g. F44: ={"",
+IF(AND(ApCalcData!$E36=0,ApCalcData!$H36=0,ApCalcData!$E44=0),"-   ",
+IF(ApCalcData!$E36=0,ApCalcData!$H36,ApCalcData!$E36)+ApCalcData!$E44)
+}
+
+PATTERN 128  kind=excel  array=False  J44
+  context_label: -
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},$G{r}
+*IFERROR(IFS(
+ApCalcData!$N$43,ApCalcData!$O$43),
+(ApCalcData!$E$12*ApCalcData!$H$12*0.01)*(ApCalcData!$K$44*0.01)))
+  e.g. J44: =IF(NOT(ISNUMBER($G44)),$G44,$G44
+*IFERROR(IFS(
+ApCalcData!$N$43,ApCalcData!$O$43),
+(ApCalcData!$E$12*ApCalcData!$H$12*0.01)*(ApCalcData!$K$44*0.01)))  cached='-   '
+
+PATTERN 129  kind=excel  array=False  S44
+  context_label: Sleep
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*S$13*S25,3))
+  e.g. S44: =IF(NOT(ISNUMBER($G44)),$G44,
+ROUND($G44*S$13*S25,3))  cached='-   '
+
+PATTERN 130  kind=excel  array=True  F45
+  context_label: Madness
+  array_spill_ref: F45:G45
+  template: ={"",
+IF(AND(ApCalcData!$E37=0,ApCalcData!$H37=0,ApCalcData!$E{r}=0),"-   ",
+IF(ApCalcData!$E37=0,ApCalcData!$H37,ApCalcData!$E37)+ApCalcData!$E{r})
+}
+  e.g. F45: ={"",
+IF(AND(ApCalcData!$E37=0,ApCalcData!$H37=0,ApCalcData!$E45=0),"-   ",
+IF(ApCalcData!$E37=0,ApCalcData!$H37,ApCalcData!$E37)+ApCalcData!$E45)
+}
+
+PATTERN 131  kind=excel  array=False  J45
+  context_label: -
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},$G{r}
+*IFERROR(IFS(
+ApCalcData!$N$43,ApCalcData!$O$43),
+(ApCalcData!$E$12*ApCalcData!$H$12*0.01)*(ApCalcData!$K$47*0.01)))
+  e.g. J45: =IF(NOT(ISNUMBER($G45)),$G45,$G45
+*IFERROR(IFS(
+ApCalcData!$N$43,ApCalcData!$O$43),
+(ApCalcData!$E$12*ApCalcData!$H$12*0.01)*(ApCalcData!$K$47*0.01)))  cached='-   '
+
+PATTERN 132  kind=excel  array=False  S45
+  context_label: Madness
+  template: =IF(NOT(ISNUMBER($G{r})),$G{r},
+ROUND($G{r}*S$13*S26,3))
+  e.g. S45: =IF(NOT(ISNUMBER($G45)),$G45,
+ROUND($G45*S$13*S26,3))  cached='-   '
+
+PATTERN 133  kind=excel  array=False  K46
+  context_label: Total AR
+  template: =SUM(K30:K34)
+  e.g. K46: =SUM(K30:K34)  cached=23.45785443
+
+PATTERN 134  kind=excel  array=False  L46
+  context_label: Total AR
+  template: =TRUNC(SUM(K30:K34))
+  e.g. L46: =TRUNC(SUM(K30:K34))  cached=23
+
+PATTERN 135  kind=excel  array=False  E50
+  context_label: Physical
+  template: =MIN(ApCalcData!$E$14*ApCalcData!$H$14,100)
+  e.g. E50: =MIN(ApCalcData!$E$14*ApCalcData!$H$14,100)  cached=30
+
+PATTERN 136  kind=excel  array=False  G50
+  context_label: Magic
+  template: =MIN(ApCalcData!$E$15*ApCalcData!$H$15,100)
+  e.g. G50: =MIN(ApCalcData!$E$15*ApCalcData!$H$15,100)  cached=20
+
+PATTERN 137  kind=excel  array=False  J50
+  context_label: Fire
+  template: =MIN(ApCalcData!$E$16*ApCalcData!$H$16,100)
+  e.g. J50: =MIN(ApCalcData!$E$16*ApCalcData!$H$16,100)  cached=20
+
+PATTERN 138  kind=excel  array=False  K50
+  context_label: Lightning
+  template: =MIN(ApCalcData!$E$17*ApCalcData!$H$17,100)
+  e.g. K50: =MIN(ApCalcData!$E$17*ApCalcData!$H$17,100)  cached=20
+
+PATTERN 139  kind=excel  array=False  L50
+  context_label: Holy
+  template: =MIN(ApCalcData!$E$18*ApCalcData!$H$18,100)
+  e.g. L50: =MIN(ApCalcData!$E$18*ApCalcData!$H$18,100)  cached=20
+
+PATTERN 140  kind=excel  array=False  N50
+  context_label: Poison
+  template: =TRUNC(ApCalcData!$E$19*ApCalcData!$H$19)
+  e.g. N50: =TRUNC(ApCalcData!$E$19*ApCalcData!$H$19)  cached=10
+
+PATTERN 141  kind=excel  array=False  O50
+  context_label: Scarlet Rot
+  template: =TRUNC(ApCalcData!$E$20*ApCalcData!$H$20)
+  e.g. O50: =TRUNC(ApCalcData!$E$20*ApCalcData!$H$20)  cached=10
+
+PATTERN 142  kind=excel  array=False  P50
+  context_label: Bleed
+  template: =TRUNC(ApCalcData!$E$21*ApCalcData!$H$21)
+  e.g. P50: =TRUNC(ApCalcData!$E$21*ApCalcData!$H$21)  cached=10
+
+PATTERN 143  kind=excel  array=False  Q50
+  context_label: Frost
+  template: =TRUNC(ApCalcData!$E$22*ApCalcData!$H$22)
+  e.g. Q50: =TRUNC(ApCalcData!$E$22*ApCalcData!$H$22)  cached=10
+
+PATTERN 144  kind=excel  array=False  R50
+  context_label: Sleep
+  template: =TRUNC(ApCalcData!$E$23*ApCalcData!$H$23)
+  e.g. R50: =TRUNC(ApCalcData!$E$23*ApCalcData!$H$23)  cached=0
+
+PATTERN 145  kind=excel  array=False  S50
+  context_label: Madness
+  template: =TRUNC(ApCalcData!$E$24*ApCalcData!$H$24)
+  e.g. S50: =TRUNC(ApCalcData!$E$24*ApCalcData!$H$24)  cached=0
+
+PATTERN 146  kind=excel  array=False  E52
+  context_label: Guard Boost
+  template: =TRUNC(ApCalcData!$E$26*ApCalcData!$H$26)
+  e.g. E52: =TRUNC(ApCalcData!$E$26*ApCalcData!$H$26)  cached=10
+
+PATTERN 147  kind=excel  array=False  N52
+  context_label: Death
+  template: =TRUNC(ApCalcData!$E$25*ApCalcData!$H$25)
+  e.g. N52: =TRUNC(ApCalcData!$E$25*ApCalcData!$H$25)  cached=10
+
+========================================================================
+ALL FORMULAS
+========================================================================
+cell	kind	array_ref	label	logic	stored	cached
+H6	excel		Update Available:	=IF(UpdateData!$D$2=UpdateData!$D$5,False,True)	=IF(UpdateData!$D$2=UpdateData!$D$5,False,True)	FALSE
+E7	excel		Update Available:	=IF(H6,"Link to Update:","Link to Original:")	=IF(H6,"Link to Update:","Link to Original:")	Link to Original:
+H7	excel			=HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U/copy", | UpdateData!D5&" - "&IF(H6,"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))	=HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U/copy", | UpdateData!D5&" - "&IF(H6,"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))	v1.19.1 - last updated 413 days ago
+F10	excel	F10:G10	Class	={"",ApCalcData!$AD2}	={"",ApCalcData!$AD2}	
+O10	excel			=IFERROR(ApCalcData!$A$1&" Scaling","Scaling")	=IFERROR(ApCalcData!$A$1&" Scaling","Scaling")	Unarmed Scaling
+E11	excel		Class	=IF(ApCalcData!$A$2="Invalid","Invalid","Weapon")	=IF(ApCalcData!$A$2="Invalid","Invalid","Weapon")	Weapon
+F11	excel	F11:G11		={"",ApCalcData!$AD3}	={"",ApCalcData!$AD3}	
+F12	excel	F12:G12	Affinity	={"",ApCalcData!$AD4}	={"",ApCalcData!$AD4}	
+O12	excel		Letter	=IFS( | ROUND(O13,4)>=1.75,"S", | ROUND(O13,4)>=1.4,"A", | ROUND(O13,4)>=0.9,"B", | ROUND(O13,4)>=0.6,"C", | ROUND(O13,4)>=0.25,"D", | ROUND(O13,4)>=0.01,"E", | ROUND(O13,4)<0.01,"-" | )	=IFS( | ROUND(O13,4)>=1.75,"S", | ROUND(O13,4)>=1.4,"A", | ROUND(O13,4)>=0.9,"B", | ROUND(O13,4)>=0.6,"C", | ROUND(O13,4)>=0.25,"D", | ROUND(O13,4)>=0.01,"E", | ROUND(O13,4)<0.01,"-" | )	D
+P12	excel		Letter	=IFS( | ROUND(P13,4)>=1.75,"S", | ROUND(P13,4)>=1.4,"A", | ROUND(P13,4)>=0.9,"B", | ROUND(P13,4)>=0.6,"C", | ROUND(P13,4)>=0.25,"D", | ROUND(P13,4)>=0.01,"E", | ROUND(P13,4)<0.01,"-" | )	=IFS( | ROUND(P13,4)>=1.75,"S", | ROUND(P13,4)>=1.4,"A", | ROUND(P13,4)>=0.9,"B", | ROUND(P13,4)>=0.6,"C", | ROUND(P13,4)>=0.25,"D", | ROUND(P13,4)>=0.01,"E", | ROUND(P13,4)<0.01,"-" | )	D
+Q12	excel		Letter	=IFS( | ROUND(Q13,4)>=1.75,"S", | ROUND(Q13,4)>=1.4,"A", | ROUND(Q13,4)>=0.9,"B", | ROUND(Q13,4)>=0.6,"C", | ROUND(Q13,4)>=0.25,"D", | ROUND(Q13,4)>=0.01,"E", | ROUND(Q13,4)<0.01,"-" | )	=IFS( | ROUND(Q13,4)>=1.75,"S", | ROUND(Q13,4)>=1.4,"A", | ROUND(Q13,4)>=0.9,"B", | ROUND(Q13,4)>=0.6,"C", | ROUND(Q13,4)>=0.25,"D", | ROUND(Q13,4)>=0.01,"E", | ROUND(Q13,4)<0.01,"-" | )	-
+R12	excel		Letter	=IFS( | ROUND(R13,4)>=1.75,"S", | ROUND(R13,4)>=1.4,"A", | ROUND(R13,4)>=0.9,"B", | ROUND(R13,4)>=0.6,"C", | ROUND(R13,4)>=0.25,"D", | ROUND(R13,4)>=0.01,"E", | ROUND(R13,4)<0.01,"-" | )	=IFS( | ROUND(R13,4)>=1.75,"S", | ROUND(R13,4)>=1.4,"A", | ROUND(R13,4)>=0.9,"B", | ROUND(R13,4)>=0.6,"C", | ROUND(R13,4)>=0.25,"D", | ROUND(R13,4)>=0.01,"E", | ROUND(R13,4)<0.01,"-" | )	-
+S12	excel		Letter	=IFS( | ROUND(S13,4)>=1.75,"S", | ROUND(S13,4)>=1.4,"A", | ROUND(S13,4)>=0.9,"B", | ROUND(S13,4)>=0.6,"C", | ROUND(S13,4)>=0.25,"D", | ROUND(S13,4)>=0.01,"E", | ROUND(S13,4)<0.01,"-" | )	=IFS( | ROUND(S13,4)>=1.75,"S", | ROUND(S13,4)>=1.4,"A", | ROUND(S13,4)>=0.9,"B", | ROUND(S13,4)>=0.6,"C", | ROUND(S13,4)>=0.25,"D", | ROUND(S13,4)>=0.01,"E", | ROUND(S13,4)<0.01,"-" | )	-
+F13	excel	F13:G13	Upgrade	={"",ApCalcData!$AD5}	={"",ApCalcData!$AD5}	
+O13	excel		Percent	=ApCalcData!N$3*ApCalcData!N$4+ApCalcData!N$46	=ApCalcData!N$3*ApCalcData!N$4+ApCalcData!N$46	0.5
+P13	excel		Percent	=ApCalcData!O$3*ApCalcData!O$4+ApCalcData!O$46	=ApCalcData!O$3*ApCalcData!O$4+ApCalcData!O$46	0.5
+Q13	excel		Percent	=ApCalcData!P$3*ApCalcData!P$4+ApCalcData!P$46	=ApCalcData!P$3*ApCalcData!P$4+ApCalcData!P$46	0
+R13	excel		Percent	=ApCalcData!Q$3*ApCalcData!Q$4+ApCalcData!Q$46	=ApCalcData!Q$3*ApCalcData!Q$4+ApCalcData!Q$46	0
+S13	excel		Percent	=ApCalcData!R$3*ApCalcData!R$4+ApCalcData!R$46	=ApCalcData!R$3*ApCalcData!R$4+ApCalcData!R$46	0
+O14	excel		Requirements	=IF(ApCalcData!$B$15>0,ApCalcData!$B$15,"-")	=IF(ApCalcData!$B$15>0,ApCalcData!$B$15,"-")	-
+P14	excel		Requirements	=IF(ApCalcData!$B$16>0,ApCalcData!$B$16,"-")	=IF(ApCalcData!$B$16>0,ApCalcData!$B$16,"-")	-
+Q14	excel		Requirements	=IF(ApCalcData!$B$17>0,ApCalcData!$B$17,"-")	=IF(ApCalcData!$B$17>0,ApCalcData!$B$17,"-")	-
+R14	excel		Requirements	=IF(ApCalcData!$B$18>0,ApCalcData!$B$18,"-")	=IF(ApCalcData!$B$18>0,ApCalcData!$B$18,"-")	-
+S14	excel		Requirements	=IF(ApCalcData!$B$19>0,ApCalcData!$B$19,"-")	=IF(ApCalcData!$B$19>0,ApCalcData!$B$19,"-")	-
+F15	excel	F15:G15	Strength	={"",ApCalcData!$AD7}	={"",ApCalcData!$AD7}	
+F16	excel	F16:G16	Dexterity	={"",ApCalcData!$AD8}	={"",ApCalcData!$AD8}	
+F17	excel	F17:G17	Intelligence	={"",ApCalcData!$AD9}	={"",ApCalcData!$AD9}	
+F18	excel	F18:G18	Faith	={"",ApCalcData!$AD10}	={"",ApCalcData!$AD10}	
+O18	excel		Physical	=IF(ApCalcData!N12,ApCalcData!N6,0)	=IF(ApCalcData!N12,ApCalcData!N6,0)	0.1811896248
+P18	excel		Physical	=IF(ApCalcData!O12,ApCalcData!O6,0)	=IF(ApCalcData!O12,ApCalcData!O6,0)	0.1645958186
+Q18	excel		Physical	=IF(ApCalcData!P12,ApCalcData!P6,0)	=IF(ApCalcData!P12,ApCalcData!P6,0)	0
+R18	excel		Physical	=IF(ApCalcData!Q12,ApCalcData!Q6,0)	=IF(ApCalcData!Q12,ApCalcData!Q6,0)	0
+S18	excel		Physical	=IF(ApCalcData!R12,ApCalcData!R6,0)	=IF(ApCalcData!R12,ApCalcData!R6,0)	0
+F19	excel	F19:G19	Arcane	={"",ApCalcData!$AD11}	={"",ApCalcData!$AD11}	
+O19	excel		Magic	=IF(ApCalcData!N13,ApCalcData!N7,0)	=IF(ApCalcData!N13,ApCalcData!N7,0)	0
+P19	excel		Magic	=IF(ApCalcData!O13,ApCalcData!O7,0)	=IF(ApCalcData!O13,ApCalcData!O7,0)	0
+Q19	excel		Magic	=IF(ApCalcData!P13,ApCalcData!P7,0)	=IF(ApCalcData!P13,ApCalcData!P7,0)	0.1011834044
+R19	excel		Magic	=IF(ApCalcData!Q13,ApCalcData!Q7,0)	=IF(ApCalcData!Q13,ApCalcData!Q7,0)	0
+S19	excel		Magic	=IF(ApCalcData!R13,ApCalcData!R7,0)	=IF(ApCalcData!R13,ApCalcData!R7,0)	0
+O20	excel		Fire	=IF(ApCalcData!N14,ApCalcData!N8,0)	=IF(ApCalcData!N14,ApCalcData!N8,0)	0
+P20	excel		Fire	=IF(ApCalcData!O14,ApCalcData!O8,0)	=IF(ApCalcData!O14,ApCalcData!O8,0)	0
+Q20	excel		Fire	=IF(ApCalcData!P14,ApCalcData!P8,0)	=IF(ApCalcData!P14,ApCalcData!P8,0)	0
+R20	excel		Fire	=IF(ApCalcData!Q14,ApCalcData!Q8,0)	=IF(ApCalcData!Q14,ApCalcData!Q8,0)	0.1011834044
+S20	excel		Fire	=IF(ApCalcData!R14,ApCalcData!R8,0)	=IF(ApCalcData!R14,ApCalcData!R8,0)	0
+O21	excel		Lightning	=IF(ApCalcData!N15,ApCalcData!N9,0)	=IF(ApCalcData!N15,ApCalcData!N9,0)	0
+P21	excel		Lightning	=IF(ApCalcData!O15,ApCalcData!O9,0)	=IF(ApCalcData!O15,ApCalcData!O9,0)	0.1645958186
+Q21	excel		Lightning	=IF(ApCalcData!P15,ApCalcData!P9,0)	=IF(ApCalcData!P15,ApCalcData!P9,0)	0
+R21	excel		Lightning	=IF(ApCalcData!Q15,ApCalcData!Q9,0)	=IF(ApCalcData!Q15,ApCalcData!Q9,0)	0
+S21	excel		Lightning	=IF(ApCalcData!R15,ApCalcData!R9,0)	=IF(ApCalcData!R15,ApCalcData!R9,0)	0
+F22	excel	F22:G22	Status Buff	={"",ApCalcData!$AD14}	={"",ApCalcData!$AD14}	
+O22	excel		Holy	=IF(ApCalcData!N16,ApCalcData!N10,0)	=IF(ApCalcData!N16,ApCalcData!N10,0)	0
+P22	excel		Holy	=IF(ApCalcData!O16,ApCalcData!O10,0)	=IF(ApCalcData!O16,ApCalcData!O10,0)	0
+Q22	excel		Holy	=IF(ApCalcData!P16,ApCalcData!P10,0)	=IF(ApCalcData!P16,ApCalcData!P10,0)	0
+R22	excel		Holy	=IF(ApCalcData!Q16,ApCalcData!Q10,0)	=IF(ApCalcData!Q16,ApCalcData!Q10,0)	0.1011834044
+S22	excel		Holy	=IF(ApCalcData!R16,ApCalcData!R10,0)	=IF(ApCalcData!R16,ApCalcData!R10,0)	0
+S23	excel		-	=ApCalcData!$K$38*0.01	=ApCalcData!$K$38*0.01	0.04285714286
+S24	excel		-	=ApCalcData!$K$41*0.01	=ApCalcData!$K$41*0.01	0.04285714286
+S25	excel		-	=ApCalcData!$K$44*0.01	=ApCalcData!$K$44*0.01	0.07164449132
+E26	excel			=IF(ISBLANK(E27),,"Casting Bonus Type")	=IF(ISBLANK(E27),,"Casting Bonus Type")	
+J26	excel			=IF(ISBLANK(J27),,"Modifier")	=IF(ISBLANK(J27),,"Modifier")	
+S26	excel		-	=ApCalcData!$K$47*0.01	=ApCalcData!$K$47*0.01	0.07164449132
+E27	excel	E27		=IFERROR(IF(OR(INDEX(WeaponData!$A$1:$A56,MATCH($G$11,WeaponData!$B$1:$B56,0))="Glintstone Staff",INDEX(WeaponData!$A$1:$A56,MATCH($G$11,WeaponData!$B$1:$B56,0))="Sacred Seal"), | VLOOKUP($G$11,WeaponData!$B$2:$M56,MATCH("CastingBonusType",WeaponData!$1:$1,0)-1,False),),)	=IFERROR(IF(OR(INDEX(WeaponData!$A$1:$A56,MATCH($G$11,WeaponData!$B$1:$B56,0))="Glintstone Staff",INDEX(WeaponData!$A$1:$A56,MATCH($G$11,WeaponData!$B$1:$B56,0))="Sacred Seal"), | VLOOKUP($G$11,WeaponData!$B$2:$M56,MATCH("CastingBonusType",WeaponData!$1:$1,0)-1,False),),)	
+J27	excel	J27		=IFERROR(IF(OR(INDEX(WeaponData!$A$1:$A56,MATCH($G$11,WeaponData!$B$1:$B56,0))="Glintstone Staff",INDEX(WeaponData!$A$1:$A56,MATCH($G$11,WeaponData!$B$1:$B56,0))="Sacred Seal"), | VLOOKUP($G$11,WeaponData!$B$2:$M56,MATCH("CastingBonusRate",WeaponData!$1:$1,0)-1,False),),)	=IFERROR(IF(OR(INDEX(WeaponData!$A$1:$A56,MATCH($G$11,WeaponData!$B$1:$B56,0))="Glintstone Staff",INDEX(WeaponData!$A$1:$A56,MATCH($G$11,WeaponData!$B$1:$B56,0))="Sacred Seal"), | VLOOKUP($G$11,WeaponData!$B$2:$M56,MATCH("CastingBonusRate",WeaponData!$1:$1,0)-1,False),),)	
+F30	excel	F30:G30	Physical AP	={"",IF(ApCalcData!$E2=0,"-   ",ApCalcData!$E2*ApCalcData!$H2)}	={"",IF(ApCalcData!$E2=0,"-   ",ApCalcData!$E2*ApCalcData!$H2)}	
+J30	excel		Physical AP	=IF(NOT(ISNUMBER($G30)),$G30,$G30 | *IFERROR(IFS( | ApCalcData!$N37,ApCalcData!$O37, | ApCalcData!$Q37,ApCalcData!$R37), | ApCalcData!$N30+ApCalcData!$O30+ApCalcData!$P30+ApCalcData!$Q30+ApCalcData!$R30))	=IF(NOT(ISNUMBER($G30)),$G30,$G30 | *IFERROR(IFS( | ApCalcData!$N37,ApCalcData!$O37, | ApCalcData!$Q37,ApCalcData!$R37), | ApCalcData!$N30+ApCalcData!$O30+ApCalcData!$P30+ApCalcData!$Q30+ApCalcData!$R30))	3.457854434
+K30	excel		Total	=IF(NOT(ISNUMBER($G30)),$G30, | $G30+$J30)	=IF(NOT(ISNUMBER($G30)),$G30, | $G30+$J30)	23.45785443
+L30	excel		Rounded	=IF(NOT(ISNUMBER($G30)),$G30, | TRUNC($K30))	=IF(NOT(ISNUMBER($G30)),$G30, | TRUNC($K30))	23
+O30	excel		Physical AP	=IF(NOT(ISNUMBER($G30)),$G30, | ROUND($G30*ApCalcData!N30,3))	=IF(NOT(ISNUMBER($G30)),$G30, | ROUND($G30*ApCalcData!N30,3))	1.812
+P30	excel		Physical AP	=IF(NOT(ISNUMBER($G30)),$G30, | ROUND($G30*ApCalcData!O30,3))	=IF(NOT(ISNUMBER($G30)),$G30, | ROUND($G30*ApCalcData!O30,3))	1.646
+Q30	excel		Physical AP	=IF(NOT(ISNUMBER($G30)),$G30, | ROUND($G30*ApCalcData!P30,3))	=IF(NOT(ISNUMBER($G30)),$G30, | ROUND($G30*ApCalcData!P30,3))	0
+R30	excel		Physical AP	=IF(NOT(ISNUMBER($G30)),$G30, | ROUND($G30*ApCalcData!Q30,3))	=IF(NOT(ISNUMBER($G30)),$G30, | ROUND($G30*ApCalcData!Q30,3))	0
+S30	excel		Physical AP	=IF(NOT(ISNUMBER($G30)),$G30, | ROUND($G30*ApCalcData!R30,3))	=IF(NOT(ISNUMBER($G30)),$G30, | ROUND($G30*ApCalcData!R30,3))	0
+F31	excel	F31:G31	Magic AP	={"",IF(ApCalcData!$E3=0,"-   ",ApCalcData!$E3*ApCalcData!$H3)}	={"",IF(ApCalcData!$E3=0,"-   ",ApCalcData!$E3*ApCalcData!$H3)}	
+J31	excel		-	=IF(NOT(ISNUMBER($G31)),$G31,$G31 | *IFERROR(IFS( | ApCalcData!$N38,ApCalcData!$O38, | ApCalcData!$Q38,ApCalcData!$R38), | ApCalcData!$N31+ApCalcData!$O31+ApCalcData!$P31+ApCalcData!$Q31+ApCalcData!$R31))	=IF(NOT(ISNUMBER($G31)),$G31,$G31 | *IFERROR(IFS( | ApCalcData!$N38,ApCalcData!$O38, | ApCalcData!$Q38,ApCalcData!$R38), | ApCalcData!$N31+ApCalcData!$O31+ApCalcData!$P31+ApCalcData!$Q31+ApCalcData!$R31))	-   
+K31	excel		-	=IF(NOT(ISNUMBER($G31)),$G31, | $G31+$J31)	=IF(NOT(ISNUMBER($G31)),$G31, | $G31+$J31)	-   
+L31	excel		-	=IF(NOT(ISNUMBER($G31)),$G31, | TRUNC($K31))	=IF(NOT(ISNUMBER($G31)),$G31, | TRUNC($K31))	-   
+O31	excel		Magic AP	=IF(NOT(ISNUMBER($G31)),$G31, | ROUND($G31*ApCalcData!N31,3))	=IF(NOT(ISNUMBER($G31)),$G31, | ROUND($G31*ApCalcData!N31,3))	-   
+P31	excel		Magic AP	=IF(NOT(ISNUMBER($G31)),$G31, | ROUND($G31*ApCalcData!O31,3))	=IF(NOT(ISNUMBER($G31)),$G31, | ROUND($G31*ApCalcData!O31,3))	-   
+Q31	excel		Magic AP	=IF(NOT(ISNUMBER($G31)),$G31, | ROUND($G31*ApCalcData!P31,3))	=IF(NOT(ISNUMBER($G31)),$G31, | ROUND($G31*ApCalcData!P31,3))	-   
+R31	excel		Magic AP	=IF(NOT(ISNUMBER($G31)),$G31, | ROUND($G31*ApCalcData!Q31,3))	=IF(NOT(ISNUMBER($G31)),$G31, | ROUND($G31*ApCalcData!Q31,3))	-   
+S31	excel		Magic AP	=IF(NOT(ISNUMBER($G31)),$G31, | ROUND($G31*ApCalcData!R31,3))	=IF(NOT(ISNUMBER($G31)),$G31, | ROUND($G31*ApCalcData!R31,3))	-   
+F32	excel	F32:G32	Fire AP	={"",IF(ApCalcData!$E4=0,"-   ",ApCalcData!$E4*ApCalcData!$H4)}	={"",IF(ApCalcData!$E4=0,"-   ",ApCalcData!$E4*ApCalcData!$H4)}	
+J32	excel		-	=IF(NOT(ISNUMBER($G32)),$G32,$G32 | *IFERROR(IFS( | ApCalcData!$N39,ApCalcData!$O39, | ApCalcData!$Q39,ApCalcData!$R39), | ApCalcData!$N32+ApCalcData!$O32+ApCalcData!$P32+ApCalcData!$Q32+ApCalcData!$R32))	=IF(NOT(ISNUMBER($G32)),$G32,$G32 | *IFERROR(IFS( | ApCalcData!$N39,ApCalcData!$O39, | ApCalcData!$Q39,ApCalcData!$R39), | ApCalcData!$N32+ApCalcData!$O32+ApCalcData!$P32+ApCalcData!$Q32+ApCalcData!$R32))	-   
+K32	excel		-	=IF(NOT(ISNUMBER($G32)),$G32, | $G32+$J32)	=IF(NOT(ISNUMBER($G32)),$G32, | $G32+$J32)	-   
+L32	excel		-	=IF(NOT(ISNUMBER($G32)),$G32, | TRUNC($K32))	=IF(NOT(ISNUMBER($G32)),$G32, | TRUNC($K32))	-   
+O32	excel		Fire AP	=IF(NOT(ISNUMBER($G32)),$G32, | ROUND($G32*ApCalcData!N32,3))	=IF(NOT(ISNUMBER($G32)),$G32, | ROUND($G32*ApCalcData!N32,3))	-   
+P32	excel		Fire AP	=IF(NOT(ISNUMBER($G32)),$G32, | ROUND($G32*ApCalcData!O32,3))	=IF(NOT(ISNUMBER($G32)),$G32, | ROUND($G32*ApCalcData!O32,3))	-   
+Q32	excel		Fire AP	=IF(NOT(ISNUMBER($G32)),$G32, | ROUND($G32*ApCalcData!P32,3))	=IF(NOT(ISNUMBER($G32)),$G32, | ROUND($G32*ApCalcData!P32,3))	-   
+R32	excel		Fire AP	=IF(NOT(ISNUMBER($G32)),$G32, | ROUND($G32*ApCalcData!Q32,3))	=IF(NOT(ISNUMBER($G32)),$G32, | ROUND($G32*ApCalcData!Q32,3))	-   
+S32	excel		Fire AP	=IF(NOT(ISNUMBER($G32)),$G32, | ROUND($G32*ApCalcData!R32,3))	=IF(NOT(ISNUMBER($G32)),$G32, | ROUND($G32*ApCalcData!R32,3))	-   
+F33	excel	F33:G33	Lightning AP	={"",IF(ApCalcData!$E5=0,"-   ",ApCalcData!$E5*ApCalcData!$H5)}	={"",IF(ApCalcData!$E5=0,"-   ",ApCalcData!$E5*ApCalcData!$H5)}	
+J33	excel		-	=IF(NOT(ISNUMBER($G33)),$G33,$G33 | *IFERROR(IFS( | ApCalcData!$N40,ApCalcData!$O40, | ApCalcData!$Q40,ApCalcData!$R40), | ApCalcData!$N33+ApCalcData!$O33+ApCalcData!$P33+ApCalcData!$Q33+ApCalcData!$R33))	=IF(NOT(ISNUMBER($G33)),$G33,$G33 | *IFERROR(IFS( | ApCalcData!$N40,ApCalcData!$O40, | ApCalcData!$Q40,ApCalcData!$R40), | ApCalcData!$N33+ApCalcData!$O33+ApCalcData!$P33+ApCalcData!$Q33+ApCalcData!$R33))	-   
+K33	excel		-	=IF(NOT(ISNUMBER($G33)),$G33, | $G33+$J33)	=IF(NOT(ISNUMBER($G33)),$G33, | $G33+$J33)	-   
+L33	excel		-	=IF(NOT(ISNUMBER($G33)),$G33, | TRUNC($K33))	=IF(NOT(ISNUMBER($G33)),$G33, | TRUNC($K33))	-   
+O33	excel		Lightning AP	=IF(NOT(ISNUMBER($G33)),$G33, | ROUND($G33*ApCalcData!N33,3))	=IF(NOT(ISNUMBER($G33)),$G33, | ROUND($G33*ApCalcData!N33,3))	-   
+P33	excel		Lightning AP	=IF(NOT(ISNUMBER($G33)),$G33, | ROUND($G33*ApCalcData!O33,3))	=IF(NOT(ISNUMBER($G33)),$G33, | ROUND($G33*ApCalcData!O33,3))	-   
+Q33	excel		Lightning AP	=IF(NOT(ISNUMBER($G33)),$G33, | ROUND($G33*ApCalcData!P33,3))	=IF(NOT(ISNUMBER($G33)),$G33, | ROUND($G33*ApCalcData!P33,3))	-   
+R33	excel		Lightning AP	=IF(NOT(ISNUMBER($G33)),$G33, | ROUND($G33*ApCalcData!Q33,3))	=IF(NOT(ISNUMBER($G33)),$G33, | ROUND($G33*ApCalcData!Q33,3))	-   
+S33	excel		Lightning AP	=IF(NOT(ISNUMBER($G33)),$G33, | ROUND($G33*ApCalcData!R33,3))	=IF(NOT(ISNUMBER($G33)),$G33, | ROUND($G33*ApCalcData!R33,3))	-   
+F34	excel	F34:G34	Holy AP	={"",IF(ApCalcData!$E6=0,"-   ",ApCalcData!$E6*ApCalcData!$H6)}	={"",IF(ApCalcData!$E6=0,"-   ",ApCalcData!$E6*ApCalcData!$H6)}	
+J34	excel		-	=IF(NOT(ISNUMBER($G34)),$G34,$G34 | *IFERROR(IFS( | ApCalcData!$N41,ApCalcData!$O41, | ApCalcData!$Q41,ApCalcData!$R41), | ApCalcData!$N34+ApCalcData!$O34+ApCalcData!$P34+ApCalcData!$Q34+ApCalcData!$R34))	=IF(NOT(ISNUMBER($G34)),$G34,$G34 | *IFERROR(IFS( | ApCalcData!$N41,ApCalcData!$O41, | ApCalcData!$Q41,ApCalcData!$R41), | ApCalcData!$N34+ApCalcData!$O34+ApCalcData!$P34+ApCalcData!$Q34+ApCalcData!$R34))	-   
+K34	excel		-	=IF(NOT(ISNUMBER($G34)),$G34, | $G34+$J34)	=IF(NOT(ISNUMBER($G34)),$G34, | $G34+$J34)	-   
+L34	excel		-	=IF(NOT(ISNUMBER($G34)),$G34, | TRUNC($K34))	=IF(NOT(ISNUMBER($G34)),$G34, | TRUNC($K34))	-   
+O34	excel		Holy AP	=IF(NOT(ISNUMBER($G34)),$G34, | ROUND($G34*ApCalcData!N34,3))	=IF(NOT(ISNUMBER($G34)),$G34, | ROUND($G34*ApCalcData!N34,3))	-   
+P34	excel		Holy AP	=IF(NOT(ISNUMBER($G34)),$G34, | ROUND($G34*ApCalcData!O34,3))	=IF(NOT(ISNUMBER($G34)),$G34, | ROUND($G34*ApCalcData!O34,3))	-   
+Q34	excel		Holy AP	=IF(NOT(ISNUMBER($G34)),$G34, | ROUND($G34*ApCalcData!P34,3))	=IF(NOT(ISNUMBER($G34)),$G34, | ROUND($G34*ApCalcData!P34,3))	-   
+R34	excel		Holy AP	=IF(NOT(ISNUMBER($G34)),$G34, | ROUND($G34*ApCalcData!Q34,3))	=IF(NOT(ISNUMBER($G34)),$G34, | ROUND($G34*ApCalcData!Q34,3))	-   
+S34	excel		Holy AP	=IF(NOT(ISNUMBER($G34)),$G34, | ROUND($G34*ApCalcData!R34,3))	=IF(NOT(ISNUMBER($G34)),$G34, | ROUND($G34*ApCalcData!R34,3))	-   
+F35	excel	F35:G35	Physical SB	={"", | IFERROR(IFS( | ApCalcData!$B$12,100, | ApCalcData!$B$13,100 | ),"-   ") | }	={"", | IFERROR(IFS( | ApCalcData!$B$12,100, | ApCalcData!$B$13,100 | ),"-   ") | }	
+J35	excel		-	=IF(NOT(ISNUMBER($G35)),$G35,$G35 | *IFERROR(IFS( | ApCalcData!$N37,ApCalcData!$O37, | ApCalcData!$Q37,ApCalcData!$R37), | ApCalcData!$N30+ApCalcData!$O30+ApCalcData!$P30+ApCalcData!$Q30+ApCalcData!$R30))	=IF(NOT(ISNUMBER($G35)),$G35,$G35 | *IFERROR(IFS( | ApCalcData!$N37,ApCalcData!$O37, | ApCalcData!$Q37,ApCalcData!$R37), | ApCalcData!$N30+ApCalcData!$O30+ApCalcData!$P30+ApCalcData!$Q30+ApCalcData!$R30))	-   
+K35	excel		-	=IF(NOT(ISNUMBER($G35)),$G35, | $G35+$J35)	=IF(NOT(ISNUMBER($G35)),$G35, | $G35+$J35)	-   
+L35	excel		-	=IF(NOT(ISNUMBER($G35)),$G35, | TRUNC($K35))	=IF(NOT(ISNUMBER($G35)),$G35, | TRUNC($K35))	-   
+O35	excel		Physical SB	=IF(NOT(ISNUMBER($G35)),$G35, | ROUND($G35*ApCalcData!N30,3))	=IF(NOT(ISNUMBER($G35)),$G35, | ROUND($G35*ApCalcData!N30,3))	-   
+P35	excel		Physical SB	=IF(NOT(ISNUMBER($G35)),$G35, | ROUND($G35*ApCalcData!O30,3))	=IF(NOT(ISNUMBER($G35)),$G35, | ROUND($G35*ApCalcData!O30,3))	-   
+Q35	excel		Physical SB	=IF(NOT(ISNUMBER($G35)),$G35, | ROUND($G35*ApCalcData!P30,3))	=IF(NOT(ISNUMBER($G35)),$G35, | ROUND($G35*ApCalcData!P30,3))	-   
+R35	excel		Physical SB	=IF(NOT(ISNUMBER($G35)),$G35, | ROUND($G35*ApCalcData!Q30,3))	=IF(NOT(ISNUMBER($G35)),$G35, | ROUND($G35*ApCalcData!Q30,3))	-   
+S35	excel		Physical SB	=IF(NOT(ISNUMBER($G35)),$G35, | ROUND($G35*ApCalcData!R30,3))	=IF(NOT(ISNUMBER($G35)),$G35, | ROUND($G35*ApCalcData!R30,3))	-   
+F36	excel	F36:G36	Magic SB	={"", | IFERROR(IFS( | ApCalcData!$B$12,100, | ApCalcData!$B$13,100 | ),"-   ") | }	={"", | IFERROR(IFS( | ApCalcData!$B$12,100, | ApCalcData!$B$13,100 | ),"-   ") | }	
+J36	excel		-	=IF(NOT(ISNUMBER($G36)),$G36,$G36 | *IFERROR(IFS( | ApCalcData!$N38,ApCalcData!$O38, | ApCalcData!$Q38,ApCalcData!$R38), | ApCalcData!$N31+ApCalcData!$O31+ApCalcData!$P31+ApCalcData!$Q31+ApCalcData!$R31))	=IF(NOT(ISNUMBER($G36)),$G36,$G36 | *IFERROR(IFS( | ApCalcData!$N38,ApCalcData!$O38, | ApCalcData!$Q38,ApCalcData!$R38), | ApCalcData!$N31+ApCalcData!$O31+ApCalcData!$P31+ApCalcData!$Q31+ApCalcData!$R31))	-   
+K36	excel		-	=IF(NOT(ISNUMBER($G36)),$G36, | $G36+$J36)	=IF(NOT(ISNUMBER($G36)),$G36, | $G36+$J36)	-   
+L36	excel		-	=IF(NOT(ISNUMBER($G36)),$G36, | TRUNC($K36))	=IF(NOT(ISNUMBER($G36)),$G36, | TRUNC($K36))	-   
+O36	excel		Magic SB	=IF(NOT(ISNUMBER($G36)),$G36, | ROUND($G36*ApCalcData!N31,3))	=IF(NOT(ISNUMBER($G36)),$G36, | ROUND($G36*ApCalcData!N31,3))	-   
+P36	excel		Magic SB	=IF(NOT(ISNUMBER($G36)),$G36, | ROUND($G36*ApCalcData!O31,3))	=IF(NOT(ISNUMBER($G36)),$G36, | ROUND($G36*ApCalcData!O31,3))	-   
+Q36	excel		Magic SB	=IF(NOT(ISNUMBER($G36)),$G36, | ROUND($G36*ApCalcData!P31,3))	=IF(NOT(ISNUMBER($G36)),$G36, | ROUND($G36*ApCalcData!P31,3))	-   
+R36	excel		Magic SB	=IF(NOT(ISNUMBER($G36)),$G36, | ROUND($G36*ApCalcData!Q31,3))	=IF(NOT(ISNUMBER($G36)),$G36, | ROUND($G36*ApCalcData!Q31,3))	-   
+S36	excel		Magic SB	=IF(NOT(ISNUMBER($G36)),$G36, | ROUND($G36*ApCalcData!R31,3))	=IF(NOT(ISNUMBER($G36)),$G36, | ROUND($G36*ApCalcData!R31,3))	-   
+F37	excel	F37:G37	Fire SB	={"", | IFERROR(IFS( | ApCalcData!$B$12,100, | ApCalcData!$B$13,100 | ),"-   ") | }	={"", | IFERROR(IFS( | ApCalcData!$B$12,100, | ApCalcData!$B$13,100 | ),"-   ") | }	
+J37	excel		-	=IF(NOT(ISNUMBER($G37)),$G37,$G37 | *IFERROR(IFS( | ApCalcData!$N39,ApCalcData!$O39, | ApCalcData!$Q39,ApCalcData!$R39), | ApCalcData!$N32+ApCalcData!$O32+ApCalcData!$P32+ApCalcData!$Q32+ApCalcData!$R32))	=IF(NOT(ISNUMBER($G37)),$G37,$G37 | *IFERROR(IFS( | ApCalcData!$N39,ApCalcData!$O39, | ApCalcData!$Q39,ApCalcData!$R39), | ApCalcData!$N32+ApCalcData!$O32+ApCalcData!$P32+ApCalcData!$Q32+ApCalcData!$R32))	-   
+K37	excel		-	=IF(NOT(ISNUMBER($G37)),$G37, | $G37+$J37)	=IF(NOT(ISNUMBER($G37)),$G37, | $G37+$J37)	-   
+L37	excel		-	=IF(NOT(ISNUMBER($G37)),$G37, | TRUNC($K37))	=IF(NOT(ISNUMBER($G37)),$G37, | TRUNC($K37))	-   
+O37	excel		Fire SB	=IF(NOT(ISNUMBER($G37)),$G37, | ROUND($G37*ApCalcData!N32,3))	=IF(NOT(ISNUMBER($G37)),$G37, | ROUND($G37*ApCalcData!N32,3))	-   
+P37	excel		Fire SB	=IF(NOT(ISNUMBER($G37)),$G37, | ROUND($G37*ApCalcData!O32,3))	=IF(NOT(ISNUMBER($G37)),$G37, | ROUND($G37*ApCalcData!O32,3))	-   
+Q37	excel		Fire SB	=IF(NOT(ISNUMBER($G37)),$G37, | ROUND($G37*ApCalcData!P32,3))	=IF(NOT(ISNUMBER($G37)),$G37, | ROUND($G37*ApCalcData!P32,3))	-   
+R37	excel		Fire SB	=IF(NOT(ISNUMBER($G37)),$G37, | ROUND($G37*ApCalcData!Q32,3))	=IF(NOT(ISNUMBER($G37)),$G37, | ROUND($G37*ApCalcData!Q32,3))	-   
+S37	excel		Fire SB	=IF(NOT(ISNUMBER($G37)),$G37, | ROUND($G37*ApCalcData!R32,3))	=IF(NOT(ISNUMBER($G37)),$G37, | ROUND($G37*ApCalcData!R32,3))	-   
+F38	excel	F38:G38	Lightning SB	={"", | IFERROR(IFS( | ApCalcData!$B$12,100, | ApCalcData!$B$13,100 | ),"-   ") | }	={"", | IFERROR(IFS( | ApCalcData!$B$12,100, | ApCalcData!$B$13,100 | ),"-   ") | }	
+J38	excel		-	=IF(NOT(ISNUMBER($G38)),$G38,$G38 | *IFERROR(IFS( | ApCalcData!$N40,ApCalcData!$O40, | ApCalcData!$Q40,ApCalcData!$R40), | ApCalcData!$N33+ApCalcData!$O33+ApCalcData!$P33+ApCalcData!$Q33+ApCalcData!$R33))	=IF(NOT(ISNUMBER($G38)),$G38,$G38 | *IFERROR(IFS( | ApCalcData!$N40,ApCalcData!$O40, | ApCalcData!$Q40,ApCalcData!$R40), | ApCalcData!$N33+ApCalcData!$O33+ApCalcData!$P33+ApCalcData!$Q33+ApCalcData!$R33))	-   
+K38	excel		-	=IF(NOT(ISNUMBER($G38)),$G38, | $G38+$J38)	=IF(NOT(ISNUMBER($G38)),$G38, | $G38+$J38)	-   
+L38	excel		-	=IF(NOT(ISNUMBER($G38)),$G38, | TRUNC($K38))	=IF(NOT(ISNUMBER($G38)),$G38, | TRUNC($K38))	-   
+O38	excel		Lightning SB	=IF(NOT(ISNUMBER($G38)),$G38, | ROUND($G38*ApCalcData!N33,3))	=IF(NOT(ISNUMBER($G38)),$G38, | ROUND($G38*ApCalcData!N33,3))	-   
+P38	excel		Lightning SB	=IF(NOT(ISNUMBER($G38)),$G38, | ROUND($G38*ApCalcData!O33,3))	=IF(NOT(ISNUMBER($G38)),$G38, | ROUND($G38*ApCalcData!O33,3))	-   
+Q38	excel		Lightning SB	=IF(NOT(ISNUMBER($G38)),$G38, | ROUND($G38*ApCalcData!P33,3))	=IF(NOT(ISNUMBER($G38)),$G38, | ROUND($G38*ApCalcData!P33,3))	-   
+R38	excel		Lightning SB	=IF(NOT(ISNUMBER($G38)),$G38, | ROUND($G38*ApCalcData!Q33,3))	=IF(NOT(ISNUMBER($G38)),$G38, | ROUND($G38*ApCalcData!Q33,3))	-   
+S38	excel		Lightning SB	=IF(NOT(ISNUMBER($G38)),$G38, | ROUND($G38*ApCalcData!R33,3))	=IF(NOT(ISNUMBER($G38)),$G38, | ROUND($G38*ApCalcData!R33,3))	-   
+F39	excel	F39:G39	Holy SB	={"", | IFERROR(IFS( | ApCalcData!$B$12,100, | ApCalcData!$B$13,100 | ),"-   ") | }	={"", | IFERROR(IFS( | ApCalcData!$B$12,100, | ApCalcData!$B$13,100 | ),"-   ") | }	
+J39	excel		-	=IF(NOT(ISNUMBER($G39)),$G39,$G39 | *IFERROR(IFS( | ApCalcData!$N41,ApCalcData!$O41, | ApCalcData!$Q41,ApCalcData!$R41), | ApCalcData!$N34+ApCalcData!$O34+ApCalcData!$P34+ApCalcData!$Q34+ApCalcData!$R34))	=IF(NOT(ISNUMBER($G39)),$G39,$G39 | *IFERROR(IFS( | ApCalcData!$N41,ApCalcData!$O41, | ApCalcData!$Q41,ApCalcData!$R41), | ApCalcData!$N34+ApCalcData!$O34+ApCalcData!$P34+ApCalcData!$Q34+ApCalcData!$R34))	-   
+K39	excel		-	=IF(NOT(ISNUMBER($G39)),$G39, | $G39+$J39)	=IF(NOT(ISNUMBER($G39)),$G39, | $G39+$J39)	-   
+L39	excel		-	=IF(NOT(ISNUMBER($G39)),$G39, | TRUNC($K39))	=IF(NOT(ISNUMBER($G39)),$G39, | TRUNC($K39))	-   
+O39	excel		Holy SB	=IF(NOT(ISNUMBER($G39)),$G39, | ROUND($G39*ApCalcData!N34,3))	=IF(NOT(ISNUMBER($G39)),$G39, | ROUND($G39*ApCalcData!N34,3))	-   
+P39	excel		Holy SB	=IF(NOT(ISNUMBER($G39)),$G39, | ROUND($G39*ApCalcData!O34,3))	=IF(NOT(ISNUMBER($G39)),$G39, | ROUND($G39*ApCalcData!O34,3))	-   
+Q39	excel		Holy SB	=IF(NOT(ISNUMBER($G39)),$G39, | ROUND($G39*ApCalcData!P34,3))	=IF(NOT(ISNUMBER($G39)),$G39, | ROUND($G39*ApCalcData!P34,3))	-   
+R39	excel		Holy SB	=IF(NOT(ISNUMBER($G39)),$G39, | ROUND($G39*ApCalcData!Q34,3))	=IF(NOT(ISNUMBER($G39)),$G39, | ROUND($G39*ApCalcData!Q34,3))	-   
+S39	excel		Holy SB	=IF(NOT(ISNUMBER($G39)),$G39, | ROUND($G39*ApCalcData!R34,3))	=IF(NOT(ISNUMBER($G39)),$G39, | ROUND($G39*ApCalcData!R34,3))	-   
+F40	excel	F40:G40	Poison	={"", | IF(AND(ApCalcData!$E32=0,ApCalcData!$H32=0,ApCalcData!$E40=0),"-   ", | IF(ApCalcData!$E32=0,ApCalcData!$H32,ApCalcData!$E32)+ApCalcData!$E40) | }	={"", | IF(AND(ApCalcData!$E32=0,ApCalcData!$H32=0,ApCalcData!$E40=0),"-   ", | IF(ApCalcData!$E32=0,ApCalcData!$H32,ApCalcData!$E32)+ApCalcData!$E40) | }	
+J40	excel		-	=IF(NOT(ISNUMBER($G40)),$G40,$G40 | *IFERROR(IFS( | ApCalcData!$N$43,ApCalcData!$O$43), | (ApCalcData!$E$12*ApCalcData!$H$12*0.01)*(ApCalcData!$K$38*0.01)))	=IF(NOT(ISNUMBER($G40)),$G40,$G40 | *IFERROR(IFS( | ApCalcData!$N$43,ApCalcData!$O$43), | (ApCalcData!$E$12*ApCalcData!$H$12*0.01)*(ApCalcData!$K$38*0.01)))	-   
+K40	excel		-	=IF(NOT(ISNUMBER($G40)),$G40, | TRUNC($G40+$J40))	=IF(NOT(ISNUMBER($G40)),$G40, | TRUNC($G40+$J40))	-   
+L40	excel		-	=IF(NOT(ISNUMBER($G40)),$G40, | TRUNC($K40))	=IF(NOT(ISNUMBER($G40)),$G40, | TRUNC($K40))	-   
+O40	excel		Poison	="-   "	="-   "	-   
+P40	excel		Poison	="-   "	="-   "	-   
+Q40	excel		Poison	="-   "	="-   "	-   
+R40	excel		Poison	="-   "	="-   "	-   
+S40	excel		Poison	=IF(NOT(ISNUMBER($G40)),$G40, | ROUND($G40*S$13*S23,3))	=IF(NOT(ISNUMBER($G40)),$G40, | ROUND($G40*S$13*S23,3))	-   
+F41	excel	F41:G41	Scarlet Rot	={"", | IF(AND(ApCalcData!$E33=0,ApCalcData!$H33=0,ApCalcData!$E41=0),"-   ", | IF(ApCalcData!$E33=0,ApCalcData!$H33,ApCalcData!$E33)+ApCalcData!$E41) | }	={"", | IF(AND(ApCalcData!$E33=0,ApCalcData!$H33=0,ApCalcData!$E41=0),"-   ", | IF(ApCalcData!$E33=0,ApCalcData!$H33,ApCalcData!$E33)+ApCalcData!$E41) | }	
+J41	excel		-	=IF(NOT(ISNUMBER($G41)),$G41,0)	=IF(NOT(ISNUMBER($G41)),$G41,0)	-   
+K41	excel		-	=IF(NOT(ISNUMBER($G41)),$G41, | TRUNC($G41+$J41))	=IF(NOT(ISNUMBER($G41)),$G41, | TRUNC($G41+$J41))	-   
+L41	excel		-	=IF(NOT(ISNUMBER($G41)),$G41, | TRUNC($K41))	=IF(NOT(ISNUMBER($G41)),$G41, | TRUNC($K41))	-   
+O41	excel		Scarlet Rot	="-   "	="-   "	-   
+P41	excel		Scarlet Rot	="-   "	="-   "	-   
+Q41	excel		Scarlet Rot	="-   "	="-   "	-   
+R41	excel		Scarlet Rot	="-   "	="-   "	-   
+S41	excel		Scarlet Rot	=IF(NOT(ISNUMBER($G41)),$G41,0)	=IF(NOT(ISNUMBER($G41)),$G41,0)	-   
+F42	excel	F42:G42	Bleed	={"", | IF(AND(ApCalcData!$E34=0,ApCalcData!$H34=0,ApCalcData!$E42=0),"-   ", | IF(ApCalcData!$E34=0,ApCalcData!$H34,ApCalcData!$E34)+ApCalcData!$E42) | }	={"", | IF(AND(ApCalcData!$E34=0,ApCalcData!$H34=0,ApCalcData!$E42=0),"-   ", | IF(ApCalcData!$E34=0,ApCalcData!$H34,ApCalcData!$E34)+ApCalcData!$E42) | }	
+J42	excel		-	=IF(NOT(ISNUMBER($G42)),$G42,$G42 | *IFERROR(IFS( | ApCalcData!$N$43,ApCalcData!$O$43), | (ApCalcData!$E$12*ApCalcData!$H$12*0.01)*(ApCalcData!$K$41*0.01)))	=IF(NOT(ISNUMBER($G42)),$G42,$G42 | *IFERROR(IFS( | ApCalcData!$N$43,ApCalcData!$O$43), | (ApCalcData!$E$12*ApCalcData!$H$12*0.01)*(ApCalcData!$K$41*0.01)))	-   
+K42	excel		-	=IF(NOT(ISNUMBER($G42)),$G42, | TRUNC($G42+$J42))	=IF(NOT(ISNUMBER($G42)),$G42, | TRUNC($G42+$J42))	-   
+L42	excel		-	=IF(NOT(ISNUMBER($G42)),$G42, | TRUNC($K42))	=IF(NOT(ISNUMBER($G42)),$G42, | TRUNC($K42))	-   
+O42	excel		Bleed	="-   "	="-   "	-   
+P42	excel		Bleed	="-   "	="-   "	-   
+Q42	excel		Bleed	="-   "	="-   "	-   
+R42	excel		Bleed	="-   "	="-   "	-   
+S42	excel		Bleed	=IF(NOT(ISNUMBER($G42)),$G42, | ROUND($G42*S$13*S24,3))	=IF(NOT(ISNUMBER($G42)),$G42, | ROUND($G42*S$13*S24,3))	-   
+F43	excel	F43:G43	Frost	={"", | IF(AND(ApCalcData!$E35=0,ApCalcData!$H35=0,ApCalcData!$E43=0),"-   ", | IF(ApCalcData!$E35=0,ApCalcData!$H35,ApCalcData!$E35)+ApCalcData!$E43) | }	={"", | IF(AND(ApCalcData!$E35=0,ApCalcData!$H35=0,ApCalcData!$E43=0),"-   ", | IF(ApCalcData!$E35=0,ApCalcData!$H35,ApCalcData!$E35)+ApCalcData!$E43) | }	
+J43	excel		-	=IF(NOT(ISNUMBER($G43)),$G43,0)	=IF(NOT(ISNUMBER($G43)),$G43,0)	-   
+K43	excel		-	=IF(NOT(ISNUMBER($G43)),$G43, | TRUNC($G43+$J43))	=IF(NOT(ISNUMBER($G43)),$G43, | TRUNC($G43+$J43))	-   
+L43	excel		-	=IF(NOT(ISNUMBER($G43)),$G43, | TRUNC($K43))	=IF(NOT(ISNUMBER($G43)),$G43, | TRUNC($K43))	-   
+O43	excel		Frost	="-   "	="-   "	-   
+P43	excel		Frost	="-   "	="-   "	-   
+Q43	excel		Frost	="-   "	="-   "	-   
+R43	excel		Frost	="-   "	="-   "	-   
+S43	excel		Frost	=IF(NOT(ISNUMBER($G43)),$G43,0)	=IF(NOT(ISNUMBER($G43)),$G43,0)	-   
+F44	excel	F44:G44	Sleep	={"", | IF(AND(ApCalcData!$E36=0,ApCalcData!$H36=0,ApCalcData!$E44=0),"-   ", | IF(ApCalcData!$E36=0,ApCalcData!$H36,ApCalcData!$E36)+ApCalcData!$E44) | }	={"", | IF(AND(ApCalcData!$E36=0,ApCalcData!$H36=0,ApCalcData!$E44=0),"-   ", | IF(ApCalcData!$E36=0,ApCalcData!$H36,ApCalcData!$E36)+ApCalcData!$E44) | }	
+J44	excel		-	=IF(NOT(ISNUMBER($G44)),$G44,$G44 | *IFERROR(IFS( | ApCalcData!$N$43,ApCalcData!$O$43), | (ApCalcData!$E$12*ApCalcData!$H$12*0.01)*(ApCalcData!$K$44*0.01)))	=IF(NOT(ISNUMBER($G44)),$G44,$G44 | *IFERROR(IFS( | ApCalcData!$N$43,ApCalcData!$O$43), | (ApCalcData!$E$12*ApCalcData!$H$12*0.01)*(ApCalcData!$K$44*0.01)))	-   
+K44	excel		-	=IF(NOT(ISNUMBER($G44)),$G44, | TRUNC($G44+$J44))	=IF(NOT(ISNUMBER($G44)),$G44, | TRUNC($G44+$J44))	-   
+L44	excel		-	=IF(NOT(ISNUMBER($G44)),$G44, | TRUNC($K44))	=IF(NOT(ISNUMBER($G44)),$G44, | TRUNC($K44))	-   
+O44	excel		Sleep	="-   "	="-   "	-   
+P44	excel		Sleep	="-   "	="-   "	-   
+Q44	excel		Sleep	="-   "	="-   "	-   
+R44	excel		Sleep	="-   "	="-   "	-   
+S44	excel		Sleep	=IF(NOT(ISNUMBER($G44)),$G44, | ROUND($G44*S$13*S25,3))	=IF(NOT(ISNUMBER($G44)),$G44, | ROUND($G44*S$13*S25,3))	-   
+F45	excel	F45:G45	Madness	={"", | IF(AND(ApCalcData!$E37=0,ApCalcData!$H37=0,ApCalcData!$E45=0),"-   ", | IF(ApCalcData!$E37=0,ApCalcData!$H37,ApCalcData!$E37)+ApCalcData!$E45) | }	={"", | IF(AND(ApCalcData!$E37=0,ApCalcData!$H37=0,ApCalcData!$E45=0),"-   ", | IF(ApCalcData!$E37=0,ApCalcData!$H37,ApCalcData!$E37)+ApCalcData!$E45) | }	
+J45	excel		-	=IF(NOT(ISNUMBER($G45)),$G45,$G45 | *IFERROR(IFS( | ApCalcData!$N$43,ApCalcData!$O$43), | (ApCalcData!$E$12*ApCalcData!$H$12*0.01)*(ApCalcData!$K$47*0.01)))	=IF(NOT(ISNUMBER($G45)),$G45,$G45 | *IFERROR(IFS( | ApCalcData!$N$43,ApCalcData!$O$43), | (ApCalcData!$E$12*ApCalcData!$H$12*0.01)*(ApCalcData!$K$47*0.01)))	-   
+K45	excel		-	=IF(NOT(ISNUMBER($G45)),$G45, | TRUNC($G45+$J45))	=IF(NOT(ISNUMBER($G45)),$G45, | TRUNC($G45+$J45))	-   
+L45	excel		-	=IF(NOT(ISNUMBER($G45)),$G45, | TRUNC($K45))	=IF(NOT(ISNUMBER($G45)),$G45, | TRUNC($K45))	-   
+O45	excel		Madness	="-   "	="-   "	-   
+P45	excel		Madness	="-   "	="-   "	-   
+Q45	excel		Madness	="-   "	="-   "	-   
+R45	excel		Madness	="-   "	="-   "	-   
+S45	excel		Madness	=IF(NOT(ISNUMBER($G45)),$G45, | ROUND($G45*S$13*S26,3))	=IF(NOT(ISNUMBER($G45)),$G45, | ROUND($G45*S$13*S26,3))	-   
+K46	excel		Total AR	=SUM(K30:K34)	=SUM(K30:K34)	23.45785443
+L46	excel		Total AR	=TRUNC(SUM(K30:K34))	=TRUNC(SUM(K30:K34))	23
+E50	excel		Physical	=MIN(ApCalcData!$E$14*ApCalcData!$H$14,100)	=MIN(ApCalcData!$E$14*ApCalcData!$H$14,100)	30
+G50	excel		Magic	=MIN(ApCalcData!$E$15*ApCalcData!$H$15,100)	=MIN(ApCalcData!$E$15*ApCalcData!$H$15,100)	20
+J50	excel		Fire	=MIN(ApCalcData!$E$16*ApCalcData!$H$16,100)	=MIN(ApCalcData!$E$16*ApCalcData!$H$16,100)	20
+K50	excel		Lightning	=MIN(ApCalcData!$E$17*ApCalcData!$H$17,100)	=MIN(ApCalcData!$E$17*ApCalcData!$H$17,100)	20
+L50	excel		Holy	=MIN(ApCalcData!$E$18*ApCalcData!$H$18,100)	=MIN(ApCalcData!$E$18*ApCalcData!$H$18,100)	20
+N50	excel		Poison	=TRUNC(ApCalcData!$E$19*ApCalcData!$H$19)	=TRUNC(ApCalcData!$E$19*ApCalcData!$H$19)	10
+O50	excel		Scarlet Rot	=TRUNC(ApCalcData!$E$20*ApCalcData!$H$20)	=TRUNC(ApCalcData!$E$20*ApCalcData!$H$20)	10
+P50	excel		Bleed	=TRUNC(ApCalcData!$E$21*ApCalcData!$H$21)	=TRUNC(ApCalcData!$E$21*ApCalcData!$H$21)	10
+Q50	excel		Frost	=TRUNC(ApCalcData!$E$22*ApCalcData!$H$22)	=TRUNC(ApCalcData!$E$22*ApCalcData!$H$22)	10
+R50	excel		Sleep	=TRUNC(ApCalcData!$E$23*ApCalcData!$H$23)	=TRUNC(ApCalcData!$E$23*ApCalcData!$H$23)	0
+S50	excel		Madness	=TRUNC(ApCalcData!$E$24*ApCalcData!$H$24)	=TRUNC(ApCalcData!$E$24*ApCalcData!$H$24)	0
+E52	excel		Guard Boost	=TRUNC(ApCalcData!$E$26*ApCalcData!$H$26)	=TRUNC(ApCalcData!$E$26*ApCalcData!$H$26)	10
+N52	excel		Death	=TRUNC(ApCalcData!$E$25*ApCalcData!$H$25)	=TRUNC(ApCalcData!$E$25*ApCalcData!$H$25)	10

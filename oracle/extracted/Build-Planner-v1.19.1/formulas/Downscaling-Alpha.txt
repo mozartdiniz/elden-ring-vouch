@@ -1,0 +1,771 @@
+SHEET: Downscaling (Alpha)
+WORKBOOK: Copy of ER - Build Planner v1.19.1.xlsx
+USED RANGE: A1:O34
+NONEMPTY CELLS: 211
+FORMULA CELLS: 53
+
+This file is for an LLM that must rebuild these calculations in another language. Treat formulas as the source of truth. Cached/fallback values are only for checking a port. Skip spill_cache cells; they are not logic.
+
+VISIBILITY: hidden
+STATIC / INPUT / LABEL CELLS (158):
+coord	value
+M1	reinforce
+N1	lowerRange
+O1	upperRange
+B2	host level
+C2	125.0
+E2	summonDataCoopMatchingWepLevelMul
+F2	10.0
+I2	CalcCorrectGraph
+J2	host_max
+K2	summon_min
+M2	0.0
+N2	0.0
+O2	3.0
+B3	host weapon level
+C3	25.0
+E3	machingLevelWhiteSignUpperRel
+F3	10.0
+H3	Multiplayer Correction - HP
+I3	300.0
+M3	1.0
+N3	0.0
+O3	4.0
+E4	machingLevelWhiteSignUpperAbs
+F4	10.0
+H4	Multiplayer Correction - FP
+I4	301.0
+M4	2.0
+N4	0.0
+O4	5.0
+B5	phantom level
+C5	713.0
+E5	machingLevelRedSignUpperRel
+F5	10.0
+H5	Multiplayer Correction - Stamina
+I5	302.0
+M5	3.0
+N5	0.0
+O5	6.0
+B6	phantom weapon level
+C6	25.0
+E6	machingLevelRedSignUpperAbs
+F6	10.0
+H6	Multiplayer Correction - Defense
+I6	303.0
+M6	4.0
+N6	1.0
+O6	7.0
+E7	summonDataCoopMatchingSpiritAshLevelMul
+F7	25.0
+H7	Multiplayer Correction - Resistance
+I7	304.0
+M7	5.0
+N7	2.0
+O7	8.0
+B8	host_maxScore
+H8	Multiplayer Correction - Regular Weapons Damage
+I8	310.0
+M8	6.0
+N8	3.0
+O8	10.0
+B9	summon_minScore
+H9	Multiplayer Correction - Daggers/Throwing Blades Damage
+I9	320.0
+M9	7.0
+N9	4.0
+O9	11.0
+H10	Multiplayer Correction - Colossal Weapons/Greatshields Damage
+I10	330.0
+M10	8.0
+N10	5.0
+O10	12.0
+B11	hostLevel_upperRange
+H11	Multiplayer Correction - Bows/Bolts/Arrows Damage
+I11	340.0
+M11	9.0
+N11	6.0
+O11	13.0
+B12	hostWeapon_upperRange
+H12	Multiplayer Correction - Greatbows/Ballistas Damage
+I12	341.0
+M12	10.0
+N12	6.0
+O12	14.0
+B13	outsideLevelRange
+H13	Multiplayer Correction - Crossbows Damage
+I13	342.0
+M13	11.0
+N13	7.0
+O13	15.0
+B14	outsideWeaponRange
+H14	Multiplayer Correction - Staves Damage
+I14	350.0
+M14	12.0
+N14	8.0
+O14	17.0
+H15	Multiplayer Correction - Seals Damage
+I15	351.0
+M15	13.0
+N15	9.0
+O15	18.0
+B16	HP Multiplier
+H16	Multiplayer Correction - Throwing Items Damage
+I16	400.0
+M16	14.0
+N16	10.0
+O16	19.0
+B17	FP Multiplier
+H17	Multiplayer Correction - Consumable Items Damage
+I17	401.0
+M17	15.0
+N17	11.0
+O17	20.0
+B18	Stamina Multiplier
+M18	16.0
+N18	12.0
+O18	21.0
+B19	Defense Multiplier
+M19	17.0
+N19	12.0
+O19	22.0
+B20	Resistance Multiplier
+M20	18.0
+N20	13.0
+O20	24.0
+B21	General Dmg Mult
+M21	19.0
+N21	14.0
+O21	25.0
+B22	Dagger/Throwing Blade Dmg Mult
+M22	20.0
+N22	15.0
+O22	25.0
+B23	Colossal/Greatshield Dmg Mult
+M23	21.0
+N23	16.0
+O23	25.0
+B24	Bow/Arrow/Bolt Dmg Mult
+M24	22.0
+N24	17.0
+O24	25.0
+B25	Greatbow/Ballista Dmg Mult
+M25	23.0
+N25	18.0
+O25	25.0
+B26	Crossbow Dmg Mult
+M26	24.0
+N26	18.0
+O26	25.0
+B27	Staff Dmg Mult
+M27	25.0
+N27	19.0
+O27	25.0
+B28	Seal Dmg Mult
+B29	Throwing Item Dmg Mult
+B30	Consumable Item Dmg Mult
+B32	Colossal Exclusions
+B33	Bloodfiend's Arm
+B34	Anvil Hammer
+
+CROSS-SHEET REFERENCES: (none)
+FORMULA KINDS: excel=53
+UNIQUE PATTERNS: 49
+
+========================================================================
+FORMULA PATTERNS (fill-down compressed)
+{r} is the row of the cell. Port the template once and apply per row.
+========================================================================
+
+PATTERN 1  kind=excel  array=False  J1
+  template: =C8
+  e.g. J1: =C8  cached=397.5
+
+PATTERN 2  kind=excel  array=False  K1
+  template: =C9
+  e.g. K1: =C9  cached=963
+
+PATTERN 3  kind=excel  array=False  J3
+  context_label: Multiplayer Correction - HP
+  template: =IF(J$1<=1,1,
+IF(J$1<76,((J$1-1)/75)^1*0+1,
+IF(J$1<220,((J$1-76)/144)^1*1+1,
+IF(J$1<350,((J$1-220)/130)^1*0.3+2,
+IF(J$1<999,((J$1-350)/649)^1*0.2+2.3,
+2.5)))))
+  e.g. J3: =IF(J$1<=1,1,
+IF(J$1<76,((J$1-1)/75)^1*0+1,
+IF(J$1<220,((J$1-76)/144)^1*1+1,
+IF(J$1<350,((J$1-220)/130)^1*0.3+2,
+IF(J$1<999,((J$1-350)/649)^1*0.2+2.3,
+2.5)))))  cached=2.314637904
+
+PATTERN 4  kind=excel  array=False  K3
+  context_label: Multiplayer Correction - HP
+  template: =IF(K$1<=1,1,
+IF(K$1<76,((K$1-1)/75)^1*0+1,
+IF(K$1<220,((K$1-76)/144)^1*1+1,
+IF(K$1<350,((K$1-220)/130)^1*0.3+2,
+IF(K$1<999,((K$1-350)/649)^1*0.2+2.3,
+2.5)))))
+  e.g. K3: =IF(K$1<=1,1,
+IF(K$1<76,((K$1-1)/75)^1*0+1,
+IF(K$1<220,((K$1-76)/144)^1*1+1,
+IF(K$1<350,((K$1-220)/130)^1*0.3+2,
+IF(K$1<999,((K$1-350)/649)^1*0.2+2.3,
+2.5)))))  cached=2.488906009
+
+PATTERN 5  kind=excel  array=False  J4
+  context_label: Multiplayer Correction - FP
+  template: =IF(J$1<=1,1,
+IF(J$1<76,((J$1-1)/75)^1*0+1,
+IF(J$1<220,((J$1-76)/144)^1*0.1+1,
+IF(J$1<350,((J$1-220)/130)^1*0.15+1.1,
+IF(J$1<999,((J$1-350)/649)^1*0.75+1.25,
+2)))))
+  e.g. J4: =IF(J$1<=1,1,
+IF(J$1<76,((J$1-1)/75)^1*0+1,
+IF(J$1<220,((J$1-76)/144)^1*0.1+1,
+IF(J$1<350,((J$1-220)/130)^1*0.15+1.1,
+IF(J$1<999,((J$1-350)/649)^1*0.75+1.25,
+2)))))  cached=1.304892142
+
+PATTERN 6  kind=excel  array=False  K4
+  context_label: Multiplayer Correction - FP
+  template: =IF(K$1<=1,1,
+IF(K$1<76,((K$1-1)/75)^1*0+1,
+IF(K$1<220,((K$1-76)/144)^1*0.1+1,
+IF(K$1<350,((K$1-220)/130)^1*0.15+1.1,
+IF(K$1<999,((K$1-350)/649)^1*0.75+1.25,
+2)))))
+  e.g. K4: =IF(K$1<=1,1,
+IF(K$1<76,((K$1-1)/75)^1*0+1,
+IF(K$1<220,((K$1-76)/144)^1*0.1+1,
+IF(K$1<350,((K$1-220)/130)^1*0.15+1.1,
+IF(K$1<999,((K$1-350)/649)^1*0.75+1.25,
+2)))))  cached=1.958397535
+
+PATTERN 7  kind=excel  array=False  J5
+  context_label: Multiplayer Correction - Stamina
+  template: =IF(J$1<=1,1,
+IF(J$1<76,((J$1-1)/75)^1*0+1,
+IF(J$1<220,((J$1-76)/144)^1*0.1+1,
+IF(J$1<350,((J$1-220)/130)^1*0.15+1.1,
+IF(J$1<999,((J$1-350)/649)^1*0.15+1.25,
+1.4)))))
+  e.g. J5: =IF(J$1<=1,1,
+IF(J$1<76,((J$1-1)/75)^1*0+1,
+IF(J$1<220,((J$1-76)/144)^1*0.1+1,
+IF(J$1<350,((J$1-220)/130)^1*0.15+1.1,
+IF(J$1<999,((J$1-350)/649)^1*0.15+1.25,
+1.4)))))  cached=1.260978428
+
+PATTERN 8  kind=excel  array=False  K5
+  context_label: Multiplayer Correction - Stamina
+  template: =IF(K$1<=1,1,
+IF(K$1<76,((K$1-1)/75)^1*0+1,
+IF(K$1<220,((K$1-76)/144)^1*0.1+1,
+IF(K$1<350,((K$1-220)/130)^1*0.15+1.1,
+IF(K$1<999,((K$1-350)/649)^1*0.15+1.25,
+1.4)))))
+  e.g. K5: =IF(K$1<=1,1,
+IF(K$1<76,((K$1-1)/75)^1*0+1,
+IF(K$1<220,((K$1-76)/144)^1*0.1+1,
+IF(K$1<350,((K$1-220)/130)^1*0.15+1.1,
+IF(K$1<999,((K$1-350)/649)^1*0.15+1.25,
+1.4)))))  cached=1.391679507
+
+PATTERN 9  kind=excel  array=False  J6
+  context_label: Multiplayer Correction - Defense
+  template: =IF(J$1<=1,93,
+IF(J$1<76,((J$1-1)/75)^1*21+93,
+IF(J$1<220,((J$1-76)/144)^1*36+114,
+IF(J$1<350,((J$1-220)/130)^1*15+150,
+IF(J$1<999,((J$1-350)/649)^1*85+165,
+250)))))
+  e.g. J6: =IF(J$1<=1,93,
+IF(J$1<76,((J$1-1)/75)^1*21+93,
+IF(J$1<220,((J$1-76)/144)^1*36+114,
+IF(J$1<350,((J$1-220)/130)^1*15+150,
+IF(J$1<999,((J$1-350)/649)^1*85+165,
+250)))))  cached=171.2211094
+
+PATTERN 10  kind=excel  array=False  K6
+  context_label: Multiplayer Correction - Defense
+  template: =IF(K$1<=1,93,
+IF(K$1<76,((K$1-1)/75)^1*21+93,
+IF(K$1<220,((K$1-76)/144)^1*36+114,
+IF(K$1<350,((K$1-220)/130)^1*15+150,
+IF(K$1<999,((K$1-350)/649)^1*85+165,
+250)))))
+  e.g. K6: =IF(K$1<=1,93,
+IF(K$1<76,((K$1-1)/75)^1*21+93,
+IF(K$1<220,((K$1-76)/144)^1*36+114,
+IF(K$1<350,((K$1-220)/130)^1*15+150,
+IF(K$1<999,((K$1-350)/649)^1*85+165,
+250)))))  cached=245.2850539
+
+PATTERN 11  kind=excel  array=False  J7
+  context_label: Multiplayer Correction - Resistance
+  template: =IF(J$1<=1,100,
+IF(J$1<76,((J$1-1)/75)^1*20+100,
+IF(J$1<220,((J$1-76)/144)^1*40+120,
+IF(J$1<350,((J$1-220)/130)^1*40+160,
+IF(J$1<999,((J$1-350)/649)^1*50+200,
+250)))))
+  e.g. J7: =IF(J$1<=1,100,
+IF(J$1<76,((J$1-1)/75)^1*20+100,
+IF(J$1<220,((J$1-76)/144)^1*40+120,
+IF(J$1<350,((J$1-220)/130)^1*40+160,
+IF(J$1<999,((J$1-350)/649)^1*50+200,
+250)))))  cached=203.6594761
+
+PATTERN 12  kind=excel  array=False  K7
+  context_label: Multiplayer Correction - Resistance
+  template: =IF(K$1<=1,100,
+IF(K$1<76,((K$1-1)/75)^1*20+100,
+IF(K$1<220,((K$1-76)/144)^1*40+120,
+IF(K$1<350,((K$1-220)/130)^1*40+160,
+IF(K$1<999,((K$1-350)/649)^1*50+200,
+250)))))
+  e.g. K7: =IF(K$1<=1,100,
+IF(K$1<76,((K$1-1)/75)^1*20+100,
+IF(K$1<220,((K$1-76)/144)^1*40+120,
+IF(K$1<350,((K$1-220)/130)^1*40+160,
+IF(K$1<999,((K$1-350)/649)^1*50+200,
+250)))))  cached=247.2265023
+
+PATTERN 13  kind=excel  array=False  C8
+  context_label: host_maxScore
+  template: =C2*(1+$F$3/100)
++$F$4
++C3*$F$2
+  e.g. C8: =C2*(1+$F$3/100)
++$F$4
++C3*$F$2  cached=397.5
+
+PATTERN 14  kind=excel  array=False  J8:J10 (2 cells)
+  context_label: Multiplayer Correction - Regular Weapons Damage
+  template: =IF(J$1<=1,1,
+IF(J$1<30,((J$1-1)/29)^1*0+1,
+IF(J$1<215,((J$1-30)/185)^1*3+1,
+IF(J$1<333,((J$1-215)/118)^1*1+4,
+IF(J$1<902,((J$1-333)/569)^1*0+5,
+5)))))
+  e.g. J8: =IF(J$1<=1,1,
+IF(J$1<30,((J$1-1)/29)^1*0+1,
+IF(J$1<215,((J$1-30)/185)^1*3+1,
+IF(J$1<333,((J$1-215)/118)^1*1+4,
+IF(J$1<902,((J$1-333)/569)^1*0+5,
+5)))))  cached=5
+  e.g. J10: =IF(J$1<=1,1,
+IF(J$1<30,((J$1-1)/29)^1*0+1,
+IF(J$1<215,((J$1-30)/185)^1*3+1,
+IF(J$1<333,((J$1-215)/118)^1*1+4,
+IF(J$1<902,((J$1-333)/569)^1*0+5,
+5)))))  cached=5
+
+PATTERN 15  kind=excel  array=False  K8:K10 (2 cells)
+  context_label: Multiplayer Correction - Regular Weapons Damage
+  template: =IF(K$1<=1,1,
+IF(K$1<30,((K$1-1)/29)^1*0+1,
+IF(K$1<215,((K$1-30)/185)^1*3+1,
+IF(K$1<333,((K$1-215)/118)^1*1+4,
+IF(K$1<902,((K$1-333)/569)^1*0+5,
+5)))))
+  e.g. K8: =IF(K$1<=1,1,
+IF(K$1<30,((K$1-1)/29)^1*0+1,
+IF(K$1<215,((K$1-30)/185)^1*3+1,
+IF(K$1<333,((K$1-215)/118)^1*1+4,
+IF(K$1<902,((K$1-333)/569)^1*0+5,
+5)))))  cached=5
+  e.g. K10: =IF(K$1<=1,1,
+IF(K$1<30,((K$1-1)/29)^1*0+1,
+IF(K$1<215,((K$1-30)/185)^1*3+1,
+IF(K$1<333,((K$1-215)/118)^1*1+4,
+IF(K$1<902,((K$1-333)/569)^1*0+5,
+5)))))  cached=5
+
+PATTERN 16  kind=excel  array=False  C9
+  context_label: summon_minScore
+  template: =C5
++C6*$F$2
+  e.g. C9: =C5
++C6*$F$2  cached=963
+
+PATTERN 17  kind=excel  array=False  J9
+  context_label: Multiplayer Correction - Daggers/Throwing Blades Damage
+  template: =IF(J$1<=1,1,
+IF(J$1<30,((J$1-1)/29)^1*0+1,
+IF(J$1<215,((J$1-30)/185)^1*4+1,
+IF(J$1<333,((J$1-215)/118)^1*1+5,
+IF(J$1<902,((J$1-333)/569)^1*0+6,
+6)))))
+  e.g. J9: =IF(J$1<=1,1,
+IF(J$1<30,((J$1-1)/29)^1*0+1,
+IF(J$1<215,((J$1-30)/185)^1*4+1,
+IF(J$1<333,((J$1-215)/118)^1*1+5,
+IF(J$1<902,((J$1-333)/569)^1*0+6,
+6)))))  cached=6
+
+PATTERN 18  kind=excel  array=False  K9
+  context_label: Multiplayer Correction - Daggers/Throwing Blades Damage
+  template: =IF(K$1<=1,1,
+IF(K$1<30,((K$1-1)/29)^1*0+1,
+IF(K$1<215,((K$1-30)/185)^1*4+1,
+IF(K$1<333,((K$1-215)/118)^1*1+5,
+IF(K$1<902,((K$1-333)/569)^1*0+6,
+6)))))
+  e.g. K9: =IF(K$1<=1,1,
+IF(K$1<30,((K$1-1)/29)^1*0+1,
+IF(K$1<215,((K$1-30)/185)^1*4+1,
+IF(K$1<333,((K$1-215)/118)^1*1+5,
+IF(K$1<902,((K$1-333)/569)^1*0+6,
+6)))))  cached=6
+
+PATTERN 19  kind=excel  array=False  C11
+  context_label: hostLevel_upperRange
+  template: =ROUND(IF(C2>=306,713,
+MIN((C2*1.1+10)-0.01,305)),0)
+  e.g. C11: =ROUND(IF(C2>=306,713,
+MIN((C2*1.1+10)-0.01,305)),0)  cached=147
+
+PATTERN 20  kind=excel  array=False  J11
+  context_label: Multiplayer Correction - Bows/Bolts/Arrows Damage
+  template: =IF(J$1<=1,1,
+IF(J$1<30,((J$1-1)/29)^1*0+1,
+IF(J$1<215,((J$1-30)/185)^1*2+1,
+IF(J$1<333,((J$1-215)/118)^1*0.5+3,
+IF(J$1<902,((J$1-333)/569)^1*0+3.5,
+3.5)))))
+  e.g. J11: =IF(J$1<=1,1,
+IF(J$1<30,((J$1-1)/29)^1*0+1,
+IF(J$1<215,((J$1-30)/185)^1*2+1,
+IF(J$1<333,((J$1-215)/118)^1*0.5+3,
+IF(J$1<902,((J$1-333)/569)^1*0+3.5,
+3.5)))))  cached=3.5
+
+PATTERN 21  kind=excel  array=False  K11
+  context_label: Multiplayer Correction - Bows/Bolts/Arrows Damage
+  template: =IF(K$1<=1,1,
+IF(K$1<30,((K$1-1)/29)^1*0+1,
+IF(K$1<215,((K$1-30)/185)^1*2+1,
+IF(K$1<333,((K$1-215)/118)^1*0.5+3,
+IF(K$1<902,((K$1-333)/569)^1*0+3.5,
+3.5)))))
+  e.g. K11: =IF(K$1<=1,1,
+IF(K$1<30,((K$1-1)/29)^1*0+1,
+IF(K$1<215,((K$1-30)/185)^1*2+1,
+IF(K$1<333,((K$1-215)/118)^1*0.5+3,
+IF(K$1<902,((K$1-333)/569)^1*0+3.5,
+3.5)))))  cached=3.5
+
+PATTERN 22  kind=excel  array=False  C12
+  context_label: hostWeapon_upperRange
+  template: =VLOOKUP(C3,$M:$O,3,False)
+  e.g. C12: =VLOOKUP(C3,$M:$O,3,False)  cached=25
+
+PATTERN 23  kind=excel  array=False  J12
+  context_label: Multiplayer Correction - Greatbows/Ballistas Damage
+  template: =IF(J$1<=1,1,
+IF(J$1<30,((J$1-1)/29)^1*0+1,
+IF(J$1<215,((J$1-30)/185)^1*3.5+1,
+IF(J$1<333,((J$1-215)/118)^1*0.5+4.5,
+IF(J$1<902,((J$1-333)/569)^1*0+5,
+5)))))
+  e.g. J12: =IF(J$1<=1,1,
+IF(J$1<30,((J$1-1)/29)^1*0+1,
+IF(J$1<215,((J$1-30)/185)^1*3.5+1,
+IF(J$1<333,((J$1-215)/118)^1*0.5+4.5,
+IF(J$1<902,((J$1-333)/569)^1*0+5,
+5)))))  cached=5
+
+PATTERN 24  kind=excel  array=False  K12
+  context_label: Multiplayer Correction - Greatbows/Ballistas Damage
+  template: =IF(K$1<=1,1,
+IF(K$1<30,((K$1-1)/29)^1*0+1,
+IF(K$1<215,((K$1-30)/185)^1*3.5+1,
+IF(K$1<333,((K$1-215)/118)^1*0.5+4.5,
+IF(K$1<902,((K$1-333)/569)^1*0+5,
+5)))))
+  e.g. K12: =IF(K$1<=1,1,
+IF(K$1<30,((K$1-1)/29)^1*0+1,
+IF(K$1<215,((K$1-30)/185)^1*3.5+1,
+IF(K$1<333,((K$1-215)/118)^1*0.5+4.5,
+IF(K$1<902,((K$1-333)/569)^1*0+5,
+5)))))  cached=5
+
+PATTERN 25  kind=excel  array=False  C13
+  context_label: outsideLevelRange
+  template: =C5>C11
+  e.g. C13: =C5>C11  cached=True
+
+PATTERN 26  kind=excel  array=False  J13
+  context_label: Multiplayer Correction - Crossbows Damage
+  template: =IF(J$1<=1,1,
+IF(J$1<30,((J$1-1)/29)^1*0+1,
+IF(J$1<100,((J$1-30)/70)^1*0.8+1,
+IF(J$1<200,((J$1-100)/100)^1*0.8+1.8,
+IF(J$1<902,((J$1-200)/702)^1*0+2.6,
+2.6)))))
+  e.g. J13: =IF(J$1<=1,1,
+IF(J$1<30,((J$1-1)/29)^1*0+1,
+IF(J$1<100,((J$1-30)/70)^1*0.8+1,
+IF(J$1<200,((J$1-100)/100)^1*0.8+1.8,
+IF(J$1<902,((J$1-200)/702)^1*0+2.6,
+2.6)))))  cached=2.6
+
+PATTERN 27  kind=excel  array=False  K13
+  context_label: Multiplayer Correction - Crossbows Damage
+  template: =IF(K$1<=1,1,
+IF(K$1<30,((K$1-1)/29)^1*0+1,
+IF(K$1<100,((K$1-30)/70)^1*0.8+1,
+IF(K$1<200,((K$1-100)/100)^1*0.8+1.8,
+IF(K$1<902,((K$1-200)/702)^1*0+2.6,
+2.6)))))
+  e.g. K13: =IF(K$1<=1,1,
+IF(K$1<30,((K$1-1)/29)^1*0+1,
+IF(K$1<100,((K$1-30)/70)^1*0.8+1,
+IF(K$1<200,((K$1-100)/100)^1*0.8+1.8,
+IF(K$1<902,((K$1-200)/702)^1*0+2.6,
+2.6)))))  cached=2.6
+
+PATTERN 28  kind=excel  array=False  C14
+  context_label: outsideWeaponRange
+  template: =C6>C12
+  e.g. C14: =C6>C12  cached=False
+
+PATTERN 29  kind=excel  array=False  J14:J15 (2 cells)
+  context_label: Multiplayer Correction - Staves Damage
+  template: =IF(J$1<=1,1,
+IF(J$1<30,((J$1-1)/29)^1*0+1,
+IF(J$1<215,((J$1-30)/185)^1*1.5+1,
+IF(J$1<262,((J$1-215)/47)^1*0.5+2.5,
+IF(J$1<902,((J$1-262)/640)^1*0+3,
+3)))))
+  e.g. J14: =IF(J$1<=1,1,
+IF(J$1<30,((J$1-1)/29)^1*0+1,
+IF(J$1<215,((J$1-30)/185)^1*1.5+1,
+IF(J$1<262,((J$1-215)/47)^1*0.5+2.5,
+IF(J$1<902,((J$1-262)/640)^1*0+3,
+3)))))  cached=3
+  e.g. J15: =IF(J$1<=1,1,
+IF(J$1<30,((J$1-1)/29)^1*0+1,
+IF(J$1<215,((J$1-30)/185)^1*1.5+1,
+IF(J$1<262,((J$1-215)/47)^1*0.5+2.5,
+IF(J$1<902,((J$1-262)/640)^1*0+3,
+3)))))  cached=3
+
+PATTERN 30  kind=excel  array=False  K14:K15 (2 cells)
+  context_label: Multiplayer Correction - Staves Damage
+  template: =IF(K$1<=1,1,
+IF(K$1<30,((K$1-1)/29)^1*0+1,
+IF(K$1<215,((K$1-30)/185)^1*1.5+1,
+IF(K$1<262,((K$1-215)/47)^1*0.5+2.5,
+IF(K$1<902,((K$1-262)/640)^1*0+3,
+3)))))
+  e.g. K14: =IF(K$1<=1,1,
+IF(K$1<30,((K$1-1)/29)^1*0+1,
+IF(K$1<215,((K$1-30)/185)^1*1.5+1,
+IF(K$1<262,((K$1-215)/47)^1*0.5+2.5,
+IF(K$1<902,((K$1-262)/640)^1*0+3,
+3)))))  cached=3
+  e.g. K15: =IF(K$1<=1,1,
+IF(K$1<30,((K$1-1)/29)^1*0+1,
+IF(K$1<215,((K$1-30)/185)^1*1.5+1,
+IF(K$1<262,((K$1-215)/47)^1*0.5+2.5,
+IF(K$1<902,((K$1-262)/640)^1*0+3,
+3)))))  cached=3
+
+PATTERN 31  kind=excel  array=False  C16
+  context_label: HP Multiplier
+  template: =J3/K3
+  e.g. C16: =J3/K3  cached=0.9299820467
+
+PATTERN 32  kind=excel  array=False  J16
+  context_label: Multiplayer Correction - Throwing Items Damage
+  template: =IF(J$1<=1,1,
+IF(J$1<30,((J$1-1)/29)^1*0+1,
+IF(J$1<215,((J$1-30)/185)^1*2.5+1,
+IF(J$1<333,((J$1-215)/118)^1*0+3.5,
+IF(J$1<902,((J$1-333)/569)^1*0+3.5,
+3.5)))))
+  e.g. J16: =IF(J$1<=1,1,
+IF(J$1<30,((J$1-1)/29)^1*0+1,
+IF(J$1<215,((J$1-30)/185)^1*2.5+1,
+IF(J$1<333,((J$1-215)/118)^1*0+3.5,
+IF(J$1<902,((J$1-333)/569)^1*0+3.5,
+3.5)))))  cached=3.5
+
+PATTERN 33  kind=excel  array=False  K16
+  context_label: Multiplayer Correction - Throwing Items Damage
+  template: =IF(K$1<=1,1,
+IF(K$1<30,((K$1-1)/29)^1*0+1,
+IF(K$1<215,((K$1-30)/185)^1*2.5+1,
+IF(K$1<333,((K$1-215)/118)^1*0+3.5,
+IF(K$1<902,((K$1-333)/569)^1*0+3.5,
+3.5)))))
+  e.g. K16: =IF(K$1<=1,1,
+IF(K$1<30,((K$1-1)/29)^1*0+1,
+IF(K$1<215,((K$1-30)/185)^1*2.5+1,
+IF(K$1<333,((K$1-215)/118)^1*0+3.5,
+IF(K$1<902,((K$1-333)/569)^1*0+3.5,
+3.5)))))  cached=3.5
+
+PATTERN 34  kind=excel  array=False  C17
+  context_label: FP Multiplier
+  template: =J4/K4
+  e.g. C17: =J4/K4  cached=0.6663060582
+
+PATTERN 35  kind=excel  array=False  J17
+  context_label: Multiplayer Correction - Consumable Items Damage
+  template: =IF(J$1<=1,1,
+IF(J$1<30,((J$1-1)/29)^1*0+1,
+IF(J$1<215,((J$1-30)/185)^1*1+1,
+IF(J$1<333,((J$1-215)/118)^1*0.5+2,
+IF(J$1<902,((J$1-333)/569)^1*0+2.5,
+2.5)))))
+  e.g. J17: =IF(J$1<=1,1,
+IF(J$1<30,((J$1-1)/29)^1*0+1,
+IF(J$1<215,((J$1-30)/185)^1*1+1,
+IF(J$1<333,((J$1-215)/118)^1*0.5+2,
+IF(J$1<902,((J$1-333)/569)^1*0+2.5,
+2.5)))))  cached=2.5
+
+PATTERN 36  kind=excel  array=False  K17
+  context_label: Multiplayer Correction - Consumable Items Damage
+  template: =IF(K$1<=1,1,
+IF(K$1<30,((K$1-1)/29)^1*0+1,
+IF(K$1<215,((K$1-30)/185)^1*1+1,
+IF(K$1<333,((K$1-215)/118)^1*0.5+2,
+IF(K$1<902,((K$1-333)/569)^1*0+2.5,
+2.5)))))
+  e.g. K17: =IF(K$1<=1,1,
+IF(K$1<30,((K$1-1)/29)^1*0+1,
+IF(K$1<215,((K$1-30)/185)^1*1+1,
+IF(K$1<333,((K$1-215)/118)^1*0.5+2,
+IF(K$1<902,((K$1-333)/569)^1*0+2.5,
+2.5)))))  cached=2.5
+
+PATTERN 37  kind=excel  array=False  C18
+  context_label: Stamina Multiplier
+  template: =J5/K5
+  e.g. C18: =J5/K5  cached=0.9060839238
+
+PATTERN 38  kind=excel  array=False  C19
+  context_label: Defense Multiplier
+  template: =J6/K6
+  e.g. C19: =J6/K6  cached=0.6980495006
+
+PATTERN 39  kind=excel  array=False  C20
+  context_label: Resistance Multiplier
+  template: =J7/K7
+  e.g. C20: =J7/K7  cached=0.8237768775
+
+PATTERN 40  kind=excel  array=False  C21
+  context_label: General Dmg Mult
+  template: =J8/K8
+  e.g. C21: =J8/K8  cached=1
+
+PATTERN 41  kind=excel  array=False  C22
+  context_label: Dagger/Throwing Blade Dmg Mult
+  template: =J9/K9
+  e.g. C22: =J9/K9  cached=1
+
+PATTERN 42  kind=excel  array=False  C23
+  context_label: Colossal/Greatshield Dmg Mult
+  template: =J10/K10
+  e.g. C23: =J10/K10  cached=1
+
+PATTERN 43  kind=excel  array=False  C24
+  context_label: Bow/Arrow/Bolt Dmg Mult
+  template: =J11/K11
+  e.g. C24: =J11/K11  cached=1
+
+PATTERN 44  kind=excel  array=False  C25
+  context_label: Greatbow/Ballista Dmg Mult
+  template: =J12/K12
+  e.g. C25: =J12/K12  cached=1
+
+PATTERN 45  kind=excel  array=False  C26
+  context_label: Crossbow Dmg Mult
+  template: =J13/K13
+  e.g. C26: =J13/K13  cached=1
+
+PATTERN 46  kind=excel  array=False  C27
+  context_label: Staff Dmg Mult
+  template: =J14/K14
+  e.g. C27: =J14/K14  cached=1
+
+PATTERN 47  kind=excel  array=False  C28
+  context_label: Seal Dmg Mult
+  template: =J15/K15
+  e.g. C28: =J15/K15  cached=1
+
+PATTERN 48  kind=excel  array=False  C29
+  context_label: Throwing Item Dmg Mult
+  template: =J16/K16
+  e.g. C29: =J16/K16  cached=1
+
+PATTERN 49  kind=excel  array=False  C30
+  context_label: Consumable Item Dmg Mult
+  template: =J17/K17
+  e.g. C30: =J17/K17  cached=1
+
+========================================================================
+ALL FORMULAS
+========================================================================
+cell	kind	array_ref	label	logic	stored	cached
+J1	excel			=C8	=C8	397.5
+K1	excel			=C9	=C9	963
+J3	excel		Multiplayer Correction - HP	=IF(J$1<=1,1, | IF(J$1<76,((J$1-1)/75)^1*0+1, | IF(J$1<220,((J$1-76)/144)^1*1+1, | IF(J$1<350,((J$1-220)/130)^1*0.3+2, | IF(J$1<999,((J$1-350)/649)^1*0.2+2.3, | 2.5)))))	=IF(J$1<=1,1, | IF(J$1<76,((J$1-1)/75)^1*0+1, | IF(J$1<220,((J$1-76)/144)^1*1+1, | IF(J$1<350,((J$1-220)/130)^1*0.3+2, | IF(J$1<999,((J$1-350)/649)^1*0.2+2.3, | 2.5)))))	2.314637904
+K3	excel		Multiplayer Correction - HP	=IF(K$1<=1,1, | IF(K$1<76,((K$1-1)/75)^1*0+1, | IF(K$1<220,((K$1-76)/144)^1*1+1, | IF(K$1<350,((K$1-220)/130)^1*0.3+2, | IF(K$1<999,((K$1-350)/649)^1*0.2+2.3, | 2.5)))))	=IF(K$1<=1,1, | IF(K$1<76,((K$1-1)/75)^1*0+1, | IF(K$1<220,((K$1-76)/144)^1*1+1, | IF(K$1<350,((K$1-220)/130)^1*0.3+2, | IF(K$1<999,((K$1-350)/649)^1*0.2+2.3, | 2.5)))))	2.488906009
+J4	excel		Multiplayer Correction - FP	=IF(J$1<=1,1, | IF(J$1<76,((J$1-1)/75)^1*0+1, | IF(J$1<220,((J$1-76)/144)^1*0.1+1, | IF(J$1<350,((J$1-220)/130)^1*0.15+1.1, | IF(J$1<999,((J$1-350)/649)^1*0.75+1.25, | 2)))))	=IF(J$1<=1,1, | IF(J$1<76,((J$1-1)/75)^1*0+1, | IF(J$1<220,((J$1-76)/144)^1*0.1+1, | IF(J$1<350,((J$1-220)/130)^1*0.15+1.1, | IF(J$1<999,((J$1-350)/649)^1*0.75+1.25, | 2)))))	1.304892142
+K4	excel		Multiplayer Correction - FP	=IF(K$1<=1,1, | IF(K$1<76,((K$1-1)/75)^1*0+1, | IF(K$1<220,((K$1-76)/144)^1*0.1+1, | IF(K$1<350,((K$1-220)/130)^1*0.15+1.1, | IF(K$1<999,((K$1-350)/649)^1*0.75+1.25, | 2)))))	=IF(K$1<=1,1, | IF(K$1<76,((K$1-1)/75)^1*0+1, | IF(K$1<220,((K$1-76)/144)^1*0.1+1, | IF(K$1<350,((K$1-220)/130)^1*0.15+1.1, | IF(K$1<999,((K$1-350)/649)^1*0.75+1.25, | 2)))))	1.958397535
+J5	excel		Multiplayer Correction - Stamina	=IF(J$1<=1,1, | IF(J$1<76,((J$1-1)/75)^1*0+1, | IF(J$1<220,((J$1-76)/144)^1*0.1+1, | IF(J$1<350,((J$1-220)/130)^1*0.15+1.1, | IF(J$1<999,((J$1-350)/649)^1*0.15+1.25, | 1.4)))))	=IF(J$1<=1,1, | IF(J$1<76,((J$1-1)/75)^1*0+1, | IF(J$1<220,((J$1-76)/144)^1*0.1+1, | IF(J$1<350,((J$1-220)/130)^1*0.15+1.1, | IF(J$1<999,((J$1-350)/649)^1*0.15+1.25, | 1.4)))))	1.260978428
+K5	excel		Multiplayer Correction - Stamina	=IF(K$1<=1,1, | IF(K$1<76,((K$1-1)/75)^1*0+1, | IF(K$1<220,((K$1-76)/144)^1*0.1+1, | IF(K$1<350,((K$1-220)/130)^1*0.15+1.1, | IF(K$1<999,((K$1-350)/649)^1*0.15+1.25, | 1.4)))))	=IF(K$1<=1,1, | IF(K$1<76,((K$1-1)/75)^1*0+1, | IF(K$1<220,((K$1-76)/144)^1*0.1+1, | IF(K$1<350,((K$1-220)/130)^1*0.15+1.1, | IF(K$1<999,((K$1-350)/649)^1*0.15+1.25, | 1.4)))))	1.391679507
+J6	excel		Multiplayer Correction - Defense	=IF(J$1<=1,93, | IF(J$1<76,((J$1-1)/75)^1*21+93, | IF(J$1<220,((J$1-76)/144)^1*36+114, | IF(J$1<350,((J$1-220)/130)^1*15+150, | IF(J$1<999,((J$1-350)/649)^1*85+165, | 250)))))	=IF(J$1<=1,93, | IF(J$1<76,((J$1-1)/75)^1*21+93, | IF(J$1<220,((J$1-76)/144)^1*36+114, | IF(J$1<350,((J$1-220)/130)^1*15+150, | IF(J$1<999,((J$1-350)/649)^1*85+165, | 250)))))	171.2211094
+K6	excel		Multiplayer Correction - Defense	=IF(K$1<=1,93, | IF(K$1<76,((K$1-1)/75)^1*21+93, | IF(K$1<220,((K$1-76)/144)^1*36+114, | IF(K$1<350,((K$1-220)/130)^1*15+150, | IF(K$1<999,((K$1-350)/649)^1*85+165, | 250)))))	=IF(K$1<=1,93, | IF(K$1<76,((K$1-1)/75)^1*21+93, | IF(K$1<220,((K$1-76)/144)^1*36+114, | IF(K$1<350,((K$1-220)/130)^1*15+150, | IF(K$1<999,((K$1-350)/649)^1*85+165, | 250)))))	245.2850539
+J7	excel		Multiplayer Correction - Resistance	=IF(J$1<=1,100, | IF(J$1<76,((J$1-1)/75)^1*20+100, | IF(J$1<220,((J$1-76)/144)^1*40+120, | IF(J$1<350,((J$1-220)/130)^1*40+160, | IF(J$1<999,((J$1-350)/649)^1*50+200, | 250)))))	=IF(J$1<=1,100, | IF(J$1<76,((J$1-1)/75)^1*20+100, | IF(J$1<220,((J$1-76)/144)^1*40+120, | IF(J$1<350,((J$1-220)/130)^1*40+160, | IF(J$1<999,((J$1-350)/649)^1*50+200, | 250)))))	203.6594761
+K7	excel		Multiplayer Correction - Resistance	=IF(K$1<=1,100, | IF(K$1<76,((K$1-1)/75)^1*20+100, | IF(K$1<220,((K$1-76)/144)^1*40+120, | IF(K$1<350,((K$1-220)/130)^1*40+160, | IF(K$1<999,((K$1-350)/649)^1*50+200, | 250)))))	=IF(K$1<=1,100, | IF(K$1<76,((K$1-1)/75)^1*20+100, | IF(K$1<220,((K$1-76)/144)^1*40+120, | IF(K$1<350,((K$1-220)/130)^1*40+160, | IF(K$1<999,((K$1-350)/649)^1*50+200, | 250)))))	247.2265023
+C8	excel		host_maxScore	=C2*(1+$F$3/100) | +$F$4 | +C3*$F$2	=C2*(1+$F$3/100) | +$F$4 | +C3*$F$2	397.5
+J8	excel		Multiplayer Correction - Regular Weapons Damage	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<215,((J$1-30)/185)^1*3+1, | IF(J$1<333,((J$1-215)/118)^1*1+4, | IF(J$1<902,((J$1-333)/569)^1*0+5, | 5)))))	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<215,((J$1-30)/185)^1*3+1, | IF(J$1<333,((J$1-215)/118)^1*1+4, | IF(J$1<902,((J$1-333)/569)^1*0+5, | 5)))))	5
+K8	excel		Multiplayer Correction - Regular Weapons Damage	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<215,((K$1-30)/185)^1*3+1, | IF(K$1<333,((K$1-215)/118)^1*1+4, | IF(K$1<902,((K$1-333)/569)^1*0+5, | 5)))))	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<215,((K$1-30)/185)^1*3+1, | IF(K$1<333,((K$1-215)/118)^1*1+4, | IF(K$1<902,((K$1-333)/569)^1*0+5, | 5)))))	5
+C9	excel		summon_minScore	=C5 | +C6*$F$2	=C5 | +C6*$F$2	963
+J9	excel		Multiplayer Correction - Daggers/Throwing Blades Damage	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<215,((J$1-30)/185)^1*4+1, | IF(J$1<333,((J$1-215)/118)^1*1+5, | IF(J$1<902,((J$1-333)/569)^1*0+6, | 6)))))	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<215,((J$1-30)/185)^1*4+1, | IF(J$1<333,((J$1-215)/118)^1*1+5, | IF(J$1<902,((J$1-333)/569)^1*0+6, | 6)))))	6
+K9	excel		Multiplayer Correction - Daggers/Throwing Blades Damage	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<215,((K$1-30)/185)^1*4+1, | IF(K$1<333,((K$1-215)/118)^1*1+5, | IF(K$1<902,((K$1-333)/569)^1*0+6, | 6)))))	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<215,((K$1-30)/185)^1*4+1, | IF(K$1<333,((K$1-215)/118)^1*1+5, | IF(K$1<902,((K$1-333)/569)^1*0+6, | 6)))))	6
+J10	excel		Multiplayer Correction - Colossal Weapons/Greatshields Damage	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<215,((J$1-30)/185)^1*3+1, | IF(J$1<333,((J$1-215)/118)^1*1+4, | IF(J$1<902,((J$1-333)/569)^1*0+5, | 5)))))	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<215,((J$1-30)/185)^1*3+1, | IF(J$1<333,((J$1-215)/118)^1*1+4, | IF(J$1<902,((J$1-333)/569)^1*0+5, | 5)))))	5
+K10	excel		Multiplayer Correction - Colossal Weapons/Greatshields Damage	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<215,((K$1-30)/185)^1*3+1, | IF(K$1<333,((K$1-215)/118)^1*1+4, | IF(K$1<902,((K$1-333)/569)^1*0+5, | 5)))))	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<215,((K$1-30)/185)^1*3+1, | IF(K$1<333,((K$1-215)/118)^1*1+4, | IF(K$1<902,((K$1-333)/569)^1*0+5, | 5)))))	5
+C11	excel		hostLevel_upperRange	=ROUND(IF(C2>=306,713, | MIN((C2*1.1+10)-0.01,305)),0)	=ROUND(IF(C2>=306,713, | MIN((C2*1.1+10)-0.01,305)),0)	147
+J11	excel		Multiplayer Correction - Bows/Bolts/Arrows Damage	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<215,((J$1-30)/185)^1*2+1, | IF(J$1<333,((J$1-215)/118)^1*0.5+3, | IF(J$1<902,((J$1-333)/569)^1*0+3.5, | 3.5)))))	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<215,((J$1-30)/185)^1*2+1, | IF(J$1<333,((J$1-215)/118)^1*0.5+3, | IF(J$1<902,((J$1-333)/569)^1*0+3.5, | 3.5)))))	3.5
+K11	excel		Multiplayer Correction - Bows/Bolts/Arrows Damage	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<215,((K$1-30)/185)^1*2+1, | IF(K$1<333,((K$1-215)/118)^1*0.5+3, | IF(K$1<902,((K$1-333)/569)^1*0+3.5, | 3.5)))))	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<215,((K$1-30)/185)^1*2+1, | IF(K$1<333,((K$1-215)/118)^1*0.5+3, | IF(K$1<902,((K$1-333)/569)^1*0+3.5, | 3.5)))))	3.5
+C12	excel		hostWeapon_upperRange	=VLOOKUP(C3,$M:$O,3,False)	=VLOOKUP(C3,$M:$O,3,False)	25
+J12	excel		Multiplayer Correction - Greatbows/Ballistas Damage	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<215,((J$1-30)/185)^1*3.5+1, | IF(J$1<333,((J$1-215)/118)^1*0.5+4.5, | IF(J$1<902,((J$1-333)/569)^1*0+5, | 5)))))	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<215,((J$1-30)/185)^1*3.5+1, | IF(J$1<333,((J$1-215)/118)^1*0.5+4.5, | IF(J$1<902,((J$1-333)/569)^1*0+5, | 5)))))	5
+K12	excel		Multiplayer Correction - Greatbows/Ballistas Damage	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<215,((K$1-30)/185)^1*3.5+1, | IF(K$1<333,((K$1-215)/118)^1*0.5+4.5, | IF(K$1<902,((K$1-333)/569)^1*0+5, | 5)))))	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<215,((K$1-30)/185)^1*3.5+1, | IF(K$1<333,((K$1-215)/118)^1*0.5+4.5, | IF(K$1<902,((K$1-333)/569)^1*0+5, | 5)))))	5
+C13	excel		outsideLevelRange	=C5>C11	=C5>C11	TRUE
+J13	excel		Multiplayer Correction - Crossbows Damage	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<100,((J$1-30)/70)^1*0.8+1, | IF(J$1<200,((J$1-100)/100)^1*0.8+1.8, | IF(J$1<902,((J$1-200)/702)^1*0+2.6, | 2.6)))))	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<100,((J$1-30)/70)^1*0.8+1, | IF(J$1<200,((J$1-100)/100)^1*0.8+1.8, | IF(J$1<902,((J$1-200)/702)^1*0+2.6, | 2.6)))))	2.6
+K13	excel		Multiplayer Correction - Crossbows Damage	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<100,((K$1-30)/70)^1*0.8+1, | IF(K$1<200,((K$1-100)/100)^1*0.8+1.8, | IF(K$1<902,((K$1-200)/702)^1*0+2.6, | 2.6)))))	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<100,((K$1-30)/70)^1*0.8+1, | IF(K$1<200,((K$1-100)/100)^1*0.8+1.8, | IF(K$1<902,((K$1-200)/702)^1*0+2.6, | 2.6)))))	2.6
+C14	excel		outsideWeaponRange	=C6>C12	=C6>C12	FALSE
+J14	excel		Multiplayer Correction - Staves Damage	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<215,((J$1-30)/185)^1*1.5+1, | IF(J$1<262,((J$1-215)/47)^1*0.5+2.5, | IF(J$1<902,((J$1-262)/640)^1*0+3, | 3)))))	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<215,((J$1-30)/185)^1*1.5+1, | IF(J$1<262,((J$1-215)/47)^1*0.5+2.5, | IF(J$1<902,((J$1-262)/640)^1*0+3, | 3)))))	3
+K14	excel		Multiplayer Correction - Staves Damage	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<215,((K$1-30)/185)^1*1.5+1, | IF(K$1<262,((K$1-215)/47)^1*0.5+2.5, | IF(K$1<902,((K$1-262)/640)^1*0+3, | 3)))))	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<215,((K$1-30)/185)^1*1.5+1, | IF(K$1<262,((K$1-215)/47)^1*0.5+2.5, | IF(K$1<902,((K$1-262)/640)^1*0+3, | 3)))))	3
+J15	excel		Multiplayer Correction - Seals Damage	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<215,((J$1-30)/185)^1*1.5+1, | IF(J$1<262,((J$1-215)/47)^1*0.5+2.5, | IF(J$1<902,((J$1-262)/640)^1*0+3, | 3)))))	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<215,((J$1-30)/185)^1*1.5+1, | IF(J$1<262,((J$1-215)/47)^1*0.5+2.5, | IF(J$1<902,((J$1-262)/640)^1*0+3, | 3)))))	3
+K15	excel		Multiplayer Correction - Seals Damage	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<215,((K$1-30)/185)^1*1.5+1, | IF(K$1<262,((K$1-215)/47)^1*0.5+2.5, | IF(K$1<902,((K$1-262)/640)^1*0+3, | 3)))))	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<215,((K$1-30)/185)^1*1.5+1, | IF(K$1<262,((K$1-215)/47)^1*0.5+2.5, | IF(K$1<902,((K$1-262)/640)^1*0+3, | 3)))))	3
+C16	excel		HP Multiplier	=J3/K3	=J3/K3	0.9299820467
+J16	excel		Multiplayer Correction - Throwing Items Damage	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<215,((J$1-30)/185)^1*2.5+1, | IF(J$1<333,((J$1-215)/118)^1*0+3.5, | IF(J$1<902,((J$1-333)/569)^1*0+3.5, | 3.5)))))	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<215,((J$1-30)/185)^1*2.5+1, | IF(J$1<333,((J$1-215)/118)^1*0+3.5, | IF(J$1<902,((J$1-333)/569)^1*0+3.5, | 3.5)))))	3.5
+K16	excel		Multiplayer Correction - Throwing Items Damage	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<215,((K$1-30)/185)^1*2.5+1, | IF(K$1<333,((K$1-215)/118)^1*0+3.5, | IF(K$1<902,((K$1-333)/569)^1*0+3.5, | 3.5)))))	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<215,((K$1-30)/185)^1*2.5+1, | IF(K$1<333,((K$1-215)/118)^1*0+3.5, | IF(K$1<902,((K$1-333)/569)^1*0+3.5, | 3.5)))))	3.5
+C17	excel		FP Multiplier	=J4/K4	=J4/K4	0.6663060582
+J17	excel		Multiplayer Correction - Consumable Items Damage	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<215,((J$1-30)/185)^1*1+1, | IF(J$1<333,((J$1-215)/118)^1*0.5+2, | IF(J$1<902,((J$1-333)/569)^1*0+2.5, | 2.5)))))	=IF(J$1<=1,1, | IF(J$1<30,((J$1-1)/29)^1*0+1, | IF(J$1<215,((J$1-30)/185)^1*1+1, | IF(J$1<333,((J$1-215)/118)^1*0.5+2, | IF(J$1<902,((J$1-333)/569)^1*0+2.5, | 2.5)))))	2.5
+K17	excel		Multiplayer Correction - Consumable Items Damage	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<215,((K$1-30)/185)^1*1+1, | IF(K$1<333,((K$1-215)/118)^1*0.5+2, | IF(K$1<902,((K$1-333)/569)^1*0+2.5, | 2.5)))))	=IF(K$1<=1,1, | IF(K$1<30,((K$1-1)/29)^1*0+1, | IF(K$1<215,((K$1-30)/185)^1*1+1, | IF(K$1<333,((K$1-215)/118)^1*0.5+2, | IF(K$1<902,((K$1-333)/569)^1*0+2.5, | 2.5)))))	2.5
+C18	excel		Stamina Multiplier	=J5/K5	=J5/K5	0.9060839238
+C19	excel		Defense Multiplier	=J6/K6	=J6/K6	0.6980495006
+C20	excel		Resistance Multiplier	=J7/K7	=J7/K7	0.8237768775
+C21	excel		General Dmg Mult	=J8/K8	=J8/K8	1
+C22	excel		Dagger/Throwing Blade Dmg Mult	=J9/K9	=J9/K9	1
+C23	excel		Colossal/Greatshield Dmg Mult	=J10/K10	=J10/K10	1
+C24	excel		Bow/Arrow/Bolt Dmg Mult	=J11/K11	=J11/K11	1
+C25	excel		Greatbow/Ballista Dmg Mult	=J12/K12	=J12/K12	1
+C26	excel		Crossbow Dmg Mult	=J13/K13	=J13/K13	1
+C27	excel		Staff Dmg Mult	=J14/K14	=J14/K14	1
+C28	excel		Seal Dmg Mult	=J15/K15	=J15/K15	1
+C29	excel		Throwing Item Dmg Mult	=J16/K16	=J16/K16	1
+C30	excel		Consumable Item Dmg Mult	=J17/K17	=J17/K17	1

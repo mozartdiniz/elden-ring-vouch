@@ -1,0 +1,559 @@
+SHEET: EffectData
+WORKBOOK: Copy of ER - Build Planner v1.19.1.xlsx
+USED RANGE: A1:AW532
+NONEMPTY CELLS: 25257
+FORMULA CELLS: 27
+
+This file is for an LLM that must rebuild these calculations in another language. Treat formulas as the source of truth. Cached/fallback values are only for checking a port. Skip spill_cache cells; they are not logic.
+
+VISIBILITY: hidden
+STATIC / INPUT / LABEL CELLS (25230):
+coord	value
+E1	-1.0
+F1	-1.0
+G1	0.0
+H1	0.0
+I1	0.0
+J1	0.0
+K1	0.0
+L1	0.0
+M1	0.0
+N1	0.0
+O1	1.0
+P1	1.0
+Q1	1.0
+R1	1.0
+S1	1.0
+T1	1.0
+U1	1.0
+V1	1.0
+W1	1.0
+X1	1.0
+Y1	1.0
+Z1	1.0
+AA1	1.0
+AB1	1.0
+AC1	1.0
+AD1	1.0
+AE1	1.0
+AF1	1.0
+AG1	1.0
+AH1	1.0
+AI1	1.0
+AJ1	1.0
+AK1	0.0
+AL1	0.0
+AM1	0.0
+AN1	0.0
+AO1	0.0
+AP1	0.0
+AQ1	0.0
+AR1	1.0
+AS1	1.0
+AT1	1.0
+AU1	1.0
+AV1	1.0
+AW1	0.0
+A2	Name
+B2	Effects
+C2	Overwrite Effects
+D2	Import Effects
+E2	conditionHp
+F2	conditionHpRate
+G2	addLifeForceStatus
+H2	addWillpowerStatus
+I2	addEndureStatus
+J2	addStrengthStatus
+K2	addDexterityStatus
+L2	addMagicStatus
+M2	addFaithStatus
+N2	addLuckStatus
+O2	maxHpRate
+P2	maxMpRate
+Q2	maxStaminaRate
+R2	equipWeightChangeRate
+S2	neutralDamageCutRate
+T2	blowDamageCutRate
+U2	slashDamageCutRate
+V2	thrustDamageCutRate
+W2	magicDamageCutRate
+X2	fireDamageCutRate
+Y2	thunderDamageCutRate
+Z2	darkDamageCutRate
+AA2	defEnemyDmgCorrectRate_Physics
+AB2	defEnemyDmgCorrectRate_Magic
+AC2	defEnemyDmgCorrectRate_Fire
+AD2	defEnemyDmgCorrectRate_Thunder
+AE2	defEnemyDmgCorrectRate_Dark
+AF2	defPlayerDmgCorrectRate_Physics
+AG2	defPlayerDmgCorrectRate_Magic
+AH2	defPlayerDmgCorrectRate_Fire
+AI2	defPlayerDmgCorrectRate_Thunder
+AJ2	defPlayerDmgCorrectRate_Dark
+AK2	changePoisonResistPoint
+AL2	changeDiseaseResistPoint
+AM2	changeBloodResistPoint
+AN2	changeFreezeResistPoint
+AO2	changeSleepResistPoint
+AP2	changeMadnessResistPoint
+AQ2	changeCurseResistPoint
+AR2	physicsAttackPowerRate
+AS2	magicAttackPowerRate
+AT2	fireAttackPowerRate
+AU2	thunderAttackPowerRate
+AV2	darkAttackPowerRate
+AW2	itemDropRate
+A3	Celebrant's Sickle
+D3	Gain 10 runes on hit
+E3	-1.0
+F3	-1.0
+G3	0.0
+H3	0.0
+I3	0.0
+J3	0.0
+K3	0.0
+L3	0.0
+M3	0.0
+N3	0.0
+O3	1.0
+P3	1.0
+Q3	1.0
+R3	1.0
+S3	1.0
+T3	1.0
+U3	1.0
+V3	1.0
+W3	1.0
+X3	1.0
+Y3	1.0
+Z3	1.0
+AA3	1.0
+AB3	1.0
+AC3	1.0
+AD3	1.0
+AE3	1.0
+AF3	1.0
+AG3	1.0
+AH3	1.0
+AI3	1.0
+AJ3	1.0
+AK3	0.0
+AL3	0.0
+AM3	0.0
+AN3	0.0
+AO3	0.0
+AP3	0.0
+AQ3	0.0
+AR3	1.0
+AS3	1.0
+AT3	1.0
+AU3	1.0
+AV3	1.0
+AW3	0.0
+A4	Cinquedea
+B4	Increases damage by 1.1x (holy bugged in PvP: 1x) with bestial incantations
+D4	Increases damage by 1.1x (holy bugged in PvP: 1x) with bestial incantations
+E4	-1.0
+F4	-1.0
+G4	0.0
+H4	0.0
+I4	0.0
+J4	0.0
+K4	0.0
+L4	0.0
+M4	0.0
+N4	0.0
+O4	1.0
+P4	1.0
+Q4	1.0
+R4	1.0
+S4	1.0
+T4	1.0
+U4	1.0
+V4	1.0
+W4	1.0
+X4	1.0
+Y4	1.0
+Z4	1.0
+AA4	1.0
+AB4	1.0
+AC4	1.0
+AD4	1.0
+AE4	1.0
+AF4	1.0
+AG4	1.0
+AH4	1.0
+AI4	1.0
+AJ4	1.0
+AK4	0.0
+AL4	0.0
+AM4	0.0
+AN4	0.0
+AO4	0.0
+AP4	0.0
+AQ4	0.0
+AR4	1.0
+AS4	1.0
+AT4	1.0
+AU4	1.0
+AV4	1.0
+AW4	0.0
+A5	Golden Epitaph
+B5	Increases damage by 1.3x to Those Who Live in Death enemies
+D5	Increases damage by 1.3x to Those Who Live in Death enemies
+E5	-1.0
+F5	-1.0
+G5	0.0
+H5	0.0
+I5	0.0
+J5	0.0
+K5	0.0
+L5	0.0
+M5	0.0
+N5	0.0
+O5	1.0
+P5	1.0
+Q5	1.0
+R5	1.0
+S5	1.0
+T5	1.0
+U5	1.0
+V5	1.0
+W5	1.0
+X5	1.0
+Y5	1.0
+Z5	1.0
+AA5	1.0
+AB5	1.0
+AC5	1.0
+AD5	1.0
+AE5	1.0
+AF5	1.0
+AG5	1.0
+AH5	1.0
+AI5	1.0
+AJ5	1.0
+AK5	0.0
+AL5	0.0
+AM5	0.0
+AN5	0.0
+AO5	0.0
+AP5	0.0
+AQ5	0.0
+AR5	1.0
+AS5	1.0
+AT5	1.0
+AU5	1.0
+AV5	1.0
+AW5	0.0
+A6	Inseparable Sword
+B6	Increases damage by 1.2x to Those Who Live in Death enemies
+D6	Increases damage by 1.2x to Those Who Live in Death enemies
+E6	-1.0
+F6	-1.0
+G6	0.0
+H6	0.0
+I6	0.0
+J6	0.0
+K6	0.0
+L6	0.0
+M6	0.0
+N6	0.0
+O6	1.0
+P6	1.0
+Q6	1.0
+R6	1.0
+S6	1.0
+T6	1.0
+U6	1.0
+V6	1.0
+W6	1.0
+X6	1.0
+Y6	1.0
+Z6	1.0
+AA6	1.0
+AB6	1.0
+AC6	1.0
+AD6	1.0
+AE6	1.0
+AF6	1.0
+AG6	1.0
+AH6	1.0
+AI6	1.0
+AJ6	1.0
+AK6	0.0
+AL6	0.0
+AM6	0.0
+AN6	0.0
+AO6	0.0
+AP6	0.0
+AQ6	0.0
+AR6	1.0
+AS6	1.0
+AT6	1.0
+AU6	1.0
+AV6	1.0
+AW6	0.0
+A7	Sword of Milos
+B7	Restores 5 FP when an enemy dies
+D7	Restores 5 FP when an enemy dies
+E7	-1.0
+F7	-1.0
+G7	0.0
+H7	0.0
+I7	0.0
+J7	0.0
+K7	0.0
+L7	0.0
+M7	0.0
+N7	0.0
+O7	1.0
+P7	1.0
+Q7	1.0
+R7	1.0
+S7	1.0
+T7	1.0
+U7	1.0
+V7	1.0
+W7	1.0
+X7	1.0
+Y7	1.0
+Z7	1.0
+AA7	1.0
+AB7	1.0
+AC7	1.0
+AD7	1.0
+AE7	1.0
+AF7	1.0
+AG7	1.0
+AH7	1.0
+AI7	1.0
+AJ7	1.0
+AK7	0.0
+AL7	0.0
+AM7	0.0
+AN7	0.0
+AO7	0.0
+AP7	0.0
+AQ7	0.0
+AR7	1.0
+AS7	1.0
+AT7	1.0
+AU7	1.0
+AV7	1.0
+AW7	0.0
+A8	Alabaster Lord's Sword
+B8	Increases damage by 1.2x to Void enemies
+D8	Increases damage by 1.2x to Void enemies
+E8	-1.0
+F8	-1.0
+G8	0.0
+H8	0.0
+I8	0.0
+J8	0.0
+K8	0.0
+L8	0.0
+M8	0.0
+N8	0.0
+O8	1.0
+P8	1.0
+Q8	1.0
+R8	1.0
+S8	1.0
+T8	1.0
+U8	1.0
+V8	1.0
+W8	1.0
+X8	1.0
+Y8	1.0
+Z8	1.0
+AA8	1.0
+AB8	1.0
+AC8	1.0
+AD8	1.0
+AE8	1.0
+AF8	1.0
+AG8	1.0
+AH8	1.0
+AI8	1.0
+AJ8	1.0
+AK8	0.0
+AL8	0.0
+AM8	0.0
+AN8	0.0
+AO8	0.0
+AP8	0.0
+AQ8	0.0
+AR8	1.0
+AS8	1.0
+AT8	1.0
+AU8	1.0
+AV8	1.0
+AW8	0.0
+A9	Blasphemous Blade
+B9	Restores ⌊MaxHP * 0.04⌋ + 40 HP when an enemy dies (60 HP)
+D9	Restores ⌊MaxHP * 0.04⌋ + 40 HP when an enemy dies
+E9	-1.0
+F9	-1.0
+G9	0.0
+H9	0.0
+I9	0.0
+J9	0.0
+K9	0.0
+L9	0.0
+M9	0.0
+N9	0.0
+O9	1.0
+P9	1.0
+Q9	1.0
+R9	1.0
+S9	1.0
+T9	1.0
+... 24830 more static cells omitted (see CSV)
+
+CROSS-SHEET REFERENCES: PlannerData
+FORMULA KINDS: excel=27
+UNIQUE PATTERNS: 19
+
+========================================================================
+FORMULA PATTERNS (fill-down compressed)
+{r} is the row of the cell. Port the template once and apply per row.
+========================================================================
+
+PATTERN 1  kind=excel  array=True  B3
+  context_label: Celebrant's Sickle
+  array_spill_ref: B3:B532
+  template: =IF(NOT(ISBLANK(C{r}:C532)),C{r}:C532,D{r}:D532)
+
+  e.g. B3: =IF(NOT(ISBLANK(C3:C532)),C3:C532,D3:D532)
+  cached='Gain 10 runes on hit'
+
+PATTERN 2  kind=excel  array=False  C9
+  context_label: Restores ⌊MaxHP * 0.04⌋ + 40 HP when an enemy dies (60 HP)
+  template: =D{r}&" ("&TRUNC(PlannerData!$L$2*0.04)+40&" HP)"
+  e.g. C9: =D9&" ("&TRUNC(PlannerData!$L$2*0.04)+40&" HP)"  cached='Restores ⌊MaxHP * 0.04⌋ + 40 HP when an enemy dies (60 HP)'
+
+PATTERN 3  kind=excel  array=False  C14:C372 (2 cells)
+  context_label: Restores ⌊MaxHP * 0.025⌋ + 25 HP when an enemy dies (38 HP)
+  template: =D{r}&" ("&MAX(TRUNC(PlannerData!$L$2*0.025),1)+25&" HP)"
+  e.g. C14: =D14&" ("&MAX(TRUNC(PlannerData!$L$2*0.025),1)+25&" HP)"  cached='Restores ⌊MaxHP * 0.025⌋ + 25 HP when an enemy dies (38 HP)'
+  e.g. C372: =D372&" ("&MAX(TRUNC(PlannerData!$L$2*0.025),1)+25&" HP)"  cached='Restores ⌊MaxHP * 0.03⌋ + 30 HP when an enemy dies (38 HP)'
+
+PATTERN 4  kind=excel  array=False  C22:C365 (4 cells)
+  context_label: Gains "Luster" tier 1 at 25 accumuVal (adds 95 holy attack power) and "Luster" t
+  template: =HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg/edit?usp=sharing",D{r})
+  e.g. C22: =HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg/edit?usp=sharing",D22)  cached='Gains "Luster" tier 1 at 25 accumuVal (adds 95 holy attack power) and "Luster" tier 2 at 50 accumuVal (adds 120 holy attack power); "Luster" tier lingers for 30 seconds'
+  e.g. C363: =HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg/edit?usp=sharing",D363)  cached='Increases damage by 1.03x /1.05x /1.1x /1.1x with continuous attacks'
+  e.g. C364: =HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg/edit?usp=sharing",D364)  cached='Increases damage by 1.06x /1.08x /1.13x /1.13x with continuous attacks'
+  ... 1 more of this pattern
+
+PATTERN 5  kind=excel  array=False  C27:C32 (3 cells)
+  context_label: Restores ⌊MaxHP * 0.01⌋ HP on hit (5 HP)
+  template: =D{r}&" ("&MAX(TRUNC(PlannerData!$L$2*0.01),1)+0&" HP)"
+  e.g. C27: =D27&" ("&MAX(TRUNC(PlannerData!$L$2*0.01),1)+0&" HP)"  cached='Restores ⌊MaxHP * 0.01⌋ HP on hit (5 HP)'
+  e.g. C28: =D28&" ("&MAX(TRUNC(PlannerData!$L$2*0.01),1)+0&" HP)"  cached='Restores ⌊MaxHP * 0.01⌋ HP on hit (5 HP)'
+  e.g. C32: =D32&" ("&MAX(TRUNC(PlannerData!$L$2*0.01),1)+0&" HP)"  cached='Restores ⌊MaxHP * 0.01⌋ HP on hit (5 HP)'
+
+PATTERN 6  kind=excel  array=False  C33
+  context_label: Restores ⌊MaxHP * 0.02⌋ + 20 HP when an enemy dies (30 HP)
+  template: =D{r}&" ("&MAX(TRUNC(PlannerData!$L$2*0.02),1)+20&" HP)"
+  e.g. C33: =D33&" ("&MAX(TRUNC(PlannerData!$L$2*0.02),1)+20&" HP)"  cached='Restores ⌊MaxHP * 0.02⌋ + 20 HP when an enemy dies (30 HP)'
+
+PATTERN 7  kind=excel  array=False  C307
+  context_label: Increases critical damage by 1.17x (holy bugged in PvP: 1x); effect is bugged so
+  template: =D{r}&"; effect is bugged so the practical multiplier is 1.16"
+  e.g. C307: =D307&"; effect is bugged so the practical multiplier is 1.16"  cached='Increases critical damage by 1.17x (holy bugged in PvP: 1x); effect is bugged so the practical multiplier is 1.16'
+
+PATTERN 8  kind=excel  array=False  C346
+  context_label: Increases physical attack power by 1.15x; effectiveness reduced with equipped we
+  template: =SUBSTITUTE(D{r},1.15,ROUND(PlannerData!$F$29,3))
+  e.g. C346: =SUBSTITUTE(D346,1.15,ROUND(PlannerData!$F$29,3))  cached='Increases physical attack power by 1.15x; effectiveness reduced with equipped weight'
+
+PATTERN 9  kind=excel  array=False  C361
+  context_label: Restores ⌊MaxHP * 0.1⌋ + 85 HP while performing a critical attack (90 HP)
+  template: =HYPERLINK("https://docs.google.com/spreadsheets/d/1rfYfa5kcyoCuKgnS23dc8J8lLLTqWXsWtq9qG4TxT50/edit?gid=272005363#gid=272005363",D{r}&" ("&MAX(TRUNC(PlannerData!$L$2*0.01),1)+85&" HP)")
+  e.g. C361: =HYPERLINK("https://docs.google.com/spreadsheets/d/1rfYfa5kcyoCuKgnS23dc8J8lLLTqWXsWtq9qG4TxT50/edit?gid=272005363#gid=272005363",D361&" ("&MAX(TRUNC(PlannerData!$L$2*0.01),1)+85&" HP)")  cached='Restores ⌊MaxHP * 0.1⌋ + 85 HP while performing a critical attack (90 HP)'
+
+PATTERN 10  kind=excel  array=False  C362
+  context_label: Restores 15 FP while performing a critical attack
+  template: =HYPERLINK("https://docs.google.com/spreadsheets/d/1rfYfa5kcyoCuKgnS23dc8J8lLLTqWXsWtq9qG4TxT50/edit?gid=272005363#gid=272005363",D{r})
+  e.g. C362: =HYPERLINK("https://docs.google.com/spreadsheets/d/1rfYfa5kcyoCuKgnS23dc8J8lLLTqWXsWtq9qG4TxT50/edit?gid=272005363#gid=272005363",D362)  cached='Restores 15 FP while performing a critical attack'
+
+PATTERN 11  kind=excel  array=False  C366
+  context_label: Restores ⌊MaxHP * 0.03⌋ + 30 HP with continuous attacks (45 HP)
+  template: =HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg/edit?usp=sharing",D{r}&" ("&MAX(TRUNC(PlannerData!$L$2*0.03),1)+30&" HP)")
+  e.g. C366: =HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg/edit?usp=sharing",D366&" ("&MAX(TRUNC(PlannerData!$L$2*0.03),1)+30&" HP)")  cached='Restores ⌊MaxHP * 0.03⌋ + 30 HP with continuous attacks (45 HP)'
+
+PATTERN 12  kind=excel  array=False  C388
+  context_label: Restores ⌊MaxHP * 0.07⌋ + 80 HP when an enemy dies (116 HP)
+  template: =D{r}&" ("&TRUNC(PlannerData!$L$2*0.07)+80&" HP)"
+  e.g. C388: =D388&" ("&TRUNC(PlannerData!$L$2*0.07)+80&" HP)"  cached='Restores ⌊MaxHP * 0.07⌋ + 80 HP when an enemy dies (116 HP)'
+
+PATTERN 13  kind=excel  array=False  C394:C395 (2 cells)
+  context_label: Restores ⌊MaxHP * 0.5⌋ HP (261 HP)
+  template: =D{r}&" ("&TRUNC(PlannerData!$L$2*0.5)+0&" HP)"
+  e.g. C394: =D394&" ("&TRUNC(PlannerData!$L$2*0.5)+0&" HP)"  cached='Restores ⌊MaxHP * 0.5⌋ HP (261 HP)'
+  e.g. C395: =D395&" ("&TRUNC(PlannerData!$L$2*0.5)+0&" HP)"  cached='Restores ⌊MaxHP * 0.5⌋ HP (261 HP)'
+
+PATTERN 14  kind=excel  array=False  C399:C400 (2 cells)
+  context_label: Restores ⌊MaxFP * 0.5⌋ FP (39 FP)
+  template: =D{r}&" ("&TRUNC(PlannerData!$L$3*0.5)+0&" FP)"
+  e.g. C399: =D399&" ("&TRUNC(PlannerData!$L$3*0.5)+0&" FP)"  cached='Restores ⌊MaxFP * 0.5⌋ FP (39 FP)'
+  e.g. C400: =D400&" ("&TRUNC(PlannerData!$L$3*0.5)+0&" FP)"  cached='Restores ⌊MaxFP * 0.5⌋ FP (39 FP)'
+
+PATTERN 15  kind=excel  array=False  C417
+  context_label: Increases damage by 1.09x /1.13x /1.2x /1.2x with continuous attacks  for 180 se
+  template: =HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg",D{r})
+  e.g. C417: =HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg",D417)  cached='Increases damage by 1.09x /1.13x /1.2x /1.2x with continuous attacks  for 180 seconds'
+
+PATTERN 16  kind=excel  array=False  C418
+  context_label: Restores ⌊MaxHP * 0.008⌋ HP every hit for 45 seconds (4 HP)
+  template: =D{r}&" ("&TRUNC(PlannerData!$L$2*0.008)+0&" HP)"
+  e.g. C418: =D418&" ("&TRUNC(PlannerData!$L$2*0.008)+0&" HP)"  cached='Restores ⌊MaxHP * 0.008⌋ HP every hit for 45 seconds (4 HP)'
+
+PATTERN 17  kind=excel  array=False  C420
+  context_label: Increases damage by 1.2x (1.125x in PvP) for 180 seconds, but drains ⌊MaxHP * 0.
+  template: =D{r}&" ("&TRUNC(PlannerData!$L$2*0.002)+20&" HP/s)"
+  e.g. C420: =D420&" ("&TRUNC(PlannerData!$L$2*0.002)+20&" HP/s)"  cached='Increases damage by 1.2x (1.125x in PvP) for 180 seconds, but drains ⌊MaxHP * 0.002⌋ + 20 HP/s for the duration (21 HP/s)'
+
+PATTERN 18  kind=excel  array=False  C425
+  context_label: Restores ⌊MaxHP * 0.3⌋ HP when less than 20% MaxHP for 180 seconds; the effect i
+  template: =D{r}&" ("&TRUNC(PlannerData!$L$2*0.3)+0&" HP)"
+  e.g. C425: =D425&" ("&TRUNC(PlannerData!$L$2*0.3)+0&" HP)"  cached='Restores ⌊MaxHP * 0.3⌋ HP when less than 20% MaxHP for 180 seconds; the effect is removed when triggered (156 HP)'
+
+PATTERN 19  kind=excel  array=False  C426
+  context_label: Restores ⌊MaxHP * 0.05⌋ HP when hit for 15 seconds (26 HP)
+  template: =D{r}&" ("&TRUNC(PlannerData!$L$2*0.05)+0&" HP)"
+  e.g. C426: =D426&" ("&TRUNC(PlannerData!$L$2*0.05)+0&" HP)"  cached='Restores ⌊MaxHP * 0.05⌋ HP when hit for 15 seconds (26 HP)'
+
+========================================================================
+ALL FORMULAS
+========================================================================
+cell	kind	array_ref	label	logic	stored	cached
+B3	excel	B3:B532	Celebrant's Sickle	=IF(NOT(ISBLANK(C3:C532)),C3:C532,D3:D532) | 	=IF(NOT(ISBLANK(C3:C532)),C3:C532,D3:D532) | 	Gain 10 runes on hit
+C9	excel		Restores ⌊MaxHP * 0.04⌋ + 40 HP when an enemy dies (60 HP)	=D9&" ("&TRUNC(PlannerData!$L$2*0.04)+40&" HP)"	=D9&" ("&TRUNC(PlannerData!$L$2*0.04)+40&" HP)"	Restores ⌊MaxHP * 0.04⌋ + 40 HP when an enemy dies (60 HP)
+C14	excel		Restores ⌊MaxHP * 0.025⌋ + 25 HP when an enemy dies (38 HP)	=D14&" ("&MAX(TRUNC(PlannerData!$L$2*0.025),1)+25&" HP)"	=D14&" ("&MAX(TRUNC(PlannerData!$L$2*0.025),1)+25&" HP)"	Restores ⌊MaxHP * 0.025⌋ + 25 HP when an enemy dies (38 HP)
+C22	excel		Gains "Luster" tier 1 at 25 accumuVal (adds 95 holy attack power) and "Luster" t	=HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg/edit?usp=sharing",D22)	=HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg/edit?usp=sharing",D22)	Gains "Luster" tier 1 at 25 accumuVal (adds 95 holy attack power) and "Luster" tier 2 at 50 accumuVal (adds 120 holy attack power); "Luster" tier lingers for 30 seconds
+C27	excel		Restores ⌊MaxHP * 0.01⌋ HP on hit (5 HP)	=D27&" ("&MAX(TRUNC(PlannerData!$L$2*0.01),1)+0&" HP)"	=D27&" ("&MAX(TRUNC(PlannerData!$L$2*0.01),1)+0&" HP)"	Restores ⌊MaxHP * 0.01⌋ HP on hit (5 HP)
+C28	excel		Restores ⌊MaxHP * 0.01⌋ HP on hit (5 HP)	=D28&" ("&MAX(TRUNC(PlannerData!$L$2*0.01),1)+0&" HP)"	=D28&" ("&MAX(TRUNC(PlannerData!$L$2*0.01),1)+0&" HP)"	Restores ⌊MaxHP * 0.01⌋ HP on hit (5 HP)
+C32	excel		Restores ⌊MaxHP * 0.01⌋ HP on hit (5 HP)	=D32&" ("&MAX(TRUNC(PlannerData!$L$2*0.01),1)+0&" HP)"	=D32&" ("&MAX(TRUNC(PlannerData!$L$2*0.01),1)+0&" HP)"	Restores ⌊MaxHP * 0.01⌋ HP on hit (5 HP)
+C33	excel		Restores ⌊MaxHP * 0.02⌋ + 20 HP when an enemy dies (30 HP)	=D33&" ("&MAX(TRUNC(PlannerData!$L$2*0.02),1)+20&" HP)"	=D33&" ("&MAX(TRUNC(PlannerData!$L$2*0.02),1)+20&" HP)"	Restores ⌊MaxHP * 0.02⌋ + 20 HP when an enemy dies (30 HP)
+C307	excel		Increases critical damage by 1.17x (holy bugged in PvP: 1x); effect is bugged so	=D307&"; effect is bugged so the practical multiplier is 1.16"	=D307&"; effect is bugged so the practical multiplier is 1.16"	Increases critical damage by 1.17x (holy bugged in PvP: 1x); effect is bugged so the practical multiplier is 1.16
+C346	excel		Increases physical attack power by 1.15x; effectiveness reduced with equipped we	=SUBSTITUTE(D346,1.15,ROUND(PlannerData!$F$29,3))	=SUBSTITUTE(D346,1.15,ROUND(PlannerData!$F$29,3))	Increases physical attack power by 1.15x; effectiveness reduced with equipped weight
+C361	excel		Restores ⌊MaxHP * 0.1⌋ + 85 HP while performing a critical attack (90 HP)	=HYPERLINK("https://docs.google.com/spreadsheets/d/1rfYfa5kcyoCuKgnS23dc8J8lLLTqWXsWtq9qG4TxT50/edit?gid=272005363#gid=272005363",D361&" ("&MAX(TRUNC(PlannerData!$L$2*0.01),1)+85&" HP)")	=HYPERLINK("https://docs.google.com/spreadsheets/d/1rfYfa5kcyoCuKgnS23dc8J8lLLTqWXsWtq9qG4TxT50/edit?gid=272005363#gid=272005363",D361&" ("&MAX(TRUNC(PlannerData!$L$2*0.01),1)+85&" HP)")	Restores ⌊MaxHP * 0.1⌋ + 85 HP while performing a critical attack (90 HP)
+C362	excel		Restores 15 FP while performing a critical attack	=HYPERLINK("https://docs.google.com/spreadsheets/d/1rfYfa5kcyoCuKgnS23dc8J8lLLTqWXsWtq9qG4TxT50/edit?gid=272005363#gid=272005363",D362)	=HYPERLINK("https://docs.google.com/spreadsheets/d/1rfYfa5kcyoCuKgnS23dc8J8lLLTqWXsWtq9qG4TxT50/edit?gid=272005363#gid=272005363",D362)	Restores 15 FP while performing a critical attack
+C363	excel		Increases damage by 1.03x /1.05x /1.1x /1.1x with continuous attacks	=HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg/edit?usp=sharing",D363)	=HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg/edit?usp=sharing",D363)	Increases damage by 1.03x /1.05x /1.1x /1.1x with continuous attacks
+C364	excel		Increases damage by 1.06x /1.08x /1.13x /1.13x with continuous attacks	=HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg/edit?usp=sharing",D364)	=HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg/edit?usp=sharing",D364)	Increases damage by 1.06x /1.08x /1.13x /1.13x with continuous attacks
+C365	excel		Increases damage by 1.04x /1.06x /1.11x /1.11x with continuous attacks and incre	=HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg/edit?usp=sharing",D365)	=HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg/edit?usp=sharing",D365)	Increases damage by 1.04x /1.06x /1.11x /1.11x with continuous attacks and increases dexterity by 5
+C366	excel		Restores ⌊MaxHP * 0.03⌋ + 30 HP with continuous attacks (45 HP)	=HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg/edit?usp=sharing",D366&" ("&MAX(TRUNC(PlannerData!$L$2*0.03),1)+30&" HP)")	=HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg/edit?usp=sharing",D366&" ("&MAX(TRUNC(PlannerData!$L$2*0.03),1)+30&" HP)")	Restores ⌊MaxHP * 0.03⌋ + 30 HP with continuous attacks (45 HP)
+C372	excel		Restores ⌊MaxHP * 0.03⌋ + 30 HP when an enemy dies (38 HP)	=D372&" ("&MAX(TRUNC(PlannerData!$L$2*0.025),1)+25&" HP)"	=D372&" ("&MAX(TRUNC(PlannerData!$L$2*0.025),1)+25&" HP)"	Restores ⌊MaxHP * 0.03⌋ + 30 HP when an enemy dies (38 HP)
+C388	excel		Restores ⌊MaxHP * 0.07⌋ + 80 HP when an enemy dies (116 HP)	=D388&" ("&TRUNC(PlannerData!$L$2*0.07)+80&" HP)"	=D388&" ("&TRUNC(PlannerData!$L$2*0.07)+80&" HP)"	Restores ⌊MaxHP * 0.07⌋ + 80 HP when an enemy dies (116 HP)
+C394	excel		Restores ⌊MaxHP * 0.5⌋ HP (261 HP)	=D394&" ("&TRUNC(PlannerData!$L$2*0.5)+0&" HP)"	=D394&" ("&TRUNC(PlannerData!$L$2*0.5)+0&" HP)"	Restores ⌊MaxHP * 0.5⌋ HP (261 HP)
+C395	excel		Restores ⌊MaxHP * 0.5⌋ HP (261 HP)	=D395&" ("&TRUNC(PlannerData!$L$2*0.5)+0&" HP)"	=D395&" ("&TRUNC(PlannerData!$L$2*0.5)+0&" HP)"	Restores ⌊MaxHP * 0.5⌋ HP (261 HP)
+C399	excel		Restores ⌊MaxFP * 0.5⌋ FP (39 FP)	=D399&" ("&TRUNC(PlannerData!$L$3*0.5)+0&" FP)"	=D399&" ("&TRUNC(PlannerData!$L$3*0.5)+0&" FP)"	Restores ⌊MaxFP * 0.5⌋ FP (39 FP)
+C400	excel		Restores ⌊MaxFP * 0.5⌋ FP (39 FP)	=D400&" ("&TRUNC(PlannerData!$L$3*0.5)+0&" FP)"	=D400&" ("&TRUNC(PlannerData!$L$3*0.5)+0&" FP)"	Restores ⌊MaxFP * 0.5⌋ FP (39 FP)
+C417	excel		Increases damage by 1.09x /1.13x /1.2x /1.2x with continuous attacks  for 180 se	=HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg",D417)	=HYPERLINK("https://docs.google.com/spreadsheets/d/14FEyr8Nf4e3qjiLltlSsD8cnVU6pgZ8jZbADkR68rdg",D417)	Increases damage by 1.09x /1.13x /1.2x /1.2x with continuous attacks  for 180 seconds
+C418	excel		Restores ⌊MaxHP * 0.008⌋ HP every hit for 45 seconds (4 HP)	=D418&" ("&TRUNC(PlannerData!$L$2*0.008)+0&" HP)"	=D418&" ("&TRUNC(PlannerData!$L$2*0.008)+0&" HP)"	Restores ⌊MaxHP * 0.008⌋ HP every hit for 45 seconds (4 HP)
+C420	excel		Increases damage by 1.2x (1.125x in PvP) for 180 seconds, but drains ⌊MaxHP * 0.	=D420&" ("&TRUNC(PlannerData!$L$2*0.002)+20&" HP/s)"	=D420&" ("&TRUNC(PlannerData!$L$2*0.002)+20&" HP/s)"	Increases damage by 1.2x (1.125x in PvP) for 180 seconds, but drains ⌊MaxHP * 0.002⌋ + 20 HP/s for the duration (21 HP/s)
+C425	excel		Restores ⌊MaxHP * 0.3⌋ HP when less than 20% MaxHP for 180 seconds; the effect i	=D425&" ("&TRUNC(PlannerData!$L$2*0.3)+0&" HP)"	=D425&" ("&TRUNC(PlannerData!$L$2*0.3)+0&" HP)"	Restores ⌊MaxHP * 0.3⌋ HP when less than 20% MaxHP for 180 seconds; the effect is removed when triggered (156 HP)
+C426	excel		Restores ⌊MaxHP * 0.05⌋ HP when hit for 15 seconds (26 HP)	=D426&" ("&TRUNC(PlannerData!$L$2*0.05)+0&" HP)"	=D426&" ("&TRUNC(PlannerData!$L$2*0.05)+0&" HP)"	Restores ⌊MaxHP * 0.05⌋ HP when hit for 15 seconds (26 HP)

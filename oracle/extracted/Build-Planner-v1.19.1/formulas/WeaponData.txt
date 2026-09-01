@@ -1,0 +1,463 @@
+SHEET: WeaponData
+WORKBOOK: Copy of ER - Build Planner v1.19.1.xlsx
+USED RANGE: A1:P571
+NONEMPTY CELLS: 5219
+FORMULA CELLS: 3
+
+This file is for an LLM that must rebuild these calculations in another language. Treat formulas as the source of truth. Cached/fallback values are only for checking a port. Skip spill_cache cells; they are not logic.
+
+VISIBILITY: hidden
+STATIC / INPUT / LABEL CELLS (5216):
+coord	value
+A1	Weapon Class
+B1	Weapon
+C1	ID
+D1	isInfuse
+E1	isReinforce
+F1	isUnique
+G1	bothHandsAtkBonus
+H1	throwable
+I1	waAttackElementCorrectId
+J1	specialStatusSpEffectId
+K1	castingBonusType
+L1	castingBonusRate
+M1	defaultPhysType
+O1	Infusion
+P1	Offset
+A2	Dagger
+B2	Dagger
+C2	1000000.0
+G2	TRUE
+H2	FALSE
+M2	Slash
+O2	Standard
+P2	0.0
+A3	Dagger
+B3	Parrying Dagger
+C3	1020000.0
+D3	TRUE
+E3	TRUE
+F3	FALSE
+G3	TRUE
+H3	FALSE
+M3	Slash
+O3	Heavy
+P3	100.0
+A4	Dagger
+B4	Miséricorde
+C4	1030000.0
+D4	TRUE
+E4	TRUE
+F4	FALSE
+G4	TRUE
+H4	FALSE
+M4	Slash
+O4	Keen
+P4	200.0
+A5	Dagger
+B5	Great Knife
+C5	1090000.0
+D5	TRUE
+E5	TRUE
+F5	FALSE
+G5	TRUE
+H5	FALSE
+M5	Slash
+O5	Quality
+P5	300.0
+A6	Dagger
+B6	Bloodstained Dagger
+C6	1140000.0
+D6	TRUE
+E6	TRUE
+F6	FALSE
+G6	TRUE
+H6	FALSE
+M6	Slash
+O6	Fire
+P6	400.0
+A7	Dagger
+B7	Erdsteel Dagger
+C7	1150000.0
+D7	TRUE
+E7	TRUE
+F7	FALSE
+G7	TRUE
+H7	FALSE
+M7	Slash
+O7	Flame Art
+P7	500.0
+A8	Dagger
+B8	Fire Knight's Shortsword
+C8	1510000.0
+D8	TRUE
+E8	TRUE
+F8	FALSE
+G8	TRUE
+H8	FALSE
+M8	Slash
+O8	Lightning
+P8	600.0
+A9	Dagger
+B9	Wakizashi
+C9	1100000.0
+D9	TRUE
+E9	TRUE
+F9	FALSE
+G9	TRUE
+H9	FALSE
+M9	Slash
+O9	Sacred
+P9	700.0
+A10	Dagger
+B10	Main-gauche
+C10	1500000.0
+D10	TRUE
+E10	TRUE
+F10	FALSE
+G10	TRUE
+H10	FALSE
+M10	Slash
+O10	Magic
+P10	800.0
+A11	Dagger
+B11	Celebrant's Sickle
+C11	1060000.0
+D11	TRUE
+E11	TRUE
+F11	FALSE
+G11	TRUE
+H11	FALSE
+M11	Slash
+O11	Cold
+P11	900.0
+A12	Dagger
+B12	Ivory Sickle
+C12	1130000.0
+D12	FALSE
+E12	TRUE
+F12	FALSE
+G12	TRUE
+H12	FALSE
+M12	Slash
+O12	Poison
+P12	1000.0
+A13	Dagger
+B13	Crystal Knife
+C13	1050000.0
+D13	FALSE
+E13	TRUE
+F13	FALSE
+G13	TRUE
+H13	FALSE
+M13	Slash
+O13	Blood
+P13	1100.0
+A14	Dagger
+B14	Scorpion's Stinger
+C14	1080000.0
+D14	FALSE
+E14	TRUE
+F14	TRUE
+G14	TRUE
+H14	FALSE
+M14	Slash
+O14	Occult
+P14	1200.0
+A15	Dagger
+B15	Cinquedea
+C15	1110000.0
+D15	FALSE
+E15	TRUE
+F15	TRUE
+G15	TRUE
+H15	FALSE
+M15	Slash
+A16	Dagger
+B16	Glintstone Kris
+C16	1070000.0
+D16	FALSE
+E16	TRUE
+F16	TRUE
+G16	TRUE
+H16	FALSE
+M16	Slash
+A17	Dagger
+B17	Reduvia
+C17	1040000.0
+D17	FALSE
+E17	TRUE
+F17	TRUE
+G17	TRUE
+H17	FALSE
+M17	Slash
+A18	Dagger
+B18	Blade of Calling
+C18	1160000.0
+D18	FALSE
+E18	TRUE
+F18	TRUE
+G18	TRUE
+H18	FALSE
+M18	Slash
+A19	Dagger
+B19	Black Knife
+C19	1010000.0
+D19	FALSE
+E19	TRUE
+F19	TRUE
+G19	TRUE
+H19	FALSE
+M19	Slash
+A20	Throwing Blade
+B20	Smithscript Dagger
+C20	63500000.0
+D20	TRUE
+E20	TRUE
+F20	FALSE
+G20	FALSE
+H20	FALSE
+M20	Slash
+A21	Straight Sword
+B21	Short Sword
+C21	2010000.0
+D21	TRUE
+E21	TRUE
+F21	FALSE
+G21	TRUE
+H21	FALSE
+M21	Standard
+A22	Straight Sword
+B22	Longsword
+C22	2000000.0
+D22	TRUE
+E22	TRUE
+F22	FALSE
+G22	TRUE
+H22	FALSE
+M22	Standard
+A23	Straight Sword
+B23	Broadsword
+C23	2020000.0
+D23	TRUE
+E23	TRUE
+F23	FALSE
+G23	TRUE
+H23	FALSE
+M23	Standard
+A24	Straight Sword
+B24	Weathered Straight Sword
+C24	2050000.0
+D24	TRUE
+E24	TRUE
+F24	FALSE
+G24	TRUE
+H24	FALSE
+M24	Standard
+A25	Straight Sword
+B25	Lordsworn's Straight Sword
+C25	2040000.0
+D25	TRUE
+E25	TRUE
+F25	FALSE
+G25	TRUE
+H25	FALSE
+M25	Standard
+A26	Straight Sword
+B26	Noble's Slender Sword
+C26	2230000.0
+D26	TRUE
+E26	TRUE
+F26	FALSE
+G26	TRUE
+H26	FALSE
+M26	Standard
+A27	Straight Sword
+B27	Cane Sword
+C27	2210000.0
+D27	TRUE
+E27	TRUE
+F27	FALSE
+G27	TRUE
+H27	FALSE
+M27	Standard
+A28	Straight Sword
+B28	Stone-Sheathed Sword
+C28	2540000.0
+D28	FALSE
+E28	TRUE
+F28	TRUE
+G28	TRUE
+H28	FALSE
+M28	Strike
+A29	Straight Sword
+B29	Warhawk's Talon
+C29	2240000.0
+D29	TRUE
+E29	TRUE
+F29	FALSE
+G29	TRUE
+H29	FALSE
+M29	Standard
+A30	Straight Sword
+B30	Lazuli Glintstone Sword
+C30	2250000.0
+D30	FALSE
+E30	TRUE
+F30	TRUE
+G30	TRUE
+H30	FALSE
+M30	Standard
+A31	Straight Sword
+B31	Carian Knight's Sword
+C31	2180000.0
+D31	FALSE
+E31	TRUE
+F31	TRUE
+G31	TRUE
+H31	FALSE
+M31	Standard
+A32	Straight Sword
+B32	Crystal Sword
+C32	2150000.0
+D32	FALSE
+E32	TRUE
+F32	TRUE
+G32	TRUE
+H32	FALSE
+M32	Standard
+A33	Straight Sword
+B33	Rotten Crystal Sword
+C33	2260000.0
+D33	FALSE
+E33	TRUE
+F33	TRUE
+G33	TRUE
+H33	FALSE
+M33	Standard
+A34	Straight Sword
+B34	Miquellan Knight's Sword
+C34	2200000.0
+D34	FALSE
+E34	TRUE
+F34	TRUE
+G34	TRUE
+H34	FALSE
+M34	Standard
+A35	Straight Sword
+B35	Ornamental Straight Sword
+C35	2060000.0
+D35	FALSE
+E35	TRUE
+F35	TRUE
+G35	FALSE
+H35	FALSE
+M35	Standard
+A36	Straight Sword
+B36	Golden Epitaph
+C36	2070000.0
+D36	FALSE
+E36	TRUE
+F36	TRUE
+G36	TRUE
+H36	FALSE
+M36	Standard
+A37	Straight Sword
+B37	Sword of St. Trina
+C37	2190000.0
+D37	FALSE
+E37	TRUE
+F37	TRUE
+G37	TRUE
+H37	FALSE
+M37	Standard
+A38	Straight Sword
+B38	Velvet Sword of St. Trina
+C38	2510000.0
+D38	FALSE
+E38	TRUE
+F38	TRUE
+G38	TRUE
+H38	FALSE
+M38	Standard
+A39	Straight Sword
+B39	Regalia of Eochaid
+C39	2220000.0
+D39	FALSE
+E39	TRUE
+F39	TRUE
+G39	TRUE
+H39	FALSE
+M39	Standard
+A40	Straight Sword
+B40	Coded Sword
+C40	2110000.0
+D40	FALSE
+E40	TRUE
+F40	TRUE
+G40	TRUE
+H40	FALSE
+M40	Standard
+A41	Straight Sword
+B41	Sword of Night and Flame
+C41	2140000.0
+D41	FALSE
+E41	TRUE
+F41	TRUE
+G41	TRUE
+H41	FALSE
+M41	Standard
+A42	Straight Sword
+B42	Sword of Light
+... 4816 more static cells omitted (see CSV)
+
+CROSS-SHEET REFERENCES: EquipParamWeapon
+FORMULA KINDS: excel=3
+UNIQUE PATTERNS: 3
+
+========================================================================
+FORMULA PATTERNS (fill-down compressed)
+{r} is the row of the cell. Port the template once and apply per row.
+========================================================================
+
+PATTERN 1  kind=excel  array=True  D2
+  context_label: Dagger
+  array_spill_ref: D2:D571
+  template: =IF(ISBLANK($B{r}:$B571),,
+IF(ISBLANK($C{r}:$C571),False,
+(VLOOKUP($C{r}:$C571,EquipParamWeapon!$A:$BR,MATCH("gemMountType",EquipParamWeapon!$1:$1,0),False)=2)
+*(NOT(VLOOKUP($C{r}:$C571,EquipParamWeapon!$A:$BR,MATCH("disableGemAttr",EquipParamWeapon!$1:$1,0),False)))=1))
+  e.g. D2: =IF(ISBLANK($B2:$B571),,
+IF(ISBLANK($C2:$C571),False,
+(VLOOKUP($C2:$C571,EquipParamWeapon!$A:$BR,MATCH("gemMountType",EquipParamWeapon!$1:$1,0),False)=2)
+*(NOT(VLOOKUP($C2:$C571,EquipParamWeapon!$A:$BR,MATCH("disableGemAttr",EquipParamWeapon!$1:$1,0),False)))=1))  cached=True
+
+PATTERN 2  kind=excel  array=True  E2
+  context_label: Dagger
+  array_spill_ref: E2:E571
+  template: =IF(ISBLANK($B{r}:$B571),,
+IF(ISBLANK($C{r}:$C571),False,
+IF(VLOOKUP($C{r}:$C571,EquipParamWeapon!$A:$BR,MATCH("originEquipWep1",EquipParamWeapon!$1:$1,0),False)=-1,False,True)))
+  e.g. E2: =IF(ISBLANK($B2:$B571),,
+IF(ISBLANK($C2:$C571),False,
+IF(VLOOKUP($C2:$C571,EquipParamWeapon!$A:$BR,MATCH("originEquipWep1",EquipParamWeapon!$1:$1,0),False)=-1,False,True)))  cached=True
+
+PATTERN 3  kind=excel  array=True  F2
+  context_label: Dagger
+  array_spill_ref: F2:F571
+  template: =IF(ISBLANK($B{r}:$B571),,
+IF(ISBLANK($C{r}:$C571),False,
+IF(NOT($E{r}:$E571),False,
+IF(VLOOKUP($C{r}:$C571,EquipParamWeapon!$A:$BR,MATCH("originEquipWep11",EquipParamWeapon!$1:$1,0),False)=-1,True,False))))
+  e.g. F2: =IF(ISBLANK($B2:$B571),,
+IF(ISBLANK($C2:$C571),False,
+IF(NOT($E2:$E571),False,
+IF(VLOOKUP($C2:$C571,EquipParamWeapon!$A:$BR,MATCH("originEquipWep11",EquipParamWeapon!$1:$1,0),False)=-1,True,False))))  cached=False
+
+========================================================================
+ALL FORMULAS
+========================================================================
+cell	kind	array_ref	label	logic	stored	cached
+D2	excel	D2:D571	Dagger	=IF(ISBLANK($B2:$B571),, | IF(ISBLANK($C2:$C571),False, | (VLOOKUP($C2:$C571,EquipParamWeapon!$A:$BR,MATCH("gemMountType",EquipParamWeapon!$1:$1,0),False)=2) | *(NOT(VLOOKUP($C2:$C571,EquipParamWeapon!$A:$BR,MATCH("disableGemAttr",EquipParamWeapon!$1:$1,0),False)))=1))	=IF(ISBLANK($B2:$B571),, | IF(ISBLANK($C2:$C571),False, | (VLOOKUP($C2:$C571,EquipParamWeapon!$A:$BR,MATCH("gemMountType",EquipParamWeapon!$1:$1,0),False)=2) | *(NOT(VLOOKUP($C2:$C571,EquipParamWeapon!$A:$BR,MATCH("disableGemAttr",EquipParamWeapon!$1:$1,0),False)))=1))	TRUE
+E2	excel	E2:E571	Dagger	=IF(ISBLANK($B2:$B571),, | IF(ISBLANK($C2:$C571),False, | IF(VLOOKUP($C2:$C571,EquipParamWeapon!$A:$BR,MATCH("originEquipWep1",EquipParamWeapon!$1:$1,0),False)=-1,False,True)))	=IF(ISBLANK($B2:$B571),, | IF(ISBLANK($C2:$C571),False, | IF(VLOOKUP($C2:$C571,EquipParamWeapon!$A:$BR,MATCH("originEquipWep1",EquipParamWeapon!$1:$1,0),False)=-1,False,True)))	TRUE
+F2	excel	F2:F571	Dagger	=IF(ISBLANK($B2:$B571),, | IF(ISBLANK($C2:$C571),False, | IF(NOT($E2:$E571),False, | IF(VLOOKUP($C2:$C571,EquipParamWeapon!$A:$BR,MATCH("originEquipWep11",EquipParamWeapon!$1:$1,0),False)=-1,True,False))))	=IF(ISBLANK($B2:$B571),, | IF(ISBLANK($C2:$C571),False, | IF(NOT($E2:$E571),False, | IF(VLOOKUP($C2:$C571,EquipParamWeapon!$A:$BR,MATCH("originEquipWep11",EquipParamWeapon!$1:$1,0),False)=-1,True,False))))	FALSE

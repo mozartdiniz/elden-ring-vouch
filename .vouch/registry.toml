@@ -1,0 +1,14 @@
+name = "elden-ring"
+description = "Elden Ring build maths — attack rating, scaling, requirements and status buildup — computed from the extracted Build Planner spreadsheet tables."
+
+notes = [
+  "When the user describes a build by only some of its stats, call character-build first. attack-power needs all five combat stats, and the unnamed ones are the starting class's minimums — real numbers, not ones you pick. Never invent a stat to fill an argument.",
+  "character-build reports stats_from_class_minimum and stats_raised_to_class_minimum. Both are figures the user did not choose, so say so rather than presenting them as part of their build.",
+  "Call weapon-lookup first for any question naming a weapon, even one spelled correctly. It returns the exact catalogue name, and the two bounds attack-power cannot check for itself: max_upgrade and infusable. Pass both on.",
+  "More than one candidate from weapon-lookup is not a list to choose from. Ask the user which weapon they meant; do not price the first one.",
+  "A weapon whose infusable is false takes Standard only. Asking for any other affinity on it silently prices the Standard version — the result says affinity_ignored, and quoting the affinity you asked for would be wrong.",
+  "Upgrade caps are +25 for smithing-stone weapons, +10 for somber, and +0 for weapons that cannot be reinforced. Always pass max_upgrade from weapon-lookup, or an impossible upgrade level is only caught after the fact.",
+  "Comparing weapons means calling attack-power once per weapon on the same stats, then ranking what came back. Say what you ranked on: total_ar alone ignores status buildup, reach, and whether the build meets the requirements.",
+  "Every figure is for the stat spread you passed. Two-handing changes strength, so a one-handed and a two-handed answer are different questions — say which one you computed.",
+  "These numbers come from the Build Planner spreadsheet at patch 1.19.1, not from the live game.",
+]

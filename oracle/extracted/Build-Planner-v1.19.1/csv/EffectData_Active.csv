@@ -1,0 +1,27 @@
+,,,,-1.0,-1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,0.0,,,,,,,,,
+ignore,,Equipped,ignore,conditionHp,conditionHpRate,addLifeForceStatus,addWillpowerStatus,addEndureStatus,addStrengthStatus,addDexterityStatus,addMagicStatus,addFaithStatus,addLuckStatus,maxHpRate,maxMpRate,maxStaminaRate,equipWeightChangeRate,neutralDamageCutRate,blowDamageCutRate,slashDamageCutRate,thrustDamageCutRate,magicDamageCutRate,fireDamageCutRate,thunderDamageCutRate,darkDamageCutRate,defEnemyDmgCorrectRate_Physics,defEnemyDmgCorrectRate_Magic,defEnemyDmgCorrectRate_Fire,defEnemyDmgCorrectRate_Thunder,defEnemyDmgCorrectRate_Dark,defPlayerDmgCorrectRate_Physics,defPlayerDmgCorrectRate_Magic,defPlayerDmgCorrectRate_Fire,defPlayerDmgCorrectRate_Thunder,defPlayerDmgCorrectRate_Dark,changePoisonResistPoint,changeDiseaseResistPoint,changeBloodResistPoint,changeFreezeResistPoint,changeSleepResistPoint,changeMadnessResistPoint,changeCurseResistPoint,physicsAttackPowerRate,magicAttackPowerRate,fireAttackPowerRate,thunderAttackPowerRate,darkAttackPowerRate,itemDropRate,,,,,,,,,
+Rakshasa's Great Katana,,Empty,FALSE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,vigor,0,,hp,1,,immunity,0
+Blue Dancer Charm,,Empty,FALSE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,mind,0.0,,fp,1.0,,robustness,0.0
+Crucible Scale Talisman,,Empty,FALSE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,endurance,0.0,,stam,1.0,,focus,0.0
+,,Empty,FALSE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,strength,0.0,,equip,1.0,,vitality,0.0
+,,Empty,FALSE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,dexterity,0.0,,discovery,0,,,
+,,,FALSE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,intelligence,0.0,,,,,atkphys,1
+,,,FALSE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,faith,0.0,,,,,atkmag,1.0
+,,,FALSE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,arcane,0.0,,,,,atkfire,1.0
+,,Empty,FALSE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,,,,,,,atkthun,1.0
+,,FALSE,FALSE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,,,,,,,atkdark,1.0
+,,Empty,FALSE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,,global,,pve,pvp,,,
+,,Empty,FALSE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,physical,1,,1,1,,,
+,,FALSE,FALSE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,strike,1.0,,1,1,,,
+,,Unarmed,FALSE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,slash,1.0,,1,1,,,
+,,Unarmed,FALSE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,pierce,1.0,,1,1,,,
+,,Unarmed,FALSE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,magic,1.0,,1,1,,,
+,,Unarmed,FALSE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,fire,1.0,,1.0,1.0,,,
+,,Unarmed,FALSE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,lightning,1.0,,1.0,1.0,,,
+,,Unarmed,FALSE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,dark,1.0,,1.0,1.0,,,
+,,Rain,TRUE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,,,,,,,,
+,,Wet,TRUE,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,output,,,,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0,,,,,,,,,
+,,low HP,FALSE,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,full HP,FALSE,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

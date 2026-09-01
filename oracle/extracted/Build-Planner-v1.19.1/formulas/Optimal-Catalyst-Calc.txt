@@ -1,0 +1,277 @@
+SHEET: Optimal Catalyst Calc
+WORKBOOK: Copy of ER - Build Planner v1.19.1.xlsx
+USED RANGE: A1:Q20
+NONEMPTY CELLS: 48
+FORMULA CELLS: 16
+
+This file is for an LLM that must rebuild these calculations in another language. Treat formulas as the source of truth. Cached/fallback values are only for checking a port. Skip spill_cache cells; they are not logic.
+
+MERGED RANGES (87):
+  E36:K36
+  E22:K22
+  O32:P32
+  O26:P26
+  O41:P41
+  O35:P35
+  E7:G7
+  E39:K39
+  O25:P25
+  E48:K48
+  O43:P43
+  E29:K29
+  O40:P40
+  E38:K38
+  O27:P27
+  M17:N17
+  E31:K31
+  E40:K40
+  H7:Q7
+  K13:L13
+  E26:K26
+  K15:L15
+  E25:K25
+  O45:P45
+  E6:G6
+  O29:P29
+  E50:K50
+  O44:P44
+  E42:K42
+  O31:P31
+  E52:K52
+  O21:P21
+  E44:K44
+  O51:P51
+  E20:K20
+  K17:L17
+  G16:H16
+  E30:K30
+  K10:L10
+  E46:K46
+  K16:L16
+  O19:P19
+  O34:P34
+  O28:P28
+  E32:K32
+  O39:P39
+  E41:K41
+  O36:P36
+  O30:P30
+  K11:L11
+  E47:K47
+  O20:P20
+  E10:I10
+  E43:K43
+  G13:H13
+  E24:K24
+  E33:K33
+  O22:P22
+  G15:H15
+  O46:P46
+  E35:K35
+  E11:I11
+  O47:P47
+  E19:K19
+  E28:K28
+  O48:P48
+  O23:P23
+  O38:P38
+  E45:K45
+  O24:P24
+  O33:P33
+  E5:L5
+  G17:H17
+  E37:K37
+  O49:P49
+  E21:K21
+  E23:K23
+  O50:P50
+  E51:K51
+  O42:P42
+  ... 7 more
+
+DATA VALIDATION / INPUTS:
+  K10  type=list  formula1=OptimalCatalystCalcData!$BB$2:$BB56
+  K11  type=list  formula1=OptimalCatalystCalcData!$BA$2:$BA56
+  G13:G17  type=custom  formula1=AND(G13>=1,G13<=99,G13=TRUNC(G13),ISNUMBER(G13))
+  M17  type=list  formula1=OptimalCatalystCalcData!$A$14:$A$16
+These cells are user inputs (dropdowns or constraints), not calculated.
+
+COMMENTS (author notes on UI / semantics):
+  E6: If you don't care about the changes listed in Changelog you can:
+    
+    Go to the UpdateData page and edit cell D2 to equal the update version
+    
+    Doing so will remove the notification until the next update
+    
+    If this says TRUE or is highlighted green with no update you can run the fix_updateBooleanFormat macro to restore proper functionality
+  E7: See Changelog for details
+    
+    If this is giving an error you can run the fix_importRangeError macro to restore proper functionality
+  E11: If no manual entry is made: will default to the somber equivalent of the Standard Reinforcement level selected.
+  M19: Only relevant for Sorceries that ignore non-intelligence scaling
+  N19: Only relevant for Incantations that ignore non-faith scaling
+  Q19: The multiplier affects damage rather than being inserted into AP/MV calculation
+
+STATIC / INPUT / LABEL CELLS (32):
+coord	value
+E5	To use this sheet: File > Make a copy
+E6	Update Available:
+E10	Standard Reinforcement
+K10	25.0
+E11	Special Reinforcement
+K11	10.0
+E13	Strength
+G13	14.0
+K13	Effective Only
+M13	TRUE
+E14	Dexterity
+G14	13.0
+K14	Sorceries
+M14	TRUE
+E15	Intelligence
+G15	9.0
+K15	Incantations
+M15	TRUE
+E16	Faith
+G16	9.0
+K16	2h
+M16	FALSE
+E17	Arcane
+G17	7.0
+K17	Sort By
+M17	Spell Buff
+E19	Catalyst
+L19	Spell Buff
+M19	Int SB
+N19	Faith SB
+O19	Damage Bonus
+Q19	Multiplier
+
+CROSS-SHEET REFERENCES: OptimalCatalystCalcData, UpdateData
+FORMULA KINDS: excel=11, excel_compat=5
+UNIQUE PATTERNS: 16
+
+========================================================================
+FORMULA PATTERNS (fill-down compressed)
+{r} is the row of the cell. Port the template once and apply per row.
+========================================================================
+
+PATTERN 1  kind=excel  array=False  H6
+  context_label: Update Available:
+  template: =IF(UpdateData!$D$2=UpdateData!$D$5,False,True)
+  e.g. H6: =IF(UpdateData!$D$2=UpdateData!$D$5,False,True)  cached=False
+
+PATTERN 2  kind=excel  array=False  E7
+  context_label: Update Available:
+  template: =IF(H{r-1},"Link to Update:","Link to Original:")
+  e.g. E7: =IF(H6,"Link to Update:","Link to Original:")  cached='Link to Original:'
+
+PATTERN 3  kind=excel  array=False  H7
+  template: =HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P{r}gdVMkPzFQX{r-1}OsjZcfyUjdGOj7Cjk9qFAVj-U/copy",
+UpdateData!D5&" - "&IF(H{r-1},"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))
+  e.g. H7: =HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U/copy",
+UpdateData!D5&" - "&IF(H6,"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))  cached='v1.19.1 - last updated 413 days ago'
+
+PATTERN 4  kind=excel  array=True  J10
+  context_label: Standard Reinforcement
+  array_spill_ref: J10:K10
+  template: ={"",25}
+  e.g. J10: ={"",25}
+
+PATTERN 5  kind=excel  array=True  J11
+  context_label: Special Reinforcement
+  array_spill_ref: J11:K11
+  template: ={"",TRUNC((K{r-1}+0.5)*0.4)}
+  e.g. J11: ={"",TRUNC((K10+0.5)*0.4)}
+
+PATTERN 6  kind=excel  array=True  F13
+  context_label: Strength
+  array_spill_ref: F13:G13
+  template: ={"",OptimalCatalystCalcData!$BD2}
+  e.g. F13: ={"",OptimalCatalystCalcData!$BD2}
+
+PATTERN 7  kind=excel  array=True  F14
+  context_label: Dexterity
+  array_spill_ref: F14:G14
+  template: ={"",OptimalCatalystCalcData!$BD3}
+  e.g. F14: ={"",OptimalCatalystCalcData!$BD3}
+
+PATTERN 8  kind=excel  array=True  F15
+  context_label: Intelligence
+  array_spill_ref: F15:G15
+  template: ={"",OptimalCatalystCalcData!$BD4}
+  e.g. F15: ={"",OptimalCatalystCalcData!$BD4}
+
+PATTERN 9  kind=excel  array=True  F16
+  context_label: Faith
+  array_spill_ref: F16:G16
+  template: ={"",OptimalCatalystCalcData!$BD5}
+  e.g. F16: ={"",OptimalCatalystCalcData!$BD5}
+
+PATTERN 10  kind=excel  array=True  F17
+  context_label: Arcane
+  array_spill_ref: F17:G17
+  template: ={"",OptimalCatalystCalcData!$BD6}
+  e.g. F17: ={"",OptimalCatalystCalcData!$BD6}
+
+PATTERN 11  kind=excel  array=True  E20
+  context_label: Catalyst
+  array_spill_ref: E20:E52
+  template: =OptimalCatalystCalcData!D2:D56
+  e.g. E20: =OptimalCatalystCalcData!D2:D56  cached='Frenzied Flame Seal +10'
+
+PATTERN 12  kind=excel_compat  array=True  L20
+  context_label: Spell Buff
+  array_spill_ref: L20:L52
+  template: =XLOOKUP($E{r}:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$J2:$J56,)
+  note: Stored with Excel _xlfn/_xlws prefix (newer functions like XLOOKUP).
+  e.g. L20: =XLOOKUP($E20:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$J2:$J56,)  cached=121
+
+PATTERN 13  kind=excel_compat  array=True  M20
+  context_label: Int SB
+  array_spill_ref: M20:M52
+  template: =XLOOKUP($E{r}:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$K2:$K56,)
+  note: Stored with Excel _xlfn/_xlws prefix (newer functions like XLOOKUP).
+  e.g. M20: =XLOOKUP($E20:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$K2:$K56,)  cached=103.4285714
+
+PATTERN 14  kind=excel_compat  array=True  N20
+  context_label: Faith SB
+  array_spill_ref: N20:N52
+  template: =XLOOKUP($E{r}:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$L2:$L56,)
+  note: Stored with Excel _xlfn/_xlws prefix (newer functions like XLOOKUP).
+  e.g. N20: =XLOOKUP($E20:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$L2:$L56,)  cached=106.8571429
+
+PATTERN 15  kind=excel_compat  array=True  O20
+  context_label: Damage Bonus
+  array_spill_ref: O20:O52
+  template: =XLOOKUP($E{r}:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$M2:$M56,)
+  note: Stored with Excel _xlfn/_xlws prefix (newer functions like XLOOKUP).
+  e.g. O20: =XLOOKUP($E20:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$M2:$M56,)  cached='Frenzied Flame'
+
+PATTERN 16  kind=excel_compat  array=True  Q20
+  context_label: Multiplier
+  array_spill_ref: Q20:Q52
+  template: =XLOOKUP($E{r}:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$N2:$N56,)
+  note: Stored with Excel _xlfn/_xlws prefix (newer functions like XLOOKUP).
+  e.g. Q20: =XLOOKUP($E20:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$N2:$N56,)  cached=1.2
+
+========================================================================
+ALL FORMULAS
+========================================================================
+cell	kind	array_ref	label	logic	stored	cached
+H6	excel		Update Available:	=IF(UpdateData!$D$2=UpdateData!$D$5,False,True)	=IF(UpdateData!$D$2=UpdateData!$D$5,False,True)	FALSE
+E7	excel		Update Available:	=IF(H6,"Link to Update:","Link to Original:")	=IF(H6,"Link to Update:","Link to Original:")	Link to Original:
+H7	excel			=HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U/copy", | UpdateData!D5&" - "&IF(H6,"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))	=HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U/copy", | UpdateData!D5&" - "&IF(H6,"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))	v1.19.1 - last updated 413 days ago
+J10	excel	J10:K10	Standard Reinforcement	={"",25}	={"",25}	
+J11	excel	J11:K11	Special Reinforcement	={"",TRUNC((K10+0.5)*0.4)}	={"",TRUNC((K10+0.5)*0.4)}	
+F13	excel	F13:G13	Strength	={"",OptimalCatalystCalcData!$BD2}	={"",OptimalCatalystCalcData!$BD2}	
+F14	excel	F14:G14	Dexterity	={"",OptimalCatalystCalcData!$BD3}	={"",OptimalCatalystCalcData!$BD3}	
+F15	excel	F15:G15	Intelligence	={"",OptimalCatalystCalcData!$BD4}	={"",OptimalCatalystCalcData!$BD4}	
+F16	excel	F16:G16	Faith	={"",OptimalCatalystCalcData!$BD5}	={"",OptimalCatalystCalcData!$BD5}	
+F17	excel	F17:G17	Arcane	={"",OptimalCatalystCalcData!$BD6}	={"",OptimalCatalystCalcData!$BD6}	
+E20	excel	E20:E52	Catalyst	=OptimalCatalystCalcData!D2:D56	=OptimalCatalystCalcData!D2:D56	Frenzied Flame Seal +10
+L20	excel_compat	L20:L52	Spell Buff	=XLOOKUP($E20:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$J2:$J56,)	=_xlfn.XLOOKUP($E20:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$J2:$J56,)	121
+M20	excel_compat	M20:M52	Int SB	=XLOOKUP($E20:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$K2:$K56,)	=_xlfn.XLOOKUP($E20:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$K2:$K56,)	103.4285714
+N20	excel_compat	N20:N52	Faith SB	=XLOOKUP($E20:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$L2:$L56,)	=_xlfn.XLOOKUP($E20:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$L2:$L56,)	106.8571429
+O20	excel_compat	O20:O52	Damage Bonus	=XLOOKUP($E20:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$M2:$M56,)	=_xlfn.XLOOKUP($E20:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$M2:$M56,)	Frenzied Flame
+Q20	excel_compat	Q20:Q52	Multiplier	=XLOOKUP($E20:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$N2:$N56,)	=_xlfn.XLOOKUP($E20:$E52,OptimalCatalystCalcData!$I2:$I56,OptimalCatalystCalcData!$N2:$N56,)	1.2

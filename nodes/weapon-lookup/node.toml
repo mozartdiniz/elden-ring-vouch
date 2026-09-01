@@ -1,0 +1,87 @@
+name = "weapon-lookup"
+version = "0.1.0"
+
+purpose = "Resolve an Elden Ring weapon name, and report its class, infusability and upgrade cap"
+
+use_when = [
+  "the user names a weapon in anything but its exact catalogue spelling",
+  "before any call to attack-power, to get the weapon's exact name and its upgrade cap",
+  "you need to know whether a weapon accepts affinities",
+  "you need to know whether a weapon exists in the game at all",
+]
+not_for = [
+  "attack power, scaling or requirements — call attack-power with the name this resolved",
+  "choosing between candidates when this reports more than one; that is the user's call",
+  "spells, armour, talismans or ashes of war",
+]
+
+run = ["python3", "lookup.py"]
+timeout_ms = 20000
+
+# The catalogue this resolves against. `attack-power` reads the same file, so a name resolved
+# here is a name that node can price.
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/WeaponData.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.query]
+guidance = "The weapon name exactly as the user wrote it. Do not tidy it up or guess at a fuller name first — resolving it is this node's job, and the guess is the thing being prevented."
+
+[params.weapon_class]
+guidance = "Optional, e.g. 'Katana', 'Colossal Sword', 'Straight Sword'. Use it only when the user named a class themselves; do not invent one to force an ambiguous query to resolve."
+
+[[requires]]
+expr = "size(input.query) >= 3"
+message = "a weapon query needs at least 3 characters; anything shorter matches too much of a 570-weapon catalogue to resolve a single name"
+
+# The postcondition this node exists for: `resolved` is set if and only if exactly one weapon
+# matched. It makes picking a name out of an ambiguous match a defect rather than a plausible
+# answer, so that failure cannot reach a caller as a value.
+[[ensures]]
+expr = '(result.resolved != "") == (result.match_count == 1)'
+
+[[ensures]]
+expr = 'result.resolved == "" || result.resolved in result.candidates'
+
+[[ensures]]
+expr = "result.ambiguous == (result.match_count > 1)"
+
+# The listed candidates are a prefix of the matches, so the count may exceed them — but never
+# the other way round, and the flag has to agree with which case it is.
+[[ensures]]
+expr = "result.match_count >= size(result.candidates)"
+
+[[ensures]]
+expr = "result.candidates_truncated == (result.match_count > size(result.candidates))"
+
+[[ensures]]
+expr = "result.catalog_size >= result.match_count"
+
+# An unresolved query has no weapon to report bounds for, so it must not appear to have any.
+# A resolved one must carry a cap that is a real upgrade level: 0, 10 or 25.
+[[ensures]]
+expr = 'result.resolved != "" || (result.max_upgrade == 0 && result.weapon_class == "" && !result.infusable)'
+
+[[ensures]]
+expr = "result.max_upgrade == 0 || result.max_upgrade == 10 || result.max_upgrade == 25"
+
+# Only smithing-stone weapons reach +25, and those are exactly the infusable ones.
+[[ensures]]
+expr = "result.infusable == (result.max_upgrade == 25)"
+
+[[examples]]
+ask = "what should I level for an Ordovis's Greatsword build?"
+call = { query = "ordovis" }
+
+[[examples]]
+ask = "is rivers of blood any good?"
+call = { query = "rivers of blood" }
+
+[[examples]]
+ask = "what katana should I use?"
+call = { query = "katana", weapon_class = "Katana" }

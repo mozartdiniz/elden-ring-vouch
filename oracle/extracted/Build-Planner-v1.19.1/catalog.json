@@ -1,0 +1,623 @@
+{
+  "sheets": [
+    {
+      "sheet": "UpdateData",
+      "hidden": true,
+      "rows": 5,
+      "cols": 4,
+      "nonempty": 12,
+      "formulas": 4,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/UpdateData.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/UpdateData.txt",
+      "cross_sheet": []
+    },
+    {
+      "sheet": "ChangelogData",
+      "hidden": true,
+      "rows": 218,
+      "cols": 2,
+      "nonempty": 222,
+      "formulas": 0,
+      "kind": "data",
+      "csv": "Build-Planner-v1.19.1/csv/ChangelogData.csv"
+    },
+    {
+      "sheet": "Planner",
+      "hidden": false,
+      "rows": 62,
+      "cols": 43,
+      "nonempty": 512,
+      "formulas": 264,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/Planner.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/Planner.txt",
+      "cross_sheet": [
+        "DropdownData",
+        "MagicApData",
+        "PlannerData",
+        "RollTypeData",
+        "StartingClassData",
+        "UpdateData"
+      ]
+    },
+    {
+      "sheet": "Matchmaking Calc (Beta)",
+      "hidden": false,
+      "rows": 24,
+      "cols": 12,
+      "nonempty": 56,
+      "formulas": 25,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/Matchmaking-Calc-Beta.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/Matchmaking-Calc-Beta.txt",
+      "cross_sheet": [
+        "MatchmakingCalcData",
+        "UpdateData"
+      ]
+    },
+    {
+      "sheet": "Downscaling (Alpha)",
+      "hidden": true,
+      "rows": 34,
+      "cols": 15,
+      "nonempty": 211,
+      "formulas": 53,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/Downscaling-Alpha.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/Downscaling-Alpha.txt",
+      "cross_sheet": []
+    },
+    {
+      "sheet": "AP Calc",
+      "hidden": false,
+      "rows": 52,
+      "cols": 22,
+      "nonempty": 378,
+      "formulas": 222,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/AP-Calc.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/AP-Calc.txt",
+      "cross_sheet": [
+        "ApCalcData",
+        "UpdateData",
+        "WeaponData"
+      ]
+    },
+    {
+      "sheet": "Optimal Affinity Calc",
+      "hidden": false,
+      "rows": 40,
+      "cols": 25,
+      "nonempty": 155,
+      "formulas": 52,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/Optimal-Affinity-Calc.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/Optimal-Affinity-Calc.txt",
+      "cross_sheet": [
+        "OptimalAffinityCalcData",
+        "PlannerData",
+        "UpdateData"
+      ]
+    },
+    {
+      "sheet": "Optimal Catalyst Calc",
+      "hidden": false,
+      "rows": 20,
+      "cols": 17,
+      "nonempty": 48,
+      "formulas": 16,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/Optimal-Catalyst-Calc.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/Optimal-Catalyst-Calc.txt",
+      "cross_sheet": [
+        "OptimalCatalystCalcData",
+        "UpdateData"
+      ]
+    },
+    {
+      "sheet": "Damage Calc",
+      "hidden": false,
+      "rows": 122,
+      "cols": 27,
+      "nonempty": 1007,
+      "formulas": 442,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/Damage-Calc.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/Damage-Calc.txt",
+      "cross_sheet": [
+        "PlannerData",
+        "UpdateData"
+      ]
+    },
+    {
+      "sheet": "Builds",
+      "hidden": false,
+      "rows": 41,
+      "cols": 2,
+      "nonempty": 82,
+      "formulas": 1,
+      "kind": "mixed",
+      "csv": "Build-Planner-v1.19.1/csv/Builds.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/Builds.txt",
+      "cross_sheet": [
+        "BuildsData"
+      ]
+    },
+    {
+      "sheet": "Database Builds",
+      "hidden": false,
+      "rows": 43,
+      "cols": 5,
+      "nonempty": 205,
+      "formulas": 195,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/Database-Builds.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/Database-Builds.txt",
+      "cross_sheet": [
+        "Export"
+      ]
+    },
+    {
+      "sheet": "Changelog",
+      "hidden": false,
+      "rows": 218,
+      "cols": 2,
+      "nonempty": 222,
+      "formulas": 222,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/Changelog.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/Changelog.txt",
+      "cross_sheet": [
+        "ChangelogData"
+      ]
+    },
+    {
+      "sheet": "PlannerData",
+      "hidden": false,
+      "rows": 40,
+      "cols": 163,
+      "nonempty": 2196,
+      "formulas": 1897,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/PlannerData.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/PlannerData.txt",
+      "cross_sheet": [
+        "ArmorData",
+        "AttackElementCorrectParam",
+        "CalcCorrectGraphEz",
+        "ConsumableData",
+        "DropdownData",
+        "EffectData",
+        "EffectData_Active",
+        "EquipParamAccessory",
+        "EquipParamProtector",
+        "EquipParamWeapon",
+        "Planner",
+        "PlayerCommonParam",
+        "ReinforceParamWeapon",
+        "StatusEffectData",
+        "TalismanData",
+        "WeaponData"
+      ]
+    },
+    {
+      "sheet": "MagicApData",
+      "hidden": false,
+      "rows": 204,
+      "cols": 99,
+      "nonempty": 4767,
+      "formulas": 4475,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/MagicApData.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/MagicApData.txt",
+      "cross_sheet": [
+        "EquipParamWeapon",
+        "MagicData",
+        "Planner",
+        "PlannerData",
+        "StatusEffectData",
+        "WeaponData"
+      ]
+    },
+    {
+      "sheet": "MatchmakingCalcData",
+      "hidden": false,
+      "rows": 30,
+      "cols": 18,
+      "nonempty": 243,
+      "formulas": 126,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/MatchmakingCalcData.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/MatchmakingCalcData.txt",
+      "cross_sheet": [
+        "Matchmaking Calc (Beta)",
+        "PlannerData",
+        "WeaponData"
+      ]
+    },
+    {
+      "sheet": "ApCalcData",
+      "hidden": false,
+      "rows": 47,
+      "cols": 30,
+      "nonempty": 608,
+      "formulas": 382,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/ApCalcData.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/ApCalcData.txt",
+      "cross_sheet": [
+        "AP Calc",
+        "AttackElementCorrectParam",
+        "CalcCorrectGraphEz",
+        "ConsumableData",
+        "EquipParamWeapon",
+        "Planner",
+        "PlannerData",
+        "PlayerCommonParam",
+        "ReinforceParamWeapon",
+        "StatusBuffData",
+        "StatusEffectData",
+        "WeaponData"
+      ]
+    },
+    {
+      "sheet": "OptimalAffinityCalcData",
+      "hidden": false,
+      "rows": 58,
+      "cols": 103,
+      "nonempty": 1432,
+      "formulas": 1255,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/OptimalAffinityCalcData.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/OptimalAffinityCalcData.txt",
+      "cross_sheet": [
+        "AttackElementCorrectParam",
+        "CalcCorrectGraphEz",
+        "EquipParamWeapon",
+        "Optimal Affinity Calc",
+        "Planner",
+        "PlannerData",
+        "ReinforceParamWeapon",
+        "WeaponData"
+      ]
+    },
+    {
+      "sheet": "OptimalCatalystCalcData",
+      "hidden": false,
+      "rows": 34,
+      "cols": 56,
+      "nonempty": 1381,
+      "formulas": 1146,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/OptimalCatalystCalcData.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/OptimalCatalystCalcData.txt",
+      "cross_sheet": [
+        "AttackElementCorrectParam",
+        "CalcCorrectGraphEz",
+        "EquipParamWeapon",
+        "Optimal Catalyst Calc",
+        "PlannerData",
+        "ReinforceParamWeapon",
+        "WeaponData"
+      ]
+    },
+    {
+      "sheet": "BuildsData",
+      "hidden": false,
+      "rows": 706,
+      "cols": 43,
+      "nonempty": 6233,
+      "formulas": 259,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/BuildsData.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/BuildsData.txt",
+      "cross_sheet": [
+        "ArmorData",
+        "Builds",
+        "CrystalTearData",
+        "GreatRuneData",
+        "MagicData",
+        "Planner",
+        "PlannerData",
+        "TalismanData",
+        "WeaponData"
+      ]
+    },
+    {
+      "sheet": "DropdownData",
+      "hidden": true,
+      "rows": 525,
+      "cols": 65,
+      "nonempty": 8404,
+      "formulas": 7891,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/DropdownData.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/DropdownData.txt",
+      "cross_sheet": [
+        "ArmorData",
+        "Builds",
+        "BuildsData",
+        "CrystalTearData",
+        "Flame",
+        "GreatRuneData",
+        "MagicApData",
+        "MagicData",
+        "O Flame",
+        "Planner",
+        "PlannerData",
+        "StartingClassData",
+        "TalismanData",
+        "WeaponData"
+      ]
+    },
+    {
+      "sheet": "StartingClassData",
+      "hidden": true,
+      "rows": 22,
+      "cols": 10,
+      "nonempty": 202,
+      "formulas": 111,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/StartingClassData.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/StartingClassData.txt",
+      "cross_sheet": [
+        "Planner"
+      ]
+    },
+    {
+      "sheet": "RollTypeData",
+      "hidden": true,
+      "rows": 100,
+      "cols": 5,
+      "nonempty": 208,
+      "formulas": 103,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/RollTypeData.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/RollTypeData.txt",
+      "cross_sheet": [
+        "CalcCorrectGraphEz",
+        "PlannerData"
+      ]
+    },
+    {
+      "sheet": "WeaponData",
+      "hidden": true,
+      "rows": 571,
+      "cols": 16,
+      "nonempty": 5219,
+      "formulas": 3,
+      "kind": "mixed",
+      "csv": "Build-Planner-v1.19.1/csv/WeaponData.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/WeaponData.txt",
+      "cross_sheet": [
+        "EquipParamWeapon"
+      ]
+    },
+    {
+      "sheet": "MagicData",
+      "hidden": true,
+      "rows": 524,
+      "cols": 65,
+      "nonempty": 16803,
+      "formulas": 0,
+      "kind": "data",
+      "csv": "Build-Planner-v1.19.1/csv/MagicData.csv"
+    },
+    {
+      "sheet": "ConsumableData",
+      "hidden": true,
+      "rows": 91,
+      "cols": 7,
+      "nonempty": 637,
+      "formulas": 0,
+      "kind": "data",
+      "csv": "Build-Planner-v1.19.1/csv/ConsumableData.csv"
+    },
+    {
+      "sheet": "ArmorData",
+      "hidden": true,
+      "rows": 705,
+      "cols": 3,
+      "nonempty": 2115,
+      "formulas": 0,
+      "kind": "data",
+      "csv": "Build-Planner-v1.19.1/csv/ArmorData.csv"
+    },
+    {
+      "sheet": "TalismanData",
+      "hidden": true,
+      "rows": 155,
+      "cols": 3,
+      "nonempty": 465,
+      "formulas": 1,
+      "kind": "mixed",
+      "csv": "Build-Planner-v1.19.1/csv/TalismanData.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/TalismanData.txt",
+      "cross_sheet": [
+        "EquipParamAccessory"
+      ]
+    },
+    {
+      "sheet": "GreatRuneData",
+      "hidden": true,
+      "rows": 14,
+      "cols": 2,
+      "nonempty": 26,
+      "formulas": 0,
+      "kind": "data",
+      "csv": "Build-Planner-v1.19.1/csv/GreatRuneData.csv"
+    },
+    {
+      "sheet": "CrystalTearData",
+      "hidden": true,
+      "rows": 41,
+      "cols": 2,
+      "nonempty": 82,
+      "formulas": 0,
+      "kind": "data",
+      "csv": "Build-Planner-v1.19.1/csv/CrystalTearData.csv"
+    },
+    {
+      "sheet": "StatusBuffData",
+      "hidden": true,
+      "rows": 17,
+      "cols": 50,
+      "nonempty": 850,
+      "formulas": 0,
+      "kind": "data",
+      "csv": "Build-Planner-v1.19.1/csv/StatusBuffData.csv"
+    },
+    {
+      "sheet": "EffectData",
+      "hidden": true,
+      "rows": 532,
+      "cols": 49,
+      "nonempty": 25257,
+      "formulas": 27,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/EffectData.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/EffectData.txt",
+      "cross_sheet": [
+        "PlannerData"
+      ]
+    },
+    {
+      "sheet": "EffectData_Active",
+      "hidden": true,
+      "rows": 27,
+      "cols": 58,
+      "nonempty": 1210,
+      "formulas": 1046,
+      "kind": "calc",
+      "csv": "Build-Planner-v1.19.1/csv/EffectData_Active.csv",
+      "formulas_file": "Build-Planner-v1.19.1/formulas/EffectData_Active.txt",
+      "cross_sheet": [
+        "EffectData",
+        "PlannerData"
+      ]
+    },
+    {
+      "sheet": "StatusEffectData",
+      "hidden": true,
+      "rows": 1512,
+      "cols": 15,
+      "nonempty": 22680,
+      "formulas": 0,
+      "kind": "data",
+      "csv": "Build-Planner-v1.19.1/csv/StatusEffectData.csv"
+    },
+    {
+      "sheet": "AttackElementCorrectParam",
+      "hidden": true,
+      "rows": 186,
+      "cols": 79,
+      "nonempty": 14568,
+      "formulas": 0,
+      "kind": "data",
+      "csv": "Build-Planner-v1.19.1/csv/AttackElementCorrectParam.csv"
+    },
+    {
+      "sheet": "CalcCorrectGraphEz",
+      "hidden": true,
+      "rows": 78,
+      "cols": 793,
+      "nonempty": 61854,
+      "formulas": 0,
+      "kind": "data",
+      "csv": "Build-Planner-v1.19.1/csv/CalcCorrectGraphEz.csv"
+    },
+    {
+      "sheet": "EquipParamAccessory",
+      "hidden": true,
+      "rows": 159,
+      "cols": 10,
+      "nonempty": 1586,
+      "formulas": 0,
+      "kind": "data",
+      "csv": "Build-Planner-v1.19.1/csv/EquipParamAccessory.csv"
+    },
+    {
+      "sheet": "EquipParamProtector",
+      "hidden": true,
+      "rows": 822,
+      "cols": 24,
+      "nonempty": 19674,
+      "formulas": 0,
+      "kind": "data",
+      "csv": "Build-Planner-v1.19.1/csv/EquipParamProtector.csv"
+    },
+    {
+      "sheet": "EquipParamWeapon",
+      "hidden": true,
+      "rows": 3556,
+      "cols": 71,
+      "nonempty": 252330,
+      "formulas": 0,
+      "kind": "data",
+      "csv": "Build-Planner-v1.19.1/csv/EquipParamWeapon.csv"
+    },
+    {
+      "sheet": "PlayerCommonParam",
+      "hidden": true,
+      "rows": 3,
+      "cols": 73,
+      "nonempty": 217,
+      "formulas": 0,
+      "kind": "data",
+      "csv": "Build-Planner-v1.19.1/csv/PlayerCommonParam.csv"
+    },
+    {
+      "sheet": "ReinforceParamWeapon",
+      "hidden": true,
+      "rows": 915,
+      "cols": 32,
+      "nonempty": 28395,
+      "formulas": 0,
+      "kind": "data",
+      "csv": "Build-Planner-v1.19.1/csv/ReinforceParamWeapon.csv"
+    }
+  ],
+  "sheetnames": [
+    "UpdateData",
+    "ChangelogData",
+    "Planner",
+    "Matchmaking Calc (Beta)",
+    "Downscaling (Alpha)",
+    "AP Calc",
+    "Optimal Affinity Calc",
+    "Optimal Catalyst Calc",
+    "Damage Calc",
+    "Builds",
+    "Database Builds",
+    "Changelog",
+    "PlannerData",
+    "MagicApData",
+    "MatchmakingCalcData",
+    "ApCalcData",
+    "OptimalAffinityCalcData",
+    "OptimalCatalystCalcData",
+    "BuildsData",
+    "DropdownData",
+    "StartingClassData",
+    "RollTypeData",
+    "WeaponData",
+    "MagicData",
+    "ConsumableData",
+    "ArmorData",
+    "TalismanData",
+    "GreatRuneData",
+    "CrystalTearData",
+    "StatusBuffData",
+    "EffectData",
+    "EffectData_Active",
+    "StatusEffectData",
+    "AttackElementCorrectParam",
+    "CalcCorrectGraphEz",
+    "EquipParamAccessory",
+    "EquipParamProtector",
+    "EquipParamWeapon",
+    "PlayerCommonParam",
+    "ReinforceParamWeapon"
+  ]
+}

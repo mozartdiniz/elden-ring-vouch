@@ -1,0 +1,189 @@
+name = "attack-power"
+version = "0.1.0"
+
+purpose = "Attack rating, scaling and status buildup for one weapon at one upgrade level and stat spread"
+
+use_when = [
+  "the question asks what a weapon hits for, at a given stat spread or upgrade level",
+  "the question asks how a weapon scales, or what letter grade a stat gets on it",
+  "the question compares two weapons on the same build — call this once per weapon",
+  "the question asks whether a build meets a weapon's requirements",
+]
+not_for = [
+  "resolving a weapon name — call weapon-lookup first and pass its `resolved`",
+  "spell damage, armour, or how a weapon performs against a specific enemy's defences",
+  "which weapon is best overall; rank the numbers this returns and say what you ranked on",
+]
+
+run = ["python3", "ap.py"]
+timeout_ms = 30000
+
+# The extracted spreadsheet tables the calculation reads. Together they are what makes a
+# number here checkable tomorrow: if the Build Planner is re-extracted, these hashes change.
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/WeaponData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/EquipParamWeapon.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/ReinforceParamWeapon.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/AttackElementCorrectParam.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/CalcCorrectGraphEz.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/StatusEffectData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/StatusBuffData.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.weapon]
+guidance = "The exact catalogue name. Take it from weapon-lookup's `resolved` field; do not type it from memory, and never pass a name weapon-lookup left unresolved."
+
+[params.affinity]
+guidance = "Standard, Heavy, Keen, Quality, Fire, Flame Art, Lightning, Sacred, Magic, Cold, Poison, Blood, or Occult. Use Standard for any weapon whose weapon-lookup `infusable` is false — anything else is ignored, and the result will say so."
+
+[params.upgrade]
+guidance = "Use weapon-lookup's `max_upgrade` for a fully upgraded weapon: 25 for smithing-stone weapons, 10 for somber, 0 for weapons that cannot be reinforced. Passing more than the weapon's cap produces no answer."
+
+[params.max_upgrade]
+guidance = "Copy weapon-lookup's `max_upgrade` for this weapon. It lets the runtime reject an impossible upgrade level before the node runs, which is a correction you can act on rather than a failure after the fact."
+
+[params.strength]
+guidance = "The build's strength. Two-handing already applies the 1.5x bonus, so pass the raw stat and set two_hand."
+
+[params.dexterity]
+guidance = "The build's dexterity."
+
+[params.intelligence]
+guidance = "The build's intelligence."
+
+[params.faith]
+guidance = "The build's faith."
+
+[params.arcane]
+guidance = "The build's arcane. It scales bleed and rot buildup as well as some weapons' damage."
+
+[params.two_hand]
+guidance = "True if the weapon is held in both hands. It raises effective strength by half, and often meets a strength requirement a one-handed build misses."
+
+[params.ignore_require]
+guidance = "Leave false. True removes the unmet-requirement penalty, which answers 'what could this weapon do' rather than 'what does this build hit for'."
+
+[params.status_buff]
+guidance = "A buff that adds status buildup, e.g. 'Frozen Armament'. Omit it unless the user named one."
+
+# --- preconditions: what can be judged from the call alone ---
+
+[[requires]]
+expr = '''
+input.affinity in [
+  "Standard", "Heavy", "Keen", "Quality", "Fire", "Flame Art", "Lightning",
+  "Sacred", "Magic", "Cold", "Poison", "Blood", "Occult"
+]
+'''
+message = "unknown affinity; the thirteen are Standard, Heavy, Keen, Quality, Fire, Flame Art, Lightning, Sacred, Magic, Cold, Poison, Blood and Occult. A weapon whose weapon-lookup `infusable` is false takes Standard only."
+
+[[requires]]
+expr = "input.upgrade >= 0 && input.upgrade <= 25"
+message = "upgrade must be between 0 and 25; call weapon-lookup for this weapon's actual cap, which is 10 for somber weapons and 0 for weapons that cannot be reinforced"
+
+# The weapon's own cap, when the caller brought it along. This is the honest mistake — asking
+# for a +25 somber weapon — and with the bound declared it becomes a refusal that says what to
+# do instead, rather than a defect that blames the node. A caller who passes a *wrong* bound is
+# still caught, by the postcondition below, which uses the cap the node looked up itself.
+[[requires]]
+expr = "!has(input.max_upgrade) || input.upgrade <= input.max_upgrade"
+message = "this weapon cannot be upgraded that far; weapon-lookup reported a lower max_upgrade for it — smithing-stone weapons reach +25, somber weapons +10, and some weapons cannot be reinforced at all"
+
+[[requires]]
+expr = """
+input.strength >= 1 && input.strength <= 99 &&
+input.dexterity >= 1 && input.dexterity <= 99 &&
+input.intelligence >= 1 && input.intelligence <= 99 &&
+input.faith >= 1 && input.faith <= 99 &&
+input.arcane >= 1 && input.arcane <= 99
+"""
+message = "every stat must be between 1 and 99; a character cannot have less than 1 or more than 99 in any stat, and the spreadsheet will happily compute an attack rating for values it can never reach"
+
+# --- postconditions ---
+#
+# The first is the one that matters most, and it is a postcondition rather than a precondition
+# only because a CEL expression cannot read the weapon table. `ap_calc.py` computes Moonveil
+# +25 as 180.39 without complaint. Comparing the upgrade against the cap the node looked up
+# turns that into no answer at all.
+
+[[ensures]]
+expr = "result.upgrade <= result.max_upgrade"
+
+# And the bound the caller declared, if any, has to have been the true one — otherwise the
+# refusal above could be talked out of firing by passing a generous number.
+[[ensures]]
+expr = "!has(input.max_upgrade) || input.max_upgrade == result.max_upgrade"
+
+[[ensures]]
+expr = "result.max_upgrade == 0 || result.max_upgrade == 10 || result.max_upgrade == 25"
+
+[[ensures]]
+expr = "result.infusable == (result.max_upgrade == 25)"
+
+# A non-infusable weapon is always priced as Standard, and the substitution has to be
+# reported rather than absorbed: a caller must not repeat the affinity it asked for.
+[[ensures]]
+expr = 'result.infusable || result.affinity_applied == "Standard"'
+
+[[ensures]]
+expr = "result.affinity_ignored == (result.affinity_requested != result.affinity_applied)"
+
+[[ensures]]
+expr = "result.total_ar > 0.0"
+
+# The headline figure has to be the sum of its parts, or the breakdown and the total are
+# telling a caller two different things. A tolerance, because these are doubles.
+[[ensures]]
+expr = """
+result.attack.physical + result.attack.magic + result.attack.fire +
+result.attack.lightning + result.attack.holy - result.total_ar < 0.000001 &&
+result.total_ar - (result.attack.physical + result.attack.magic + result.attack.fire +
+result.attack.lightning + result.attack.holy) < 0.000001
+"""
+
+# What the game displays is the full-precision figure truncated, never rounded up.
+[[ensures]]
+expr = "result.total_ar_rounded <= result.total_ar && result.total_ar < result.total_ar_rounded + 1"
+
+# `requirements_met` must agree with the per-stat flags rather than being set on its own —
+# the summary and the detail cannot be allowed to disagree.
+[[ensures]]
+expr = """
+result.requirements_met == (
+  result.scaling.strength.req_met && result.scaling.dexterity.req_met &&
+  result.scaling.intelligence.req_met && result.scaling.faith.req_met &&
+  result.scaling.arcane.req_met
+)
+"""
+
+[[ensures]]
+expr = "result.upgrade == input.upgrade && result.two_hand == (has(input.two_hand) && input.two_hand)"
+
+[[examples]]
+ask = "what does a fully upgraded Longsword hit for at 20 strength?"
+call = { weapon = "Longsword", affinity = "Standard", upgrade = 25, strength = 20, dexterity = 13, intelligence = 80, faith = 7, arcane = 9 }
+
+[[examples]]
+ask = "how good is Ordovis's Greatsword on a strength-faith build at RL150?"
+call = { weapon = "Ordovis's Greatsword", affinity = "Standard", upgrade = 10, strength = 40, dexterity = 20, intelligence = 10, faith = 40, arcane = 10, two_hand = true }
+
+[[examples]]
+ask = "is Heavy better than Standard on a Zweihander for a strength build?"
+call = { weapon = "Zweihander", affinity = "Heavy", upgrade = 25, strength = 60, dexterity = 12, intelligence = 10, faith = 10, arcane = 10, two_hand = true }

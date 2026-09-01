@@ -1,0 +1,55 @@
+# Node fixtures (§7.1). The class starting levels and HP are the game's own; the rest pins
+# the behaviour that stops a caller inventing a stat.
+
+[[case]]
+name = "Wretch starts at rune level 1 with flat tens"
+input = { starting_class = "Wretch" }
+expect = { "result.level" = 1, "result.class_level" = 1, "result.points_spent" = 0, "result.stats.vigor" = 10, "result.stats.arcane" = 10 }
+
+[[case]]
+name = "Hero starts at rune level 7"
+input = { starting_class = "Hero" }
+expect = { "result.class_level" = 7, "result.stats.strength" = 16, "result.hp" = 499 }
+
+[[case]]
+name = "Astrologer starts at rune level 6"
+input = { starting_class = "Astrologer" }
+expect = { "result.class_level" = 6, "result.stats.intelligence" = 16 }
+
+# The case this node exists for: two stats named, six filled from the class, and the result
+# says which were which so an answer can be honest about what nobody chose.
+[[case]]
+name = "unnamed stats come from the class, and are reported as such"
+input = { starting_class = "Hero", strength = 60, faith = 60 }
+expect = { "result.level" = 103, "result.points_spent" = 96, "result.stats.dexterity" = 9, "result.stats_given[0]" = "faith", "result.stats_given[1]" = "strength", "result.stats_from_class_minimum[0]" = "arcane" }
+
+[[case]]
+name = "a named stat comes back exactly as given"
+input = { starting_class = "Astrologer", intelligence = 60, vigor = 40 }
+expect = { "result.stats.intelligence" = 60, "result.stats.vigor" = 40 }
+
+# A class cannot go below its own floor, so asking for less gives the floor back.
+[[case]]
+name = "asking below the class floor returns the floor, and says so"
+input = { starting_class = "Hero", strength = 5 }
+expect = { "result.stats.strength" = 16, "result.stats_raised_to_class_minimum[0]" = "strength" }
+
+[[case]]
+name = "the optimal class for a pure intelligence build is the one that starts there"
+input = { starting_class = "Hero", intelligence = 60 }
+expect = { "result.optimal_class" = "Astrologer" }
+
+[[case]]
+name = "an unknown starting class is refused with the ten names"
+input = { starting_class = "Paladin" }
+expect_code = 11
+
+[[case]]
+name = "a stat above 99 is refused"
+input = { starting_class = "Hero", strength = 120 }
+expect_code = 11
+
+[[case]]
+name = "a missing starting class is a caller error"
+input = { strength = 60 }
+expect_code = 10

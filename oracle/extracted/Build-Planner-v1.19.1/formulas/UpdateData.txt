@@ -1,0 +1,63 @@
+SHEET: UpdateData
+WORKBOOK: Copy of ER - Build Planner v1.19.1.xlsx
+USED RANGE: A1:D5
+NONEMPTY CELLS: 12
+FORMULA CELLS: 4
+
+This file is for an LLM that must rebuild these calculations in another language. Treat formulas as the source of truth. Cached/fallback values are only for checking a port. Skip spill_cache cells; they are not logic.
+
+VISIBILITY: hidden
+DATA VALIDATION / INPUTS:
+  B2  type=list  formula1=$A$2
+These cells are user inputs (dropdowns or constraints), not calculated.
+
+STATIC / INPUT / LABEL CELLS (8):
+coord	value
+A1	Current Date
+B1	Last Edited
+C1	Days Since
+D1	Version
+B2	2025-07-03 00:00:00
+D2	v1.19.1
+C4	Days Since (origin sheet)
+D4	Version (origin sheet)
+
+CROSS-SHEET REFERENCES: (none)
+FORMULA KINDS: excel=2, google_sheets=1, spill_cache=1
+UNIQUE PATTERNS: 4
+
+========================================================================
+FORMULA PATTERNS (fill-down compressed)
+{r} is the row of the cell. Port the template once and apply per row.
+========================================================================
+
+PATTERN 1  kind=excel  array=False  A2
+  context_label: Current Date
+  template: =TODAY()
+  e.g. A2: =TODAY()  cached=datetime.datetime(2026, 8, 20, 0, 0)
+
+PATTERN 2  kind=excel  array=False  C2
+  context_label: Days Since
+  template: =DATEVALUE(A{r})-DATEVALUE(B{r})
+  e.g. C2: =DATEVALUE(A2)-DATEVALUE(B2)  cached=413
+
+PATTERN 3  kind=google_sheets  array=False  C5
+  context_label: Days Since (origin sheet)
+  template: =IMPORTRANGE("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX{r+1}OsjZcfyUjdGOj7Cjk9qFAVj-U","UpdateData!C2:D2")
+  note: Original Google Sheets formula recovered from DUMMYFUNCTION wrapper. Functions like FILTER, QUERY, UNIQUE, FLATTEN, IMPORTRANGE, GOOGLETRANSLATE are Sheets-only and must be reimplemented.
+  e.g. C5: =IMPORTRANGE("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U","UpdateData!C2:D2")  cached=413
+
+PATTERN 4  kind=spill_cache  array=False  D5
+  context_label: Version (origin sheet)
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"v1.19.1")
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. D5: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"v1.19.1")  cached='v1.19.1'
+
+========================================================================
+ALL FORMULAS
+========================================================================
+cell	kind	array_ref	label	logic	stored	cached
+A2	excel		Current Date	=TODAY()	=TODAY()	2026-08-20 00:00:00
+C2	excel		Days Since	=DATEVALUE(A2)-DATEVALUE(B2)	=DATEVALUE(A2)-DATEVALUE(B2)	413
+C5	google_sheets		Days Since (origin sheet)	=IMPORTRANGE("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U","UpdateData!C2:D2")	=IFERROR(__xludf.DUMMYFUNCTION("IMPORTRANGE(""https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U"",""UpdateData!C2:D2"")"),413.0)	413
+D5	spill_cache		Version (origin sheet)		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),"v1.19.1")	v1.19.1

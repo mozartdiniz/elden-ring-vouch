@@ -1,0 +1,594 @@
+SHEET: MatchmakingCalcData
+WORKBOOK: Copy of ER - Build Planner v1.19.1.xlsx
+USED RANGE: A1:R30
+NONEMPTY CELLS: 243
+FORMULA CELLS: 126
+
+This file is for an LLM that must rebuild these calculations in another language. Treat formulas as the source of truth. Cached/fallback values are only for checking a port. Skip spill_cache cells; they are not logic.
+
+STATIC / INPUT / LABEL CELLS (117):
+coord	value
+G1	reinforce
+H1	lowerRange
+I1	upperRange
+J1	somberLowerRange
+K1	somberUpperRange
+M1	ID
+N1	isUnique
+O1	reinforce
+P1	reinforceAdjust
+R1	Defaults
+A2	level
+G2	0.0
+I2	3.0
+A3	reinforcement
+G3	1.0
+I3	4.0
+M3	110000.0
+N3	FALSE
+O3	0.0
+P3	0.0
+A4	delineator
+G4	2.0
+I4	5.0
+M4	110000.0
+N4	FALSE
+O4	0.0
+P4	0.0
+B5	summon lower
+C5	summon upper
+D5	summoned by lower
+E5	summoned by upper
+G5	3.0
+I5	6.0
+M5	110000.0
+N5	FALSE
+O5	0.0
+P5	0.0
+A6	fingerTarnished
+G6	4.0
+I6	7.0
+M6	110000.0
+N6	FALSE
+O6	0.0
+P6	0.0
+A7	fingerDuelist
+G7	5.0
+I7	8.0
+M7	110000.0
+N7	FALSE
+O7	0.0
+P7	0.0
+A8	cipherRing
+G8	6.0
+I8	10.0
+B9	invading lower
+C9	invading upper
+D9	invaded by lower
+E9	invaded by lower
+G9	7.0
+I9	11.0
+A10	fingerBloody
+G10	8.0
+I10	12.0
+A11	fingerRecusant
+G11	9.0
+I11	13.0
+B12	colosseum lower
+C12	colosseum upper
+G12	10.0
+I12	14.0
+A13	colosseum
+G13	11.0
+I13	15.0
+B14	lower
+C14	upper
+G14	12.0
+I14	17.0
+A15	reinforcement
+G15	13.0
+I15	18.0
+A16	reinforcementSomber
+G16	14.0
+I16	19.0
+G17	15.0
+I17	20.0
+B18	summoning
+C18	summoned by
+G18	16.0
+I18	21.0
+A19	tarnished finger display
+G19	17.0
+I19	22.0
+A20	duelist finger display
+G20	18.0
+I20	24.0
+A21	cipher ring display
+G21	19.0
+I21	25.0
+G22	20.0
+I22	25.0
+B23	invading as
+C23	invaded by
+G23	21.0
+I23	25.0
+A24	bloody finger display
+G24	22.0
+I24	25.0
+A25	recusant finger display
+G25	23.0
+I25	25.0
+G26	24.0
+I26	25.0
+A27	colosseum display
+G27	25.0
+I27	25.0
+A29	standard display
+A30	somber display
+
+CROSS-SHEET REFERENCES: Matchmaking Calc (Beta), PlannerData, WeaponData
+FORMULA KINDS: excel=100, excel_compat=26
+UNIQUE PATTERNS: 43
+
+========================================================================
+FORMULA PATTERNS (fill-down compressed)
+{r} is the row of the cell. Port the template once and apply per row.
+========================================================================
+
+PATTERN 1  kind=excel  array=False  B2
+  context_label: level
+  template: =MIN(MAX(TRUNC('Matchmaking Calc (Beta)'!$G9),1),713)
+  e.g. B2: =MIN(MAX(TRUNC('Matchmaking Calc (Beta)'!$G9),1),713)  cached=9
+
+PATTERN 2  kind=excel_compat  array=False  H2:H27 (26 cells)
+  context_label: lowerRange
+  template: =XLOOKUP($G{r},$I:$I,$G:$G,XLOOKUP($G{r+1},$I:$I,$G:$G,0))
+  note: Stored with Excel _xlfn/_xlws prefix (newer functions like XLOOKUP).
+  e.g. H2: =XLOOKUP($G2,$I:$I,$G:$G,XLOOKUP($G3,$I:$I,$G:$G,0))  cached=0
+  e.g. H3: =XLOOKUP($G3,$I:$I,$G:$G,XLOOKUP($G4,$I:$I,$G:$G,0))  cached=0
+  e.g. H4: =XLOOKUP($G4,$I:$I,$G:$G,XLOOKUP($G5,$I:$I,$G:$G,0))  cached=0
+  ... 23 more of this pattern
+
+PATTERN 3  kind=excel  array=False  J2:J27 (26 cells)
+  context_label: somberLowerRange
+  template: =CEILING($H{r}*0.4,1)
+  e.g. J2: =CEILING($H2*0.4,1)  cached=0
+  e.g. J3: =CEILING($H3*0.4,1)  cached=0
+  e.g. J4: =CEILING($H4*0.4,1)  cached=0
+  ... 23 more of this pattern
+
+PATTERN 4  kind=excel  array=False  K2:K27 (26 cells)
+  context_label: somberUpperRange
+  template: =TRUNC(($I{r}+0.5)*0.4)
+  e.g. K2: =TRUNC(($I2+0.5)*0.4)  cached=1
+  e.g. K3: =TRUNC(($I3+0.5)*0.4)  cached=1
+  e.g. K4: =TRUNC(($I4+0.5)*0.4)  cached=2
+  ... 23 more of this pattern
+
+PATTERN 5  kind=excel  array=True  M2
+  context_label: ID
+  array_spill_ref: M2:M7
+  template: =PlannerData!$S$2:$S$7
+  e.g. M2: =PlannerData!$S$2:$S$7  cached=110000
+
+PATTERN 6  kind=excel  array=True  N2
+  context_label: isUnique
+  array_spill_ref: N2:N30
+  template: =IF(ISBLANK($M{r}:$M30),,
+VLOOKUP($M{r}:$M30,WeaponData!$C:$I,MATCH(N$1,WeaponData!$1:$1,0)-2,False)
+)
+  e.g. N2: =IF(ISBLANK($M2:$M30),,
+VLOOKUP($M2:$M30,WeaponData!$C:$I,MATCH(N$1,WeaponData!$1:$1,0)-2,False)
+)  cached=False
+
+PATTERN 7  kind=excel  array=True  O2
+  context_label: reinforce
+  array_spill_ref: O2:O7
+  template: =PlannerData!$U$2:$U$7
+  e.g. O2: =PlannerData!$U$2:$U$7  cached=0
+
+PATTERN 8  kind=excel  array=True  P2
+  context_label: reinforceAdjust
+  array_spill_ref: P2:P30
+  template: =IF(ISBLANK($M{r}:$M30),,
+IF($N{r}:$N30,TRUNC($O{r}:$O30*2.5),$O{r}:$O30))
+  e.g. P2: =IF(ISBLANK($M2:$M30),,
+IF($N2:$N30,TRUNC($O2:$O30*2.5),$O2:$O30))  cached=0
+
+PATTERN 9  kind=excel  array=False  R2
+  context_label: Defaults
+  template: =PlannerData!$B$10
+  e.g. R2: =PlannerData!$B$10  cached=9
+
+PATTERN 10  kind=excel  array=False  B3
+  context_label: reinforcement
+  template: =MIN(MAX(TRUNC('Matchmaking Calc (Beta)'!$G10),1),25)
+  e.g. B3: =MIN(MAX(TRUNC('Matchmaking Calc (Beta)'!$G10),1),25)  cached=1
+
+PATTERN 11  kind=excel  array=False  R3
+  context_label: Defaults
+  template: =MAX($P$2:$P30)
+  e.g. R3: =MAX($P$2:$P30)  cached=0
+
+PATTERN 12  kind=excel  array=False  B4
+  context_label: delineator
+  template: =" - "
+  e.g. B4: =" - "  cached=' - '
+
+PATTERN 13  kind=excel  array=False  B6:B7 (2 cells)
+  context_label: fingerTarnished
+  template: =MAX(IF($B$2>=306,306,
+$B$2*0.9-10),1)
+  e.g. B6: =MAX(IF($B$2>=306,306,
+$B$2*0.9-10),1)  cached=1
+  e.g. B7: =MAX(IF($B$2>=306,306,
+$B$2*0.9-10),1)  cached=1
+
+PATTERN 14  kind=excel  array=False  C6:C7 (2 cells)
+  context_label: fingerTarnished
+  template: =IF($B$2>=306,713,
+MIN($B$2*1.1+10,305))
+  e.g. C6: =IF($B$2>=306,713,
+MIN($B$2*1.1+10,305))  cached=19.9
+  e.g. C7: =IF($B$2>=306,713,
+MIN($B$2*1.1+10,305))  cached=19.9
+
+PATTERN 15  kind=excel  array=False  D6:D7 (2 cells)
+  context_label: fingerTarnished
+  template: =IF($B$2>=306,306,
+MAX(($B$2-10)/1.1,1))
+  e.g. D6: =IF($B$2>=306,306,
+MAX(($B$2-10)/1.1,1))  cached=1
+  e.g. D7: =IF($B$2>=306,306,
+MAX(($B$2-10)/1.1,1))  cached=1
+
+PATTERN 16  kind=excel  array=False  E6:E7 (2 cells)
+  context_label: fingerTarnished
+  template: =IF($B$2>=306,713,
+MIN(($B$2+10)/0.9,305))
+  e.g. E6: =IF($B$2>=306,713,
+MIN(($B$2+10)/0.9,305))  cached=21.11111111
+  e.g. E7: =IF($B$2>=306,713,
+MIN(($B$2+10)/0.9,305))  cached=21.11111111
+
+PATTERN 17  kind=excel  array=False  B8
+  context_label: cipherRing
+  template: =MAX(IF($B$2>=306,306,
+$B$2*0.9-15),1)
+  e.g. B8: =MAX(IF($B$2>=306,306,
+$B$2*0.9-15),1)  cached=1
+
+PATTERN 18  kind=excel  array=False  C8
+  context_label: cipherRing
+  template: =IF($B$2>=306,713,
+MIN($B$2*1.1+15,305))
+  e.g. C8: =IF($B$2>=306,713,
+MIN($B$2*1.1+15,305))  cached=24.9
+
+PATTERN 19  kind=excel  array=False  D8
+  context_label: cipherRing
+  template: =IF($B$2>=306,306,
+MAX(($B$2-15)/1.1,1))
+  e.g. D8: =IF($B$2>=306,306,
+MAX(($B$2-15)/1.1,1))  cached=1
+
+PATTERN 20  kind=excel  array=False  E8
+  context_label: cipherRing
+  template: =IF($B$2>=306,713,
+MIN(($B$2+15)/0.9,305))
+  e.g. E8: =IF($B$2>=306,713,
+MIN(($B$2+15)/0.9,305))  cached=26.66666667
+
+PATTERN 21  kind=excel  array=False  B10:B11 (2 cells)
+  context_label: fingerBloody
+  template: =MAX(IF($B$2>=301,301,
+$B$2*0.9),1)
+  e.g. B10: =MAX(IF($B$2>=301,301,
+$B$2*0.9),1)  cached=8.1
+  e.g. B11: =MAX(IF($B$2>=301,301,
+$B$2*0.9),1)  cached=8.1
+
+PATTERN 22  kind=excel  array=False  C10:C11 (2 cells)
+  context_label: fingerBloody
+  template: =IF($B$2>=301,713,
+MIN($B$2*1.1+20,300))
+  e.g. C10: =IF($B$2>=301,713,
+MIN($B$2*1.1+20,300))  cached=29.9
+  e.g. C11: =IF($B$2>=301,713,
+MIN($B$2*1.1+20,300))  cached=29.9
+
+PATTERN 23  kind=excel  array=False  D10:D11 (2 cells)
+  context_label: fingerBloody
+  template: =IF($B$2>=301,301,
+MAX(($B$2-20)/1.1,1))
+  e.g. D10: =IF($B$2>=301,301,
+MAX(($B$2-20)/1.1,1))  cached=1
+  e.g. D11: =IF($B$2>=301,301,
+MAX(($B$2-20)/1.1,1))  cached=1
+
+PATTERN 24  kind=excel  array=False  E10:E11 (2 cells)
+  context_label: fingerBloody
+  template: =IF($B$2>=301,713,
+MIN($B$2/0.9,300))
+  e.g. E10: =IF($B$2>=301,713,
+MIN($B$2/0.9,300))  cached=10
+  e.g. E11: =IF($B$2>=301,713,
+MIN($B$2/0.9,300))  cached=10
+
+PATTERN 25  kind=excel  array=False  B13
+  context_label: colosseum
+  template: =MIN(B7,D7)
+  e.g. B13: =MIN(B7,D7)  cached=1
+
+PATTERN 26  kind=excel  array=False  C13
+  context_label: colosseum
+  template: =MAX(C7,E7)
+  e.g. C13: =MAX(C7,E7)  cached=21.11111111
+
+PATTERN 27  kind=excel  array=False  B15
+  context_label: reinforcement
+  template: =VLOOKUP($B$3,$G:$K,2,False)
+  e.g. B15: =VLOOKUP($B$3,$G:$K,2,False)  cached=0
+
+PATTERN 28  kind=excel  array=False  C15
+  context_label: reinforcement
+  template: =VLOOKUP($B$3,$G:$K,3,False)
+  e.g. C15: =VLOOKUP($B$3,$G:$K,3,False)  cached=4
+
+PATTERN 29  kind=excel  array=False  B16
+  context_label: reinforcementSomber
+  template: =VLOOKUP($B$3,$G:$K,4,False)
+  e.g. B16: =VLOOKUP($B$3,$G:$K,4,False)  cached=0
+
+PATTERN 30  kind=excel  array=False  C16
+  context_label: reinforcementSomber
+  template: =VLOOKUP($B$3,$G:$K,5,False)
+  e.g. C16: =VLOOKUP($B$3,$G:$K,5,False)  cached=1
+
+PATTERN 31  kind=excel  array=False  B19
+  context_label: tarnished finger display
+  template: =ROUND(B6,0)
+&$B$4
+&ROUND(C6-0.01,0)
+  e.g. B19: =ROUND(B6,0)
+&$B$4
+&ROUND(C6-0.01,0)  cached='1 - 20'
+
+PATTERN 32  kind=excel  array=False  C19
+  context_label: tarnished finger display
+  template: =ROUND(D6+0.05,0)
+&$B$4
+&ROUND(E6,0)
+  e.g. C19: =ROUND(D6+0.05,0)
+&$B$4
+&ROUND(E6,0)  cached='1 - 21'
+
+PATTERN 33  kind=excel  array=False  B20
+  context_label: duelist finger display
+  template: =ROUND(B7,0)
+&
+$B$4&ROUND(C7-0.01,0)
+  e.g. B20: =ROUND(B7,0)
+&
+$B$4&ROUND(C7-0.01,0)  cached='1 - 20'
+
+PATTERN 34  kind=excel  array=False  C20
+  context_label: duelist finger display
+  template: =ROUND(D7+0.05,0)
+&
+$B$4&ROUND(E7,0)
+  e.g. C20: =ROUND(D7+0.05,0)
+&
+$B$4&ROUND(E7,0)  cached='1 - 21'
+
+PATTERN 35  kind=excel  array=False  B21
+  context_label: cipher ring display
+  template: =ROUND(B8,0)
+&$B$4
+&ROUND(C8,0)
+  e.g. B21: =ROUND(B8,0)
+&$B$4
+&ROUND(C8,0)  cached='1 - 25'
+
+PATTERN 36  kind=excel  array=False  C21
+  context_label: cipher ring display
+  template: =ROUND(D8,0)
+&$B$4
+&ROUND(E8,0)
+  e.g. C21: =ROUND(D8,0)
+&$B$4
+&ROUND(E8,0)  cached='1 - 27'
+
+PATTERN 37  kind=excel  array=False  B24
+  context_label: bloody finger display
+  template: =ROUND(B10,0)
+&$B$4
+&ROUND(C10-0.01,0)
+  e.g. B24: =ROUND(B10,0)
+&$B$4
+&ROUND(C10-0.01,0)  cached='8 - 30'
+
+PATTERN 38  kind=excel  array=False  C24
+  context_label: bloody finger display
+  template: =ROUND(D10+0.05,0)
+&$B$4
+&ROUND(E10,0)
+  e.g. C24: =ROUND(D10+0.05,0)
+&$B$4
+&ROUND(E10,0)  cached='1 - 10'
+
+PATTERN 39  kind=excel  array=False  B25
+  context_label: recusant finger display
+  template: =ROUND(B11,0)
+&
+$B$4&ROUND(C11-0.01,0)
+  e.g. B25: =ROUND(B11,0)
+&
+$B$4&ROUND(C11-0.01,0)  cached='8 - 30'
+
+PATTERN 40  kind=excel  array=False  C25
+  context_label: recusant finger display
+  template: =ROUND(D11+0.05,0)
+&
+$B$4&ROUND(E11,0)
+  e.g. C25: =ROUND(D11+0.05,0)
+&
+$B$4&ROUND(E11,0)  cached='1 - 10'
+
+PATTERN 41  kind=excel  array=False  B27
+  context_label: colosseum display
+  template: =ROUND(B13,0)
+&$B$4
+&ROUND(C13,0)
+  e.g. B27: =ROUND(B13,0)
+&$B$4
+&ROUND(C13,0)  cached='1 - 21'
+
+PATTERN 42  kind=excel  array=False  B29
+  context_label: standard display
+  template: =B15
+&$B$4
+&C15
+  e.g. B29: =B15
+&$B$4
+&C15  cached='0 - 4'
+
+PATTERN 43  kind=excel  array=False  B30
+  context_label: somber display
+  template: =
+B16&
+$B$4&C16
+  e.g. B30: =
+B16&
+$B$4&C16  cached='0 - 1'
+
+========================================================================
+ALL FORMULAS
+========================================================================
+cell	kind	array_ref	label	logic	stored	cached
+B2	excel		level	=MIN(MAX(TRUNC('Matchmaking Calc (Beta)'!$G9),1),713)	=MIN(MAX(TRUNC('Matchmaking Calc (Beta)'!$G9),1),713)	9
+H2	excel_compat		lowerRange	=XLOOKUP($G2,$I:$I,$G:$G,XLOOKUP($G3,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G2,$I:$I,$G:$G,_xlfn.XLOOKUP($G3,$I:$I,$G:$G,0))	0
+J2	excel		somberLowerRange	=CEILING($H2*0.4,1)	=CEILING($H2*0.4,1)	0
+K2	excel		somberUpperRange	=TRUNC(($I2+0.5)*0.4)	=TRUNC(($I2+0.5)*0.4)	1
+M2	excel	M2:M7	ID	=PlannerData!$S$2:$S$7	=PlannerData!$S$2:$S$7	110000
+N2	excel	N2:N30	isUnique	=IF(ISBLANK($M2:$M30),, | VLOOKUP($M2:$M30,WeaponData!$C:$I,MATCH(N$1,WeaponData!$1:$1,0)-2,False) | )	=IF(ISBLANK($M2:$M30),, | VLOOKUP($M2:$M30,WeaponData!$C:$I,MATCH(N$1,WeaponData!$1:$1,0)-2,False) | )	FALSE
+O2	excel	O2:O7	reinforce	=PlannerData!$U$2:$U$7	=PlannerData!$U$2:$U$7	0
+P2	excel	P2:P30	reinforceAdjust	=IF(ISBLANK($M2:$M30),, | IF($N2:$N30,TRUNC($O2:$O30*2.5),$O2:$O30))	=IF(ISBLANK($M2:$M30),, | IF($N2:$N30,TRUNC($O2:$O30*2.5),$O2:$O30))	0
+R2	excel		Defaults	=PlannerData!$B$10	=PlannerData!$B$10	9
+B3	excel		reinforcement	=MIN(MAX(TRUNC('Matchmaking Calc (Beta)'!$G10),1),25)	=MIN(MAX(TRUNC('Matchmaking Calc (Beta)'!$G10),1),25)	1
+H3	excel_compat		lowerRange	=XLOOKUP($G3,$I:$I,$G:$G,XLOOKUP($G4,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G3,$I:$I,$G:$G,_xlfn.XLOOKUP($G4,$I:$I,$G:$G,0))	0
+J3	excel		somberLowerRange	=CEILING($H3*0.4,1)	=CEILING($H3*0.4,1)	0
+K3	excel		somberUpperRange	=TRUNC(($I3+0.5)*0.4)	=TRUNC(($I3+0.5)*0.4)	1
+R3	excel		Defaults	=MAX($P$2:$P30)	=MAX($P$2:$P30)	0
+B4	excel		delineator	=" - "	=" - "	 - 
+H4	excel_compat		lowerRange	=XLOOKUP($G4,$I:$I,$G:$G,XLOOKUP($G5,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G4,$I:$I,$G:$G,_xlfn.XLOOKUP($G5,$I:$I,$G:$G,0))	0
+J4	excel		somberLowerRange	=CEILING($H4*0.4,1)	=CEILING($H4*0.4,1)	0
+K4	excel		somberUpperRange	=TRUNC(($I4+0.5)*0.4)	=TRUNC(($I4+0.5)*0.4)	2
+H5	excel_compat		summoned by upper	=XLOOKUP($G5,$I:$I,$G:$G,XLOOKUP($G6,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G5,$I:$I,$G:$G,_xlfn.XLOOKUP($G6,$I:$I,$G:$G,0))	0
+J5	excel		summoned by upper	=CEILING($H5*0.4,1)	=CEILING($H5*0.4,1)	0
+K5	excel			=TRUNC(($I5+0.5)*0.4)	=TRUNC(($I5+0.5)*0.4)	2
+B6	excel		fingerTarnished	=MAX(IF($B$2>=306,306, | $B$2*0.9-10),1)	=MAX(IF($B$2>=306,306, | $B$2*0.9-10),1)	1
+C6	excel		fingerTarnished	=IF($B$2>=306,713, | MIN($B$2*1.1+10,305))	=IF($B$2>=306,713, | MIN($B$2*1.1+10,305))	19.9
+D6	excel		fingerTarnished	=IF($B$2>=306,306, | MAX(($B$2-10)/1.1,1))	=IF($B$2>=306,306, | MAX(($B$2-10)/1.1,1))	1
+E6	excel		fingerTarnished	=IF($B$2>=306,713, | MIN(($B$2+10)/0.9,305))	=IF($B$2>=306,713, | MIN(($B$2+10)/0.9,305))	21.11111111
+H6	excel_compat			=XLOOKUP($G6,$I:$I,$G:$G,XLOOKUP($G7,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G6,$I:$I,$G:$G,_xlfn.XLOOKUP($G7,$I:$I,$G:$G,0))	1
+J6	excel			=CEILING($H6*0.4,1)	=CEILING($H6*0.4,1)	1
+K6	excel			=TRUNC(($I6+0.5)*0.4)	=TRUNC(($I6+0.5)*0.4)	3
+B7	excel		fingerDuelist	=MAX(IF($B$2>=306,306, | $B$2*0.9-10),1)	=MAX(IF($B$2>=306,306, | $B$2*0.9-10),1)	1
+C7	excel		fingerDuelist	=IF($B$2>=306,713, | MIN($B$2*1.1+10,305))	=IF($B$2>=306,713, | MIN($B$2*1.1+10,305))	19.9
+D7	excel		fingerDuelist	=IF($B$2>=306,306, | MAX(($B$2-10)/1.1,1))	=IF($B$2>=306,306, | MAX(($B$2-10)/1.1,1))	1
+E7	excel		fingerDuelist	=IF($B$2>=306,713, | MIN(($B$2+10)/0.9,305))	=IF($B$2>=306,713, | MIN(($B$2+10)/0.9,305))	21.11111111
+H7	excel_compat			=XLOOKUP($G7,$I:$I,$G:$G,XLOOKUP($G8,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G7,$I:$I,$G:$G,_xlfn.XLOOKUP($G8,$I:$I,$G:$G,0))	2
+J7	excel			=CEILING($H7*0.4,1)	=CEILING($H7*0.4,1)	1
+K7	excel			=TRUNC(($I7+0.5)*0.4)	=TRUNC(($I7+0.5)*0.4)	3
+B8	excel		cipherRing	=MAX(IF($B$2>=306,306, | $B$2*0.9-15),1)	=MAX(IF($B$2>=306,306, | $B$2*0.9-15),1)	1
+C8	excel		cipherRing	=IF($B$2>=306,713, | MIN($B$2*1.1+15,305))	=IF($B$2>=306,713, | MIN($B$2*1.1+15,305))	24.9
+D8	excel		cipherRing	=IF($B$2>=306,306, | MAX(($B$2-15)/1.1,1))	=IF($B$2>=306,306, | MAX(($B$2-15)/1.1,1))	1
+E8	excel		cipherRing	=IF($B$2>=306,713, | MIN(($B$2+15)/0.9,305))	=IF($B$2>=306,713, | MIN(($B$2+15)/0.9,305))	26.66666667
+H8	excel_compat			=XLOOKUP($G8,$I:$I,$G:$G,XLOOKUP($G9,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G8,$I:$I,$G:$G,_xlfn.XLOOKUP($G9,$I:$I,$G:$G,0))	3
+J8	excel			=CEILING($H8*0.4,1)	=CEILING($H8*0.4,1)	2
+K8	excel			=TRUNC(($I8+0.5)*0.4)	=TRUNC(($I8+0.5)*0.4)	4
+H9	excel_compat		invaded by lower	=XLOOKUP($G9,$I:$I,$G:$G,XLOOKUP($G10,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G9,$I:$I,$G:$G,_xlfn.XLOOKUP($G10,$I:$I,$G:$G,0))	4
+J9	excel		invaded by lower	=CEILING($H9*0.4,1)	=CEILING($H9*0.4,1)	2
+K9	excel			=TRUNC(($I9+0.5)*0.4)	=TRUNC(($I9+0.5)*0.4)	4
+B10	excel		fingerBloody	=MAX(IF($B$2>=301,301, | $B$2*0.9),1)	=MAX(IF($B$2>=301,301, | $B$2*0.9),1)	8.1
+C10	excel		fingerBloody	=IF($B$2>=301,713, | MIN($B$2*1.1+20,300))	=IF($B$2>=301,713, | MIN($B$2*1.1+20,300))	29.9
+D10	excel		fingerBloody	=IF($B$2>=301,301, | MAX(($B$2-20)/1.1,1))	=IF($B$2>=301,301, | MAX(($B$2-20)/1.1,1))	1
+E10	excel		fingerBloody	=IF($B$2>=301,713, | MIN($B$2/0.9,300))	=IF($B$2>=301,713, | MIN($B$2/0.9,300))	10
+H10	excel_compat			=XLOOKUP($G10,$I:$I,$G:$G,XLOOKUP($G11,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G10,$I:$I,$G:$G,_xlfn.XLOOKUP($G11,$I:$I,$G:$G,0))	5
+J10	excel			=CEILING($H10*0.4,1)	=CEILING($H10*0.4,1)	2
+K10	excel			=TRUNC(($I10+0.5)*0.4)	=TRUNC(($I10+0.5)*0.4)	5
+B11	excel		fingerRecusant	=MAX(IF($B$2>=301,301, | $B$2*0.9),1)	=MAX(IF($B$2>=301,301, | $B$2*0.9),1)	8.1
+C11	excel		fingerRecusant	=IF($B$2>=301,713, | MIN($B$2*1.1+20,300))	=IF($B$2>=301,713, | MIN($B$2*1.1+20,300))	29.9
+D11	excel		fingerRecusant	=IF($B$2>=301,301, | MAX(($B$2-20)/1.1,1))	=IF($B$2>=301,301, | MAX(($B$2-20)/1.1,1))	1
+E11	excel		fingerRecusant	=IF($B$2>=301,713, | MIN($B$2/0.9,300))	=IF($B$2>=301,713, | MIN($B$2/0.9,300))	10
+H11	excel_compat			=XLOOKUP($G11,$I:$I,$G:$G,XLOOKUP($G12,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G11,$I:$I,$G:$G,_xlfn.XLOOKUP($G12,$I:$I,$G:$G,0))	6
+J11	excel			=CEILING($H11*0.4,1)	=CEILING($H11*0.4,1)	3
+K11	excel			=TRUNC(($I11+0.5)*0.4)	=TRUNC(($I11+0.5)*0.4)	5
+H12	excel_compat		colosseum upper	=XLOOKUP($G12,$I:$I,$G:$G,XLOOKUP($G13,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G12,$I:$I,$G:$G,_xlfn.XLOOKUP($G13,$I:$I,$G:$G,0))	6
+J12	excel			=CEILING($H12*0.4,1)	=CEILING($H12*0.4,1)	3
+K12	excel			=TRUNC(($I12+0.5)*0.4)	=TRUNC(($I12+0.5)*0.4)	5
+B13	excel		colosseum	=MIN(B7,D7)	=MIN(B7,D7)	1
+C13	excel		colosseum	=MAX(C7,E7)	=MAX(C7,E7)	21.11111111
+H13	excel_compat			=XLOOKUP($G13,$I:$I,$G:$G,XLOOKUP($G14,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G13,$I:$I,$G:$G,_xlfn.XLOOKUP($G14,$I:$I,$G:$G,0))	7
+J13	excel			=CEILING($H13*0.4,1)	=CEILING($H13*0.4,1)	3
+K13	excel			=TRUNC(($I13+0.5)*0.4)	=TRUNC(($I13+0.5)*0.4)	6
+H14	excel_compat		upper	=XLOOKUP($G14,$I:$I,$G:$G,XLOOKUP($G15,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G14,$I:$I,$G:$G,_xlfn.XLOOKUP($G15,$I:$I,$G:$G,0))	8
+J14	excel			=CEILING($H14*0.4,1)	=CEILING($H14*0.4,1)	4
+K14	excel			=TRUNC(($I14+0.5)*0.4)	=TRUNC(($I14+0.5)*0.4)	7
+B15	excel		reinforcement	=VLOOKUP($B$3,$G:$K,2,False)	=VLOOKUP($B$3,$G:$K,2,False)	0
+C15	excel		reinforcement	=VLOOKUP($B$3,$G:$K,3,False)	=VLOOKUP($B$3,$G:$K,3,False)	4
+H15	excel_compat			=XLOOKUP($G15,$I:$I,$G:$G,XLOOKUP($G16,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G15,$I:$I,$G:$G,_xlfn.XLOOKUP($G16,$I:$I,$G:$G,0))	9
+J15	excel			=CEILING($H15*0.4,1)	=CEILING($H15*0.4,1)	4
+K15	excel			=TRUNC(($I15+0.5)*0.4)	=TRUNC(($I15+0.5)*0.4)	7
+B16	excel		reinforcementSomber	=VLOOKUP($B$3,$G:$K,4,False)	=VLOOKUP($B$3,$G:$K,4,False)	0
+C16	excel		reinforcementSomber	=VLOOKUP($B$3,$G:$K,5,False)	=VLOOKUP($B$3,$G:$K,5,False)	1
+H16	excel_compat			=XLOOKUP($G16,$I:$I,$G:$G,XLOOKUP($G17,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G16,$I:$I,$G:$G,_xlfn.XLOOKUP($G17,$I:$I,$G:$G,0))	10
+J16	excel			=CEILING($H16*0.4,1)	=CEILING($H16*0.4,1)	4
+K16	excel			=TRUNC(($I16+0.5)*0.4)	=TRUNC(($I16+0.5)*0.4)	7
+H17	excel_compat			=XLOOKUP($G17,$I:$I,$G:$G,XLOOKUP($G18,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G17,$I:$I,$G:$G,_xlfn.XLOOKUP($G18,$I:$I,$G:$G,0))	11
+J17	excel			=CEILING($H17*0.4,1)	=CEILING($H17*0.4,1)	5
+K17	excel			=TRUNC(($I17+0.5)*0.4)	=TRUNC(($I17+0.5)*0.4)	8
+H18	excel_compat		summoned by	=XLOOKUP($G18,$I:$I,$G:$G,XLOOKUP($G19,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G18,$I:$I,$G:$G,_xlfn.XLOOKUP($G19,$I:$I,$G:$G,0))	12
+J18	excel			=CEILING($H18*0.4,1)	=CEILING($H18*0.4,1)	5
+K18	excel			=TRUNC(($I18+0.5)*0.4)	=TRUNC(($I18+0.5)*0.4)	8
+B19	excel		tarnished finger display	=ROUND(B6,0) | &$B$4 | &ROUND(C6-0.01,0)	=ROUND(B6,0) | &$B$4 | &ROUND(C6-0.01,0)	1 - 20
+C19	excel		tarnished finger display	=ROUND(D6+0.05,0) | &$B$4 | &ROUND(E6,0)	=ROUND(D6+0.05,0) | &$B$4 | &ROUND(E6,0)	1 - 21
+H19	excel_compat			=XLOOKUP($G19,$I:$I,$G:$G,XLOOKUP($G20,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G19,$I:$I,$G:$G,_xlfn.XLOOKUP($G20,$I:$I,$G:$G,0))	12
+J19	excel			=CEILING($H19*0.4,1)	=CEILING($H19*0.4,1)	5
+K19	excel			=TRUNC(($I19+0.5)*0.4)	=TRUNC(($I19+0.5)*0.4)	9
+B20	excel		duelist finger display	=ROUND(B7,0) | & | $B$4&ROUND(C7-0.01,0)	=ROUND(B7,0) | & | $B$4&ROUND(C7-0.01,0)	1 - 20
+C20	excel		duelist finger display	=ROUND(D7+0.05,0) | & | $B$4&ROUND(E7,0)	=ROUND(D7+0.05,0) | & | $B$4&ROUND(E7,0)	1 - 21
+H20	excel_compat			=XLOOKUP($G20,$I:$I,$G:$G,XLOOKUP($G21,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G20,$I:$I,$G:$G,_xlfn.XLOOKUP($G21,$I:$I,$G:$G,0))	13
+J20	excel			=CEILING($H20*0.4,1)	=CEILING($H20*0.4,1)	6
+K20	excel			=TRUNC(($I20+0.5)*0.4)	=TRUNC(($I20+0.5)*0.4)	9
+B21	excel		cipher ring display	=ROUND(B8,0) | &$B$4 | &ROUND(C8,0)	=ROUND(B8,0) | &$B$4 | &ROUND(C8,0)	1 - 25
+C21	excel		cipher ring display	=ROUND(D8,0) | &$B$4 | &ROUND(E8,0)	=ROUND(D8,0) | &$B$4 | &ROUND(E8,0)	1 - 27
+H21	excel_compat			=XLOOKUP($G21,$I:$I,$G:$G,XLOOKUP($G22,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G21,$I:$I,$G:$G,_xlfn.XLOOKUP($G22,$I:$I,$G:$G,0))	14
+J21	excel			=CEILING($H21*0.4,1)	=CEILING($H21*0.4,1)	6
+K21	excel			=TRUNC(($I21+0.5)*0.4)	=TRUNC(($I21+0.5)*0.4)	10
+H22	excel_compat			=XLOOKUP($G22,$I:$I,$G:$G,XLOOKUP($G23,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G22,$I:$I,$G:$G,_xlfn.XLOOKUP($G23,$I:$I,$G:$G,0))	15
+J22	excel			=CEILING($H22*0.4,1)	=CEILING($H22*0.4,1)	6
+K22	excel			=TRUNC(($I22+0.5)*0.4)	=TRUNC(($I22+0.5)*0.4)	10
+H23	excel_compat		invaded by	=XLOOKUP($G23,$I:$I,$G:$G,XLOOKUP($G24,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G23,$I:$I,$G:$G,_xlfn.XLOOKUP($G24,$I:$I,$G:$G,0))	16
+J23	excel			=CEILING($H23*0.4,1)	=CEILING($H23*0.4,1)	7
+K23	excel			=TRUNC(($I23+0.5)*0.4)	=TRUNC(($I23+0.5)*0.4)	10
+B24	excel		bloody finger display	=ROUND(B10,0) | &$B$4 | &ROUND(C10-0.01,0)	=ROUND(B10,0) | &$B$4 | &ROUND(C10-0.01,0)	8 - 30
+C24	excel		bloody finger display	=ROUND(D10+0.05,0) | &$B$4 | &ROUND(E10,0)	=ROUND(D10+0.05,0) | &$B$4 | &ROUND(E10,0)	1 - 10
+H24	excel_compat			=XLOOKUP($G24,$I:$I,$G:$G,XLOOKUP($G25,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G24,$I:$I,$G:$G,_xlfn.XLOOKUP($G25,$I:$I,$G:$G,0))	17
+J24	excel			=CEILING($H24*0.4,1)	=CEILING($H24*0.4,1)	7
+K24	excel			=TRUNC(($I24+0.5)*0.4)	=TRUNC(($I24+0.5)*0.4)	10
+B25	excel		recusant finger display	=ROUND(B11,0) | & | $B$4&ROUND(C11-0.01,0)	=ROUND(B11,0) | & | $B$4&ROUND(C11-0.01,0)	8 - 30
+C25	excel		recusant finger display	=ROUND(D11+0.05,0) | & | $B$4&ROUND(E11,0)	=ROUND(D11+0.05,0) | & | $B$4&ROUND(E11,0)	1 - 10
+H25	excel_compat			=XLOOKUP($G25,$I:$I,$G:$G,XLOOKUP($G26,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G25,$I:$I,$G:$G,_xlfn.XLOOKUP($G26,$I:$I,$G:$G,0))	18
+J25	excel			=CEILING($H25*0.4,1)	=CEILING($H25*0.4,1)	8
+K25	excel			=TRUNC(($I25+0.5)*0.4)	=TRUNC(($I25+0.5)*0.4)	10
+H26	excel_compat			=XLOOKUP($G26,$I:$I,$G:$G,XLOOKUP($G27,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G26,$I:$I,$G:$G,_xlfn.XLOOKUP($G27,$I:$I,$G:$G,0))	18
+J26	excel			=CEILING($H26*0.4,1)	=CEILING($H26*0.4,1)	8
+K26	excel			=TRUNC(($I26+0.5)*0.4)	=TRUNC(($I26+0.5)*0.4)	10
+B27	excel		colosseum display	=ROUND(B13,0) | &$B$4 | &ROUND(C13,0)	=ROUND(B13,0) | &$B$4 | &ROUND(C13,0)	1 - 21
+H27	excel_compat			=XLOOKUP($G27,$I:$I,$G:$G,XLOOKUP($G28,$I:$I,$G:$G,0))	=_xlfn.XLOOKUP($G27,$I:$I,$G:$G,_xlfn.XLOOKUP($G28,$I:$I,$G:$G,0))	19
+J27	excel			=CEILING($H27*0.4,1)	=CEILING($H27*0.4,1)	8
+K27	excel			=TRUNC(($I27+0.5)*0.4)	=TRUNC(($I27+0.5)*0.4)	10
+B29	excel		standard display	=B15 | &$B$4 | &C15	=B15 | &$B$4 | &C15	0 - 4
+B30	excel		somber display	= | B16& | $B$4&C16	= | B16& | $B$4&C16	0 - 1

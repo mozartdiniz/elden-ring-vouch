@@ -1,0 +1,498 @@
+SHEET: TalismanData
+WORKBOOK: Copy of ER - Build Planner v1.19.1.xlsx
+USED RANGE: A1:C155
+NONEMPTY CELLS: 465
+FORMULA CELLS: 1
+
+This file is for an LLM that must rebuild these calculations in another language. Treat formulas as the source of truth. Cached/fallback values are only for checking a port. Skip spill_cache cells; they are not logic.
+
+VISIBILITY: hidden
+STATIC / INPUT / LABEL CELLS (464):
+coord	value
+A1	Talisman
+B1	ID
+C1	accessoryGroup
+A2	Crimson Amber Medallion
+B2	1000.0
+A3	Crimson Amber Medallion +1
+B3	1001.0
+C3	1000.0
+A4	Crimson Amber Medallion +2
+B4	1002.0
+C4	1000.0
+A5	Crimson Amber Medallion +3
+B5	7000.0
+C5	1000.0
+A6	Crimson Seed Talisman
+B6	5000.0
+C6	5000.0
+A7	Crimson Seed Talisman +1
+B7	7140.0
+C7	5000.0
+A8	Blessed Dew Talisman
+B8	5020.0
+C8	5020.0
+A9	Cerulean Amber Medallion
+B9	1010.0
+C9	1010.0
+A10	Cerulean Amber Medallion +1
+B10	1011.0
+C10	1010.0
+A11	Cerulean Amber Medallion +2
+B11	1012.0
+C11	1010.0
+A12	Cerulean Amber Medallion +3
+B12	7010.0
+C12	1010.0
+A13	Cerulean Seed Talisman
+B13	5010.0
+C13	5010.0
+A14	Cerulean Seed Talisman +1
+B14	7150.0
+C14	5010.0
+A15	Blessed Blue Dew Talisman
+B15	8000.0
+C15	8000.0
+A16	Talisman of Lord's Bestowal
+B16	8200.0
+C16	8200.0
+A17	Viridian Amber Medallion
+B17	1020.0
+C17	1020.0
+A18	Viridian Amber Medallion +1
+B18	1021.0
+C18	1020.0
+A19	Viridian Amber Medallion +2
+B19	1022.0
+C19	1020.0
+A20	Viridian Amber Medallion +3
+B20	7020.0
+C20	1020.0
+A21	Green Turtle Talisman
+B21	1150.0
+C21	1150.0
+A22	Two-Headed Turtle Talisman
+B22	7030.0
+C22	1150.0
+A23	Arsenal Charm
+B23	1030.0
+C23	1030.0
+A24	Arsenal Charm +1
+B24	1031.0
+C24	1030.0
+A25	Great-Jar's Arsenal
+B25	1032.0
+C25	1030.0
+A26	Erdtree's Favor
+B26	1040.0
+C26	1040.0
+A27	Erdtree's Favor +1
+B27	1041.0
+C27	1040.0
+A28	Erdtree's Favor +2
+B28	1042.0
+C28	1040.0
+A29	Radagon's Scarseal
+B29	1050.0
+C29	1050.0
+A30	Radagon's Soreseal
+B30	1051.0
+C30	1050.0
+A31	Marika's Scarseal
+B31	1220.0
+C31	1220.0
+A32	Marika's Soreseal
+B32	1221.0
+C32	1220.0
+A33	Starscourge Heirloom
+B33	1060.0
+C33	1060.0
+A34	Prosthesis-Wearer Heirloom
+B34	1070.0
+C34	1070.0
+A35	Stargazer Heirloom
+B35	1080.0
+C35	1080.0
+A36	Two Fingers Heirloom
+B36	1090.0
+C36	1090.0
+A37	Outer God Heirloom
+B37	8020.0
+C37	8020.0
+A38	Dragoncrest Shield Talisman
+B38	4000.0
+C38	4000.0
+A39	Dragoncrest Shield Talisman +1
+B39	4001.0
+C39	4000.0
+A40	Dragoncrest Shield Talisman +2
+B40	4002.0
+C40	4000.0
+A41	Dragoncrest Greatshield Talisman
+B41	4003.0
+C41	4000.0
+A42	Spelldrake Talisman
+B42	4010.0
+C42	4010.0
+A43	Spelldrake Talisman +1
+B43	4011.0
+C43	4010.0
+A44	Spelldrake Talisman +2
+B44	4012.0
+C44	4010.0
+A45	Spelldrake Talisman +3
+B45	7090.0
+C45	4010.0
+A46	Flamedrake Talisman
+B46	4020.0
+C46	4020.0
+A47	Flamedrake Talisman +1
+B47	4021.0
+C47	4020.0
+A48	Flamedrake Talisman +2
+B48	4022.0
+C48	4020.0
+A49	Flamedrake Talisman +3
+B49	7100.0
+C49	4020.0
+A50	Boltdrake Talisman
+B50	4030.0
+C50	4030.0
+A51	Boltdrake Talisman +1
+B51	4031.0
+C51	4030.0
+A52	Boltdrake Talisman +2
+B52	4032.0
+C52	4030.0
+A53	Boltdrake Talisman +3
+B53	7110.0
+C53	4030.0
+A54	Haligdrake Talisman
+B54	4040.0
+C54	4040.0
+A55	Haligdrake Talisman +1
+B55	4041.0
+C55	4040.0
+A56	Haligdrake Talisman +2
+B56	4042.0
+C56	4040.0
+A57	Golden Braid
+B57	7120.0
+C57	4040.0
+A58	Pearldrake Talisman
+B58	4050.0
+C58	4050.0
+A59	Pearldrake Talisman +1
+B59	4051.0
+C59	4050.0
+A60	Pearldrake Talisman +2
+B60	4052.0
+C60	4050.0
+A61	Pearldrake Talisman +3
+B61	7130.0
+C61	4050.0
+A62	Immunizing Horn Charm
+B62	1170.0
+C62	1170.0
+A63	Immunizing Horn Charm +1
+B63	1171.0
+C63	1170.0
+A64	Immunizing Horn Charm +2
+B64	7050.0
+C64	1170.0
+A65	Stalwart Horn Charm
+B65	1160.0
+C65	1160.0
+A66	Stalwart Horn Charm +1
+B66	1161.0
+C66	1160.0
+A67	Stalwart Horn Charm +2
+B67	7040.0
+C67	1160.0
+A68	Clarifying Horn Charm
+B68	1180.0
+C68	1180.0
+A69	Clarifying Horn Charm +1
+B69	1181.0
+C69	1180.0
+A70	Clarifying Horn Charm +2
+B70	7060.0
+C70	1180.0
+A71	Mottled Necklace
+B71	1200.0
+C71	1200.0
+A72	Mottled Necklace +1
+B72	1201.0
+C72	1200.0
+A73	Mottled Necklace +2
+B73	7080.0
+C73	1200.0
+A74	Prince of Death's Pustule
+B74	1190.0
+C74	1190.0
+A75	Prince of Death's Cyst
+B75	1191.0
+C75	1190.0
+A76	Ailment Talisman
+B76	8120.0
+C76	8120.0
+A77	Dagger Talisman
+B77	2090.0
+C77	2090.0
+A78	Curved Sword Talisman
+B78	2200.0
+C78	2200.0
+A79	Twinblade Talisman
+B79	2120.0
+C79	2120.0
+A80	Axe Talisman
+B80	2130.0
+C80	2130.0
+A81	Hammer Talisman
+B81	2070.0
+C81	2070.0
+A82	Spear Talisman
+B82	2060.0
+C82	2060.0
+A83	Lance Talisman
+B83	2140.0
+C83	2140.0
+A84	Claw Talisman
+B84	2180.0
+C84	2180.0
+A85	Two-Handed Sword Talisman
+B85	8040.0
+C85	8040.0
+A86	Greatshield Talisman
+B86	4100.0
+C86	4100.0
+A87	Pearl Shield Talisman
+B87	8090.0
+C87	8090.0
+A88	Retaliatory Crossed-Tree
+B88	8130.0
+C88	8130.0
+A89	Lacerating Crossed-Tree
+B89	8140.0
+C89	8140.0
+A90	Arrow's Sting Talisman
+B90	2150.0
+C90	2150.0
+A91	Arrow's Reach Talisman
+B91	2100.0
+C91	2100.0
+A92	Arrow's Soaring Sting Talisman
+B92	8070.0
+C92	2100.0
+A93	Sharpshot Talisman
+B93	8150.0
+C93	8150.0
+A94	Graven-School Talisman
+B94	3000.0
+C94	3000.0
+A95	Graven-Mass Talisman
+B95	3001.0
+C95	3001.0
+A96	Faithful's Canvas Talisman
+B96	3040.0
+C96	3040.0
+A97	Flock's Canvas Talisman
+B97	3050.0
+C97	3050.0
+A98	Primal Glintstone Blade
+B98	3080.0
+C98	3080.0
+A99	Moon of Nokstella
+B99	1140.0
+C99	1140.0
+A100	Old Lord's Talisman
+B100	3060.0
+C100	3060.0
+A101	Radagon Icon
+B101	3070.0
+C101	3070.0
+A102	Beloved Stardust
+B102	8190.0
+C102	3070.0
+A103	Roar Medallion
+B103	2190.0
+C103	2190.0
+A104	Companion Jar
+B104	2210.0
+C104	2210.0
+A105	Perfumer's Talisman
+B105	2220.0
+C105	2220.0
+A106	Carian Filigreed Crest
+B106	6020.0
+C106	6020.0
+A107	Warrior Jar Shard
+B107	1230.0
+C107	1230.0
+A108	Shard of Alexander
+B108	1231.0
+C108	1230.0
+A109	Godfrey Icon
+B109	3090.0
+C109	3090.0
+A110	Rellana's Cameo
+B110	8220.0
+C110	8220.0
+A111	Shattered Stone Talisman
+B111	8030.0
+C111	8030.0
+A112	Smithing Talisman
+B112	8110.0
+C112	8110.0
+A113	Enraged Divine Beast
+B113	8180.0
+C113	8180.0
+A114	Talisman of the Dread
+B114	8170.0
+C114	8170.0
+A115	Bull-Goat's Talisman
+B115	1210.0
+C115	1210.0
+A116	Blue Dancer Charm
+B116	2110.0
+C116	2110.0
+A117	Verdigris Discus
+B117	8210.0
+C117	8210.0
+A118	Magic Scorpion Charm
+B118	2000.0
+C118	2000.0
+A119	Fire Scorpion Charm
+B119	2020.0
+C119	2020.0
+A120	Lightning Scorpion Charm
+B120	2010.0
+C120	2010.0
+A121	Sacred Scorpion Charm
+B121	2030.0
+C121	2030.0
+A122	Crucible Scale Talisman
+B122	4060.0
+C122	4060.0
+A123	Crucible Feather Talisman
+B123	4070.0
+C123	4070.0
+A124	Crucible Knot Talisman
+B124	4110.0
+C124	4110.0
+A125	Fine Crucible Feather Talisman
+B125	8010.0
+C125	8010.0
+A126	Talisman of All Crucibles
+B126	8240.0
+C126	4060.0
+A127	Red-Feathered Branchsword
+B127	2040.0
+C127	2040.0
+A128	Blue-Feathered Branchsword
+B128	4080.0
+C128	4080.0
+A129	Ritual Sword Talisman
+B129	2050.0
+C129	2050.0
+A130	Ritual Shield Talisman
+B130	4090.0
+C130	4090.0
+A131	Assassin's Crimson Dagger
+B131	5050.0
+C131	5050.0
+A132	Assassin's Cerulean Dagger
+B132	5060.0
+C132	5060.0
+A133	Winged Sword Insignia
+B133	2080.0
+C133	2080.0
+A134	Rotten Winged Sword Insignia
+B134	2081.0
+C134	2080.0
+A135	Millicent's Prosthesis
+B135	1250.0
+C135	1250.0
+A136	Godskin Swaddling Cloth
+B136	5040.0
+C136	5040.0
+A137	Kindred of Rot's Exultation
+B137	2170.0
+C137	2170.0
+A138	Lord of Blood's Exultation
+B138	2160.0
+C138	2160.0
+A139	Aged One's Exultation
+B139	8060.0
+C139	8060.0
+A140	St. Trina's Smile
+B140	8160.0
+C140	8160.0
+A141	Blade of Mercy
+B141	8230.0
+C141	8230.0
+A142	Taker's Cameo
+B142	5030.0
+C142	5030.0
+A143	Ancestral Spirit's Horn
+B143	6110.0
+C143	6110.0
+A144	Crusade Insignia
+B144	8050.0
+C144	8050.0
+A145	Dried Bouquet
+B145	8100.0
+C145	8100.0
+A146	Gold Scarab
+B146	1110.0
+C146	1110.0
+A147	Silver Scarab
+B147	1100.0
+C147	1100.0
+A148	Crepus's Vial
+B148	6000.0
+C148	6000.0
+A149	Concealing Veil
+B149	6010.0
+C149	6010.0
+A150	Longtail Cat Talisman
+B150	6040.0
+C150	6040.0
+A151	Furled Finger's Trick-Mirror
+B151	6080.0
+C151	6080.0
+A152	Host's Trick-Mirror
+B152	6090.0
+C152	6080.0
+A153	Shabriri's Woe
+B153	6050.0
+C153	6050.0
+A154	Daedicar's Woe
+B154	6060.0
+C154	6060.0
+A155	Sacrificial Twig
+B155	6070.0
+C155	6070.0
+
+CROSS-SHEET REFERENCES: EquipParamAccessory
+FORMULA KINDS: excel=1
+UNIQUE PATTERNS: 1
+
+========================================================================
+FORMULA PATTERNS (fill-down compressed)
+{r} is the row of the cell. Port the template once and apply per row.
+========================================================================
+
+PATTERN 1  kind=excel  array=True  C2
+  context_label: Crimson Amber Medallion
+  array_spill_ref: C2:C155
+  template: =IF(ISBLANK(B{r}:B155),,
+VLOOKUP(B{r}:B155,EquipParamAccessory!$A:$AC,MATCH(C$1,EquipParamAccessory!$1:$1,0),False))
+  e.g. C2: =IF(ISBLANK(B2:B155),,
+VLOOKUP(B2:B155,EquipParamAccessory!$A:$AC,MATCH(C$1,EquipParamAccessory!$1:$1,0),False))  cached=1000
+
+========================================================================
+ALL FORMULAS
+========================================================================
+cell	kind	array_ref	label	logic	stored	cached
+C2	excel	C2:C155	Crimson Amber Medallion	=IF(ISBLANK(B2:B155),, | VLOOKUP(B2:B155,EquipParamAccessory!$A:$AC,MATCH(C$1,EquipParamAccessory!$1:$1,0),False))	=IF(ISBLANK(B2:B155),, | VLOOKUP(B2:B155,EquipParamAccessory!$A:$AC,MATCH(C$1,EquipParamAccessory!$1:$1,0),False))	1000

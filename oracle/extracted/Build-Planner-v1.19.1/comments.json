@@ -1,0 +1,257 @@
+[
+  {
+    "sheet": "Planner",
+    "cell": "E6",
+    "text": "If you don't care about the changes listed in Changelog you can:\n\nGo to the UpdateData page and edit cell D2 to equal the update version\n\nDoing so will remove the notification until the next update\n\nIf this says TRUE or is highlighted green with no update you can run the fix_updateBooleanFormat macro to restore proper functionality"
+  },
+  {
+    "sheet": "Planner",
+    "cell": "E7",
+    "text": "See Changelog for details\n\nIf this is giving an error you can run the fix_importRangeError macro to restore proper functionality"
+  },
+  {
+    "sheet": "Planner",
+    "cell": "AM8",
+    "text": "This will delete the selected build\n\nDoes not clear selections so you have a chance to recover a deleted build if you change your mind"
+  },
+  {
+    "sheet": "Planner",
+    "cell": "E10",
+    "text": "You may need to \"Load Build\" twice depending on Talisman and Spell usage relative to previously loaded slots.\n\nIf you use the \"Load Build\" button you can ignore the following:\n\nAll selections need to be cleared for a build to load without the script buttons."
+  },
+  {
+    "sheet": "Planner",
+    "cell": "E11",
+    "text": "Name used for saving build\n\nIf this name matches a saved build it will edit that build instead of saving a new one"
+  },
+  {
+    "sheet": "Planner",
+    "cell": "AQ14",
+    "text": "None of the damage multipliers are reflected in the AP display because they are not AP multipliers.\n\nAlmost every effect that increases damage is a damage multiplier."
+  },
+  {
+    "sheet": "Planner",
+    "cell": "V15",
+    "text": "Toggles between attack values and guard values"
+  },
+  {
+    "sheet": "Planner",
+    "cell": "AC15",
+    "text": "GB = Guard Boost"
+  },
+  {
+    "sheet": "Planner",
+    "cell": "AC17",
+    "text": "Sorcery/Incant Scaling"
+  },
+  {
+    "sheet": "Planner",
+    "cell": "AI33",
+    "text": "+10% Fire Damage Negation\n-10% Lightning Damage Negation"
+  },
+  {
+    "sheet": "Planner",
+    "cell": "AI34",
+    "text": "+10% Fire Damage Negation\n-10% Lightning Damage Negation"
+  },
+  {
+    "sheet": "Planner",
+    "cell": "AI35",
+    "text": "Toggles attack power penalties for lacking requirements"
+  },
+  {
+    "sheet": "Planner",
+    "cell": "AE36",
+    "text": "Has priority over Low HP"
+  },
+  {
+    "sheet": "Planner",
+    "cell": "AI36",
+    "text": "Toggles Scaling display between letters and values"
+  },
+  {
+    "sheet": "Planner",
+    "cell": "AI37",
+    "text": "Display all starting classes under \"Optimal Classes\" so you can see how many levels are saved/lost between them"
+  },
+  {
+    "sheet": "Planner",
+    "cell": "AI38",
+    "text": "Hides default builds from the dropdown menu; they will always be sorted at the bottom of the list if visible"
+  },
+  {
+    "sheet": "Planner",
+    "cell": "E42",
+    "text": "Valid input is 2-10"
+  },
+  {
+    "sheet": "Planner",
+    "cell": "E45",
+    "text": "Uses highest Sorcery/Incant Scaling equipped by default\n\nIf two or more slots have equal Sorcery/Incant Scaling it will prioritize RH1>RH2>RH3>LH1>LH2>LH3 with no manual selection"
+  },
+  {
+    "sheet": "Planner",
+    "cell": "T47",
+    "text": "Intelligence | Faith | Arcane"
+  },
+  {
+    "sheet": "Planner",
+    "cell": "E61",
+    "text": "There will be no valid spell/catalyst if the selected catalyst cannot cast any of the selected spells"
+  },
+  {
+    "sheet": "Matchmaking Calc (Beta)",
+    "cell": "E6",
+    "text": "If you don't care about the changes listed in Changelog you can:\n\nGo to the UpdateData page and edit cell D2 to equal the update version\n\nDoing so will remove the notification until the next update\n\nIf this says TRUE or is highlighted green with no update you can run the fix_updateBooleanFormat macro to restore proper functionality"
+  },
+  {
+    "sheet": "Matchmaking Calc (Beta)",
+    "cell": "E7",
+    "text": "See Changelog for details\n\nIf this is giving an error you can run the fix_importRangeError macro to restore proper functionality"
+  },
+  {
+    "sheet": "Matchmaking Calc (Beta)",
+    "cell": "E9",
+    "text": "Will default to Planner value with no manual input"
+  },
+  {
+    "sheet": "Matchmaking Calc (Beta)",
+    "cell": "E10",
+    "text": "Use standard reinforcement values; 0-25\n\nWill default to the maximum equivalent from Planner selections with no manual input"
+  },
+  {
+    "sheet": "AP Calc",
+    "cell": "E6",
+    "text": "If you don't care about the changes listed in Changelog you can:\n\nGo to the UpdateData page and edit cell D2 to equal the update version\n\nDoing so will remove the notification until the next update\n\nIf this says TRUE or is highlighted green with no update you can run the fix_updateBooleanFormat macro to restore proper functionality"
+  },
+  {
+    "sheet": "AP Calc",
+    "cell": "E7",
+    "text": "See Changelog for details\n\nIf this is giving an error you can run the fix_importRangeError macro to restore proper functionality"
+  },
+  {
+    "sheet": "AP Calc",
+    "cell": "U10",
+    "text": "Make sure you clear/uncheck these cells when not calculating for an Ash of War"
+  },
+  {
+    "sheet": "AP Calc",
+    "cell": "E11",
+    "text": "Will use Planner RH1 selection with no manual input"
+  },
+  {
+    "sheet": "AP Calc",
+    "cell": "U17",
+    "text": "This should almost always be checked for attack power calculation\nof Ashes of War that have innate attack power"
+  },
+  {
+    "sheet": "AP Calc",
+    "cell": "U19",
+    "text": "Currently only changeStrengthPoint is used\n\nValue of 5 for the following buffs:\n- Roar\n- Barbaric Roar\n- War Cry\n- Shriek of Sorrow\n- Shriek of Milos"
+  },
+  {
+    "sheet": "AP Calc",
+    "cell": "G29",
+    "text": "You can enter a manual base value here if desired\n\nManual value entry will slightly darken cell color and make text blue"
+  },
+  {
+    "sheet": "Optimal Affinity Calc",
+    "cell": "E6",
+    "text": "If you don't care about the changes listed in Changelog you can:\n\nGo to the UpdateData page and edit cell D2 to equal the update version\n\nDoing so will remove the notification until the next update\n\nIf this says TRUE or is highlighted green with no update you can run the fix_updateBooleanFormat macro to restore proper functionality"
+  },
+  {
+    "sheet": "Optimal Affinity Calc",
+    "cell": "E7",
+    "text": "See Changelog for details\n\nIf this is giving an error you can run the fix_importRangeError macro to restore proper functionality"
+  },
+  {
+    "sheet": "Optimal Affinity Calc",
+    "cell": "E13",
+    "text": "Will use Planner RH1 selection with no manual input"
+  },
+  {
+    "sheet": "Optimal Catalyst Calc",
+    "cell": "E6",
+    "text": "If you don't care about the changes listed in Changelog you can:\n\nGo to the UpdateData page and edit cell D2 to equal the update version\n\nDoing so will remove the notification until the next update\n\nIf this says TRUE or is highlighted green with no update you can run the fix_updateBooleanFormat macro to restore proper functionality"
+  },
+  {
+    "sheet": "Optimal Catalyst Calc",
+    "cell": "E7",
+    "text": "See Changelog for details\n\nIf this is giving an error you can run the fix_importRangeError macro to restore proper functionality"
+  },
+  {
+    "sheet": "Optimal Catalyst Calc",
+    "cell": "E11",
+    "text": "If no manual entry is made: will default to the somber equivalent of the Standard Reinforcement level selected."
+  },
+  {
+    "sheet": "Optimal Catalyst Calc",
+    "cell": "M19",
+    "text": "Only relevant for Sorceries that ignore non-intelligence scaling"
+  },
+  {
+    "sheet": "Optimal Catalyst Calc",
+    "cell": "N19",
+    "text": "Only relevant for Incantations that ignore non-faith scaling"
+  },
+  {
+    "sheet": "Optimal Catalyst Calc",
+    "cell": "Q19",
+    "text": "The multiplier affects damage rather than being inserted into AP/MV calculation"
+  },
+  {
+    "sheet": "Damage Calc",
+    "cell": "AA5",
+    "text": "Sorcery/Incant Scaling"
+  },
+  {
+    "sheet": "Damage Calc",
+    "cell": "E6",
+    "text": "If you don't care about the changes listed in Changelog you can:\n\nGo to the UpdateData page and edit cell D2 to equal the update version\n\nDoing so will remove the notification until the next update\n\nIf this says TRUE or is highlighted green with no update you can run the fix_updateBooleanFormat macro to restore proper functionality"
+  },
+  {
+    "sheet": "Damage Calc",
+    "cell": "E7",
+    "text": "See Changelog for details\n\nIf this is giving an error you can run the fix_importRangeError macro to restore proper functionality"
+  },
+  {
+    "sheet": "Damage Calc",
+    "cell": "G18",
+    "text": "Uses Planner defense values without a manual entry"
+  },
+  {
+    "sheet": "Damage Calc",
+    "cell": "J18",
+    "text": "Uses Planner dmg negation values without a manual entry"
+  },
+  {
+    "sheet": "Damage Calc",
+    "cell": "E27",
+    "text": "Uses Planner health value without a manual entry"
+  },
+  {
+    "sheet": "Builds",
+    "cell": "A1",
+    "text": "Copy B2 and paste below to save your build manually\n\nRename column A to name your builds manually\n\nIf you need more slots: add more rows"
+  },
+  {
+    "sheet": "Database Builds",
+    "cell": "B2",
+    "text": "Will only display builds with creator names that contain your input"
+  },
+  {
+    "sheet": "Database Builds",
+    "cell": "C2",
+    "text": "Will only display builds at this level"
+  },
+  {
+    "sheet": "Database Builds",
+    "cell": "D2",
+    "text": "Will only display builds containing your input in the name"
+  },
+  {
+    "sheet": "Database Builds",
+    "cell": "A4",
+    "text": "last updated"
+  }
+]

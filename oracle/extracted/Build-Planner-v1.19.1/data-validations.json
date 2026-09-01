@@ -1,0 +1,554 @@
+[
+  {
+    "sheet": "UpdateData",
+    "sqref": "B2",
+    "type": "list",
+    "operator": null,
+    "formula1": "$A$2",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "AG30",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$T$2:$T129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "Q24",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$Z$2:$Z129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "G52",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$BB$2:$BB129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "Q26",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$AH$2:$AH129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "Q25",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$AO$2:$AO129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "G53",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$BC$2:$BC129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "AG16",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$F$2:$F129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "Q33",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$AQ$2:$AQ129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "AG24",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$O$2:$O129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "G59",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$BI$2:$BI129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "Q18",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$AF$2:$AF129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "G58",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$BH$2:$BH129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "Q17",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$AM$2:$AM129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "Q16",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$X$2:$X129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "G50",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$AZ$2:$AZ129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "Q20",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$Y$2:$Y129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "AG17",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$G$2:$G129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "Q36",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$AC$2:$AC129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "G14",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$C$2:$C129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "Q29",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$AP$2:$AP129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "G49",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$AY$2:$AY129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "AG29",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$S$2:$S129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "G54",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$BD$2:$BD129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "Q38",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$AK$2:$AK129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "AG22",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$M$2:$M129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "G56",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$BF$2:$BF129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "AG21",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$L$2:$L129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "AG18",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$H$2:$H129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "G55",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$BE$2:$BE129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "AG26",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$Q$2:$Q129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "G45",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$AV$2:$AV129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "G48",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$AX$2:$AX129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "Q32",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$AB$2:$AB129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "G10",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$A$2:$A129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "Q34",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$AJ$2:$AJ129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "G57",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$BG$2:$BG129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "Q21",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$AN$2:$AN129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "Q30",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$AI$2:$AI129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "G51",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$BA$2:$BA129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "I19:I26",
+    "type": "custom",
+    "operator": null,
+    "formula1": "AND(I19>=1,I19<=99,I19=TRUNC(I19),ISNUMBER(I19))",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "Q22",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$AG$2:$AG129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "Q28",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$AA$2:$AA129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "Q37",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$AR$2:$AR129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "AG15",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$E$2:$E129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "AG23",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$N$2:$N129",
+    "formula2": null
+  },
+  {
+    "sheet": "Planner",
+    "sqref": "Q15 Q19 Q23 Q27 Q31 Q35",
+    "type": "list",
+    "operator": null,
+    "formula1": "DropdownData!$V$2:$V129",
+    "formula2": null
+  },
+  {
+    "sheet": "Matchmaking Calc (Beta)",
+    "sqref": "G9",
+    "type": "custom",
+    "operator": null,
+    "formula1": "AND(G9>=1,G9<=713,G9=TRUNC(G9),ISNUMBER(G9))",
+    "formula2": null
+  },
+  {
+    "sheet": "Matchmaking Calc (Beta)",
+    "sqref": "G10",
+    "type": "custom",
+    "operator": null,
+    "formula1": "AND(G10>=0,G10<=25,G10=TRUNC(G10),ISNUMBER(G10))",
+    "formula2": null
+  },
+  {
+    "sheet": "AP Calc",
+    "sqref": "G13",
+    "type": "list",
+    "operator": null,
+    "formula1": "ApCalcData!$X$2:$X56",
+    "formula2": null
+  },
+  {
+    "sheet": "AP Calc",
+    "sqref": "G11",
+    "type": "list",
+    "operator": null,
+    "formula1": "ApCalcData!$T$2:$T56",
+    "formula2": null
+  },
+  {
+    "sheet": "AP Calc",
+    "sqref": "V12:V16",
+    "type": "custom",
+    "operator": null,
+    "formula1": "AND(ISNUMBER(V12),V12>=0)",
+    "formula2": null
+  },
+  {
+    "sheet": "AP Calc",
+    "sqref": "G30:G45",
+    "type": "custom",
+    "operator": null,
+    "formula1": "OR(AND(ISNUMBER(G30),G30>=0),G30=\"-   \")",
+    "formula2": null
+  },
+  {
+    "sheet": "AP Calc",
+    "sqref": "G15:G19",
+    "type": "custom",
+    "operator": null,
+    "formula1": "AND(G15>=1,G15<=99,G15=TRUNC(G15),ISNUMBER(G15))",
+    "formula2": null
+  },
+  {
+    "sheet": "AP Calc",
+    "sqref": "V11",
+    "type": "custom",
+    "operator": null,
+    "formula1": "OR(AND(ISNUMBER(V11),V11>=0),V11=-1)",
+    "formula2": null
+  },
+  {
+    "sheet": "AP Calc",
+    "sqref": "V20:V24",
+    "type": "custom",
+    "operator": null,
+    "formula1": "ISNUMBER(V20)",
+    "formula2": null
+  },
+  {
+    "sheet": "AP Calc",
+    "sqref": "G10",
+    "type": "list",
+    "operator": null,
+    "formula1": "WeaponData!$A$2:$A56",
+    "formula2": null
+  },
+  {
+    "sheet": "AP Calc",
+    "sqref": "G22",
+    "type": "list",
+    "operator": null,
+    "formula1": "ApCalcData!$AB$2:$AB56",
+    "formula2": null
+  },
+  {
+    "sheet": "AP Calc",
+    "sqref": "G12",
+    "type": "list",
+    "operator": null,
+    "formula1": "ApCalcData!$V$2:$V56",
+    "formula2": null
+  },
+  {
+    "sheet": "Optimal Affinity Calc",
+    "sqref": "G13",
+    "type": "list",
+    "operator": null,
+    "formula1": "OptimalAffinityCalcData!$CU$2:$CU44",
+    "formula2": null
+  },
+  {
+    "sheet": "Optimal Affinity Calc",
+    "sqref": "G23",
+    "type": "list",
+    "operator": null,
+    "formula1": "\"Standard,Strike,Slash,Pierce\"",
+    "formula2": null
+  },
+  {
+    "sheet": "Optimal Affinity Calc",
+    "sqref": "G16:G20",
+    "type": "custom",
+    "operator": null,
+    "formula1": "AND(G16>=1,G16<=99,G16=TRUNC(G16),ISNUMBER(G16))",
+    "formula2": null
+  },
+  {
+    "sheet": "Optimal Affinity Calc",
+    "sqref": "G14",
+    "type": "list",
+    "operator": null,
+    "formula1": "OptimalAffinityCalcData!$CW$2:$CW44",
+    "formula2": null
+  },
+  {
+    "sheet": "Optimal Affinity Calc",
+    "sqref": "G12",
+    "type": "list",
+    "operator": null,
+    "formula1": "OptimalAffinityCalcData!$CS$2:$CS44",
+    "formula2": null
+  },
+  {
+    "sheet": "Optimal Affinity Calc",
+    "sqref": "G25",
+    "type": "list",
+    "operator": null,
+    "formula1": "OptimalAffinityCalcData!$A44:$A$52",
+    "formula2": null
+  },
+  {
+    "sheet": "Optimal Catalyst Calc",
+    "sqref": "K10",
+    "type": "list",
+    "operator": null,
+    "formula1": "OptimalCatalystCalcData!$BB$2:$BB56",
+    "formula2": null
+  },
+  {
+    "sheet": "Optimal Catalyst Calc",
+    "sqref": "K11",
+    "type": "list",
+    "operator": null,
+    "formula1": "OptimalCatalystCalcData!$BA$2:$BA56",
+    "formula2": null
+  },
+  {
+    "sheet": "Optimal Catalyst Calc",
+    "sqref": "G13:G17",
+    "type": "custom",
+    "operator": null,
+    "formula1": "AND(G13>=1,G13<=99,G13=TRUNC(G13),ISNUMBER(G13))",
+    "formula2": null
+  },
+  {
+    "sheet": "Optimal Catalyst Calc",
+    "sqref": "M17",
+    "type": "list",
+    "operator": null,
+    "formula1": "OptimalCatalystCalcData!$A$14:$A$16",
+    "formula2": null
+  }
+]

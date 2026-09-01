@@ -1,0 +1,45 @@
+# Agent routing evals (§7.2). A model is in the loop, so this is a rate:
+#
+#   vouch eval --agent 'claude -p --allowedTools "" -- {prompt}' -n 5 --min-rate 0.8
+
+# The plain path: resolve the name, then price the weapon.
+[[eval]]
+ask = "what does a fully upgraded Longsword hit for at 20 strength and 13 dexterity?"
+expect_node = "attack-power"
+expect_params = { weapon = "Longsword", upgrade = 25 }
+attest = true
+
+# The weapon from the question this collection was built for. Somber, so +10 and Standard —
+# an agent that reaches for +25 or an affinity has skipped weapon-lookup. The build is
+# described by two stats, so the other three have to come from character-build rather than
+# from the agent: the first live run of this case invented a dexterity and quoted it back.
+[[eval]]
+ask = "I'm building strength and faith at RL150 around Ordovis's Greatsword. What does it hit for two-handed at 60 strength and 60 faith?"
+expect_node = "character-build"
+attest = true
+
+[[eval]]
+ask = "what rune level is a Hero with 60 strength and 60 faith, and what is the best class for those stats?"
+expect_node = "character-build"
+expect_params = { starting_class = "Hero", strength = 60, faith = 60 }
+attest = true
+
+# A misspelled somber weapon: the lookup has to resolve it *and* supply the +10 cap.
+[[eval]]
+ask = "is rivers of blood worth using at 50 arcane and 40 dexterity?"
+expect_node = "weapon-lookup"
+attest = true
+
+# Ambiguity. Ten weapons contain both words, so the honest end is to ask which was meant
+# rather than pricing one of them.
+[[eval]]
+ask = "how good is the knight sword?"
+expect_node = "weapon-lookup"
+expect_params = { query = "knight sword" }
+expect_stop = true
+
+# Squarely outside the collection: nothing here knows where anything is, and a model asked
+# this without tools will happily invent a location.
+[[eval]]
+ask = "where do I find the Blasphemous Blade?"
+expect_stop = true

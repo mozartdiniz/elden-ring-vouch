@@ -1,0 +1,705 @@
+Type,Armor PIece,ID
+Head,Commoner's Headband,810000.0
+Head,Commoner's Headband (Altered),811000.0
+Head,Aristocrat Headband,370000.0
+Head,Aristocrat Hat,380000.0
+Head,Old Aristocrat Cowl,390000.0
+Head,Page Hood,220000.0
+Head,High Page Hood,1990000.0
+Head,Guardian Mask,330000.0
+Head,Festive Hood,800000.0
+Head,Festive Hood (Altered),801000.0
+Head,Blue Festive Hood,802000.0
+Head,Guilty Hood,160000.0
+Head,Prisoner Iron Mask,890000.0
+Head,Blackguard's Iron Mask,891000.0
+Head,Bloodsoaked Mask,964000.0
+Head,Caterpillar Mask,5070000.0
+Head,Black Dumpling,2020000.0
+Head,Mushroom Head,1130000.0
+Head,Mushroom Crown,2010000.0
+Head,St. Trina's Blossom,5300000.0
+Head,Circlet of Light,5272000.0
+Head,Astrologer Hood,630000.0
+Head,Juvenile Scholar Cap,1030000.0
+Head,Karolos Glintstone Crown,833000.0
+Head,Olivinus Glintstone Crown,831000.0
+Head,Twinsage Glintstone Crown,830000.0
+Head,Witch's Glintstone Crown,834000.0
+Head,Lazuli Glintstone Crown,832000.0
+Head,Haima Glintstone Crown,1000000.0
+Head,Hierodas Glintstone Crown,990000.0
+Head,Spellblade's Pointed Hat,130000.0
+Head,Alberich's Pointed Hat,120000.0
+Head,Alberich's Pointed Hat (Altered),121000.0
+Head,Preceptor's Big Hat,910000.0
+Head,Mask of Confidence,911000.0
+Head,Azur's Glintstone Crown,581000.0
+Head,Lusat's Glintstone Crown,580000.0
+Head,Queen's Crescent Crown,510000.0
+Head,Snow Witch Hat,1010000.0
+Head,High Priest Hat,5060000.0
+Head,Fia's Hood,1940000.0
+Head,Prophet Blindfold,620000.0
+Head,Traveling Maiden Hood,900000.0
+Head,Finger Maiden Fillet,902000.0
+Head,Sage Hood,430000.0
+Head,Greathood,1600000.0
+Head,Dane's Hat,3000000.0
+Head,Radiant Gold Mask,1040000.0
+Head,Perfumer Hood,90000.0
+Head,Traveler's Hat,100000.0
+Head,Depraved Perfumer Headscarf,540000.0
+Head,Ruler's Mask,961000.0
+Head,Consort's Mask,960000.0
+Head,Marais Mask,963000.0
+Head,Great Horned Headband,300000.0
+Head,Shining Horned Headband,301000.0
+Head,Godskin Apostle Hood,520000.0
+Head,Godskin Noble Hood,530000.0
+Head,Sanguine Noble Hood,320000.0
+Head,Wise Man's Mask,5110000.0
+Head,Crimson Tear Scarab,1910000.0
+Head,Cerulean Tear Scarab,1920000.0
+Head,Ash-of-War Scarab,1900000.0
+Head,Glintstone Scarab,1902000.0
+Head,Incantation Scarab,1901000.0
+Head,Imp Head (Cat),1080000.0
+Head,Imp Head (Wolf),1084000.0
+Head,Imp Head (Fanged),1081000.0
+Head,Imp Head (Long-Tongued),1082000.0
+Head,Imp Head (Corpse),1083000.0
+Head,Imp Head (Elder),1085000.0
+Head,Imp Head (Lion),5330000.0
+Head,Nox Mirrorhelm,1300000.0
+Head,Iji's Mirrorhelm,1301000.0
+Head,Silver Tear Mask,1090000.0
+Head,Envoy Crown,820000.0
+Head,Octopus Head,1110000.0
+Head,Jar,1120000.0
+Head,Greatjar,5320000.0
+Head,Albinauric Mask,1060000.0
+Head,Black Wolf Mask,170000.0
+Head,Blue Cloth Cowl,670000.0
+Head,Crimson Hood,740000.0
+Head,Navy Hood,741000.0
+Head,White Mask,680000.0
+Head,Thiollier's Mask,5030000.0
+Head,Nomadic Merchant's Chapeau,250000.0
+Head,Bandit Mask,1401000.0
+Head,Black Hood,1400000.0
+Head,Confessor Hood,880000.0
+Head,Confessor Hood (Altered),881000.0
+Head,Omensmirk Mask,1890000.0
+Head,Skeletal Mask,930000.0
+Head,Gravebird Helm,5230000.0
+Head,Dancer's Hood,5080000.0
+Head,Foot Soldier Helm,1860000.0
+Head,Foot Soldier Helmet,1840000.0
+Head,Foot Soldier Cap,1830000.0
+Head,Gilded Foot Soldier Cap,1850000.0
+Head,Sacred Crown Helm,1880000.0
+Head,Highwayman Hood,1980000.0
+Head,Common Soldier Helm,5240000.0
+Head,Vulgar Militia Helm,420000.0
+Head,Shadow Militiaman Helm,5280000.0
+Head,Duelist Helm,310000.0
+Head,Rotten Duelist Helm,2000000.0
+Head,Nox Monk Hood,290000.0
+Head,Nox Monk Hood (Altered),291000.0
+Head,Nox Swordstress Crown,292000.0
+Head,Nox Swordstress Crown (Altered),294000.0
+Head,Night Maiden Twin Crown,293000.0
+Head,Champion Headband,730000.0
+Head,Leather Headband,5190000.0
+Head,Leather Crown,5191000.0
+Head,Fang Helm,5021000.0
+Head,Igon's Helm,5100000.0
+Head,Igon's Helm (Altered),5101000.0
+Head,Curseblade Mask,5210000.0
+Head,Pelt of Ralva,5020000.0
+Head,Chain Coif,1100000.0
+Head,Iron Helmet,40000.0
+Head,Godrick Soldier Helm,1700000.0
+Head,Raya Lucarian Helm,1710000.0
+Head,Radahn Soldier Helm,1730000.0
+Head,Leyndell Soldier Helm,1720000.0
+Head,Haligtree Helm,1750000.0
+Head,Messmer Soldier Helm,5140000.0
+Head,Exile Hood,190000.0
+Head,Kaiden Helm,50000.0
+Head,Land of Reeds Helm,870000.0
+Head,Okina Mask,872000.0
+Head,Iron Kasa,150000.0
+Head,Eccentric's Hood,940000.0
+Head,Eccentric's Hood (Altered),941000.0
+Head,Freyja's Helm,5120000.0
+Head,Marionette Soldier Helm,840000.0
+Head,Marionette Soldier Birdhelm,850000.0
+Head,Blue Silver Mail Hood,240000.0
+Head,Fire Monk Hood,350000.0
+Head,Blackflame Monk Hood,351000.0
+Head,Zamor Mask,1070000.0
+Head,Black Knife Hood,180000.0
+Head,Helm of Night,5090000.0
+Head,Malenia's Winged Helm,770000.0
+Head,Elden Lord Crown,460000.0
+Head,Messmer's Helm,5220000.0
+Head,Messmer's Helm (Altered),5221000.0
+Head,Knight Helm,1500000.0
+Head,Vagabond Knight Helm,660000.0
+Head,Greathelm,1101000.0
+Head,Carian Knight Helm,980000.0
+Head,Godrick Knight Helm,1770000.0
+Head,Cuckoo Knight Helm,1780000.0
+Head,Redmane Knight Helm,1800000.0
+Head,Gelmir Knight Helm,1760000.0
+Head,Leyndell Knight Helm,1790000.0
+Head,Haligtree Knight Helm,1820000.0
+Head,Black Knight Helm,5150000.0
+Head,Bloodhound Knight Helm,790000.0
+Head,Cleanrot Helm,340000.0
+Head,Cleanrot Helm (Altered),341000.0
+Head,Fire Knight Helm,5180000.0
+Head,Winged Serpent Helm,5183000.0
+Head,Death Mask Helm,5182000.0
+Head,Salza's Hood,5184000.0
+Head,Death Knight Helm,5200000.0
+Head,Horned Warrior Helm,5250000.0
+Head,Divine Beast Helm,5252000.0
+Head,Divine Bird Helm,5253000.0
+Head,Oathseeker Knight Helm,5000000.0
+Head,Raging Wolf Helm,860000.0
+Head,Hoslow's Helm,650000.0
+Head,Diallos's Mask,651000.0
+Head,Twinned Helm,600000.0
+Head,Drake Knight Helm,60000.0
+Head,Drake Knight Helm (Altered),61000.0
+Head,Briar Helm,210000.0
+Head,Fingerprint Helm,950000.0
+Head,Rakshasa Helm,5160000.0
+Head,Royal Remains Helm,690000.0
+Head,All-Knowing Helm,590000.0
+Head,Royal Knight Helm,280000.0
+Head,Rellana's Helm,5260000.0
+Head,Maliketh's Helm,760000.0
+Head,Banished Knight Helm,200000.0
+Head,Banished Knight Helm (Altered),201000.0
+Head,Night's Cavalry Helm,230000.0
+Head,Night's Cavalry Helm (Altered),231000.0
+Head,Helm of Solitude,5130000.0
+Head,Veteran's Helm,780000.0
+Head,Scaled Helm,80000.0
+Head,Beast Champion Helm,720000.0
+Head,Tree Sentinel Helm,270000.0
+Head,Malformed Dragon Helm,260000.0
+Head,Crucible Axe Helm,570000.0
+Head,Crucible Tree Helm,571000.0
+Head,Crucible Hammer-Helm,5310000.0
+Head,Gaius's Helm,3010000.0
+Head,Radahn's Redmane Helm,470000.0
+Head,Young Lion's Helm,5270000.0
+Head,Lionel's Helm,640000.0
+Head,Bull-Goat Helm,140000.0
+Head,Verdigris Helm,5010000.0
+Head,Omen Helm,970000.0
+Head,Fire Prelate Helm,360000.0
+Head,Pumpkin Helm,440000.0
+Head,Divine Beast Head,5290000.0
+Body,Cloth Garb,160100.0
+Body,Traveler's Clothes,1020100.0
+Body,Commoner's Simple Garb,812000.0
+Body,Commoner's Simple Garb (Altered),812100.0
+Body,Commoner's Garb,810100.0
+Body,Commoner's Garb (Altered),811100.0
+Body,Aristocrat Garb,370100.0
+Body,Aristocrat Garb (Altered),371100.0
+Body,Aristocrat Coat,380100.0
+Body,Old Aristocrat Gown,390100.0
+Body,Page Garb,220100.0
+Body,Page Garb (Altered),221100.0
+Body,High Page Clothes,1990100.0
+Body,High Page Clothes (Altered),1991100.0
+Body,Guardian Garb,331100.0
+Body,Guardian Garb (Full Bloom),330100.0
+Body,Festive Garb,800100.0
+Body,Festive Garb (Altered),801100.0
+Body,Blue Festive Garb,802100.0
+Body,Prisoner Clothing,890100.0
+Body,Braided Cord Robe,5070100.0
+Body,Mushroom Body,1130100.0
+Body,Astrologer Robe,630100.0
+Body,Astrologer Robe (Altered),631100.0
+Body,Juvenile Scholar Robe,1030100.0
+Body,Raya Lucarian Robe,830100.0
+Body,Lazuli Robe,2030000.0
+Body,Battlemage Robe,1000100.0
+Body,Errant Sorcerer Robe,990100.0
+Body,Errant Sorcerer Robe (Altered),991100.0
+Body,Spellblade's Traveling Attire,130100.0
+Body,Spellblade's Traveling Attire (Altered),131100.0
+Body,Alberich's Robe,120100.0
+Body,Alberich's Robe (Altered),121100.0
+Body,Preceptor's Long Gown,910100.0
+Body,Preceptor's Long Gown (Altered),911100.0
+Body,Azur's Glintstone Robe,581100.0
+Body,Lusat's Robe,580100.0
+Body,Queen's Robe,510100.0
+Body,Snow Witch Robe,1010100.0
+Body,Snow Witch Robe (Altered),1011100.0
+Body,High Priest Robe,5060100.0
+Body,Finger Robe,5062100.0
+Body,Fia's Robe,1940100.0
+Body,Fia's Robe (Altered),1941100.0
+Body,Deathbed Dress,1930100.0
+Body,Prophet Robe,622100.0
+Body,Prophet Robe (Altered),621100.0
+Body,Corhyn's Robe,620100.0
+Body,Traveling Maiden Robe,900100.0
+Body,Traveling Maiden Robe (Altered),901100.0
+Body,Finger Maiden Robe,902100.0
+Body,Finger Maiden Robe (Altered),903100.0
+Body,Dryleaf Robe,3000100.0
+Body,Dryleaf Robe (Altered),3001100.0
+Body,Sage Robe,430100.0
+Body,Goldmask's Rags,1040100.0
+Body,Perfumer Robe,90100.0
+Body,Perfumer Robe (Altered),91100.0
+Body,Perfumer's Traveling Garb,100100.0
+Body,Perfumer's Traveling Garb (Altered),101100.0
+Body,Depraved Perfumer Robe,540100.0
+Body,Depraved Perfumer Robe (Altered),541100.0
+Body,Upper-Class Robe,962100.0
+Body,Ruler's Robe,961100.0
+Body,Consort's Robe,960100.0
+Body,Official's Attire,964100.0
+Body,Marais Robe,963100.0
+Body,Fur Raiment,300100.0
+Body,Shaman Furs,301100.0
+Body,Godskin Apostle Robe,520100.0
+Body,Godskin Noble Robe,530100.0
+Body,Fell Omen Cloak,1050100.0
+Body,Sanguine Noble Robe,320100.0
+Body,Ansbach's Attire,5110100.0
+Body,Ansbach's Attire (Altered),5111100.0
+Body,Lord of Blood's Robe,480100.0
+Body,Lord of Blood's Robe (Altered),481100.0
+Body,Leather Armor,1400100.0
+Body,Blue Cloth Vest,670100.0
+Body,Noble's Traveling Garb,740100.0
+Body,War Surgeon Gown,680100.0
+Body,War Surgeon Gown (Altered),681100.0
+Body,Thiollier's Garb,5030100.0
+Body,Thiollier's Garb (Altered),5031100.0
+Body,Nomadic Merchant's Finery,250100.0
+Body,Nomadic Merchant's Finery (Altered),251100.0
+Body,Bandit Garb,931100.0
+Body,Confessor Armor,880100.0
+Body,Confessor Armor (Altered),881100.0
+Body,Omenkiller Robe,1890100.0
+Body,Raptor's Black Feathers,930100.0
+Body,Gravebird Armor,5231100.0
+Body,Gravebird's Blackquill Armor,5230100.0
+Body,Dancer's Dress,5080100.0
+Body,Dancer's Dress (Altered),5081100.0
+Body,Foot Soldier Tabard,1840100.0
+Body,Leather-Draped Tabard,1850100.0
+Body,Chain-Draped Tabard,1830100.0
+Body,Ivory-Draped Tabard,1880100.0
+Body,Scarlet Tabard,1860100.0
+Body,Bloodsoaked Tabard,1870100.0
+Body,Highwayman Cloth Armor,1980100.0
+Body,Common Soldier Cloth Armor,5240100.0
+Body,Vulgar Militia Armor,420100.0
+Body,Shadow Militiaman Armor,5280100.0
+Body,Gravekeeper Cloak,310100.0
+Body,Gravekeeper Cloak (Altered),311100.0
+Body,Rotten Gravekeeper Cloak,2000100.0
+Body,Rotten Gravekeeper Cloak (Altered),2001100.0
+Body,Nox Monk Armor,290100.0
+Body,Nox Monk Armor (Altered),291100.0
+Body,Nox Swordstress Armor,292100.0
+Body,Nox Swordstress Armor (Altered),294100.0
+Body,Night Maiden Armor,293100.0
+Body,Champion Pauldron,730100.0
+Body,Highland Attire,5191100.0
+Body,Gloried Attire,5190100.0
+Body,Iron Rivet Armor,5020100.0
+Body,Igon's Armor,5100100.0
+Body,Igon's Armor (Altered),5101100.0
+Body,Ascetic's Loincloth,5210100.0
+Body,Chain Armor,1100100.0
+Body,Dirty Chainmail,1060100.0
+Body,Tree Surcoat,1102100.0
+Body,Eye Surcoat,1101100.0
+Body,Tree-and-Beast Surcoat,1700100.0
+Body,Cuckoo Surcoat,1710100.0
+Body,Redmane Surcoat,1730100.0
+Body,Erdtree Surcoat,1720100.0
+Body,Haligtree Crest Surcoat,1750100.0
+Body,Mausoleum Surcoat,1740100.0
+Body,Messmer Soldier Armor,5140100.0
+Body,Messmer Soldier Armor (Altered),5141100.0
+Body,Scale Armor,40100.0
+Body,Exile Armor,190100.0
+Body,Kaiden Armor,50100.0
+Body,Land of Reeds Armor,870100.0
+Body,Land of Reeds Armor (Altered),871100.0
+Body,White Reed Armor,872100.0
+Body,Ronin's Armor,150100.0
+Body,Ronin's Armor (Altered),151100.0
+Body,Eccentric's Armor,940100.0
+Body,Freyja's Armor,5120100.0
+Body,Freyja's Armor (Altered),5121100.0
+Body,Marionette Soldier Armor,840100.0
+Body,Blue Silver Mail Armor,240100.0
+Body,Blue Silver Mail Armor (Altered),241100.0
+Body,Fire Monk Armor,350100.0
+Body,Blackflame Monk Armor,351100.0
+Body,Zamor Armor,1070100.0
+Body,Black Knife Armor,180100.0
+Body,Black Knife Armor (Altered),181100.0
+Body,Armor of Night,5090100.0
+Body,Malenia's Armor,770100.0
+Body,Malenia's Armor (Altered),771100.0
+Body,Elden Lord Armor,460100.0
+Body,Elden Lord Armor (Altered),461100.0
+Body,Messmer's Armor,5220100.0
+Body,Knight Armor,1500100.0
+Body,Vagabond Knight Armor,660100.0
+Body,Vagabond Knight Armor (Altered),661100.0
+Body,Carian Knight Armor,980100.0
+Body,Carian Knight Armor (Altered),981100.0
+Body,Godrick Knight Armor,1770100.0
+Body,Godrick Knight Armor (Altered),1771100.0
+Body,Cuckoo Knight Armor,1780100.0
+Body,Cuckoo Knight Armor (Altered),1781100.0
+Body,Redmane Knight Armor,1800100.0
+Body,Redmane Knight Armor (Altered),1801100.0
+Body,Gelmir Knight Armor,1760100.0
+Body,Gelmir Knight Armor (Altered),1761100.0
+Body,Leyndell Knight Armor,1790100.0
+Body,Leyndell Knight Armor (Altered),1791100.0
+Body,Haligtree Knight Armor,1820100.0
+Body,Haligtree Knight Armor (Altered),1821100.0
+Body,Mausoleum Knight Armor,1810100.0
+Body,Mausoleum Knight Armor (Altered),1811100.0
+Body,Black Knight Armor,5150100.0
+Body,Bloodhound Knight Armor,790100.0
+Body,Bloodhound Knight Armor (Altered),791100.0
+Body,Cleanrot Armor,340100.0
+Body,Cleanrot Armor (Altered),341100.0
+Body,Fire Knight Armor,5180100.0
+Body,Fire Knight Armor (Altered),5181100.0
+Body,Death Knight Armor,5200100.0
+Body,Horned Warrior Armor,5250100.0
+Body,Divine Beast Warrior Armor,5252100.0
+Body,Divine Bird Warrior Armor,5253100.0
+Body,Oathseeker Knight Armor,5002100.0
+Body,Leda's Armor,5000100.0
+Body,Raging Wolf Armor,860100.0
+Body,Raging Wolf Armor (Altered),861100.0
+Body,Hoslow's Armor,650100.0
+Body,Hoslow's Armor (Altered),652100.0
+Body,Twinned Armor,600100.0
+Body,Twinned Armor (Altered),601100.0
+Body,Drake Knight Armor,60100.0
+Body,Drake Knight Armor (Altered),61100.0
+Body,Blaidd's Armor,170100.0
+Body,Blaidd's Armor (Altered),171100.0
+Body,Briar Armor,210100.0
+Body,Briar Armor (Altered),211100.0
+Body,Fingerprint Armor,950100.0
+Body,Fingerprint Armor (Altered),951100.0
+Body,Rakshasa Armor,5160100.0
+Body,Royal Remains Armor,690100.0
+Body,All-Knowing Armor,590100.0
+Body,All-Knowing Armor (Altered),591100.0
+Body,Royal Knight Armor,280100.0
+Body,Royal Knight Armor (Altered),281100.0
+Body,Rellana's Armor,5260100.0
+Body,Maliketh's Armor,760100.0
+Body,Maliketh's Armor (Altered),761100.0
+Body,Banished Knight Armor,200100.0
+Body,Banished Knight Armor (Altered),201100.0
+Body,Night's Cavalry Armor,230100.0
+Body,Night's Cavalry Armor (Altered),231100.0
+Body,Armor of Solitude,5130100.0
+Body,Armor of Solitude (Altered),5131100.0
+Body,Veteran's Armor,780100.0
+Body,Veteran's Armor (Altered),781100.0
+Body,Scaled Armor,80100.0
+Body,Scaled Armor (Altered),81100.0
+Body,Beast Champion Armor,720100.0
+Body,Beast Champion Armor (Altered),721100.0
+Body,Tree Sentinel Armor,270100.0
+Body,Tree Sentinel Armor (Altered),271100.0
+Body,Malformed Dragon Armor,260100.0
+Body,Crucible Axe Armor,570100.0
+Body,Crucible Axe Armor (Altered),572100.0
+Body,Crucible Tree Armor,571100.0
+Body,Crucible Tree Armor (Altered),573100.0
+Body,Gaius's Armor,3010100.0
+Body,Radahn's Lion Armor,470100.0
+Body,Radahn's Lion Armor (Altered),471100.0
+Body,Young Lion's Armor,5270100.0
+Body,Young Lion's Armor (Altered),5271100.0
+Body,Lionel's Armor,640100.0
+Body,Lionel's Armor (Altered),641100.0
+Body,Bull-Goat Armor,140100.0
+Body,Verdigris Armor,5010100.0
+Body,Omen Armor,970100.0
+Body,Fire Prelate Armor,360100.0
+Body,Fire Prelate Armor (Altered),361100.0
+Arms,Traveler's Manchettes,1020200.0
+Arms,Guardian Bracers,330200.0
+Arms,Bloodsoaked Manchettes,963200.0
+Arms,Braided Arm Wraps,5070200.0
+Arms,Mushroom Arms,1130200.0
+Arms,Astrologer Gloves,630200.0
+Arms,Sorcerer Manchettes,830200.0
+Arms,Battlemage Manchettes,1000200.0
+Arms,Errant Sorcerer Manchettes,990200.0
+Arms,Spellblade's Gloves,130200.0
+Arms,Alberich's Bracers,120200.0
+Arms,Preceptor's Gloves,910200.0
+Arms,High Priest Gloves,5060200.0
+Arms,Azur's Manchettes,581200.0
+Arms,Lusat's Manchettes,580200.0
+Arms,Queen's Bracelets,510200.0
+Arms,Traveling Maiden Gloves,900200.0
+Arms,Dryleaf Arm Wraps,3000200.0
+Arms,Gold Bracelets,1040200.0
+Arms,Perfumer Gloves,90200.0
+Arms,Traveler's Gloves,100200.0
+Arms,Depraved Perfumer Gloves,540200.0
+Arms,Godskin Apostle Bracelets,520200.0
+Arms,Godskin Noble Bracelets,530200.0
+Arms,Ansbach's Manchettes,5110200.0
+Arms,Leather Gloves,1400200.0
+Arms,Warrior Gauntlets,670200.0
+Arms,Noble's Gloves,740200.0
+Arms,War Surgeon Gloves,680200.0
+Arms,Thiollier's Gloves,5030200.0
+Arms,Bandit Manchettes,930200.0
+Arms,Confessor Gloves,880200.0
+Arms,Omenkiller Long Gloves,1890200.0
+Arms,Gravebird Bracelets,5230200.0
+Arms,Dancer's Bracer,5080200.0
+Arms,Foot Soldier Gauntlets,1830200.0
+Arms,Highwayman Gauntlets,1980200.0
+Arms,Common Soldier Gauntlets,5240200.0
+Arms,Vulgar Militia Gauntlets,420200.0
+Arms,Shadow Militiaman Gauntlets,5280200.0
+Arms,Nox Bracelets,290200.0
+Arms,Champion Bracers,730200.0
+Arms,Leather Arm Wraps,5190200.0
+Arms,Iron Rivet Gauntlets,5020200.0
+Arms,Igon's Gauntlets,5100200.0
+Arms,Ascetic's Wrist Guards,5210200.0
+Arms,Chain Gauntlets,1100200.0
+Arms,Iron Gauntlets,40200.0
+Arms,Godrick Soldier Gauntlets,1700200.0
+Arms,Raya Lucarian Gauntlets,1710200.0
+Arms,Radahn Soldier Gauntlets,1730200.0
+Arms,Leyndell Soldier Gauntlets,1720200.0
+Arms,Haligtree Gauntlets,1750200.0
+Arms,Mausoleum Gauntlets,1740200.0
+Arms,Messmer Soldier Gauntlets,5140200.0
+Arms,Exile Gauntlets,190200.0
+Arms,Kaiden Gauntlets,50200.0
+Arms,Land of Reeds Gauntlets,870200.0
+Arms,White Reed Gauntlets,872200.0
+Arms,Ronin's Gauntlets,150200.0
+Arms,Eccentric's Manchettes,940200.0
+Arms,Freyja's Gauntlets,5120200.0
+Arms,Blue Silver Bracelets,240200.0
+Arms,Fire Monk Gauntlets,350200.0
+Arms,Blackflame Monk Gauntlets,351200.0
+Arms,Zamor Bracelets,1070200.0
+Arms,Black Knife Gauntlets,180200.0
+Arms,Gauntlets of Night,5090200.0
+Arms,Malenia's Gauntlet,770200.0
+Arms,Elden Lord Bracers,460200.0
+Arms,Messmer's Gauntlets,5220200.0
+Arms,Knight Gauntlets,1500200.0
+Arms,Vagabond Knight Gauntlets,660200.0
+Arms,Carian Knight Gauntlets,980200.0
+Arms,Godrick Knight Gauntlets,1770200.0
+Arms,Cuckoo Knight Gauntlets,1780200.0
+Arms,Redmane Knight Gauntlets,1800200.0
+Arms,Gelmir Knight Gauntlets,1760200.0
+Arms,Leyndell Knight Gauntlets,1790200.0
+Arms,Haligtree Knight Gauntlets,1820200.0
+Arms,Mausoleum Knight Gauntlets,1810200.0
+Arms,Black Knight Gauntlets,5150200.0
+Arms,Bloodhound Knight Gauntlets,790200.0
+Arms,Cleanrot Gauntlets,340200.0
+Arms,Fire Knight Gauntlets,5180200.0
+Arms,Death Knight Gauntlets,5200200.0
+Arms,Horned Warrior Gauntlets,5250200.0
+Arms,Divine Bird Warrior Gauntlets,5253200.0
+Arms,Oathseeker Knight Gauntlets,5000200.0
+Arms,Raging Wolf Gauntlets,860200.0
+Arms,Hoslow's Gauntlets,650200.0
+Arms,Twinned Gauntlets,600200.0
+Arms,Drake Knight Gauntlets,60200.0
+Arms,Blaidd's Gauntlets,170200.0
+Arms,Briar Gauntlets,210200.0
+Arms,Fingerprint Gauntlets,950200.0
+Arms,Rakshasa Gauntlets,5160200.0
+Arms,Royal Remains Gauntlets,690200.0
+Arms,All-Knowing Gauntlets,590200.0
+Arms,Royal Knight Gauntlets,280200.0
+Arms,Rellana's Gloves,5260200.0
+Arms,Maliketh's Gauntlets,760200.0
+Arms,Banished Knight Gauntlets,200200.0
+Arms,Night's Cavalry Gauntlets,230200.0
+Arms,Gauntlets of Solitude,5130200.0
+Arms,Veteran's Gauntlets,780200.0
+Arms,Scaled Gauntlets,80200.0
+Arms,Beast Champion Gauntlets,720200.0
+Arms,Tree Sentinel Gauntlets,270200.0
+Arms,Malformed Dragon Gauntlets,260200.0
+Arms,Crucible Gauntlets,570200.0
+Arms,Gaius's Gauntlets,3010200.0
+Arms,Radahn's Gauntlets,470200.0
+Arms,Young Lion's Gauntlets,5270200.0
+Arms,Lionel's Gauntlets,640200.0
+Arms,Bull-Goat Gauntlets,140200.0
+Arms,Verdigris Gauntlets,5010200.0
+Arms,Omen Gauntlets,970200.0
+Arms,Fire Prelate Gauntlets,360200.0
+Legs,Cloth Trousers,160300.0
+Legs,Traveler's Boots,1020300.0
+Legs,Commoner's Shoes,810300.0
+Legs,Aristocrat Boots,370300.0
+Legs,Old Aristocrat Shoes,390300.0
+Legs,Page Trousers,220300.0
+Legs,Guardian Greaves,330300.0
+Legs,Prisoner Trousers,890300.0
+Legs,Soiled Loincloth,5070300.0
+Legs,Mushroom Legs,1130300.0
+Legs,Astrologer Trousers,630300.0
+Legs,Sorcerer Leggings,830300.0
+Legs,Battlemage Legwraps,1000300.0
+Legs,Errant Sorcerer Boots,990300.0
+Legs,Spellblade's Trousers,130300.0
+Legs,Alberich's Trousers,120300.0
+Legs,Preceptor's Trousers,910300.0
+Legs,Old Sorcerer's Legwraps,580300.0
+Legs,Queen's Leggings,510300.0
+Legs,Snow Witch Skirt,1010300.0
+Legs,High Priest Undergarments,5060300.0
+Legs,Prophet Trousers,620300.0
+Legs,Traveling Maiden Boots,900300.0
+Legs,Finger Maiden Shoes,902300.0
+Legs,Sage Trousers,430300.0
+Legs,Dryleaf Cuissardes,3000300.0
+Legs,Gold Waistwrap,1040300.0
+Legs,Perfumer Sarong,90300.0
+Legs,Traveler's Slops,100300.0
+Legs,Depraved Perfumer Trousers,540300.0
+Legs,Consort's Trousers,960300.0
+Legs,Fur Leggings,300300.0
+Legs,Shaman Leggings,301300.0
+Legs,Godskin Apostle Trousers,520300.0
+Legs,Godskin Noble Trousers,530300.0
+Legs,Sanguine Noble Waistcloth,320300.0
+Legs,Ansbach's Boots,5110300.0
+Legs,Leather Trousers,40300.0
+Legs,Leather Boots,1400300.0
+Legs,Warrior Greaves,670300.0
+Legs,Noble's Trousers,740300.0
+Legs,War Surgeon Trousers,680300.0
+Legs,Thiollier's Trousers,5030300.0
+Legs,Nomadic Merchant's Trousers,250300.0
+Legs,Bandit Boots,930300.0
+Legs,Confessor Boots,880300.0
+Legs,Omenkiller Boots,1890300.0
+Legs,Gravebird Anklets,5230300.0
+Legs,Dancer's Trousers,5080300.0
+Legs,Foot Soldier Greaves,1830300.0
+Legs,Common Soldier Greaves,5240300.0
+Legs,Vulgar Militia Greaves,420300.0
+Legs,Shadow Militiaman Greaves,5280300.0
+Legs,Duelist Greaves,310300.0
+Legs,Rotten Duelist Greaves,2000300.0
+Legs,Nox Greaves,290300.0
+Legs,Champion Gaiters,730300.0
+Legs,Leather Leg Wraps,5190300.0
+Legs,Iron Rivet Greaves,5020300.0
+Legs,Igon's Loincloth,5100300.0
+Legs,Ascetic's Ankle Guards,5210300.0
+Legs,Chain Leggings,1100300.0
+Legs,Godrick Soldier Greaves,1700300.0
+Legs,Raya Lucarian Greaves,1710300.0
+Legs,Radahn Soldier Greaves,1730300.0
+Legs,Leyndell Soldier Greaves,1720300.0
+Legs,Haligtree Greaves,1750300.0
+Legs,Mausoleum Greaves,1740300.0
+Legs,Messmer Soldier Greaves,5140300.0
+Legs,Exile Greaves,190300.0
+Legs,Kaiden Trousers,50300.0
+Legs,Land of Reeds Greaves,870300.0
+Legs,White Reed Greaves,872300.0
+Legs,Ronin's Greaves,150300.0
+Legs,Eccentric's Breeches,940300.0
+Legs,Freyja's Greaves,5120300.0
+Legs,Blue Silver Mail Skirt,240300.0
+Legs,Fire Monk Greaves,350300.0
+Legs,Blackflame Monk Greaves,351300.0
+Legs,Zamor Legwraps,1070300.0
+Legs,Black Knife Greaves,180300.0
+Legs,Greaves of Night,5090300.0
+Legs,Malenia's Greaves,770300.0
+Legs,Elden Lord Greaves,460300.0
+Legs,Messmer's Greaves,5220300.0
+Legs,Knight Greaves,1500300.0
+Legs,Vagabond Knight Greaves,660300.0
+Legs,Carian Knight Greaves,980300.0
+Legs,Godrick Knight Greaves,1770300.0
+Legs,Cuckoo Knight Greaves,1780300.0
+Legs,Redmane Knight Greaves,1800300.0
+Legs,Gelmir Knight Greaves,1760300.0
+Legs,Leyndell Knight Greaves,1790300.0
+Legs,Haligtree Knight Greaves,1820300.0
+Legs,Mausoleum Knight Greaves,1810300.0
+Legs,Black Knight Greaves,5150300.0
+Legs,Bloodhound Knight Greaves,790300.0
+Legs,Cleanrot Greaves,340300.0
+Legs,Fire Knight Greaves,5180300.0
+Legs,Death Knight Greaves,5200300.0
+Legs,Horned Warrior Greaves,5250300.0
+Legs,Divine Bird Warrior Greaves,5253300.0
+Legs,Oathseeker Knight Greaves,5000300.0
+Legs,Raging Wolf Greaves,860300.0
+Legs,Hoslow's Greaves,650300.0
+Legs,Twinned Greaves,600300.0
+Legs,Drake Knight Greaves,60300.0
+Legs,Blaidd's Greaves,170300.0
+Legs,Briar Greaves,210300.0
+Legs,Fingerprint Greaves,950300.0
+Legs,Rakshasa Greaves,5160300.0
+Legs,Royal Remains Greaves,690300.0
+Legs,All-Knowing Greaves,590300.0
+Legs,Royal Knight Greaves,280300.0
+Legs,Rellana's Greaves,5260300.0
+Legs,Maliketh's Greaves,760300.0
+Legs,Banished Knight Greaves,200300.0
+Legs,Night's Cavalry Greaves,230300.0
+Legs,Greaves of Solitude,5130300.0
+Legs,Veteran's Greaves,780300.0
+Legs,Scaled Greaves,80300.0
+Legs,Beast Champion Greaves,720300.0
+Legs,Tree Sentinel Greaves,270300.0
+Legs,Malformed Dragon Greaves,260300.0
+Legs,Crucible Greaves,570300.0
+Legs,Gaius's Greaves,3010300.0
+Legs,Radahn's Greaves,470300.0
+Legs,Young Lion's Greaves,5270300.0
+Legs,Lionel's Greaves,640300.0
+Legs,Bull-Goat Greaves,140300.0
+Legs,Verdigris Greaves,5010300.0
+Legs,Omen Greaves,970300.0
+Legs,Fire Prelate Greaves,360300.0

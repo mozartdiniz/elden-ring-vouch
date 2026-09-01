@@ -1,0 +1,2083 @@
+SHEET: Planner
+WORKBOOK: Copy of ER - Build Planner v1.19.1.xlsx
+USED RANGE: A1:AQ62
+NONEMPTY CELLS: 512
+FORMULA CELLS: 264
+
+This file is for an LLM that must rebuild these calculations in another language. Treat formulas as the source of truth. Cached/fallback values are only for checking a port. Skip spill_cache cells; they are not logic.
+
+MERGED RANGES (491):
+  X117:AD117
+  AL25:AN25
+  AM109:AQ109
+  Q28:U28
+  X33:Y34
+  E71:O71
+  AE93:AI93
+  AG14:AJ14
+  AJ117:AL117
+  E79:O79
+  V20:W20
+  E73:O73
+  AJ83:AL83
+  AE122:AI122
+  Q23:U23
+  G7:AC7
+  W50:X50
+  G10:Q10
+  AJ91:AL91
+  Q31:U31
+  AJ85:AL85
+  AJ112:AL112
+  E74:O74
+  V15:W15
+  N29:O29
+  R51:S51
+  AM73:AQ73
+  AJ84:AL84
+  AE119:AI119
+  N31:O31
+  AJ86:AL86
+  AE112:AI112
+  AM74:AQ74
+  N24:O24
+  X74:AD74
+  AE104:AI104
+  X68:AD68
+  AM114:AQ114
+  AE114:AI114
+  AJ111:AL111
+  N26:O26
+  X76:AD76
+  X69:AD69
+  E67:O67
+  AE66:AI66
+  V35:W35
+  W55:X55
+  AM92:AQ92
+  E87:O87
+  G57:N57
+  AE117:AI117
+  Q19:U19
+  AM67:AQ67
+  AM61:AQ61
+  AE67:AI67
+  AE61:AI61
+  AM69:AQ69
+  G58:N58
+  X87:AD87
+  W58:X58
+  E110:O110
+  E76:O76
+  AJ99:AL99
+  Q32:U32
+  AJ122:AL122
+  W53:X53
+  AJ101:AL101
+  AJ72:AL72
+  X93:AD93
+  N32:O32
+  V23:W23
+  G11:Q11
+  X113:AD113
+  E92:O92
+  X29:Y30
+  AE105:AI105
+  X115:AD115
+  AE120:AI120
+  E94:O94
+  V24:W24
+  ... 411 more
+
+DATA VALIDATION / INPUTS:
+  AG30  type=list  formula1=DropdownData!$T$2:$T129
+  Q24  type=list  formula1=DropdownData!$Z$2:$Z129
+  G52  type=list  formula1=DropdownData!$BB$2:$BB129
+  Q26  type=list  formula1=DropdownData!$AH$2:$AH129
+  Q25  type=list  formula1=DropdownData!$AO$2:$AO129
+  G53  type=list  formula1=DropdownData!$BC$2:$BC129
+  AG16  type=list  formula1=DropdownData!$F$2:$F129
+  Q33  type=list  formula1=DropdownData!$AQ$2:$AQ129
+  AG24  type=list  formula1=DropdownData!$O$2:$O129
+  G59  type=list  formula1=DropdownData!$BI$2:$BI129
+  Q18  type=list  formula1=DropdownData!$AF$2:$AF129
+  G58  type=list  formula1=DropdownData!$BH$2:$BH129
+  Q17  type=list  formula1=DropdownData!$AM$2:$AM129
+  Q16  type=list  formula1=DropdownData!$X$2:$X129
+  G50  type=list  formula1=DropdownData!$AZ$2:$AZ129
+  Q20  type=list  formula1=DropdownData!$Y$2:$Y129
+  AG17  type=list  formula1=DropdownData!$G$2:$G129
+  Q36  type=list  formula1=DropdownData!$AC$2:$AC129
+  G14  type=list  formula1=DropdownData!$C$2:$C129
+  Q29  type=list  formula1=DropdownData!$AP$2:$AP129
+  G49  type=list  formula1=DropdownData!$AY$2:$AY129
+  AG29  type=list  formula1=DropdownData!$S$2:$S129
+  G54  type=list  formula1=DropdownData!$BD$2:$BD129
+  Q38  type=list  formula1=DropdownData!$AK$2:$AK129
+  AG22  type=list  formula1=DropdownData!$M$2:$M129
+  G56  type=list  formula1=DropdownData!$BF$2:$BF129
+  AG21  type=list  formula1=DropdownData!$L$2:$L129
+  AG18  type=list  formula1=DropdownData!$H$2:$H129
+  G55  type=list  formula1=DropdownData!$BE$2:$BE129
+  AG26  type=list  formula1=DropdownData!$Q$2:$Q129
+  G45  type=list  formula1=DropdownData!$AV$2:$AV129
+  G48  type=list  formula1=DropdownData!$AX$2:$AX129
+  Q32  type=list  formula1=DropdownData!$AB$2:$AB129
+  G10  type=list  formula1=DropdownData!$A$2:$A129
+  Q34  type=list  formula1=DropdownData!$AJ$2:$AJ129
+  G57  type=list  formula1=DropdownData!$BG$2:$BG129
+  Q21  type=list  formula1=DropdownData!$AN$2:$AN129
+  Q30  type=list  formula1=DropdownData!$AI$2:$AI129
+  G51  type=list  formula1=DropdownData!$BA$2:$BA129
+  I19:I26  type=custom  formula1=AND(I19>=1,I19<=99,I19=TRUNC(I19),ISNUMBER(I19))
+  Q22  type=list  formula1=DropdownData!$AG$2:$AG129
+  Q28  type=list  formula1=DropdownData!$AA$2:$AA129
+  Q37  type=list  formula1=DropdownData!$AR$2:$AR129
+  AG15  type=list  formula1=DropdownData!$E$2:$E129
+  AG23  type=list  formula1=DropdownData!$N$2:$N129
+  Q15 Q19 Q23 Q27 Q31 Q35  type=list  formula1=DropdownData!$V$2:$V129
+These cells are user inputs (dropdowns or constraints), not calculated.
+
+COMMENTS (author notes on UI / semantics):
+  E6: If you don't care about the changes listed in Changelog you can:
+    
+    Go to the UpdateData page and edit cell D2 to equal the update version
+    
+    Doing so will remove the notification until the next update
+    
+    If this says TRUE or is highlighted green with no update you can run the fix_updateBooleanFormat macro to restore proper functionality
+  E7: See Changelog for details
+    
+    If this is giving an error you can run the fix_importRangeError macro to restore proper functionality
+  AM8: This will delete the selected build
+    
+    Does not clear selections so you have a chance to recover a deleted build if you change your mind
+  E10: You may need to "Load Build" twice depending on Talisman and Spell usage relative to previously loaded slots.
+    
+    If you use the "Load Build" button you can ignore the following:
+    
+    All selections need to be cleared for a build to load without the script buttons.
+  E11: Name used for saving build
+    
+    If this name matches a saved build it will edit that build instead of saving a new one
+  AQ14: None of the damage multipliers are reflected in the AP display because they are not AP multipliers.
+    
+    Almost every effect that increases damage is a damage multiplier.
+  V15: Toggles between attack values and guard values
+  AC15: GB = Guard Boost
+  AC17: Sorcery/Incant Scaling
+  AI33: +10% Fire Damage Negation
+    -10% Lightning Damage Negation
+  AI34: +10% Fire Damage Negation
+    -10% Lightning Damage Negation
+  AI35: Toggles attack power penalties for lacking requirements
+  AE36: Has priority over Low HP
+  AI36: Toggles Scaling display between letters and values
+  AI37: Display all starting classes under "Optimal Classes" so you can see how many levels are saved/lost between them
+  AI38: Hides default builds from the dropdown menu; they will always be sorted at the bottom of the list if visible
+  E42: Valid input is 2-10
+  E45: Uses highest Sorcery/Incant Scaling equipped by default
+    
+    If two or more slots have equal Sorcery/Incant Scaling it will prioritize RH1>RH2>RH3>LH1>LH2>LH3 with no manual selection
+  T47: Intelligence | Faith | Arcane
+  E61: There will be no valid spell/catalyst if the selected catalyst cannot cast any of the selected spells
+
+STATIC / INPUT / LABEL CELLS (248):
+coord	value
+E5	To use this sheet: File > Make a copy
+Q5	Don't edit outside of the green boxes unless you know what you're doing
+E6	Update Available:
+AG9	Here's an alternative Build Planner that does not require saving a file
+E10	Build Select
+G10	None
+AL10	Poise values will not display their floating point errors currently
+E11	Name Build
+AG12	Here's a Poise Optimizer
+E14	Starting Class
+G14	Vagabond
+Q14	Armaments
+AG14	Armor
+AM14	Stats
+AP14	Effect Source
+AQ14	Effect
+N15	RH1 Class
+V15	Guard Stats
+X15	Physical
+Y15	Magic
+Z15	Fire
+AA15	Lightning
+AB15	Holy
+AE15	Head
+AG15	Empty
+AL15	HP
+E16	Level
+Q16	Unarmed
+V16	FALSE
+AE16	Chest
+AG16	Empty
+AL16	FP
+N17	Affinity
+Q17	Standard
+R17	Scaling
+X17	Status
+AC17	SB
+AE17	Arms
+AG17	Empty
+AL17	Stamina
+G18	Base
+I18	Input
+K18	Alter
+L18	Total
+N18	Upgrade
+Q18	0.0
+R18	Require
+AE18	Legs
+AG18	Empty
+AL18	Equip Load
+E19	Vigor
+N19	RH2 Class
+V19	Guard Stats
+X19	Physical
+Y19	Magic
+Z19	Fire
+AA19	Lightning
+AB19	Holy
+AL19	Weight Left | Roll
+E20	Mind
+Q20	Unarmed
+V20	FALSE
+AG20	Talismans
+AL20	End for Mid Roll
+E21	Endurance
+N21	Affinity
+Q21	Standard
+R21	Scaling
+X21	Status
+AC21	SB
+AE21	Talisman 1
+AG21	Empty
+AL21	End for Light Roll
+E22	Strength
+N22	Upgrade
+Q22	0.0
+R22	Require
+AE22	Talisman 2
+AG22	Empty
+AL22	Poise (In-Game)
+E23	Dexterity
+N23	RH3 Class
+V23	Guard Stats
+X23	Physical
+Y23	Magic
+Z23	Fire
+AA23	Lightning
+AB23	Holy
+AE23	Talisman 3
+AG23	Empty
+AL23	Discovery
+E24	Intelligence
+Q24	Unarmed
+V24	FALSE
+AE24	Talisman 4
+AG24	Empty
+E25	Faith
+N25	Affinity
+Q25	Standard
+R25	Scaling
+X25	Status
+AC25	SB
+AL25	Defense / Dmg Negation
+E26	Arcane
+N26	Upgrade
+Q26	0.0
+R26	Require
+AE26	Great Rune
+AG26	Empty
+AL26	Physical
+N27	LH1 Class
+V27	Guard Stats
+X27	Physical
+Y27	Magic
+Z27	Fire
+AA27	Lightning
+AB27	Holy
+AE27	Active
+AG27	FALSE
+AL27	   VS Strike
+F28	Level
+Q28	Unarmed
+V28	FALSE
+AL28	   VS Slash
+N29	Affinity
+Q29	Standard
+R29	Scaling
+X29	Status
+AC29	SB
+AE29	Crystal Tear 1
+AG29	Empty
+AL29	   VS Pierce
+N30	Upgrade
+Q30	0.0
+R30	Require
+AE30	Crystal Tear 2
+AG30	Empty
+AL30	Magic
+N31	LH2 Class
+V31	Guard Stats
+X31	Physical
+Y31	Magic
+Z31	Fire
+AA31	Lightning
+AB31	Holy
+AE31	Active
+AG31	FALSE
+AL31	Fire
+Q32	Unarmed
+V32	FALSE
+AL32	Lightning
+N33	Affinity
+Q33	Standard
+R33	Scaling
+X33	Status
+AC33	SB
+AE33	2H Weapon
+AG33	FALSE
+AI33	Raining Dmg Neg
+AJ33	FALSE
+AL33	Holy
+N34	Upgrade
+Q34	0.0
+R34	Require
+AE34	PvP
+AG34	FALSE
+AI34	Wet Dmg Neg
+AJ34	FALSE
+AL34	Resistance
+N35	LH3 Class
+V35	Guard Stats
+X35	Physical
+Y35	Magic
+Z35	Fire
+AA35	Lightning
+AB35	Holy
+AE35	Low HP
+AG35	FALSE
+AI35	Ignore Requirements
+AJ35	FALSE
+AL35	Immunity
+Q36	Unarmed
+V36	FALSE
+AE36	Full HP
+AG36	FALSE
+AI36	Scaling Values
+AJ36	FALSE
+AL36	Robustness
+N37	Affinity
+Q37	Standard
+R37	Scaling
+X37	Status
+AC37	SB
+AI37	Display All Classes
+AJ37	FALSE
+AL37	Focus
+N38	Upgrade
+Q38	0.0
+R38	Require
+AI38	Hide Default Builds
+AJ38	FALSE
+AL38	Vitality
+E42	Memory Slots
+G42	10.0
+E43	Remaining
+E45	Equipped Select
+G45	No Catalyst Equipped
+O47	Slots
+Q47	FP Cost
+R47	Stamina Cost
+T47	Requirements
+W47	Duration
+E48	Spell 1
+G48	Empty
+E49	Spell 2
+G49	Empty
+E50	Spell 3
+G50	Empty
+E51	Spell 4
+G51	Empty
+E52	Spell 5
+G52	Empty
+E53	Spell 6
+G53	Empty
+E54	Spell 7
+G54	Empty
+E55	Spell 8
+G55	Empty
+E56	Spell 9
+G56	Empty
+E57	Spell 10
+G57	Empty
+E58	Spell 11
+G58	Empty
+E59	Spell 12
+G59	Empty
+E61	Spells
+Q61	Total AP
+R61	Physical
+S61	Magic
+T61	Fire
+U61	Lightning
+V61	Holy
+W61	Heal
+X61	Spell Category
+AE61	Attack Category
+AJ61	Status
+AM61	Special Effect
+
+CROSS-SHEET REFERENCES: DropdownData, MagicApData, PlannerData, RollTypeData, StartingClassData, UpdateData
+FORMULA KINDS: excel=248, google_sheets=9, spill_cache=7
+UNIQUE PATTERNS: 252
+
+========================================================================
+FORMULA PATTERNS (fill-down compressed)
+{r} is the row of the cell. Port the template once and apply per row.
+========================================================================
+
+PATTERN 1  kind=excel  array=False  G6
+  context_label: Update Available:
+  template: =IF(UpdateData!$D$2=UpdateData!$D$5,False,True)
+  e.g. G6: =IF(UpdateData!$D$2=UpdateData!$D$5,False,True)  cached=False
+
+PATTERN 2  kind=excel  array=False  E7
+  context_label: Update Available:
+  template: =IF(G{r-1},"Link to Update:","Link to Original:")
+  e.g. E7: =IF(G6,"Link to Update:","Link to Original:")  cached='Link to Original:'
+
+PATTERN 3  kind=excel  array=False  G7
+  template: =HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P{r}gdVMkPzFQX{r-1}OsjZcfyUjdGOj7Cjk9qFAVj-U/copy",
+UpdateData!D5&" - "&IF(G{r-1},"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))
+  e.g. G7: =HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U/copy",
+UpdateData!D5&" - "&IF(G6,"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))  cached='v1.19.1 - last updated 413 days ago'
+
+PATTERN 4  kind=excel  array=True  F10
+  context_label: Build Select
+  array_spill_ref: F10:G10
+  template: ={"",DropdownData!$BL2}
+  e.g. F10: ={"",DropdownData!$BL2}
+
+PATTERN 5  kind=excel  array=True  F11
+  context_label: Name Build
+  array_spill_ref: F11:G11
+  template: ={"",DropdownData!$BL3}
+  e.g. F11: ={"",DropdownData!$BL3}
+
+PATTERN 6  kind=excel  array=True  F14
+  context_label: Starting Class
+  array_spill_ref: F14:G14
+  template: ={"",DropdownData!$BL5}
+  e.g. F14: ={"",DropdownData!$BL5}
+
+PATTERN 7  kind=excel  array=True  P15
+  context_label: RH1 Class
+  array_spill_ref: P15:Q15
+  template: ={"",DropdownData!$BL25}
+  e.g. P15: ={"",DropdownData!$BL25}
+
+PATTERN 8  kind=excel  array=False  AC15:AC35 (6 cells)
+  context_label: Holy
+  template: =IF($V{r+1},"GB","Total")
+  e.g. AC15: =IF($V16,"GB","Total")  cached='Total'
+  e.g. AC19: =IF($V20,"GB","Total")  cached='Total'
+  e.g. AC23: =IF($V24,"GB","Total")  cached='Total'
+  ... 3 more of this pattern
+
+PATTERN 9  kind=excel  array=True  AF15:AF18 (4 cells)
+  context_label: Head
+  array_spill_ref: AF15:AG15
+  template: ={"",DropdownData!$BL{r-1}}
+  e.g. AF15: ={"",DropdownData!$BL14}
+  e.g. AF16: ={"",DropdownData!$BL15}
+  e.g. AF17: ={"",DropdownData!$BL16}
+  ... 1 more of this pattern
+
+PATTERN 10  kind=excel  array=False  AM15
+  context_label: HP
+  template: =PlannerData!L2
+  e.g. AM15: =PlannerData!L2  cached=522
+
+PATTERN 11  kind=google_sheets  array=False  AP15
+  context_label: HP
+  template: =IFERROR(FILTER(PlannerData!N2:N129,NOT(ISBLANK(PlannerData!$O2:$O129))),"Current gear has no effects")
+  note: Original Google Sheets formula recovered from DUMMYFUNCTION wrapper. Functions like FILTER, QUERY, UNIQUE, FLATTEN, IMPORTRANGE, GOOGLETRANSLATE are Sheets-only and must be reimplemented.
+  e.g. AP15: =IFERROR(FILTER(PlannerData!N2:N129,NOT(ISBLANK(PlannerData!$O2:$O129))),"Current gear has no effects")  cached='Current gear has no effects'
+
+PATTERN 12  kind=google_sheets  array=False  AQ15
+  context_label: HP
+  template: =IFERROR(FILTER(PlannerData!O2:O129,NOT(ISBLANK(PlannerData!$O2:$O129))))
+  note: Original Google Sheets formula recovered from DUMMYFUNCTION wrapper. Functions like FILTER, QUERY, UNIQUE, FLATTEN, IMPORTRANGE, GOOGLETRANSLATE are Sheets-only and must be reimplemented.
+  e.g. AQ15: =IFERROR(FILTER(PlannerData!O2:O129,NOT(ISBLANK(PlannerData!$O2:$O129))))
+
+PATTERN 13  kind=excel  array=False  G16
+  context_label: Level
+  template: =PlannerData!B10
+  e.g. G16: =PlannerData!B10  cached=9
+
+PATTERN 14  kind=excel  array=False  N16
+  context_label: RH1 Class
+  template: =IF(PlannerData!$R$16="Invalid","Invalid","Weapon")
+  e.g. N16: =IF(PlannerData!$R$16="Invalid","Invalid","Weapon")  cached='Weapon'
+
+PATTERN 15  kind=excel  array=True  P16
+  array_spill_ref: P16:Q16
+  template: ={"",DropdownData!$BL26}
+  e.g. P16: ={"",DropdownData!$BL26}
+
+PATTERN 16  kind=excel  array=False  X16
+  context_label: Physical
+  template: =IF($V{r},PlannerData!AH$23,PlannerData!S$23)
+  e.g. X16: =IF($V16,PlannerData!AH$23,PlannerData!S$23)  cached=23.46
+
+PATTERN 17  kind=excel  array=False  Y16
+  context_label: Magic
+  template: =IF($V{r},PlannerData!AI$23,PlannerData!T$23)
+  e.g. Y16: =IF($V16,PlannerData!AI$23,PlannerData!T$23)  cached='-'
+
+PATTERN 18  kind=excel  array=False  Z16
+  context_label: Fire
+  template: =IF($V{r},PlannerData!AJ$23,PlannerData!U$23)
+  e.g. Z16: =IF($V16,PlannerData!AJ$23,PlannerData!U$23)  cached='-'
+
+PATTERN 19  kind=excel  array=False  AA16
+  context_label: Lightning
+  template: =IF($V{r},PlannerData!AK$23,PlannerData!V$23)
+  e.g. AA16: =IF($V16,PlannerData!AK$23,PlannerData!V$23)  cached='-'
+
+PATTERN 20  kind=excel  array=False  AB16
+  context_label: Holy
+  template: =IF($V{r},PlannerData!AL$23,PlannerData!W$23)
+  e.g. AB16: =IF($V16,PlannerData!AL$23,PlannerData!W$23)  cached='-'
+
+PATTERN 21  kind=excel  array=False  AC16
+  template: =IF($V{r},PlannerData!$AM$23,PlannerData!$X$23)
+  e.g. AC16: =IF($V16,PlannerData!$AM$23,PlannerData!$X$23)  cached=23.46
+
+PATTERN 22  kind=excel  array=False  AM16
+  context_label: FP
+  template: =PlannerData!L3
+  e.g. AM16: =PlannerData!L3  cached=78
+
+PATTERN 23  kind=excel  array=True  P17
+  context_label: Affinity
+  array_spill_ref: P17:Q17
+  template: ={"",DropdownData!$BL27}
+  e.g. P17: ={"",DropdownData!$BL27}
+
+PATTERN 24  kind=excel  array=False  S17
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AN$23,PlannerData!AS$23)
+  e.g. S17: =IF($AJ$36,PlannerData!AN$23,PlannerData!AS$23)  cached='D'
+
+PATTERN 25  kind=excel  array=False  T17
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AO$23,PlannerData!AT$23)
+  e.g. T17: =IF($AJ$36,PlannerData!AO$23,PlannerData!AT$23)  cached='D'
+
+PATTERN 26  kind=excel  array=False  U17
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AP$23,PlannerData!AU$23)
+  e.g. U17: =IF($AJ$36,PlannerData!AP$23,PlannerData!AU$23)  cached='-'
+
+PATTERN 27  kind=excel  array=False  V17
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AQ$23,PlannerData!AV$23)
+  e.g. V17: =IF($AJ$36,PlannerData!AQ$23,PlannerData!AV$23)  cached='-'
+
+PATTERN 28  kind=excel  array=False  W17
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AR$23,PlannerData!AW$23)
+  e.g. W17: =IF($AJ$36,PlannerData!AR$23,PlannerData!AW$23)  cached='-'
+
+PATTERN 29  kind=google_sheets  array=False  Z17
+  context_label: Status
+  template: =IFERROR(TRANSPOSE(FILTER(PlannerData!X31:AC31,NOT(ISBLANK(PlannerData!X31:AC31)))))
+  note: Original Google Sheets formula recovered from DUMMYFUNCTION wrapper. Functions like FILTER, QUERY, UNIQUE, FLATTEN, IMPORTRANGE, GOOGLETRANSLATE are Sheets-only and must be reimplemented.
+  e.g. Z17: =IFERROR(TRANSPOSE(FILTER(PlannerData!X31:AC31,NOT(ISBLANK(PlannerData!X31:AC31)))))
+
+PATTERN 30  kind=excel  array=False  AM17
+  context_label: Stamina
+  template: =PlannerData!L4
+  e.g. AM17: =PlannerData!L4  cached=97
+
+PATTERN 31  kind=excel  array=True  P18
+  context_label: Upgrade
+  array_spill_ref: P18:Q18
+  template: ={"",DropdownData!$BL28}
+  e.g. P18: ={"",DropdownData!$BL28}
+
+PATTERN 32  kind=excel  array=False  S18
+  context_label: Require
+  template: =IF(PlannerData!AE$31>0,PlannerData!AE$31,"-")
+  e.g. S18: =IF(PlannerData!AE$31>0,PlannerData!AE$31,"-")  cached='-'
+
+PATTERN 33  kind=excel  array=False  T18
+  context_label: Require
+  template: =IF(PlannerData!AF$31>0,PlannerData!AF$31,"-")
+  e.g. T18: =IF(PlannerData!AF$31>0,PlannerData!AF$31,"-")  cached='-'
+
+PATTERN 34  kind=excel  array=False  U18
+  context_label: Require
+  template: =IF(PlannerData!AG$31>0,PlannerData!AG$31,"-")
+  e.g. U18: =IF(PlannerData!AG$31>0,PlannerData!AG$31,"-")  cached='-'
+
+PATTERN 35  kind=excel  array=False  V18
+  context_label: Require
+  template: =IF(PlannerData!AH$31>0,PlannerData!AH$31,"-")
+  e.g. V18: =IF(PlannerData!AH$31>0,PlannerData!AH$31,"-")  cached='-'
+
+PATTERN 36  kind=excel  array=False  W18
+  context_label: Require
+  template: =IF(PlannerData!AI$31>0,PlannerData!AI$31,"-")
+  e.g. W18: =IF(PlannerData!AI$31>0,PlannerData!AI$31,"-")  cached='-'
+
+PATTERN 37  kind=excel  array=False  AC18
+  context_label: SB
+  template: =PlannerData!Y$23
+  e.g. AC18: =PlannerData!Y$23  cached='-'
+
+PATTERN 38  kind=excel  array=False  AM18
+  context_label: Equip Load
+  template: =PlannerData!J20&"  -  "&PlannerData!K20
+  e.g. AM18: =PlannerData!J20&"  -  "&PlannerData!K20  cached='0.0 / 49.8  -  0.0%'
+
+PATTERN 39  kind=google_sheets  array=False  G19
+  context_label: Vigor
+  template: =IFERROR(FILTER(StartingClassData!A2:J9,G14=StartingClassData!A1:J1),ARRAYFORMULA(StartingClassData!J2:J9))
+  note: Original Google Sheets formula recovered from DUMMYFUNCTION wrapper. Functions like FILTER, QUERY, UNIQUE, FLATTEN, IMPORTRANGE, GOOGLETRANSLATE are Sheets-only and must be reimplemented.
+  e.g. G19: =IFERROR(FILTER(StartingClassData!A2:J9,G14=StartingClassData!A1:J1),ARRAYFORMULA(StartingClassData!J2:J9))  cached=15
+
+PATTERN 40  kind=excel  array=True  H19
+  context_label: Vigor
+  array_spill_ref: H19:I19
+  template: ={"",DropdownData!$BL6}
+  e.g. H19: ={"",DropdownData!$BL6}
+
+PATTERN 41  kind=excel  array=False  K19
+  context_label: Alter
+  template: =PlannerData!B12
+  e.g. K19: =PlannerData!B12  cached=0
+
+PATTERN 42  kind=excel  array=False  L19
+  context_label: Total
+  template: =PlannerData!B21
+  e.g. L19: =PlannerData!B21  cached=15
+
+PATTERN 43  kind=excel  array=True  P19
+  context_label: RH2 Class
+  array_spill_ref: P19:Q19
+  template: ={"",DropdownData!$BL29}
+  e.g. P19: ={"",DropdownData!$BL29}
+
+PATTERN 44  kind=excel  array=False  AM19
+  context_label: Weight Left | Roll
+  template: =PlannerData!J21&" | "&PlannerData!K21
+  e.g. AM19: =PlannerData!J21&" | "&PlannerData!K21  cached='14.9 | Light Load'
+
+PATTERN 45  kind=spill_cache  array=False  G20
+  context_label: Mind
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),10.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. G20: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),10.0)  cached=10
+
+PATTERN 46  kind=excel  array=True  H20
+  context_label: Mind
+  array_spill_ref: H20:I20
+  template: ={"",DropdownData!$BL7}
+  e.g. H20: ={"",DropdownData!$BL7}
+
+PATTERN 47  kind=excel  array=False  K20
+  context_label: Alter
+  template: =PlannerData!B13
+  e.g. K20: =PlannerData!B13  cached=0
+
+PATTERN 48  kind=excel  array=False  L20
+  context_label: Total
+  template: =PlannerData!B22
+  e.g. L20: =PlannerData!B22  cached=10
+
+PATTERN 49  kind=excel  array=False  N20
+  context_label: RH2 Class
+  template: =IF(PlannerData!$R$17="Invalid","Invalid","Weapon")
+  e.g. N20: =IF(PlannerData!$R$17="Invalid","Invalid","Weapon")  cached='Weapon'
+
+PATTERN 50  kind=excel  array=True  P20
+  array_spill_ref: P20:Q20
+  template: ={"",DropdownData!$BL30}
+  e.g. P20: ={"",DropdownData!$BL30}
+
+PATTERN 51  kind=excel  array=False  X20
+  context_label: Physical
+  template: =IF($V{r},PlannerData!AH$24,PlannerData!S$24)
+  e.g. X20: =IF($V20,PlannerData!AH$24,PlannerData!S$24)  cached=23.46
+
+PATTERN 52  kind=excel  array=False  Y20
+  context_label: Magic
+  template: =IF($V{r},PlannerData!AI$24,PlannerData!T$24)
+  e.g. Y20: =IF($V20,PlannerData!AI$24,PlannerData!T$24)  cached='-'
+
+PATTERN 53  kind=excel  array=False  Z20
+  context_label: Fire
+  template: =IF($V{r},PlannerData!AJ$24,PlannerData!U$24)
+  e.g. Z20: =IF($V20,PlannerData!AJ$24,PlannerData!U$24)  cached='-'
+
+PATTERN 54  kind=excel  array=False  AA20
+  context_label: Lightning
+  template: =IF($V{r},PlannerData!AK$24,PlannerData!V$24)
+  e.g. AA20: =IF($V20,PlannerData!AK$24,PlannerData!V$24)  cached='-'
+
+PATTERN 55  kind=excel  array=False  AB20
+  context_label: Holy
+  template: =IF($V{r},PlannerData!AL$24,PlannerData!W$24)
+  e.g. AB20: =IF($V20,PlannerData!AL$24,PlannerData!W$24)  cached='-'
+
+PATTERN 56  kind=excel  array=False  AC20
+  context_label: SB
+  template: =IF($V{r},PlannerData!$AM$24,PlannerData!$X$24)
+  e.g. AC20: =IF($V20,PlannerData!$AM$24,PlannerData!$X$24)  cached=23.46
+
+PATTERN 57  kind=excel  array=False  AM20
+  context_label: End for Mid Roll
+  template: =RollTypeData!E5
+  e.g. AM20: =RollTypeData!E5  cached=8
+
+PATTERN 58  kind=spill_cache  array=False  G21
+  context_label: Endurance
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),11.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. G21: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),11.0)  cached=11
+
+PATTERN 59  kind=excel  array=True  H21
+  context_label: Endurance
+  array_spill_ref: H21:I21
+  template: ={"",DropdownData!$BL8}
+  e.g. H21: ={"",DropdownData!$BL8}
+
+PATTERN 60  kind=excel  array=False  K21
+  context_label: Alter
+  template: =PlannerData!B14
+  e.g. K21: =PlannerData!B14  cached=0
+
+PATTERN 61  kind=excel  array=False  L21
+  context_label: Total
+  template: =PlannerData!B23
+  e.g. L21: =PlannerData!B23  cached=11
+
+PATTERN 62  kind=excel  array=True  P21
+  context_label: Affinity
+  array_spill_ref: P21:Q21
+  template: ={"",DropdownData!$BL31}
+  e.g. P21: ={"",DropdownData!$BL31}
+
+PATTERN 63  kind=excel  array=False  S21
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AN$24,PlannerData!AS$24)
+  e.g. S21: =IF($AJ$36,PlannerData!AN$24,PlannerData!AS$24)  cached='D'
+
+PATTERN 64  kind=excel  array=False  T21
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AO$24,PlannerData!AT$24)
+  e.g. T21: =IF($AJ$36,PlannerData!AO$24,PlannerData!AT$24)  cached='D'
+
+PATTERN 65  kind=excel  array=False  U21
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AP$24,PlannerData!AU$24)
+  e.g. U21: =IF($AJ$36,PlannerData!AP$24,PlannerData!AU$24)  cached='-'
+
+PATTERN 66  kind=excel  array=False  V21
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AQ$24,PlannerData!AV$24)
+  e.g. V21: =IF($AJ$36,PlannerData!AQ$24,PlannerData!AV$24)  cached='-'
+
+PATTERN 67  kind=excel  array=False  W21
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AR$24,PlannerData!AW$24)
+  e.g. W21: =IF($AJ$36,PlannerData!AR$24,PlannerData!AW$24)  cached='-'
+
+PATTERN 68  kind=google_sheets  array=False  Z21
+  context_label: Status
+  template: =IFERROR(TRANSPOSE(FILTER(PlannerData!X32:AC32,NOT(ISBLANK(PlannerData!X32:AC32)))))
+  note: Original Google Sheets formula recovered from DUMMYFUNCTION wrapper. Functions like FILTER, QUERY, UNIQUE, FLATTEN, IMPORTRANGE, GOOGLETRANSLATE are Sheets-only and must be reimplemented.
+  e.g. Z21: =IFERROR(TRANSPOSE(FILTER(PlannerData!X32:AC32,NOT(ISBLANK(PlannerData!X32:AC32)))))
+
+PATTERN 69  kind=excel  array=True  AF21
+  context_label: Talisman 1
+  array_spill_ref: AF21:AG21
+  template: ={"",DropdownData!$BL18}
+  e.g. AF21: ={"",DropdownData!$BL18}
+
+PATTERN 70  kind=excel  array=False  AM21
+  context_label: End for Light Roll
+  template: =RollTypeData!E6
+  e.g. AM21: =RollTypeData!E6  cached=8
+
+PATTERN 71  kind=spill_cache  array=False  G22
+  context_label: Strength
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),14.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. G22: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),14.0)  cached=14
+
+PATTERN 72  kind=excel  array=True  H22
+  context_label: Strength
+  array_spill_ref: H22:I22
+  template: ={"",DropdownData!$BL9}
+  e.g. H22: ={"",DropdownData!$BL9}
+
+PATTERN 73  kind=excel  array=False  K22
+  template: =PlannerData!B15
+  e.g. K22: =PlannerData!B15  cached=0
+
+PATTERN 74  kind=excel  array=False  L22
+  template: =PlannerData!B24
+  e.g. L22: =PlannerData!B24  cached=14
+
+PATTERN 75  kind=excel  array=True  P22
+  context_label: Upgrade
+  array_spill_ref: P22:Q22
+  template: ={"",DropdownData!$BL32}
+  e.g. P22: ={"",DropdownData!$BL32}
+
+PATTERN 76  kind=excel  array=False  S22
+  context_label: Require
+  template: =IF(PlannerData!AE$32>0,PlannerData!AE$32,"-")
+  e.g. S22: =IF(PlannerData!AE$32>0,PlannerData!AE$32,"-")  cached='-'
+
+PATTERN 77  kind=excel  array=False  T22
+  context_label: Require
+  template: =IF(PlannerData!AF$32>0,PlannerData!AF$32,"-")
+  e.g. T22: =IF(PlannerData!AF$32>0,PlannerData!AF$32,"-")  cached='-'
+
+PATTERN 78  kind=excel  array=False  U22
+  context_label: Require
+  template: =IF(PlannerData!AG$32>0,PlannerData!AG$32,"-")
+  e.g. U22: =IF(PlannerData!AG$32>0,PlannerData!AG$32,"-")  cached='-'
+
+PATTERN 79  kind=excel  array=False  V22
+  context_label: Require
+  template: =IF(PlannerData!AH$32>0,PlannerData!AH$32,"-")
+  e.g. V22: =IF(PlannerData!AH$32>0,PlannerData!AH$32,"-")  cached='-'
+
+PATTERN 80  kind=excel  array=False  W22
+  context_label: Require
+  template: =IF(PlannerData!AI$32>0,PlannerData!AI$32,"-")
+  e.g. W22: =IF(PlannerData!AI$32>0,PlannerData!AI$32,"-")  cached='-'
+
+PATTERN 81  kind=excel  array=False  AC22
+  context_label: SB
+  template: =PlannerData!Y$24
+  e.g. AC22: =PlannerData!Y$24  cached='-'
+
+PATTERN 82  kind=excel  array=True  AF22
+  context_label: Talisman 2
+  array_spill_ref: AF22:AG22
+  template: ={"",DropdownData!$BL19}
+  e.g. AF22: ={"",DropdownData!$BL19}
+
+PATTERN 83  kind=excel  array=False  AM22
+  context_label: Poise (In-Game)
+  template: =TRUNC(1000*PlannerData!L17,8)&" ("&ROUND(1000*PlannerData!L17,0)&")"
+  e.g. AM22: =TRUNC(1000*PlannerData!L17,8)&" ("&ROUND(1000*PlannerData!L17,0)&")"  cached='0 (0)'
+
+PATTERN 84  kind=spill_cache  array=False  G23
+  context_label: Dexterity
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),13.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. G23: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),13.0)  cached=13
+
+PATTERN 85  kind=excel  array=True  H23
+  context_label: Dexterity
+  array_spill_ref: H23:I23
+  template: ={"",DropdownData!$BL10}
+  e.g. H23: ={"",DropdownData!$BL10}
+
+PATTERN 86  kind=excel  array=False  K23
+  template: =PlannerData!B16
+  e.g. K23: =PlannerData!B16  cached=0
+
+PATTERN 87  kind=excel  array=False  L23
+  template: =PlannerData!B25
+  e.g. L23: =PlannerData!B25  cached=13
+
+PATTERN 88  kind=excel  array=True  P23
+  context_label: RH3 Class
+  array_spill_ref: P23:Q23
+  template: ={"",DropdownData!$BL33}
+  e.g. P23: ={"",DropdownData!$BL33}
+
+PATTERN 89  kind=excel  array=True  AF23
+  context_label: Talisman 3
+  array_spill_ref: AF23:AG23
+  template: ={"",DropdownData!$BL20}
+  e.g. AF23: ={"",DropdownData!$BL20}
+
+PATTERN 90  kind=excel  array=False  AM23
+  context_label: Discovery
+  template: =ROUND(100*PlannerData!L6,0)
+  e.g. AM23: =ROUND(100*PlannerData!L6,0)  cached=107
+
+PATTERN 91  kind=spill_cache  array=False  G24:G25 (2 cells)
+  context_label: Intelligence
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),9.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. G24: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),9.0)  cached=9
+  e.g. G25: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),9.0)  cached=9
+
+PATTERN 92  kind=excel  array=True  H24
+  context_label: Intelligence
+  array_spill_ref: H24:I24
+  template: ={"",DropdownData!$BL11}
+  e.g. H24: ={"",DropdownData!$BL11}
+
+PATTERN 93  kind=excel  array=False  K24
+  template: =PlannerData!B17
+  e.g. K24: =PlannerData!B17  cached=0
+
+PATTERN 94  kind=excel  array=False  L24
+  template: =PlannerData!B26
+  e.g. L24: =PlannerData!B26  cached=9
+
+PATTERN 95  kind=excel  array=False  N24
+  context_label: RH3 Class
+  template: =IF(PlannerData!$R$18="Invalid","Invalid","Weapon")
+  e.g. N24: =IF(PlannerData!$R$18="Invalid","Invalid","Weapon")  cached='Weapon'
+
+PATTERN 96  kind=excel  array=True  P24
+  array_spill_ref: P24:Q24
+  template: ={"",DropdownData!$BL34}
+  e.g. P24: ={"",DropdownData!$BL34}
+
+PATTERN 97  kind=excel  array=False  X24
+  context_label: Physical
+  template: =IF($V{r},PlannerData!AH$25,PlannerData!S$25)
+  e.g. X24: =IF($V24,PlannerData!AH$25,PlannerData!S$25)  cached=23.46
+
+PATTERN 98  kind=excel  array=False  Y24
+  context_label: Magic
+  template: =IF($V{r},PlannerData!AI$25,PlannerData!T$25)
+  e.g. Y24: =IF($V24,PlannerData!AI$25,PlannerData!T$25)  cached='-'
+
+PATTERN 99  kind=excel  array=False  Z24
+  context_label: Fire
+  template: =IF($V{r},PlannerData!AJ$25,PlannerData!U$25)
+  e.g. Z24: =IF($V24,PlannerData!AJ$25,PlannerData!U$25)  cached='-'
+
+PATTERN 100  kind=excel  array=False  AA24
+  context_label: Lightning
+  template: =IF($V{r},PlannerData!AK$25,PlannerData!V$25)
+  e.g. AA24: =IF($V24,PlannerData!AK$25,PlannerData!V$25)  cached='-'
+
+PATTERN 101  kind=excel  array=False  AB24
+  context_label: Holy
+  template: =IF($V{r},PlannerData!AL$25,PlannerData!W$25)
+  e.g. AB24: =IF($V24,PlannerData!AL$25,PlannerData!W$25)  cached='-'
+
+PATTERN 102  kind=excel  array=False  AC24
+  context_label: SB
+  template: =IF($V{r},PlannerData!$AM$25,PlannerData!$X$25)
+  e.g. AC24: =IF($V24,PlannerData!$AM$25,PlannerData!$X$25)  cached=23.46
+
+PATTERN 103  kind=excel  array=True  AF24
+  context_label: Talisman 4
+  array_spill_ref: AF24:AG24
+  template: ={"",DropdownData!$BL21}
+  e.g. AF24: ={"",DropdownData!$BL21}
+
+PATTERN 104  kind=excel  array=True  H25
+  context_label: Faith
+  array_spill_ref: H25:I25
+  template: ={"",DropdownData!$BL12}
+  e.g. H25: ={"",DropdownData!$BL12}
+
+PATTERN 105  kind=excel  array=False  K25
+  template: =PlannerData!B18
+  e.g. K25: =PlannerData!B18  cached=0
+
+PATTERN 106  kind=excel  array=False  L25
+  template: =PlannerData!B27
+  e.g. L25: =PlannerData!B27  cached=9
+
+PATTERN 107  kind=excel  array=True  P25
+  context_label: Affinity
+  array_spill_ref: P25:Q25
+  template: ={"",DropdownData!$BL35}
+  e.g. P25: ={"",DropdownData!$BL35}
+
+PATTERN 108  kind=excel  array=False  S25
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AN$25,PlannerData!AS$25)
+  e.g. S25: =IF($AJ$36,PlannerData!AN$25,PlannerData!AS$25)  cached='D'
+
+PATTERN 109  kind=excel  array=False  T25
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AO$25,PlannerData!AT$25)
+  e.g. T25: =IF($AJ$36,PlannerData!AO$25,PlannerData!AT$25)  cached='D'
+
+PATTERN 110  kind=excel  array=False  U25
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AP$25,PlannerData!AU$25)
+  e.g. U25: =IF($AJ$36,PlannerData!AP$25,PlannerData!AU$25)  cached='-'
+
+PATTERN 111  kind=excel  array=False  V25
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AQ$25,PlannerData!AV$25)
+  e.g. V25: =IF($AJ$36,PlannerData!AQ$25,PlannerData!AV$25)  cached='-'
+
+PATTERN 112  kind=excel  array=False  W25
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AR$25,PlannerData!AW$25)
+  e.g. W25: =IF($AJ$36,PlannerData!AR$25,PlannerData!AW$25)  cached='-'
+
+PATTERN 113  kind=google_sheets  array=False  Z25
+  context_label: Status
+  template: =IFERROR(TRANSPOSE(FILTER(PlannerData!X33:AC33,NOT(ISBLANK(PlannerData!X33:AC33)))))
+  note: Original Google Sheets formula recovered from DUMMYFUNCTION wrapper. Functions like FILTER, QUERY, UNIQUE, FLATTEN, IMPORTRANGE, GOOGLETRANSLATE are Sheets-only and must be reimplemented.
+  e.g. Z25: =IFERROR(TRANSPOSE(FILTER(PlannerData!X33:AC33,NOT(ISBLANK(PlannerData!X33:AC33)))))
+
+PATTERN 114  kind=spill_cache  array=False  G26
+  context_label: Arcane
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),7.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. G26: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),7.0)  cached=7
+
+PATTERN 115  kind=excel  array=True  H26
+  context_label: Arcane
+  array_spill_ref: H26:I26
+  template: ={"",DropdownData!$BL13}
+  e.g. H26: ={"",DropdownData!$BL13}
+
+PATTERN 116  kind=excel  array=False  K26
+  template: =PlannerData!B19
+  e.g. K26: =PlannerData!B19  cached=0
+
+PATTERN 117  kind=excel  array=False  L26
+  template: =PlannerData!B28
+  e.g. L26: =PlannerData!B28  cached=7
+
+PATTERN 118  kind=excel  array=True  P26
+  context_label: Upgrade
+  array_spill_ref: P26:Q26
+  template: ={"",DropdownData!$BL36}
+  e.g. P26: ={"",DropdownData!$BL36}
+
+PATTERN 119  kind=excel  array=False  S26
+  context_label: Require
+  template: =IF(PlannerData!AE$33>0,PlannerData!AE$33,"-")
+  e.g. S26: =IF(PlannerData!AE$33>0,PlannerData!AE$33,"-")  cached='-'
+
+PATTERN 120  kind=excel  array=False  T26
+  context_label: Require
+  template: =IF(PlannerData!AF$33>0,PlannerData!AF$33,"-")
+  e.g. T26: =IF(PlannerData!AF$33>0,PlannerData!AF$33,"-")  cached='-'
+
+PATTERN 121  kind=excel  array=False  U26
+  context_label: Require
+  template: =IF(PlannerData!AG$33>0,PlannerData!AG$33,"-")
+  e.g. U26: =IF(PlannerData!AG$33>0,PlannerData!AG$33,"-")  cached='-'
+
+PATTERN 122  kind=excel  array=False  V26
+  context_label: Require
+  template: =IF(PlannerData!AH$33>0,PlannerData!AH$33,"-")
+  e.g. V26: =IF(PlannerData!AH$33>0,PlannerData!AH$33,"-")  cached='-'
+
+PATTERN 123  kind=excel  array=False  W26
+  context_label: Require
+  template: =IF(PlannerData!AI$33>0,PlannerData!AI$33,"-")
+  e.g. W26: =IF(PlannerData!AI$33>0,PlannerData!AI$33,"-")  cached='-'
+
+PATTERN 124  kind=excel  array=False  AC26
+  context_label: SB
+  template: =PlannerData!Y$25
+  e.g. AC26: =PlannerData!Y$25  cached='-'
+
+PATTERN 125  kind=excel  array=True  AF26
+  context_label: Great Rune
+  array_spill_ref: AF26:AG26
+  template: ={"",DropdownData!$BL22}
+  e.g. AF26: ={"",DropdownData!$BL22}
+
+PATTERN 126  kind=excel  array=False  AM26:AM29 (4 cells)
+  context_label: Physical
+  template: =PlannerData!J7&" /"
+  e.g. AM26: =PlannerData!J7&" /"  cached='79 /'
+  e.g. AM27: =PlannerData!J7&" /"  cached='79 /'
+  e.g. AM28: =PlannerData!J7&" /"  cached='79 /'
+  ... 1 more of this pattern
+
+PATTERN 127  kind=excel  array=False  AN26
+  context_label: Physical
+  template: =ROUND(100*(1-PlannerData!L23),3)
+  e.g. AN26: =ROUND(100*(1-PlannerData!L23),3)  cached=0
+
+PATTERN 128  kind=excel  array=True  P27
+  context_label: LH1 Class
+  array_spill_ref: P27:Q27
+  template: ={"",DropdownData!$BL37}
+  e.g. P27: ={"",DropdownData!$BL37}
+
+PATTERN 129  kind=excel  array=False  AN27
+  context_label: VS Strike
+  template: =ROUND(100*(1-PlannerData!L24),3)
+  e.g. AN27: =ROUND(100*(1-PlannerData!L24),3)  cached=0
+
+PATTERN 130  kind=excel  array=False  E28
+  context_label: Arcane
+  template: =IF($AJ$37,
+"Classes",
+"Optimal Class"&IF(ISBLANK(E30),,"es"))
+  e.g. E28: =IF($AJ$37,
+"Classes",
+"Optimal Class"&IF(ISBLANK(E30),,"es"))  cached='Optimal Class'
+
+PATTERN 131  kind=excel  array=False  N28
+  context_label: LH1 Class
+  template: =IF(PlannerData!$R$19="Invalid","Invalid","Weapon")
+  e.g. N28: =IF(PlannerData!$R$19="Invalid","Invalid","Weapon")  cached='Weapon'
+
+PATTERN 132  kind=excel  array=True  P28
+  array_spill_ref: P28:Q28
+  template: ={"",DropdownData!$BL38}
+  e.g. P28: ={"",DropdownData!$BL38}
+
+PATTERN 133  kind=excel  array=False  X28
+  context_label: Physical
+  template: =IF($V{r},PlannerData!AH$26,PlannerData!S$26)
+  e.g. X28: =IF($V28,PlannerData!AH$26,PlannerData!S$26)  cached=23.46
+
+PATTERN 134  kind=excel  array=False  Y28
+  context_label: Magic
+  template: =IF($V{r},PlannerData!AI$26,PlannerData!T$26)
+  e.g. Y28: =IF($V28,PlannerData!AI$26,PlannerData!T$26)  cached='-'
+
+PATTERN 135  kind=excel  array=False  Z28
+  context_label: Fire
+  template: =IF($V{r},PlannerData!AJ$26,PlannerData!U$26)
+  e.g. Z28: =IF($V28,PlannerData!AJ$26,PlannerData!U$26)  cached='-'
+
+PATTERN 136  kind=excel  array=False  AA28
+  context_label: Lightning
+  template: =IF($V{r},PlannerData!AK$26,PlannerData!V$26)
+  e.g. AA28: =IF($V28,PlannerData!AK$26,PlannerData!V$26)  cached='-'
+
+PATTERN 137  kind=excel  array=False  AB28
+  context_label: Holy
+  template: =IF($V{r},PlannerData!AL$26,PlannerData!W$26)
+  e.g. AB28: =IF($V28,PlannerData!AL$26,PlannerData!W$26)  cached='-'
+
+PATTERN 138  kind=excel  array=False  AC28
+  context_label: SB
+  template: =IF($V{r},PlannerData!$AM$26,PlannerData!$X$26)
+  e.g. AC28: =IF($V28,PlannerData!$AM$26,PlannerData!$X$26)  cached=23.46
+
+PATTERN 139  kind=excel  array=False  AN28
+  context_label: VS Slash
+  template: =ROUND(100*(1-PlannerData!L25),3)
+  e.g. AN28: =ROUND(100*(1-PlannerData!L25),3)  cached=0
+
+PATTERN 140  kind=excel  array=True  E29
+  context_label: Arcane
+  array_spill_ref: E29:E38
+  template: =TRANSPOSE(StartingClassData!A21:J21)
+  e.g. E29: =TRANSPOSE(StartingClassData!A21:J21)  cached='Wretch'
+
+PATTERN 141  kind=excel  array=True  F29
+  context_label: Level
+  array_spill_ref: F29:F38
+  template: =TRANSPOSE(StartingClassData!A22:J22)
+  e.g. F29: =TRANSPOSE(StartingClassData!A22:J22)  cached=1
+
+PATTERN 142  kind=excel  array=True  P29
+  context_label: Affinity
+  array_spill_ref: P29:Q29
+  template: ={"",DropdownData!$BL39}
+  e.g. P29: ={"",DropdownData!$BL39}
+
+PATTERN 143  kind=excel  array=False  S29
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AN$26,PlannerData!AS$26)
+  e.g. S29: =IF($AJ$36,PlannerData!AN$26,PlannerData!AS$26)  cached='D'
+
+PATTERN 144  kind=excel  array=False  T29
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AO$26,PlannerData!AT$26)
+  e.g. T29: =IF($AJ$36,PlannerData!AO$26,PlannerData!AT$26)  cached='D'
+
+PATTERN 145  kind=excel  array=False  U29
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AP$26,PlannerData!AU$26)
+  e.g. U29: =IF($AJ$36,PlannerData!AP$26,PlannerData!AU$26)  cached='-'
+
+PATTERN 146  kind=excel  array=False  V29
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AQ$26,PlannerData!AV$26)
+  e.g. V29: =IF($AJ$36,PlannerData!AQ$26,PlannerData!AV$26)  cached='-'
+
+PATTERN 147  kind=excel  array=False  W29
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AR$26,PlannerData!AW$26)
+  e.g. W29: =IF($AJ$36,PlannerData!AR$26,PlannerData!AW$26)  cached='-'
+
+PATTERN 148  kind=google_sheets  array=False  Z29
+  context_label: Status
+  template: =IFERROR(TRANSPOSE(FILTER(PlannerData!X34:AC34,NOT(ISBLANK(PlannerData!X34:AC34)))))
+  note: Original Google Sheets formula recovered from DUMMYFUNCTION wrapper. Functions like FILTER, QUERY, UNIQUE, FLATTEN, IMPORTRANGE, GOOGLETRANSLATE are Sheets-only and must be reimplemented.
+  e.g. Z29: =IFERROR(TRANSPOSE(FILTER(PlannerData!X34:AC34,NOT(ISBLANK(PlannerData!X34:AC34)))))
+
+PATTERN 149  kind=excel  array=True  AF29
+  context_label: Crystal Tear 1
+  array_spill_ref: AF29:AG29
+  template: ={"",DropdownData!$BL23}
+  e.g. AF29: ={"",DropdownData!$BL23}
+
+PATTERN 150  kind=excel  array=False  AN29
+  context_label: VS Pierce
+  template: =ROUND(100*(1-PlannerData!L26),3)
+  e.g. AN29: =ROUND(100*(1-PlannerData!L26),3)  cached=0
+
+PATTERN 151  kind=excel  array=True  P30
+  context_label: Upgrade
+  array_spill_ref: P30:Q30
+  template: ={"",DropdownData!$BL40}
+  e.g. P30: ={"",DropdownData!$BL40}
+
+PATTERN 152  kind=excel  array=False  S30
+  context_label: Require
+  template: =IF(PlannerData!AE$34>0,PlannerData!AE$34,"-")
+  e.g. S30: =IF(PlannerData!AE$34>0,PlannerData!AE$34,"-")  cached='-'
+
+PATTERN 153  kind=excel  array=False  T30
+  context_label: Require
+  template: =IF(PlannerData!AF$34>0,PlannerData!AF$34,"-")
+  e.g. T30: =IF(PlannerData!AF$34>0,PlannerData!AF$34,"-")  cached='-'
+
+PATTERN 154  kind=excel  array=False  U30
+  context_label: Require
+  template: =IF(PlannerData!AG$34>0,PlannerData!AG$34,"-")
+  e.g. U30: =IF(PlannerData!AG$34>0,PlannerData!AG$34,"-")  cached='-'
+
+PATTERN 155  kind=excel  array=False  V30
+  context_label: Require
+  template: =IF(PlannerData!AH$34>0,PlannerData!AH$34,"-")
+  e.g. V30: =IF(PlannerData!AH$34>0,PlannerData!AH$34,"-")  cached='-'
+
+PATTERN 156  kind=excel  array=False  W30
+  context_label: Require
+  template: =IF(PlannerData!AI$34>0,PlannerData!AI$34,"-")
+  e.g. W30: =IF(PlannerData!AI$34>0,PlannerData!AI$34,"-")  cached='-'
+
+PATTERN 157  kind=excel  array=False  AC30
+  context_label: SB
+  template: =PlannerData!Y$26
+  e.g. AC30: =PlannerData!Y$26  cached='-'
+
+PATTERN 158  kind=excel  array=True  AF30
+  context_label: Crystal Tear 2
+  array_spill_ref: AF30:AG30
+  template: ={"",DropdownData!$BL24}
+  e.g. AF30: ={"",DropdownData!$BL24}
+
+PATTERN 159  kind=excel  array=False  AM30
+  context_label: Magic
+  template: =PlannerData!J8&" /"
+  e.g. AM30: =PlannerData!J8&" /"  cached='93 /'
+
+PATTERN 160  kind=excel  array=False  AN30
+  context_label: Magic
+  template: =ROUND(100*(1-PlannerData!L27),3)
+  e.g. AN30: =ROUND(100*(1-PlannerData!L27),3)  cached=0
+
+PATTERN 161  kind=excel  array=True  P31
+  context_label: LH2 Class
+  array_spill_ref: P31:Q31
+  template: ={"",DropdownData!$BL41}
+  e.g. P31: ={"",DropdownData!$BL41}
+
+PATTERN 162  kind=excel  array=False  AM31
+  context_label: Fire
+  template: =PlannerData!J9&" /"
+  e.g. AM31: =PlannerData!J9&" /"  cached='85 /'
+
+PATTERN 163  kind=excel  array=False  AN31
+  context_label: Fire
+  template: =ROUND(100*(1-PlannerData!L28),3)
+  e.g. AN31: =ROUND(100*(1-PlannerData!L28),3)  cached=0
+
+PATTERN 164  kind=excel  array=False  N32
+  context_label: LH2 Class
+  template: =IF(PlannerData!$R$20="Invalid","Invalid","Weapon")
+  e.g. N32: =IF(PlannerData!$R$20="Invalid","Invalid","Weapon")  cached='Weapon'
+
+PATTERN 165  kind=excel  array=True  P32
+  array_spill_ref: P32:Q32
+  template: ={"",DropdownData!$BL42}
+  e.g. P32: ={"",DropdownData!$BL42}
+
+PATTERN 166  kind=excel  array=False  X32
+  context_label: Physical
+  template: =IF($V{r},PlannerData!AH$27,PlannerData!S$27)
+  e.g. X32: =IF($V32,PlannerData!AH$27,PlannerData!S$27)  cached=23.46
+
+PATTERN 167  kind=excel  array=False  Y32
+  context_label: Magic
+  template: =IF($V{r},PlannerData!AI$27,PlannerData!T$27)
+  e.g. Y32: =IF($V32,PlannerData!AI$27,PlannerData!T$27)  cached='-'
+
+PATTERN 168  kind=excel  array=False  Z32
+  context_label: Fire
+  template: =IF($V{r},PlannerData!AJ$27,PlannerData!U$27)
+  e.g. Z32: =IF($V32,PlannerData!AJ$27,PlannerData!U$27)  cached='-'
+
+PATTERN 169  kind=excel  array=False  AA32
+  context_label: Lightning
+  template: =IF($V{r},PlannerData!AK$27,PlannerData!V$27)
+  e.g. AA32: =IF($V32,PlannerData!AK$27,PlannerData!V$27)  cached='-'
+
+PATTERN 170  kind=excel  array=False  AB32
+  context_label: Holy
+  template: =IF($V{r},PlannerData!AL$27,PlannerData!W$27)
+  e.g. AB32: =IF($V32,PlannerData!AL$27,PlannerData!W$27)  cached='-'
+
+PATTERN 171  kind=excel  array=False  AC32
+  context_label: SB
+  template: =IF($V{r},PlannerData!$AM$27,PlannerData!$X$27)
+  e.g. AC32: =IF($V32,PlannerData!$AM$27,PlannerData!$X$27)  cached=23.46
+
+PATTERN 172  kind=excel  array=False  AM32
+  context_label: Lightning
+  template: =PlannerData!J10&" /"
+  e.g. AM32: =PlannerData!J10&" /"  cached='75 /'
+
+PATTERN 173  kind=excel  array=False  AN32
+  context_label: Lightning
+  template: =ROUND(100*(1-PlannerData!L29),3)
+  e.g. AN32: =ROUND(100*(1-PlannerData!L29),3)  cached=0
+
+PATTERN 174  kind=excel  array=True  P33
+  context_label: Affinity
+  array_spill_ref: P33:Q33
+  template: ={"",DropdownData!$BL43}
+  e.g. P33: ={"",DropdownData!$BL43}
+
+PATTERN 175  kind=excel  array=False  S33
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AN$27,PlannerData!AS$27)
+  e.g. S33: =IF($AJ$36,PlannerData!AN$27,PlannerData!AS$27)  cached='D'
+
+PATTERN 176  kind=excel  array=False  T33
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AO$27,PlannerData!AT$27)
+  e.g. T33: =IF($AJ$36,PlannerData!AO$27,PlannerData!AT$27)  cached='D'
+
+PATTERN 177  kind=excel  array=False  U33
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AP$27,PlannerData!AU$27)
+  e.g. U33: =IF($AJ$36,PlannerData!AP$27,PlannerData!AU$27)  cached='-'
+
+PATTERN 178  kind=excel  array=False  V33
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AQ$27,PlannerData!AV$27)
+  e.g. V33: =IF($AJ$36,PlannerData!AQ$27,PlannerData!AV$27)  cached='-'
+
+PATTERN 179  kind=excel  array=False  W33
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AR$27,PlannerData!AW$27)
+  e.g. W33: =IF($AJ$36,PlannerData!AR$27,PlannerData!AW$27)  cached='-'
+
+PATTERN 180  kind=google_sheets  array=False  Z33
+  context_label: Status
+  template: =IFERROR(TRANSPOSE(FILTER(PlannerData!X35:AC35,NOT(ISBLANK(PlannerData!X35:AC35)))))
+  note: Original Google Sheets formula recovered from DUMMYFUNCTION wrapper. Functions like FILTER, QUERY, UNIQUE, FLATTEN, IMPORTRANGE, GOOGLETRANSLATE are Sheets-only and must be reimplemented.
+  e.g. Z33: =IFERROR(TRANSPOSE(FILTER(PlannerData!X35:AC35,NOT(ISBLANK(PlannerData!X35:AC35)))))
+
+PATTERN 181  kind=excel  array=False  AM33
+  context_label: Holy
+  template: =PlannerData!J11&" /"
+  e.g. AM33: =PlannerData!J11&" /"  cached='89 /'
+
+PATTERN 182  kind=excel  array=False  AN33
+  context_label: Holy
+  template: =ROUND(100*(1-PlannerData!L30),3)
+  e.g. AN33: =ROUND(100*(1-PlannerData!L30),3)  cached=0
+
+PATTERN 183  kind=excel  array=True  P34
+  context_label: Upgrade
+  array_spill_ref: P34:Q34
+  template: ={"",DropdownData!$BL44}
+  e.g. P34: ={"",DropdownData!$BL44}
+
+PATTERN 184  kind=excel  array=False  S34
+  context_label: Require
+  template: =IF(PlannerData!AE$35>0,PlannerData!AE$35,"-")
+  e.g. S34: =IF(PlannerData!AE$35>0,PlannerData!AE$35,"-")  cached='-'
+
+PATTERN 185  kind=excel  array=False  T34
+  context_label: Require
+  template: =IF(PlannerData!AF$35>0,PlannerData!AF$35,"-")
+  e.g. T34: =IF(PlannerData!AF$35>0,PlannerData!AF$35,"-")  cached='-'
+
+PATTERN 186  kind=excel  array=False  U34
+  context_label: Require
+  template: =IF(PlannerData!AG$35>0,PlannerData!AG$35,"-")
+  e.g. U34: =IF(PlannerData!AG$35>0,PlannerData!AG$35,"-")  cached='-'
+
+PATTERN 187  kind=excel  array=False  V34
+  context_label: Require
+  template: =IF(PlannerData!AH$35>0,PlannerData!AH$35,"-")
+  e.g. V34: =IF(PlannerData!AH$35>0,PlannerData!AH$35,"-")  cached='-'
+
+PATTERN 188  kind=excel  array=False  W34
+  context_label: Require
+  template: =IF(PlannerData!AI$35>0,PlannerData!AI$35,"-")
+  e.g. W34: =IF(PlannerData!AI$35>0,PlannerData!AI$35,"-")  cached='-'
+
+PATTERN 189  kind=excel  array=False  AC34
+  context_label: SB
+  template: =PlannerData!Y$27
+  e.g. AC34: =PlannerData!Y$27  cached='-'
+
+PATTERN 190  kind=excel  array=True  P35
+  context_label: LH3 Class
+  array_spill_ref: P35:Q35
+  template: ={"",DropdownData!$BL45}
+  e.g. P35: ={"",DropdownData!$BL45}
+
+PATTERN 191  kind=excel  array=False  AM35
+  context_label: Immunity
+  template: =PlannerData!L31&" /"
+  e.g. AM35: =PlannerData!L31&" /"  cached='92 /'
+
+PATTERN 192  kind=excel  array=False  AN35
+  context_label: Immunity
+  template: =PlannerData!J31
+  e.g. AN35: =PlannerData!J31  cached=0
+
+PATTERN 193  kind=excel  array=False  N36
+  context_label: LH3 Class
+  template: =IF(PlannerData!$R$21="Invalid","Invalid","Weapon")
+  e.g. N36: =IF(PlannerData!$R$21="Invalid","Invalid","Weapon")  cached='Weapon'
+
+PATTERN 194  kind=excel  array=True  P36
+  array_spill_ref: P36:Q36
+  template: ={"",DropdownData!$BL46}
+  e.g. P36: ={"",DropdownData!$BL46}
+
+PATTERN 195  kind=excel  array=False  X36
+  context_label: Physical
+  template: =IF($V{r},PlannerData!AH$28,PlannerData!S$28)
+  e.g. X36: =IF($V36,PlannerData!AH$28,PlannerData!S$28)  cached=23.46
+
+PATTERN 196  kind=excel  array=False  Y36
+  context_label: Magic
+  template: =IF($V{r},PlannerData!AI$28,PlannerData!T$28)
+  e.g. Y36: =IF($V36,PlannerData!AI$28,PlannerData!T$28)  cached='-'
+
+PATTERN 197  kind=excel  array=False  Z36
+  context_label: Fire
+  template: =IF($V{r},PlannerData!AJ$28,PlannerData!U$28)
+  e.g. Z36: =IF($V36,PlannerData!AJ$28,PlannerData!U$28)  cached='-'
+
+PATTERN 198  kind=excel  array=False  AA36
+  context_label: Lightning
+  template: =IF($V{r},PlannerData!AK$28,PlannerData!V$28)
+  e.g. AA36: =IF($V36,PlannerData!AK$28,PlannerData!V$28)  cached='-'
+
+PATTERN 199  kind=excel  array=False  AB36
+  context_label: Holy
+  template: =IF($V{r},PlannerData!AL$28,PlannerData!W$28)
+  e.g. AB36: =IF($V36,PlannerData!AL$28,PlannerData!W$28)  cached='-'
+
+PATTERN 200  kind=excel  array=False  AC36
+  context_label: SB
+  template: =IF($V{r},PlannerData!$AM$28,PlannerData!$X$28)
+  e.g. AC36: =IF($V36,PlannerData!$AM$28,PlannerData!$X$28)  cached=23.46
+
+PATTERN 201  kind=excel  array=False  AM36
+  context_label: Robustness
+  template: =PlannerData!L32&" /"
+  e.g. AM36: =PlannerData!L32&" /"  cached='92 /'
+
+PATTERN 202  kind=excel  array=False  AN36
+  context_label: Robustness
+  template: =PlannerData!J32
+  e.g. AN36: =PlannerData!J32  cached=0
+
+PATTERN 203  kind=excel  array=True  P37
+  context_label: Affinity
+  array_spill_ref: P37:Q37
+  template: ={"",DropdownData!$BL47}
+  e.g. P37: ={"",DropdownData!$BL47}
+
+PATTERN 204  kind=excel  array=False  S37
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AN$28,PlannerData!AS$28)
+  e.g. S37: =IF($AJ$36,PlannerData!AN$28,PlannerData!AS$28)  cached='D'
+
+PATTERN 205  kind=excel  array=False  T37
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AO$28,PlannerData!AT$28)
+  e.g. T37: =IF($AJ$36,PlannerData!AO$28,PlannerData!AT$28)  cached='D'
+
+PATTERN 206  kind=excel  array=False  U37
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AP$28,PlannerData!AU$28)
+  e.g. U37: =IF($AJ$36,PlannerData!AP$28,PlannerData!AU$28)  cached='-'
+
+PATTERN 207  kind=excel  array=False  V37
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AQ$28,PlannerData!AV$28)
+  e.g. V37: =IF($AJ$36,PlannerData!AQ$28,PlannerData!AV$28)  cached='-'
+
+PATTERN 208  kind=excel  array=False  W37
+  context_label: Scaling
+  template: =IF($AJ$36,PlannerData!AR$28,PlannerData!AW$28)
+  e.g. W37: =IF($AJ$36,PlannerData!AR$28,PlannerData!AW$28)  cached='-'
+
+PATTERN 209  kind=google_sheets  array=False  Z37
+  context_label: Status
+  template: =IFERROR(TRANSPOSE(FILTER(PlannerData!X{r-1}:AC{r-1},NOT(ISBLANK(PlannerData!X{r-1}:AC{r-1})))))
+  note: Original Google Sheets formula recovered from DUMMYFUNCTION wrapper. Functions like FILTER, QUERY, UNIQUE, FLATTEN, IMPORTRANGE, GOOGLETRANSLATE are Sheets-only and must be reimplemented.
+  e.g. Z37: =IFERROR(TRANSPOSE(FILTER(PlannerData!X36:AC36,NOT(ISBLANK(PlannerData!X36:AC36)))))
+
+PATTERN 210  kind=excel  array=False  AM37
+  context_label: Focus
+  template: =PlannerData!L33&" /"
+  e.g. AM37: =PlannerData!L33&" /"  cached='92 /'
+
+PATTERN 211  kind=excel  array=False  AN37
+  context_label: Focus
+  template: =PlannerData!J33
+  e.g. AN37: =PlannerData!J33  cached=0
+
+PATTERN 212  kind=excel  array=True  P38
+  context_label: Upgrade
+  array_spill_ref: P38:Q38
+  template: ={"",DropdownData!$BL48}
+  e.g. P38: ={"",DropdownData!$BL48}
+
+PATTERN 213  kind=excel  array=False  S38
+  context_label: Require
+  template: =IF(PlannerData!AE$36>0,PlannerData!AE$36,"-")
+  e.g. S38: =IF(PlannerData!AE$36>0,PlannerData!AE$36,"-")  cached='-'
+
+PATTERN 214  kind=excel  array=False  T38
+  context_label: Require
+  template: =IF(PlannerData!AF$36>0,PlannerData!AF$36,"-")
+  e.g. T38: =IF(PlannerData!AF$36>0,PlannerData!AF$36,"-")  cached='-'
+
+PATTERN 215  kind=excel  array=False  U38
+  context_label: Require
+  template: =IF(PlannerData!AG$36>0,PlannerData!AG$36,"-")
+  e.g. U38: =IF(PlannerData!AG$36>0,PlannerData!AG$36,"-")  cached='-'
+
+PATTERN 216  kind=excel  array=False  V38
+  context_label: Require
+  template: =IF(PlannerData!AH$36>0,PlannerData!AH$36,"-")
+  e.g. V38: =IF(PlannerData!AH$36>0,PlannerData!AH$36,"-")  cached='-'
+
+PATTERN 217  kind=excel  array=False  W38
+  context_label: Require
+  template: =IF(PlannerData!AI$36>0,PlannerData!AI$36,"-")
+  e.g. W38: =IF(PlannerData!AI$36>0,PlannerData!AI$36,"-")  cached='-'
+
+PATTERN 218  kind=excel  array=False  AC38
+  context_label: SB
+  template: =PlannerData!Y$28
+  e.g. AC38: =PlannerData!Y$28  cached='-'
+
+PATTERN 219  kind=excel  array=False  AM38
+  context_label: Vitality
+  template: =PlannerData!L34&" /"
+  e.g. AM38: =PlannerData!L34&" /"  cached='99 /'
+
+PATTERN 220  kind=excel  array=False  AN38
+  context_label: Vitality
+  template: =PlannerData!J34
+  e.g. AN38: =PlannerData!J34  cached=0
+
+PATTERN 221  kind=excel  array=True  F42
+  context_label: Memory Slots
+  array_spill_ref: F42:G42
+  template: ={"",DropdownData!$BL49}
+  e.g. F42: ={"",DropdownData!$BL49}
+
+PATTERN 222  kind=excel  array=False  G43
+  context_label: Remaining
+  template: =MagicApData!B2
+  e.g. G43: =MagicApData!B2  cached=10
+
+PATTERN 223  kind=excel  array=True  F45
+  context_label: Equipped Select
+  array_spill_ref: F45:G45
+  template: ={"",DropdownData!$BL63}
+  e.g. F45: ={"",DropdownData!$BL63}
+
+PATTERN 224  kind=excel  array=True  F48
+  context_label: Spell 1
+  array_spill_ref: F48:G48
+  template: ={"",DropdownData!$BL50}
+  e.g. F48: ={"",DropdownData!$BL50}
+
+PATTERN 225  kind=excel  array=True  O48
+  context_label: Slots
+  array_spill_ref: O48:O59
+  template: =MagicApData!AB2:AB13
+  e.g. O48: =MagicApData!AB2:AB13
+
+PATTERN 226  kind=excel  array=True  Q48
+  context_label: FP Cost
+  array_spill_ref: Q48:Q59
+  template: =IF(ISBLANK(MagicApData!AC2:AC13),,
+MagicApData!AC2:AC13
+&IF(MagicApData!AD2:AD13>=10," ( "," (   ")
+&MagicApData!AD2:AD13
+&")"
+)
+  e.g. Q48: =IF(ISBLANK(MagicApData!AC2:AC13),,
+MagicApData!AC2:AC13
+&IF(MagicApData!AD2:AD13>=10," ( "," (   ")
+&MagicApData!AD2:AD13
+&")"
+)
+
+PATTERN 227  kind=excel  array=True  R48
+  context_label: Stamina Cost
+  array_spill_ref: R48:R59
+  template: =IF(ISBLANK(MagicApData!AE2:AE13),,
+MagicApData!AE2:AE13
+&IF(MagicApData!AF2:AF13>=10," ( "," (   ")
+&MagicApData!AF2:AF13
+&")"
+)
+  e.g. R48: =IF(ISBLANK(MagicApData!AE2:AE13),,
+MagicApData!AE2:AE13
+&IF(MagicApData!AF2:AF13>=10," ( "," (   ")
+&MagicApData!AF2:AF13
+&")"
+)
+
+PATTERN 228  kind=excel  array=True  T48
+  context_label: Requirements
+  array_spill_ref: T48:V59
+  template: =IF(ISBLANK(MagicApData!AG2:AI13),,
+IF(MagicApData!AG2:AI13<0,"-",MagicApData!AG2:AI13))
+  e.g. T48: =IF(ISBLANK(MagicApData!AG2:AI13),,
+IF(MagicApData!AG2:AI13<0,"-",MagicApData!AG2:AI13))
+
+PATTERN 229  kind=excel  array=True  W48
+  context_label: Duration
+  array_spill_ref: W48:W59
+  template: =MagicApData!AJ2:AJ13
+  e.g. W48: =MagicApData!AJ2:AJ13
+
+PATTERN 230  kind=excel  array=True  F49
+  context_label: Spell 2
+  array_spill_ref: F49:G49
+  template: ={"",DropdownData!$BL51}
+  e.g. F49: ={"",DropdownData!$BL51}
+
+PATTERN 231  kind=excel  array=True  F50
+  context_label: Spell 3
+  array_spill_ref: F50:G50
+  template: ={"",DropdownData!$BL52}
+  e.g. F50: ={"",DropdownData!$BL52}
+
+PATTERN 232  kind=excel  array=True  F51
+  context_label: Spell 4
+  array_spill_ref: F51:G51
+  template: ={"",DropdownData!$BL53}
+  e.g. F51: ={"",DropdownData!$BL53}
+
+PATTERN 233  kind=excel  array=True  F52
+  context_label: Spell 5
+  array_spill_ref: F52:G52
+  template: ={"",DropdownData!$BL54}
+  e.g. F52: ={"",DropdownData!$BL54}
+
+PATTERN 234  kind=excel  array=True  F53
+  context_label: Spell 6
+  array_spill_ref: F53:G53
+  template: ={"",DropdownData!$BL55}
+  e.g. F53: ={"",DropdownData!$BL55}
+
+PATTERN 235  kind=excel  array=True  F54
+  context_label: Spell 7
+  array_spill_ref: F54:G54
+  template: ={"",DropdownData!$BL56}
+  e.g. F54: ={"",DropdownData!$BL56}
+
+PATTERN 236  kind=excel  array=True  F55
+  context_label: Spell 8
+  array_spill_ref: F55:G55
+  template: ={"",DropdownData!$BL57}
+  e.g. F55: ={"",DropdownData!$BL57}
+
+PATTERN 237  kind=excel  array=True  F56
+  context_label: Spell 9
+  array_spill_ref: F56:G56
+  template: ={"",DropdownData!$BL58}
+  e.g. F56: ={"",DropdownData!$BL58}
+
+PATTERN 238  kind=excel  array=True  F57
+  context_label: Spell 10
+  array_spill_ref: F57:G57
+  template: ={"",DropdownData!$BL59}
+  e.g. F57: ={"",DropdownData!$BL59}
+
+PATTERN 239  kind=excel  array=True  F58
+  context_label: Spell 11
+  array_spill_ref: F58:G58
+  template: ={"",DropdownData!$BL60}
+  e.g. F58: ={"",DropdownData!$BL60}
+
+PATTERN 240  kind=excel  array=True  F59
+  context_label: Spell 12
+  array_spill_ref: F59:G59
+  template: ={"",DropdownData!$BL61}
+  e.g. F59: ={"",DropdownData!$BL61}
+
+PATTERN 241  kind=excel  array=True  E62
+  context_label: Spells
+  array_spill_ref: E62:E265
+  template: =MagicApData!BY2:BY129
+  e.g. E62: =MagicApData!BY2:BY129  cached='No Valid Spell/Catalyst'
+
+PATTERN 242  kind=excel  array=True  Q62
+  context_label: Total AP
+  array_spill_ref: Q62:Q265
+  template: =MagicApData!CF2:CF129
+  e.g. Q62: =MagicApData!CF2:CF129
+
+PATTERN 243  kind=excel  array=True  R62
+  context_label: Physical
+  array_spill_ref: R62:R265
+  template: =MagicApData!BZ2:BZ129
+  e.g. R62: =MagicApData!BZ2:BZ129
+
+PATTERN 244  kind=excel  array=True  S62
+  context_label: Magic
+  array_spill_ref: S62:S265
+  template: =MagicApData!CA2:CA129
+  e.g. S62: =MagicApData!CA2:CA129
+
+PATTERN 245  kind=excel  array=True  T62
+  context_label: Fire
+  array_spill_ref: T62:T265
+  template: =MagicApData!CB2:CB129
+  e.g. T62: =MagicApData!CB2:CB129
+
+PATTERN 246  kind=excel  array=True  U62
+  context_label: Lightning
+  array_spill_ref: U62:U265
+  template: =MagicApData!CC2:CC129
+  e.g. U62: =MagicApData!CC2:CC129
+
+PATTERN 247  kind=excel  array=True  V62
+  context_label: Holy
+  array_spill_ref: V62:V265
+  template: =MagicApData!CD2:CD129
+  e.g. V62: =MagicApData!CD2:CD129
+
+PATTERN 248  kind=excel  array=True  W62
+  context_label: Heal
+  array_spill_ref: W62:W265
+  template: =MagicApData!CG2:CG129
+  e.g. W62: =MagicApData!CG2:CG129
+
+PATTERN 249  kind=excel  array=True  X62
+  context_label: Spell Category
+  array_spill_ref: X62:X265
+  template: =MagicApData!CT2:CT129
+  e.g. X62: =MagicApData!CT2:CT129
+
+PATTERN 250  kind=excel  array=True  AE62
+  context_label: Attack Category
+  array_spill_ref: AE62:AE265
+  template: =MagicApData!CU2:CU129
+  e.g. AE62: =MagicApData!CU2:CU129
+
+PATTERN 251  kind=excel  array=True  AJ62
+  context_label: Status
+  array_spill_ref: AJ62:AJ265
+  template: =MagicApData!CR2:CR129
+  e.g. AJ62: =MagicApData!CR2:CR129
+
+PATTERN 252  kind=excel  array=True  AM62
+  context_label: Special Effect
+  array_spill_ref: AM62:AM265
+  template: =MagicApData!CS2:CS129
+  e.g. AM62: =MagicApData!CS2:CS129
+
+========================================================================
+ALL FORMULAS
+========================================================================
+cell	kind	array_ref	label	logic	stored	cached
+G6	excel		Update Available:	=IF(UpdateData!$D$2=UpdateData!$D$5,False,True)	=IF(UpdateData!$D$2=UpdateData!$D$5,False,True)	FALSE
+E7	excel		Update Available:	=IF(G6,"Link to Update:","Link to Original:")	=IF(G6,"Link to Update:","Link to Original:")	Link to Original:
+G7	excel			=HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U/copy", | UpdateData!D5&" - "&IF(G6,"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))	=HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U/copy", | UpdateData!D5&" - "&IF(G6,"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))	v1.19.1 - last updated 413 days ago
+F10	excel	F10:G10	Build Select	={"",DropdownData!$BL2}	={"",DropdownData!$BL2}	
+F11	excel	F11:G11	Name Build	={"",DropdownData!$BL3}	={"",DropdownData!$BL3}	
+F14	excel	F14:G14	Starting Class	={"",DropdownData!$BL5}	={"",DropdownData!$BL5}	
+P15	excel	P15:Q15	RH1 Class	={"",DropdownData!$BL25}	={"",DropdownData!$BL25}	
+AC15	excel		Holy	=IF($V16,"GB","Total")	=IF($V16,"GB","Total")	Total
+AF15	excel	AF15:AG15	Head	={"",DropdownData!$BL14}	={"",DropdownData!$BL14}	
+AM15	excel		HP	=PlannerData!L2	=PlannerData!L2	522
+AP15	google_sheets		HP	=IFERROR(FILTER(PlannerData!N2:N129,NOT(ISBLANK(PlannerData!$O2:$O129))),"Current gear has no effects")	=IFERROR(__xludf.DUMMYFUNCTION("IFERROR(FILTER(PlannerData!N2:N129,NOT(ISBLANK(PlannerData!$O2:$O129))),""Current gear has no effects"")"),"Current gear has no effects")	Current gear has no effects
+AQ15	google_sheets		HP	=IFERROR(FILTER(PlannerData!O2:O129,NOT(ISBLANK(PlannerData!$O2:$O129))))	=IFERROR(__xludf.DUMMYFUNCTION("IFERROR(FILTER(PlannerData!O2:O129,NOT(ISBLANK(PlannerData!$O2:$O129))))"),"")	
+G16	excel		Level	=PlannerData!B10	=PlannerData!B10	9
+N16	excel		RH1 Class	=IF(PlannerData!$R$16="Invalid","Invalid","Weapon")	=IF(PlannerData!$R$16="Invalid","Invalid","Weapon")	Weapon
+P16	excel	P16:Q16		={"",DropdownData!$BL26}	={"",DropdownData!$BL26}	
+X16	excel		Physical	=IF($V16,PlannerData!AH$23,PlannerData!S$23)	=IF($V16,PlannerData!AH$23,PlannerData!S$23)	23.46
+Y16	excel		Magic	=IF($V16,PlannerData!AI$23,PlannerData!T$23)	=IF($V16,PlannerData!AI$23,PlannerData!T$23)	-
+Z16	excel		Fire	=IF($V16,PlannerData!AJ$23,PlannerData!U$23)	=IF($V16,PlannerData!AJ$23,PlannerData!U$23)	-
+AA16	excel		Lightning	=IF($V16,PlannerData!AK$23,PlannerData!V$23)	=IF($V16,PlannerData!AK$23,PlannerData!V$23)	-
+AB16	excel		Holy	=IF($V16,PlannerData!AL$23,PlannerData!W$23)	=IF($V16,PlannerData!AL$23,PlannerData!W$23)	-
+AC16	excel			=IF($V16,PlannerData!$AM$23,PlannerData!$X$23)	=IF($V16,PlannerData!$AM$23,PlannerData!$X$23)	23.46
+AF16	excel	AF16:AG16	Chest	={"",DropdownData!$BL15}	={"",DropdownData!$BL15}	
+AM16	excel		FP	=PlannerData!L3	=PlannerData!L3	78
+P17	excel	P17:Q17	Affinity	={"",DropdownData!$BL27}	={"",DropdownData!$BL27}	
+S17	excel		Scaling	=IF($AJ$36,PlannerData!AN$23,PlannerData!AS$23)	=IF($AJ$36,PlannerData!AN$23,PlannerData!AS$23)	D
+T17	excel		Scaling	=IF($AJ$36,PlannerData!AO$23,PlannerData!AT$23)	=IF($AJ$36,PlannerData!AO$23,PlannerData!AT$23)	D
+U17	excel		Scaling	=IF($AJ$36,PlannerData!AP$23,PlannerData!AU$23)	=IF($AJ$36,PlannerData!AP$23,PlannerData!AU$23)	-
+V17	excel		Scaling	=IF($AJ$36,PlannerData!AQ$23,PlannerData!AV$23)	=IF($AJ$36,PlannerData!AQ$23,PlannerData!AV$23)	-
+W17	excel		Scaling	=IF($AJ$36,PlannerData!AR$23,PlannerData!AW$23)	=IF($AJ$36,PlannerData!AR$23,PlannerData!AW$23)	-
+Z17	google_sheets		Status	=IFERROR(TRANSPOSE(FILTER(PlannerData!X31:AC31,NOT(ISBLANK(PlannerData!X31:AC31)))))	=IFERROR(__xludf.DUMMYFUNCTION("IFERROR(TRANSPOSE(FILTER(PlannerData!X31:AC31,NOT(ISBLANK(PlannerData!X31:AC31)))))"),"")	
+AF17	excel	AF17:AG17	Arms	={"",DropdownData!$BL16}	={"",DropdownData!$BL16}	
+AM17	excel		Stamina	=PlannerData!L4	=PlannerData!L4	97
+P18	excel	P18:Q18	Upgrade	={"",DropdownData!$BL28}	={"",DropdownData!$BL28}	
+S18	excel		Require	=IF(PlannerData!AE$31>0,PlannerData!AE$31,"-")	=IF(PlannerData!AE$31>0,PlannerData!AE$31,"-")	-
+T18	excel		Require	=IF(PlannerData!AF$31>0,PlannerData!AF$31,"-")	=IF(PlannerData!AF$31>0,PlannerData!AF$31,"-")	-
+U18	excel		Require	=IF(PlannerData!AG$31>0,PlannerData!AG$31,"-")	=IF(PlannerData!AG$31>0,PlannerData!AG$31,"-")	-
+V18	excel		Require	=IF(PlannerData!AH$31>0,PlannerData!AH$31,"-")	=IF(PlannerData!AH$31>0,PlannerData!AH$31,"-")	-
+W18	excel		Require	=IF(PlannerData!AI$31>0,PlannerData!AI$31,"-")	=IF(PlannerData!AI$31>0,PlannerData!AI$31,"-")	-
+AC18	excel		SB	=PlannerData!Y$23	=PlannerData!Y$23	-
+AF18	excel	AF18:AG18	Legs	={"",DropdownData!$BL17}	={"",DropdownData!$BL17}	
+AM18	excel		Equip Load	=PlannerData!J20&"  -  "&PlannerData!K20	=PlannerData!J20&"  -  "&PlannerData!K20	0.0 / 49.8  -  0.0%
+G19	google_sheets		Vigor	=IFERROR(FILTER(StartingClassData!A2:J9,G14=StartingClassData!A1:J1),ARRAYFORMULA(StartingClassData!J2:J9))	=IFERROR(__xludf.DUMMYFUNCTION("IFERROR(FILTER(StartingClassData!A2:J9,G14=StartingClassData!A1:J1),ARRAYFORMULA(StartingClassData!J2:J9))"),15.0)	15
+H19	excel	H19:I19	Vigor	={"",DropdownData!$BL6}	={"",DropdownData!$BL6}	
+K19	excel		Alter	=PlannerData!B12	=PlannerData!B12	0
+L19	excel		Total	=PlannerData!B21	=PlannerData!B21	15
+P19	excel	P19:Q19	RH2 Class	={"",DropdownData!$BL29}	={"",DropdownData!$BL29}	
+AC19	excel		Holy	=IF($V20,"GB","Total")	=IF($V20,"GB","Total")	Total
+AM19	excel		Weight Left | Roll	=PlannerData!J21&" | "&PlannerData!K21	=PlannerData!J21&" | "&PlannerData!K21	14.9 | Light Load
+G20	spill_cache		Mind		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),10.0)	10
+H20	excel	H20:I20	Mind	={"",DropdownData!$BL7}	={"",DropdownData!$BL7}	
+K20	excel		Alter	=PlannerData!B13	=PlannerData!B13	0
+L20	excel		Total	=PlannerData!B22	=PlannerData!B22	10
+N20	excel		RH2 Class	=IF(PlannerData!$R$17="Invalid","Invalid","Weapon")	=IF(PlannerData!$R$17="Invalid","Invalid","Weapon")	Weapon
+P20	excel	P20:Q20		={"",DropdownData!$BL30}	={"",DropdownData!$BL30}	
+X20	excel		Physical	=IF($V20,PlannerData!AH$24,PlannerData!S$24)	=IF($V20,PlannerData!AH$24,PlannerData!S$24)	23.46
+Y20	excel		Magic	=IF($V20,PlannerData!AI$24,PlannerData!T$24)	=IF($V20,PlannerData!AI$24,PlannerData!T$24)	-
+Z20	excel		Fire	=IF($V20,PlannerData!AJ$24,PlannerData!U$24)	=IF($V20,PlannerData!AJ$24,PlannerData!U$24)	-
+AA20	excel		Lightning	=IF($V20,PlannerData!AK$24,PlannerData!V$24)	=IF($V20,PlannerData!AK$24,PlannerData!V$24)	-
+AB20	excel		Holy	=IF($V20,PlannerData!AL$24,PlannerData!W$24)	=IF($V20,PlannerData!AL$24,PlannerData!W$24)	-
+AC20	excel		SB	=IF($V20,PlannerData!$AM$24,PlannerData!$X$24)	=IF($V20,PlannerData!$AM$24,PlannerData!$X$24)	23.46
+AM20	excel		End for Mid Roll	=RollTypeData!E5	=RollTypeData!E5	8
+G21	spill_cache		Endurance		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),11.0)	11
+H21	excel	H21:I21	Endurance	={"",DropdownData!$BL8}	={"",DropdownData!$BL8}	
+K21	excel		Alter	=PlannerData!B14	=PlannerData!B14	0
+L21	excel		Total	=PlannerData!B23	=PlannerData!B23	11
+P21	excel	P21:Q21	Affinity	={"",DropdownData!$BL31}	={"",DropdownData!$BL31}	
+S21	excel		Scaling	=IF($AJ$36,PlannerData!AN$24,PlannerData!AS$24)	=IF($AJ$36,PlannerData!AN$24,PlannerData!AS$24)	D
+T21	excel		Scaling	=IF($AJ$36,PlannerData!AO$24,PlannerData!AT$24)	=IF($AJ$36,PlannerData!AO$24,PlannerData!AT$24)	D
+U21	excel		Scaling	=IF($AJ$36,PlannerData!AP$24,PlannerData!AU$24)	=IF($AJ$36,PlannerData!AP$24,PlannerData!AU$24)	-
+V21	excel		Scaling	=IF($AJ$36,PlannerData!AQ$24,PlannerData!AV$24)	=IF($AJ$36,PlannerData!AQ$24,PlannerData!AV$24)	-
+W21	excel		Scaling	=IF($AJ$36,PlannerData!AR$24,PlannerData!AW$24)	=IF($AJ$36,PlannerData!AR$24,PlannerData!AW$24)	-
+Z21	google_sheets		Status	=IFERROR(TRANSPOSE(FILTER(PlannerData!X32:AC32,NOT(ISBLANK(PlannerData!X32:AC32)))))	=IFERROR(__xludf.DUMMYFUNCTION("IFERROR(TRANSPOSE(FILTER(PlannerData!X32:AC32,NOT(ISBLANK(PlannerData!X32:AC32)))))"),"")	
+AF21	excel	AF21:AG21	Talisman 1	={"",DropdownData!$BL18}	={"",DropdownData!$BL18}	
+AM21	excel		End for Light Roll	=RollTypeData!E6	=RollTypeData!E6	8
+G22	spill_cache		Strength		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),14.0)	14
+H22	excel	H22:I22	Strength	={"",DropdownData!$BL9}	={"",DropdownData!$BL9}	
+K22	excel			=PlannerData!B15	=PlannerData!B15	0
+L22	excel			=PlannerData!B24	=PlannerData!B24	14
+P22	excel	P22:Q22	Upgrade	={"",DropdownData!$BL32}	={"",DropdownData!$BL32}	
+S22	excel		Require	=IF(PlannerData!AE$32>0,PlannerData!AE$32,"-")	=IF(PlannerData!AE$32>0,PlannerData!AE$32,"-")	-
+T22	excel		Require	=IF(PlannerData!AF$32>0,PlannerData!AF$32,"-")	=IF(PlannerData!AF$32>0,PlannerData!AF$32,"-")	-
+U22	excel		Require	=IF(PlannerData!AG$32>0,PlannerData!AG$32,"-")	=IF(PlannerData!AG$32>0,PlannerData!AG$32,"-")	-
+V22	excel		Require	=IF(PlannerData!AH$32>0,PlannerData!AH$32,"-")	=IF(PlannerData!AH$32>0,PlannerData!AH$32,"-")	-
+W22	excel		Require	=IF(PlannerData!AI$32>0,PlannerData!AI$32,"-")	=IF(PlannerData!AI$32>0,PlannerData!AI$32,"-")	-
+AC22	excel		SB	=PlannerData!Y$24	=PlannerData!Y$24	-
+AF22	excel	AF22:AG22	Talisman 2	={"",DropdownData!$BL19}	={"",DropdownData!$BL19}	
+AM22	excel		Poise (In-Game)	=TRUNC(1000*PlannerData!L17,8)&" ("&ROUND(1000*PlannerData!L17,0)&")"	=TRUNC(1000*PlannerData!L17,8)&" ("&ROUND(1000*PlannerData!L17,0)&")"	0 (0)
+G23	spill_cache		Dexterity		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),13.0)	13
+H23	excel	H23:I23	Dexterity	={"",DropdownData!$BL10}	={"",DropdownData!$BL10}	
+K23	excel			=PlannerData!B16	=PlannerData!B16	0
+L23	excel			=PlannerData!B25	=PlannerData!B25	13
+P23	excel	P23:Q23	RH3 Class	={"",DropdownData!$BL33}	={"",DropdownData!$BL33}	
+AC23	excel		Holy	=IF($V24,"GB","Total")	=IF($V24,"GB","Total")	Total
+AF23	excel	AF23:AG23	Talisman 3	={"",DropdownData!$BL20}	={"",DropdownData!$BL20}	
+AM23	excel		Discovery	=ROUND(100*PlannerData!L6,0)	=ROUND(100*PlannerData!L6,0)	107
+G24	spill_cache		Intelligence		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),9.0)	9
+H24	excel	H24:I24	Intelligence	={"",DropdownData!$BL11}	={"",DropdownData!$BL11}	
+K24	excel			=PlannerData!B17	=PlannerData!B17	0
+L24	excel			=PlannerData!B26	=PlannerData!B26	9
+N24	excel		RH3 Class	=IF(PlannerData!$R$18="Invalid","Invalid","Weapon")	=IF(PlannerData!$R$18="Invalid","Invalid","Weapon")	Weapon
+P24	excel	P24:Q24		={"",DropdownData!$BL34}	={"",DropdownData!$BL34}	
+X24	excel		Physical	=IF($V24,PlannerData!AH$25,PlannerData!S$25)	=IF($V24,PlannerData!AH$25,PlannerData!S$25)	23.46
+Y24	excel		Magic	=IF($V24,PlannerData!AI$25,PlannerData!T$25)	=IF($V24,PlannerData!AI$25,PlannerData!T$25)	-
+Z24	excel		Fire	=IF($V24,PlannerData!AJ$25,PlannerData!U$25)	=IF($V24,PlannerData!AJ$25,PlannerData!U$25)	-
+AA24	excel		Lightning	=IF($V24,PlannerData!AK$25,PlannerData!V$25)	=IF($V24,PlannerData!AK$25,PlannerData!V$25)	-
+AB24	excel		Holy	=IF($V24,PlannerData!AL$25,PlannerData!W$25)	=IF($V24,PlannerData!AL$25,PlannerData!W$25)	-
+AC24	excel		SB	=IF($V24,PlannerData!$AM$25,PlannerData!$X$25)	=IF($V24,PlannerData!$AM$25,PlannerData!$X$25)	23.46
+AF24	excel	AF24:AG24	Talisman 4	={"",DropdownData!$BL21}	={"",DropdownData!$BL21}	
+G25	spill_cache		Faith		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),9.0)	9
+H25	excel	H25:I25	Faith	={"",DropdownData!$BL12}	={"",DropdownData!$BL12}	
+K25	excel			=PlannerData!B18	=PlannerData!B18	0
+L25	excel			=PlannerData!B27	=PlannerData!B27	9
+P25	excel	P25:Q25	Affinity	={"",DropdownData!$BL35}	={"",DropdownData!$BL35}	
+S25	excel		Scaling	=IF($AJ$36,PlannerData!AN$25,PlannerData!AS$25)	=IF($AJ$36,PlannerData!AN$25,PlannerData!AS$25)	D
+T25	excel		Scaling	=IF($AJ$36,PlannerData!AO$25,PlannerData!AT$25)	=IF($AJ$36,PlannerData!AO$25,PlannerData!AT$25)	D
+U25	excel		Scaling	=IF($AJ$36,PlannerData!AP$25,PlannerData!AU$25)	=IF($AJ$36,PlannerData!AP$25,PlannerData!AU$25)	-
+V25	excel		Scaling	=IF($AJ$36,PlannerData!AQ$25,PlannerData!AV$25)	=IF($AJ$36,PlannerData!AQ$25,PlannerData!AV$25)	-
+W25	excel		Scaling	=IF($AJ$36,PlannerData!AR$25,PlannerData!AW$25)	=IF($AJ$36,PlannerData!AR$25,PlannerData!AW$25)	-
+Z25	google_sheets		Status	=IFERROR(TRANSPOSE(FILTER(PlannerData!X33:AC33,NOT(ISBLANK(PlannerData!X33:AC33)))))	=IFERROR(__xludf.DUMMYFUNCTION("IFERROR(TRANSPOSE(FILTER(PlannerData!X33:AC33,NOT(ISBLANK(PlannerData!X33:AC33)))))"),"")	
+G26	spill_cache		Arcane		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),7.0)	7
+H26	excel	H26:I26	Arcane	={"",DropdownData!$BL13}	={"",DropdownData!$BL13}	
+K26	excel			=PlannerData!B19	=PlannerData!B19	0
+L26	excel			=PlannerData!B28	=PlannerData!B28	7
+P26	excel	P26:Q26	Upgrade	={"",DropdownData!$BL36}	={"",DropdownData!$BL36}	
+S26	excel		Require	=IF(PlannerData!AE$33>0,PlannerData!AE$33,"-")	=IF(PlannerData!AE$33>0,PlannerData!AE$33,"-")	-
+T26	excel		Require	=IF(PlannerData!AF$33>0,PlannerData!AF$33,"-")	=IF(PlannerData!AF$33>0,PlannerData!AF$33,"-")	-
+U26	excel		Require	=IF(PlannerData!AG$33>0,PlannerData!AG$33,"-")	=IF(PlannerData!AG$33>0,PlannerData!AG$33,"-")	-
+V26	excel		Require	=IF(PlannerData!AH$33>0,PlannerData!AH$33,"-")	=IF(PlannerData!AH$33>0,PlannerData!AH$33,"-")	-
+W26	excel		Require	=IF(PlannerData!AI$33>0,PlannerData!AI$33,"-")	=IF(PlannerData!AI$33>0,PlannerData!AI$33,"-")	-
+AC26	excel		SB	=PlannerData!Y$25	=PlannerData!Y$25	-
+AF26	excel	AF26:AG26	Great Rune	={"",DropdownData!$BL22}	={"",DropdownData!$BL22}	
+AM26	excel		Physical	=PlannerData!J7&" /"	=PlannerData!J7&" /"	79 /
+AN26	excel		Physical	=ROUND(100*(1-PlannerData!L23),3)	=ROUND(100*(1-PlannerData!L23),3)	0
+P27	excel	P27:Q27	LH1 Class	={"",DropdownData!$BL37}	={"",DropdownData!$BL37}	
+AC27	excel		Holy	=IF($V28,"GB","Total")	=IF($V28,"GB","Total")	Total
+AM27	excel		VS Strike	=PlannerData!J7&" /"	=PlannerData!J7&" /"	79 /
+AN27	excel		VS Strike	=ROUND(100*(1-PlannerData!L24),3)	=ROUND(100*(1-PlannerData!L24),3)	0
+E28	excel		Arcane	=IF($AJ$37, | "Classes", | "Optimal Class"&IF(ISBLANK(E30),,"es"))	=IF($AJ$37, | "Classes", | "Optimal Class"&IF(ISBLANK(E30),,"es"))	Optimal Class
+N28	excel		LH1 Class	=IF(PlannerData!$R$19="Invalid","Invalid","Weapon")	=IF(PlannerData!$R$19="Invalid","Invalid","Weapon")	Weapon
+P28	excel	P28:Q28		={"",DropdownData!$BL38}	={"",DropdownData!$BL38}	
+X28	excel		Physical	=IF($V28,PlannerData!AH$26,PlannerData!S$26)	=IF($V28,PlannerData!AH$26,PlannerData!S$26)	23.46
+Y28	excel		Magic	=IF($V28,PlannerData!AI$26,PlannerData!T$26)	=IF($V28,PlannerData!AI$26,PlannerData!T$26)	-
+Z28	excel		Fire	=IF($V28,PlannerData!AJ$26,PlannerData!U$26)	=IF($V28,PlannerData!AJ$26,PlannerData!U$26)	-
+AA28	excel		Lightning	=IF($V28,PlannerData!AK$26,PlannerData!V$26)	=IF($V28,PlannerData!AK$26,PlannerData!V$26)	-
+AB28	excel		Holy	=IF($V28,PlannerData!AL$26,PlannerData!W$26)	=IF($V28,PlannerData!AL$26,PlannerData!W$26)	-
+AC28	excel		SB	=IF($V28,PlannerData!$AM$26,PlannerData!$X$26)	=IF($V28,PlannerData!$AM$26,PlannerData!$X$26)	23.46
+AM28	excel		VS Slash	=PlannerData!J7&" /"	=PlannerData!J7&" /"	79 /
+AN28	excel		VS Slash	=ROUND(100*(1-PlannerData!L25),3)	=ROUND(100*(1-PlannerData!L25),3)	0
+E29	excel	E29:E38	Arcane	=TRANSPOSE(StartingClassData!A21:J21)	=TRANSPOSE(StartingClassData!A21:J21)	Wretch
+F29	excel	F29:F38	Level	=TRANSPOSE(StartingClassData!A22:J22)	=TRANSPOSE(StartingClassData!A22:J22)	1
+P29	excel	P29:Q29	Affinity	={"",DropdownData!$BL39}	={"",DropdownData!$BL39}	
+S29	excel		Scaling	=IF($AJ$36,PlannerData!AN$26,PlannerData!AS$26)	=IF($AJ$36,PlannerData!AN$26,PlannerData!AS$26)	D
+T29	excel		Scaling	=IF($AJ$36,PlannerData!AO$26,PlannerData!AT$26)	=IF($AJ$36,PlannerData!AO$26,PlannerData!AT$26)	D
+U29	excel		Scaling	=IF($AJ$36,PlannerData!AP$26,PlannerData!AU$26)	=IF($AJ$36,PlannerData!AP$26,PlannerData!AU$26)	-
+V29	excel		Scaling	=IF($AJ$36,PlannerData!AQ$26,PlannerData!AV$26)	=IF($AJ$36,PlannerData!AQ$26,PlannerData!AV$26)	-
+W29	excel		Scaling	=IF($AJ$36,PlannerData!AR$26,PlannerData!AW$26)	=IF($AJ$36,PlannerData!AR$26,PlannerData!AW$26)	-
+Z29	google_sheets		Status	=IFERROR(TRANSPOSE(FILTER(PlannerData!X34:AC34,NOT(ISBLANK(PlannerData!X34:AC34)))))	=IFERROR(__xludf.DUMMYFUNCTION("IFERROR(TRANSPOSE(FILTER(PlannerData!X34:AC34,NOT(ISBLANK(PlannerData!X34:AC34)))))"),"")	
+AF29	excel	AF29:AG29	Crystal Tear 1	={"",DropdownData!$BL23}	={"",DropdownData!$BL23}	
+AM29	excel		VS Pierce	=PlannerData!J7&" /"	=PlannerData!J7&" /"	79 /
+AN29	excel		VS Pierce	=ROUND(100*(1-PlannerData!L26),3)	=ROUND(100*(1-PlannerData!L26),3)	0
+P30	excel	P30:Q30	Upgrade	={"",DropdownData!$BL40}	={"",DropdownData!$BL40}	
+S30	excel		Require	=IF(PlannerData!AE$34>0,PlannerData!AE$34,"-")	=IF(PlannerData!AE$34>0,PlannerData!AE$34,"-")	-
+T30	excel		Require	=IF(PlannerData!AF$34>0,PlannerData!AF$34,"-")	=IF(PlannerData!AF$34>0,PlannerData!AF$34,"-")	-
+U30	excel		Require	=IF(PlannerData!AG$34>0,PlannerData!AG$34,"-")	=IF(PlannerData!AG$34>0,PlannerData!AG$34,"-")	-
+V30	excel		Require	=IF(PlannerData!AH$34>0,PlannerData!AH$34,"-")	=IF(PlannerData!AH$34>0,PlannerData!AH$34,"-")	-
+W30	excel		Require	=IF(PlannerData!AI$34>0,PlannerData!AI$34,"-")	=IF(PlannerData!AI$34>0,PlannerData!AI$34,"-")	-
+AC30	excel		SB	=PlannerData!Y$26	=PlannerData!Y$26	-
+AF30	excel	AF30:AG30	Crystal Tear 2	={"",DropdownData!$BL24}	={"",DropdownData!$BL24}	
+AM30	excel		Magic	=PlannerData!J8&" /"	=PlannerData!J8&" /"	93 /
+AN30	excel		Magic	=ROUND(100*(1-PlannerData!L27),3)	=ROUND(100*(1-PlannerData!L27),3)	0
+P31	excel	P31:Q31	LH2 Class	={"",DropdownData!$BL41}	={"",DropdownData!$BL41}	
+AC31	excel		Holy	=IF($V32,"GB","Total")	=IF($V32,"GB","Total")	Total
+AM31	excel		Fire	=PlannerData!J9&" /"	=PlannerData!J9&" /"	85 /
+AN31	excel		Fire	=ROUND(100*(1-PlannerData!L28),3)	=ROUND(100*(1-PlannerData!L28),3)	0
+N32	excel		LH2 Class	=IF(PlannerData!$R$20="Invalid","Invalid","Weapon")	=IF(PlannerData!$R$20="Invalid","Invalid","Weapon")	Weapon
+P32	excel	P32:Q32		={"",DropdownData!$BL42}	={"",DropdownData!$BL42}	
+X32	excel		Physical	=IF($V32,PlannerData!AH$27,PlannerData!S$27)	=IF($V32,PlannerData!AH$27,PlannerData!S$27)	23.46
+Y32	excel		Magic	=IF($V32,PlannerData!AI$27,PlannerData!T$27)	=IF($V32,PlannerData!AI$27,PlannerData!T$27)	-
+Z32	excel		Fire	=IF($V32,PlannerData!AJ$27,PlannerData!U$27)	=IF($V32,PlannerData!AJ$27,PlannerData!U$27)	-
+AA32	excel		Lightning	=IF($V32,PlannerData!AK$27,PlannerData!V$27)	=IF($V32,PlannerData!AK$27,PlannerData!V$27)	-
+AB32	excel		Holy	=IF($V32,PlannerData!AL$27,PlannerData!W$27)	=IF($V32,PlannerData!AL$27,PlannerData!W$27)	-
+AC32	excel		SB	=IF($V32,PlannerData!$AM$27,PlannerData!$X$27)	=IF($V32,PlannerData!$AM$27,PlannerData!$X$27)	23.46
+AM32	excel		Lightning	=PlannerData!J10&" /"	=PlannerData!J10&" /"	75 /
+AN32	excel		Lightning	=ROUND(100*(1-PlannerData!L29),3)	=ROUND(100*(1-PlannerData!L29),3)	0
+P33	excel	P33:Q33	Affinity	={"",DropdownData!$BL43}	={"",DropdownData!$BL43}	
+S33	excel		Scaling	=IF($AJ$36,PlannerData!AN$27,PlannerData!AS$27)	=IF($AJ$36,PlannerData!AN$27,PlannerData!AS$27)	D
+T33	excel		Scaling	=IF($AJ$36,PlannerData!AO$27,PlannerData!AT$27)	=IF($AJ$36,PlannerData!AO$27,PlannerData!AT$27)	D
+U33	excel		Scaling	=IF($AJ$36,PlannerData!AP$27,PlannerData!AU$27)	=IF($AJ$36,PlannerData!AP$27,PlannerData!AU$27)	-
+V33	excel		Scaling	=IF($AJ$36,PlannerData!AQ$27,PlannerData!AV$27)	=IF($AJ$36,PlannerData!AQ$27,PlannerData!AV$27)	-
+W33	excel		Scaling	=IF($AJ$36,PlannerData!AR$27,PlannerData!AW$27)	=IF($AJ$36,PlannerData!AR$27,PlannerData!AW$27)	-
+Z33	google_sheets		Status	=IFERROR(TRANSPOSE(FILTER(PlannerData!X35:AC35,NOT(ISBLANK(PlannerData!X35:AC35)))))	=IFERROR(__xludf.DUMMYFUNCTION("IFERROR(TRANSPOSE(FILTER(PlannerData!X35:AC35,NOT(ISBLANK(PlannerData!X35:AC35)))))"),"")	
+AM33	excel		Holy	=PlannerData!J11&" /"	=PlannerData!J11&" /"	89 /
+AN33	excel		Holy	=ROUND(100*(1-PlannerData!L30),3)	=ROUND(100*(1-PlannerData!L30),3)	0
+P34	excel	P34:Q34	Upgrade	={"",DropdownData!$BL44}	={"",DropdownData!$BL44}	
+S34	excel		Require	=IF(PlannerData!AE$35>0,PlannerData!AE$35,"-")	=IF(PlannerData!AE$35>0,PlannerData!AE$35,"-")	-
+T34	excel		Require	=IF(PlannerData!AF$35>0,PlannerData!AF$35,"-")	=IF(PlannerData!AF$35>0,PlannerData!AF$35,"-")	-
+U34	excel		Require	=IF(PlannerData!AG$35>0,PlannerData!AG$35,"-")	=IF(PlannerData!AG$35>0,PlannerData!AG$35,"-")	-
+V34	excel		Require	=IF(PlannerData!AH$35>0,PlannerData!AH$35,"-")	=IF(PlannerData!AH$35>0,PlannerData!AH$35,"-")	-
+W34	excel		Require	=IF(PlannerData!AI$35>0,PlannerData!AI$35,"-")	=IF(PlannerData!AI$35>0,PlannerData!AI$35,"-")	-
+AC34	excel		SB	=PlannerData!Y$27	=PlannerData!Y$27	-
+P35	excel	P35:Q35	LH3 Class	={"",DropdownData!$BL45}	={"",DropdownData!$BL45}	
+AC35	excel		Holy	=IF($V36,"GB","Total")	=IF($V36,"GB","Total")	Total
+AM35	excel		Immunity	=PlannerData!L31&" /"	=PlannerData!L31&" /"	92 /
+AN35	excel		Immunity	=PlannerData!J31	=PlannerData!J31	0
+N36	excel		LH3 Class	=IF(PlannerData!$R$21="Invalid","Invalid","Weapon")	=IF(PlannerData!$R$21="Invalid","Invalid","Weapon")	Weapon
+P36	excel	P36:Q36		={"",DropdownData!$BL46}	={"",DropdownData!$BL46}	
+X36	excel		Physical	=IF($V36,PlannerData!AH$28,PlannerData!S$28)	=IF($V36,PlannerData!AH$28,PlannerData!S$28)	23.46
+Y36	excel		Magic	=IF($V36,PlannerData!AI$28,PlannerData!T$28)	=IF($V36,PlannerData!AI$28,PlannerData!T$28)	-
+Z36	excel		Fire	=IF($V36,PlannerData!AJ$28,PlannerData!U$28)	=IF($V36,PlannerData!AJ$28,PlannerData!U$28)	-
+AA36	excel		Lightning	=IF($V36,PlannerData!AK$28,PlannerData!V$28)	=IF($V36,PlannerData!AK$28,PlannerData!V$28)	-
+AB36	excel		Holy	=IF($V36,PlannerData!AL$28,PlannerData!W$28)	=IF($V36,PlannerData!AL$28,PlannerData!W$28)	-
+AC36	excel		SB	=IF($V36,PlannerData!$AM$28,PlannerData!$X$28)	=IF($V36,PlannerData!$AM$28,PlannerData!$X$28)	23.46
+AM36	excel		Robustness	=PlannerData!L32&" /"	=PlannerData!L32&" /"	92 /
+AN36	excel		Robustness	=PlannerData!J32	=PlannerData!J32	0
+P37	excel	P37:Q37	Affinity	={"",DropdownData!$BL47}	={"",DropdownData!$BL47}	
+S37	excel		Scaling	=IF($AJ$36,PlannerData!AN$28,PlannerData!AS$28)	=IF($AJ$36,PlannerData!AN$28,PlannerData!AS$28)	D
+T37	excel		Scaling	=IF($AJ$36,PlannerData!AO$28,PlannerData!AT$28)	=IF($AJ$36,PlannerData!AO$28,PlannerData!AT$28)	D
+U37	excel		Scaling	=IF($AJ$36,PlannerData!AP$28,PlannerData!AU$28)	=IF($AJ$36,PlannerData!AP$28,PlannerData!AU$28)	-
+V37	excel		Scaling	=IF($AJ$36,PlannerData!AQ$28,PlannerData!AV$28)	=IF($AJ$36,PlannerData!AQ$28,PlannerData!AV$28)	-
+W37	excel		Scaling	=IF($AJ$36,PlannerData!AR$28,PlannerData!AW$28)	=IF($AJ$36,PlannerData!AR$28,PlannerData!AW$28)	-
+Z37	google_sheets		Status	=IFERROR(TRANSPOSE(FILTER(PlannerData!X36:AC36,NOT(ISBLANK(PlannerData!X36:AC36)))))	=IFERROR(__xludf.DUMMYFUNCTION("IFERROR(TRANSPOSE(FILTER(PlannerData!X36:AC36,NOT(ISBLANK(PlannerData!X36:AC36)))))"),"")	
+AM37	excel		Focus	=PlannerData!L33&" /"	=PlannerData!L33&" /"	92 /
+AN37	excel		Focus	=PlannerData!J33	=PlannerData!J33	0
+P38	excel	P38:Q38	Upgrade	={"",DropdownData!$BL48}	={"",DropdownData!$BL48}	
+S38	excel		Require	=IF(PlannerData!AE$36>0,PlannerData!AE$36,"-")	=IF(PlannerData!AE$36>0,PlannerData!AE$36,"-")	-
+T38	excel		Require	=IF(PlannerData!AF$36>0,PlannerData!AF$36,"-")	=IF(PlannerData!AF$36>0,PlannerData!AF$36,"-")	-
+U38	excel		Require	=IF(PlannerData!AG$36>0,PlannerData!AG$36,"-")	=IF(PlannerData!AG$36>0,PlannerData!AG$36,"-")	-
+V38	excel		Require	=IF(PlannerData!AH$36>0,PlannerData!AH$36,"-")	=IF(PlannerData!AH$36>0,PlannerData!AH$36,"-")	-
+W38	excel		Require	=IF(PlannerData!AI$36>0,PlannerData!AI$36,"-")	=IF(PlannerData!AI$36>0,PlannerData!AI$36,"-")	-
+AC38	excel		SB	=PlannerData!Y$28	=PlannerData!Y$28	-
+AM38	excel		Vitality	=PlannerData!L34&" /"	=PlannerData!L34&" /"	99 /
+AN38	excel		Vitality	=PlannerData!J34	=PlannerData!J34	0
+F42	excel	F42:G42	Memory Slots	={"",DropdownData!$BL49}	={"",DropdownData!$BL49}	
+G43	excel		Remaining	=MagicApData!B2	=MagicApData!B2	10
+F45	excel	F45:G45	Equipped Select	={"",DropdownData!$BL63}	={"",DropdownData!$BL63}	
+F48	excel	F48:G48	Spell 1	={"",DropdownData!$BL50}	={"",DropdownData!$BL50}	
+O48	excel	O48:O59	Slots	=MagicApData!AB2:AB13	=MagicApData!AB2:AB13	
+Q48	excel	Q48:Q59	FP Cost	=IF(ISBLANK(MagicApData!AC2:AC13),, | MagicApData!AC2:AC13 | &IF(MagicApData!AD2:AD13>=10," ( "," (   ") | &MagicApData!AD2:AD13 | &")" | )	=IF(ISBLANK(MagicApData!AC2:AC13),, | MagicApData!AC2:AC13 | &IF(MagicApData!AD2:AD13>=10," ( "," (   ") | &MagicApData!AD2:AD13 | &")" | )	
+R48	excel	R48:R59	Stamina Cost	=IF(ISBLANK(MagicApData!AE2:AE13),, | MagicApData!AE2:AE13 | &IF(MagicApData!AF2:AF13>=10," ( "," (   ") | &MagicApData!AF2:AF13 | &")" | )	=IF(ISBLANK(MagicApData!AE2:AE13),, | MagicApData!AE2:AE13 | &IF(MagicApData!AF2:AF13>=10," ( "," (   ") | &MagicApData!AF2:AF13 | &")" | )	
+T48	excel	T48:V59	Requirements	=IF(ISBLANK(MagicApData!AG2:AI13),, | IF(MagicApData!AG2:AI13<0,"-",MagicApData!AG2:AI13))	=IF(ISBLANK(MagicApData!AG2:AI13),, | IF(MagicApData!AG2:AI13<0,"-",MagicApData!AG2:AI13))	
+W48	excel	W48:W59	Duration	=MagicApData!AJ2:AJ13	=MagicApData!AJ2:AJ13	
+F49	excel	F49:G49	Spell 2	={"",DropdownData!$BL51}	={"",DropdownData!$BL51}	
+F50	excel	F50:G50	Spell 3	={"",DropdownData!$BL52}	={"",DropdownData!$BL52}	
+F51	excel	F51:G51	Spell 4	={"",DropdownData!$BL53}	={"",DropdownData!$BL53}	
+F52	excel	F52:G52	Spell 5	={"",DropdownData!$BL54}	={"",DropdownData!$BL54}	
+F53	excel	F53:G53	Spell 6	={"",DropdownData!$BL55}	={"",DropdownData!$BL55}	
+F54	excel	F54:G54	Spell 7	={"",DropdownData!$BL56}	={"",DropdownData!$BL56}	
+F55	excel	F55:G55	Spell 8	={"",DropdownData!$BL57}	={"",DropdownData!$BL57}	
+F56	excel	F56:G56	Spell 9	={"",DropdownData!$BL58}	={"",DropdownData!$BL58}	
+F57	excel	F57:G57	Spell 10	={"",DropdownData!$BL59}	={"",DropdownData!$BL59}	
+F58	excel	F58:G58	Spell 11	={"",DropdownData!$BL60}	={"",DropdownData!$BL60}	
+F59	excel	F59:G59	Spell 12	={"",DropdownData!$BL61}	={"",DropdownData!$BL61}	
+E62	excel	E62:E265	Spells	=MagicApData!BY2:BY129	=MagicApData!BY2:BY129	No Valid Spell/Catalyst
+Q62	excel	Q62:Q265	Total AP	=MagicApData!CF2:CF129	=MagicApData!CF2:CF129	
+R62	excel	R62:R265	Physical	=MagicApData!BZ2:BZ129	=MagicApData!BZ2:BZ129	
+S62	excel	S62:S265	Magic	=MagicApData!CA2:CA129	=MagicApData!CA2:CA129	
+T62	excel	T62:T265	Fire	=MagicApData!CB2:CB129	=MagicApData!CB2:CB129	
+U62	excel	U62:U265	Lightning	=MagicApData!CC2:CC129	=MagicApData!CC2:CC129	
+V62	excel	V62:V265	Holy	=MagicApData!CD2:CD129	=MagicApData!CD2:CD129	
+W62	excel	W62:W265	Heal	=MagicApData!CG2:CG129	=MagicApData!CG2:CG129	
+X62	excel	X62:X265	Spell Category	=MagicApData!CT2:CT129	=MagicApData!CT2:CT129	
+AE62	excel	AE62:AE265	Attack Category	=MagicApData!CU2:CU129	=MagicApData!CU2:CU129	
+AJ62	excel	AJ62:AJ265	Status	=MagicApData!CR2:CR129	=MagicApData!CR2:CR129	
+AM62	excel	AM62:AM265	Special Effect	=MagicApData!CS2:CS129	=MagicApData!CS2:CS129	

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "weapon-lookup output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "query", "resolved", "weapon_class", "match_count", "candidates",
+    "candidates_truncated", "ambiguous", "catalog_size", "infusable", "max_upgrade"
+  ],
+  "properties": {
+    "query": { "type": "string", "description": "The query as received, unmodified." },
+    "resolved": {
+      "type": "string",
+      "description": "The exact catalogue name, set only when the query matched exactly one weapon. Empty otherwise — never a guess picked from several candidates."
+    },
+    "weapon_class": {
+      "type": "string",
+      "description": "The resolved weapon's class. Empty when nothing resolved."
+    },
+    "match_count": { "type": "integer", "minimum": 0, "description": "How many weapons the query matched, before any truncation." },
+    "candidates": {
+      "type": "array",
+      "description": "Matched weapons in name order, at most 20. Ask the user which one they meant; do not choose.",
+      "items": { "type": "string" }
+    },
+    "candidates_truncated": { "type": "boolean", "description": "True when match_count exceeds the listed candidates." },
+    "ambiguous": { "type": "boolean", "description": "True when more than one weapon matched, and no answer about a single weapon can follow." },
+    "catalog_size": { "type": "integer", "minimum": 1, "description": "How many weapons were searched, after any weapon_class filter." },
+    "infusable": {
+      "type": "boolean",
+      "description": "Whether this weapon accepts affinities. False means Standard is the only legal affinity for it."
+    },
+    "max_upgrade": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 25,
+      "description": "The highest upgrade level this weapon has: 25 for smithing-stone weapons, 10 for somber, 0 for weapons that cannot be reinforced. Pass this bound to attack-power; it cannot check it itself."
+    }
+  }
+}

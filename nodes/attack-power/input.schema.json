@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "attack-power input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["weapon", "affinity", "upgrade", "strength", "dexterity", "intelligence", "faith", "arcane"],
+  "properties": {
+    "weapon": {
+      "type": "string",
+      "description": "Exact catalogue name, as returned by weapon-lookup's `resolved`."
+    },
+    "affinity": {
+      "type": "string",
+      "description": "One of the thirteen affinities. The valid list is enforced by a precondition, not here, so a wrong one refuses with the list rather than being rejected as malformed."
+    },
+    "upgrade": {
+      "type": "integer",
+      "description": "Upgrade level. The 0-25 range is a precondition; the weapon's own cap is checked by a postcondition, because a contract cannot read the weapon table."
+    },
+    "max_upgrade": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 25,
+      "description": "This weapon's upgrade cap, copied from weapon-lookup. Optional, but pass it: with it an over-cap upgrade is a refusal you can act on; without it the same mistake is only caught after the fact, as a defect."
+    },
+    "strength": { "type": "integer" },
+    "dexterity": { "type": "integer" },
+    "intelligence": { "type": "integer" },
+    "faith": { "type": "integer" },
+    "arcane": { "type": "integer" },
+    "two_hand": {
+      "type": "boolean",
+      "description": "Two-handing multiplies effective strength by 1.5. Default false."
+    },
+    "ignore_require": {
+      "type": "boolean",
+      "description": "Skip the penalty for unmet requirements. Default false. Use it to see a weapon's potential, never to answer what a build hits for today."
+    },
+    "status_buff": {
+      "type": "string",
+      "description": "A status-buff item or spell name, e.g. 'Frozen Armament'. Default 'None'."
+    }
+  }
+}

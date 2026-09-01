@@ -1,0 +1,198 @@
+SHEET: Matchmaking Calc (Beta)
+WORKBOOK: Copy of ER - Build Planner v1.19.1.xlsx
+USED RANGE: A1:L24
+NONEMPTY CELLS: 56
+FORMULA CELLS: 25
+
+This file is for an LLM that must rebuild these calculations in another language. Treat formulas as the source of truth. Cached/fallback values are only for checking a port. Skip spill_cache cells; they are not logic.
+
+MERGED RANGES (14):
+  G21:H21
+  K9:L10
+  G12:H12
+  E6:F6
+  G16:H16
+  E7:F7
+  G19:H19
+  E24:L24
+  G14:H14
+  E5:I5
+  G22:H22
+  G17:H17
+  G13:H13
+  G7:L7
+
+DATA VALIDATION / INPUTS:
+  G9  type=custom  formula1=AND(G9>=1,G9<=713,G9=TRUNC(G9),ISNUMBER(G9))
+  G10  type=custom  formula1=AND(G10>=0,G10<=25,G10=TRUNC(G10),ISNUMBER(G10))
+These cells are user inputs (dropdowns or constraints), not calculated.
+
+COMMENTS (author notes on UI / semantics):
+  E6: If you don't care about the changes listed in Changelog you can:
+    
+    Go to the UpdateData page and edit cell D2 to equal the update version
+    
+    Doing so will remove the notification until the next update
+    
+    If this says TRUE or is highlighted green with no update you can run the fix_updateBooleanFormat macro to restore proper functionality
+  E7: See Changelog for details
+    
+    If this is giving an error you can run the fix_importRangeError macro to restore proper functionality
+  E9: Will default to Planner value with no manual input
+  E10: Use standard reinforcement values; 0-25
+    
+    Will default to the maximum equivalent from Planner selections with no manual input
+
+STATIC / INPUT / LABEL CELLS (31):
+coord	value
+E5	To use this sheet: File > Make a copy
+E6	Update Available:
+E9	Level
+G9	9.0
+K9	Somber Equivalent | "Cheat Sheet"
+E10	Upgrade
+G10	0.0
+K11	Somber
+L11	Standard
+G12	Summoning
+I12	Summoned By
+K12	0.0
+E13	Summon Signs
+K13	1.0
+E14	Cipher Ring
+K14	2.0
+K15	3.0
+G16	Invading As
+I16	Invaded By
+K16	4.0
+E17	Invasions
+K17	5.0
+K18	6.0
+E19	Colosseum
+K19	7.0
+K20	8.0
+E21	Weapon Range
+K21	9.0
+E22	Somber Range
+K22	10.0
+E24	Cipher Ring ranges are untested so take those with a grain of salt
+
+CROSS-SHEET REFERENCES: MatchmakingCalcData, UpdateData
+FORMULA KINDS: excel=25
+UNIQUE PATTERNS: 15
+
+========================================================================
+FORMULA PATTERNS (fill-down compressed)
+{r} is the row of the cell. Port the template once and apply per row.
+========================================================================
+
+PATTERN 1  kind=excel  array=False  G6
+  context_label: Update Available:
+  template: =IF(UpdateData!$D$2=UpdateData!$D$5,False,True)
+  e.g. G6: =IF(UpdateData!$D$2=UpdateData!$D$5,False,True)  cached=False
+
+PATTERN 2  kind=excel  array=False  E7
+  context_label: Update Available:
+  template: =IF(G{r-1},"Link to Update:","Link to Original:")
+  e.g. E7: =IF(G6,"Link to Update:","Link to Original:")  cached='Link to Original:'
+
+PATTERN 3  kind=excel  array=False  G7
+  template: =HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P{r}gdVMkPzFQX{r-1}OsjZcfyUjdGOj7Cjk9qFAVj-U/copy",
+UpdateData!D5&" - "&IF(G{r-1},"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))
+  e.g. G7: =HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U/copy",
+UpdateData!D5&" - "&IF(G6,"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))  cached='v1.19.1 - last updated 413 days ago'
+
+PATTERN 4  kind=excel  array=True  F9
+  context_label: Level
+  array_spill_ref: F9:G9
+  template: ={"",MatchmakingCalcData!$R2}
+  e.g. F9: ={"",MatchmakingCalcData!$R2}
+
+PATTERN 5  kind=excel  array=True  F10
+  context_label: Upgrade
+  array_spill_ref: F10:G10
+  template: ={"",MatchmakingCalcData!$R3}
+  e.g. F10: ={"",MatchmakingCalcData!$R3}
+
+PATTERN 6  kind=excel  array=False  L12:L22 (11 cells)
+  context_label: Summoned By
+  template: =TRUNC(K{r}*2.5)
+  e.g. L12: =TRUNC(K12*2.5)  cached=0
+  e.g. L13: =TRUNC(K13*2.5)  cached=2
+  e.g. L14: =TRUNC(K14*2.5)  cached=5
+  ... 8 more of this pattern
+
+PATTERN 7  kind=excel  array=False  G13
+  context_label: Summon Signs
+  template: =MatchmakingCalcData!$B$19
+  e.g. G13: =MatchmakingCalcData!$B$19  cached='1 - 20'
+
+PATTERN 8  kind=excel  array=False  I13
+  context_label: Summon Signs
+  template: =MatchmakingCalcData!$C$19
+  e.g. I13: =MatchmakingCalcData!$C$19  cached='1 - 21'
+
+PATTERN 9  kind=excel  array=False  G14
+  context_label: Cipher Ring
+  template: =MatchmakingCalcData!$B$21
+  e.g. G14: =MatchmakingCalcData!$B$21  cached='1 - 25'
+
+PATTERN 10  kind=excel  array=False  I14
+  context_label: Cipher Ring
+  template: =MatchmakingCalcData!$C$21
+  e.g. I14: =MatchmakingCalcData!$C$21  cached='1 - 27'
+
+PATTERN 11  kind=excel  array=False  G17
+  context_label: Invasions
+  template: =MatchmakingCalcData!$B$24
+  e.g. G17: =MatchmakingCalcData!$B$24  cached='8 - 30'
+
+PATTERN 12  kind=excel  array=False  I17
+  context_label: Invasions
+  template: =MatchmakingCalcData!$C$24
+  e.g. I17: =MatchmakingCalcData!$C$24  cached='1 - 10'
+
+PATTERN 13  kind=excel  array=False  G19
+  context_label: Colosseum
+  template: =MatchmakingCalcData!$B$27
+  e.g. G19: =MatchmakingCalcData!$B$27  cached='1 - 21'
+
+PATTERN 14  kind=excel  array=False  G21
+  context_label: Weapon Range
+  template: =MatchmakingCalcData!$B$29
+  e.g. G21: =MatchmakingCalcData!$B$29  cached='0 - 4'
+
+PATTERN 15  kind=excel  array=False  G22
+  context_label: Somber Range
+  template: =MatchmakingCalcData!$B$30
+  e.g. G22: =MatchmakingCalcData!$B$30  cached='0 - 1'
+
+========================================================================
+ALL FORMULAS
+========================================================================
+cell	kind	array_ref	label	logic	stored	cached
+G6	excel		Update Available:	=IF(UpdateData!$D$2=UpdateData!$D$5,False,True)	=IF(UpdateData!$D$2=UpdateData!$D$5,False,True)	FALSE
+E7	excel		Update Available:	=IF(G6,"Link to Update:","Link to Original:")	=IF(G6,"Link to Update:","Link to Original:")	Link to Original:
+G7	excel			=HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U/copy", | UpdateData!D5&" - "&IF(G6,"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))	=HYPERLINK("https://docs.google.com/spreadsheets/d/19Op36P7gdVMkPzFQX6OsjZcfyUjdGOj7Cjk9qFAVj-U/copy", | UpdateData!D5&" - "&IF(G6,"updated ","last updated ")&IF(UpdateData!C5<=0,"today ",UpdateData!C5&IF(UpdateData!C5=1," day ago"," days ago")))	v1.19.1 - last updated 413 days ago
+F9	excel	F9:G9	Level	={"",MatchmakingCalcData!$R2}	={"",MatchmakingCalcData!$R2}	
+F10	excel	F10:G10	Upgrade	={"",MatchmakingCalcData!$R3}	={"",MatchmakingCalcData!$R3}	
+L12	excel		Summoned By	=TRUNC(K12*2.5)	=TRUNC(K12*2.5)	0
+G13	excel		Summon Signs	=MatchmakingCalcData!$B$19	=MatchmakingCalcData!$B$19	1 - 20
+I13	excel		Summon Signs	=MatchmakingCalcData!$C$19	=MatchmakingCalcData!$C$19	1 - 21
+L13	excel		Standard	=TRUNC(K13*2.5)	=TRUNC(K13*2.5)	2
+G14	excel		Cipher Ring	=MatchmakingCalcData!$B$21	=MatchmakingCalcData!$B$21	1 - 25
+I14	excel		Cipher Ring	=MatchmakingCalcData!$C$21	=MatchmakingCalcData!$C$21	1 - 27
+L14	excel		Standard	=TRUNC(K14*2.5)	=TRUNC(K14*2.5)	5
+L15	excel			=TRUNC(K15*2.5)	=TRUNC(K15*2.5)	7
+L16	excel		Invaded By	=TRUNC(K16*2.5)	=TRUNC(K16*2.5)	10
+G17	excel		Invasions	=MatchmakingCalcData!$B$24	=MatchmakingCalcData!$B$24	8 - 30
+I17	excel		Invasions	=MatchmakingCalcData!$C$24	=MatchmakingCalcData!$C$24	1 - 10
+L17	excel			=TRUNC(K17*2.5)	=TRUNC(K17*2.5)	12
+L18	excel			=TRUNC(K18*2.5)	=TRUNC(K18*2.5)	15
+G19	excel		Colosseum	=MatchmakingCalcData!$B$27	=MatchmakingCalcData!$B$27	1 - 21
+L19	excel			=TRUNC(K19*2.5)	=TRUNC(K19*2.5)	17
+L20	excel			=TRUNC(K20*2.5)	=TRUNC(K20*2.5)	20
+G21	excel		Weapon Range	=MatchmakingCalcData!$B$29	=MatchmakingCalcData!$B$29	0 - 4
+L21	excel			=TRUNC(K21*2.5)	=TRUNC(K21*2.5)	22
+G22	excel		Somber Range	=MatchmakingCalcData!$B$30	=MatchmakingCalcData!$B$30	0 - 1
+L22	excel			=TRUNC(K22*2.5)	=TRUNC(K22*2.5)	25

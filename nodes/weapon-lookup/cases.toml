@@ -1,0 +1,64 @@
+# Node fixtures (§7.1). Hand-written: this node's answers come from the catalogue, and the
+# behaviour worth pinning is what it does when a name does *not* resolve.
+
+[[case]]
+name = "an exact name resolves and reports its bounds"
+input = { query = "Longsword" }
+expect = { "result.resolved" = "Longsword", "result.weapon_class" = "Straight Sword", "result.infusable" = true, "result.max_upgrade" = 25 }
+
+# A somber weapon: caps at +10 and takes no affinity. These two fields are the whole reason
+# attack-power can reject an impossible upgrade instead of pricing one.
+[[case]]
+name = "a somber weapon caps at +10 and takes no affinity"
+input = { query = "moonveil" }
+expect = { "result.resolved" = "Moonveil", "result.max_upgrade" = 10, "result.infusable" = false }
+
+[[case]]
+name = "a weapon that cannot be reinforced caps at +0"
+input = { query = "meteorite staff" }
+expect = { "result.resolved" = "Meteorite Staff", "result.max_upgrade" = 0 }
+
+[[case]]
+name = "a partial name resolves"
+input = { query = "ordovis" }
+expect = { "result.resolved" = "Ordovis's Greatsword", "result.weapon_class" = "Greatsword", "result.max_upgrade" = 10 }
+
+# Apostrophes and case are normalised away before comparison.
+[[case]]
+name = "punctuation and case do not matter"
+input = { query = "ordoviss greatsword" }
+expect = { "result.resolved" = "Ordovis's Greatsword" }
+
+# The case the node exists for: ten weapons contain both words, so nothing resolves and the
+# caller has to ask which was meant.
+[[case]]
+name = "an ambiguous name resolves to nothing and lists the candidates"
+input = { query = "knight sword" }
+expect = { "result.resolved" = "", "result.ambiguous" = true, "result.match_count" = 10, "result.max_upgrade" = 0, "result.candidates[1]" = "Carian Knight's Sword" }
+
+# An exact name wins outright even though it is a substring of longer names.
+[[case]]
+name = "an exact name beats the names that contain it"
+input = { query = "Greatsword" }
+expect = { "result.resolved" = "Greatsword", "result.weapon_class" = "Colossal Sword" }
+
+[[case]]
+name = "a class filter narrows an ambiguous query"
+input = { query = "katana", weapon_class = "Katana" }
+expect = { "result.catalog_size" = 10 }
+
+# Matching nothing is a fact about the catalogue, not an error.
+[[case]]
+name = "a weapon that is not in the game matches nothing"
+input = { query = "buster sword" }
+expect = { "result.resolved" = "", "result.match_count" = 0, "result.ambiguous" = false, "result.catalog_size" = 570 }
+
+[[case]]
+name = "a query too short to resolve anything is refused"
+input = { query = "gs" }
+expect_code = 11
+
+[[case]]
+name = "a missing query is a caller error, not a refusal"
+input = { }
+expect_code = 10

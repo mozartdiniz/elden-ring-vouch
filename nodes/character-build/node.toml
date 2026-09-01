@@ -1,0 +1,153 @@
+name = "character-build"
+version = "0.1.0"
+
+purpose = "Turn a starting class and the stats a user named into a complete build: full spread, rune level, HP, FP, stamina and equip load"
+
+use_when = [
+  "the user describes a build by some of its stats — 'strength and faith', '60 vigor' — and the rest are unstated",
+  "the question mentions a rune level, or asks what level a spread costs",
+  "you need a stat spread to pass to attack-power and the user did not give all five",
+  "the question asks which starting class suits a build",
+]
+not_for = [
+  "attack rating or weapon scaling — pass this node's `stats` to attack-power",
+  "armour, talismans and poise; this reports the bare character",
+  "deciding how to spend levels for the user, which is a judgement and not a calculation",
+]
+
+run = ["python3", "build.py"]
+timeout_ms = 30000
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/StartingClassData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/PlayerCommonParam.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.starting_class]
+guidance = "Vagabond, Warrior, Hero, Bandit, Astrologer, Prophet, Samurai, Prisoner, Confessor, or Wretch. If the user did not name one, ask — or use Wretch, whose stats are all equal, and say that is what you did."
+
+[params.vigor]
+guidance = "Omit any stat the user did not name. It comes back as the class minimum, and the result says which stats that happened to, so an answer can be honest about what was assumed. Never invent a value to fill the gap."
+
+[params.mind]
+guidance = "Omit unless the user named it."
+
+[params.endurance]
+guidance = "Omit unless the user named it."
+
+[params.strength]
+guidance = "Omit unless the user named it."
+
+[params.dexterity]
+guidance = "Omit unless the user named it."
+
+[params.intelligence]
+guidance = "Omit unless the user named it."
+
+[params.faith]
+guidance = "Omit unless the user named it."
+
+[params.arcane]
+guidance = "Omit unless the user named it."
+
+[[requires]]
+expr = '''
+input.starting_class in [
+  "Vagabond", "Warrior", "Hero", "Bandit", "Astrologer",
+  "Prophet", "Samurai", "Prisoner", "Confessor", "Wretch"
+]
+'''
+message = "unknown starting class; the ten are Vagabond, Warrior, Hero, Bandit, Astrologer, Prophet, Samurai, Prisoner, Confessor and Wretch"
+
+[[requires]]
+expr = """
+(!has(input.vigor) || (input.vigor >= 1 && input.vigor <= 99)) &&
+(!has(input.mind) || (input.mind >= 1 && input.mind <= 99)) &&
+(!has(input.endurance) || (input.endurance >= 1 && input.endurance <= 99)) &&
+(!has(input.strength) || (input.strength >= 1 && input.strength <= 99)) &&
+(!has(input.dexterity) || (input.dexterity >= 1 && input.dexterity <= 99)) &&
+(!has(input.intelligence) || (input.intelligence >= 1 && input.intelligence <= 99)) &&
+(!has(input.faith) || (input.faith >= 1 && input.faith <= 99)) &&
+(!has(input.arcane) || (input.arcane >= 1 && input.arcane <= 99))
+"""
+message = "every stat given must be between 1 and 99; omit a stat entirely rather than passing 0 for one the user did not name"
+
+# No stat may come back below the class's own floor — that is what a starting class is.
+[[ensures]]
+expr = """
+result.stats.vigor >= result.class_minimums.vigor &&
+result.stats.mind >= result.class_minimums.mind &&
+result.stats.endurance >= result.class_minimums.endurance &&
+result.stats.strength >= result.class_minimums.strength &&
+result.stats.dexterity >= result.class_minimums.dexterity &&
+result.stats.intelligence >= result.class_minimums.intelligence &&
+result.stats.faith >= result.class_minimums.faith &&
+result.stats.arcane >= result.class_minimums.arcane
+"""
+
+# A stat the caller named comes back exactly as given — unless it was below the class floor,
+# in which case it comes back at the floor *and* is named in stats_raised_to_class_minimum.
+# This node fills gaps and reports substitutions; it never quietly moves a chosen number.
+[[ensures]]
+expr = """
+(!has(input.strength) || result.stats.strength == input.strength || "strength" in result.stats_raised_to_class_minimum) &&
+(!has(input.faith) || result.stats.faith == input.faith || "faith" in result.stats_raised_to_class_minimum) &&
+(!has(input.dexterity) || result.stats.dexterity == input.dexterity || "dexterity" in result.stats_raised_to_class_minimum) &&
+(!has(input.intelligence) || result.stats.intelligence == input.intelligence || "intelligence" in result.stats_raised_to_class_minimum) &&
+(!has(input.arcane) || result.stats.arcane == input.arcane || "arcane" in result.stats_raised_to_class_minimum) &&
+(!has(input.vigor) || result.stats.vigor == input.vigor || "vigor" in result.stats_raised_to_class_minimum) &&
+(!has(input.mind) || result.stats.mind == input.mind || "mind" in result.stats_raised_to_class_minimum) &&
+(!has(input.endurance) || result.stats.endurance == input.endurance || "endurance" in result.stats_raised_to_class_minimum)
+"""
+
+# A raised stat has to be one the caller actually named, and has to have landed on the floor.
+# Without this the escape hatch above would excuse any substitution the node cared to make.
+[[ensures]]
+expr = """
+result.stats_raised_to_class_minimum.all(s,
+  s in result.stats_given &&
+  (s != "strength" || result.stats.strength == result.class_minimums.strength) &&
+  (s != "faith" || result.stats.faith == result.class_minimums.faith) &&
+  (s != "dexterity" || result.stats.dexterity == result.class_minimums.dexterity) &&
+  (s != "intelligence" || result.stats.intelligence == result.class_minimums.intelligence) &&
+  (s != "arcane" || result.stats.arcane == result.class_minimums.arcane) &&
+  (s != "vigor" || result.stats.vigor == result.class_minimums.vigor) &&
+  (s != "mind" || result.stats.mind == result.class_minimums.mind) &&
+  (s != "endurance" || result.stats.endurance == result.class_minimums.endurance)
+)
+"""
+
+# Rune level is the class's own starting level plus every point spent on top of it. This is
+# the arithmetic a reader would otherwise have to redo to check the answer, so the node has to
+# be internally consistent about it.
+[[ensures]]
+expr = "result.level == result.class_level + result.points_spent"
+
+# Every stat is either one the caller gave or one filled from the class — never both, never
+# neither. This is what lets an answer say which figures nobody chose.
+[[ensures]]
+expr = "size(result.stats_given) + size(result.stats_from_class_minimum) == 8"
+
+[[ensures]]
+expr = "result.optimal_class_level <= result.level"
+
+[[ensures]]
+expr = "result.levels_saved_by_optimal_class == result.level - result.optimal_class_level"
+
+[[ensures]]
+expr = "result.hp > 0 && result.fp > 0 && result.stamina > 0 && result.equip_load > 0.0"
+
+[[examples]]
+ask = "I want a strength and faith build at 60/60. What level is that?"
+call = { starting_class = "Hero", strength = 60, faith = 60 }
+
+[[examples]]
+ask = "what does an RL150 Astrologer with 60 intelligence and 40 vigor look like?"
+call = { starting_class = "Astrologer", intelligence = 60, vigor = 40 }

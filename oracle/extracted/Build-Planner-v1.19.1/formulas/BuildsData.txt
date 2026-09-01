@@ -1,0 +1,1653 @@
+SHEET: BuildsData
+WORKBOOK: Copy of ER - Build Planner v1.19.1.xlsx
+USED RANGE: A1:AQ706
+NONEMPTY CELLS: 6233
+FORMULA CELLS: 259
+
+This file is for an LLM that must rebuild these calculations in another language. Treat formulas as the source of truth. Cached/fallback values are only for checking a port. Skip spill_cache cells; they are not logic.
+
+STATIC / INPUT / LABEL CELLS (5974):
+coord	value
+D1	Type
+E1	Planner
+F1	ID
+K1	Type
+L1	ID
+M1	Translation
+N1	Affinity
+O1	Upgrade
+P1	Class
+R1	Starting Class
+S1	ID
+U1	Armor
+V1	ID
+X1	Talisman
+Y1	ID
+AA1	Great Rune
+AB1	ID
+AD1	Crystal Tear
+AE1	ID
+AH1	Weapon
+AI1	ID
+AK1	isUnique
+AM1	Affinity
+AN1	ID
+AP1	Magic
+AQ1	ID
+A2	Build Name
+D2	Starting Class
+H2	Planner Selection Build ID
+K2	Starting Class
+R2	Vagabond
+S2	10.0
+U2	Empty
+V2	0.0
+X2	Empty
+Y2	0.0
+AA2	Empty
+AB2	0.0
+AD2	Empty
+AE2	0.0
+AG2	Dagger
+AH2	Dagger
+AI2	1000000.0
+AJ2	TRUE
+AK2	FALSE
+AN2	0.0
+AP2	Empty
+AQ2	0.0
+A3	Build ID
+D3	Vigor
+K3	Vigor
+R3	Warrior
+S3	20.0
+V3	810000.0
+Y3	1000.0
+AB3	191.0
+AE3	11002.0
+AG3	Dagger
+AH3	Parrying Dagger
+AI3	1020000.0
+AJ3	TRUE
+AK3	FALSE
+AM3	Heavy
+AN3	100.0
+AQ3	4000.0
+A4	Filter
+D4	Mind
+H4	Default Build ID
+I4	0xA-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x1ADB0-0x1ADB0-0x1ADB0-0x1ADB0-0x1ADB0-0x1ADB0-0xA-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-…
+K4	Mind
+R4	Hero
+S4	30.0
+U4	Commoner's Headband (Altered)
+V4	811000.0
+X4	Crimson Amber Medallion +1
+Y4	1001.0
+AA4	Rykard's Great Rune
+AB4	194.0
+AD4	Crimson Crystal Tear 2
+AE4	11003.0
+AG4	Dagger
+AH4	Miséricorde
+AI4	1030000.0
+AJ4	TRUE
+AK4	FALSE
+AM4	Keen
+AN4	200.0
+AP4	Swift Glintstone Shard
+AQ4	4010.0
+A5	Edit Flag
+D5	Endurance
+K5	Endurance
+R5	Bandit
+S5	40.0
+U5	Aristocrat Headband
+V5	370000.0
+X5	Crimson Amber Medallion +2
+Y5	1002.0
+AA5	Radahn's Great Rune
+AB5	192.0
+AD5	Crimsonspill Crystal Tear
+AE5	11000.0
+AG5	Dagger
+AH5	Great Knife
+AI5	1090000.0
+AJ5	TRUE
+AK5	FALSE
+AM5	Quality
+AN5	300.0
+AP5	Great Glintstone Shard
+AQ5	4001.0
+A6	Selected Row
+D6	Strength
+H6	Dropdown Selected Build ID
+K6	Strength
+R6	Astrologer
+S6	50.0
+U6	Aristocrat Hat
+V6	380000.0
+X6	Crimson Amber Medallion +3
+Y6	7000.0
+AA6	Morgott's Great Rune
+AB6	193.0
+AD6	Crimsonburst Crystal Tear
+AE6	11009.0
+AG6	Dagger
+AH6	Bloodstained Dagger
+AI6	1140000.0
+AJ6	TRUE
+AK6	FALSE
+AM6	Fire
+AN6	400.0
+AP6	Glintstone Cometshard
+AQ6	4020.0
+A7	Script Used Flag
+B7	FALSE
+D7	Dexterity
+K7	Dexterity
+R7	Prophet
+S7	60.0
+U7	Old Aristocrat Cowl
+V7	390000.0
+X7	Crimson Seed Talisman
+Y7	5000.0
+AA7	Mohg's Great Rune
+AB7	195.0
+AD7	Crimsonburst Dried Tear
+AE7	2011010.0
+AG7	Dagger
+AH7	Erdsteel Dagger
+AI7	1150000.0
+AJ7	TRUE
+AK7	FALSE
+AM7	Flame Art
+AN7	500.0
+AP7	Glintstone Cometshard
+AQ7	4020.0
+D8	Intelligence
+K8	Intelligence
+R8	Samurai
+S8	70.0
+U8	Page Hood
+V8	220000.0
+X8	Crimson Seed Talisman +1
+Y8	7140.0
+AA8	Malenia's Great Rune
+AB8	196.0
+AD8	Cerulean Crystal Tear 1
+AE8	11004.0
+AG8	Dagger
+AH8	Fire Knight's Shortsword
+AI8	1510000.0
+AJ8	TRUE
+AK8	FALSE
+AM8	Lightning
+AN8	600.0
+AP8	Comet
+AQ8	4021.0
+A9	Disable Class Load
+B9	TRUE
+D9	Faith
+K9	Faith
+R9	Prisoner
+S9	80.0
+U9	High Page Hood
+V9	1990000.0
+X9	Blessed Dew Talisman
+Y9	5020.0
+AD9	Cerulean Crystal Tear 2
+AE9	11005.0
+AG9	Dagger
+AH9	Wakizashi
+AI9	1100000.0
+AJ9	TRUE
+AK9	FALSE
+AM9	Sacred
+AN9	700.0
+AP9	Comet
+AQ9	4021.0
+D10	Arcane
+K10	Arcane
+R10	Confessor
+S10	90.0
+U10	Guardian Mask
+V10	330000.0
+X10	Cerulean Amber Medallion
+Y10	1010.0
+AA10	Godrick's Great Rune
+AB10	10.0
+AD10	Greenspill Crystal Tear
+AE10	11001.0
+AG10	Dagger
+AH10	Main-gauche
+AI10	1500000.0
+AJ10	TRUE
+AK10	FALSE
+AM10	Magic
+AN10	800.0
+AP10	Comet
+AQ10	4021.0
+D11	Head
+K11	Head
+R11	Wretch
+S11	100.0
+U11	Festive Hood
+V11	800000.0
+X11	Cerulean Amber Medallion +1
+Y11	1011.0
+AA11	Rykard's Great Rune
+AB11	20.0
+AD11	Greenburst Crystal Tear
+AE11	11010.0
+AG11	Dagger
+AH11	Celebrant's Sickle
+AI11	1060000.0
+AJ11	TRUE
+AK11	FALSE
+AM11	Cold
+AN11	900.0
+AP11	Shard Spiral
+AQ11	4030.0
+D12	Body
+E12	Empty
+K12	Body
+U12	Festive Hood (Altered)
+V12	801000.0
+X12	Cerulean Amber Medallion +2
+Y12	1012.0
+AA12	Radahn's Great Rune
+AB12	30.0
+AD12	Strength-knot Crystal Tear
+AE12	11021.0
+AG12	Dagger
+AH12	Ivory Sickle
+AI12	1130000.0
+AJ12	TRUE
+AK12	FALSE
+AM12	Poison
+AN12	1000.0
+AP12	Shard Spiral
+AQ12	4030.0
+D13	Arms
+E13	Empty
+K13	Arms
+U13	Blue Festive Hood
+V13	802000.0
+X13	Cerulean Amber Medallion +3
+Y13	7010.0
+AA13	Morgott's Great Rune
+AB13	40.0
+AD13	Dexterity-knot Crystal Tear
+AE13	11022.0
+AG13	Dagger
+AH13	Crystal Knife
+AI13	1050000.0
+AJ13	TRUE
+AK13	FALSE
+AM13	Blood
+AN13	1100.0
+AP13	Glintstone Stars
+AQ13	4040.0
+D14	Legs
+E14	Empty
+K14	Legs
+U14	Guilty Hood
+V14	160000.0
+X14	Cerulean Seed Talisman
+Y14	5010.0
+AA14	Mohg's Great Rune
+AB14	50.0
+AD14	Intelligence-knot Crystal Tear
+AE14	11023.0
+AG14	Dagger
+AH14	Scorpion's Stinger
+AI14	1080000.0
+AJ14	TRUE
+AK14	TRUE
+AM14	Occult
+AN14	1200.0
+AP14	Glintstone Stars
+AQ14	4040.0
+D15	Talisman 1
+K15	Talisman 1
+U15	Prisoner Iron Mask
+V15	890000.0
+X15	Cerulean Seed Talisman +1
+Y15	7150.0
+AA15	Malenia's Great Rune
+AB15	60.0
+AD15	Faith-knot Crystal Tear
+AE15	11024.0
+AG15	Dagger
+AH15	Cinquedea
+AI15	1110000.0
+AJ15	TRUE
+AK15	TRUE
+AP15	Glintstone Stars
+AQ15	4040.0
+D16	Talisman 2
+K16	Talisman 2
+U16	Blackguard's Iron Mask
+V16	891000.0
+X16	Blessed Blue Dew Talisman
+Y16	8000.0
+AD16	Opaline Hardtear
+AE16	11011.0
+AG16	Dagger
+AH16	Glintstone Kris
+AI16	1070000.0
+AJ16	TRUE
+AK16	TRUE
+AP16	Glintstone Stars
+AQ16	4040.0
+D17	Talisman 3
+K17	Talisman 3
+U17	Bloodsoaked Mask
+V17	964000.0
+X17	Talisman of Lord's Bestowal
+Y17	8200.0
+AD17	Speckled Hardtear
+AE17	11006.0
+AG17	Dagger
+AH17	Reduvia
+AI17	1040000.0
+AJ17	TRUE
+AK17	TRUE
+AP17	Glintstone Stars
+AQ17	4040.0
+D18	Talisman 4
+K18	Talisman 4
+U18	Caterpillar Mask
+V18	5070000.0
+X18	Viridian Amber Medallion
+Y18	1020.0
+AD18	Leaden Hardtear
+AE18	11018.0
+AG18	Dagger
+AH18	Blade of Calling
+AI18	1160000.0
+AJ18	TRUE
+AK18	TRUE
+AP18	Glintstone Stars
+AQ18	4040.0
+D19	Great Rune
+K19	Great Rune
+U19	Black Dumpling
+V19	2020000.0
+X19	Viridian Amber Medallion +1
+Y19	1021.0
+AD19	Deflecting Hardtear
+AE19	2011070.0
+AG19	Dagger
+AH19	Black Knife
+AI19	1010000.0
+AJ19	TRUE
+AK19	TRUE
+AP19	Star Shower
+AQ19	4050.0
+A20	Starting Class
+D20	RH1 Weapon
+K20	RH1 Weapon
+U20	Mushroom Head
+V20	1130000.0
+X20	Viridian Amber Medallion +2
+Y20	1022.0
+AD20	Magic-Shrouding Cracked Tear
+AE20	11029.0
+AG20	Throwing Blade
+AH20	Smithscript Dagger
+AI20	63500000.0
+AJ20	TRUE
+AK20	FALSE
+AP20	Star Shower
+AQ20	4050.0
+A21	Vigor
+D21	RH1 Affinity
+K21	RH2 Weapon
+U21	Mushroom Crown
+V21	2010000.0
+X21	Viridian Amber Medallion +3
+... 5574 more static cells omitted (see CSV)
+
+CROSS-SHEET REFERENCES: ArmorData, Builds, CrystalTearData, GreatRuneData, MagicData, Planner, PlannerData, TalismanData, WeaponData
+FORMULA KINDS: excel=212, google_sheets=3, spill_cache=44
+UNIQUE PATTERNS: 139
+
+========================================================================
+FORMULA PATTERNS (fill-down compressed)
+{r} is the row of the cell. Port the template once and apply per row.
+========================================================================
+
+PATTERN 1  kind=excel  array=True  AG1
+  context_label: ID
+  array_spill_ref: AG1:AI571
+  template: =WeaponData!$A:$C
+  e.g. AG1: =WeaponData!$A:$C  cached='Weapon Class'
+
+PATTERN 2  kind=excel  array=True  AJ1
+  context_label: ID
+  array_spill_ref: AJ1:AK571
+  template: =WeaponData!$E:$F
+  e.g. AJ1: =WeaponData!$E:$F  cached='isReinforce'
+
+PATTERN 3  kind=excel  array=False  B2
+  context_label: Build Name
+  template: =IFERROR(IFS(
+OR(LOWER(Planner!G11)="none",Planner!G11="--------------------------------------------------------------------------------"),,
+LEFT(LOWER(Planner!G11),10)="[default] ",RIGHT(Planner!G11,LEN(Planner!G11)-10)
+),Planner!G11)
+  e.g. B2: =IFERROR(IFS(
+OR(LOWER(Planner!G11)="none",Planner!G11="--------------------------------------------------------------------------------"),,
+LEFT(LOWER(Planner!G11),10)="[default] ",RIGHT(Planner!G11,LEN(Planner!G11)-10)
+),Planner!G11)
+
+PATTERN 4  kind=excel  array=False  E2
+  context_label: Starting Class
+  template: =Planner!$G$14
+  e.g. E2: =Planner!$G$14  cached='Vagabond'
+
+PATTERN 5  kind=excel  array=False  F2
+  context_label: Starting Class
+  template: =DEC{r}HEX(
+IFERROR(
+VLOOKUP($E{r},$R:$S,2,False),
+10)
+)
+  e.g. F2: =DEC2HEX(
+IFERROR(
+VLOOKUP($E2,$R:$S,2,False),
+10)
+)  cached='A'
+
+PATTERN 6  kind=google_sheets  array=False  I2
+  context_label: Planner Selection Build ID
+  template: ="0x"&SUBSTITUTE(JOIN("-",FILTER($F$2:$F1206,NOT(ISBLANK($F$2:$F1206)))),"-","-0x")
+  note: Original Google Sheets formula recovered from DUMMYFUNCTION wrapper. Functions like FILTER, QUERY, UNIQUE, FLATTEN, IMPORTRANGE, GOOGLETRANSLATE are Sheets-only and must be reimplemented.
+  e.g. I2: ="0x"&SUBSTITUTE(JOIN("-",FILTER($F$2:$F1206,NOT(ISBLANK($F$2:$F1206)))),"-","-0x")  cached='0xA-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x1ADB0-0x1ADB0-0x1ADB0-0x1ADB0-0x1ADB0-0x1ADB0-0xA-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0'
+
+PATTERN 7  kind=google_sheets  array=False  L2
+  context_label: Starting Class
+  template: =TRANSPOSE(ARRAYFORMULA(HEX{r}DEC(SPLIT($I$6,"-"))))
+  note: Original Google Sheets formula recovered from DUMMYFUNCTION wrapper. Functions like FILTER, QUERY, UNIQUE, FLATTEN, IMPORTRANGE, GOOGLETRANSLATE are Sheets-only and must be reimplemented.
+  e.g. L2: =TRANSPOSE(ARRAYFORMULA(HEX2DEC(SPLIT($I$6,"-"))))  cached=10
+
+PATTERN 8  kind=excel  array=True  M2
+  context_label: Starting Class
+  array_spill_ref: M2
+  template: =INDEX($R:$R,MATCH($L{r},$S:$S,0))
+  e.g. M2: =INDEX($R:$R,MATCH($L2,$S:$S,0))  cached='Vagabond'
+
+PATTERN 9  kind=excel  array=True  AM2
+  context_label: Dagger
+  array_spill_ref: AM2:AN571
+  template: =WeaponData!$O$2:$P1206
+  e.g. AM2: =WeaponData!$O$2:$P1206  cached='Standard'
+
+PATTERN 10  kind=excel  array=False  B3
+  context_label: Build ID
+  template: =SUBSTITUTE(I{r-1},"0x",)
+  e.g. B3: =SUBSTITUTE(I2,"0x",)  cached='A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0'
+
+PATTERN 11  kind=excel  array=True  E3
+  context_label: Vigor
+  array_spill_ref: E3:E10
+  template: =Planner!$I$19:$I$26
+  e.g. E3: =Planner!$I$19:$I$26
+
+PATTERN 12  kind=excel  array=False  F3
+  context_label: Vigor
+  template: =DEC{r-1}HEX(
+IF(ISBLANK($E{r}),0,$E{r})
+)
+  e.g. F3: =DEC2HEX(
+IF(ISBLANK($E3),0,$E3)
+)  cached='0'
+
+PATTERN 13  kind=spill_cache  array=False  L3:L46 (37 cells)
+  context_label: Vigor
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. L3: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)  cached=0
+  e.g. L4: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)  cached=0
+  e.g. L5: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)  cached=0
+  ... 34 more of this pattern
+
+PATTERN 14  kind=excel  array=False  M3:M10 (8 cells)
+  context_label: Vigor
+  template: =IF($L{r}>0,
+$L{r},
+)
+  e.g. M3: =IF($L3>0,
+$L3,
+)
+  e.g. M4: =IF($L4>0,
+$L4,
+)
+  e.g. M5: =IF($L5>0,
+$L5,
+)
+  ... 5 more of this pattern
+
+PATTERN 15  kind=excel  array=True  U3
+  context_label: Warrior
+  array_spill_ref: U3:V706
+  template: =ArmorData!$B$2:$C1206
+  e.g. U3: =ArmorData!$B$2:$C1206  cached="Commoner's Headband"
+
+PATTERN 16  kind=excel  array=True  X3
+  context_label: Empty
+  array_spill_ref: X3:Y156
+  template: =TalismanData!$A$2:$B1206
+  e.g. X3: =TalismanData!$A$2:$B1206  cached='Crimson Amber Medallion'
+
+PATTERN 17  kind=excel  array=True  AA3
+  context_label: Empty
+  array_spill_ref: AA3:AB15
+  template: =GreatRuneData!$A$2:$B1206
+  e.g. AA3: =GreatRuneData!$A$2:$B1206  cached="Godrick's Great Rune"
+
+PATTERN 18  kind=excel  array=True  AD3
+  context_label: Empty
+  array_spill_ref: AD3:AE42
+  template: =CrystalTearData!$A$2:$C1206
+  e.g. AD3: =CrystalTearData!$A$2:$C1206  cached='Crimson Crystal Tear 1'
+
+PATTERN 19  kind=excel  array=True  AP3
+  context_label: Heavy
+  array_spill_ref: AP3:AQ525
+  template: =MagicData!$B$2:$C1206
+  e.g. AP3: =MagicData!$B$2:$C1206  cached='Glintstone Pebble'
+
+PATTERN 20  kind=google_sheets  array=False  B4
+  context_label: Filter
+  template: =IFERROR(FILTER(Builds!A{r-1}:A1206,Builds!A{r-1}:A1206=B2,NOT(ISBLANK(Builds!A{r-1}:A1206))))
+  note: Original Google Sheets formula recovered from DUMMYFUNCTION wrapper. Functions like FILTER, QUERY, UNIQUE, FLATTEN, IMPORTRANGE, GOOGLETRANSLATE are Sheets-only and must be reimplemented.
+  e.g. B4: =IFERROR(FILTER(Builds!A3:A1206,Builds!A3:A1206=B2,NOT(ISBLANK(Builds!A3:A1206))))
+
+PATTERN 21  kind=excel  array=False  F4:F10 (7 cells)
+  context_label: Mind
+  template: =DEC2HEX(
+IF(ISBLANK($E{r}),0,$E{r})
+)
+  e.g. F4: =DEC2HEX(
+IF(ISBLANK($E4),0,$E4)
+)  cached='0'
+  e.g. F5: =DEC2HEX(
+IF(ISBLANK($E5),0,$E5)
+)  cached='0'
+  e.g. F6: =DEC2HEX(
+IF(ISBLANK($E6),0,$E6)
+)  cached='0'
+  ... 4 more of this pattern
+
+PATTERN 22  kind=excel  array=False  B5
+  context_label: Edit Flag
+  template: =NOT(ISBLANK(B{r-1}))
+  e.g. B5: =NOT(ISBLANK(B4))  cached=False
+
+PATTERN 23  kind=excel  array=False  B6
+  context_label: Selected Row
+  template: =IF(B{r-1},MATCH(B2,Builds!A3:A1206,0)+2,"none")
+  e.g. B6: =IF(B5,MATCH(B2,Builds!A3:A1206,0)+2,"none")  cached='none'
+
+PATTERN 24  kind=excel  array=False  I6
+  context_label: Dropdown Selected Build ID
+  template: =IFERROR("0x"&SUBSTITUTE(SUBSTITUTE(VLOOKUP(Planner!$G$10,Builds!$A$3:$B1206,2,False),"0x",),"-","-0x"),I4)
+  e.g. I6: =IFERROR("0x"&SUBSTITUTE(SUBSTITUTE(VLOOKUP(Planner!$G$10,Builds!$A$3:$B1206,2,False),"0x",),"-","-0x"),I4)  cached='0xA-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x1ADB0-0x1ADB0-0x1ADB0-0x1ADB0-0x1ADB0-0x1ADB0-0xA-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0'
+
+PATTERN 25  kind=excel  array=True  E11
+  context_label: Head
+  array_spill_ref: E11:E14
+  template: =Planner!$AG$15:$AG$18
+  e.g. E11: =Planner!$AG$15:$AG$18  cached='Empty'
+
+PATTERN 26  kind=excel  array=False  F11:F14 (4 cells)
+  context_label: Head
+  template: =DEC2HEX(
+IFERROR(
+VLOOKUP($E{r},$U:$V,2,False),
+0)
+)
+  e.g. F11: =DEC2HEX(
+IFERROR(
+VLOOKUP($E11,$U:$V,2,False),
+0)
+)  cached='0'
+  e.g. F12: =DEC2HEX(
+IFERROR(
+VLOOKUP($E12,$U:$V,2,False),
+0)
+)  cached='0'
+  e.g. F13: =DEC2HEX(
+IFERROR(
+VLOOKUP($E13,$U:$V,2,False),
+0)
+)  cached='0'
+  ... 1 more of this pattern
+
+PATTERN 27  kind=excel  array=False  M11:M14 (4 cells)
+  context_label: Head
+  template: =INDEX($U:$U,MATCH($L{r},$V:$V,0))
+  e.g. M11: =INDEX($U:$U,MATCH($L11,$V:$V,0))  cached='Empty'
+  e.g. M12: =INDEX($U:$U,MATCH($L12,$V:$V,0))  cached='Empty'
+  e.g. M13: =INDEX($U:$U,MATCH($L13,$V:$V,0))  cached='Empty'
+  ... 1 more of this pattern
+
+PATTERN 28  kind=excel  array=True  E15
+  context_label: Talisman 1
+  array_spill_ref: E15:E18
+  template: =PlannerData!$N$2:$N$5
+  e.g. E15: =PlannerData!$N$2:$N$5  cached='Empty'
+
+PATTERN 29  kind=excel  array=False  F15:F18 (4 cells)
+  context_label: Talisman 1
+  template: =DEC2HEX(
+IFERROR(
+VLOOKUP($E{r},$X:$Y,2,False),
+0)
+)
+  e.g. F15: =DEC2HEX(
+IFERROR(
+VLOOKUP($E15,$X:$Y,2,False),
+0)
+)  cached='0'
+  e.g. F16: =DEC2HEX(
+IFERROR(
+VLOOKUP($E16,$X:$Y,2,False),
+0)
+)  cached='0'
+  e.g. F17: =DEC2HEX(
+IFERROR(
+VLOOKUP($E17,$X:$Y,2,False),
+0)
+)  cached='0'
+  ... 1 more of this pattern
+
+PATTERN 30  kind=excel  array=False  M15:M18 (4 cells)
+  context_label: Talisman 1
+  template: =INDEX($X:$X,MATCH($L{r},$Y:$Y,0))
+  e.g. M15: =INDEX($X:$X,MATCH($L15,$Y:$Y,0))  cached='Empty'
+  e.g. M16: =INDEX($X:$X,MATCH($L16,$Y:$Y,0))  cached='Empty'
+  e.g. M17: =INDEX($X:$X,MATCH($L17,$Y:$Y,0))  cached='Empty'
+  ... 1 more of this pattern
+
+PATTERN 31  kind=excel  array=False  E19
+  context_label: Great Rune
+  template: =Planner!$AG$26
+  e.g. E19: =Planner!$AG$26  cached='Empty'
+
+PATTERN 32  kind=excel  array=False  F19
+  context_label: Great Rune
+  template: =DEC2HEX(
+IFERROR(
+VLOOKUP($E{r},$AA:$AB,2,False),
+0)
+)
+  e.g. F19: =DEC2HEX(
+IFERROR(
+VLOOKUP($E19,$AA:$AB,2,False),
+0)
+)  cached='0'
+
+PATTERN 33  kind=excel  array=True  M19
+  context_label: Great Rune
+  array_spill_ref: M19
+  template: =INDEX($AA:$AA,MATCH($L{r},$AB:$AB,0))
+  e.g. M19: =INDEX($AA:$AA,MATCH($L19,$AB:$AB,0))  cached='Empty'
+
+PATTERN 34  kind=excel  array=False  B20
+  context_label: Starting Class
+  template: =M2
+  e.g. B20: =M2  cached='Vagabond'
+
+PATTERN 35  kind=excel  array=False  E20
+  context_label: RH1 Weapon
+  template: =PlannerData!$R$2
+  e.g. E20: =PlannerData!$R$2  cached='Unarmed'
+
+PATTERN 36  kind=excel  array=False  F20
+  context_label: RH1 Weapon
+  template: =DEC2HEX(
+IFERROR(
+VLOOKUP($E{r},$AH:$AI,2,False)+E{r+1}+E22,
+110000)
+)
+  e.g. F20: =DEC2HEX(
+IFERROR(
+VLOOKUP($E20,$AH:$AI,2,False)+E21+E22,
+110000)
+)  cached='1ADB0'
+
+PATTERN 37  kind=spill_cache  array=False  L20:L25 (6 cells)
+  context_label: RH1 Weapon
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),110000.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. L20: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),110000.0)  cached=110000
+  e.g. L21: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),110000.0)  cached=110000
+  e.g. L22: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),110000.0)  cached=110000
+  ... 3 more of this pattern
+
+PATTERN 38  kind=excel  array=False  M20:M25 (6 cells)
+  context_label: RH1 Weapon
+  template: =INDEX($AH:$AH,MATCH(INT(LEFT(L{r},LEN(L{r})-4)&"0000"),$AI:$AI,0))
+  e.g. M20: =INDEX($AH:$AH,MATCH(INT(LEFT(L20,LEN(L20)-4)&"0000"),$AI:$AI,0))  cached='Unarmed'
+  e.g. M21: =INDEX($AH:$AH,MATCH(INT(LEFT(L21,LEN(L21)-4)&"0000"),$AI:$AI,0))  cached='Unarmed'
+  e.g. M22: =INDEX($AH:$AH,MATCH(INT(LEFT(L22,LEN(L22)-4)&"0000"),$AI:$AI,0))  cached='Unarmed'
+  ... 3 more of this pattern
+
+PATTERN 39  kind=excel  array=False  N20:N25 (6 cells)
+  context_label: RH1 Weapon
+  template: =INDEX($AM:$AM,MATCH(INT(LEFT(RIGHT(L{r},4),2)&"00"),$AN:$AN,0),0)
+  e.g. N20: =INDEX($AM:$AM,MATCH(INT(LEFT(RIGHT(L20,4),2)&"00"),$AN:$AN,0),0)  cached='Standard'
+  e.g. N21: =INDEX($AM:$AM,MATCH(INT(LEFT(RIGHT(L21,4),2)&"00"),$AN:$AN,0),0)  cached='Standard'
+  e.g. N22: =INDEX($AM:$AM,MATCH(INT(LEFT(RIGHT(L22,4),2)&"00"),$AN:$AN,0),0)  cached='Standard'
+  ... 3 more of this pattern
+
+PATTERN 40  kind=excel  array=False  O20:O25 (6 cells)
+  context_label: RH1 Weapon
+  template: =INT(RIGHT(L{r},2))
+  e.g. O20: =INT(RIGHT(L20,2))  cached=0
+  e.g. O21: =INT(RIGHT(L21,2))  cached=0
+  e.g. O22: =INT(RIGHT(L22,2))  cached=0
+  ... 3 more of this pattern
+
+PATTERN 41  kind=excel  array=False  P20:P25 (6 cells)
+  context_label: RH1 Weapon
+  template: =IF($M{r}="Unarmed",,
+INDEX($AG:$AG,MATCH($M{r},$AH:$AH,0)))
+  e.g. P20: =IF($M20="Unarmed",,
+INDEX($AG:$AG,MATCH($M20,$AH:$AH,0)))
+  e.g. P21: =IF($M21="Unarmed",,
+INDEX($AG:$AG,MATCH($M21,$AH:$AH,0)))
+  e.g. P22: =IF($M22="Unarmed",,
+INDEX($AG:$AG,MATCH($M22,$AH:$AH,0)))
+  ... 3 more of this pattern
+
+PATTERN 42  kind=excel  array=False  B21
+  context_label: Vigor
+  template: =M3
+  e.g. B21: =M3
+
+PATTERN 43  kind=excel  array=False  E21
+  context_label: RH1 Affinity
+  template: =PlannerData!$T$2
+  e.g. E21: =PlannerData!$T$2  cached=0
+
+PATTERN 44  kind=excel  array=False  B22
+  context_label: Mind
+  template: =M4
+  e.g. B22: =M4
+
+PATTERN 45  kind=excel  array=False  E22
+  context_label: RH1 Upgrade
+  template: =PlannerData!$U$2
+  e.g. E22: =PlannerData!$U$2  cached=0
+
+PATTERN 46  kind=excel  array=False  B23
+  context_label: Endurance
+  template: =M5
+  e.g. B23: =M5
+
+PATTERN 47  kind=excel  array=False  E23
+  context_label: RH2 Weapon
+  template: =PlannerData!$R$3
+  e.g. E23: =PlannerData!$R$3  cached='Unarmed'
+
+PATTERN 48  kind=excel  array=False  F23
+  context_label: RH2 Weapon
+  template: =DEC2HEX(
+IFERROR(
+VLOOKUP($E{r},$AH:$AI,2,False)+E{r+1}+E25,
+110000)
+)
+  e.g. F23: =DEC2HEX(
+IFERROR(
+VLOOKUP($E23,$AH:$AI,2,False)+E24+E25,
+110000)
+)  cached='1ADB0'
+
+PATTERN 49  kind=excel  array=False  B24
+  context_label: Strength
+  template: =M6
+  e.g. B24: =M6
+
+PATTERN 50  kind=excel  array=False  E24
+  context_label: RH2 Affinity
+  template: =PlannerData!$T$3
+  e.g. E24: =PlannerData!$T$3  cached=0
+
+PATTERN 51  kind=excel  array=False  B25
+  context_label: Dexterity
+  template: =M7
+  e.g. B25: =M7
+
+PATTERN 52  kind=excel  array=False  E25
+  context_label: RH2 Upgrade
+  template: =PlannerData!$U$3
+  e.g. E25: =PlannerData!$U$3  cached=0
+
+PATTERN 53  kind=excel  array=False  B26
+  context_label: Intelligence
+  template: =M8
+  e.g. B26: =M8
+
+PATTERN 54  kind=excel  array=False  E26
+  context_label: RH3 Weapon
+  template: =PlannerData!$R$4
+  e.g. E26: =PlannerData!$R$4  cached='Unarmed'
+
+PATTERN 55  kind=excel  array=False  F26
+  context_label: RH3 Weapon
+  template: =DEC2HEX(
+IFERROR(
+VLOOKUP($E{r},$AH:$AI,2,False)+E{r+1}+E28,
+110000)
+)
+  e.g. F26: =DEC2HEX(
+IFERROR(
+VLOOKUP($E26,$AH:$AI,2,False)+E27+E28,
+110000)
+)  cached='1ADB0'
+
+PATTERN 56  kind=spill_cache  array=False  L26
+  context_label: Memory Slots
+  template: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),10.0)
+  note: Not real logic: spilled/cached value from a neighboring array formula. Use fallback/cached value (None) as the displayed result.
+  e.g. L26: =IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),10.0)  cached=10
+
+PATTERN 57  kind=excel  array=False  M26
+  context_label: Memory Slots
+  template: =$L{r}
+  e.g. M26: =$L26  cached=10
+
+PATTERN 58  kind=excel  array=False  B27
+  context_label: Faith
+  template: =M9
+  e.g. B27: =M9
+
+PATTERN 59  kind=excel  array=False  E27
+  context_label: RH3 Affinity
+  template: =PlannerData!$T$4
+  e.g. E27: =PlannerData!$T$4  cached=0
+
+PATTERN 60  kind=excel  array=False  M27:M38 (12 cells)
+  context_label: Spell 1
+  template: =INDEX($AP:$AP,MATCH($L{r},$AQ:$AQ,0))
+  e.g. M27: =INDEX($AP:$AP,MATCH($L27,$AQ:$AQ,0))  cached='Empty'
+  e.g. M28: =INDEX($AP:$AP,MATCH($L28,$AQ:$AQ,0))  cached='Empty'
+  e.g. M29: =INDEX($AP:$AP,MATCH($L29,$AQ:$AQ,0))  cached='Empty'
+  ... 9 more of this pattern
+
+PATTERN 61  kind=excel  array=False  B28
+  context_label: Arcane
+  template: =M10
+  e.g. B28: =M10
+
+PATTERN 62  kind=excel  array=False  E28
+  context_label: RH3 Upgrade
+  template: =PlannerData!$U$4
+  e.g. E28: =PlannerData!$U$4  cached=0
+
+PATTERN 63  kind=excel  array=False  B29
+  context_label: Head
+  template: =IF(M11="Empty",,M11)
+  e.g. B29: =IF(M11="Empty",,M11)
+
+PATTERN 64  kind=excel  array=False  E29
+  context_label: LH1 Weapon
+  template: =PlannerData!$R$5
+  e.g. E29: =PlannerData!$R$5  cached='Unarmed'
+
+PATTERN 65  kind=excel  array=False  F29
+  context_label: LH1 Weapon
+  template: =DEC2HEX(
+IFERROR(
+VLOOKUP($E{r},$AH:$AI,2,False)+E{r+1}+E31,
+110000)
+)
+  e.g. F29: =DEC2HEX(
+IFERROR(
+VLOOKUP($E29,$AH:$AI,2,False)+E30+E31,
+110000)
+)  cached='1ADB0'
+
+PATTERN 66  kind=excel  array=False  B30
+  context_label: Chest
+  template: =IF(M12="Empty",,M12)
+  e.g. B30: =IF(M12="Empty",,M12)
+
+PATTERN 67  kind=excel  array=False  E30
+  context_label: LH1 Affinity
+  template: =PlannerData!$T$5
+  e.g. E30: =PlannerData!$T$5  cached=0
+
+PATTERN 68  kind=excel  array=False  B31
+  context_label: Hands
+  template: =IF(M13="Empty",,M13)
+  e.g. B31: =IF(M13="Empty",,M13)
+
+PATTERN 69  kind=excel  array=False  E31
+  context_label: LH1 Upgrade
+  template: =PlannerData!$U$5
+  e.g. E31: =PlannerData!$U$5  cached=0
+
+PATTERN 70  kind=excel  array=False  B32
+  context_label: Legs
+  template: =IF(M14="Empty",,M14)
+  e.g. B32: =IF(M14="Empty",,M14)
+
+PATTERN 71  kind=excel  array=False  E32
+  context_label: LH2 Weapon
+  template: =PlannerData!$R$6
+  e.g. E32: =PlannerData!$R$6  cached='Unarmed'
+
+PATTERN 72  kind=excel  array=False  F32
+  context_label: LH2 Weapon
+  template: =DEC2HEX(
+IFERROR(
+VLOOKUP($E{r},$AH:$AI,2,False)+E{r+1}+E34,
+110000)
+)
+  e.g. F32: =DEC2HEX(
+IFERROR(
+VLOOKUP($E32,$AH:$AI,2,False)+E33+E34,
+110000)
+)  cached='1ADB0'
+
+PATTERN 73  kind=excel  array=False  B33
+  context_label: Talisman 1
+  template: =IF(M15="Empty",,M15)
+  e.g. B33: =IF(M15="Empty",,M15)
+
+PATTERN 74  kind=excel  array=False  E33
+  context_label: LH2 Affinity
+  template: =PlannerData!$T$6
+  e.g. E33: =PlannerData!$T$6  cached=0
+
+PATTERN 75  kind=excel  array=False  B34
+  context_label: Talisman 2
+  template: =IF(M16="Empty",,M16)
+  e.g. B34: =IF(M16="Empty",,M16)
+
+PATTERN 76  kind=excel  array=False  E34
+  context_label: LH2 Upgrade
+  template: =PlannerData!$U$6
+  e.g. E34: =PlannerData!$U$6  cached=0
+
+PATTERN 77  kind=excel  array=False  B35
+  context_label: Talisman 3
+  template: =IF(M17="Empty",,M17)
+  e.g. B35: =IF(M17="Empty",,M17)
+
+PATTERN 78  kind=excel  array=False  E35
+  context_label: LH3 Weapon
+  template: =PlannerData!$R$7
+  e.g. E35: =PlannerData!$R$7  cached='Unarmed'
+
+PATTERN 79  kind=excel  array=False  F35
+  context_label: LH3 Weapon
+  template: =DEC2HEX(
+IFERROR(
+VLOOKUP($E{r},$AH:$AI,2,False)+E{r+1}+E37,
+110000)
+)
+  e.g. F35: =DEC2HEX(
+IFERROR(
+VLOOKUP($E35,$AH:$AI,2,False)+E36+E37,
+110000)
+)  cached='1ADB0'
+
+PATTERN 80  kind=excel  array=False  B36
+  context_label: Talisman 4
+  template: =IF(M18="Empty",,M18)
+  e.g. B36: =IF(M18="Empty",,M18)
+
+PATTERN 81  kind=excel  array=False  E36
+  context_label: LH3 Affinity
+  template: =PlannerData!$T$7
+  e.g. E36: =PlannerData!$T$7  cached=0
+
+PATTERN 82  kind=excel  array=False  B37
+  context_label: Great Rune
+  template: =IF(M19="Empty",,M19)
+  e.g. B37: =IF(M19="Empty",,M19)
+
+PATTERN 83  kind=excel  array=False  E37
+  context_label: LH3 Upgrade
+  template: =PlannerData!$U$7
+  e.g. E37: =PlannerData!$U$7  cached=0
+
+PATTERN 84  kind=excel  array=False  B38
+  context_label: RH1 Class
+  template: =IF($B$9,,P20)
+  e.g. B38: =IF($B$9,,P20)
+
+PATTERN 85  kind=excel  array=False  E38
+  context_label: Memory Slots
+  template: =MIN(MAX(Planner!$G$42,2),10)
+  e.g. E38: =MIN(MAX(Planner!$G$42,2),10)  cached=10
+
+PATTERN 86  kind=excel  array=False  F38
+  context_label: Memory Slots
+  template: =DEC2HEX(
+IF(ISBLANK($E{r}),10,$E{r})
+)
+  e.g. F38: =DEC2HEX(
+IF(ISBLANK($E38),10,$E38)
+)  cached='A'
+
+PATTERN 87  kind=excel  array=False  B39
+  context_label: RH1 Weapon
+  template: =IF(M20="Unarmed",,M20)
+  e.g. B39: =IF(M20="Unarmed",,M20)
+
+PATTERN 88  kind=excel  array=True  E39
+  context_label: Spell 1
+  array_spill_ref: E39:E50
+  template: =Planner!$G$48:$G$59
+  e.g. E39: =Planner!$G$48:$G$59  cached='Empty'
+
+PATTERN 89  kind=excel  array=False  F39:F50 (12 cells)
+  context_label: Spell 1
+  template: =DEC2HEX(
+IFERROR(
+VLOOKUP($E{r},$AP:$AQ,2,False),
+0)
+)
+  e.g. F39: =DEC2HEX(
+IFERROR(
+VLOOKUP($E39,$AP:$AQ,2,False),
+0)
+)  cached='0'
+  e.g. F40: =DEC2HEX(
+IFERROR(
+VLOOKUP($E40,$AP:$AQ,2,False),
+0)
+)  cached='0'
+  e.g. F41: =DEC2HEX(
+IFERROR(
+VLOOKUP($E41,$AP:$AQ,2,False),
+0)
+)  cached='0'
+  ... 9 more of this pattern
+
+PATTERN 90  kind=excel  array=False  M39:M46 (6 cells)
+  context_label: GR Active
+  template: =IF($L{r}=1,True,False)
+  e.g. M39: =IF($L39=1,True,False)  cached=False
+  e.g. M40: =IF($L40=1,True,False)  cached=False
+  e.g. M41: =IF($L41=1,True,False)  cached=False
+  ... 3 more of this pattern
+
+PATTERN 91  kind=excel  array=False  B40
+  context_label: RH1 Affinity
+  template: =IF(N20="Standard",,N20)
+  e.g. B40: =IF(N20="Standard",,N20)
+
+PATTERN 92  kind=excel  array=False  B41
+  context_label: RH1 Upgrade
+  template: =IF(NOT(VLOOKUP(M20,$AH:$AK,3,False)),IF(O20=0,,O20),
+IF(VLOOKUP(M20,$AH:$AK,4,False),IF(O20=10,,O20),
+IF(O20=25,,O20)
+))
+  e.g. B41: =IF(NOT(VLOOKUP(M20,$AH:$AK,3,False)),IF(O20=0,,O20),
+IF(VLOOKUP(M20,$AH:$AK,4,False),IF(O20=10,,O20),
+IF(O20=25,,O20)
+))
+
+PATTERN 93  kind=excel  array=False  B42
+  context_label: RH2 Class
+  template: =IF($B$9,,P21)
+  e.g. B42: =IF($B$9,,P21)
+
+PATTERN 94  kind=excel  array=False  B43
+  context_label: RH2 Weapon
+  template: =IF(M21="Unarmed",,M21)
+  e.g. B43: =IF(M21="Unarmed",,M21)
+
+PATTERN 95  kind=excel  array=False  B44
+  context_label: RH2 Affinity
+  template: =IF(N21="Standard",,N21)
+  e.g. B44: =IF(N21="Standard",,N21)
+
+PATTERN 96  kind=excel  array=False  M44:M45 (2 cells)
+  context_label: Crystal Tear 1
+  template: =INDEX($AD:$AD,MATCH($L{r},$AE:$AE,0))
+  e.g. M44: =INDEX($AD:$AD,MATCH($L44,$AE:$AE,0))  cached='Empty'
+  e.g. M45: =INDEX($AD:$AD,MATCH($L45,$AE:$AE,0))  cached='Empty'
+
+PATTERN 97  kind=excel  array=False  B45
+  context_label: RH2 Upgrade
+  template: =IF(NOT(VLOOKUP(M21,$AH:$AK,3,False)),IF(O21=0,,O21),
+IF(VLOOKUP(M21,$AH:$AK,4,False),IF(O21=10,,O21),
+IF(O21=25,,O21)
+))
+  e.g. B45: =IF(NOT(VLOOKUP(M21,$AH:$AK,3,False)),IF(O21=0,,O21),
+IF(VLOOKUP(M21,$AH:$AK,4,False),IF(O21=10,,O21),
+IF(O21=25,,O21)
+))
+
+PATTERN 98  kind=excel  array=False  B46
+  context_label: RH3 Class
+  template: =IF($B$9,,P22)
+  e.g. B46: =IF($B$9,,P22)
+
+PATTERN 99  kind=excel  array=False  B47
+  context_label: RH3 Weapon
+  template: =IF(M22="Unarmed",,M22)
+  e.g. B47: =IF(M22="Unarmed",,M22)
+
+PATTERN 100  kind=excel  array=False  B48
+  context_label: RH3 Affinity
+  template: =IF(N22="Standard",,N22)
+  e.g. B48: =IF(N22="Standard",,N22)
+
+PATTERN 101  kind=excel  array=False  B49
+  context_label: RH3 Upgrade
+  template: =IF(NOT(VLOOKUP(M22,$AH:$AK,3,False)),IF(O22=0,,O22),
+IF(VLOOKUP(M22,$AH:$AK,4,False),IF(O22=10,,O22),
+IF(O22=25,,O22)
+))
+  e.g. B49: =IF(NOT(VLOOKUP(M22,$AH:$AK,3,False)),IF(O22=0,,O22),
+IF(VLOOKUP(M22,$AH:$AK,4,False),IF(O22=10,,O22),
+IF(O22=25,,O22)
+))
+
+PATTERN 102  kind=excel  array=False  B50
+  context_label: LH1 Class
+  template: =IF($B$9,,P23)
+  e.g. B50: =IF($B$9,,P23)
+
+PATTERN 103  kind=excel  array=False  B51
+  context_label: LH1 Weapon
+  template: =IF(M23="Unarmed",,M23)
+  e.g. B51: =IF(M23="Unarmed",,M23)
+
+PATTERN 104  kind=excel  array=False  E51
+  context_label: GR Active
+  template: =Planner!$AG$27
+  e.g. E51: =Planner!$AG$27  cached=False
+
+PATTERN 105  kind=excel  array=False  F51:F58 (6 cells)
+  context_label: GR Active
+  template: =DEC2HEX(
+IF($E{r},1,0)
+)
+  e.g. F51: =DEC2HEX(
+IF($E51,1,0)
+)  cached='0'
+  e.g. F52: =DEC2HEX(
+IF($E52,1,0)
+)  cached='0'
+  e.g. F53: =DEC2HEX(
+IF($E53,1,0)
+)  cached='0'
+  ... 3 more of this pattern
+
+PATTERN 106  kind=excel  array=False  B52
+  context_label: LH1 Affinity
+  template: =IF(N23="Standard",,N23)
+  e.g. B52: =IF(N23="Standard",,N23)
+
+PATTERN 107  kind=excel  array=True  E52
+  context_label: 2H Weapon
+  array_spill_ref: E52:E55
+  template: =Planner!$AG$33:$AG$36
+  e.g. E52: =Planner!$AG$33:$AG$36  cached=False
+
+PATTERN 108  kind=excel  array=False  B53
+  context_label: LH1 Upgrade
+  template: =IF(NOT(VLOOKUP(M23,$AH:$AK,3,False)),IF(O23=0,,O23),
+IF(VLOOKUP(M23,$AH:$AK,4,False),IF(O23=10,,O23),
+IF(O23=25,,O23)
+))
+  e.g. B53: =IF(NOT(VLOOKUP(M23,$AH:$AK,3,False)),IF(O23=0,,O23),
+IF(VLOOKUP(M23,$AH:$AK,4,False),IF(O23=10,,O23),
+IF(O23=25,,O23)
+))
+
+PATTERN 109  kind=excel  array=False  B54
+  context_label: LH2 Class
+  template: =IF($B$9,,P24)
+  e.g. B54: =IF($B$9,,P24)
+
+PATTERN 110  kind=excel  array=False  B55
+  context_label: LH2 Weapon
+  template: =IF(M24="Unarmed",,M24)
+  e.g. B55: =IF(M24="Unarmed",,M24)
+
+PATTERN 111  kind=excel  array=False  B56
+  context_label: LH2 Affinity
+  template: =IF(N24="Standard",,N24)
+  e.g. B56: =IF(N24="Standard",,N24)
+
+PATTERN 112  kind=excel  array=True  E56
+  context_label: Crystal Tear 1
+  array_spill_ref: E56:E58
+  template: =Planner!$AG$29:$AG$31
+  e.g. E56: =Planner!$AG$29:$AG$31  cached='Empty'
+
+PATTERN 113  kind=excel  array=False  F56:F57 (2 cells)
+  context_label: Crystal Tear 1
+  template: =DEC2HEX(
+IFERROR(
+VLOOKUP($E{r},$AD:$AE,2,False),
+0)
+)
+  e.g. F56: =DEC2HEX(
+IFERROR(
+VLOOKUP($E56,$AD:$AE,2,False),
+0)
+)  cached='0'
+  e.g. F57: =DEC2HEX(
+IFERROR(
+VLOOKUP($E57,$AD:$AE,2,False),
+0)
+)  cached='0'
+
+PATTERN 114  kind=excel  array=False  B57
+  context_label: LH2 Upgrade
+  template: =IF(NOT(VLOOKUP(M24,$AH:$AK,3,False)),IF(O24=0,,O24),
+IF(VLOOKUP(M24,$AH:$AK,4,False),IF(O24=10,,O24),
+IF(O24=25,,O24)
+))
+  e.g. B57: =IF(NOT(VLOOKUP(M24,$AH:$AK,3,False)),IF(O24=0,,O24),
+IF(VLOOKUP(M24,$AH:$AK,4,False),IF(O24=10,,O24),
+IF(O24=25,,O24)
+))
+
+PATTERN 115  kind=excel  array=False  B58
+  context_label: LH3 Class
+  template: =IF($B$9,,P25)
+  e.g. B58: =IF($B$9,,P25)
+
+PATTERN 116  kind=excel  array=False  B59
+  context_label: LH3 Weapon
+  template: =IF(M25="Unarmed",,M25)
+  e.g. B59: =IF(M25="Unarmed",,M25)
+
+PATTERN 117  kind=excel  array=False  B60
+  context_label: LH3 Affinity
+  template: =IF(N25="Standard",,N25)
+  e.g. B60: =IF(N25="Standard",,N25)
+
+PATTERN 118  kind=excel  array=False  B61
+  context_label: LH3 Upgrade
+  template: =IF(NOT(VLOOKUP(M25,$AH:$AK,3,False)),IF(O25=0,,O25),
+IF(VLOOKUP(M25,$AH:$AK,4,False),IF(O25=10,,O25),
+IF(O25=25,,O25)
+))
+  e.g. B61: =IF(NOT(VLOOKUP(M25,$AH:$AK,3,False)),IF(O25=0,,O25),
+IF(VLOOKUP(M25,$AH:$AK,4,False),IF(O25=10,,O25),
+IF(O25=25,,O25)
+))
+
+PATTERN 119  kind=excel  array=False  B62
+  context_label: Memory Slots
+  template: =IF(M26=10,,M26)
+  e.g. B62: =IF(M26=10,,M26)
+
+PATTERN 120  kind=excel  array=False  B63
+  context_label: Spell 1
+  template: =IF(M27="Empty",,M27)
+  e.g. B63: =IF(M27="Empty",,M27)
+
+PATTERN 121  kind=excel  array=False  B64
+  context_label: Spell 2
+  template: =IF(M28="Empty",,M28)
+  e.g. B64: =IF(M28="Empty",,M28)
+
+PATTERN 122  kind=excel  array=False  B65
+  context_label: Spell 3
+  template: =IF(M29="Empty",,M29)
+  e.g. B65: =IF(M29="Empty",,M29)
+
+PATTERN 123  kind=excel  array=False  B66
+  context_label: Spell 4
+  template: =IF(M30="Empty",,M30)
+  e.g. B66: =IF(M30="Empty",,M30)
+
+PATTERN 124  kind=excel  array=False  B67
+  context_label: Spell 5
+  template: =IF(M31="Empty",,M31)
+  e.g. B67: =IF(M31="Empty",,M31)
+
+PATTERN 125  kind=excel  array=False  B68
+  context_label: Spell 6
+  template: =IF(M32="Empty",,M32)
+  e.g. B68: =IF(M32="Empty",,M32)
+
+PATTERN 126  kind=excel  array=False  B69
+  context_label: Spell 7
+  template: =IF(M33="Empty",,M33)
+  e.g. B69: =IF(M33="Empty",,M33)
+
+PATTERN 127  kind=excel  array=False  B70
+  context_label: Spell 8
+  template: =IF(M34="Empty",,M34)
+  e.g. B70: =IF(M34="Empty",,M34)
+
+PATTERN 128  kind=excel  array=False  B71
+  context_label: Spell 9
+  template: =IF(M35="Empty",,M35)
+  e.g. B71: =IF(M35="Empty",,M35)
+
+PATTERN 129  kind=excel  array=False  B72
+  context_label: Spell 10
+  template: =IF(M36="Empty",,M36)
+  e.g. B72: =IF(M36="Empty",,M36)
+
+PATTERN 130  kind=excel  array=False  B73
+  context_label: Spell 11
+  template: =IF(M37="Empty",,M37)
+  e.g. B73: =IF(M37="Empty",,M37)
+
+PATTERN 131  kind=excel  array=False  B74
+  context_label: Spell 12
+  template: =IF(M38="Empty",,M38)
+  e.g. B74: =IF(M38="Empty",,M38)
+
+PATTERN 132  kind=excel  array=False  B75
+  context_label: GR Active
+  template: =M39
+  e.g. B75: =M39  cached=False
+
+PATTERN 133  kind=excel  array=False  B76
+  context_label: 2H Weapon
+  template: =M40
+  e.g. B76: =M40  cached=False
+
+PATTERN 134  kind=excel  array=False  B77
+  context_label: PvP
+  template: =M41
+  e.g. B77: =M41  cached=False
+
+PATTERN 135  kind=excel  array=False  B78
+  context_label: Low HP
+  template: =M42
+  e.g. B78: =M42  cached=False
+
+PATTERN 136  kind=excel  array=False  B79
+  context_label: Full HP
+  template: =M43
+  e.g. B79: =M43  cached=False
+
+PATTERN 137  kind=excel  array=False  B80
+  context_label: Crystal Tear 1
+  template: =IF(M44="Empty",,M44)
+  e.g. B80: =IF(M44="Empty",,M44)
+
+PATTERN 138  kind=excel  array=False  B81
+  context_label: Crystal Tear 2
+  template: =IF(M45="Empty",,M45)
+  e.g. B81: =IF(M45="Empty",,M45)
+
+PATTERN 139  kind=excel  array=False  B82
+  context_label: CT Active
+  template: =M46
+  e.g. B82: =M46  cached=False
+
+========================================================================
+ALL FORMULAS
+========================================================================
+cell	kind	array_ref	label	logic	stored	cached
+AG1	excel	AG1:AI571	ID	=WeaponData!$A:$C	=WeaponData!$A:$C	Weapon Class
+AJ1	excel	AJ1:AK571	ID	=WeaponData!$E:$F	=WeaponData!$E:$F	isReinforce
+B2	excel		Build Name	=IFERROR(IFS( | OR(LOWER(Planner!G11)="none",Planner!G11="--------------------------------------------------------------------------------"),, | LEFT(LOWER(Planner!G11),10)="[default] ",RIGHT(Planner!G11,LEN(Planner!G11)-10) | ),Planner!G11)	=IFERROR(IFS( | OR(LOWER(Planner!G11)="none",Planner!G11="--------------------------------------------------------------------------------"),, | LEFT(LOWER(Planner!G11),10)="[default] ",RIGHT(Planner!G11,LEN(Planner!G11)-10) | ),Planner!G11)	
+E2	excel		Starting Class	=Planner!$G$14	=Planner!$G$14	Vagabond
+F2	excel		Starting Class	=DEC2HEX( | IFERROR( | VLOOKUP($E2,$R:$S,2,False), | 10) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E2,$R:$S,2,False), | 10) | )	A
+I2	google_sheets		Planner Selection Build ID	="0x"&SUBSTITUTE(JOIN("-",FILTER($F$2:$F1206,NOT(ISBLANK($F$2:$F1206)))),"-","-0x")	=IFERROR(__xludf.DUMMYFUNCTION("""0x""&SUBSTITUTE(JOIN(""-"",FILTER($F$2:$F1206,NOT(ISBLANK($F$2:$F1206)))),""-"",""-0x"")"),"0xA-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x1ADB0-0x1ADB0-0x1ADB0-0x1ADB0-0x1ADB0-0x1ADB0-0xA-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0")	0xA-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x1ADB0-0x1ADB0-0x1ADB0-0x1ADB0-0x1ADB0-0x1ADB0-0xA-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0
+L2	google_sheets		Starting Class	=TRANSPOSE(ARRAYFORMULA(HEX2DEC(SPLIT($I$6,"-"))))	=IFERROR(__xludf.DUMMYFUNCTION("TRANSPOSE(ARRAYFORMULA(HEX2DEC(SPLIT($I$6,""-""))))"),10.0)	10
+M2	excel	M2	Starting Class	=INDEX($R:$R,MATCH($L2,$S:$S,0))	=INDEX($R:$R,MATCH($L2,$S:$S,0))	Vagabond
+AM2	excel	AM2:AN571	Dagger	=WeaponData!$O$2:$P1206	=WeaponData!$O$2:$P1206	Standard
+B3	excel		Build ID	=SUBSTITUTE(I2,"0x",)	=SUBSTITUTE(I2,"0x",)	A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-1ADB0-A-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0
+E3	excel	E3:E10	Vigor	=Planner!$I$19:$I$26	=Planner!$I$19:$I$26	
+F3	excel		Vigor	=DEC2HEX( | IF(ISBLANK($E3),0,$E3) | )	=DEC2HEX( | IF(ISBLANK($E3),0,$E3) | )	0
+L3	spill_cache		Vigor		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M3	excel		Vigor	=IF($L3>0, | $L3, | )	=IF($L3>0, | $L3, | )	
+U3	excel	U3:V706	Warrior	=ArmorData!$B$2:$C1206	=ArmorData!$B$2:$C1206	Commoner's Headband
+X3	excel	X3:Y156	Empty	=TalismanData!$A$2:$B1206	=TalismanData!$A$2:$B1206	Crimson Amber Medallion
+AA3	excel	AA3:AB15	Empty	=GreatRuneData!$A$2:$B1206	=GreatRuneData!$A$2:$B1206	Godrick's Great Rune
+AD3	excel	AD3:AE42	Empty	=CrystalTearData!$A$2:$C1206	=CrystalTearData!$A$2:$C1206	Crimson Crystal Tear 1
+AP3	excel	AP3:AQ525	Heavy	=MagicData!$B$2:$C1206	=MagicData!$B$2:$C1206	Glintstone Pebble
+B4	google_sheets		Filter	=IFERROR(FILTER(Builds!A3:A1206,Builds!A3:A1206=B2,NOT(ISBLANK(Builds!A3:A1206))))	=IFERROR(__xludf.DUMMYFUNCTION("IFERROR(FILTER(Builds!A3:A1206,Builds!A3:A1206=B2,NOT(ISBLANK(Builds!A3:A1206))))"),"")	
+F4	excel		Mind	=DEC2HEX( | IF(ISBLANK($E4),0,$E4) | )	=DEC2HEX( | IF(ISBLANK($E4),0,$E4) | )	0
+L4	spill_cache		Mind		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M4	excel		Mind	=IF($L4>0, | $L4, | )	=IF($L4>0, | $L4, | )	
+B5	excel		Edit Flag	=NOT(ISBLANK(B4))	=NOT(ISBLANK(B4))	FALSE
+F5	excel		Endurance	=DEC2HEX( | IF(ISBLANK($E5),0,$E5) | )	=DEC2HEX( | IF(ISBLANK($E5),0,$E5) | )	0
+L5	spill_cache		Endurance		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M5	excel		Endurance	=IF($L5>0, | $L5, | )	=IF($L5>0, | $L5, | )	
+B6	excel		Selected Row	=IF(B5,MATCH(B2,Builds!A3:A1206,0)+2,"none")	=IF(B5,MATCH(B2,Builds!A3:A1206,0)+2,"none")	none
+F6	excel		Strength	=DEC2HEX( | IF(ISBLANK($E6),0,$E6) | )	=DEC2HEX( | IF(ISBLANK($E6),0,$E6) | )	0
+I6	excel		Dropdown Selected Build ID	=IFERROR("0x"&SUBSTITUTE(SUBSTITUTE(VLOOKUP(Planner!$G$10,Builds!$A$3:$B1206,2,False),"0x",),"-","-0x"),I4)	=IFERROR("0x"&SUBSTITUTE(SUBSTITUTE(VLOOKUP(Planner!$G$10,Builds!$A$3:$B1206,2,False),"0x",),"-","-0x"),I4)	0xA-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x1ADB0-0x1ADB0-0x1ADB0-0x1ADB0-0x1ADB0-0x1ADB0-0xA-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0-0x0
+L6	spill_cache		Strength		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M6	excel		Strength	=IF($L6>0, | $L6, | )	=IF($L6>0, | $L6, | )	
+F7	excel		Dexterity	=DEC2HEX( | IF(ISBLANK($E7),0,$E7) | )	=DEC2HEX( | IF(ISBLANK($E7),0,$E7) | )	0
+L7	spill_cache		Dexterity		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M7	excel		Dexterity	=IF($L7>0, | $L7, | )	=IF($L7>0, | $L7, | )	
+F8	excel		Intelligence	=DEC2HEX( | IF(ISBLANK($E8),0,$E8) | )	=DEC2HEX( | IF(ISBLANK($E8),0,$E8) | )	0
+L8	spill_cache		Intelligence		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M8	excel		Intelligence	=IF($L8>0, | $L8, | )	=IF($L8>0, | $L8, | )	
+F9	excel		Faith	=DEC2HEX( | IF(ISBLANK($E9),0,$E9) | )	=DEC2HEX( | IF(ISBLANK($E9),0,$E9) | )	0
+L9	spill_cache		Faith		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M9	excel		Faith	=IF($L9>0, | $L9, | )	=IF($L9>0, | $L9, | )	
+F10	excel		Arcane	=DEC2HEX( | IF(ISBLANK($E10),0,$E10) | )	=DEC2HEX( | IF(ISBLANK($E10),0,$E10) | )	0
+L10	spill_cache		Arcane		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M10	excel		Arcane	=IF($L10>0, | $L10, | )	=IF($L10>0, | $L10, | )	
+E11	excel	E11:E14	Head	=Planner!$AG$15:$AG$18	=Planner!$AG$15:$AG$18	Empty
+F11	excel		Head	=DEC2HEX( | IFERROR( | VLOOKUP($E11,$U:$V,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E11,$U:$V,2,False), | 0) | )	0
+L11	spill_cache		Head		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M11	excel		Head	=INDEX($U:$U,MATCH($L11,$V:$V,0))	=INDEX($U:$U,MATCH($L11,$V:$V,0))	Empty
+F12	excel		Empty	=DEC2HEX( | IFERROR( | VLOOKUP($E12,$U:$V,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E12,$U:$V,2,False), | 0) | )	0
+L12	spill_cache		Body		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M12	excel		Body	=INDEX($U:$U,MATCH($L12,$V:$V,0))	=INDEX($U:$U,MATCH($L12,$V:$V,0))	Empty
+F13	excel		Empty	=DEC2HEX( | IFERROR( | VLOOKUP($E13,$U:$V,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E13,$U:$V,2,False), | 0) | )	0
+L13	spill_cache		Arms		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M13	excel		Arms	=INDEX($U:$U,MATCH($L13,$V:$V,0))	=INDEX($U:$U,MATCH($L13,$V:$V,0))	Empty
+F14	excel		Empty	=DEC2HEX( | IFERROR( | VLOOKUP($E14,$U:$V,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E14,$U:$V,2,False), | 0) | )	0
+L14	spill_cache		Legs		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M14	excel		Legs	=INDEX($U:$U,MATCH($L14,$V:$V,0))	=INDEX($U:$U,MATCH($L14,$V:$V,0))	Empty
+E15	excel	E15:E18	Talisman 1	=PlannerData!$N$2:$N$5	=PlannerData!$N$2:$N$5	Empty
+F15	excel		Talisman 1	=DEC2HEX( | IFERROR( | VLOOKUP($E15,$X:$Y,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E15,$X:$Y,2,False), | 0) | )	0
+L15	spill_cache		Talisman 1		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M15	excel		Talisman 1	=INDEX($X:$X,MATCH($L15,$Y:$Y,0))	=INDEX($X:$X,MATCH($L15,$Y:$Y,0))	Empty
+F16	excel		Talisman 2	=DEC2HEX( | IFERROR( | VLOOKUP($E16,$X:$Y,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E16,$X:$Y,2,False), | 0) | )	0
+L16	spill_cache		Talisman 2		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M16	excel		Talisman 2	=INDEX($X:$X,MATCH($L16,$Y:$Y,0))	=INDEX($X:$X,MATCH($L16,$Y:$Y,0))	Empty
+F17	excel		Talisman 3	=DEC2HEX( | IFERROR( | VLOOKUP($E17,$X:$Y,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E17,$X:$Y,2,False), | 0) | )	0
+L17	spill_cache		Talisman 3		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M17	excel		Talisman 3	=INDEX($X:$X,MATCH($L17,$Y:$Y,0))	=INDEX($X:$X,MATCH($L17,$Y:$Y,0))	Empty
+F18	excel		Talisman 4	=DEC2HEX( | IFERROR( | VLOOKUP($E18,$X:$Y,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E18,$X:$Y,2,False), | 0) | )	0
+L18	spill_cache		Talisman 4		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M18	excel		Talisman 4	=INDEX($X:$X,MATCH($L18,$Y:$Y,0))	=INDEX($X:$X,MATCH($L18,$Y:$Y,0))	Empty
+E19	excel		Great Rune	=Planner!$AG$26	=Planner!$AG$26	Empty
+F19	excel		Great Rune	=DEC2HEX( | IFERROR( | VLOOKUP($E19,$AA:$AB,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E19,$AA:$AB,2,False), | 0) | )	0
+L19	spill_cache		Great Rune		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M19	excel	M19	Great Rune	=INDEX($AA:$AA,MATCH($L19,$AB:$AB,0))	=INDEX($AA:$AA,MATCH($L19,$AB:$AB,0))	Empty
+B20	excel		Starting Class	=M2	=M2	Vagabond
+E20	excel		RH1 Weapon	=PlannerData!$R$2	=PlannerData!$R$2	Unarmed
+F20	excel		RH1 Weapon	=DEC2HEX( | IFERROR( | VLOOKUP($E20,$AH:$AI,2,False)+E21+E22, | 110000) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E20,$AH:$AI,2,False)+E21+E22, | 110000) | )	1ADB0
+L20	spill_cache		RH1 Weapon		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),110000.0)	110000
+M20	excel		RH1 Weapon	=INDEX($AH:$AH,MATCH(INT(LEFT(L20,LEN(L20)-4)&"0000"),$AI:$AI,0))	=INDEX($AH:$AH,MATCH(INT(LEFT(L20,LEN(L20)-4)&"0000"),$AI:$AI,0))	Unarmed
+N20	excel		RH1 Weapon	=INDEX($AM:$AM,MATCH(INT(LEFT(RIGHT(L20,4),2)&"00"),$AN:$AN,0),0)	=INDEX($AM:$AM,MATCH(INT(LEFT(RIGHT(L20,4),2)&"00"),$AN:$AN,0),0)	Standard
+O20	excel		RH1 Weapon	=INT(RIGHT(L20,2))	=INT(RIGHT(L20,2))	0
+P20	excel		RH1 Weapon	=IF($M20="Unarmed",, | INDEX($AG:$AG,MATCH($M20,$AH:$AH,0)))	=IF($M20="Unarmed",, | INDEX($AG:$AG,MATCH($M20,$AH:$AH,0)))	
+B21	excel		Vigor	=M3	=M3	
+E21	excel		RH1 Affinity	=PlannerData!$T$2	=PlannerData!$T$2	0
+L21	spill_cache		RH2 Weapon		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),110000.0)	110000
+M21	excel		RH2 Weapon	=INDEX($AH:$AH,MATCH(INT(LEFT(L21,LEN(L21)-4)&"0000"),$AI:$AI,0))	=INDEX($AH:$AH,MATCH(INT(LEFT(L21,LEN(L21)-4)&"0000"),$AI:$AI,0))	Unarmed
+N21	excel		RH2 Weapon	=INDEX($AM:$AM,MATCH(INT(LEFT(RIGHT(L21,4),2)&"00"),$AN:$AN,0),0)	=INDEX($AM:$AM,MATCH(INT(LEFT(RIGHT(L21,4),2)&"00"),$AN:$AN,0),0)	Standard
+O21	excel		RH2 Weapon	=INT(RIGHT(L21,2))	=INT(RIGHT(L21,2))	0
+P21	excel		RH2 Weapon	=IF($M21="Unarmed",, | INDEX($AG:$AG,MATCH($M21,$AH:$AH,0)))	=IF($M21="Unarmed",, | INDEX($AG:$AG,MATCH($M21,$AH:$AH,0)))	
+B22	excel		Mind	=M4	=M4	
+E22	excel		RH1 Upgrade	=PlannerData!$U$2	=PlannerData!$U$2	0
+L22	spill_cache		RH3 Weapon		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),110000.0)	110000
+M22	excel		RH3 Weapon	=INDEX($AH:$AH,MATCH(INT(LEFT(L22,LEN(L22)-4)&"0000"),$AI:$AI,0))	=INDEX($AH:$AH,MATCH(INT(LEFT(L22,LEN(L22)-4)&"0000"),$AI:$AI,0))	Unarmed
+N22	excel		RH3 Weapon	=INDEX($AM:$AM,MATCH(INT(LEFT(RIGHT(L22,4),2)&"00"),$AN:$AN,0),0)	=INDEX($AM:$AM,MATCH(INT(LEFT(RIGHT(L22,4),2)&"00"),$AN:$AN,0),0)	Standard
+O22	excel		RH3 Weapon	=INT(RIGHT(L22,2))	=INT(RIGHT(L22,2))	0
+P22	excel		RH3 Weapon	=IF($M22="Unarmed",, | INDEX($AG:$AG,MATCH($M22,$AH:$AH,0)))	=IF($M22="Unarmed",, | INDEX($AG:$AG,MATCH($M22,$AH:$AH,0)))	
+B23	excel		Endurance	=M5	=M5	
+E23	excel		RH2 Weapon	=PlannerData!$R$3	=PlannerData!$R$3	Unarmed
+F23	excel		RH2 Weapon	=DEC2HEX( | IFERROR( | VLOOKUP($E23,$AH:$AI,2,False)+E24+E25, | 110000) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E23,$AH:$AI,2,False)+E24+E25, | 110000) | )	1ADB0
+L23	spill_cache		LH1 Weapon		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),110000.0)	110000
+M23	excel		LH1 Weapon	=INDEX($AH:$AH,MATCH(INT(LEFT(L23,LEN(L23)-4)&"0000"),$AI:$AI,0))	=INDEX($AH:$AH,MATCH(INT(LEFT(L23,LEN(L23)-4)&"0000"),$AI:$AI,0))	Unarmed
+N23	excel		LH1 Weapon	=INDEX($AM:$AM,MATCH(INT(LEFT(RIGHT(L23,4),2)&"00"),$AN:$AN,0),0)	=INDEX($AM:$AM,MATCH(INT(LEFT(RIGHT(L23,4),2)&"00"),$AN:$AN,0),0)	Standard
+O23	excel		LH1 Weapon	=INT(RIGHT(L23,2))	=INT(RIGHT(L23,2))	0
+P23	excel		LH1 Weapon	=IF($M23="Unarmed",, | INDEX($AG:$AG,MATCH($M23,$AH:$AH,0)))	=IF($M23="Unarmed",, | INDEX($AG:$AG,MATCH($M23,$AH:$AH,0)))	
+B24	excel		Strength	=M6	=M6	
+E24	excel		RH2 Affinity	=PlannerData!$T$3	=PlannerData!$T$3	0
+L24	spill_cache		LH2 Weapon		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),110000.0)	110000
+M24	excel		LH2 Weapon	=INDEX($AH:$AH,MATCH(INT(LEFT(L24,LEN(L24)-4)&"0000"),$AI:$AI,0))	=INDEX($AH:$AH,MATCH(INT(LEFT(L24,LEN(L24)-4)&"0000"),$AI:$AI,0))	Unarmed
+N24	excel		LH2 Weapon	=INDEX($AM:$AM,MATCH(INT(LEFT(RIGHT(L24,4),2)&"00"),$AN:$AN,0),0)	=INDEX($AM:$AM,MATCH(INT(LEFT(RIGHT(L24,4),2)&"00"),$AN:$AN,0),0)	Standard
+O24	excel		LH2 Weapon	=INT(RIGHT(L24,2))	=INT(RIGHT(L24,2))	0
+P24	excel		LH2 Weapon	=IF($M24="Unarmed",, | INDEX($AG:$AG,MATCH($M24,$AH:$AH,0)))	=IF($M24="Unarmed",, | INDEX($AG:$AG,MATCH($M24,$AH:$AH,0)))	
+B25	excel		Dexterity	=M7	=M7	
+E25	excel		RH2 Upgrade	=PlannerData!$U$3	=PlannerData!$U$3	0
+L25	spill_cache		LH3 Weapon		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),110000.0)	110000
+M25	excel		LH3 Weapon	=INDEX($AH:$AH,MATCH(INT(LEFT(L25,LEN(L25)-4)&"0000"),$AI:$AI,0))	=INDEX($AH:$AH,MATCH(INT(LEFT(L25,LEN(L25)-4)&"0000"),$AI:$AI,0))	Unarmed
+N25	excel		LH3 Weapon	=INDEX($AM:$AM,MATCH(INT(LEFT(RIGHT(L25,4),2)&"00"),$AN:$AN,0),0)	=INDEX($AM:$AM,MATCH(INT(LEFT(RIGHT(L25,4),2)&"00"),$AN:$AN,0),0)	Standard
+O25	excel		LH3 Weapon	=INT(RIGHT(L25,2))	=INT(RIGHT(L25,2))	0
+P25	excel		LH3 Weapon	=IF($M25="Unarmed",, | INDEX($AG:$AG,MATCH($M25,$AH:$AH,0)))	=IF($M25="Unarmed",, | INDEX($AG:$AG,MATCH($M25,$AH:$AH,0)))	
+B26	excel		Intelligence	=M8	=M8	
+E26	excel		RH3 Weapon	=PlannerData!$R$4	=PlannerData!$R$4	Unarmed
+F26	excel		RH3 Weapon	=DEC2HEX( | IFERROR( | VLOOKUP($E26,$AH:$AI,2,False)+E27+E28, | 110000) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E26,$AH:$AI,2,False)+E27+E28, | 110000) | )	1ADB0
+L26	spill_cache		Memory Slots		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),10.0)	10
+M26	excel		Memory Slots	=$L26	=$L26	10
+B27	excel		Faith	=M9	=M9	
+E27	excel		RH3 Affinity	=PlannerData!$T$4	=PlannerData!$T$4	0
+L27	spill_cache		Spell 1		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M27	excel		Spell 1	=INDEX($AP:$AP,MATCH($L27,$AQ:$AQ,0))	=INDEX($AP:$AP,MATCH($L27,$AQ:$AQ,0))	Empty
+B28	excel		Arcane	=M10	=M10	
+E28	excel		RH3 Upgrade	=PlannerData!$U$4	=PlannerData!$U$4	0
+L28	spill_cache		Spell 2		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M28	excel		Spell 2	=INDEX($AP:$AP,MATCH($L28,$AQ:$AQ,0))	=INDEX($AP:$AP,MATCH($L28,$AQ:$AQ,0))	Empty
+B29	excel		Head	=IF(M11="Empty",,M11)	=IF(M11="Empty",,M11)	
+E29	excel		LH1 Weapon	=PlannerData!$R$5	=PlannerData!$R$5	Unarmed
+F29	excel		LH1 Weapon	=DEC2HEX( | IFERROR( | VLOOKUP($E29,$AH:$AI,2,False)+E30+E31, | 110000) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E29,$AH:$AI,2,False)+E30+E31, | 110000) | )	1ADB0
+L29	spill_cache		Spell 3		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M29	excel		Spell 3	=INDEX($AP:$AP,MATCH($L29,$AQ:$AQ,0))	=INDEX($AP:$AP,MATCH($L29,$AQ:$AQ,0))	Empty
+B30	excel		Chest	=IF(M12="Empty",,M12)	=IF(M12="Empty",,M12)	
+E30	excel		LH1 Affinity	=PlannerData!$T$5	=PlannerData!$T$5	0
+L30	spill_cache		Spell 4		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M30	excel		Spell 4	=INDEX($AP:$AP,MATCH($L30,$AQ:$AQ,0))	=INDEX($AP:$AP,MATCH($L30,$AQ:$AQ,0))	Empty
+B31	excel		Hands	=IF(M13="Empty",,M13)	=IF(M13="Empty",,M13)	
+E31	excel		LH1 Upgrade	=PlannerData!$U$5	=PlannerData!$U$5	0
+L31	spill_cache		Spell 5		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M31	excel		Spell 5	=INDEX($AP:$AP,MATCH($L31,$AQ:$AQ,0))	=INDEX($AP:$AP,MATCH($L31,$AQ:$AQ,0))	Empty
+B32	excel		Legs	=IF(M14="Empty",,M14)	=IF(M14="Empty",,M14)	
+E32	excel		LH2 Weapon	=PlannerData!$R$6	=PlannerData!$R$6	Unarmed
+F32	excel		LH2 Weapon	=DEC2HEX( | IFERROR( | VLOOKUP($E32,$AH:$AI,2,False)+E33+E34, | 110000) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E32,$AH:$AI,2,False)+E33+E34, | 110000) | )	1ADB0
+L32	spill_cache		Spell 6		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M32	excel		Spell 6	=INDEX($AP:$AP,MATCH($L32,$AQ:$AQ,0))	=INDEX($AP:$AP,MATCH($L32,$AQ:$AQ,0))	Empty
+B33	excel		Talisman 1	=IF(M15="Empty",,M15)	=IF(M15="Empty",,M15)	
+E33	excel		LH2 Affinity	=PlannerData!$T$6	=PlannerData!$T$6	0
+L33	spill_cache		Spell 7		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M33	excel		Spell 7	=INDEX($AP:$AP,MATCH($L33,$AQ:$AQ,0))	=INDEX($AP:$AP,MATCH($L33,$AQ:$AQ,0))	Empty
+B34	excel		Talisman 2	=IF(M16="Empty",,M16)	=IF(M16="Empty",,M16)	
+E34	excel		LH2 Upgrade	=PlannerData!$U$6	=PlannerData!$U$6	0
+L34	spill_cache		Spell 8		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M34	excel		Spell 8	=INDEX($AP:$AP,MATCH($L34,$AQ:$AQ,0))	=INDEX($AP:$AP,MATCH($L34,$AQ:$AQ,0))	Empty
+B35	excel		Talisman 3	=IF(M17="Empty",,M17)	=IF(M17="Empty",,M17)	
+E35	excel		LH3 Weapon	=PlannerData!$R$7	=PlannerData!$R$7	Unarmed
+F35	excel		LH3 Weapon	=DEC2HEX( | IFERROR( | VLOOKUP($E35,$AH:$AI,2,False)+E36+E37, | 110000) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E35,$AH:$AI,2,False)+E36+E37, | 110000) | )	1ADB0
+L35	spill_cache		Spell 9		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M35	excel		Spell 9	=INDEX($AP:$AP,MATCH($L35,$AQ:$AQ,0))	=INDEX($AP:$AP,MATCH($L35,$AQ:$AQ,0))	Empty
+B36	excel		Talisman 4	=IF(M18="Empty",,M18)	=IF(M18="Empty",,M18)	
+E36	excel		LH3 Affinity	=PlannerData!$T$7	=PlannerData!$T$7	0
+L36	spill_cache		Spell 10		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M36	excel		Spell 10	=INDEX($AP:$AP,MATCH($L36,$AQ:$AQ,0))	=INDEX($AP:$AP,MATCH($L36,$AQ:$AQ,0))	Empty
+B37	excel		Great Rune	=IF(M19="Empty",,M19)	=IF(M19="Empty",,M19)	
+E37	excel		LH3 Upgrade	=PlannerData!$U$7	=PlannerData!$U$7	0
+L37	spill_cache		Spell 11		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M37	excel		Spell 11	=INDEX($AP:$AP,MATCH($L37,$AQ:$AQ,0))	=INDEX($AP:$AP,MATCH($L37,$AQ:$AQ,0))	Empty
+B38	excel		RH1 Class	=IF($B$9,,P20)	=IF($B$9,,P20)	
+E38	excel		Memory Slots	=MIN(MAX(Planner!$G$42,2),10)	=MIN(MAX(Planner!$G$42,2),10)	10
+F38	excel		Memory Slots	=DEC2HEX( | IF(ISBLANK($E38),10,$E38) | )	=DEC2HEX( | IF(ISBLANK($E38),10,$E38) | )	A
+L38	spill_cache		Spell 12		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M38	excel		Spell 12	=INDEX($AP:$AP,MATCH($L38,$AQ:$AQ,0))	=INDEX($AP:$AP,MATCH($L38,$AQ:$AQ,0))	Empty
+B39	excel		RH1 Weapon	=IF(M20="Unarmed",,M20)	=IF(M20="Unarmed",,M20)	
+E39	excel	E39:E50	Spell 1	=Planner!$G$48:$G$59	=Planner!$G$48:$G$59	Empty
+F39	excel		Spell 1	=DEC2HEX( | IFERROR( | VLOOKUP($E39,$AP:$AQ,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E39,$AP:$AQ,2,False), | 0) | )	0
+L39	spill_cache		GR Active		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M39	excel		GR Active	=IF($L39=1,True,False)	=IF($L39=1,True,False)	FALSE
+B40	excel		RH1 Affinity	=IF(N20="Standard",,N20)	=IF(N20="Standard",,N20)	
+F40	excel		Empty	=DEC2HEX( | IFERROR( | VLOOKUP($E40,$AP:$AQ,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E40,$AP:$AQ,2,False), | 0) | )	0
+L40	spill_cache		2H Weapon		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M40	excel		2H Weapon	=IF($L40=1,True,False)	=IF($L40=1,True,False)	FALSE
+B41	excel		RH1 Upgrade	=IF(NOT(VLOOKUP(M20,$AH:$AK,3,False)),IF(O20=0,,O20), | IF(VLOOKUP(M20,$AH:$AK,4,False),IF(O20=10,,O20), | IF(O20=25,,O20) | ))	=IF(NOT(VLOOKUP(M20,$AH:$AK,3,False)),IF(O20=0,,O20), | IF(VLOOKUP(M20,$AH:$AK,4,False),IF(O20=10,,O20), | IF(O20=25,,O20) | ))	
+F41	excel		Empty	=DEC2HEX( | IFERROR( | VLOOKUP($E41,$AP:$AQ,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E41,$AP:$AQ,2,False), | 0) | )	0
+L41	spill_cache		PvP		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M41	excel		PvP	=IF($L41=1,True,False)	=IF($L41=1,True,False)	FALSE
+B42	excel		RH2 Class	=IF($B$9,,P21)	=IF($B$9,,P21)	
+F42	excel		Empty	=DEC2HEX( | IFERROR( | VLOOKUP($E42,$AP:$AQ,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E42,$AP:$AQ,2,False), | 0) | )	0
+L42	spill_cache		Low HP		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M42	excel		Low HP	=IF($L42=1,True,False)	=IF($L42=1,True,False)	FALSE
+B43	excel		RH2 Weapon	=IF(M21="Unarmed",,M21)	=IF(M21="Unarmed",,M21)	
+F43	excel		Empty	=DEC2HEX( | IFERROR( | VLOOKUP($E43,$AP:$AQ,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E43,$AP:$AQ,2,False), | 0) | )	0
+L43	spill_cache		Full HP		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M43	excel		Full HP	=IF($L43=1,True,False)	=IF($L43=1,True,False)	FALSE
+B44	excel		RH2 Affinity	=IF(N21="Standard",,N21)	=IF(N21="Standard",,N21)	
+F44	excel		Empty	=DEC2HEX( | IFERROR( | VLOOKUP($E44,$AP:$AQ,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E44,$AP:$AQ,2,False), | 0) | )	0
+L44	spill_cache		Crystal Tear 1		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M44	excel		Crystal Tear 1	=INDEX($AD:$AD,MATCH($L44,$AE:$AE,0))	=INDEX($AD:$AD,MATCH($L44,$AE:$AE,0))	Empty
+B45	excel		RH2 Upgrade	=IF(NOT(VLOOKUP(M21,$AH:$AK,3,False)),IF(O21=0,,O21), | IF(VLOOKUP(M21,$AH:$AK,4,False),IF(O21=10,,O21), | IF(O21=25,,O21) | ))	=IF(NOT(VLOOKUP(M21,$AH:$AK,3,False)),IF(O21=0,,O21), | IF(VLOOKUP(M21,$AH:$AK,4,False),IF(O21=10,,O21), | IF(O21=25,,O21) | ))	
+F45	excel		Empty	=DEC2HEX( | IFERROR( | VLOOKUP($E45,$AP:$AQ,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E45,$AP:$AQ,2,False), | 0) | )	0
+L45	spill_cache		Crystal Tear 2		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M45	excel		Crystal Tear 2	=INDEX($AD:$AD,MATCH($L45,$AE:$AE,0))	=INDEX($AD:$AD,MATCH($L45,$AE:$AE,0))	Empty
+B46	excel		RH3 Class	=IF($B$9,,P22)	=IF($B$9,,P22)	
+F46	excel		Empty	=DEC2HEX( | IFERROR( | VLOOKUP($E46,$AP:$AQ,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E46,$AP:$AQ,2,False), | 0) | )	0
+L46	spill_cache		CT Active		=IFERROR(__xludf.DUMMYFUNCTION("""COMPUTED_VALUE"""),0.0)	0
+M46	excel		CT Active	=IF($L46=1,True,False)	=IF($L46=1,True,False)	FALSE
+B47	excel		RH3 Weapon	=IF(M22="Unarmed",,M22)	=IF(M22="Unarmed",,M22)	
+F47	excel		Empty	=DEC2HEX( | IFERROR( | VLOOKUP($E47,$AP:$AQ,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E47,$AP:$AQ,2,False), | 0) | )	0
+B48	excel		RH3 Affinity	=IF(N22="Standard",,N22)	=IF(N22="Standard",,N22)	
+F48	excel		Empty	=DEC2HEX( | IFERROR( | VLOOKUP($E48,$AP:$AQ,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E48,$AP:$AQ,2,False), | 0) | )	0
+B49	excel		RH3 Upgrade	=IF(NOT(VLOOKUP(M22,$AH:$AK,3,False)),IF(O22=0,,O22), | IF(VLOOKUP(M22,$AH:$AK,4,False),IF(O22=10,,O22), | IF(O22=25,,O22) | ))	=IF(NOT(VLOOKUP(M22,$AH:$AK,3,False)),IF(O22=0,,O22), | IF(VLOOKUP(M22,$AH:$AK,4,False),IF(O22=10,,O22), | IF(O22=25,,O22) | ))	
+F49	excel		Empty	=DEC2HEX( | IFERROR( | VLOOKUP($E49,$AP:$AQ,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E49,$AP:$AQ,2,False), | 0) | )	0
+B50	excel		LH1 Class	=IF($B$9,,P23)	=IF($B$9,,P23)	
+F50	excel		Empty	=DEC2HEX( | IFERROR( | VLOOKUP($E50,$AP:$AQ,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E50,$AP:$AQ,2,False), | 0) | )	0
+B51	excel		LH1 Weapon	=IF(M23="Unarmed",,M23)	=IF(M23="Unarmed",,M23)	
+E51	excel		GR Active	=Planner!$AG$27	=Planner!$AG$27	FALSE
+F51	excel		GR Active	=DEC2HEX( | IF($E51,1,0) | )	=DEC2HEX( | IF($E51,1,0) | )	0
+B52	excel		LH1 Affinity	=IF(N23="Standard",,N23)	=IF(N23="Standard",,N23)	
+E52	excel	E52:E55	2H Weapon	=Planner!$AG$33:$AG$36	=Planner!$AG$33:$AG$36	FALSE
+F52	excel		2H Weapon	=DEC2HEX( | IF($E52,1,0) | )	=DEC2HEX( | IF($E52,1,0) | )	0
+B53	excel		LH1 Upgrade	=IF(NOT(VLOOKUP(M23,$AH:$AK,3,False)),IF(O23=0,,O23), | IF(VLOOKUP(M23,$AH:$AK,4,False),IF(O23=10,,O23), | IF(O23=25,,O23) | ))	=IF(NOT(VLOOKUP(M23,$AH:$AK,3,False)),IF(O23=0,,O23), | IF(VLOOKUP(M23,$AH:$AK,4,False),IF(O23=10,,O23), | IF(O23=25,,O23) | ))	
+F53	excel		PvP	=DEC2HEX( | IF($E53,1,0) | )	=DEC2HEX( | IF($E53,1,0) | )	0
+B54	excel		LH2 Class	=IF($B$9,,P24)	=IF($B$9,,P24)	
+F54	excel		Low HP	=DEC2HEX( | IF($E54,1,0) | )	=DEC2HEX( | IF($E54,1,0) | )	0
+B55	excel		LH2 Weapon	=IF(M24="Unarmed",,M24)	=IF(M24="Unarmed",,M24)	
+F55	excel		Full HP	=DEC2HEX( | IF($E55,1,0) | )	=DEC2HEX( | IF($E55,1,0) | )	0
+B56	excel		LH2 Affinity	=IF(N24="Standard",,N24)	=IF(N24="Standard",,N24)	
+E56	excel	E56:E58	Crystal Tear 1	=Planner!$AG$29:$AG$31	=Planner!$AG$29:$AG$31	Empty
+F56	excel		Crystal Tear 1	=DEC2HEX( | IFERROR( | VLOOKUP($E56,$AD:$AE,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E56,$AD:$AE,2,False), | 0) | )	0
+B57	excel		LH2 Upgrade	=IF(NOT(VLOOKUP(M24,$AH:$AK,3,False)),IF(O24=0,,O24), | IF(VLOOKUP(M24,$AH:$AK,4,False),IF(O24=10,,O24), | IF(O24=25,,O24) | ))	=IF(NOT(VLOOKUP(M24,$AH:$AK,3,False)),IF(O24=0,,O24), | IF(VLOOKUP(M24,$AH:$AK,4,False),IF(O24=10,,O24), | IF(O24=25,,O24) | ))	
+F57	excel		Empty	=DEC2HEX( | IFERROR( | VLOOKUP($E57,$AD:$AE,2,False), | 0) | )	=DEC2HEX( | IFERROR( | VLOOKUP($E57,$AD:$AE,2,False), | 0) | )	0
+B58	excel		LH3 Class	=IF($B$9,,P25)	=IF($B$9,,P25)	
+F58	excel		CT Active	=DEC2HEX( | IF($E58,1,0) | )	=DEC2HEX( | IF($E58,1,0) | )	0
+B59	excel		LH3 Weapon	=IF(M25="Unarmed",,M25)	=IF(M25="Unarmed",,M25)	
+B60	excel		LH3 Affinity	=IF(N25="Standard",,N25)	=IF(N25="Standard",,N25)	
+B61	excel		LH3 Upgrade	=IF(NOT(VLOOKUP(M25,$AH:$AK,3,False)),IF(O25=0,,O25), | IF(VLOOKUP(M25,$AH:$AK,4,False),IF(O25=10,,O25), | IF(O25=25,,O25) | ))	=IF(NOT(VLOOKUP(M25,$AH:$AK,3,False)),IF(O25=0,,O25), | IF(VLOOKUP(M25,$AH:$AK,4,False),IF(O25=10,,O25), | IF(O25=25,,O25) | ))	
+B62	excel		Memory Slots	=IF(M26=10,,M26)	=IF(M26=10,,M26)	
+B63	excel		Spell 1	=IF(M27="Empty",,M27)	=IF(M27="Empty",,M27)	
+B64	excel		Spell 2	=IF(M28="Empty",,M28)	=IF(M28="Empty",,M28)	
+B65	excel		Spell 3	=IF(M29="Empty",,M29)	=IF(M29="Empty",,M29)	
+B66	excel		Spell 4	=IF(M30="Empty",,M30)	=IF(M30="Empty",,M30)	
+B67	excel		Spell 5	=IF(M31="Empty",,M31)	=IF(M31="Empty",,M31)	
+B68	excel		Spell 6	=IF(M32="Empty",,M32)	=IF(M32="Empty",,M32)	
+B69	excel		Spell 7	=IF(M33="Empty",,M33)	=IF(M33="Empty",,M33)	
+B70	excel		Spell 8	=IF(M34="Empty",,M34)	=IF(M34="Empty",,M34)	
+B71	excel		Spell 9	=IF(M35="Empty",,M35)	=IF(M35="Empty",,M35)	
+B72	excel		Spell 10	=IF(M36="Empty",,M36)	=IF(M36="Empty",,M36)	
+B73	excel		Spell 11	=IF(M37="Empty",,M37)	=IF(M37="Empty",,M37)	
+B74	excel		Spell 12	=IF(M38="Empty",,M38)	=IF(M38="Empty",,M38)	
+B75	excel		GR Active	=M39	=M39	FALSE
+B76	excel		2H Weapon	=M40	=M40	FALSE
+B77	excel		PvP	=M41	=M41	FALSE
+B78	excel		Low HP	=M42	=M42	FALSE
+B79	excel		Full HP	=M43	=M43	FALSE
+B80	excel		Crystal Tear 1	=IF(M44="Empty",,M44)	=IF(M44="Empty",,M44)	
+B81	excel		Crystal Tear 2	=IF(M45="Empty",,M45)	=IF(M45="Empty",,M45)	
+B82	excel		CT Active	=M46	=M46	FALSE

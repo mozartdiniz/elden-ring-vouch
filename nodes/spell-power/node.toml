@@ -1,0 +1,153 @@
+name = "spell-power"
+version = "0.1.0"
+
+purpose = "Spell attack power for one spell cast from one catalyst by one build"
+
+use_when = [
+  "the question asks what a sorcery or incantation hits for",
+  "the question compares catalysts for a spell — call this once per staff or seal",
+  "the question asks whether a build can cast a spell at all",
+]
+not_for = [
+  "weapon attack rating — call attack-power",
+  "resolving a catalyst's name — call weapon-lookup first, and pass its weapon_class and max_upgrade",
+  "which spell to use overall, which is a judgement; rank what this returns and say what you ranked on",
+]
+
+run = ["python3", "spell.py"]
+timeout_ms = 30000
+
+# The spell's own attack, from the Build Planner extraction.
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/MagicData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/WeaponData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/EquipParamWeapon.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/ReinforceParamWeapon.csv"
+
+# Which family a spell belongs to, which the Build Planner does not publish. This one comes
+# from the Prometheux ontology, and is declared here so a reader can see that the family
+# bonus rests on a different table than the attack figures do.
+[[reads]]
+path = "../../data/MagicFamily.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.spell]
+guidance = "The exact spell name. A charged cast is a separate spell with a different attack — 'Comet' and 'Comet - Charged' are not the same figure — and the result lists every form so you can say which one you priced."
+
+[params.catalyst]
+guidance = "The staff or seal, from weapon-lookup's `resolved`."
+
+[params.catalyst_class]
+guidance = "Pass weapon-lookup's `weapon_class` for the catalyst. It makes casting from a sword a refusal you can act on rather than a puzzling zero."
+
+[params.upgrade]
+guidance = "Use weapon-lookup's `max_upgrade`. Catalysts vary more than they look: the Academy Glintstone Staff and the Carian Glintstone Staff both reach +25 while taking no affinity, and the Carian Regal Scepter stops at +10."
+
+[params.max_upgrade]
+guidance = "Copy weapon-lookup's `max_upgrade` for the catalyst."
+
+[params.starting_class]
+guidance = "Only sets the stat floors. Leave it out unless the user named a class."
+
+[params.strength]
+guidance = "The build's strength. Catalysts scale on intelligence, faith and arcane, but the slot still needs a full spread."
+
+[params.dexterity]
+guidance = "The build's dexterity."
+
+[params.intelligence]
+guidance = "The build's intelligence."
+
+[params.faith]
+guidance = "The build's faith."
+
+[params.arcane]
+guidance = "The build's arcane."
+
+[[requires]]
+expr = "input.upgrade >= 0 && input.upgrade <= 25"
+message = "upgrade must be between 0 and 25; call weapon-lookup for this catalyst's actual cap"
+
+[[requires]]
+expr = "!has(input.max_upgrade) || input.upgrade <= input.max_upgrade"
+message = "this catalyst cannot be upgraded that far; weapon-lookup reported a lower max_upgrade for it"
+
+[[requires]]
+expr = '!has(input.catalyst_class) || input.catalyst_class in ["Glintstone Staff", "Sacred Seal"]'
+message = "spells are cast from a Glintstone Staff or a Sacred Seal; weapon-lookup reported another class for this weapon, so it cannot cast anything"
+
+[[requires]]
+expr = """
+input.strength >= 1 && input.strength <= 99 &&
+input.dexterity >= 1 && input.dexterity <= 99 &&
+input.intelligence >= 1 && input.intelligence <= 99 &&
+input.faith >= 1 && input.faith <= 99 &&
+input.arcane >= 1 && input.arcane <= 99
+"""
+message = "every stat must be between 1 and 99"
+
+# --- postconditions ---
+
+[[ensures]]
+expr = "result.upgrade <= result.max_upgrade"
+
+[[ensures]]
+expr = "!has(input.max_upgrade) || input.max_upgrade == result.max_upgrade"
+
+# The one piece of arithmetic in this collection that is not the oracle's: the Python scripts
+# stop at the spell buff. Stating it as a contract means the multiply is checked on every
+# call, not just in the fixtures that pin it against the Prometheux figures.
+[[ensures]]
+expr = """
+result.attack - result.magic_attack * result.spell_buff / 100.0 * result.bonus < 0.000001 &&
+result.magic_attack * result.spell_buff / 100.0 * result.bonus - result.attack < 0.000001
+"""
+
+[[ensures]]
+expr = "result.attack_shown <= result.attack && result.attack < result.attack_shown + 1"
+
+# A bonus is either applied for a family this spell belongs to, or it is exactly 1.
+[[ensures]]
+expr = """
+result.bonus_applied
+  ? (result.bonus > 1.0 && result.bonus_family in result.spell_families && result.family_source != "")
+  : (result.bonus == 1.0 && result.bonus_family == "" && result.family_source == "")
+"""
+
+# Castability is the requirements, not a separate opinion — and an uncastable spell has to
+# name what is short, or the answer is unactionable.
+[[ensures]]
+expr = "result.castable == (size(result.unmet) == 0)"
+
+[[ensures]]
+expr = """
+result.castable == (
+  input.intelligence >= result.requirement.intelligence &&
+  input.faith >= result.requirement.faith &&
+  input.arcane >= result.requirement.arcane
+)
+"""
+
+# The spell priced is one of the forms reported, so an answer naming the others cannot be read
+# as covering them.
+[[ensures]]
+expr = "result.spell in result.forms"
+
+[[examples]]
+ask = "what does Comet hit for with a Carian Regal Scepter at 80 intelligence?"
+call = { spell = "Comet", catalyst = "Carian Regal Scepter", catalyst_class = "Glintstone Staff", upgrade = 10, max_upgrade = 10, strength = 10, dexterity = 10, intelligence = 80, faith = 10, arcane = 10 }
+
+[[examples]]
+ask = "is the Carian Glintstone Staff better than the Regal Scepter for Adula's Moonblade?"
+call = { spell = "Adula's Moonblade", catalyst = "Carian Glintstone Staff", catalyst_class = "Glintstone Staff", upgrade = 25, max_upgrade = 25, strength = 10, dexterity = 10, intelligence = 80, faith = 10, arcane = 10 }

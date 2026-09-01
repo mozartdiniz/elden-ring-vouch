@@ -46,9 +46,31 @@ FAMILY_CSV = os.path.join(ROOT, "data", "MagicFamily.csv")
 
 
 def spells():
+    """Spells keyed by their **display** name, which is the one that is unique.
+
+    `Name` is not: "Comet" is three rows — the plain cast at 292 magic attack, and two charged
+    variants at 365. Keying on it silently keeps whichever came last, which is how this node
+    first reported a charged Comet as an ordinary one. `Display Name` distinguishes them
+    ("Comet", "Comet - Charged", "Comet - Charged (AoE)"), so it is the key, and a caller
+    asking for the base name gets the base cast.
+    """
     with open(MAGIC_CSV, newline="", encoding="utf-8") as handle:
         rows = [r for r in csv.DictReader(handle) if r.get("ID") and r["Name"]]
-    return {r["Name"]: r for r in rows}
+
+    book = {}
+    for row in rows:
+        display = (row.get("Display Name") or row["Name"]).strip()
+        book.setdefault(display, row)
+    return book
+
+
+def variants(book, name):
+    """Every named form of a spell — the plain cast and its charged variants."""
+    return sorted(
+        display
+        for display, row in book.items()
+        if row["Name"] == name or display == name
+    )
 
 
 def families():
@@ -82,6 +104,7 @@ def main():
     if spell is None:
         print(f"no spell named {spell_name!r}", file=sys.stderr)
         sys.exit(1)
+    forms = variants(book, spell["Name"])
 
     build = planner.PlannerInputs(
         starting_class=request.get("starting_class", "Wretch"),
@@ -128,6 +151,9 @@ def main():
     result = {
         "spell": spell_name,
         "spell_type": spell.get("Type") or "",
+        # A charged cast is a different spell with the same name and a different attack. Naming
+        # the other forms keeps an answer about "Comet" from being read as covering all three.
+        "forms": forms,
         "catalyst": catalyst,
         "catalyst_class": row["Weapon Class"],
         "upgrade": int(request["upgrade"]),
@@ -139,6 +165,7 @@ def main():
         # Named so an answer can say *why* a staff is better, not just that it is.
         "bonus_family": bonus_family if applies else "",
         "spell_families": sorted(spell_families),
+        "family_source": "MagicFamily.csv (Prometheux ontology)" if applies else "",
         "attack": attack,
         "attack_shown": int(attack),
         "fp_cost": number(spell.get("mp")),

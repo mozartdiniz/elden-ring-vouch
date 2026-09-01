@@ -1,0 +1,69 @@
+# Node fixtures (§7.1).
+#
+# The five `spell_ar` cases below are pinned against the **Prometheux Elden Ring Brain**
+# ontology, the independent implementation this collection is a second version of. Its figures
+# are recorded in `prometheux-workspace/HANDOFF.md`, and they are the only check available on
+# the one piece of arithmetic here that the Python oracle does not do: the scripts stop at the
+# spell buff, and `attack = magic_attack x spell_buff / 100 x bonus` is ours.
+#
+# All five agree to six significant figures. Getting there took a real bug out of this
+# collection: the Academy and Carian Glintstone staves reach +25 without taking any affinity,
+# and `max_upgrade` had capped them at +10.
+
+[[case]]
+name = "Comet from a Carian Regal Scepter (Prometheux: 1090.912)"
+input = { spell = "Comet", catalyst = "Carian Regal Scepter", upgrade = 10, strength = 10, dexterity = 10, intelligence = 80, faith = 10, arcane = 10 }
+expect = { "result.attack" = 1090.912, "result.spell_buff" = 373.6, "result.magic_attack" = 292.0, "result.bonus" = 1.0 }
+
+[[case]]
+name = "Comet from Lusat's Glintstone Staff (Prometheux: 1207.42)"
+input = { spell = "Comet", catalyst = "Lusat's Glintstone Staff", upgrade = 10, strength = 10, dexterity = 10, intelligence = 80, faith = 10, arcane = 10 }
+expect = { "result.attack" = 1207.42 }
+
+# Lusat's boosts every school, and that boost is already inside its spell buff. Its
+# castingBonusRate reads "1.5x FP cost", not a number, so no multiplier is applied on top.
+[[case]]
+name = "a bonus already inside the spell buff is not applied twice"
+input = { spell = "Comet", catalyst = "Lusat's Glintstone Staff", upgrade = 10, strength = 10, dexterity = 10, intelligence = 80, faith = 10, arcane = 10 }
+expect = { "result.bonus" = 1.0, "result.bonus_applied" = false }
+
+# The staff that exposed the upgrade-cap bug: it takes no affinity and still reaches +25.
+[[case]]
+name = "Comet from an Academy Glintstone Staff at +25 (Prometheux: 1009.444)"
+input = { spell = "Comet", catalyst = "Academy Glintstone Staff", upgrade = 25, max_upgrade = 25, strength = 10, dexterity = 10, intelligence = 80, faith = 10, arcane = 10 }
+expect = { "result.attack" = 1009.444, "result.spell_buff" = 345.7 }
+
+[[case]]
+name = "Adula's Moonblade on a Carian Glintstone Staff, Carian Sword bonus (Prometheux: 503.97)"
+input = { spell = "Adula's Moonblade", catalyst = "Carian Glintstone Staff", upgrade = 25, max_upgrade = 25, strength = 10, dexterity = 10, intelligence = 80, faith = 10, arcane = 10 }
+expect = { "result.attack" = 503.97, "result.bonus" = 1.15, "result.bonus_applied" = true, "result.bonus_family" = "Carian Sword" }
+
+[[case]]
+name = "Ranni's Dark Moon on a Regal Scepter, Full Moon bonus (Prometheux: 1356.168)"
+input = { spell = "Ranni's Dark Moon", catalyst = "Carian Regal Scepter", upgrade = 10, strength = 10, dexterity = 10, intelligence = 80, faith = 10, arcane = 10 }
+expect = { "result.attack" = 1356.168, "result.bonus" = 1.1, "result.bonus_family" = "Full Moon" }
+
+# --- what the ontology has no opinion about -----------------------------------------
+
+# "Comet" is three rows in MagicData: the plain cast at 292, and two charged variants at 365.
+# Keying on Name kept whichever came last, so this node once reported a charged Comet as an
+# ordinary one. Display Name is the unique key, and the other forms are named in the result.
+[[case]]
+name = "a charged variant is a different spell, and both are reachable"
+input = { spell = "Comet - Charged", catalyst = "Carian Regal Scepter", upgrade = 10, strength = 10, dexterity = 10, intelligence = 80, faith = 10, arcane = 10 }
+expect = { "result.magic_attack" = 365.0, "result.forms[0]" = "Comet", "result.forms[1]" = "Comet - Charged" }
+
+[[case]]
+name = "a spell the build cannot cast says what is short"
+input = { spell = "Ranni's Dark Moon", catalyst = "Carian Regal Scepter", upgrade = 10, strength = 10, dexterity = 10, intelligence = 20, faith = 10, arcane = 10 }
+expect = { "result.castable" = false, "result.unmet[0]" = "intelligence", "result.requirement.intelligence" = 68 }
+
+[[case]]
+name = "casting from something that is not a catalyst is refused"
+input = { spell = "Comet", catalyst = "Longsword", catalyst_class = "Straight Sword", upgrade = 25, strength = 10, dexterity = 10, intelligence = 80, faith = 10, arcane = 10 }
+expect_code = 11
+
+[[case]]
+name = "an upgrade past the catalyst's cap is refused"
+input = { spell = "Comet", catalyst = "Carian Regal Scepter", upgrade = 25, max_upgrade = 10, strength = 10, dexterity = 10, intelligence = 80, faith = 10, arcane = 10 }
+expect_code = 11

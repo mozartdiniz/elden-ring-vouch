@@ -66,6 +66,7 @@ fixture.
 | `character-build` | A starting class plus the stats a user named → the full spread, rune level, HP, FP, stamina, equip load |
 | `attack-power` | One weapon at one upgrade and stat spread → attack rating, scaling grades, requirements, status, guard |
 | `optimal-affinity` | All thirteen affinities of one weapon, ranked by damage against a target |
+| `spell-power` | One spell from one catalyst → attack, family bonus, FP cost, whether the build can cast it |
 
 The order is the routing: **character-build** when the user described a build by only some of
 its stats, **weapon-lookup** for any question naming a weapon, then **attack-power** for what
@@ -114,6 +115,31 @@ minimum, which is real data, and the result names which stats nobody chose.
 The general rule, and it is worth stating because it is easy to get backwards: **the fix for a
 fabricated number is usually upstream of where it appears.** Checking harder at the end catches
 it; not making the caller invent it stops it.
+
+## The second implementation, actually used
+
+`spell-power` is the one node whose arithmetic is not the oracle's. The Python scripts stop at
+a catalyst's spell buff; `attack = magic_attack x spell_buff / 100 x bonus` is ours, and the
+family bonus needs `data/MagicFamily.csv`, which comes from the Prometheux ontology rather than
+the spreadsheet.
+
+So its fixtures are pinned against **that ontology's own recorded figures** — the independent
+implementation this collection is a second version of. All five agree to six significant
+figures:
+
+| | Prometheux | here |
+|---|---|---|
+| Comet, Carian Regal Scepter +10 | 1090.912 | 1090.912 |
+| Comet, Lusat's Glintstone Staff +10 | 1207.42 | 1207.42 |
+| Comet, Academy Glintstone Staff +25 | 1009.444 | 1009.444 |
+| Adula's Moonblade, Carian Glintstone Staff +25 | 503.97 | 503.97 |
+| Ranni's Dark Moon, Carian Regal Scepter +10 | 1356.168 | 1356.168 |
+
+Getting there took a real bug out of this collection. `max_upgrade` was "+25 if infusable, else
++10", which is right for 512 of the 570 weapons and wrong for 58 — including the Academy and
+Carian Glintstone staves, which take no affinity and still upgrade to +25. Two of the five
+figures disagreed until the cap was read from the reinforce table instead, where it belongs.
+That is what a second implementation is for, and it earned its place on the first comparison.
 
 ## Testing
 

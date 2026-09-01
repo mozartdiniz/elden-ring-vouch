@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "spell-power output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "spell", "spell_type", "forms", "catalyst", "catalyst_class", "upgrade", "max_upgrade",
+    "spell_buff", "magic_attack", "bonus", "bonus_applied", "bonus_family", "spell_families",
+    "family_source", "attack", "attack_shown", "fp_cost", "requirement", "castable", "unmet"
+  ],
+  "properties": {
+    "spell": { "type": "string" },
+    "spell_type": { "type": "string", "description": "Sorcery or Incantation." },
+    "forms": {
+      "type": "array", "items": { "type": "string" },
+      "description": "Every named form of this spell, e.g. Comet, Comet - Charged, Comet - Charged (AoE). They have different attack values; this result covers only the one named."
+    },
+    "catalyst": { "type": "string" },
+    "catalyst_class": { "type": "string" },
+    "upgrade": { "type": "integer", "minimum": 0, "maximum": 25 },
+    "max_upgrade": { "type": "integer", "minimum": 0, "maximum": 25 },
+    "spell_buff": { "type": "number", "exclusiveMinimum": 0, "description": "The catalyst's spell buff, the figure the game shows on it. Carries all the stat scaling." },
+    "magic_attack": { "type": "number", "exclusiveMinimum": 0, "description": "The spell's own attack value, before the catalyst." },
+    "bonus": { "type": "number", "exclusiveMinimum": 0, "description": "The catalyst's family multiplier, or 1.0 when none applies." },
+    "bonus_applied": { "type": "boolean" },
+    "bonus_family": { "type": "string", "description": "The family the bonus was applied for, empty when none was." },
+    "spell_families": { "type": "array", "items": { "type": "string" } },
+    "family_source": { "type": "string", "description": "Where the family membership came from, when a bonus was applied. Not the Build Planner: say so if it matters." },
+    "attack": { "type": "number", "exclusiveMinimum": 0, "description": "magic_attack x spell_buff / 100 x bonus." },
+    "attack_shown": { "type": "integer", "description": "The same figure truncated, as displayed." },
+    "fp_cost": { "type": "number", "minimum": 0 },
+    "castable": { "type": "boolean", "description": "Whether the build meets every requirement. False means the spell cannot be cast at all — not that it is weaker." },
+    "unmet": { "type": "array", "items": { "type": "string" } },
+    "requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["intelligence", "faith", "arcane"],
+      "properties": {
+        "intelligence": { "type": "integer", "minimum": 0 },
+        "faith": { "type": "integer", "minimum": 0 },
+        "arcane": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

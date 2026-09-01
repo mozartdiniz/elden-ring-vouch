@@ -46,6 +46,14 @@ expect_node = "optimal-affinity"
 expect_params = { weapon = "Zweihander", two_hand = true }
 attest = true
 
+# Two catalysts, one spell: the comparison needs a call each, and the staff that wins here is
+# the one whose +25 cap this collection originally got wrong.
+[[eval]]
+ask = "I'm at 80 intelligence. What does Comet hit for from a Carian Regal Scepter, and is Lusat's better?"
+expect_node = "spell-power"
+expect_params = { spell = "Comet" }
+attest = true
+
 # Squarely outside the collection: nothing here knows where anything is, and a model asked
 # this without tools will happily invent a location.
 [[eval]]

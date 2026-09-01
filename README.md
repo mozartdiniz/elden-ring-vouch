@@ -67,6 +67,7 @@ fixture.
 | `attack-power` | One weapon at one upgrade and stat spread → attack rating, scaling grades, requirements, status, guard |
 | `optimal-affinity` | All thirteen affinities of one weapon, ranked by damage against a target |
 | `spell-power` | One spell from one catalyst → attack, family bonus, FP cost, whether the build can cast it |
+| `equip-load` | A loadout against a build's equip load → weight, roll type, and the endurance to change it |
 
 The order is the routing: **character-build** when the user described a build by only some of
 its stats, **weapon-lookup** for any question naming a weapon, then **attack-power** for what
@@ -183,9 +184,19 @@ elden-ring-vouch/
 
 ## What is not ported yet
 
-The Prometheux ontology this collection is a second implementation of covers considerably
-more: optimal affinity against real enemy defences, spell scaling and catalyst choice, armour
-and poise, guard and status comparison, and full loadout planning. `opt_affinity_calc.py` and
-most of `planner.py` are vendored here and unused so far.
+The Prometheux ontology this collection is a second implementation of still covers more:
+armour damage negation and resistances, poise, guard and status comparison, and the parts of
+loadout planning beyond weight.
+
+Two things are deliberately absent rather than pending:
+
+**Talisman effects.** `planner.py` never modelled them — the Build Planner port stubbed
+`EffectData_Active` — so Great-Jar's Arsenal does not raise equip load here. `equip-load`
+therefore does not take a talisman, and returns `talismans_modelled: false`, rather than
+accepting one and quietly ignoring it.
+
+**Poise.** The planner returns a poise figure on a scale we have not reconciled with the
+number the game shows, so it is not published. A figure whose meaning is unverified is worse
+than an absent one, because it reads as authoritative.
 
 Nothing here does ashes of war, item locations, or lore, and nothing here should pretend to.

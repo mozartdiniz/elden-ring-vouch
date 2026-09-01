@@ -1,0 +1,113 @@
+name = "equip-load"
+version = "0.1.0"
+
+purpose = "What a loadout weighs against a build's equip load, and which roll it leaves"
+
+use_when = [
+  "the question asks whether a build can medium-roll or light-roll in some armour",
+  "the question asks how much endurance a loadout needs",
+  "the user is choosing armour and cares about weight",
+]
+not_for = [
+  "armour damage negation, poise or resistances — not published by this node",
+  "talisman effects on equip load: Great-Jar's Arsenal and Erdtree's Favor are not modelled at all, and the result says so",
+  "weapon damage — call attack-power",
+]
+
+run = ["python3", "load.py"]
+timeout_ms = 30000
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/ArmorData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/RollTypeData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/WeaponData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/StartingClassData.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.endurance]
+guidance = "The build's endurance, from character-build's `stats.endurance` if you have it. Nothing else about the build affects equip load."
+
+[params.starting_class]
+guidance = "Only sets the endurance floor. Leave it out unless the user named a class."
+
+[params.head]
+guidance = "Exact armour name. Omit any piece the user is not wearing rather than guessing at one — a missing piece weighs nothing, an invented one weighs something."
+
+[params.chest]
+guidance = "Exact armour name, or omit."
+
+[params.arms]
+guidance = "Exact armour name, or omit."
+
+[params.legs]
+guidance = "Exact armour name, or omit."
+
+[params.weapons]
+guidance = "Every weapon carried, by exact name, up to six — three per hand. A weapon in the off-hand weighs the same as one in the right hand."
+
+[[requires]]
+expr = "input.endurance >= 1 && input.endurance <= 99"
+message = "endurance must be between 1 and 99"
+
+# --- postconditions ---
+
+# Unused capacity has to be the subtraction it claims, so a reader never redoes it.
+[[ensures]]
+expr = """
+result.equip_load - result.equipped_weight - result.load_remaining < 0.000001 &&
+result.load_remaining - (result.equip_load - result.equipped_weight) < 0.000001
+"""
+
+# The roll changes before the capacity runs out, so the headroom before that happens can never
+# exceed the unused capacity. This started as an assumption that the two were the same figure,
+# which the contract caught: at 37.3 of 72 they are 34.7 and 13.1.
+[[ensures]]
+expr = "result.weight_before_roll_change <= result.load_remaining"
+
+[[ensures]]
+expr = "result.equipped_weight >= 0.0 && result.equip_load > 0.0"
+
+[[ensures]]
+expr = "result.endurance == input.endurance || result.endurance > input.endurance"
+
+# A roll is one of the four the game has. An empty or invented category would be worse than
+# the raw percentage, because it reads as authoritative.
+[[ensures]]
+expr = 'result.roll in ["Light Load", "Med. Load", "Heavy Load", "Overloaded"]'
+
+# Overloaded is exactly the state of carrying more than you can, and the roll has to agree
+# with the arithmetic rather than being set beside it.
+[[ensures]]
+expr = 'result.load_remaining >= 0.0 || result.roll == "Overloaded"'
+
+# Reaching a light roll is at least as demanding as reaching a medium one, whenever both are
+# reachable at all. A zero means the roll is out of reach and is not a comparison.
+[[ensures]]
+expr = """
+result.end_for_light_roll == 0 || result.end_for_mid_roll == 0 ||
+result.end_for_light_roll >= result.end_for_mid_roll
+"""
+
+# This node never models talismans. Stating it as a contract keeps a later change from
+# quietly turning the flag true while the arithmetic stays the same.
+[[ensures]]
+expr = "!result.talismans_modelled"
+
+[[examples]]
+ask = "can I medium-roll in the Knight set with Ordovis's Greatsword at 25 endurance?"
+call = { endurance = 25, head = "Knight Helm", chest = "Knight Armor", arms = "Knight Gauntlets", legs = "Knight Greaves", weapons = ["Ordovis's Greatsword"] }
+
+[[examples]]
+ask = "how much endurance do I need to light-roll naked with a Longsword?"
+call = { endurance = 10, weapons = ["Longsword"] }

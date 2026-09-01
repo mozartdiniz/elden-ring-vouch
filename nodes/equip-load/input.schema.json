@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "equip-load input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["endurance"],
+  "properties": {
+    "endurance": { "type": "integer", "description": "The build's endurance. Equip load depends on this alone." },
+    "starting_class": { "type": "string", "description": "Only sets the endurance floor. Default Wretch." },
+    "head": { "type": "string", "description": "Exact armour name, or omit for a bare head." },
+    "chest": { "type": "string" },
+    "arms": { "type": "string" },
+    "legs": { "type": "string" },
+    "weapons": {
+      "type": "array",
+      "maxItems": 6,
+      "items": { "type": "string" },
+      "description": "Exact weapon names carried, up to six. Weight does not depend on upgrade or affinity."
+    }
+  }
+}

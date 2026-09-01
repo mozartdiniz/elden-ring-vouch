@@ -1,0 +1,54 @@
+# Node fixtures (§7.1).
+
+[[case]]
+name = "the Knight set with a greatsword medium-rolls at 25 endurance"
+input = { endurance = 25, head = "Knight Helm", chest = "Knight Armor", arms = "Knight Gauntlets", legs = "Knight Greaves", weapons = ["Ordovis's Greatsword"] }
+expect = { "result.equip_load" = 72.0, "result.equipped_weight" = 37.3, "result.roll" = "Med. Load", "result.end_for_light_roll" = 65 }
+
+# The two margins are different questions, and were the same field until a contract caught it:
+# capacity spare is 34.7, headroom before the roll drops is 13.1.
+[[case]]
+name = "unused capacity and roll headroom are different figures"
+input = { endurance = 25, head = "Knight Helm", chest = "Knight Armor", arms = "Knight Gauntlets", legs = "Knight Greaves", weapons = ["Ordovis's Greatsword"] }
+expect = { "result.load_remaining" = 34.7, "result.weight_before_roll_change" = 13.1 }
+
+[[case]]
+name = "nothing equipped is a light roll with everything spare"
+input = { endurance = 10 }
+expect = { "result.equipped_weight" = 0.0, "result.roll" = "Light Load" }
+
+[[case]]
+name = "a bare build with one weapon"
+input = { endurance = 10, weapons = ["Longsword"] }
+expect = { "result.roll" = "Light Load" }
+
+# More armour than the build can carry: the roll has to say Overloaded rather than reporting a
+# negative margin and leaving the reader to work out what that means.
+# Carrying more than the cap. The planner reports an unreachable roll as the string
+# "Not Possible" rather than a number, which crashed this node until it was translated to 0.
+[[case]]
+name = "carrying more than the cap is Overloaded, and the rolls are unreachable"
+input = { endurance = 1, head = "Bull-Goat Helm", chest = "Bull-Goat Armor", arms = "Bull-Goat Gauntlets", legs = "Bull-Goat Greaves" }
+expect = { "result.roll" = "Overloaded", "result.end_for_light_roll" = 0 }
+
+[[case]]
+name = "talismans are never modelled, and the result says so"
+input = { endurance = 25 }
+expect = { "result.talismans_modelled" = false }
+
+[[case]]
+name = "an endurance above 99 is refused"
+input = { endurance = 120 }
+expect_code = 11
+
+# Six slots is the shape of a character, not a judgement about competence, so the schema
+# rejects a seventh as malformed (exit 10) rather than the contract refusing it.
+[[case]]
+name = "a seventh weapon does not fit the shape of a character"
+input = { endurance = 25, weapons = ["Longsword", "Longsword", "Longsword", "Longsword", "Longsword", "Longsword", "Longsword"] }
+expect_code = 10
+
+[[case]]
+name = "a missing endurance is a caller error"
+input = { head = "Knight Helm" }
+expect_code = 10

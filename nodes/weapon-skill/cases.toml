@@ -47,3 +47,23 @@ expect_code = 11
 name = "a missing query is a caller error"
 input = { }
 expect_code = 10
+
+# Seven families in the table are a name plus " ?" — the source marking a hit it could not
+# confirm — and normalising the punctuation away made all seven skills unresolvable: the query
+# matched both the real family and its flagged twin and came back ambiguous between a name and
+# itself. Loretta's Slash and Establish Order are two of the seven, and both are named in the
+# validation battery.
+[[case]]
+name = "a name is not ambiguous with itself plus a question mark"
+input = { query = "Loretta's Slash" }
+expect = { "result.skill" = "Loretta's Slash", "result.ambiguous" = false, "result.hit_count" = 24, "result.highest_motion_value" = 172.0, "result.uncertain" = false }
+
+[[case]]
+name = "and the flagged row is still reachable, and says it is flagged"
+input = { query = "Loretta's Slash ?" }
+expect = { "result.skill" = "Loretta's Slash ?", "result.hit_count" = 1, "result.highest_motion_value" = 0.0, "result.uncertain" = true }
+
+[[case]]
+name = "the Golden Order Greatsword's ash, one of the other six"
+input = { query = "Establish Order" }
+expect = { "result.skill" = "Establish Order", "result.ambiguous" = false, "result.hit_count" = 7, "result.highest_motion_value" = 300.0, "result.unique_to[0]" = "Golden Order Greatsword" }

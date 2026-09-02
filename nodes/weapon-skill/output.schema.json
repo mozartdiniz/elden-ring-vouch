@@ -6,6 +6,7 @@
   "required": [
     "query",
     "skill",
+    "uncertain",
     "match_count",
     "candidates",
     "candidates_truncated",
@@ -184,6 +185,10 @@
     "default_affinity": {
       "type": "string",
       "description": "The affinity the ash applies by default, from AshCompat. Empty when not recorded."
+    },
+    "uncertain": {
+      "type": "boolean",
+      "description": "True for the seven families the source flagged with a trailing '?' \u2014 a hit it could not confirm, whose zeros are an absence of data rather than a measurement."
     }
   }
 }

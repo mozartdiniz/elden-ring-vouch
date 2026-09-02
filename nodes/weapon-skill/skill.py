@@ -49,8 +49,18 @@ def number(value):
 
 
 def normalize(text):
+    """Lower-cased words, with the question mark kept as a word of its own.
+
+    Seven families in the table are a name plus " ?" — the source marking a hit it could not
+    confirm, each a single row with zero motion values beside a real family of the same name.
+    Folding the "?" away made those seven skills unresolvable: "Loretta's Slash" matched both
+    its own 24 hits and the one unverified row, and came back ambiguous between a name and
+    itself. Keeping the mark as a token lets the plain name resolve and leaves the flagged row
+    reachable by asking for it.
+    """
     text = text.lower().replace("'", "").replace("’", "")
-    return " ".join("".join(c if c.isalnum() else " " for c in text).split())
+    text = "".join(c if (c.isalnum() or c == "?") else " " for c in text)
+    return " ".join(text.replace("?", " ? ").split())
 
 
 def resolve(query, names):
@@ -107,6 +117,10 @@ def main():
     result = {
         "query": query,
         "skill": resolved,
+        # The source marks a hit it could not confirm by appending " ?" to the family name.
+        # Seven skills have one, each a single row of zeros beside the real family. Saying so
+        # keeps a zero from being read as a measurement.
+        "uncertain": resolved.rstrip().endswith("?"),
         "match_count": len(candidates),
         "candidates": candidates[:MAX_CANDIDATES],
         "candidates_truncated": len(candidates) > MAX_CANDIDATES,

@@ -7,6 +7,9 @@
     "weapon",
     "weapon_class",
     "affinity",
+    "affinity_requested",
+    "affinity_ignored",
+    "infusable",
     "upgrade",
     "max_upgrade",
     "two_hand",
@@ -43,7 +46,20 @@
       "type": "string"
     },
     "affinity": {
-      "type": "string"
+      "type": "string",
+      "description": "The affinity every figure here was computed with. Not always the one asked for: a weapon that takes none is priced as Standard."
+    },
+    "affinity_requested": {
+      "type": "string",
+      "description": "What the caller asked for. Quote this one only when affinity_ignored is false."
+    },
+    "affinity_ignored": {
+      "type": "boolean",
+      "description": "True when the requested affinity was not the one applied. Saying 'a Lightning Dragon Halberd' would then be describing a weapon that does not exist."
+    },
+    "infusable": {
+      "type": "boolean",
+      "description": "Whether the weapon takes an affinity at all."
     },
     "upgrade": {
       "type": "integer",

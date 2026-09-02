@@ -93,12 +93,20 @@ def main():
 
     calc = ap_calc.ApCalc()
 
+    # A weapon that takes no affinity is priced as Standard whatever was asked for. Searching
+    # for the spread that maximises "Lightning Dragon Halberd" and reporting the affinity back
+    # unchanged would hand the caller a number for a weapon that cannot exist — Dragon Halberd
+    # is somber, and every figure below is the Standard one.
+    infusable = bool(row["isInfuse"])
+    affinity_requested = request["affinity"]
+    affinity = affinity_requested if infusable else "Standard"
+
     def evaluate(stats):
         return calc.calculate(
             ap_calc.Inputs(
                 weapon_class=row["Weapon Class"],
                 weapon=weapon,
-                affinity=request["affinity"],
+                affinity=affinity,
                 upgrade=request["upgrade"],
                 two_hand=two_hand,
                 **{s: stats[s] for s in COMBAT},
@@ -258,7 +266,10 @@ def main():
     result = {
         "weapon": weapon,
         "weapon_class": row["Weapon Class"],
-        "affinity": request["affinity"],
+        "affinity": affinity,
+        "affinity_requested": affinity_requested,
+        "affinity_ignored": affinity != affinity_requested,
+        "infusable": infusable,
         "upgrade": int(request["upgrade"]),
         "max_upgrade": oracle.max_upgrade(row),
         "two_hand": bool(two_hand),

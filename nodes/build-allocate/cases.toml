@@ -81,3 +81,19 @@ expect = { "result.objective_responds_to_stats" = false, "result.objective_gain"
 name = "a status that does scale reports what the levelling bought"
 input = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 10, max_upgrade = 10, starting_class = "Hero", target_level = 150, focus = "bleed", vigor = 40, mind = 15, endurance = 25 }
 expect = { "result.objective_responds_to_stats" = true, "result.objective_at_minimum" = 52.351250000099 }
+
+# Asking for an affinity a weapon cannot take used to come back with the affinity repeated and
+# the Standard figures beneath it. Dragon Halberd is somber: there is no Lightning version of
+# it to build for, and the answer has to say so rather than describe one.
+[[case]]
+name = "an affinity the weapon cannot take is not the one priced"
+input = { weapon = "Dragon Halberd", affinity = "Lightning", upgrade = 10, max_upgrade = 10, starting_class = "Vagabond", target_level = 150, focus = "attack", vigor = 40, mind = 20, endurance = 25 }
+expect = { "result.affinity" = "Standard", "result.affinity_requested" = "Lightning", "result.affinity_ignored" = true, "result.infusable" = false, "result.total_ar" = 716.6500024893774, "result.stats.strength" = 70, "result.stats.dexterity" = 49 }
+
+# The spread the greedy climb could not reach: every single point moved between dexterity and
+# intelligence costs more than it buys, and only the seventh pays off. Pinned against an
+# exhaustive sweep of all 2,926 legal spreads run through the oracle directly.
+[[case]]
+name = "a soft cap a one-point swap cannot cross"
+input = { weapon = "Moonveil", affinity = "Standard", upgrade = 10, max_upgrade = 10, starting_class = "Samurai", target_level = 150, focus = "attack", vigor = 40, mind = 20, endurance = 25 }
+expect = { "result.stats.dexterity" = 66, "result.stats.intelligence" = 50, "result.total_ar" = 709.8569360643488 }

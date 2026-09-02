@@ -128,6 +128,16 @@ message = "each floor must be between 1 and 99; these are the minimums to hold b
 
 # --- postconditions ---
 
+# The affinity the figures were computed with is the applied one, and a weapon that takes no
+# affinity was priced as Standard. Without this a caller can repeat "Lightning Dragon Halberd"
+# back at a user over figures for the Standard weapon.
+[[ensures]]
+expr = "result.affinity_ignored == (result.affinity != result.affinity_requested)"
+
+[[ensures]]
+expr = "result.infusable || result.affinity == \"Standard\""
+
+
 [[ensures]]
 expr = "result.upgrade <= result.max_upgrade"
 

@@ -15,7 +15,8 @@
     "assumed",
     "stack_factors",
     "stacked_multiplier",
-    "conditional_available"
+    "conditional_available",
+    "stacked_attack_multiplier"
   ],
   "properties": {
     "items": {
@@ -558,7 +559,8 @@
           "item",
           "multiplier",
           "condition",
-          "pvp_note"
+          "pvp_note",
+          "holy_multiplier"
         ],
         "properties": {
           "item": {
@@ -573,6 +575,11 @@
           },
           "pvp_note": {
             "type": "string"
+          },
+          "holy_multiplier": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "The same figure, except where the description says holy is not multiplied in PvP \u2014 then 1.0."
           }
         }
       },
@@ -614,6 +621,55 @@
         }
       },
       "description": "Multipliers these items state that were NOT counted, because the caller did not assert their conditions. List them in an answer: they are what the player would have to do to get them."
+    },
+    "stacked_attack_multiplier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "physical",
+        "strike",
+        "slash",
+        "pierce",
+        "magic",
+        "fire",
+        "lightning",
+        "holy"
+      ],
+      "properties": {
+        "physical": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "strike": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "slash": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "pierce": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "magic": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "fire": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "lightning": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "holy": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "description": "The stack in the shape optimal-affinity's damage_multiplier takes, unconditional rates already folded in. Pass it straight through \u2014 reshaping it in a caller is arithmetic a model performs."
     }
   }
 }

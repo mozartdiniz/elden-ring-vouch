@@ -232,13 +232,20 @@ def main():
         rate = conditional["multiplier"]
         if pvp and conditional["pvp_multiplier"] is not None:
             rate = conditional["pvp_multiplier"]
+        # "holy bugged in PvP: 1x" is the description saying this bonus does not apply to holy
+        # damage in PvP at all. Carrying it as a note and multiplying holy anyway would be a
+        # figure the item's own text contradicts.
+        holy_rate = 1.0 if (pvp and "holy bugged in PvP" in conditional["pvp_note"]) else rate
         factors.append({
             "item": described_item["item"],
             "multiplier": rate,
+            "holy_multiplier": holy_rate,
             "condition": conditional["condition"],
             "pvp_note": conditional["pvp_note"],
         })
     stacked = _product(f["multiplier"] for f in factors)
+    stacked_holy = _product(f["holy_multiplier"] for f in factors)
+
 
     result = {
         "items": list(items),
@@ -246,6 +253,14 @@ def main():
         "assumed": assumed,
         "stack_factors": factors,
         "stacked_multiplier": stacked,
+        # The stack in the shape optimal-affinity's `damage_multiplier` takes, with the
+        # unconditional rates already folded in, so a caller never reshapes or re-multiplies.
+        "stacked_attack_multiplier": {
+            kind: round(
+                combined_attack[kind] * (stacked_holy if kind == "holy" else stacked), 9
+            )
+            for kind in DAMAGE_KINDS
+        },
         # What was stated and *not* counted, because the caller did not say its condition
         # holds. An answer that lists these is an answer a player can act on.
         "conditional_available": [

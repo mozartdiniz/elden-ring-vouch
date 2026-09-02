@@ -107,3 +107,11 @@ expect = { "result.stacked_multiplier" = 1.0, "result.text_only[0]" = "Dragonsca
 name = "asserting an item that was not given is a caller error"
 input = { items = ["Shard of Alexander"], assume = ["Godfrey Icon"] }
 expect_code = 20
+
+# The stack in the shape the next node takes, and the one caveat a description gives that is
+# not a plain figure: Shard of Alexander says holy is not multiplied in PvP at all, so the
+# holy entry is 1.0 while everything else is 1.15.
+[[case]]
+name = "the stack comes back shaped for optimal-affinity, holy caveat included"
+input = { items = ["Shard of Alexander", "Claw Talisman"], assume = ["Shard of Alexander", "Claw Talisman"], pvp = true }
+expect = { "result.stacked_multiplier" = 1.23625, "result.stacked_attack_multiplier.physical" = 1.23625, "result.stacked_attack_multiplier.holy" = 1.075, "result.stack_factors[0].holy_multiplier" = 1.0 }

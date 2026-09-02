@@ -238,16 +238,22 @@ elden-ring-vouch/
 
 ## What is not ported yet
 
-The Prometheux ontology this collection is a second implementation of still covers more:
-ashes of war and their motion values, boss resistances, consumables and physick tears,
-matchmaking bands, and the effect catalogues behind talismans and crystal tears.
+The Prometheux ontology this collection is a second implementation of still covers ashes of
+war and their motion values, consumables, matchmaking bands, and item locations. Those tables
+mostly live only in that workspace, not in the Build Planner extraction, so porting one starts
+by vendoring it into `data/` with its provenance recorded — the way `MagicFamily.csv` and
+`BossResist.csv` were, and never into `oracle/`.
 
 Two things are deliberately absent rather than pending:
 
-**Talisman effects.** `planner.py` never modelled them — the Build Planner port stubbed
-`EffectData_Active` — so Great-Jar's Arsenal does not raise equip load here. `equip-load`
-therefore does not take a talisman, and returns `talismans_modelled: false`, rather than
-accepting one and quietly ignoring it.
+**Talisman effects, applied.** `item-effect` says what a talisman, tear or rune is worth, and
+combines several. What nothing here does is *apply* one: `planner.py` never modelled them — the
+Build Planner port stubbed `EffectData_Active` — so Great-Jar's Arsenal does not raise equip
+load, and `character-build`, `equip-load` and `defence` all report figures before any of it.
+`equip-load` refuses to take a talisman rather than accepting one and ignoring it, and
+`item-effect` pins `applied_to_a_build: false`. Closing that gap means either modelling the
+effects in `planner.py`'s place, which is arithmetic nobody has an oracle for, or having the
+caller add the numbers and say that it did.
 
 **Poise.** The planner returns a poise figure on a scale we have not reconciled with the
 number the game shows, so it is not published. A figure whose meaning is unverified is worse

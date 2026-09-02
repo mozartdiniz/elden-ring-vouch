@@ -64,7 +64,7 @@ guidance = "The class the user named. It matters more here than anywhere else: a
 guidance = "The rune level the user asked for, e.g. 150. If the build does not fit, the result says what it would need rather than failing."
 
 [params.focus]
-guidance = "'attack' unless the user asked for a status build — 'bleed' for a bleed build, 'frost', 'poison', 'scarlet_rot', 'sleep', 'madness'. It changes the answer: Rivers of Blood at RL150 puts 97 into arcane for bleed and 56 dexterity / 59 arcane for raw attack."
+guidance = "Check `objective_responds_to_stats` in the result: false means nothing the user levels improves this focus, and the honest answer is to say so and suggest a different one rather than reporting the spread as optimised. 'attack' unless the user asked for a status build — 'bleed' for a bleed build, 'frost', 'poison', 'scarlet_rot', 'sleep', 'madness'. It changes the answer: Rivers of Blood at RL150 puts 97 into arcane for bleed and 56 dexterity / 59 arcane for raw attack."
 
 [params.two_hand]
 guidance = "True if the user says they two-hand it. It lowers the strength the weapon needs, which frees points for everything else."
@@ -185,6 +185,16 @@ result.focus == "attack"
     : (result.focus == "scarlet_rot" ? result.objective_value == result.status.scarlet_rot
     : (result.focus == "sleep" ? result.objective_value == result.status.sleep
     : result.objective_value == result.status.madness)))))
+"""
+
+# What the levelling bought is the difference it claims to be, and "this focus responds to
+# stats" is exactly a positive gain. A weapon whose status is flat — Star Fist's frost, Great
+# Stars' bleed — cannot be built toward, and saying so is more useful than a spread.
+[[ensures]]
+expr = """
+result.objective_gain - (result.objective_value - result.objective_at_minimum) < 0.000001 &&
+(result.objective_value - result.objective_at_minimum) - result.objective_gain < 0.000001 &&
+result.objective_responds_to_stats == (result.objective_gain > 0.0)
 """
 
 # The same identities `attack-power` holds to, because these are its figures: the total is the

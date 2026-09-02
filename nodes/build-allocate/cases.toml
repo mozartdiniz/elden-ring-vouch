@@ -68,3 +68,16 @@ expect_code = 11
 name = "a missing floor is a caller error, not a default"
 input = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 10, starting_class = "Samurai", target_level = 150 }
 expect_code = 10
+
+# Some weapons carry a flat status that no stat improves. Maximising it is degenerate: the
+# search finds nothing to buy and the points fall through to vigor, which looks like an
+# optimised build and is not one. The result says so rather than leaving it to be inferred.
+[[case]]
+name = "a status that does not scale reports no gain from levelling"
+input = { weapon = "Star Fist", affinity = "Cold", upgrade = 25, max_upgrade = 25, starting_class = "Hero", target_level = 150, focus = "frost", vigor = 40, mind = 15, endurance = 25 }
+expect = { "result.objective_responds_to_stats" = false, "result.objective_gain" = 0.0, "result.objective_value" = 105.0, "result.objective_at_minimum" = 105.0 }
+
+[[case]]
+name = "a status that does scale reports what the levelling bought"
+input = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 10, max_upgrade = 10, starting_class = "Hero", target_level = 150, focus = "bleed", vigor = 40, mind = 15, endurance = 25 }
+expect = { "result.objective_responds_to_stats" = true, "result.objective_at_minimum" = 52.351250000099 }

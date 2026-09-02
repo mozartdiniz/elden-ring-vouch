@@ -29,6 +29,9 @@
     "status",
     "status_shown",
     "objective_value",
+    "objective_at_minimum",
+    "objective_gain",
+    "objective_responds_to_stats",
     "requirements_met",
     "searched"
   ],
@@ -341,6 +344,19 @@
       "type": "integer",
       "minimum": 0,
       "description": "How many spreads were priced. Not a quality measure, but it says the answer came from a search rather than a rule of thumb."
+    },
+    "objective_at_minimum": {
+      "type": "number",
+      "minimum": 0,
+      "description": "What the objective is worth at the floor spread, before any point is spent on it."
+    },
+    "objective_gain": {
+      "type": "number",
+      "description": "objective_value minus objective_at_minimum: what the levelling actually bought."
+    },
+    "objective_responds_to_stats": {
+      "type": "boolean",
+      "description": "False when nothing the caller levels improves the focus \u2014 a weapon whose status buildup is flat. Then the spread is the floor plus points with nowhere useful to go, and an answer must say so rather than present it as optimised."
     }
   }
 }

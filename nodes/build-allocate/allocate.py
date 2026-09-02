@@ -123,8 +123,12 @@ def main():
     # --- the search. Every candidate is priced by the oracle, so the winner's figures are
     # figures `attack-power` would give for the same spread.
     searched = 0
+    # What the objective is worth before a single point is spent on it. If the search cannot
+    # beat this, nothing the caller levels improves what they asked to maximise — true of
+    # every weapon whose status buildup is flat, like Star Fist's frost.
+    at_minimum = objective(evaluate(stats), focus)
+    best = at_minimum
     if feasible and budget:
-        best = objective(evaluate(stats), focus)
         searched += 1
 
         for _ in range(budget):
@@ -209,6 +213,12 @@ def main():
         "status": status,
         "status_shown": {s: int(status[s]) for s in STATUS},
         "objective_value": objective(final, focus),
+        "objective_at_minimum": at_minimum,
+        "objective_gain": round(objective(final, focus) - at_minimum, 9),
+        # False means the focus does not respond to levelling at all: the spread below is the
+        # floor plus points that had nowhere useful to go. Say so rather than presenting it as
+        # an optimised build.
+        "objective_responds_to_stats": objective(final, focus) > at_minimum,
         "requirements_met": all(final.req_met.get(s, True) for s in COMBAT),
         "searched": searched,
     }

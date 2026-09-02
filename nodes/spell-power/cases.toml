@@ -102,3 +102,25 @@ expect = { "result.attack" = 640.107, "result.attack_by_type.lightning" = 640.10
 name = "a spell that deals two damage types is both of them"
 input = { spell = "Meteorite", catalyst = "Carian Regal Scepter", upgrade = 10, strength = 10, dexterity = 10, intelligence = 80, faith = 10, arcane = 10 }
 expect = { "result.attack" = 1046.08, "result.attack_by_type.physical" = 672.48, "result.attack_by_type.magic" = 373.6, "result.damage_types" = ["magic", "physical"] }
+
+# A staff casts sorceries and a seal casts incantations. Nothing in the maths knows that: the
+# spell buff is a number, the spell's attack is a number, and multiplying them priced Comet
+# cast from an Erdtree Seal at 798.766 — a well-formed figure for a cast that cannot happen.
+# Caught by question 3.3 of the validation battery, where a ranking of the best catalysts for
+# a Death *sorcery* came back led by a sacred seal.
+[[case]]
+name = "a seal cannot cast a sorcery"
+input = { spell = "Comet", catalyst = "Erdtree Seal", upgrade = 10, strength = 11, dexterity = 10, intelligence = 80, faith = 60, arcane = 10 }
+expect_code = 13
+
+[[case]]
+name = "and the caller who knows both facts gets a refusal instead"
+input = { spell = "Comet", catalyst = "Erdtree Seal", catalyst_class = "Sacred Seal", spell_type = "Sorcery", upgrade = 10, strength = 11, dexterity = 10, intelligence = 80, faith = 60, arcane = 10 }
+expect_code = 11
+
+# The Staff of the Great Beyond casts both, which is why the check reads the game's flags
+# rather than deciding from the weapon class.
+[[case]]
+name = "one catalyst casts both, and the flags say so"
+input = { spell = "Comet", catalyst = "Staff of the Great Beyond", upgrade = 10, strength = 10, dexterity = 10, intelligence = 80, faith = 10, arcane = 10 }
+expect = { "result.catalyst_can_cast_this" = true, "result.catalyst_casts[0]" = "Sorcery", "result.catalyst_casts[1]" = "Incantation" }

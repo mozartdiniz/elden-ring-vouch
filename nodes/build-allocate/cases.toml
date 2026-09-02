@@ -138,3 +138,16 @@ expect = { "result.spell_attack" = 0.0, "result.objective_responds_to_stats" = f
 name = "maximising a spell needs a spell"
 input = { weapon = "Erdtree Seal", affinity = "Standard", upgrade = 10, max_upgrade = 10, starting_class = "Prophet", target_level = 150, focus = "spell", vigor = 40, mind = 30, endurance = 20 }
 expect_code = 11
+
+# Four live stats is more spreads than the sweep will price, so this one goes through the
+# coarse-to-fine search. It is here because the greedy climb it replaced stopped at 828.33:
+# no single point moved between strength, dexterity, intelligence and faith pays for itself,
+# and only a move of several does. Pinned against an exhaustive sweep of 1,837,620 spreads.
+#
+# The spread itself is the sort of answer nothing but a calculation produces: the Frenzied
+# Flame Seal is one of two catalysts in the game whose spell buff takes strength and dexterity
+# — the Clawmark Seal is the other — so a "pure faith" build is the wrong build for it.
+[[case]]
+name = "a catalyst whose spell buff is not pure faith"
+input = { weapon = "Frenzied Flame Seal", affinity = "Standard", upgrade = 10, max_upgrade = 10, starting_class = "Prophet", target_level = 150, focus = "spell", spell = "Frenzied Burst", vigor = 40, mind = 30, endurance = 20 }
+expect = { "result.stats.strength" = 26, "result.stats.dexterity" = 30, "result.stats.intelligence" = 30, "result.stats.faith" = 43, "result.spell_attack" = 845.4 }

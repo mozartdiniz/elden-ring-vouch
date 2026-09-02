@@ -52,6 +52,13 @@ def main():
         print(f"no weapon named {catalyst!r}", file=sys.stderr)
         sys.exit(1)
 
+    # A staff casts sorceries and a seal casts incantations. Nothing in the maths knows that:
+    # the spell buff is a number and the multiply does not ask what kind of spell it is, so
+    # Comet from an Erdtree Seal priced at 798.766 — arithmetically correct, and about a cast
+    # that cannot happen. `casts` reads the game's own enableMagic / enableMiracle flags,
+    # which is how the Staff of the Great Beyond comes back as doing both.
+    catalyst_casts = oracle.casts(row)
+
     book = spellbook.book()
     spell = book.get(spell_name)
     if spell is None:
@@ -104,6 +111,8 @@ def main():
         "forms": forms,
         "catalyst": catalyst,
         "catalyst_class": row["Weapon Class"],
+        "catalyst_casts": catalyst_casts,
+        "catalyst_can_cast_this": spell.get("Type") in catalyst_casts,
         "upgrade": int(request["upgrade"]),
         "max_upgrade": oracle.max_upgrade(row),
         "spell_buff": spell_buff,

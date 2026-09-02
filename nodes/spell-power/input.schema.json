@@ -3,18 +3,64 @@
   "title": "spell-power input",
   "type": "object",
   "additionalProperties": false,
-  "required": ["spell", "catalyst", "upgrade", "strength", "dexterity", "intelligence", "faith", "arcane"],
+  "required": [
+    "spell",
+    "catalyst",
+    "upgrade",
+    "strength",
+    "dexterity",
+    "intelligence",
+    "faith",
+    "arcane"
+  ],
   "properties": {
-    "spell": { "type": "string", "description": "Exact spell name. A charged variant is a separate name, e.g. 'Comet - Charged'; the result lists every form." },
-    "catalyst": { "type": "string", "description": "The staff or seal, by exact catalogue name, from weapon-lookup's `resolved`." },
-    "catalyst_class": { "type": "string", "description": "weapon-lookup's `weapon_class` for the catalyst. Optional, but pass it: with it, casting from something that is not a catalyst is refused before the node runs." },
-    "upgrade": { "type": "integer" },
-    "max_upgrade": { "type": "integer", "minimum": 0, "maximum": 25, "description": "The catalyst's cap, from weapon-lookup. Staves vary: some reach +25 without taking any affinity." },
-    "starting_class": { "type": "string", "description": "Only affects stat floors. Default Wretch, whose floors are the lowest." },
-    "strength": { "type": "integer" },
-    "dexterity": { "type": "integer" },
-    "intelligence": { "type": "integer" },
-    "faith": { "type": "integer" },
-    "arcane": { "type": "integer" }
+    "spell": {
+      "type": "string",
+      "description": "Exact spell name. A charged variant is a separate name, e.g. 'Comet - Charged'; the result lists every form."
+    },
+    "catalyst": {
+      "type": "string",
+      "description": "The staff or seal, by exact catalogue name, from weapon-lookup's `resolved`."
+    },
+    "catalyst_class": {
+      "type": "string",
+      "description": "weapon-lookup's `weapon_class` for the catalyst. Optional, but pass it: with it, casting from something that is not a catalyst is refused before the node runs."
+    },
+    "upgrade": {
+      "type": "integer"
+    },
+    "max_upgrade": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 25,
+      "description": "The catalyst's cap, from weapon-lookup. Staves vary: some reach +25 without taking any affinity."
+    },
+    "starting_class": {
+      "type": "string",
+      "description": "Only affects stat floors. Default Wretch, whose floors are the lowest."
+    },
+    "strength": {
+      "type": "integer"
+    },
+    "dexterity": {
+      "type": "integer"
+    },
+    "intelligence": {
+      "type": "integer"
+    },
+    "faith": {
+      "type": "integer"
+    },
+    "arcane": {
+      "type": "integer"
+    },
+    "spell_type": {
+      "type": "string",
+      "enum": [
+        "Sorcery",
+        "Incantation"
+      ],
+      "description": "The kind of spell, when you know it. Paired with catalyst_class it refuses an impossible cast before the node runs."
+    }
   }
 }

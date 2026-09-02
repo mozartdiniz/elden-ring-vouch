@@ -1,0 +1,63 @@
+# Node fixtures (§7.1).
+#
+# This node exists because of Pattern 3 of the validation battery — "what are the strongest
+# weapons I can use with these stats" — which the collection could not answer at all. Every
+# other node starts from a weapon somebody named. An agent told to price 570 weapons one call
+# at a time would rank from memory instead, which is the failure this collection is for.
+
+[[case]]
+name = "the strongest katanas a dexterity/arcane build can hold"
+input = { strength = 16, dexterity = 50, intelligence = 9, faith = 9, arcane = 45, weapon_class = "Katana", limit = 3 }
+expect = { "result.best" = "Rivers of Blood", "result.best_score" = 644.6437138131148, "result.ranked_on" = "total_ar", "result.considered" = 10, "result.usable" = 6, "result.returned" = 3, "result.truncated" = true }
+
+# Eighty-one rows of the 570 are consumables, fifteen of them with no weapon ID at all, which
+# is what made the first unfiltered ranking crash rather than return them. "570 weapons" is
+# not a weapon count and the result says so.
+[[case]]
+name = "the catalogue is not all weapons"
+input = { strength = 16, dexterity = 50, intelligence = 9, faith = 9, arcane = 45, limit = 1 }
+expect = { "result.catalog_size" = 570, "result.not_weapons" = 81, "result.considered" = 489 }
+
+# A weapon the build cannot hold is priced anyway, with a penalty, and the figure looks like a
+# real one: the Star-Lined Sword ranks fifth here on 512.29 while being unwieldable. Those
+# rows are out unless asked for, and when asked for they carry the shortfall.
+[[case]]
+name = "a weapon the build cannot hold is not a weak option"
+input = { strength = 16, dexterity = 50, intelligence = 9, faith = 9, arcane = 45, weapon_class = "Katana", limit = 10, include_unusable = true }
+expect = { "result.returned" = 10, "result.ranked[4].weapon" = "Star-Lined Sword", "result.ranked[4].requirements_met" = false, "result.ranked[4].shortfall.intelligence" = 12 }
+
+[[case]]
+name = "and by default it is simply absent"
+input = { strength = 16, dexterity = 50, intelligence = 9, faith = 9, arcane = 45, weapon_class = "Katana", limit = 10 }
+expect = { "result.returned" = 6, "result.usable" = 6, "result.unusable" = 4 }
+
+# The family table earns its place here: Staff of Loss beats a staff with a spell buff 74
+# points higher, because its 1.3x applies to Night sorceries and the other's does not.
+[[case]]
+name = "a family bonus decides which staff wins"
+input = { strength = 10, dexterity = 12, intelligence = 80, faith = 10, arcane = 9, spell = "Night Comet", limit = 2 }
+expect = { "result.best" = "Staff of Loss", "result.best_score" = 1014.806, "result.ranked_on" = "spell_attack", "result.spell_type" = "Sorcery", "result.ranked[0].spell_bonus" = 1.3, "result.ranked[0].spell_bonus_family" = "Night", "result.ranked[1].weapon" = "Lusat's Glintstone Staff", "result.ranked[1].spell_buff" = 413.5 }
+
+# A seal cannot cast a sorcery. Without the filter the best catalyst for a Death *sorcery*
+# came back as the Golden Order Seal, above every staff — a well-formed number for a cast that
+# does not exist.
+[[case]]
+name = "a sorcery ranks staves only"
+input = { strength = 12, dexterity = 12, intelligence = 50, faith = 50, arcane = 9, spell = "Ancient Death Rancor", limit = 5 }
+expect = { "result.best" = "Staff of the Great Beyond", "result.spell_type" = "Sorcery", "result.considered" = 21 }
+
+# A shield's attack rating is not what a shield is for.
+[[case]]
+name = "a shield ranking carries what a shield does"
+input = { strength = 60, dexterity = 14, intelligence = 9, faith = 9, arcane = 7, weapon_class = "Greatshield", limit = 2, affinity = "best" }
+expect = { "result.ranked[0].weapon" = "Fingerprint Stone Shield", "result.ranked[0].guard_boost" = 77, "result.ranked[1].weapon" = "Verdigris Greatshield", "result.ranked[1].guard_boost" = 90, "result.ranked[1].guard_negation.physical" = 100.0 }
+
+[[case]]
+name = "an affinity that is not one of the thirteen is refused"
+input = { strength = 30, dexterity = 30, intelligence = 9, faith = 9, arcane = 9, affinity = "Bleeding" }
+expect_code = 11
+
+[[case]]
+name = "a stat outside 1..99 is refused"
+input = { strength = 120, dexterity = 30, intelligence = 9, faith = 9, arcane = 9 }
+expect_code = 10

@@ -1,0 +1,172 @@
+name = "weapon-rank"
+version = "0.1.0"
+
+purpose = "Rank the weapons a build can actually use, by what they hit for at those stats"
+
+use_when = [
+  "the question is which weapon to use, given a stat spread or a build archetype",
+  "the question asks for the strongest weapon of a class — the best katana, colossal sword, greatshield — for these stats",
+  "the question asks which staff or seal to cast a named spell from",
+  "the user pastes a stat block and asks what they can wield",
+]
+not_for = [
+  "one weapon's attack rating — call attack-power",
+  "which affinity to put on a weapon already chosen — call optimal-affinity",
+  "which spread to build — call build-allocate",
+  "resolving a name the user wrote — call weapon-lookup",
+]
+
+run = ["python3", "rank.py"]
+timeout_ms = 120000
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/WeaponData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/EquipParamWeapon.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/ReinforceParamWeapon.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/AttackElementCorrectParam.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/CalcCorrectGraphEz.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/MagicData.csv"
+
+[[reads]]
+path = "../../data/MagicFamily.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.strength]
+guidance = "The build's strength. If the user gave only some stats, call character-build first: the unnamed ones are the starting class's minimums, not numbers you pick."
+
+[params.dexterity]
+guidance = "The build's dexterity."
+
+[params.intelligence]
+guidance = "The build's intelligence."
+
+[params.faith]
+guidance = "The build's faith."
+
+[params.arcane]
+guidance = "The build's arcane."
+
+[params.weapon_class]
+guidance = "Use it when the user named a category — 'best katana', 'melhor greatshield'. Without it the list spans all 570 weapons and will mix in shields and catalysts, which are ranked on the same attack rating and are not what a 'best weapon' question means."
+
+[params.affinity]
+guidance = "Leave it out for the weapons as found. 'best' asks a different question — the best each weapon could be after infusing — and the answer has to say which was ranked, because the two lists differ."
+
+[params.two_hand]
+guidance = "True if the user says they two-hand. It changes which weapons the build can hold at all, not just the numbers."
+
+[params.limit]
+guidance = "Fifteen unless the user asked for more. `truncated` says whether more qualified."
+
+[params.include_unusable]
+guidance = "Leave it false. True is for 'what would I need to use X' questions, where each row's `shortfall` is the answer."
+
+[params.spell]
+guidance = "Only when the question is which catalyst to cast a named spell from. It changes the ranking from attack rating to what that spell hits for, and restricts the list to staves and seals."
+
+[[requires]]
+expr = """
+input.strength >= 1 && input.strength <= 99 &&
+input.dexterity >= 1 && input.dexterity <= 99 &&
+input.intelligence >= 1 && input.intelligence <= 99 &&
+input.faith >= 1 && input.faith <= 99 &&
+input.arcane >= 1 && input.arcane <= 99
+"""
+message = "every stat must be between 1 and 99"
+
+[[requires]]
+expr = '''
+!has(input.affinity) || input.affinity in [
+  "best", "Standard", "Heavy", "Keen", "Quality", "Fire", "Flame Art", "Lightning",
+  "Sacred", "Magic", "Cold", "Poison", "Blood", "Occult"
+]
+'''
+message = "affinity must be 'best' or one of the thirteen"
+
+# --- postconditions ---
+
+# `best` is a claim about the whole list, not a position in an array.
+[[ensures]]
+expr = """
+size(result.ranked) == 0 ||
+  (result.ranked[0].weapon == result.best && result.ranked[0].score == result.best_score)
+"""
+
+[[ensures]]
+expr = "result.ranked.all(r, r.score <= result.best_score)"
+
+# Ordered, and no longer than asked for.
+[[ensures]]
+expr = "result.returned == size(result.ranked) && result.returned <= result.limit"
+
+# A weapon the build cannot hold is priced by the oracle anyway, with a penalty, and a row
+# like that in a "what can I use" list is worse than no row. It is here only when asked for.
+[[ensures]]
+expr = "result.include_unusable || result.ranked.all(r, r.requirements_met)"
+
+[[ensures]]
+expr = "result.ranked.all(r, r.requirements_met == (size(r.shortfall) == 0))"
+
+# Every weapon is priced at its own cap: a somber at +10 against a smithing at +25 is the
+# comparison the player is actually making.
+[[ensures]]
+expr = "result.ranked.all(r, r.upgrade == r.max_upgrade)"
+
+# A weapon that takes no affinity was priced Standard, whatever mode was asked for.
+[[ensures]]
+expr = "result.ranked.all(r, r.infusable || r.affinity == \"Standard\")"
+
+# The class filter is honoured, and reported so an answer cannot present a katana ranking as
+# a ranking of everything.
+[[ensures]]
+expr = "result.weapon_class == \"\" || result.ranked.all(r, r.weapon_class == result.weapon_class)"
+
+# Ranking on a spell means every row is a catalyst with a spell buff; ranking on attack rating
+# means no row claims one.
+[[ensures]]
+expr = """
+result.ranked_on == "spell_attack"
+  ? result.ranked.all(r, r.spell_buff > 0.0)
+  : result.ranked.all(r, r.spell_buff == 0.0)
+"""
+
+[[ensures]]
+expr = "(result.ranked_on == \"spell_attack\") == (result.spell != \"\")"
+
+# Nothing in the list is a cast that cannot happen. A staff casts sorceries and a seal casts
+# incantations, and without this the best catalyst for a sorcery came back as a seal.
+[[ensures]]
+expr = """
+result.spell_type == "" ||
+result.ranked.all(r, r.weapon_class == "Glintstone Staff" || r.weapon_class == "Sacred Seal")
+"""
+
+[[ensures]]
+expr = "result.usable + result.unusable == result.considered"
+
+[[examples]]
+ask = "estou com DEX 50 / ARC 45 no nivel 150, quais as melhores katanas pra mim?"
+call = { strength = 16, dexterity = 50, intelligence = 9, faith = 9, arcane = 45, weapon_class = "Katana", limit = 5 }
+
+[[examples]]
+ask = "what are the strongest weapons I can use at 55 strength and 60 faith?"
+call = { strength = 55, dexterity = 14, intelligence = 9, faith = 60, arcane = 9, limit = 15 }
+
+[[examples]]
+ask = "qual o melhor staff pra lancar Comet numa build de INT puro?"
+call = { strength = 10, dexterity = 12, intelligence = 80, faith = 10, arcane = 9, spell = "Comet", limit = 5 }

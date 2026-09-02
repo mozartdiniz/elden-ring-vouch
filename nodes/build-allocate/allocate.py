@@ -52,9 +52,11 @@ DAMAGE = ("physical", "magic", "fire", "lightning", "holy")
 MAX_STAT = 99
 # Rune level 1 is a stat sum of 79.
 LEVEL_BASE = 79
-# How many spreads the exhaustive sweep will price before falling back to the climb. The
-# oracle prices about seven thousand a second, so this is a few seconds at worst.
-SWEEP_CAP = 50000
+# How many spreads the exhaustive sweep will price before falling back to the coarse-to-fine
+# search. The oracle prices about seven thousand a second, so this is around twenty seconds at
+# worst — slow for a node, and worth it: below this line the answer is the optimum rather than
+# a good spread, and every case that has actually come up sits under it.
+SWEEP_CAP = 40000
 
 
 def sweep_cost(live, budget):
@@ -289,46 +291,75 @@ def main():
                     if score(trial) < best:
                         break
                     stats = trial
-        else:
-            for _ in range(budget):
-                gains = []
-                for stat in COMBAT:
-                    if stats[stat] >= MAX_STAT:
-                        continue
-                    trial = dict(stats)
-                    trial[stat] += 1
-                    gains.append((score(trial), stat))
-                searched += len(gains)
-                if not gains:
-                    break
-                gain, stat = max(gains)
-                if gain <= best:
-                    # Nothing left that helps; the rest buys health instead of damage.
-                    break
-                best, stats[stat] = gain, stats[stat] + 1
+        elif live:
+            # Too many live stats to price every spread. Sweep coarsely — every spread whose
+            # points come in multiples of `grain` — and then refine around the winner at
+            # finer and finer grain. It is not a proof of optimality the way the full sweep
+            # is, but it does not stall the way a greedy climb does: the Frenzied Flame Seal
+            # casting Frenzied Burst is 845.4 at strength 26 / dexterity 30 / intelligence 30
+            # / faith 43, and a climb with one-point swaps stops at 828.33 because no single
+            # point moved between any two of those four stats pays for itself.
+            caps = [MAX_STAT - stats[stat] for stat in live]
 
-            # Soft caps make a pure climb stall just below a breakpoint. Moving points between two
-            # stats can clear one, so keep trying while it helps.
-            improved = True
-            while improved:
-                improved = False
-                for take in COMBAT:
-                    for give in COMBAT:
-                        if take == give:
-                            continue
-                        take_floor = max(
-                            floor_stats[take],
-                            requirement_floor(requirements, take, two_hand),
-                        )
-                        moves = min(stats[take] - take_floor, MAX_STAT - stats[give])
-                        for size in range(1, moves + 1):
-                            trial = dict(stats)
-                            trial[take] -= size
-                            trial[give] += size
-                            searched += 1
-                            value = score(trial)
-                            if value > best:
-                                best, stats, improved = value, trial, True
+            def sweep(bounds, grain, ceiling):
+                """Every combination on `bounds`, at `grain`, spending at most `ceiling`."""
+                def walk(idx, remaining, taken):
+                    lo, hi = bounds[idx]
+                    if idx == len(bounds) - 1:
+                        top = min(hi, lo + (remaining // grain) * grain)
+                        if top >= lo:
+                            yield taken + (top,)
+                        return
+                    value = lo
+                    while value <= hi and value - lo <= remaining:
+                        yield from walk(idx + 1, remaining - (value - lo), taken + (value,))
+                        value += grain
+                walk_floor = sum(lo for lo, _ in bounds)
+                if walk_floor <= ceiling:
+                    yield from walk(0, ceiling - walk_floor, ())
+
+            # The floor the search starts from stays fixed; only the winner moves.
+            base = dict(stats)
+
+            def price(extra):
+                trial = dict(base)
+                for stat, spend in zip(live, extra):
+                    trial[stat] += spend
+                return score(trial), trial
+
+            grain = 1
+            while sweep_cost(len(live), budget // grain) > SWEEP_CAP:
+                grain *= 2
+
+            center = tuple(0 for _ in live)
+            bounds = [(0, cap) for cap in caps]
+            while True:
+                for extra in sweep(bounds, grain, budget):
+                    searched += 1
+                    value, trial = price(extra)
+                    if value > best:
+                        best, stats, center = value, trial, extra
+                if grain == 1:
+                    break
+                grain = max(1, grain // 2)
+                bounds = [
+                    (max(0, c - 2 * grain), min(cap, c + 2 * grain))
+                    for c, cap in zip(center, caps)
+                ]
+
+            for stat in live:
+                floor = max(floor_stats[stat], requirement_floor(requirements, stat, two_hand))
+                while stats[stat] > floor:
+                    trial = dict(stats)
+                    trial[stat] -= 1
+                    searched += 1
+                    if score(trial) < best:
+                        break
+                    stats = trial
+
+        # `live` empty means nothing the caller could level moves the objective at all — a
+        # status that does not scale, or a spell with no attack, like Terra Magica. There is
+        # no search to run, and the points below go to vigor, which is the honest answer.
 
         # Anything the search would not spend goes to vigor: it is the only stat that is
         # never wasted, and leaving points unspent would not be a build at the target level.

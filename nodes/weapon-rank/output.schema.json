@@ -1,0 +1,319 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "weapon-rank output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ranked",
+    "ranked_on",
+    "ranked_on_note",
+    "spell",
+    "spell_type",
+    "best",
+    "best_score",
+    "catalog_size",
+    "not_weapons",
+    "weapon_class",
+    "considered",
+    "usable",
+    "unusable",
+    "include_unusable",
+    "affinity_mode",
+    "two_hand",
+    "stats",
+    "limit",
+    "returned",
+    "truncated"
+  ],
+  "properties": {
+    "ranked": {
+      "type": "array",
+      "description": "Best first. Each row is one weapon at its own upgrade cap, priced by the oracle at the stats given.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "weapon",
+          "weapon_class",
+          "guard_boost",
+          "guard_negation",
+          "affinity",
+          "infusable",
+          "upgrade",
+          "max_upgrade",
+          "score",
+          "score_shown",
+          "total_ar",
+          "total_ar_rounded",
+          "attack_shown",
+          "status_shown",
+          "spell_buff",
+          "spell_bonus",
+          "spell_bonus_applied",
+          "spell_bonus_family",
+          "requirements_met",
+          "shortfall"
+        ],
+        "properties": {
+          "weapon": {
+            "type": "string"
+          },
+          "weapon_class": {
+            "type": "string"
+          },
+          "affinity": {
+            "type": "string",
+            "description": "The affinity this row was priced with."
+          },
+          "infusable": {
+            "type": "boolean"
+          },
+          "upgrade": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 25
+          },
+          "max_upgrade": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 25
+          },
+          "score": {
+            "type": "number",
+            "minimum": 0,
+            "description": "The figure the list is ordered by \u2014 see ranked_on."
+          },
+          "score_shown": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "total_ar": {
+            "type": "number",
+            "minimum": 0
+          },
+          "total_ar_rounded": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "attack_shown": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "physical",
+              "magic",
+              "fire",
+              "lightning",
+              "holy"
+            ],
+            "properties": {
+              "physical": {
+                "type": "integer"
+              },
+              "magic": {
+                "type": "integer"
+              },
+              "fire": {
+                "type": "integer"
+              },
+              "lightning": {
+                "type": "integer"
+              },
+              "holy": {
+                "type": "integer"
+              }
+            }
+          },
+          "status_shown": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "poison",
+              "scarlet_rot",
+              "bleed",
+              "frost",
+              "sleep",
+              "madness"
+            ],
+            "properties": {
+              "poison": {
+                "type": "integer"
+              },
+              "scarlet_rot": {
+                "type": "integer"
+              },
+              "bleed": {
+                "type": "integer"
+              },
+              "frost": {
+                "type": "integer"
+              },
+              "sleep": {
+                "type": "integer"
+              },
+              "madness": {
+                "type": "integer"
+              }
+            },
+            "description": "Ranking on attack rating alone buries a bleed weapon under a bigger number. This is how a reader sees it."
+          },
+          "spell_buff": {
+            "type": "number",
+            "minimum": 0,
+            "description": "The catalyst's spell buff, when a spell was named. Zero otherwise."
+          },
+          "spell_bonus": {
+            "type": "number",
+            "minimum": 0
+          },
+          "spell_bonus_applied": {
+            "type": "boolean"
+          },
+          "spell_bonus_family": {
+            "type": "string"
+          },
+          "requirements_met": {
+            "type": "boolean"
+          },
+          "shortfall": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "Points still needed, per stat. Empty when the build can hold the weapon."
+          },
+          "guard_boost": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "How much stability the weapon has when blocking. For a shield question this is the figure, not the attack rating."
+          },
+          "guard_negation": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "physical",
+              "magic",
+              "fire",
+              "lightning",
+              "holy"
+            ],
+            "properties": {
+              "physical": {
+                "type": "number"
+              },
+              "magic": {
+                "type": "number"
+              },
+              "fire": {
+                "type": "number"
+              },
+              "lightning": {
+                "type": "number"
+              },
+              "holy": {
+                "type": "number"
+              }
+            },
+            "description": "Percentage of each damage type a block stops. 100 physical is what 'this shield blocks everything' means."
+          }
+        }
+      }
+    },
+    "ranked_on": {
+      "type": "string",
+      "description": "'total_ar' or 'spell_attack'."
+    },
+    "ranked_on_note": {
+      "type": "string",
+      "description": "What that measure leaves out. Say it in the answer."
+    },
+    "spell": {
+      "type": "string"
+    },
+    "best": {
+      "type": "string"
+    },
+    "best_score": {
+      "type": "number",
+      "minimum": 0
+    },
+    "catalog_size": {
+      "type": "integer"
+    },
+    "weapon_class": {
+      "type": "string",
+      "description": "The class filter that was applied, empty when none was."
+    },
+    "considered": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "How many weapons the filter left to price."
+    },
+    "usable": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "How many of those the build can actually hold."
+    },
+    "unusable": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "include_unusable": {
+      "type": "boolean"
+    },
+    "affinity_mode": {
+      "type": "string"
+    },
+    "two_hand": {
+      "type": "boolean"
+    },
+    "stats": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "strength",
+        "dexterity",
+        "intelligence",
+        "faith",
+        "arcane"
+      ],
+      "properties": {
+        "strength": {
+          "type": "integer"
+        },
+        "dexterity": {
+          "type": "integer"
+        },
+        "intelligence": {
+          "type": "integer"
+        },
+        "faith": {
+          "type": "integer"
+        },
+        "arcane": {
+          "type": "integer"
+        }
+      }
+    },
+    "limit": {
+      "type": "integer"
+    },
+    "returned": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "truncated": {
+      "type": "boolean",
+      "description": "True when more weapons qualified than were returned."
+    },
+    "not_weapons": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Rows in the catalogue that are not weapons \u2014 the fifteen consumables, which have no weapon ID and cannot be priced. Counted so `catalog_size` is not mistaken for a weapon count."
+    },
+    "spell_type": {
+      "type": "string",
+      "description": "The kind of spell the ranking is for, empty when ranking weapons. Only catalysts that can cast that kind are in the list."
+    }
+  }
+}

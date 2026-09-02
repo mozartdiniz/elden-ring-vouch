@@ -48,6 +48,9 @@ guidance = "The exact spell name. A charged cast is a separate spell with a diff
 [params.catalyst]
 guidance = "The staff or seal, from weapon-lookup's `resolved`."
 
+[params.spell_type]
+guidance = "Pass 'Sorcery' or 'Incantation' when you know it — from an earlier spell-power result's `spell_type`, or because the user said which. With `catalyst_class` it turns a seal asked for a sorcery into a refusal rather than a defect."
+
 [params.catalyst_class]
 guidance = "Pass weapon-lookup's `weapon_class` for the catalyst. It makes casting from a sword a refusal you can act on rather than a puzzling zero."
 
@@ -87,6 +90,18 @@ message = "this catalyst cannot be upgraded that far; weapon-lookup reported a l
 expr = '!has(input.catalyst_class) || input.catalyst_class in ["Glintstone Staff", "Sacred Seal"]'
 message = "spells are cast from a Glintstone Staff or a Sacred Seal; weapon-lookup reported another class for this weapon, so it cannot cast anything"
 
+# A staff casts sorceries and a seal casts incantations. The node knows which from the game's
+# flags, but a precondition cannot read a table — so this is the caller carrying two facts it
+# already has, the way `max_upgrade` is. When it does, a seal asked for a sorcery refuses
+# here, in the right family, instead of being caught by the postcondition below as a defect.
+[[requires]]
+expr = """
+!has(input.spell_type) || !has(input.catalyst_class) ||
+input.catalyst_class == "Glintstone Staff" && input.spell_type == "Sorcery" ||
+input.catalyst_class == "Sacred Seal" && input.spell_type == "Incantation"
+"""
+message = "a Glintstone Staff casts sorceries and a Sacred Seal casts incantations; this pairing is not a cast that exists"
+
 [[requires]]
 expr = """
 input.strength >= 1 && input.strength <= 99 &&
@@ -98,6 +113,12 @@ input.arcane >= 1 && input.arcane <= 99
 message = "every stat must be between 1 and 99"
 
 # --- postconditions ---
+
+# The cast has to be one the game allows. Everything else in this result is arithmetic that
+# does not care: the spell buff is a number, the spell's attack is a number, and multiplying
+# them gives a figure for Comet cast from a seal that reads exactly like a real one.
+[[ensures]]
+expr = "result.catalyst_can_cast_this && result.spell_type in result.catalyst_casts"
 
 [[ensures]]
 expr = "result.upgrade <= result.max_upgrade"

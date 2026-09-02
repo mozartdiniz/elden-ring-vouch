@@ -71,6 +71,7 @@ fixture.
 | `defence` | A build and an armour set → per-element defences, damage negation, status resistances |
 | `build-allocate` | A weapon, class and rune level → the stat spread, maximising attack or a status |
 | `boss-lookup` | A boss encounter → every phase, each with its own health, poise, defences, negations and immunities |
+| `weapon-skill` | An ash of war → its hits, motion values, and whether it replaces the weapon's scaling |
 | `item-effect` | Talismans, crystal tears and great runes → what they do, individually and combined |
 
 The order is the routing: **character-build** when the user described a build by only some of
@@ -107,6 +108,14 @@ nothing behind it, and a node that picked one would present an opinion as a calc
 **The focus changes the character.** Rivers of Blood at RL150 from a Samurai start puts 97 into
 arcane for bleed, and 56 dexterity / 59 arcane for raw attack. Asking for one and reporting the
 other is a different build.
+
+What it does **not** know is skill damage. Four of the real questions it was tested against
+ask for a build "focused on" an ash of war — Corpse Piler, Transient Moonlight — and a spread
+that maximises a weapon is not always the spread for its skill. `weapon-skill` is what closes
+that: 173 of the 2,643 recorded hits replace the weapon's scaling with a single stat, so it
+reports `overrides_weapon_scaling` and an answer can say which case it is in. Corpse Piler does
+not override, so the Rivers of Blood spread above genuinely applies to it; Ground Slam replaces
+the scaling with strength, so it would not.
 
 An impossible build is an answer rather than an error: a Rivers of Blood build at RL40 comes
 back `feasible: false` with `minimum_level: 79`, because "that needs RL79" is what the asker

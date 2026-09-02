@@ -1,0 +1,49 @@
+# Node fixtures (§7.1). Figures from data/AshAttack.csv and data/AshCompat.csv, both from the
+# Prometheux ontology — the Build Planner publishes no skill data.
+
+# The skill from the first real question: "build de Rivers of Blood ... foco em Corpse Piler".
+# It does not override the weapon's scaling, so build-allocate's spread does apply — which is
+# the useful thing to be able to say.
+[[case]]
+name = "Corpse Piler is unique to Rivers of Blood and keeps its scaling"
+input = { query = "Corpse Piler" }
+expect = { "result.skill" = "Corpse Piler", "result.hit_count" = 18, "result.unique_to[0]" = "Rivers of Blood", "result.any_weapon" = false, "result.overrides_weapon_scaling" = false, "result.highest_motion_value" = 155.0 }
+
+# And the case that matters in the other direction: a skill that replaces the weapon's scaling
+# with a single stat, so a spread optimised for the weapon is not one optimised for the skill.
+[[case]]
+name = "Ground Slam replaces the weapon's scaling with strength"
+input = { query = "Ground Slam" }
+expect = { "result.skill" = "Ground Slam", "result.overrides_weapon_scaling" = true, "result.scaling_overrides[0]" = "Strength", "result.any_weapon" = true }
+
+[[case]]
+name = "a skill's hits carry their own motion and stamina costs"
+input = { query = "Corpse Piler" }
+expect = { "result.hits[0].hit" = "Corpse Piler #1 [1]", "result.hits[0].motion_value.physical" = 96.0, "result.hits[0].status_motion_value" = 62.0, "result.hits[0].stamina_cost" = 14.0, "result.hits[0].scaling_override" = "-" }
+
+# A skill's variants are separate families, so a bare name resolves to neither rather than
+# picking one — the same rule weapons and bosses follow.
+[[case]]
+name = "a skill with variants is ambiguous"
+input = { query = "Transient Moonlight" }
+expect = { "result.skill" = "", "result.ambiguous" = true, "result.match_count" = 2, "result.candidates[0]" = "Transient Moonlight R1", "result.candidates[1]" = "Transient Moonlight R2" }
+
+[[case]]
+name = "naming the variant resolves it"
+input = { query = "Transient Moonlight R1" }
+expect = { "result.skill" = "Transient Moonlight R1", "result.unique_to[0]" = "Moonveil" }
+
+[[case]]
+name = "a skill that is not in the table matches nothing"
+input = { query = "Hadouken" }
+expect = { "result.skill" = "", "result.match_count" = 0, "result.hit_count" = 0, "result.ambiguous" = false }
+
+[[case]]
+name = "a query too short to resolve anything is refused"
+input = { query = "gs" }
+expect_code = 11
+
+[[case]]
+name = "a missing query is a caller error"
+input = { }
+expect_code = 10

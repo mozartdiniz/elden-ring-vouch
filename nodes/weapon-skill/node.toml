@@ -1,0 +1,98 @@
+name = "weapon-skill"
+version = "0.1.0"
+
+purpose = "What an ash of war does: its hits, their motion values, and whether it replaces the weapon's scaling"
+
+use_when = [
+  "the user names a skill or ash of war — Corpse Piler, Transient Moonlight, Sword Dance",
+  "the question asks to build 'focused on' a skill rather than on the weapon",
+  "you need to know whether a build optimised for a weapon is optimised for its skill",
+  "you need a motion value to pass to optimal-affinity",
+]
+not_for = [
+  "how much a skill hits for — this reports what the skill is; the damage nodes price it",
+  "which ash to put on a weapon, which needs a compatibility search this does not do",
+  "weapon attack rating — call attack-power",
+]
+
+run = ["python3", "skill.py"]
+timeout_ms = 30000
+
+# Both from the Prometheux ontology: the Build Planner publishes no skill data at all.
+[[reads]]
+path = "../../data/AshAttack.csv"
+
+[[reads]]
+path = "../../data/AshCompat.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.query]
+guidance = "The skill name as the user wrote it. Expect ambiguity: a skill's variants are separate families, so 'Transient Moonlight' matches its R1 and R2 forms and resolves to neither. Ask which, rather than picking."
+
+[[requires]]
+expr = "size(input.query) >= 3"
+message = "a skill query needs at least 3 characters"
+
+# One match or none, as everywhere else here.
+[[ensures]]
+expr = '(result.skill != "") == (result.match_count == 1)'
+
+[[ensures]]
+expr = 'result.skill == "" || result.skill in result.candidates'
+
+[[ensures]]
+expr = "result.ambiguous == (result.match_count > 1)"
+
+[[ensures]]
+expr = "result.match_count >= size(result.candidates)"
+
+[[ensures]]
+expr = "result.candidates_truncated == (result.match_count > size(result.candidates))"
+
+[[ensures]]
+expr = "result.catalog_size >= result.match_count"
+
+[[ensures]]
+expr = '(result.skill != "") == (result.hit_count > 0)'
+
+[[ensures]]
+expr = "result.hit_count == size(result.hits)"
+
+# The override flag is the load-bearing claim: it is what tells a caller whether
+# build-allocate's spread applies to the skill they mean to use.
+[[ensures]]
+expr = "result.overrides_weapon_scaling == (size(result.scaling_overrides) > 0)"
+
+[[ensures]]
+expr = """
+result.scaling_overrides.all(o, o != "-") &&
+result.hits.all(h, h.scaling_override == "-" || h.scaling_override in result.scaling_overrides)
+"""
+
+# The headline motion value is the largest of the hits, not a sum, so it can never exceed one.
+[[ensures]]
+expr = """
+result.hits.all(h,
+  h.motion_value.physical <= result.highest_motion_value &&
+  h.motion_value.magic <= result.highest_motion_value &&
+  h.motion_value.fire <= result.highest_motion_value &&
+  h.motion_value.lightning <= result.highest_motion_value &&
+  h.motion_value.holy <= result.highest_motion_value
+)
+"""
+
+[[ensures]]
+expr = 'result.any_weapon == (result.skill != "" && size(result.unique_to) == 0)'
+
+[[examples]]
+ask = "Quero fazer uma build de Rivers of Blood focada em Corpse Piler."
+call = { query = "Corpse Piler" }
+
+[[examples]]
+ask = "does Ground Slam use the weapon's scaling?"
+call = { query = "Ground Slam" }

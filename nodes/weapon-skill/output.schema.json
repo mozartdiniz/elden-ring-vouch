@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "weapon-skill output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "query",
+    "skill",
+    "match_count",
+    "candidates",
+    "candidates_truncated",
+    "ambiguous",
+    "catalog_size",
+    "hits",
+    "hit_count",
+    "highest_motion_value",
+    "total_stamina_cost",
+    "overrides_weapon_scaling",
+    "scaling_overrides",
+    "unique_to",
+    "any_weapon",
+    "default_affinity"
+  ],
+  "properties": {
+    "query": {
+      "type": "string"
+    },
+    "skill": {
+      "type": "string",
+      "description": "The skill family, set only when the query matched one. Empty otherwise."
+    },
+    "match_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "candidates_truncated": {
+      "type": "boolean"
+    },
+    "ambiguous": {
+      "type": "boolean"
+    },
+    "catalog_size": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "hits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "hit",
+          "motion_value",
+          "status_motion_value",
+          "poise_motion_value",
+          "stamina_cost",
+          "flat_attack",
+          "scaling_override"
+        ],
+        "properties": {
+          "hit": {
+            "type": "string",
+            "description": "Which part of the skill this row is."
+          },
+          "motion_value": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Per-type motion value as a percentage, on the scale optimal-affinity's attack_mv expects.",
+            "required": [
+              "physical",
+              "magic",
+              "fire",
+              "lightning",
+              "holy"
+            ],
+            "properties": {
+              "physical": {
+                "type": "number"
+              },
+              "magic": {
+                "type": "number"
+              },
+              "fire": {
+                "type": "number"
+              },
+              "lightning": {
+                "type": "number"
+              },
+              "holy": {
+                "type": "number"
+              }
+            }
+          },
+          "status_motion_value": {
+            "type": "number",
+            "minimum": 0
+          },
+          "poise_motion_value": {
+            "type": "number",
+            "minimum": 0
+          },
+          "stamina_cost": {
+            "type": "number",
+            "minimum": 0
+          },
+          "flat_attack": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Damage the hit adds outright, before scaling.",
+            "required": [
+              "physical",
+              "magic",
+              "fire",
+              "lightning",
+              "holy"
+            ],
+            "properties": {
+              "physical": {
+                "type": "number"
+              },
+              "magic": {
+                "type": "number"
+              },
+              "fire": {
+                "type": "number"
+              },
+              "lightning": {
+                "type": "number"
+              },
+              "holy": {
+                "type": "number"
+              }
+            }
+          },
+          "scaling_override": {
+            "type": "string",
+            "description": "'-' when the weapon's own scaling applies. Anything else names the stat that replaces it, which is when a build optimised for the weapon stops being one optimised for the skill."
+          }
+        }
+      },
+      "description": "One entry per hit; a skill is usually several."
+    },
+    "hit_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "highest_motion_value": {
+      "type": "number",
+      "minimum": 0,
+      "description": "The largest single-hit motion value. Not a sum: summing would describe a full combo nobody necessarily lands."
+    },
+    "total_stamina_cost": {
+      "type": "number",
+      "minimum": 0
+    },
+    "overrides_weapon_scaling": {
+      "type": "boolean",
+      "description": "True when any hit replaces the weapon's scaling. Then build-allocate's spread, which optimises the weapon, is not the spread for this skill."
+    },
+    "scaling_overrides": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The stats that replace the weapon's scaling, when any do."
+    },
+    "unique_to": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Weapons this skill is tied to. Empty when it can go on many."
+    },
+    "any_weapon": {
+      "type": "boolean",
+      "description": "True when the skill is not tied to a specific weapon."
+    },
+    "default_affinity": {
+      "type": "string",
+      "description": "The affinity the ash applies by default, from AshCompat. Empty when not recorded."
+    }
+  }
+}

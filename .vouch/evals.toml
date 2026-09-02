@@ -101,6 +101,19 @@ ask = "Can I make a Rivers of Blood build at rune level 40 as an Astrologer with
 expect_node = "build-allocate"
 attest = true
 
+# The full shape of the first real question: a weapon, a level, a class, and a skill focus.
+# The honest answer needs weapon-skill to say whether the skill keeps the weapon's scaling.
+[[eval]]
+ask = "Quero fazer uma build de Rivers of Blood no nível 150, foco em Corpse Piler, classe Samurai. Monta a distribuição de status pra mim."
+expect_node = "build-allocate"
+attest = true
+
+[[eval]]
+ask = "Does Ground Slam scale off the weapon, or off something else?"
+expect_node = "weapon-skill"
+expect_params = { query = "Ground Slam" }
+attest = true
+
 # Squarely outside the collection: nothing here knows where anything is, and a model asked
 # this without tools will happily invent a location.
 [[eval]]

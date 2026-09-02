@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "weapon-skill input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "query"
+  ],
+  "properties": {
+    "query": {
+      "type": "string",
+      "description": "The skill or ash-of-war name as the user wrote it. Variants are separate families \u2014 'Transient Moonlight' is R1 and R2 \u2014 so a bare name is often ambiguous."
+    }
+  }
+}

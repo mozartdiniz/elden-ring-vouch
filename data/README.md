@@ -31,3 +31,21 @@ community PvE data sheet. The negation figures are percentages on the same scale
 Bosses appear once per phase, and a phase is a different fight: Rennala Phase 1 has -10
 physical negation and 3493 health, Phase 2 has 80 poise and 4097. A query that matches more
 than one is ambiguous in the way a weapon name is, and resolves to nothing.
+
+## AshAttack.csv, AshCompat.csv
+
+Ashes of war. `AshAttack` is 2,643 rows, one per *hit* — a skill is several — carrying each
+hit's motion values per damage type, its status and poise motion values, stamina cost, any flat
+attack it adds, and whether it **overrides the weapon's scaling**. `AshCompat` says which
+affinity a skill defaults to and whether it can go on any weapon.
+
+Both come from the Prometheux ontology rather than the Build Planner, which publishes no skill
+data at all.
+
+The override column is the reason a skill deserves its own node rather than a footnote: 173 of
+those rows replace the weapon's scaling with a single stat, so a build optimised for a weapon
+can be the wrong build for its ash. Most rows do not — `-` in 2,470 of them — and saying which
+case a skill is in is more useful than a number.
+
+Motion values are percentages on the scale `optimal-affinity`'s `attack_mv` expects, so a
+skill's hit can be priced through the same maths as a normal swing.

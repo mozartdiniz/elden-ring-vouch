@@ -27,6 +27,7 @@ caps, so a pure climb can stall just below one; the second pass is what gets ove
 """
 
 import json
+import math
 import os
 import sys
 
@@ -50,6 +51,14 @@ DAMAGE = ("physical", "magic", "fire", "lightning", "holy")
 MAX_STAT = 99
 # Rune level 1 is a stat sum of 79.
 LEVEL_BASE = 79
+# How many spreads the exhaustive sweep will price before falling back to the climb. The
+# oracle prices about seven thousand a second, so this is a few seconds at worst.
+SWEEP_CAP = 50000
+
+
+def sweep_cost(live, budget):
+    """How many spreads of `budget` points across `live` stats an exhaustive sweep prices."""
+    return math.comb(budget + live - 1, live - 1) if live else 1
 
 
 def objective(result, focus):
@@ -103,7 +112,11 @@ def main():
     for stat, floor in floors.items():
         stats[stat] = max(stats[stat], min(floor, MAX_STAT))
 
-    requirements = evaluate(stats).requirements
+    at_floor = evaluate(stats)
+    requirements = at_floor.requirements
+    # The weapon's scaling coefficients, which do not depend on the spread: a stat at zero
+    # here cannot change the answer, so the sweep leaves it at its floor.
+    requirements_scaling = at_floor.scaling_percent
     for stat in COMBAT:
         need = requirements.get(stat)
         if need:
@@ -131,43 +144,100 @@ def main():
     if feasible and budget:
         searched += 1
 
-        for _ in range(budget):
-            gains = []
-            for stat in COMBAT:
-                if stats[stat] >= MAX_STAT:
-                    continue
-                trial = dict(stats)
-                trial[stat] += 1
-                gains.append((objective(evaluate(trial), focus), stat))
-            searched += len(gains)
-            if not gains:
-                break
-            gain, stat = max(gains)
-            if gain <= best:
-                # Nothing left that helps; the rest buys health instead of damage.
-                break
-            best, stats[stat] = gain, stats[stat] + 1
+        # The stats that can move the answer at all: a stat the weapon does not scale off
+        # buys nothing but its own requirement, and sweeping it multiplies the search for
+        # no gain. `floor_stats` is where each of them starts, and no search goes below it.
+        floor_stats = {stat: stats[stat] for stat in COMBAT}
+        live = [
+            stat for stat in COMBAT
+            if float((requirements_scaling or {}).get(stat) or 0.0) > 0
+            and stats[stat] < MAX_STAT
+        ]
 
-        # Soft caps make a pure climb stall just below a breakpoint. Moving points between two
-        # stats can clear one, so keep trying while it helps.
-        improved = True
-        while improved:
-            improved = False
-            for take in COMBAT:
-                for give in COMBAT:
-                    if take == give or stats[take] <= minimums.get(take, 1):
-                        continue
-                    if stats[give] >= MAX_STAT or stats[take] - 1 < 1:
+        # A greedy climb finds a local optimum and a one-point swap cannot always leave it:
+        # Moonveil at RL150 stalls at dexterity 59 / intelligence 57 when dexterity 66 /
+        # intelligence 50 is worth more, because every single point moved between them costs
+        # more than it buys and only the seventh pays off. So when few enough stats are live,
+        # sweep every spread instead of climbing. Spending the whole budget is never worse
+        # than spending part of it — scaling curves only rise — so the sweep fixes the sum
+        # and a trim pass afterwards gives back whatever bought nothing.
+        if live and sweep_cost(len(live), budget) <= SWEEP_CAP:
+            caps = [MAX_STAT - stats[stat] for stat in live]
+
+            def spreads(remaining, idx):
+                if idx == len(live) - 1:
+                    # The last stat takes what is left, or as much of it as fits under 99;
+                    # the trim pass and the spare-points rule deal with any remainder.
+                    yield (min(remaining, caps[idx]),)
+                    return
+                for value in range(0, min(remaining, caps[idx]) + 1):
+                    for rest in spreads(remaining - value, idx + 1):
+                        yield (value,) + rest
+
+            best_stats = dict(stats)
+            for extra in spreads(budget, 0):
+                trial = dict(stats)
+                for stat, spend in zip(live, extra):
+                    trial[stat] += spend
+                searched += 1
+                value = objective(evaluate(trial), focus)
+                if value > best:
+                    best, best_stats = value, trial
+            stats = best_stats
+
+            # Give back every point that bought nothing. A status that does not scale is the
+            # case this exists for: the sweep spends the budget, finds no spread better than
+            # the floor, and the points belong in vigor rather than in a stat that did not
+            # move the objective.
+            for stat in live:
+                floor = max(floor_stats[stat], requirement_floor(requirements, stat, two_hand))
+                while stats[stat] > floor:
+                    trial = dict(stats)
+                    trial[stat] -= 1
+                    searched += 1
+                    if objective(evaluate(trial), focus) < best:
+                        break
+                    stats = trial
+        else:
+            for _ in range(budget):
+                gains = []
+                for stat in COMBAT:
+                    if stats[stat] >= MAX_STAT:
                         continue
                     trial = dict(stats)
-                    trial[take] -= 1
-                    trial[give] += 1
-                    searched += 1
-                    if trial[take] < requirement_floor(requirements, take, two_hand):
-                        continue
-                    value = objective(evaluate(trial), focus)
-                    if value > best:
-                        best, stats, improved = value, trial, True
+                    trial[stat] += 1
+                    gains.append((objective(evaluate(trial), focus), stat))
+                searched += len(gains)
+                if not gains:
+                    break
+                gain, stat = max(gains)
+                if gain <= best:
+                    # Nothing left that helps; the rest buys health instead of damage.
+                    break
+                best, stats[stat] = gain, stats[stat] + 1
+
+            # Soft caps make a pure climb stall just below a breakpoint. Moving points between two
+            # stats can clear one, so keep trying while it helps.
+            improved = True
+            while improved:
+                improved = False
+                for take in COMBAT:
+                    for give in COMBAT:
+                        if take == give:
+                            continue
+                        take_floor = max(
+                            minimums.get(take, 1),
+                            requirement_floor(requirements, take, two_hand),
+                        )
+                        moves = min(stats[take] - take_floor, MAX_STAT - stats[give])
+                        for size in range(1, moves + 1):
+                            trial = dict(stats)
+                            trial[take] -= size
+                            trial[give] += size
+                            searched += 1
+                            value = objective(evaluate(trial), focus)
+                            if value > best:
+                                best, stats, improved = value, trial, True
 
         # Anything the search would not spend goes to vigor: it is the only stat that is
         # never wasted, and leaving points unspent would not be a build at the target level.

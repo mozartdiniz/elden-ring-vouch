@@ -69,12 +69,48 @@ fixture.
 | `spell-power` | One spell from one catalyst → attack, family bonus, FP cost, whether the build can cast it |
 | `equip-load` | A loadout against a build's equip load → weight, roll type, and the endurance to change it |
 | `defence` | A build and an armour set → per-element defences, damage negation, status resistances |
+| `build-allocate` | A weapon, class and rune level → the stat spread, maximising attack or a status |
 | `boss-lookup` | A boss encounter → every phase, each with its own health, poise, defences, negations and immunities |
 | `item-effect` | Talismans, crystal tears and great runes → what they do, individually and combined |
 
 The order is the routing: **character-build** when the user described a build by only some of
 its stats, **weapon-lookup** for any question naming a weapon, then **attack-power** for what
 it hits for, or **optimal-affinity** for what to infuse it with.
+
+### The question people actually ask
+
+Every real question this collection was tested against has the same shape: *"monta a
+distribuição"* — give me the spread. Everything else here reports on a spread somebody already
+chose, so `build-allocate` is the node that answers it:
+
+```console
+$ vouch -C . call build-allocate --input '{"weapon":"Rivers of Blood","affinity":"Standard",
+    "upgrade":10,"max_upgrade":10,"starting_class":"Samurai","target_level":150,
+    "focus":"bleed","vigor":40,"mind":20,"endurance":25}'
+{ "level": 150, "minimum_level": 73, "feasible": true,
+  "stats": { "vigor": 40, "mind": 20, "endurance": 25, "strength": 12,
+             "dexterity": 18, "intelligence": 9, "faith": 8, "arcane": 97 },
+  "total_ar_rounded": 644, "status_shown": { "bleed": 79 }, ... }
+```
+
+Three things about it are worth knowing before trusting an answer built on it.
+
+**The arithmetic is still the oracle's.** The node searches over spreads and asks `ap_calc` what
+each is worth, so a spread's attack rating here is the same number `attack-power` gives for the
+same stats — checked, not assumed. What is new is the search, not the maths.
+
+**The survivability floors are yours.** How much vigor a build "should" have is a judgement with
+nothing behind it, and a node that picked one would present an opinion as a calculation. `vigor`,
+`mind` and `endurance` are required inputs, echoed back with
+`floors_are_the_callers_choice: true`, and an answer has to say they were chosen.
+
+**The focus changes the character.** Rivers of Blood at RL150 from a Samurai start puts 97 into
+arcane for bleed, and 56 dexterity / 59 arcane for raw attack. Asking for one and reporting the
+other is a different build.
+
+An impossible build is an answer rather than an error: a Rivers of Blood build at RL40 comes
+back `feasible: false` with `minimum_level: 79`, because "that needs RL79" is what the asker
+needs to hear.
 
 ### The question these compose to answer
 

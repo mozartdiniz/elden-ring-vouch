@@ -1,0 +1,346 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "build-allocate output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "weapon",
+    "weapon_class",
+    "affinity",
+    "upgrade",
+    "max_upgrade",
+    "two_hand",
+    "starting_class",
+    "focus",
+    "target_level",
+    "level",
+    "class_level",
+    "points_spent",
+    "stats",
+    "class_minimums",
+    "floors",
+    "floors_are_the_callers_choice",
+    "feasible",
+    "minimum_level",
+    "total_ar",
+    "total_ar_rounded",
+    "attack",
+    "attack_shown",
+    "status",
+    "status_shown",
+    "objective_value",
+    "requirements_met",
+    "searched"
+  ],
+  "properties": {
+    "weapon": {
+      "type": "string"
+    },
+    "weapon_class": {
+      "type": "string"
+    },
+    "affinity": {
+      "type": "string"
+    },
+    "upgrade": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 25
+    },
+    "max_upgrade": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 25
+    },
+    "two_hand": {
+      "type": "boolean"
+    },
+    "starting_class": {
+      "type": "string"
+    },
+    "focus": {
+      "type": "string",
+      "description": "What was maximised."
+    },
+    "target_level": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "level": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "The rune level this spread costs. Equals target_level when the build is feasible."
+    },
+    "class_level": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Where this class starts before a point is spent."
+    },
+    "points_spent": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "stats": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The spread. Every stat between 1 and 99.",
+      "required": [
+        "vigor",
+        "mind",
+        "endurance",
+        "strength",
+        "dexterity",
+        "intelligence",
+        "faith",
+        "arcane"
+      ],
+      "properties": {
+        "vigor": {
+          "type": "integer"
+        },
+        "mind": {
+          "type": "integer"
+        },
+        "endurance": {
+          "type": "integer"
+        },
+        "strength": {
+          "type": "integer"
+        },
+        "dexterity": {
+          "type": "integer"
+        },
+        "intelligence": {
+          "type": "integer"
+        },
+        "faith": {
+          "type": "integer"
+        },
+        "arcane": {
+          "type": "integer"
+        }
+      }
+    },
+    "class_minimums": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The class's own floor, which no stat goes below.",
+      "required": [
+        "vigor",
+        "mind",
+        "endurance",
+        "strength",
+        "dexterity",
+        "intelligence",
+        "faith",
+        "arcane"
+      ],
+      "properties": {
+        "vigor": {
+          "type": "integer"
+        },
+        "mind": {
+          "type": "integer"
+        },
+        "endurance": {
+          "type": "integer"
+        },
+        "strength": {
+          "type": "integer"
+        },
+        "dexterity": {
+          "type": "integer"
+        },
+        "intelligence": {
+          "type": "integer"
+        },
+        "faith": {
+          "type": "integer"
+        },
+        "arcane": {
+          "type": "integer"
+        }
+      }
+    },
+    "floors": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The survivability floors the caller chose. Not computed, and an answer has to say so.",
+      "required": [
+        "vigor",
+        "mind",
+        "endurance"
+      ],
+      "properties": {
+        "vigor": {
+          "type": "integer"
+        },
+        "mind": {
+          "type": "integer"
+        },
+        "endurance": {
+          "type": "integer"
+        }
+      }
+    },
+    "floors_are_the_callers_choice": {
+      "type": "boolean",
+      "description": "Always true. The node maximises above these floors; it does not pick them."
+    },
+    "feasible": {
+      "type": "boolean",
+      "description": "False when the floors and the weapon's requirements cost more than target_level. Then `stats` is the cheapest build that works and `level` is what it really costs."
+    },
+    "minimum_level": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "The rune level the floors and requirements alone demand. Useful even when feasible: it is how much of the build was forced."
+    },
+    "total_ar": {
+      "type": "number",
+      "minimum": 0
+    },
+    "total_ar_rounded": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "What the game displays."
+    },
+    "attack": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Per-element attack at full precision.",
+      "required": [
+        "physical",
+        "magic",
+        "fire",
+        "lightning",
+        "holy"
+      ],
+      "properties": {
+        "physical": {
+          "type": "number"
+        },
+        "magic": {
+          "type": "number"
+        },
+        "fire": {
+          "type": "number"
+        },
+        "lightning": {
+          "type": "number"
+        },
+        "holy": {
+          "type": "number"
+        }
+      }
+    },
+    "attack_shown": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Per-element attack as displayed.",
+      "required": [
+        "physical",
+        "magic",
+        "fire",
+        "lightning",
+        "holy"
+      ],
+      "properties": {
+        "physical": {
+          "type": "integer"
+        },
+        "magic": {
+          "type": "integer"
+        },
+        "fire": {
+          "type": "integer"
+        },
+        "lightning": {
+          "type": "integer"
+        },
+        "holy": {
+          "type": "integer"
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Status buildup at full precision.",
+      "required": [
+        "poison",
+        "scarlet_rot",
+        "bleed",
+        "frost",
+        "sleep",
+        "madness"
+      ],
+      "properties": {
+        "poison": {
+          "type": "number"
+        },
+        "scarlet_rot": {
+          "type": "number"
+        },
+        "bleed": {
+          "type": "number"
+        },
+        "frost": {
+          "type": "number"
+        },
+        "sleep": {
+          "type": "number"
+        },
+        "madness": {
+          "type": "number"
+        }
+      }
+    },
+    "status_shown": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Status buildup as displayed.",
+      "required": [
+        "poison",
+        "scarlet_rot",
+        "bleed",
+        "frost",
+        "sleep",
+        "madness"
+      ],
+      "properties": {
+        "poison": {
+          "type": "integer"
+        },
+        "scarlet_rot": {
+          "type": "integer"
+        },
+        "bleed": {
+          "type": "integer"
+        },
+        "frost": {
+          "type": "integer"
+        },
+        "sleep": {
+          "type": "integer"
+        },
+        "madness": {
+          "type": "integer"
+        }
+      }
+    },
+    "objective_value": {
+      "type": "number",
+      "minimum": 0,
+      "description": "The figure that was maximised: total_ar for focus 'attack', otherwise that status's buildup."
+    },
+    "requirements_met": {
+      "type": "boolean"
+    },
+    "searched": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "How many spreads were priced. Not a quality measure, but it says the answer came from a search rather than a rule of thumb."
+    }
+  }
+}

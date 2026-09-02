@@ -1,0 +1,220 @@
+name = "build-allocate"
+version = "0.1.0"
+
+purpose = "Spend a rune level's worth of points on one weapon, maximising attack or a status, above floors the caller sets"
+
+use_when = [
+  "the user asks for a stat spread, a distribution, or 'how do I level for this weapon'",
+  "the question names a target rune level and a weapon",
+  "the user wants to know whether a build fits in a level budget at all",
+]
+not_for = [
+  "what an existing spread hits for — call attack-power, which this node calls internally",
+  "picking how much vigor a build should have; that floor is an input, and the answer must say it was chosen rather than computed",
+  "ash-of-war or skill damage, which this collection does not model — a spread maximising base attack is not always the best spread for a skill",
+  "spell builds; this maximises weapon damage",
+]
+
+run = ["python3", "allocate.py"]
+timeout_ms = 60000
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/WeaponData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/EquipParamWeapon.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/ReinforceParamWeapon.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/AttackElementCorrectParam.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/CalcCorrectGraphEz.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/StartingClassData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/StatusEffectData.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.weapon]
+guidance = "The exact catalogue name, from weapon-lookup's `resolved`."
+
+[params.affinity]
+guidance = "Standard unless the weapon is infusable and the user named an affinity. To find the best affinity for a build, call optimal-affinity separately — this node takes the affinity as given."
+
+[params.upgrade]
+guidance = "Normally weapon-lookup's `max_upgrade`: a spread is usually wanted for the finished weapon."
+
+[params.max_upgrade]
+guidance = "Copy weapon-lookup's `max_upgrade`, so an impossible upgrade is refused before the search runs."
+
+[params.starting_class]
+guidance = "The class the user named. It matters more here than anywhere else: a class's floors are points already spent, so the same spread costs a different rune level from a different start."
+
+[params.target_level]
+guidance = "The rune level the user asked for, e.g. 150. If the build does not fit, the result says what it would need rather than failing."
+
+[params.focus]
+guidance = "'attack' unless the user asked for a status build — 'bleed' for a bleed build, 'frost', 'poison', 'scarlet_rot', 'sleep', 'madness'. It changes the answer: Rivers of Blood at RL150 puts 97 into arcane for bleed and 56 dexterity / 59 arcane for raw attack."
+
+[params.two_hand]
+guidance = "True if the user says they two-hand it. It lowers the strength the weapon needs, which frees points for everything else."
+
+[params.vigor]
+guidance = "The minimum vigor to hold back. This is a judgement and the node will not make it: ask the user, or state the figure you assumed and why. 40 is a common answer at RL150 and is not a computed one."
+
+[params.mind]
+guidance = "The minimum mind. A judgement, like vigor. A weapon build with no spells needs little; a caster needs a lot."
+
+[params.endurance]
+guidance = "The minimum endurance. A judgement, like vigor, and it interacts with equip-load: call that node if the user cares about rolling."
+
+# --- preconditions ---
+
+[[requires]]
+expr = '''
+input.affinity in [
+  "Standard", "Heavy", "Keen", "Quality", "Fire", "Flame Art", "Lightning",
+  "Sacred", "Magic", "Cold", "Poison", "Blood", "Occult"
+]
+'''
+message = "unknown affinity; the thirteen are Standard, Heavy, Keen, Quality, Fire, Flame Art, Lightning, Sacred, Magic, Cold, Poison, Blood and Occult"
+
+[[requires]]
+expr = '''
+!has(input.focus) || input.focus in [
+  "attack", "bleed", "frost", "poison", "scarlet_rot", "sleep", "madness"
+]
+'''
+message = "focus must be 'attack' or one of the six statuses: bleed, frost, poison, scarlet_rot, sleep, madness"
+
+[[requires]]
+expr = '''
+input.starting_class in [
+  "Vagabond", "Warrior", "Hero", "Bandit", "Astrologer",
+  "Prophet", "Samurai", "Prisoner", "Confessor", "Wretch"
+]
+'''
+message = "unknown starting class; the ten are Vagabond, Warrior, Hero, Bandit, Astrologer, Prophet, Samurai, Prisoner, Confessor and Wretch"
+
+[[requires]]
+expr = "input.upgrade >= 0 && input.upgrade <= 25"
+message = "upgrade must be between 0 and 25; call weapon-lookup for this weapon's actual cap"
+
+[[requires]]
+expr = "!has(input.max_upgrade) || input.upgrade <= input.max_upgrade"
+message = "this weapon cannot be upgraded that far; weapon-lookup reported a lower max_upgrade for it"
+
+[[requires]]
+expr = "input.target_level >= 1 && input.target_level <= 713"
+message = "rune level runs from 1 to 713; 713 is the highest a character can reach with every stat at 99"
+
+[[requires]]
+expr = """
+input.vigor >= 1 && input.vigor <= 99 &&
+input.mind >= 1 && input.mind <= 99 &&
+input.endurance >= 1 && input.endurance <= 99
+"""
+message = "each floor must be between 1 and 99; these are the minimums to hold back before the rest is spent"
+
+# --- postconditions ---
+
+[[ensures]]
+expr = "result.upgrade <= result.max_upgrade"
+
+[[ensures]]
+expr = "!has(input.max_upgrade) || input.max_upgrade == result.max_upgrade"
+
+# A feasible build costs exactly what was asked for — not less, which would leave points
+# unspent, and not more, which would be a different character.
+[[ensures]]
+expr = """
+result.feasible
+  ? (result.level == result.target_level && result.minimum_level <= result.target_level)
+  : (result.level == result.minimum_level && result.minimum_level > result.target_level)
+"""
+
+[[ensures]]
+expr = "result.target_level == input.target_level && result.level == result.class_level + result.points_spent"
+
+# No stat below the class's own floor: that is what a starting class is.
+[[ensures]]
+expr = """
+result.stats.vigor >= result.class_minimums.vigor &&
+result.stats.mind >= result.class_minimums.mind &&
+result.stats.endurance >= result.class_minimums.endurance &&
+result.stats.strength >= result.class_minimums.strength &&
+result.stats.dexterity >= result.class_minimums.dexterity &&
+result.stats.intelligence >= result.class_minimums.intelligence &&
+result.stats.faith >= result.class_minimums.faith &&
+result.stats.arcane >= result.class_minimums.arcane
+"""
+
+# The caller's floors are honoured, or the stat is already at 99 and cannot go higher. A node
+# that quietly spent below a floor would be substituting its judgement for the caller's.
+[[ensures]]
+expr = """
+(result.stats.vigor >= result.floors.vigor || result.stats.vigor == 99) &&
+(result.stats.mind >= result.floors.mind || result.stats.mind == 99) &&
+(result.stats.endurance >= result.floors.endurance || result.stats.endurance == 99)
+"""
+
+[[ensures]]
+expr = """
+result.floors.vigor == input.vigor && result.floors.mind == input.mind &&
+result.floors.endurance == input.endurance && result.floors_are_the_callers_choice
+"""
+
+# The figure that was maximised is the figure it claims to be.
+[[ensures]]
+expr = """
+result.focus == "attack"
+  ? result.objective_value == result.total_ar
+  : (result.focus == "bleed" ? result.objective_value == result.status.bleed
+    : (result.focus == "frost" ? result.objective_value == result.status.frost
+    : (result.focus == "poison" ? result.objective_value == result.status.poison
+    : (result.focus == "scarlet_rot" ? result.objective_value == result.status.scarlet_rot
+    : (result.focus == "sleep" ? result.objective_value == result.status.sleep
+    : result.objective_value == result.status.madness)))))
+"""
+
+# The same identities `attack-power` holds to, because these are its figures: the total is the
+# sum of its parts, and what the game shows is that truncated.
+[[ensures]]
+expr = """
+result.attack.physical + result.attack.magic + result.attack.fire +
+result.attack.lightning + result.attack.holy - result.total_ar < 0.000001 &&
+result.total_ar - (result.attack.physical + result.attack.magic + result.attack.fire +
+result.attack.lightning + result.attack.holy) < 0.000001
+"""
+
+[[ensures]]
+expr = "result.total_ar_rounded <= result.total_ar && result.total_ar < result.total_ar_rounded + 1"
+
+[[ensures]]
+expr = """
+result.attack_shown.physical <= result.attack.physical && result.attack.physical < result.attack_shown.physical + 1 &&
+result.status_shown.bleed <= result.status.bleed && result.status.bleed < result.status_shown.bleed + 1 &&
+result.status_shown.frost <= result.status.frost && result.status.frost < result.status_shown.frost + 1
+"""
+
+# A feasible build meets the weapon's requirements — that is part of what the floor cost buys.
+[[ensures]]
+expr = "!result.feasible || result.requirements_met"
+
+[[examples]]
+ask = "Quero fazer uma build de Rivers of Blood no nível 150, classe Samurai. Monta a distribuição."
+call = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 10, max_upgrade = 10, starting_class = "Samurai", target_level = 150, focus = "bleed", vigor = 40, mind = 20, endurance = 25 }
+
+[[examples]]
+ask = "Build de Bloodhound's Fang no nível 125 pra PvP. Como distribuo os status?"
+call = { weapon = "Bloodhound's Fang", affinity = "Standard", upgrade = 10, max_upgrade = 10, starting_class = "Vagabond", target_level = 125, focus = "attack", vigor = 40, mind = 12, endurance = 20 }

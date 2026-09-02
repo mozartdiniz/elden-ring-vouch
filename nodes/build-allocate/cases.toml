@@ -1,0 +1,70 @@
+# Node fixtures (§7.1).
+#
+# The figures are the oracle's: this node prices every candidate spread with the same
+# `ap_calc` that `attack-power` uses, so a spread's AR here and there are the same number.
+# `result.total_ar` below was checked against a separate attack-power call on the same stats.
+
+# The question this node was built for, in the form it was actually asked:
+# "Quero fazer uma build de Rivers of Blood no nível 150 ... assumindo classe Samurai."
+[[case]]
+name = "Rivers of Blood, Samurai, RL150, bleed"
+input = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 10, max_upgrade = 10, starting_class = "Samurai", target_level = 150, focus = "bleed", vigor = 40, mind = 20, endurance = 25 }
+expect = { "result.level" = 150, "result.feasible" = true, "result.minimum_level" = 73, "result.stats.arcane" = 97, "result.stats.dexterity" = 18, "result.stats.vigor" = 40, "result.requirements_met" = true, "result.total_ar" = 644.7479977404165, "result.status_shown.bleed" = 79 }
+
+# The focus is not decoration: maximising raw attack on the same weapon at the same level
+# produces a different character — 56 dexterity and 59 arcane instead of 97 arcane.
+[[case]]
+name = "the same weapon and level, maximising attack instead"
+input = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 10, max_upgrade = 10, starting_class = "Samurai", target_level = 150, focus = "attack", vigor = 40, mind = 20, endurance = 25 }
+expect = { "result.level" = 150, "result.stats.dexterity" = 56, "result.stats.arcane" = 59, "result.total_ar_rounded" = 675, "result.objective_value" = 675.8263313986536 }
+
+# A build that does not fit is answered, not refused: "that needs RL79" is what the user
+# needs to hear, and the spread returned is the cheapest one that works.
+[[case]]
+name = "a target level too low reports what the build really costs"
+input = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 10, starting_class = "Astrologer", target_level = 40, focus = "bleed", vigor = 40, mind = 20, endurance = 25 }
+expect = { "result.feasible" = false, "result.minimum_level" = 79, "result.level" = 79 }
+
+# Two-handing lowers the strength a weapon demands, which frees points for everything else.
+[[case]]
+name = "two-handing frees the points a strength requirement was taking"
+input = { weapon = "Great Stars", affinity = "Standard", upgrade = 25, max_upgrade = 25, starting_class = "Hero", target_level = 150, focus = "bleed", vigor = 40, mind = 15, endurance = 25, two_hand = true }
+expect = { "result.stats.strength" = 16, "result.two_hand" = true }
+
+[[case]]
+name = "one-handing the same build pays the full requirement"
+input = { weapon = "Great Stars", affinity = "Standard", upgrade = 25, max_upgrade = 25, starting_class = "Hero", target_level = 150, focus = "bleed", vigor = 40, mind = 15, endurance = 25 }
+expect = { "result.stats.strength" = 22, "result.two_hand" = false }
+
+# The floors are the caller's and are never spent below, and the result says whose they were.
+[[case]]
+name = "the caller's floors are honoured and echoed"
+input = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 10, starting_class = "Samurai", target_level = 150, focus = "bleed", vigor = 60, mind = 30, endurance = 30 }
+expect = { "result.stats.vigor" = 60, "result.stats.mind" = 30, "result.stats.endurance" = 30, "result.floors.vigor" = 60, "result.floors_are_the_callers_choice" = true }
+
+# A class's own spread is points already spent, so the same build costs a different level from
+# a different start — which is why the class has to be asked for rather than assumed.
+[[case]]
+name = "the starting class changes what the same floors cost"
+input = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 10, starting_class = "Wretch", target_level = 150, focus = "bleed", vigor = 40, mind = 20, endurance = 25 }
+expect = { "result.class_level" = 1, "result.level" = 150 }
+
+[[case]]
+name = "an unknown focus is refused with the list"
+input = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 10, starting_class = "Samurai", target_level = 150, focus = "damage", vigor = 40, mind = 20, endurance = 25 }
+expect_code = 11
+
+[[case]]
+name = "an upgrade past the weapon's cap is refused"
+input = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 25, max_upgrade = 10, starting_class = "Samurai", target_level = 150, vigor = 40, mind = 20, endurance = 25 }
+expect_code = 11
+
+[[case]]
+name = "a rune level beyond 713 is refused"
+input = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 10, starting_class = "Samurai", target_level = 800, vigor = 40, mind = 20, endurance = 25 }
+expect_code = 11
+
+[[case]]
+name = "a missing floor is a caller error, not a default"
+input = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 10, starting_class = "Samurai", target_level = 150 }
+expect_code = 10

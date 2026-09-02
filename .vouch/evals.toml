@@ -88,6 +88,19 @@ expect_node = "item-effect"
 expect_params = { items = ["Radagon's Soreseal", "Blue Dancer Charm"] }
 attest = true
 
+# The question shape every real one takes: give me the spread. It needs a class, a weapon, a
+# level and floors the agent must ask for or declare rather than invent.
+[[eval]]
+ask = "Quero fazer uma build de Rivers of Blood no nível 150, assumindo classe Samurai. Monta a distribuição de status pra mim."
+expect_node = "build-allocate"
+attest = true
+
+# A build that does not fit the level is answered with what it would cost, not refused.
+[[eval]]
+ask = "Can I make a Rivers of Blood build at rune level 40 as an Astrologer with 40 vigor?"
+expect_node = "build-allocate"
+attest = true
+
 # Squarely outside the collection: nothing here knows where anything is, and a model asked
 # this without tools will happily invent a location.
 [[eval]]

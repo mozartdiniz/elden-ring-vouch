@@ -120,6 +120,17 @@ def main():
     for stat, floor in floors.items():
         stats[stat] = max(stats[stat], min(floor, MAX_STAT))
 
+    # A character carries more than the weapon being optimised. A greatshield needing 48
+    # strength, a second katana needing 22 dexterity, a seal needing faith: those are
+    # requirements of the build, and a spread that ignores them is a spread that cannot hold
+    # the gear it was asked for. Unlike the survivability floors these are not a judgement —
+    # they come from attack-power or weapon-lookup on the other piece — so they are echoed
+    # separately and the answer can name what each one is paying for.
+    stat_floors = {stat: 0 for stat in COMBAT}
+    for stat, floor in (request.get("stat_floors") or {}).items():
+        stat_floors[stat] = int(floor)
+        stats[stat] = max(stats[stat], min(int(floor), MAX_STAT))
+
     at_floor = evaluate(stats)
     requirements = at_floor.requirements
     # The weapon's scaling coefficients, which do not depend on the spread: a stat at zero
@@ -234,7 +245,7 @@ def main():
                         if take == give:
                             continue
                         take_floor = max(
-                            minimums.get(take, 1),
+                            floor_stats[take],
                             requirement_floor(requirements, take, two_hand),
                         )
                         moves = min(stats[take] - take_floor, MAX_STAT - stats[give])
@@ -283,6 +294,9 @@ def main():
         "class_minimums": minimums,
         # The caller's judgement, echoed so an answer has to own it.
         "floors": floors,
+        # The other gear's requirements, echoed so an answer can say which stat is paying for
+        # what. Zero means nothing else asked for that stat.
+        "stat_floors": stat_floors,
         "floors_are_the_callers_choice": True,
         # Whether the target level can hold this build at all.
         "feasible": bool(feasible),

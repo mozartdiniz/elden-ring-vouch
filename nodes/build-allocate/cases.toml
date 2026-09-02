@@ -97,3 +97,11 @@ expect = { "result.affinity" = "Standard", "result.affinity_requested" = "Lightn
 name = "a soft cap a one-point swap cannot cross"
 input = { weapon = "Moonveil", affinity = "Standard", upgrade = 10, max_upgrade = 10, starting_class = "Samurai", target_level = 150, focus = "attack", vigor = 40, mind = 20, endurance = 25 }
 expect = { "result.stats.dexterity" = 66, "result.stats.intelligence" = 50, "result.total_ar" = 709.8569360643488 }
+
+# A build carries more than the weapon being optimised. The Fingerprint Stone Shield needs 48
+# strength, which is a third of the points at RL150, and a spread that ignores it is a spread
+# that cannot hold the shield the question was about. Pinned against an exhaustive sweep.
+[[case]]
+name = "the rest of the loadout's requirements are floors too"
+input = { weapon = "Antspur Rapier", affinity = "Keen", upgrade = 25, max_upgrade = 25, starting_class = "Vagabond", target_level = 150, focus = "attack", vigor = 45, mind = 20, endurance = 30, stat_floors = { strength = 48 } }
+expect = { "result.stats.strength" = 48, "result.stats.dexterity" = 61, "result.total_ar" = 459.06227427436136, "result.minimum_level" = 109, "result.stat_floors.strength" = 48 }

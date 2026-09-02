@@ -3,21 +3,94 @@
   "title": "build-allocate input",
   "type": "object",
   "additionalProperties": false,
-  "required": ["weapon", "affinity", "upgrade", "starting_class", "target_level", "vigor", "mind", "endurance"],
+  "required": [
+    "weapon",
+    "affinity",
+    "upgrade",
+    "starting_class",
+    "target_level",
+    "vigor",
+    "mind",
+    "endurance"
+  ],
   "properties": {
-    "weapon": { "type": "string", "description": "Exact catalogue name, from weapon-lookup's `resolved`." },
-    "affinity": { "type": "string", "description": "One of the thirteen. Use Standard for a weapon whose weapon-lookup `infusable` is false." },
-    "upgrade": { "type": "integer", "description": "Upgrade level, normally weapon-lookup's `max_upgrade`." },
-    "max_upgrade": { "type": "integer", "minimum": 0, "maximum": 25, "description": "The weapon's cap, from weapon-lookup, so an impossible upgrade refuses before the search runs." },
-    "starting_class": { "type": "string", "description": "One of the ten. It sets the floor every stat starts from." },
-    "target_level": { "type": "integer", "description": "The rune level to build to, e.g. 150." },
+    "weapon": {
+      "type": "string",
+      "description": "Exact catalogue name, from weapon-lookup's `resolved`."
+    },
+    "affinity": {
+      "type": "string",
+      "description": "One of the thirteen. Use Standard for a weapon whose weapon-lookup `infusable` is false."
+    },
+    "upgrade": {
+      "type": "integer",
+      "description": "Upgrade level, normally weapon-lookup's `max_upgrade`."
+    },
+    "max_upgrade": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 25,
+      "description": "The weapon's cap, from weapon-lookup, so an impossible upgrade refuses before the search runs."
+    },
+    "starting_class": {
+      "type": "string",
+      "description": "One of the ten. It sets the floor every stat starts from."
+    },
+    "target_level": {
+      "type": "integer",
+      "description": "The rune level to build to, e.g. 150."
+    },
     "focus": {
       "type": "string",
-      "description": "What to maximise: 'attack' for total AR, or a status — bleed, frost, poison, scarlet_rot, sleep, madness. Default 'attack'."
+      "description": "What to maximise: 'attack' for total AR, or a status \u2014 bleed, frost, poison, scarlet_rot, sleep, madness. Default 'attack'."
     },
-    "two_hand": { "type": "boolean", "description": "True if the weapon is held in both hands, which lowers the strength needed. Default false." },
-    "vigor": { "type": "integer", "description": "Minimum vigor. YOUR judgement, not a computed one — the node spends what is left after this, and the answer must say the floor was chosen." },
-    "mind": { "type": "integer", "description": "Minimum mind. Your judgement." },
-    "endurance": { "type": "integer", "description": "Minimum endurance. Your judgement." }
+    "two_hand": {
+      "type": "boolean",
+      "description": "True if the weapon is held in both hands, which lowers the strength needed. Default false."
+    },
+    "vigor": {
+      "type": "integer",
+      "description": "Minimum vigor. YOUR judgement, not a computed one \u2014 the node spends what is left after this, and the answer must say the floor was chosen."
+    },
+    "mind": {
+      "type": "integer",
+      "description": "Minimum mind. Your judgement."
+    },
+    "endurance": {
+      "type": "integer",
+      "description": "Minimum endurance. Your judgement."
+    },
+    "stat_floors": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "strength": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99
+        },
+        "dexterity": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99
+        },
+        "intelligence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99
+        },
+        "faith": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99
+        },
+        "arcane": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99
+        }
+      },
+      "description": "Minimums the rest of the loadout needs: a shield's strength, a second weapon's dexterity, a seal's faith. Real requirements from weapon-lookup or attack-power, not a judgement \u2014 the search spends above them."
+    }
   }
 }

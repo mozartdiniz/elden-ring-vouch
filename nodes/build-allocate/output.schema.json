@@ -22,6 +22,7 @@
     "stats",
     "class_minimums",
     "floors",
+    "stat_floors",
     "floors_are_the_callers_choice",
     "feasible",
     "minimum_level",
@@ -373,6 +374,45 @@
     "objective_responds_to_stats": {
       "type": "boolean",
       "description": "False when nothing the caller levels improves the focus \u2014 a weapon whose status buildup is flat. Then the spread is the floor plus points with nowhere useful to go, and an answer must say so rather than present it as optimised."
+    },
+    "stat_floors": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "strength",
+        "dexterity",
+        "intelligence",
+        "faith",
+        "arcane"
+      ],
+      "properties": {
+        "strength": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99
+        },
+        "dexterity": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99
+        },
+        "intelligence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99
+        },
+        "faith": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99
+        },
+        "arcane": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99
+        }
+      },
+      "description": "What the rest of the loadout required, echoed. Zero means nothing else asked for that stat."
     }
   }
 }

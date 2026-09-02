@@ -134,6 +134,17 @@ message = "each floor must be between 1 and 99; these are the minimums to hold b
 [[ensures]]
 expr = "result.affinity_ignored == (result.affinity != result.affinity_requested)"
 
+# Every floor the rest of the loadout needs is met. A spread that cannot hold the shield it
+# was built around is not an answer to the question that was asked.
+[[ensures]]
+expr = """
+result.stats.strength >= result.stat_floors.strength &&
+result.stats.dexterity >= result.stat_floors.dexterity &&
+result.stats.intelligence >= result.stat_floors.intelligence &&
+result.stats.faith >= result.stat_floors.faith &&
+result.stats.arcane >= result.stat_floors.arcane
+"""
+
 [[ensures]]
 expr = "result.infusable || result.affinity == \"Standard\""
 

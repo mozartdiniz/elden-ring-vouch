@@ -58,3 +58,16 @@ expect_code = 11
 name = "displayed figures are numbers, not digits inside a string"
 input = { weapon = "Zweihander", upgrade = 25, max_upgrade = 25, strength = 60, dexterity = 12, intelligence = 10, faith = 10, arcane = 10, two_hand = true }
 expect = { "result.ranked[0].shown.physical" = 409, "result.ranked[0].shown.fire" = 411, "result.ranked[0].shown.damage" = 690, "result.ranked[0].split" = "409/0/411/0/0" }
+
+# The composition this collection was extended for: a boss's own numbers, handed straight from
+# boss-lookup, change which infusion wins. Against Rennala's first phase — negative physical
+# negation, 80% magic — Heavy beats the Flame Art that wins against the generic reference.
+[[case]]
+name = "a boss's negation changes the ranking"
+input = { weapon = "Longsword", upgrade = 25, max_upgrade = 25, strength = 60, dexterity = 13, intelligence = 10, faith = 60, arcane = 9, defense = { physical = 109.0, strike = 109.0, slash = 109.0, pierce = 109.0, magic = 109.0, fire = 109.0, lightning = 109.0, holy = 109.0 }, negation = { physical = -10.0, strike = 0.0, slash = -10.0, pierce = -10.0, magic = 80.0, fire = 20.0, lightning = 20.0, holy = 20.0 } }
+expect = { "result.best" = "Heavy", "result.target" = "given", "result.negation_given" = true, "result.buffed" = false }
+
+[[case]]
+name = "without the boss's numbers the same build ranks differently"
+input = { weapon = "Longsword", upgrade = 25, max_upgrade = 25, strength = 60, dexterity = 13, intelligence = 10, faith = 60, arcane = 9 }
+expect = { "result.best" = "Flame Art", "result.target" = "default", "result.negation_given" = false }

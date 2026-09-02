@@ -69,10 +69,32 @@ fixture.
 | `spell-power` | One spell from one catalyst → attack, family bonus, FP cost, whether the build can cast it |
 | `equip-load` | A loadout against a build's equip load → weight, roll type, and the endurance to change it |
 | `defence` | A build and an armour set → per-element defences, damage negation, status resistances |
+| `boss-lookup` | A boss by name → health, poise, per-type defences and negations, status immunities |
+| `item-effect` | Talismans, crystal tears and great runes → what they do, individually and combined |
 
 The order is the routing: **character-build** when the user described a build by only some of
 its stats, **weapon-lookup** for any question naming a weapon, then **attack-power** for what
 it hits for, or **optimal-affinity** for what to infuse it with.
+
+### The question these compose to answer
+
+"What should I infuse this with for Rennala?" is not the same question as "what should I infuse
+this with", and the difference is the whole point:
+
+```console
+$ vouch -C . call boss-lookup --input '{"query":"Rennala, Queen of the Full Moon (Phase 1)"}'
+{ "health": 3493.0, "negation": { "physical": -10.0, "magic": 80.0, ... },
+  "weak_to": ["physical", "pierce", "slash"], "immune_to": ["death", "madness", "sleep"] }
+```
+
+Hand that `negation` to `optimal-affinity` and the ranking changes: **Heavy** wins against
+Rennala, where **Flame Art** wins against the generic reference. Add the multipliers from
+`item-effect` for a couple of talismans and Standard and Quality overtake Flame Art too. None
+of that is guessable, and all of it is a figure some node returned.
+
+The routing is `boss-lookup` → `optimal-affinity`, with `item-effect` alongside when the user
+named a talisman. `item-effect` combines several items itself — stats summed, multipliers
+multiplied — because that arithmetic in a caller is arithmetic a model performs.
 
 `optimal-affinity` is the one worth trying first. "What should I infuse this with" is thirteen
 comparisons against a target's defences — the shape of question a model answers from folk

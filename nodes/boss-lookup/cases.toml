@@ -1,0 +1,42 @@
+# Node fixtures (§7.1). Figures from data/BossResist.csv at NG.
+
+[[case]]
+name = "Rennala's first phase takes extra physical and shrugs off magic"
+input = { query = "Rennala, Queen of the Full Moon (Phase 1)" }
+expect = { "result.health" = 3493.0, "result.poise" = 0.0, "result.negation.physical" = -10.0, "result.negation.magic" = 80.0, "result.weak_to[0]" = "physical" }
+
+# A phase is a different fight, and the difference is not cosmetic: twice the fire resistance,
+# 80 poise where there was none, and 600 more health.
+[[case]]
+name = "her second phase is a different fight"
+input = { query = "Rennala, Queen of the Full Moon (Phase 2)" }
+expect = { "result.health" = 4097.0, "result.poise" = 80.0, "result.resist.frost" = 534.0 }
+
+# So a bare name resolves to nothing: three rows match, and picking one would answer a
+# question nobody asked.
+[[case]]
+name = "a bare boss name is ambiguous across phases"
+input = { query = "rennala" }
+expect = { "result.resolved" = "", "result.ambiguous" = true, "result.match_count" = 3 }
+
+# 9999 in the table means the status cannot be applied at all. Reported as immunity rather
+# than as a very large resistance, so nobody answers "how hard is it to put her to sleep".
+[[case]]
+name = "immunity is named, not left as a large number"
+input = { query = "Rennala, Queen of the Full Moon (Phase 1)" }
+expect = { "result.immune_to[0]" = "death", "result.immune_to[1]" = "madness", "result.immune_to[2]" = "sleep", "result.resist.sleep" = 0.0, "result.resist.bleed" = 326.0 }
+
+[[case]]
+name = "nothing matched means no figures at all"
+input = { query = "Gwyn, Lord of Cinder" }
+expect = { "result.resolved" = "", "result.match_count" = 0, "result.health" = 0.0 }
+
+[[case]]
+name = "a query too short to resolve anything is refused"
+input = { query = "re" }
+expect_code = 11
+
+[[case]]
+name = "a missing query is a caller error"
+input = { }
+expect_code = 10

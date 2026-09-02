@@ -55,6 +55,8 @@ def main():
         sys.exit(1)
 
     given_defense = request.get("defense") or {}
+    given_negation = request.get("negation") or {}
+    given_mult = request.get("damage_multiplier") or {}
     inputs = opt.OptInputs(
         weapon_class=row["Weapon Class"],
         weapon=weapon,
@@ -67,6 +69,8 @@ def main():
         two_hand=request.get("two_hand", False),
         attack_mv=float(request.get("attack_mv", 100.0)),
         defense=dict(given_defense),
+        negation=dict(given_negation),
+        dmg_mult=dict(given_mult),
         avg_pve=request.get("avg_pve", False),
         counter_hit=request.get("counter_hit", False),
     )
@@ -122,7 +126,12 @@ def main():
         "ranked": ranked,
         # Which target these numbers are about. The same weapon ranks differently against
         # different enemies, so an answer that omits this is not an answer.
-        "target": "given" if given_defense else "default",
+        # Which target these numbers are about, and whether anything was buffing them. The
+        # same weapon ranks differently against different enemies, so an answer that omits
+        # this is not an answer.
+        "target": "given" if (given_defense or given_negation) else "default",
+        "negation_given": bool(given_negation),
+        "buffed": bool(given_mult),
         "attack_mv": float(inputs.attack_mv),
     }
     json.dump(result, sys.stdout)

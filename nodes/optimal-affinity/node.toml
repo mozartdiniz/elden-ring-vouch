@@ -68,6 +68,12 @@ guidance = "True if the weapon is held in both hands."
 [params.attack_mv]
 guidance = "Motion value of the attack being compared, as a percentage. Leave it out unless the user named a specific attack; the ranking rarely changes with it."
 
+[params.negation]
+guidance = "Pass boss-lookup's `negation` whenever the question names an enemy. Without it the ranking is against a generic reference, and against something like Rennala — 80% magic negation, negative physical — a generic ranking is simply the wrong answer."
+
+[params.damage_multiplier]
+guidance = "Per-type multipliers from item-effect, when the user named a talisman or crystal tear that boosts a damage type. Never invent one, and never apply a buff the user did not mention."
+
 [params.defense]
 guidance = "The target's defences, when the user named an enemy and you have real numbers for it. Omit it otherwise — do not invent defences, and say the ranking is against the standard reference."
 
@@ -118,6 +124,15 @@ expr = "result.ranked.all(r, r.damage > 0.0 && r.total_ap > 0.0)"
 
 [[ensures]]
 expr = "result.affinities_available == size(result.ranked)"
+
+# Whether this ranking is about a named enemy, and whether anything was buffing it, are facts
+# an answer has to carry: the same weapon ranks differently against different targets.
+[[ensures]]
+expr = """
+result.negation_given == has(input.negation) &&
+result.buffed == has(input.damage_multiplier) &&
+(result.target == "given") == (has(input.defense) || has(input.negation))
+"""
 
 # Every displayed figure is its precise twin truncated, so quoting the shown value is quoting
 # the same number a reader would see in the game rather than a second, looser one.

@@ -1,0 +1,498 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "item-effect output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "items",
+    "kinds",
+    "effects",
+    "combined",
+    "quantified",
+    "text_only",
+    "applied_to_a_build"
+  ],
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "kinds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "talisman, crystal tear, great rune, or other \u2014 one per item, in the same order."
+    },
+    "effects": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "item",
+          "text",
+          "stats",
+          "attack_multiplier",
+          "damage_taken",
+          "resist",
+          "rates"
+        ],
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string",
+            "description": "The game's own description. The only account of an item whose effect has no column."
+          },
+          "stats": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Stat bonuses. Negative is possible.",
+            "required": [
+              "vigor",
+              "mind",
+              "endurance",
+              "strength",
+              "dexterity",
+              "intelligence",
+              "faith",
+              "arcane"
+            ],
+            "properties": {
+              "vigor": {
+                "type": "integer"
+              },
+              "mind": {
+                "type": "integer"
+              },
+              "endurance": {
+                "type": "integer"
+              },
+              "strength": {
+                "type": "integer"
+              },
+              "dexterity": {
+                "type": "integer"
+              },
+              "intelligence": {
+                "type": "integer"
+              },
+              "faith": {
+                "type": "integer"
+              },
+              "arcane": {
+                "type": "integer"
+              }
+            }
+          },
+          "attack_multiplier": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Attack multiplier per damage kind, 1.0 for no change. A physical bonus is already expanded across strike, slash and pierce, so this drops into optimal-affinity's damage_multiplier unchanged.",
+            "required": [
+              "physical",
+              "strike",
+              "slash",
+              "pierce",
+              "magic",
+              "fire",
+              "lightning",
+              "holy"
+            ],
+            "properties": {
+              "physical": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "strike": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "slash": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "pierce": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "magic": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "fire": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "lightning": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "holy": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            }
+          },
+          "damage_taken": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Multiplier on damage received. Above 1.0 means MORE damage taken, as on Radagon's Soreseal.",
+            "required": [
+              "physical",
+              "strike",
+              "slash",
+              "pierce",
+              "magic",
+              "fire",
+              "lightning",
+              "holy"
+            ],
+            "properties": {
+              "physical": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "strike": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "slash": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "pierce": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "magic": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "fire": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "lightning": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "holy": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            }
+          },
+          "resist": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Flat change to a status resistance.",
+            "required": [
+              "poison",
+              "scarlet_rot",
+              "bleed",
+              "frost",
+              "sleep",
+              "madness",
+              "death"
+            ],
+            "properties": {
+              "poison": {
+                "type": "number"
+              },
+              "scarlet_rot": {
+                "type": "number"
+              },
+              "bleed": {
+                "type": "number"
+              },
+              "frost": {
+                "type": "number"
+              },
+              "sleep": {
+                "type": "number"
+              },
+              "madness": {
+                "type": "number"
+              },
+              "death": {
+                "type": "number"
+              }
+            }
+          },
+          "rates": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Multipliers on max HP, FP, stamina and equip load.",
+            "required": [
+              "max_hp",
+              "max_fp",
+              "max_stamina",
+              "equip_load"
+            ],
+            "properties": {
+              "max_hp": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "max_fp": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "max_stamina": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "equip_load": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "combined": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Every item together: stat bonuses summed, multipliers multiplied. Quote these rather than combining the parts yourself.",
+      "required": [
+        "stats",
+        "attack_multiplier",
+        "damage_taken",
+        "resist",
+        "rates"
+      ],
+      "properties": {
+        "stats": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Stat bonuses, summed.",
+          "required": [
+            "vigor",
+            "mind",
+            "endurance",
+            "strength",
+            "dexterity",
+            "intelligence",
+            "faith",
+            "arcane"
+          ],
+          "properties": {
+            "vigor": {
+              "type": "integer"
+            },
+            "mind": {
+              "type": "integer"
+            },
+            "endurance": {
+              "type": "integer"
+            },
+            "strength": {
+              "type": "integer"
+            },
+            "dexterity": {
+              "type": "integer"
+            },
+            "intelligence": {
+              "type": "integer"
+            },
+            "faith": {
+              "type": "integer"
+            },
+            "arcane": {
+              "type": "integer"
+            }
+          }
+        },
+        "attack_multiplier": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Attack multipliers, multiplied together.",
+          "required": [
+            "physical",
+            "strike",
+            "slash",
+            "pierce",
+            "magic",
+            "fire",
+            "lightning",
+            "holy"
+          ],
+          "properties": {
+            "physical": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "strike": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "slash": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "pierce": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "magic": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "fire": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "lightning": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "holy": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          }
+        },
+        "damage_taken": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Damage-taken multipliers, multiplied together.",
+          "required": [
+            "physical",
+            "strike",
+            "slash",
+            "pierce",
+            "magic",
+            "fire",
+            "lightning",
+            "holy"
+          ],
+          "properties": {
+            "physical": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "strike": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "slash": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "pierce": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "magic": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "fire": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "lightning": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "holy": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          }
+        },
+        "resist": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Status resistance changes, summed.",
+          "required": [
+            "poison",
+            "scarlet_rot",
+            "bleed",
+            "frost",
+            "sleep",
+            "madness",
+            "death"
+          ],
+          "properties": {
+            "poison": {
+              "type": "number"
+            },
+            "scarlet_rot": {
+              "type": "number"
+            },
+            "bleed": {
+              "type": "number"
+            },
+            "frost": {
+              "type": "number"
+            },
+            "sleep": {
+              "type": "number"
+            },
+            "madness": {
+              "type": "number"
+            },
+            "death": {
+              "type": "number"
+            }
+          }
+        },
+        "rates": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Rate multipliers, multiplied together.",
+          "required": [
+            "max_hp",
+            "max_fp",
+            "max_stamina",
+            "equip_load"
+          ],
+          "properties": {
+            "max_hp": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "max_fp": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "max_stamina": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "equip_load": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          }
+        }
+      }
+    },
+    "quantified": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Items whose effect the tables put a number on."
+    },
+    "text_only": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Items whose effect exists only as prose. Not items with no effect \u2014 say what the text says."
+    },
+    "applied_to_a_build": {
+      "type": "boolean",
+      "description": "Always false. Nothing in this collection applies these automatically; character-build, equip-load and defence all report figures before them."
+    }
+  }
+}

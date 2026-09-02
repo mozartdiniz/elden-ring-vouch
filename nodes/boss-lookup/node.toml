@@ -1,0 +1,116 @@
+name = "boss-lookup"
+version = "0.1.0"
+
+purpose = "Resolve a boss by name, and report its health, defences, negations and status resistances"
+
+use_when = [
+  "the question names a boss and asks what damage to bring, or what it is weak to",
+  "before optimal-affinity or attack-power, when the question is about a specific fight",
+  "the question asks whether a status — bleed, frost, sleep — works on something",
+]
+not_for = [
+  "how much damage a weapon deals to it — pass this node's defence and negation to optimal-affinity",
+  "boss strategies, attack patterns or item drops",
+  "anything at NG+; these are NG figures",
+]
+
+run = ["python3", "boss.py"]
+timeout_ms = 20000
+
+# Not the Build Planner extraction: this table comes from the Prometheux ontology, compiled
+# from the community PvE data sheet. Declared so a reader can see the numbers here rest on a
+# different source than the weapon maths does.
+[[reads]]
+path = "../../data/BossResist.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.query]
+guidance = "The boss name as the user wrote it. Expect it to be ambiguous: bosses are listed once per phase, and phases differ — Rennala's first phase has negative physical negation and no poise, her second has 80 poise and twice the fire resistance. Ask which phase rather than picking one."
+
+[params.include_dlc]
+guidance = "Leave it out unless the user said they are not playing Shadow of the Erdtree."
+
+[[requires]]
+expr = "size(input.query) >= 3"
+message = "a boss query needs at least 3 characters"
+
+# Same rule as every other lookup here: one match or none. A phase is a different fight, so
+# picking one for the user would answer a question they did not ask.
+[[ensures]]
+expr = '(result.resolved != "") == (result.match_count == 1)'
+
+[[ensures]]
+expr = 'result.resolved == "" || result.resolved in result.candidates'
+
+[[ensures]]
+expr = "result.ambiguous == (result.match_count > 1)"
+
+[[ensures]]
+expr = "result.match_count >= size(result.candidates)"
+
+[[ensures]]
+expr = "result.candidates_truncated == (result.match_count > size(result.candidates))"
+
+[[ensures]]
+expr = "result.catalog_size >= result.match_count"
+
+# Nothing resolved means no figures: zeros rather than a previous row's numbers.
+[[ensures]]
+expr = 'result.resolved != "" || (result.health == 0.0 && result.poise == 0.0 && size(result.immune_to) == 0)'
+
+[[ensures]]
+expr = 'result.resolved == "" || result.health > 0.0'
+
+# Defence is a flat number and is never negative, whatever the negation does. A negative one
+# would flip the sign of a damage calculation downstream without anything noticing.
+[[ensures]]
+expr = """
+result.defence.physical >= 0.0 && result.defence.strike >= 0.0 &&
+result.defence.slash >= 0.0 && result.defence.pierce >= 0.0 &&
+result.defence.magic >= 0.0 && result.defence.fire >= 0.0 &&
+result.defence.lightning >= 0.0 && result.defence.holy >= 0.0
+"""
+
+# `weak_to` is exactly the types with negative negation, so "weak to" is a checked claim rather
+# than a reading of the table.
+[[ensures]]
+expr = """
+result.weak_to.all(d,
+  (d != "physical" || result.negation.physical < 0.0) &&
+  (d != "strike" || result.negation.strike < 0.0) &&
+  (d != "slash" || result.negation.slash < 0.0) &&
+  (d != "pierce" || result.negation.pierce < 0.0) &&
+  (d != "magic" || result.negation.magic < 0.0) &&
+  (d != "fire" || result.negation.fire < 0.0) &&
+  (d != "lightning" || result.negation.lightning < 0.0) &&
+  (d != "holy" || result.negation.holy < 0.0)
+)
+"""
+
+# A status the boss is immune to carries no resistance number, so the two can never be read as
+# contradicting each other.
+[[ensures]]
+expr = """
+result.immune_to.all(s,
+  (s != "poison" || result.resist.poison == 0.0) &&
+  (s != "scarlet_rot" || result.resist.scarlet_rot == 0.0) &&
+  (s != "bleed" || result.resist.bleed == 0.0) &&
+  (s != "frost" || result.resist.frost == 0.0) &&
+  (s != "sleep" || result.resist.sleep == 0.0) &&
+  (s != "madness" || result.resist.madness == 0.0) &&
+  (s != "death" || result.resist.death == 0.0)
+)
+"""
+
+[[examples]]
+ask = "what damage should I bring to Rennala?"
+call = { query = "Rennala, Queen of the Full Moon (Phase 1)" }
+
+[[examples]]
+ask = "does bleed work on Malenia?"
+call = { query = "malenia" }

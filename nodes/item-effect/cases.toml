@@ -1,0 +1,67 @@
+# Node fixtures (§7.1).
+#
+# The first two are pinned against figures the Prometheux ontology recorded for `effect_by_name`
+# in its HANDOFF.md: Radagon's Soreseal's +5s and its 1.15 damage cut, and Godrick's Great Rune
+# raising all eight stats by 5.
+
+[[case]]
+name = "Radagon's Soreseal (Prometheux: +5 four stats, PhysCut 1.15)"
+input = { items = ["Radagon's Soreseal"] }
+expect = { "result.kinds[0]" = "talisman", "result.effects[0].stats.vigor" = 5, "result.effects[0].stats.endurance" = 5, "result.effects[0].stats.strength" = 5, "result.effects[0].stats.dexterity" = 5, "result.effects[0].stats.intelligence" = 0, "result.effects[0].damage_taken.physical" = 1.15 }
+
+[[case]]
+name = "Godrick's Great Rune raises all eight (Prometheux: all Add* 5)"
+input = { items = ["Godrick's Great Rune"] }
+expect = { "result.kinds[0]" = "great rune", "result.effects[0].stats.vigor" = 5, "result.effects[0].stats.mind" = 5, "result.effects[0].stats.arcane" = 5, "result.effects[0].stats.faith" = 5 }
+
+# A physical attack bonus has to reach strike, slash and pierce, or a multiplier handed to
+# optimal-affinity would silently cover only part of the damage.
+[[case]]
+name = "a physical bonus expands across its three subtypes"
+input = { items = ["Blue Dancer Charm"] }
+expect = { "result.effects[0].attack_multiplier.physical" = 1.15, "result.effects[0].attack_multiplier.slash" = 1.15, "result.effects[0].attack_multiplier.pierce" = 1.15, "result.effects[0].attack_multiplier.magic" = 1.0 }
+
+# The arithmetic the node exists to do: stats add, multipliers multiply. Doing it in the
+# caller is what an eval caught the agent doing with every other figure.
+[[case]]
+name = "two talismans combine: stats add, multipliers multiply"
+input = { items = ["Radagon's Soreseal", "Blue Dancer Charm"] }
+expect = { "result.combined.stats.vigor" = 5, "result.combined.stats.strength" = 5, "result.combined.attack_multiplier.physical" = 1.15, "result.combined.damage_taken.physical" = 1.15 }
+
+[[case]]
+name = "four items across three catalogues combine"
+input = { items = ["Radagon's Soreseal", "Godrick's Great Rune", "Blue Dancer Charm", "Crimson Crystal Tear 1"] }
+expect = { "result.kinds[1]" = "great rune", "result.kinds[3]" = "crystal tear", "result.combined.stats.vigor" = 10, "result.combined.stats.strength" = 10, "result.combined.stats.mind" = 5, "result.combined.attack_multiplier.strike" = 1.15 }
+
+# A penalty is a multiplier below 1, and has to survive combination as one.
+[[case]]
+name = "a talisman that lowers physical attack is a multiplier below one"
+input = { items = ["Silver Tear Mask"] }
+expect = { "result.effects[0].attack_multiplier.physical" = 0.95, "result.effects[0].stats.arcane" = 8 }
+
+# An item whose effect exists only as prose is not an item with no effect. The partition is
+# what keeps an answer from reporting "nothing" about a physick tear that restores half your HP.
+[[case]]
+name = "an effect with no column is text, not nothing"
+input = { items = ["Crimson Crystal Tear 1"] }
+expect = { "result.text_only[0]" = "Crimson Crystal Tear 1", "result.quantified" = [] }
+
+[[case]]
+name = "nothing here is applied to a build automatically"
+input = { items = ["Radagon's Soreseal"] }
+expect = { "result.applied_to_a_build" = false }
+
+[[case]]
+name = "an item not in the effect tables is a defect, not a silent zero"
+input = { items = ["Ring of Favor"] }
+expect_code = 20
+
+[[case]]
+name = "an empty item list is a caller error"
+input = { items = [] }
+expect_code = 10
+
+[[case]]
+name = "a ninth item is a caller error"
+input = { items = ["a", "b", "c", "d", "e", "f", "g", "h", "i"] }
+expect_code = 10

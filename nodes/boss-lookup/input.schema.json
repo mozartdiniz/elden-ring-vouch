@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "boss-lookup input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["query"],
+  "properties": {
+    "query": { "type": "string", "description": "A boss name as the user wrote it. Bosses appear once per phase, so a bare name is usually ambiguous." },
+    "include_dlc": { "type": "boolean", "description": "Include Shadow of the Erdtree bosses. Default true." }
+  }
+}

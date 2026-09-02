@@ -17,6 +17,28 @@
     "attack_mv": { "type": "number", "exclusiveMinimum": 0, "description": "Motion value of the attack, as a percentage. Default 100." },
     "avg_pve": { "type": "boolean", "description": "Average over the reference PvE targets instead of one. Default false." },
     "counter_hit": { "type": "boolean", "description": "Score the comparison on a counter hit. Default false." },
+    "negation": {
+      "type": "object",
+      "description": "The target's per-type damage negation, as percentages — boss-lookup's `negation` verbatim. Negative values mean the target takes extra.",
+      "additionalProperties": false,
+      "properties": {
+        "physical": { "type": "number" }, "strike": { "type": "number" },
+        "slash": { "type": "number" }, "pierce": { "type": "number" },
+        "magic": { "type": "number" }, "fire": { "type": "number" },
+        "lightning": { "type": "number" }, "holy": { "type": "number" }
+      }
+    },
+    "damage_multiplier": {
+      "type": "object",
+      "description": "Per-type multipliers from buffs — a talisman or crystal tear that raises one damage type. 1.0 is no change. Take these from item-effect; do not invent them.",
+      "additionalProperties": false,
+      "properties": {
+        "physical": { "type": "number", "exclusiveMinimum": 0 }, "strike": { "type": "number", "exclusiveMinimum": 0 },
+        "slash": { "type": "number", "exclusiveMinimum": 0 }, "pierce": { "type": "number", "exclusiveMinimum": 0 },
+        "magic": { "type": "number", "exclusiveMinimum": 0 }, "fire": { "type": "number", "exclusiveMinimum": 0 },
+        "lightning": { "type": "number", "exclusiveMinimum": 0 }, "holy": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
     "defense": {
       "type": "object",
       "description": "The target's defences. Omit for the calculator's standard PvE reference; the result says which was used.",

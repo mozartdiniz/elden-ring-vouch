@@ -62,6 +62,25 @@ expect_node = "defence"
 expect_params = { starting_class = "Vagabond", vigor = 40 }
 attest = true
 
+# The question this collection was extended for. It needs a boss's own numbers, not a generic
+# ranking: against Rennala's first phase the physical infusion wins, and against the reference
+# target it does not. An agent that answers without calling boss-lookup gets it wrong.
+[[eval]]
+ask = "I'm fighting Rennala's first phase with a Longsword at 60 strength and 60 faith. What should I infuse it with?"
+expect_node = "boss-lookup"
+attest = true
+
+[[eval]]
+ask = "does bleed work on Rennala's first phase, and what is she weakest to?"
+expect_node = "boss-lookup"
+attest = true
+
+[[eval]]
+ask = "what does wearing Radagon's Soreseal and the Blue Dancer Charm together give me?"
+expect_node = "item-effect"
+expect_params = { items = ["Radagon's Soreseal", "Blue Dancer Charm"] }
+attest = true
+
 # Squarely outside the collection: nothing here knows where anything is, and a model asked
 # this without tools will happily invent a location.
 [[eval]]

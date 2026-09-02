@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "boss-lookup output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "query", "resolved", "location", "is_dlc", "match_count", "candidates",
+    "candidates_truncated", "ambiguous", "catalog_size", "health", "poise",
+    "defence", "negation", "resist", "immune_to", "weak_to"
+  ],
+  "properties": {
+    "query": { "type": "string" },
+    "resolved": { "type": "string", "description": "The exact table name, set only when the query matched one row. Empty otherwise — a phase is a different fight and must not be picked for the user." },
+    "location": { "type": "string" },
+    "is_dlc": { "type": "boolean" },
+    "match_count": { "type": "integer", "minimum": 0 },
+    "candidates": { "type": "array", "items": { "type": "string" }, "description": "Matching rows, at most 20. Usually the phases of one boss." },
+    "candidates_truncated": { "type": "boolean" },
+    "ambiguous": { "type": "boolean" },
+    "catalog_size": { "type": "integer", "minimum": 1 },
+    "health": { "type": "number", "minimum": 0, "description": "Health at NG. Zero when nothing resolved." },
+    "poise": { "type": "number", "minimum": 0 },
+    "defence": { "$ref": "#/$defs/damage", "description": "Flat per-type defence. Feed straight to optimal-affinity's `defense`." },
+    "negation": { "$ref": "#/$defs/damage", "description": "Per-type negation as a percentage, on the scale optimal-affinity's `negation` expects. Negative means the boss takes MORE of that type." },
+    "resist": { "$ref": "#/$defs/status", "description": "Status resistance. A status the boss is immune to reads 0 here and is named in immune_to instead, so a large number is never mistaken for a hard-but-possible one." },
+    "immune_to": { "type": "array", "items": { "type": "string" }, "description": "Statuses that cannot be applied at all. Not 'very resistant'." },
+    "weak_to": { "type": "array", "items": { "type": "string" }, "description": "Damage types whose negation is negative — the boss takes extra from these." }
+  },
+  "$defs": {
+    "damage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["physical", "strike", "slash", "pierce", "magic", "fire", "lightning", "holy"],
+      "properties": {
+        "physical": { "type": "number" }, "strike": { "type": "number" },
+        "slash": { "type": "number" }, "pierce": { "type": "number" },
+        "magic": { "type": "number" }, "fire": { "type": "number" },
+        "lightning": { "type": "number" }, "holy": { "type": "number" }
+      }
+    },
+    "status": {
+      "type": "object", "additionalProperties": false,
+      "required": ["poison", "scarlet_rot", "bleed", "frost", "sleep", "madness", "death"],
+      "properties": {
+        "poison": { "type": "number", "minimum": 0 }, "scarlet_rot": { "type": "number", "minimum": 0 },
+        "bleed": { "type": "number", "minimum": 0 }, "frost": { "type": "number", "minimum": 0 },
+        "sleep": { "type": "number", "minimum": 0 }, "madness": { "type": "number", "minimum": 0 },
+        "death": { "type": "number", "minimum": 0 }
+      }
+    }
+  }
+}

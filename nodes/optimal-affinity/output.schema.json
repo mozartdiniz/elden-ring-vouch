@@ -6,7 +6,7 @@
   "required": [
     "weapon", "weapon_class", "upgrade", "max_upgrade", "two_hand", "infusable",
     "affinities_available", "best", "best_damage", "runner_up", "best_margin",
-    "ranked", "target", "attack_mv"
+    "ranked", "target", "negation_given", "buffed", "attack_mv"
   ],
   "properties": {
     "weapon": { "type": "string" },
@@ -35,6 +35,8 @@
       "enum": ["default", "given"],
       "description": "Whether these numbers are against the calculator's standard PvE reference or defences the caller supplied. Say which; the same weapon ranks differently against different enemies."
     },
+    "negation_given": { "type": "boolean", "description": "Whether the target's negation was supplied. Without it the ranking uses the calculator's reference, not this enemy." },
+    "buffed": { "type": "boolean", "description": "Whether any damage multiplier was applied. Say so: a buffed figure is not what the weapon does unbuffed." },
     "attack_mv": { "type": "number", "exclusiveMinimum": 0 }
   },
   "$defs": {

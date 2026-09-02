@@ -1,0 +1,187 @@
+name = "item-effect"
+version = "0.1.0"
+
+purpose = "What talismans, crystal tears and great runes do, individually and combined"
+
+use_when = [
+  "the user names a talisman, crystal tear or great rune and asks what it does",
+  "the user is wearing several and you need their combined effect",
+  "you need a damage multiplier to pass to optimal-affinity, or stat bonuses to add to a build",
+]
+not_for = [
+  "applying the effect to a build — nothing here does that automatically, and the other nodes report figures before these",
+  "where to find an item",
+  "armour or weapon effects; this covers the three equippable catalogues",
+]
+
+run = ["python3", "effect.py"]
+timeout_ms = 20000
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/EffectData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/TalismanData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/CrystalTearData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/GreatRuneData.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.items]
+guidance = "Every item the user named, in one call — up to eight. Passing them together is what makes the combined effect a returned number instead of a multiplication you would have to do. Names must match the catalogue exactly."
+
+[[requires]]
+expr = "size(input.items) >= 1 && size(input.items) <= 8"
+message = "pass between one and eight item names; a character wears four talismans, drinks a two-tear physick, and carries one great rune"
+
+[[requires]]
+expr = 'input.items.all(name, size(name) > 0)'
+message = "an item name cannot be empty"
+
+# --- postconditions ---
+
+[[ensures]]
+expr = "size(result.effects) == size(result.items) && size(result.kinds) == size(result.items)"
+
+# Every item is either quantified or text-only, never both and never neither. That partition
+# is what keeps "the tables put no number on this" from being read as "this does nothing".
+[[ensures]]
+expr = "size(result.quantified) + size(result.text_only) == size(result.items)"
+
+# A physical attack bonus applies to all three physical subtypes. If the expansion ever broke,
+# a multiplier handed to optimal-affinity would silently cover only part of the damage.
+[[ensures]]
+expr = """
+result.effects.all(e,
+  e.attack_multiplier.physical == e.attack_multiplier.strike &&
+  e.attack_multiplier.physical == e.attack_multiplier.slash &&
+  e.attack_multiplier.physical == e.attack_multiplier.pierce
+)
+"""
+
+[[ensures]]
+expr = """
+result.combined.attack_multiplier.physical == result.combined.attack_multiplier.strike &&
+result.combined.attack_multiplier.physical == result.combined.attack_multiplier.slash &&
+result.combined.attack_multiplier.physical == result.combined.attack_multiplier.pierce
+"""
+
+# Multipliers are multipliers: never zero or negative, whatever the item does.
+[[ensures]]
+expr = """
+result.effects.all(e,
+  e.attack_multiplier.physical > 0.0 && e.attack_multiplier.magic > 0.0 &&
+  e.attack_multiplier.fire > 0.0 && e.attack_multiplier.lightning > 0.0 &&
+  e.attack_multiplier.holy > 0.0 &&
+  e.damage_taken.physical > 0.0 && e.rates.max_hp > 0.0 && e.rates.equip_load > 0.0
+)
+"""
+
+# One item combines to itself, in every field. The trivial case, and the one that would
+# break first if the combination ever started transforming values rather than accumulating
+# them.
+[[ensures]]
+expr = """
+size(result.items) != 1 || (
+  result.combined.stats.vigor == result.effects[0].stats.vigor &&
+  result.combined.stats.mind == result.effects[0].stats.mind &&
+  result.combined.stats.endurance == result.effects[0].stats.endurance &&
+  result.combined.stats.strength == result.effects[0].stats.strength &&
+  result.combined.stats.dexterity == result.effects[0].stats.dexterity &&
+  result.combined.stats.intelligence == result.effects[0].stats.intelligence &&
+  result.combined.stats.faith == result.effects[0].stats.faith &&
+  result.combined.stats.arcane == result.effects[0].stats.arcane &&
+  result.combined.resist.poison == result.effects[0].resist.poison &&
+  result.combined.resist.scarlet_rot == result.effects[0].resist.scarlet_rot &&
+  result.combined.resist.bleed == result.effects[0].resist.bleed &&
+  result.combined.resist.frost == result.effects[0].resist.frost &&
+  result.combined.resist.sleep == result.effects[0].resist.sleep &&
+  result.combined.resist.madness == result.effects[0].resist.madness &&
+  result.combined.resist.death == result.effects[0].resist.death &&
+  result.combined.attack_multiplier.physical == result.effects[0].attack_multiplier.physical &&
+  result.combined.damage_taken.physical == result.effects[0].damage_taken.physical &&
+  result.combined.attack_multiplier.strike == result.effects[0].attack_multiplier.strike &&
+  result.combined.damage_taken.strike == result.effects[0].damage_taken.strike &&
+  result.combined.attack_multiplier.slash == result.effects[0].attack_multiplier.slash &&
+  result.combined.damage_taken.slash == result.effects[0].damage_taken.slash &&
+  result.combined.attack_multiplier.pierce == result.effects[0].attack_multiplier.pierce &&
+  result.combined.damage_taken.pierce == result.effects[0].damage_taken.pierce &&
+  result.combined.attack_multiplier.magic == result.effects[0].attack_multiplier.magic &&
+  result.combined.damage_taken.magic == result.effects[0].damage_taken.magic &&
+  result.combined.attack_multiplier.fire == result.effects[0].attack_multiplier.fire &&
+  result.combined.damage_taken.fire == result.effects[0].damage_taken.fire &&
+  result.combined.attack_multiplier.lightning == result.effects[0].attack_multiplier.lightning &&
+  result.combined.damage_taken.lightning == result.effects[0].damage_taken.lightning &&
+  result.combined.attack_multiplier.holy == result.effects[0].attack_multiplier.holy &&
+  result.combined.damage_taken.holy == result.effects[0].damage_taken.holy &&
+  result.combined.rates.max_hp == result.effects[0].rates.max_hp &&
+  result.combined.rates.max_fp == result.effects[0].rates.max_fp &&
+  result.combined.rates.max_stamina == result.effects[0].rates.max_stamina &&
+  result.combined.rates.equip_load == result.effects[0].rates.equip_load
+)
+"""
+
+# Two items: stats and resistances add, every multiplier multiplies. This is the arithmetic
+# the node exists to do so that a caller does not, so all of it is checked rather than
+# trusted. Longer combinations are covered by fixtures.
+[[ensures]]
+expr = """
+size(result.items) != 2 || (
+  result.combined.stats.vigor == result.effects[0].stats.vigor + result.effects[1].stats.vigor &&
+  result.combined.stats.mind == result.effects[0].stats.mind + result.effects[1].stats.mind &&
+  result.combined.stats.endurance == result.effects[0].stats.endurance + result.effects[1].stats.endurance &&
+  result.combined.stats.strength == result.effects[0].stats.strength + result.effects[1].stats.strength &&
+  result.combined.stats.dexterity == result.effects[0].stats.dexterity + result.effects[1].stats.dexterity &&
+  result.combined.stats.intelligence == result.effects[0].stats.intelligence + result.effects[1].stats.intelligence &&
+  result.combined.stats.faith == result.effects[0].stats.faith + result.effects[1].stats.faith &&
+  result.combined.stats.arcane == result.effects[0].stats.arcane + result.effects[1].stats.arcane &&
+  result.combined.resist.poison == result.effects[0].resist.poison + result.effects[1].resist.poison &&
+  result.combined.resist.scarlet_rot == result.effects[0].resist.scarlet_rot + result.effects[1].resist.scarlet_rot &&
+  result.combined.resist.bleed == result.effects[0].resist.bleed + result.effects[1].resist.bleed &&
+  result.combined.resist.frost == result.effects[0].resist.frost + result.effects[1].resist.frost &&
+  result.combined.resist.sleep == result.effects[0].resist.sleep + result.effects[1].resist.sleep &&
+  result.combined.resist.madness == result.effects[0].resist.madness + result.effects[1].resist.madness &&
+  result.combined.resist.death == result.effects[0].resist.death + result.effects[1].resist.death &&
+  result.combined.attack_multiplier.physical - (result.effects[0].attack_multiplier.physical * result.effects[1].attack_multiplier.physical) < 0.000001 && (result.effects[0].attack_multiplier.physical * result.effects[1].attack_multiplier.physical) - result.combined.attack_multiplier.physical < 0.000001 &&
+  result.combined.damage_taken.physical - (result.effects[0].damage_taken.physical * result.effects[1].damage_taken.physical) < 0.000001 && (result.effects[0].damage_taken.physical * result.effects[1].damage_taken.physical) - result.combined.damage_taken.physical < 0.000001 &&
+  result.combined.attack_multiplier.strike - (result.effects[0].attack_multiplier.strike * result.effects[1].attack_multiplier.strike) < 0.000001 && (result.effects[0].attack_multiplier.strike * result.effects[1].attack_multiplier.strike) - result.combined.attack_multiplier.strike < 0.000001 &&
+  result.combined.damage_taken.strike - (result.effects[0].damage_taken.strike * result.effects[1].damage_taken.strike) < 0.000001 && (result.effects[0].damage_taken.strike * result.effects[1].damage_taken.strike) - result.combined.damage_taken.strike < 0.000001 &&
+  result.combined.attack_multiplier.slash - (result.effects[0].attack_multiplier.slash * result.effects[1].attack_multiplier.slash) < 0.000001 && (result.effects[0].attack_multiplier.slash * result.effects[1].attack_multiplier.slash) - result.combined.attack_multiplier.slash < 0.000001 &&
+  result.combined.damage_taken.slash - (result.effects[0].damage_taken.slash * result.effects[1].damage_taken.slash) < 0.000001 && (result.effects[0].damage_taken.slash * result.effects[1].damage_taken.slash) - result.combined.damage_taken.slash < 0.000001 &&
+  result.combined.attack_multiplier.pierce - (result.effects[0].attack_multiplier.pierce * result.effects[1].attack_multiplier.pierce) < 0.000001 && (result.effects[0].attack_multiplier.pierce * result.effects[1].attack_multiplier.pierce) - result.combined.attack_multiplier.pierce < 0.000001 &&
+  result.combined.damage_taken.pierce - (result.effects[0].damage_taken.pierce * result.effects[1].damage_taken.pierce) < 0.000001 && (result.effects[0].damage_taken.pierce * result.effects[1].damage_taken.pierce) - result.combined.damage_taken.pierce < 0.000001 &&
+  result.combined.attack_multiplier.magic - (result.effects[0].attack_multiplier.magic * result.effects[1].attack_multiplier.magic) < 0.000001 && (result.effects[0].attack_multiplier.magic * result.effects[1].attack_multiplier.magic) - result.combined.attack_multiplier.magic < 0.000001 &&
+  result.combined.damage_taken.magic - (result.effects[0].damage_taken.magic * result.effects[1].damage_taken.magic) < 0.000001 && (result.effects[0].damage_taken.magic * result.effects[1].damage_taken.magic) - result.combined.damage_taken.magic < 0.000001 &&
+  result.combined.attack_multiplier.fire - (result.effects[0].attack_multiplier.fire * result.effects[1].attack_multiplier.fire) < 0.000001 && (result.effects[0].attack_multiplier.fire * result.effects[1].attack_multiplier.fire) - result.combined.attack_multiplier.fire < 0.000001 &&
+  result.combined.damage_taken.fire - (result.effects[0].damage_taken.fire * result.effects[1].damage_taken.fire) < 0.000001 && (result.effects[0].damage_taken.fire * result.effects[1].damage_taken.fire) - result.combined.damage_taken.fire < 0.000001 &&
+  result.combined.attack_multiplier.lightning - (result.effects[0].attack_multiplier.lightning * result.effects[1].attack_multiplier.lightning) < 0.000001 && (result.effects[0].attack_multiplier.lightning * result.effects[1].attack_multiplier.lightning) - result.combined.attack_multiplier.lightning < 0.000001 &&
+  result.combined.damage_taken.lightning - (result.effects[0].damage_taken.lightning * result.effects[1].damage_taken.lightning) < 0.000001 && (result.effects[0].damage_taken.lightning * result.effects[1].damage_taken.lightning) - result.combined.damage_taken.lightning < 0.000001 &&
+  result.combined.attack_multiplier.holy - (result.effects[0].attack_multiplier.holy * result.effects[1].attack_multiplier.holy) < 0.000001 && (result.effects[0].attack_multiplier.holy * result.effects[1].attack_multiplier.holy) - result.combined.attack_multiplier.holy < 0.000001 &&
+  result.combined.damage_taken.holy - (result.effects[0].damage_taken.holy * result.effects[1].damage_taken.holy) < 0.000001 && (result.effects[0].damage_taken.holy * result.effects[1].damage_taken.holy) - result.combined.damage_taken.holy < 0.000001 &&
+  result.combined.rates.max_hp - (result.effects[0].rates.max_hp * result.effects[1].rates.max_hp) < 0.000001 && (result.effects[0].rates.max_hp * result.effects[1].rates.max_hp) - result.combined.rates.max_hp < 0.000001 &&
+  result.combined.rates.max_fp - (result.effects[0].rates.max_fp * result.effects[1].rates.max_fp) < 0.000001 && (result.effects[0].rates.max_fp * result.effects[1].rates.max_fp) - result.combined.rates.max_fp < 0.000001 &&
+  result.combined.rates.max_stamina - (result.effects[0].rates.max_stamina * result.effects[1].rates.max_stamina) < 0.000001 && (result.effects[0].rates.max_stamina * result.effects[1].rates.max_stamina) - result.combined.rates.max_stamina < 0.000001 &&
+  result.combined.rates.equip_load - (result.effects[0].rates.equip_load * result.effects[1].rates.equip_load) < 0.000001 && (result.effects[0].rates.equip_load * result.effects[1].rates.equip_load) - result.combined.rates.equip_load < 0.000001
+)
+"""
+
+# This node reports; it never applies. Pinning the flag keeps a later change from flipping it
+# while the other nodes still return figures that exclude these effects.
+[[ensures]]
+expr = "!result.applied_to_a_build"
+
+[[examples]]
+ask = "what does Radagon's Soreseal actually do?"
+call = { items = ["Radagon's Soreseal"] }
+
+[[examples]]
+ask = "I'm wearing Radagon's Soreseal and the Blue Dancer Charm — what do they give me together?"
+call = { items = ["Radagon's Soreseal", "Blue Dancer Charm"] }

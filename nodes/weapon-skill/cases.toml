@@ -66,4 +66,13 @@ expect = { "result.skill" = "Loretta's Slash ?", "result.hit_count" = 1, "result
 [[case]]
 name = "the Golden Order Greatsword's ash, one of the other six"
 input = { query = "Establish Order" }
-expect = { "result.skill" = "Establish Order", "result.ambiguous" = false, "result.hit_count" = 7, "result.highest_motion_value" = 300.0, "result.unique_to[0]" = "Golden Order Greatsword" }
+expect = { "result.skill" = "Establish Order", "result.ambiguous" = false, "result.hit_count" = 7, "result.highest_motion_value" = 300.0, "result.unique_to[0]" = "Golden Order Greatsword", "result.motion_values_uniform" = false }
+
+# A motion value is per damage type, and optimal-affinity's `attack_mv` is one number. Establish
+# Order's big hit is 300 holy and 0 physical: handing 300 to the scalar triples a physical
+# attack rating the skill does not use. Corpse Piler is uniform and can be passed straight
+# through, which is the difference the flag exists to make visible.
+[[case]]
+name = "a uniform hit can be priced with one motion value"
+input = { query = "Corpse Piler" }
+expect = { "result.motion_values_uniform" = true, "result.highest_motion_value" = 155.0 }

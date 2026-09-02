@@ -31,16 +31,16 @@ the exact point total for the level.
 - [x] **1.1** Quero fazer uma build de Rivers of Blood no nível 150, foco em Corpse Piler. Monta a distribuição de status pra mim, assumindo classe Samurai.
 - [~] **1.2** Monta uma distribuição RL150 pra Moonveil com foco em Transient Moonlight, priorizando dano da skill.
 - [x] **1.3** Estou fazendo uma build de Great Stars (great hammer) com sangramento, nível 150, coop. Qual distribuição você faria?
-- [ ] **1.4** I want a pure Faith incantation build at RL150 using the Erdtree Seal. Give me the stat spread, assuming Prophet start.
+- [x] **1.4** I want a pure Faith incantation build at RL150 using the Erdtree Seal. Give me the stat spread, assuming Prophet start.
 - [x] **1.5** Build de Bloodhound's Fang no nível 125 pra PvP/coop. Como distribuo os status?
 - [x] **1.6** Quero usar a Dragon Halberd com Lightning affinity no nível 150. Monta os status considerando os requisitos da arma.
 - [x] **1.7** Faz pra mim uma build de Comet Azur / Terra Magica full INT no nível 150, classe Astrologer.
-- [ ] **1.8** Estou montando um personagem de Frenzied Flame incantations no nível 150. Qual a distribuição ideal?
+- [x] **1.8** Estou montando um personagem de Frenzied Flame incantations no nível 150. Qual a distribuição ideal?
 - [x] **1.9** Build de Fingerprint Stone Shield + Antspur (poison/rot) no nível 150. Como fica a distribuição?
 - [x] **1.10** I want a RL150 dual-katana build (Nagakiba + Uchigatana) blood-focused. Give me the exact stat allocation from a Bandit start.
 - [x] **1.11** Quero fazer a Sword of Milos no nível 120 com foco em sangramento e a skill que dá FP. Monta os status.
 - [x] **1.12** Build de arcane/dragon communion pura no nível 150 pra spammar Rotten Breath e Ancient Dragons' Lightning Strike. Distribui pra mim.
-- [ ] **1.13** Faz uma distribuição pra Golden Order Greatsword no nível 150 aproveitando o Ash of War dela ao máximo.
+- [~] **1.13** Faz uma distribuição pra Golden Order Greatsword no nível 150 aproveitando o Ash of War dela ao máximo.
 - [x] **1.14** Quero uma build de Star Fist (fists) com Cold no nível 150. Como distribuo STR/DEX/INT?
 
 ## Pattern 2 — Rate my current build / re-allocate to a new level
@@ -82,16 +82,16 @@ drives it, talismans, physick, buffs, and the stacked multiplier. The flagship c
 the one this collection knows it does not close: skill damage is reported but never priced,
 and no node applies a talisman.
 
-- [ ] **4.1** Qual distribuição + talismans + physick dá o maior Wave of Destruction possível na Distinguished Greatsword no nível 150? Me mostra o multiplicador total.
-- [ ] **4.2** Como eu maximizo o dano do Corpse Piler da Rivers of Blood? Stat que mais importa, talismans e o stack de multiplicadores.
-- [ ] **4.3** Quero o Loretta's Slash mais forte possível na Loretta's War Sickle no RL150. STR vs DEX vs FTH — qual prioriza, e quais buffs stackam?
-- [ ] **4.4** Maximize Ghostflame Ignition on the Death Poker at RL150 — stats, talismans, physick, and the final multiplier.
-- [ ] **4.5** Qual o setup que faz o Unsheathe da Uchigatana bater o máximo? Considera carregar ou não.
-- [ ] **4.6** Como faço o Sacred Blade da Golden Order Greatsword dar o maior dano de Holy? Faith é o principal mesmo?
-- [ ] **4.7** Quero o Storm Assault / Thundercloud mais forte numa arma de raio no RL150. Calcula o stack Shard of Alexander + Godfrey Icon + buffs.
-- [ ] **4.8** Maximum-damage Flaming Strike on the Flamberge with Flame Art — give me the stat split and the buff stack, charged vs not.
-- [ ] **4.9** Qual o maior dano possível do Gravitas / Nebula em armas de INT no RL150? Quais talismans e physick multiplicam isso?
-- [ ] **4.10** Como maximizar o Blood Blade / Seppuku-boosted hit numa katana blood no RL150? Mostra os multiplicadores.
+- [x] **4.1** Qual distribuição + talismans + physick dá o maior Wave of Destruction possível na Distinguished Greatsword no nível 150? Me mostra o multiplicador total.
+- [x] **4.2** Como eu maximizo o dano do Corpse Piler da Rivers of Blood? Stat que mais importa, talismans e o stack de multiplicadores.
+- [x] **4.3** Quero o Loretta's Slash mais forte possível na Loretta's War Sickle no RL150. STR vs DEX vs FTH — qual prioriza, e quais buffs stackam?
+- [~] **4.4** Maximize Ghostflame Ignition on the Death Poker at RL150 — stats, talismans, physick, and the final multiplier.
+- [x] **4.5** Qual o setup que faz o Unsheathe da Uchigatana bater o máximo? Considera carregar ou não.
+- [~] **4.6** Como faço o Sacred Blade da Golden Order Greatsword dar o maior dano de Holy? Faith é o principal mesmo?
+- [~] **4.7** Quero o Storm Assault / Thundercloud mais forte numa arma de raio no RL150. Calcula o stack Shard of Alexander + Godfrey Icon + buffs.
+- [~] **4.8** Maximum-damage Flaming Strike on the Flamberge with Flame Art — give me the stat split and the buff stack, charged vs not.
+- [~] **4.9** Qual o maior dano possível do Gravitas / Nebula em armas de INT no RL150? Quais talismans e physick multiplicam isso?
+- [~] **4.10** Como maximizar o Blood Blade / Seppuku-boosted hit numa katana blood no RL150? Mostra os multiplicadores.
 
 ---
 
@@ -252,14 +252,42 @@ directly — same spread, same figure to full precision.
 The bonus asymmetry is worth quoting too: the seal boosts Rotten Breath and does nothing for
 the Lightning Strike, which belongs to a family a different seal boosts.
 
-### 1.13 Golden Order Greatsword, RL150 — done
+### 1.13 Golden Order Greatsword, RL150 — partial
 
 Somber, +10. From a Confessor with floors 40/20/25: STR 16 · DEX 36 · FTH 74, 794.928 AR split
 275 physical / 519 holy. Confirmed by sweep.
 
-"Aproveitando o Ash of War ao máximo" is the part that is not closed — same gap as 1.2. The
-spread is the weapon's optimum, and whether it is the skill's depends on the skill's motion
-values, which nothing prices.
+"Aproveitando o Ash of War ao máximo" took two fixes to get an honest answer. Establish Order
+was one of the seven skills ambiguous with itself and refused outright (`b4f735d`); it resolves
+now — 7 hits, holy motion values up to 300, `overrides_weapon_scaling` false, so the weapon's
+spread is the skill's spread.
+
+Pricing it is where it stops, and the reason is new. **Establish Order's motion values are not
+uniform**: the big hit is 300 holy and **0 physical**, and `optimal-affinity`'s `attack_mv` is
+one number for the whole hit. Passing 300 gives 2146.30, which triples a physical attack rating
+the skill does not use. `weapon-skill` now reports `motion_values_uniform` per hit and for the
+skill, so this is a refusal to quote rather than a wrong figure — Corpse Piler is uniform and
+passes straight through, Establish Order is not.
+
+### 1.4 Erdtree Seal, pure Faith incantations — done
+
+See above: two fixes and a feature. Faith 99, spell buff 367.0, Black Flame **895.48 fire**.
+
+### 1.8 Frenzied Flame incantations, RL150 — done, and the answer is not a pure faith build
+
+The Frenzied Flame Seal is one of **two catalysts in the game whose spell buff takes strength
+and dexterity** — the Clawmark Seal is the other — so "pure faith" is the wrong build for it.
+At RL150 from a Prophet with floors 40/30/20, Frenzied Burst is maximised at
+**STR 26 · DEX 30 · INT 30 · FTH 43** for 845.40, against 828.33 for the spread a greedy search
+finds and well above what pure faith reaches.
+
+That result is also what exposed the search's local optimum: no single point moved between
+those four stats pays for itself, and only a move of several does. Pinned against an exhaustive
+sweep of 1,837,620 spreads.
+
+Worth noting for the catalyst choice: the Erdtree Seal actually beats it on raw damage here
+(917.50 against 828.33 for Frenzied Burst, faith 99), because the Frenzied Flame Seal's ×1.2
+family bonus does not make up for its lower spell buff at these levels.
 
 ### 1.14 Star Fist with Cold, RL150 — done
 
@@ -448,3 +476,154 @@ Messmer Soldier's Spear at 669.31, which is the honest correction to the questio
 Occult sweeps the list. The top row, Great Katana at 712.44, carries 108 bleed and so is
 exactly what the question excluded; the answer is **Iron Greatsword, Occult +25, 700.18**,
 with no status at all. Reading the exclusion off `status_shown` is the whole trick.
+
+## Pattern 4 — the flagship, and it half closes
+
+These ten are the case the collection was built for and the one it could not do: identify the
+stat that drives a skill, price the hit, and multiply the buff stack. Three things had to
+change, and after them the pattern splits cleanly in two.
+
+**The multiplier stack now computes.** `item-effect` returned three sentences with the figures
+inside them — "Increases damage by 1.15x with weapon skills" — which is the multiply handed
+back to a model, the failure this collection keeps closing upstream. It now reads the figure
+out of the description (144 of the 157 items that carry one state it in exactly one shape) and
+multiplies **only the items whose conditions the caller asserts**. Shard of Alexander is 1.15
+with a weapon skill and nothing at all on a normal swing.
+
+**Skill damage was already priceable and nobody had wired it.** `weapon-skill` gives a hit's
+motion value and `optimal-affinity` takes one as `attack_mv`. Corpse Piler's 155 is 918.46
+against the standard reference where a normal 100-motion swing is 543.89, and 1267.48 with the
+stack applied. Two registry notes now say so.
+
+**Seven skills were ambiguous with themselves** — see `b4f735d`. Loretta's Slash was one, and
+question 4.3 simply refused before that.
+
+What is left is one real limit, and it is now precise. **A hit is priceable when its damage is
+a motion value.** It is not when the hit carries *flat attack* (Ghostflame Ignition's 140-magic
+explosion, Flaming Strike's 138 fire) or when it *overrides the weapon's scaling* (Sacred
+Blade's bullet off Faith, Blood Blade's off Arcane, Gravitas' off Intelligence). Those are
+read off the table and reported; nothing prices them, and the override is **per hit**, not per
+skill — which is a sharper fact than the collection had before.
+
+| # | skill | what drives it | priced |
+|---|---|---|---|
+| 4.1 | Wave of Destruction | weapon scaling, mv 85 + 170 bullet | **yes** |
+| 4.2 | Corpse Piler | weapon scaling, mv up to 155 | **yes** |
+| 4.3 | Loretta's Slash | weapon scaling, mv up to 172 | **yes** |
+| 4.4 | Ghostflame Ignition | flat: 55 a tick, 140 explosion | no |
+| 4.5 | Unsheathe R1 / R2 | weapon scaling, mv 190 / 245 | **yes** |
+| 4.6 | Sacred Blade | slash on the weapon, bullet flat 180 holy off **Faith** | slash only |
+| 4.7 | Storm Assault | main hit mv 200 on the weapon, bullets off **Str/Dex** | main hit only |
+| 4.8 | Flaming Strike | one bullet, flat 138 fire off **Strength** | no |
+| 4.9 | Gravitas | mv 100 on the weapon, three bullets flat 60 magic off **Intelligence** | main hit only |
+| 4.10 | Blood Blade | slash mv 55 on the weapon, bullet flat 115 off **Arcane** | slash only |
+
+### 4.1 Wave of Destruction — done, after correcting the weapon
+
+There is no "Distinguished Greatsword" in the catalogue: `weapon-lookup` matches nothing, and
+saying so is the answer rather than pricing something near it. Wave of Destruction is unique to
+the **Ruins Greatsword**. At RL150 two-handed from a Vagabond: STR 66 · INT 44, 965.88 AR; the
+skill's bullet at 170 motion value is **1362.31** against the standard reference, where a
+normal swing is 779.43.
+
+### 4.2 Corpse Piler — done, end to end
+
+`overrides_weapon_scaling: false`, so the weapon-optimal spread is the skill's spread:
+STR 12 · DEX 56 · ARC 59. Highest motion value 155.
+
+| | damage |
+|---|---|
+| normal swing (mv 100) | 543.89 |
+| Corpse Piler #3 (mv 155) | 918.46 |
+| + Shard of Alexander ×1.15 and Lord of Blood's Exultation ×1.2 = **×1.38** | **1267.48** |
+
+Both conditions are asserted rather than assumed: the first because a Corpse Piler is a weapon
+skill, the second because Rivers of Blood procs bleed. Neither would apply to a plain R1.
+
+### 4.3 Loretta's Slash — done, and the premise was wrong
+
+Loretta's War Sickle scales strength, dexterity and **intelligence** — no faith at all, so
+"STR vs DEX vs FTH" has a two-way answer. At RL150: STR 51 · DEX 57 · INT 20, 769.90 AR
+(545 physical / 224 magic). Loretta's Slash at its 172 motion value: **1153.91**.
+
+### 4.4 Ghostflame Ignition — partial
+
+Every damaging hit is **flat**: 55 magic a tick, 140 magic on the explosion, with no motion
+value and no scaling override. So the weapon's attack rating does not drive it, which is the
+useful half of the answer, and nothing here prices what does.
+
+### 4.5 Unsheathe, charged versus not — done
+
+The charge *is* the R1/R2 distinction: mv 190 against mv 245. On a Uchigatana +25 at DEX 70,
+Lightning is the best infusion for it either way — **1136.40 uncharged, 1465.41 charged**, a
+29% gain. Keen is second at 976.43 / 1259.08.
+
+### 4.6 Sacred Blade — partial, and "Faith é o principal mesmo?" gets a real answer
+
+Half yes, and the half matters. The slash (mv 65) uses the weapon's own scaling; the **bullet
+is flat 180 holy and overrides the weapon's scaling to Faith**. So faith drives the projectile
+and not the swing, on any weapon the ash is put on.
+
+### 4.7 Storm Assault — partial
+
+Main hit mv 200 on the weapon's scaling, and the jump and land bullets override to **Str/Dex**.
+The stack the question asks for computes: Shard of Alexander ×1.15 and Godfrey Icon ×1.15 give
+**×1.3225**, with Godfrey Icon's own condition — "with charged spells and charged weapon
+skills" — quoted so a reader can check it applies to the hit they meant.
+
+### 4.8 Flaming Strike — partial
+
+The skill is a single bullet, flat 138 fire, scaling overridden to **Strength**, so a Flamberge
+with Flame Art contributes nothing to it but its own swing. That is a useful answer and it is
+not the one the question asked for.
+
+### 4.9 Gravitas — partial
+
+Mv 100 on the weapon, plus three separately stacking bullets of flat 60 magic each, all
+overridden to **Intelligence**. The three-bullet structure is worth quoting on its own.
+
+### 4.10 Blood Blade / Seppuku — partial, and Seppuku is simply absent
+
+Blood Blade is nine hits: three slashes at mv 55 on the weapon's scaling and their bullets at
+flat 115 physical, overridden to **Arcane**. **Seppuku is not in the table at all** —
+`weapon-skill` matches nothing — because it deals no damage; it is a self-buff, and its attack
+bonus is not modelled anywhere in this collection. Saying that is better than a number.
+
+---
+
+## Where the battery leaves the collection
+
+| pattern | done | partial | unanswerable |
+|---|---|---|---|
+| 1 — build for a level | 12 | 2 | 0 |
+| 2 — rate / re-allocate | 8 | 0 | 0 |
+| 3 — best weapon / spell | 9 | 1 | 0 |
+| 4 — maximise a skill | 4 | 6 | 0 |
+| **total** | **33** | **9** | **0** |
+
+Nine bugs, three of which returned a number rather than an error:
+
+1. `build-allocate` stalled at a local optimum — Moonveil, `91f4938`.
+2. `spell-power` priced **every incantation in the game at zero** — `767aaba`.
+3. `build-allocate` reported an affinity the weapon cannot take — `0912393`.
+4. `spell-power` priced **Comet cast from a sacred seal** at 798.766 — `be34ad3`.
+5. Eighty-one catalogue rows are consumables, and pricing them crashed — `be34ad3`.
+6. `ap_calc.load_table` re-parsed a 1.3 MB CSV per call — `be34ad3`.
+7. The greedy fallback stalled 17 points short on the Frenzied Flame Seal — `be34ad3`.
+8. `item-effect` left the multiplier stack to the caller — `70713e5`.
+9. Seven skills were ambiguous with themselves — `b4f735d`.
+
+Four features the questions demanded and the collection did not have: a caster objective
+(`focus = "spell"`), loadout requirements (`stat_floors`), `weapon-rank`, and `spell-rank`.
+
+**What is still not modelled**, and would be the next thing to build:
+
+- **Flat-attack and scaling-overridden hits.** Six of the ten Pattern 4 skills have one. The
+  data says which stat drives them; nothing computes the damage.
+- **A skill objective for `build-allocate`.** When a skill overrides the weapon's scaling, the
+  weapon-optimal spread is the wrong build, and the node can only say so.
+- **Talismans applied to a build.** Unchanged and deliberate: `item-effect` now multiplies
+  damage bonuses under asserted conditions, but nothing adds a talisman's stat bonuses into
+  `character-build`, `equip-load` or `defence`.
+- **Guard counters**, which question 3.7 asked about and which have no motion value in the
+  extraction.

@@ -103,6 +103,13 @@ def main():
                 "flat_attack": {d: number(row[ATK_COLUMN[d]]) for d in DAMAGE},
                 # `-` means the weapon's own scaling applies; anything else replaces it.
                 "scaling_override": (row.get("OverwriteScaling") or NO_OVERRIDE).strip(),
+                # optimal-affinity's `attack_mv` is one number for the whole hit, so passing a
+                # hit whose motion values differ per damage type multiplies the wrong ones.
+                # Establish Order's big hit is 300 holy and 0 physical: handing 300 to a
+                # scalar triples a physical attack rating the skill does not use.
+                "motion_value_uniform": len(
+                    {number(row[MV_COLUMN[d]]) for d in DAMAGE}
+                ) == 1,
             }
         )
 
@@ -128,6 +135,10 @@ def main():
         "catalog_size": len(families),
         "hits": hits,
         "hit_count": len(hits),
+        # False means at least one hit's motion values differ by damage type, and
+        # optimal-affinity's single `attack_mv` cannot express it. Pricing such a hit with the
+        # highest figure inflates the damage types the skill does not deal.
+        "motion_values_uniform": all(h["motion_value_uniform"] for h in hits),
         # The headline motion value: the biggest single hit, which is what a caller comparing
         # skills wants. Summing them would describe a full combo nobody necessarily lands.
         "highest_motion_value": max(

@@ -14,6 +14,7 @@
     "catalog_size",
     "hits",
     "hit_count",
+    "motion_values_uniform",
     "highest_motion_value",
     "total_stamina_cost",
     "overrides_weapon_scaling",
@@ -62,7 +63,8 @@
           "poise_motion_value",
           "stamina_cost",
           "flat_attack",
-          "scaling_override"
+          "scaling_override",
+          "motion_value_uniform"
         ],
         "properties": {
           "hit": {
@@ -142,6 +144,10 @@
           "scaling_override": {
             "type": "string",
             "description": "'-' when the weapon's own scaling applies. Anything else names the stat that replaces it, which is when a build optimised for the weapon stops being one optimised for the skill."
+          },
+          "motion_value_uniform": {
+            "type": "boolean",
+            "description": "Whether this hit's motion value is the same for every damage type. False means optimal-affinity's single attack_mv cannot express it \u2014 Establish Order's big hit is 300 holy and 0 physical, and handing 300 to a scalar triples an attack rating the skill does not use."
           }
         }
       },
@@ -189,6 +195,10 @@
     "uncertain": {
       "type": "boolean",
       "description": "True for the seven families the source flagged with a trailing '?' \u2014 a hit it could not confirm, whose zeros are an absence of data rather than a measurement."
+    },
+    "motion_values_uniform": {
+      "type": "boolean",
+      "description": "True when every hit is uniform across damage types, which is when highest_motion_value can be passed to optimal-affinity as attack_mv."
     }
   }
 }

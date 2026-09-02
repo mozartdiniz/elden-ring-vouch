@@ -71,3 +71,10 @@ expect = { "result.best" = "Heavy", "result.target" = "given", "result.negation_
 name = "without the boss's numbers the same build ranks differently"
 input = { weapon = "Longsword", upgrade = 25, max_upgrade = 25, strength = 60, dexterity = 13, intelligence = 10, faith = 60, arcane = 9 }
 expect = { "result.best" = "Flame Art", "result.target" = "default", "result.negation_given" = false }
+
+# Rennala's bubble negates 100% of every damage type, so nothing gets through whatever it is
+# infused with. Zero is the answer, not an error — the schema used to reject it.
+[[case]]
+name = "a target that blocks everything takes nothing, and says so"
+input = { weapon = "Longsword", upgrade = 25, max_upgrade = 25, strength = 60, dexterity = 13, intelligence = 10, faith = 60, arcane = 9, defense = { physical = 109.0, strike = 109.0, slash = 109.0, pierce = 109.0, magic = 109.0, fire = 109.0, lightning = 109.0, holy = 109.0 }, negation = { physical = 100.0, strike = 100.0, slash = 100.0, pierce = 100.0, magic = 100.0, fire = 100.0, lightning = 100.0, holy = 100.0 } }
+expect = { "result.best_damage" = 0.0, "result.deals_damage" = false, "result.best_margin" = 0.0 }

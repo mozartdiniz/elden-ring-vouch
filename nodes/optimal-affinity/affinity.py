@@ -119,6 +119,11 @@ def main():
         "affinities_available": len(ranked),
         "best": best["affinity"],
         "best_damage": best["damage"],
+        # A target can block everything: Rennala's bubble negates 100% of every type, so the
+        # best infusion still deals nothing. That is the right answer and not an error, but it
+        # has to be unmissable — a ranking whose winner does zero damage reads like a ranking
+        # unless something says otherwise.
+        "deals_damage": best["damage"] > 0.0,
         # The runner-up, so an answer can say whether the choice was close or obvious without
         # a caller subtracting two rows.
         "runner_up": ranked[1]["affinity"] if len(ranked) > 1 else "",

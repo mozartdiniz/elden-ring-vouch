@@ -71,9 +71,17 @@ expect_node = "boss-lookup"
 attest = true
 
 [[eval]]
-ask = "does bleed work on Rennala's first phase, and what is she weakest to?"
+ask = "does bleed work on Rennala, and what is she weakest to?"
 expect_node = "boss-lookup"
+expect_params = { query = "rennala" }
 attest = true
+
+# Nine of them, 3442 to 28905 health. An answer that gives one number has picked an encounter
+# for the user; the honest move is to ask where they are.
+[[eval]]
+ask = "how much health does the Death Rite Bird have?"
+expect_node = "boss-lookup"
+expect_stop = true
 
 [[eval]]
 ask = "what does wearing Radagon's Soreseal and the Blue Dancer Charm together give me?"

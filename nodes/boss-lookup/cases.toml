@@ -1,35 +1,79 @@
 # Node fixtures (§7.1). Figures from data/BossResist.csv at NG.
 
+# Phases are the fight, not an ambiguity: one query, every phase, each with its own figures.
+[[case]]
+name = "Rennala resolves to all three phases in fight order"
+input = { query = "rennala" }
+expect = { "result.resolved" = "Rennala, Queen of the Full Moon", "result.location" = "Academy of Raya Lucaria", "result.phase_count" = 3, "result.multi_phase" = true, "result.phases_labelled" = true, "result.phases[0].label" = "Phase 1", "result.phases[1].label" = "Bubble (Phase 1)", "result.phases[2].label" = "Phase 2" }
+
+# And the phases genuinely differ, which is why one number for "Rennala" would be wrong:
+# 600 more health, 80 poise where there was none, and twice the frost resistance.
+[[case]]
+name = "her phases carry different figures"
+input = { query = "rennala" }
+expect = { "result.phases[0].health" = 3493.0, "result.phases[0].poise" = 0.0, "result.phases[0].negation.physical" = -10.0, "result.phases[0].negation.magic" = 80.0, "result.phases[2].health" = 4097.0, "result.phases[2].poise" = 80.0, "result.phases[2].resist.frost" = 534.0 }
+
+# The bubble blocks everything while it is up — 100% negation across the board, and nothing
+# to be weak to. Reported as its own phase rather than averaged into the fight.
+[[case]]
+name = "the bubble is its own phase and blocks everything"
+input = { query = "rennala" }
+expect = { "result.phases[1].negation.physical" = 100.0, "result.phases[1].negation.holy" = 100.0, "result.phases[1].weak_to" = [] }
+
 [[case]]
 name = "Rennala's first phase takes extra physical and shrugs off magic"
-input = { query = "Rennala, Queen of the Full Moon (Phase 1)" }
-expect = { "result.health" = 3493.0, "result.poise" = 0.0, "result.negation.physical" = -10.0, "result.negation.magic" = 80.0, "result.weak_to[0]" = "physical" }
-
-# A phase is a different fight, and the difference is not cosmetic: twice the fire resistance,
-# 80 poise where there was none, and 600 more health.
-[[case]]
-name = "her second phase is a different fight"
-input = { query = "Rennala, Queen of the Full Moon (Phase 2)" }
-expect = { "result.health" = 4097.0, "result.poise" = 80.0, "result.resist.frost" = 534.0 }
-
-# So a bare name resolves to nothing: three rows match, and picking one would answer a
-# question nobody asked.
-[[case]]
-name = "a bare boss name is ambiguous across phases"
 input = { query = "rennala" }
-expect = { "result.resolved" = "", "result.ambiguous" = true, "result.match_count" = 3 }
+expect = { "result.phases[0].weak_to[0]" = "physical", "result.phases[0].weak_to[1]" = "pierce", "result.phases[0].weak_to[2]" = "slash" }
 
-# 9999 in the table means the status cannot be applied at all. Reported as immunity rather
-# than as a very large resistance, so nobody answers "how hard is it to put her to sleep".
+# 9999 in the table means the status cannot be applied at all.
 [[case]]
 name = "immunity is named, not left as a large number"
-input = { query = "Rennala, Queen of the Full Moon (Phase 1)" }
-expect = { "result.immune_to[0]" = "death", "result.immune_to[1]" = "madness", "result.immune_to[2]" = "sleep", "result.resist.sleep" = 0.0, "result.resist.bleed" = 326.0 }
+input = { query = "rennala" }
+expect = { "result.phases[0].immune_to[0]" = "death", "result.phases[0].immune_to[1]" = "madness", "result.phases[0].immune_to[2]" = "sleep", "result.phases[0].resist.sleep" = 0.0, "result.phases[0].resist.bleed" = 326.0 }
+
+# A name is not an identity. Nine Death Rite Birds, 3442 to 28905 health, so the name alone
+# resolves to nothing and the caller is told the ambiguity is about place, not boss.
+[[case]]
+name = "one name in nine places does not resolve"
+input = { query = "death rite bird" }
+expect = { "result.resolved" = "", "result.ambiguous" = true, "result.match_count" = 1, "result.phase_count" = 0 }
 
 [[case]]
-name = "nothing matched means no figures at all"
+name = "a location narrows it to one encounter"
+input = { query = "death rite bird", location = "Stormhill" }
+expect = { "result.resolved" = "Death Rite Bird", "result.phase_count" = 1, "result.phases[0].health" = 3442.0, "result.multi_phase" = false }
+
+[[case]]
+name = "the same name elsewhere is a different fight"
+input = { query = "death rite bird", location = "Ordina" }
+expect = { "result.phases[0].health" = 17625.0 }
+
+# A location can itself be ambiguous: the table gives one row two places at once
+# ("Mountaintops of the Giants ...; Consecrated Snowfield ..."), so a loose match can hit
+# both rows. Still ambiguity, still refused, rather than picking the first.
+[[case]]
+name = "a location that matches two rows is still ambiguous"
+input = { query = "death rite bird", location = "Consecrated Snowfield" }
+expect = { "result.resolved" = "", "result.ambiguous" = true, "result.phase_count" = 0 }
+
+# Two names that are really one boss's phases, but the table does not say so. Reported as two
+# candidates rather than grouped on game knowledge the data does not carry.
+[[case]]
+name = "two differently named forms stay two candidates"
+input = { query = "malenia" }
+expect = { "result.resolved" = "", "result.match_count" = 2, "result.candidates[0]" = "Malenia, Blade of Miquella", "result.candidates[1]" = "Malenia, Goddess of Rot" }
+
+# Several entries under one name and location, unlabelled: what the sheet records, not a
+# labelling invented here.
+[[case]]
+name = "unlabelled entries are reported as unlabelled"
+input = { query = "fire giant" }
+expect = { "result.phase_count" = 2, "result.multi_phase" = true, "result.phases_labelled" = false }
+
+[[case]]
+name = "nothing matched means no phases at all"
 input = { query = "Gwyn, Lord of Cinder" }
-expect = { "result.resolved" = "", "result.match_count" = 0, "result.health" = 0.0 }
+expect = { "result.resolved" = "", "result.match_count" = 0, "result.phase_count" = 0, "result.ambiguous" = false }
 
 [[case]]
 name = "a query too short to resolve anything is refused"

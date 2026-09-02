@@ -5,7 +5,8 @@
   "additionalProperties": false,
   "required": ["query"],
   "properties": {
-    "query": { "type": "string", "description": "A boss name as the user wrote it. Bosses appear once per phase, so a bare name is usually ambiguous." },
-    "include_dlc": { "type": "boolean", "description": "Include Shadow of the Erdtree bosses. Default true." }
+    "query": { "type": "string", "description": "A boss name as the user wrote it." },
+    "location": { "type": "string", "description": "Where the fight happens, when one name is used in several places. Matched loosely against the table's location column." },
+    "include_dlc": { "type": "boolean", "description": "Include Shadow of the Erdtree encounters. Default true." }
   }
 }

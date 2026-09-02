@@ -69,7 +69,7 @@ fixture.
 | `spell-power` | One spell from one catalyst → attack, family bonus, FP cost, whether the build can cast it |
 | `equip-load` | A loadout against a build's equip load → weight, roll type, and the endurance to change it |
 | `defence` | A build and an armour set → per-element defences, damage negation, status resistances |
-| `boss-lookup` | A boss by name → health, poise, per-type defences and negations, status immunities |
+| `boss-lookup` | A boss encounter → every phase, each with its own health, poise, defences, negations and immunities |
 | `item-effect` | Talismans, crystal tears and great runes → what they do, individually and combined |
 
 The order is the routing: **character-build** when the user described a build by only some of
@@ -82,15 +82,33 @@ it hits for, or **optimal-affinity** for what to infuse it with.
 this with", and the difference is the whole point:
 
 ```console
-$ vouch -C . call boss-lookup --input '{"query":"Rennala, Queen of the Full Moon (Phase 1)"}'
-{ "health": 3493.0, "negation": { "physical": -10.0, "magic": 80.0, ... },
-  "weak_to": ["physical", "pierce", "slash"], "immune_to": ["death", "madness", "sleep"] }
+$ vouch -C . call boss-lookup --input '{"query":"rennala"}'
+{ "resolved": "Rennala, Queen of the Full Moon", "location": "Academy of Raya Lucaria",
+  "phase_count": 3, "multi_phase": true,
+  "phases": [
+    { "label": "Phase 1", "health": 3493.0, "poise": 0.0,
+      "negation": { "physical": -10.0, "magic": 80.0, ... },
+      "weak_to": ["physical", "pierce", "slash"],
+      "immune_to": ["death", "madness", "sleep"] },
+    { "label": "Bubble (Phase 1)", "negation": { "physical": 100.0, ... }, ... },
+    { "label": "Phase 2", "health": 4097.0, "poise": 80.0, ... } ] }
 ```
 
-Hand that `negation` to `optimal-affinity` and the ranking changes: **Heavy** wins against
-Rennala, where **Flame Art** wins against the generic reference. Add the multipliers from
+A phase is the fight's own structure, so all of them come back and there is deliberately no
+boss-level `negation` to quote instead: her first phase has no poise and takes extra physical,
+her second has 80 poise and twice the frost resistance, and her bubble blocks everything. One
+number for "Rennala" answers a question about a fight that does not exist.
+
+Hand a phase's `negation` to `optimal-affinity` and the ranking changes: **Heavy** wins against
+Rennala's first phase, where **Flame Art** wins against the generic reference. Add the multipliers from
 `item-effect` for a couple of talismans and Standard and Quality overtake Flame Art too. None
 of that is guessable, and all of it is a figure some node returned.
+
+A name is not an identity either. Forty-seven names in that table are used in more than one
+place — nine Death Rite Birds, from 3442 to 28905 health — so `boss-lookup` keys an encounter
+on its name *and* its location, and reports the places when a query matches several. Keying on
+the name alone was a real bug here: it kept whichever row came last in the file and called it
+resolved.
 
 The routing is `boss-lookup` → `optimal-affinity`, with `item-effect` alongside when the user
 named a talisman. `item-effect` combines several items itself — stats summed, multipliers

@@ -5,26 +5,45 @@
   "additionalProperties": false,
   "required": [
     "query", "resolved", "location", "is_dlc", "match_count", "candidates",
-    "candidates_truncated", "ambiguous", "catalog_size", "health", "poise",
-    "defence", "negation", "resist", "immune_to", "weak_to"
+    "candidates_truncated", "ambiguous", "locations", "catalog_size",
+    "phases", "phase_count", "multi_phase", "phases_labelled"
   ],
   "properties": {
     "query": { "type": "string" },
-    "resolved": { "type": "string", "description": "The exact table name, set only when the query matched one row. Empty otherwise — a phase is a different fight and must not be picked for the user." },
-    "location": { "type": "string" },
+    "resolved": { "type": "string", "description": "The boss, set only when the query matched one name in one location. Empty otherwise." },
+    "location": { "type": "string", "description": "Where this encounter happens. Part of its identity: the same name in another place is a different fight with different health." },
     "is_dlc": { "type": "boolean" },
-    "match_count": { "type": "integer", "minimum": 0 },
-    "candidates": { "type": "array", "items": { "type": "string" }, "description": "Matching rows, at most 20. Usually the phases of one boss." },
+    "match_count": { "type": "integer", "minimum": 0, "description": "How many distinct boss names matched." },
+    "candidates": { "type": "array", "items": { "type": "string" }, "description": "The matching names, at most 20." },
     "candidates_truncated": { "type": "boolean" },
-    "ambiguous": { "type": "boolean" },
+    "ambiguous": { "type": "boolean", "description": "True when the query names several bosses, or one boss fought in several places." },
+    "locations": {
+      "type": "array", "items": { "type": "string" },
+      "description": "Populated when one name is fought in several places, so the follow-up question is 'which one' rather than 'which boss'. Empty otherwise."
+    },
     "catalog_size": { "type": "integer", "minimum": 1 },
-    "health": { "type": "number", "minimum": 0, "description": "Health at NG. Zero when nothing resolved." },
-    "poise": { "type": "number", "minimum": 0 },
-    "defence": { "$ref": "#/$defs/damage", "description": "Flat per-type defence. Feed straight to optimal-affinity's `defense`." },
-    "negation": { "$ref": "#/$defs/damage", "description": "Per-type negation as a percentage, on the scale optimal-affinity's `negation` expects. Negative means the boss takes MORE of that type." },
-    "resist": { "$ref": "#/$defs/status", "description": "Status resistance. A status the boss is immune to reads 0 here and is named in immune_to instead, so a large number is never mistaken for a hard-but-possible one." },
-    "immune_to": { "type": "array", "items": { "type": "string" }, "description": "Statuses that cannot be applied at all. Not 'very resistant'." },
-    "weak_to": { "type": "array", "items": { "type": "string" }, "description": "Damage types whose negation is negative — the boss takes extra from these." }
+    "phase_count": { "type": "integer", "minimum": 0 },
+    "multi_phase": { "type": "boolean", "description": "True when the fight has more than one set of figures. An answer about such a boss has to be per phase." },
+    "phases_labelled": { "type": "boolean", "description": "Whether the table names the phases. False with more than one phase means the sheet records several entries without saying how they relate." },
+    "phases": {
+      "type": "array",
+      "description": "Every phase of the fight, in fight order, each with its own figures. There is deliberately no boss-level defence or negation: for a multi-phase fight there is no such number.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "health", "poise", "defence", "negation", "resist", "immune_to", "weak_to"],
+        "properties": {
+          "label": { "type": "string", "description": "What the table calls this phase, e.g. 'Phase 1'. Empty when the fight has one set of figures, or when the table does not name them." },
+          "health": { "type": "number", "exclusiveMinimum": 0 },
+          "poise": { "type": "number", "minimum": 0 },
+          "defence": { "$ref": "#/$defs/damage", "description": "Flat per-type defence for this phase. Feed to optimal-affinity's `defense`." },
+          "negation": { "$ref": "#/$defs/damage", "description": "Per-type negation as a percentage, for optimal-affinity's `negation`. Negative means this phase takes MORE of that type." },
+          "resist": { "$ref": "#/$defs/status", "description": "Status resistance. A status this phase is immune to reads 0 and is named in immune_to." },
+          "immune_to": { "type": "array", "items": { "type": "string" }, "description": "Statuses that cannot be applied in this phase. Not 'very resistant'." },
+          "weak_to": { "type": "array", "items": { "type": "string" }, "description": "Damage types whose negation is negative in this phase." }
+        }
+      }
+    }
   },
   "$defs": {
     "damage": {

@@ -17,7 +17,8 @@
     "infusable": { "type": "boolean", "description": "False means Standard is the only affinity this weapon has, and the ranking is one row long." },
     "affinities_available": { "type": "integer", "minimum": 1, "maximum": 13 },
     "best": { "type": "string", "description": "The highest-damage affinity. A postcondition ties this to the maximum of `ranked`." },
-    "best_damage": { "type": "number", "exclusiveMinimum": 0 },
+    "best_damage": { "type": "number", "minimum": 0, "description": "Damage from the best affinity. Zero is possible and correct: a target can negate everything." },
+    "deals_damage": { "type": "boolean", "description": "False when even the best affinity gets nothing through. Say so plainly rather than reporting a winner." },
     "runner_up": { "type": "string", "description": "Second place, or empty when there is only one affinity." },
     "best_margin": {
       "type": "number",
@@ -46,7 +47,7 @@
       "required": ["affinity", "damage", "total_ap", "split", "shown", "physical", "magic", "fire", "lightning", "holy"],
       "properties": {
         "affinity": { "type": "string" },
-        "damage": { "type": "number", "description": "Damage actually dealt to the target, after its defences and absorptions." },
+        "damage": { "type": "number", "minimum": 0, "description": "Damage actually dealt to the target, after its defences and absorptions. Zero when the target blocks this type entirely." },
         "total_ap": { "type": "number", "description": "Attack rating before the target is considered." },
         "split": { "type": "string", "description": "The calculator's display string, e.g. '409/0/411/0/0'. Do not read figures out of it — quote `shown` instead, whose values are numbers a ledger can account for." },
         "shown": {

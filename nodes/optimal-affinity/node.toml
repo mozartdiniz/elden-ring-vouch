@@ -119,8 +119,14 @@ expr = "result.ranked.all(r, r.damage <= result.best_damage)"
 
 # An affinity a weapon cannot take is absent from the ranking, never a zero row that a reader
 # could mistake for a poor option.
+# A weapon always has an attack rating, but what reaches the target can be nothing: Rennala's
+# bubble negates 100% of every damage type. Requiring damage above zero here made that a
+# defect, when it is the correct answer to a real question.
 [[ensures]]
-expr = "result.ranked.all(r, r.damage > 0.0 && r.total_ap > 0.0)"
+expr = "result.ranked.all(r, r.damage >= 0.0 && r.total_ap > 0.0)"
+
+[[ensures]]
+expr = "result.deals_damage == (result.best_damage > 0.0)"
 
 [[ensures]]
 expr = "result.affinities_available == size(result.ranked)"

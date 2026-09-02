@@ -1,15 +1,16 @@
 name = "boss-lookup"
 version = "0.1.0"
 
-purpose = "Resolve a boss by name, and report its health, defences, negations and status resistances"
+purpose = "Resolve a boss encounter, and report every phase of the fight with its own health, defences, negations and resistances"
 
 use_when = [
   "the question names a boss and asks what damage to bring, or what it is weak to",
   "before optimal-affinity or attack-power, when the question is about a specific fight",
   "the question asks whether a status — bleed, frost, sleep — works on something",
+  "you need to know how many phases a fight has, or how they differ",
 ]
 not_for = [
-  "how much damage a weapon deals to it — pass this node's defence and negation to optimal-affinity",
+  "how much damage a weapon deals to it — pass the phase's defence and negation to optimal-affinity",
   "boss strategies, attack patterns or item drops",
   "anything at NG+; these are NG figures",
 ]
@@ -30,7 +31,10 @@ schema = "input.schema.json"
 schema = "output.schema.json"
 
 [params.query]
-guidance = "The boss name as the user wrote it. Expect it to be ambiguous: bosses are listed once per phase, and phases differ — Rennala's first phase has negative physical negation and no poise, her second has 80 poise and twice the fire resistance. Ask which phase rather than picking one."
+guidance = "The boss name as the user wrote it. A resolved boss comes back with every phase of the fight, each with its own figures — so report them per phase rather than picking one. What is still ambiguous is *which* boss: forty-seven names in this table are used in more than one place, and those encounters have different health."
+
+[params.location]
+guidance = "Only when `locations` came back populated, meaning one name is fought in several places. Use what the user said about where they are; do not pick a location for them."
 
 [params.include_dlc]
 guidance = "Leave it out unless the user said they are not playing Shadow of the Erdtree."
@@ -39,16 +43,24 @@ guidance = "Leave it out unless the user said they are not playing Shadow of the
 expr = "size(input.query) >= 3"
 message = "a boss query needs at least 3 characters"
 
-# Same rule as every other lookup here: one match or none. A phase is a different fight, so
-# picking one for the user would answer a question they did not ask.
+# One name in one place, or nothing. What phases a fight has is not ambiguity — it is the
+# fight — but which boss, and which of the places it is fought in, still is.
 [[ensures]]
-expr = '(result.resolved != "") == (result.match_count == 1)'
+expr = '(result.resolved != "") == (result.phase_count > 0)'
 
 [[ensures]]
-expr = 'result.resolved == "" || result.resolved in result.candidates'
+expr = 'result.resolved == "" || (result.match_count == 1 && result.resolved in result.candidates)'
 
 [[ensures]]
-expr = "result.ambiguous == (result.match_count > 1)"
+expr = 'result.ambiguous == (result.match_count > 1 || size(result.locations) > 1)'
+
+[[ensures]]
+expr = 'result.resolved != "" || result.ambiguous || result.match_count == 0'
+
+# When one name is fought in several places, the caller is told so — otherwise the follow-up
+# question would be "which boss" when the real one is "which of these nine".
+[[ensures]]
+expr = 'size(result.locations) == 0 || (result.resolved == "" && size(result.locations) > 1)'
 
 [[ensures]]
 expr = "result.match_count >= size(result.candidates)"
@@ -59,58 +71,70 @@ expr = "result.candidates_truncated == (result.match_count > size(result.candida
 [[ensures]]
 expr = "result.catalog_size >= result.match_count"
 
-# Nothing resolved means no figures: zeros rather than a previous row's numbers.
 [[ensures]]
-expr = 'result.resolved != "" || (result.health == 0.0 && result.poise == 0.0 && size(result.immune_to) == 0)'
+expr = 'result.resolved != "" || result.location == ""'
 
 [[ensures]]
-expr = 'result.resolved == "" || result.health > 0.0'
+expr = "result.phase_count == size(result.phases) && result.multi_phase == (result.phase_count > 1)"
 
-# Defence is a flat number and is never negative, whatever the negation does. A negative one
-# would flip the sign of a damage calculation downstream without anything noticing.
+# With no phases nothing is labelled, rather than vacuously all of them: `all` over an empty
+# list is true, and "the phases are labelled" about a boss that did not resolve reads as a
+# claim about phases that are not there.
 [[ensures]]
 expr = """
-result.defence.physical >= 0.0 && result.defence.strike >= 0.0 &&
-result.defence.slash >= 0.0 && result.defence.pierce >= 0.0 &&
-result.defence.magic >= 0.0 && result.defence.fire >= 0.0 &&
-result.defence.lightning >= 0.0 && result.defence.holy >= 0.0
+result.phase_count == 0
+  ? !result.phases_labelled
+  : result.phases_labelled == result.phases.all(p, p.label != "")
 """
 
-# `weak_to` is exactly the types with negative negation, so "weak to" is a checked claim rather
-# than a reading of the table.
+# Every phase is a real set of figures: something has health, defence is never negative
+# however the negation reads, and a phase with no health would be a parsing failure rather
+# than an enemy.
 [[ensures]]
 expr = """
-result.weak_to.all(d,
-  (d != "physical" || result.negation.physical < 0.0) &&
-  (d != "strike" || result.negation.strike < 0.0) &&
-  (d != "slash" || result.negation.slash < 0.0) &&
-  (d != "pierce" || result.negation.pierce < 0.0) &&
-  (d != "magic" || result.negation.magic < 0.0) &&
-  (d != "fire" || result.negation.fire < 0.0) &&
-  (d != "lightning" || result.negation.lightning < 0.0) &&
-  (d != "holy" || result.negation.holy < 0.0)
+result.phases.all(p,
+  p.health > 0.0 && p.poise >= 0.0 &&
+  p.defence.physical >= 0.0 && p.defence.strike >= 0.0 && p.defence.slash >= 0.0 &&
+  p.defence.pierce >= 0.0 && p.defence.magic >= 0.0 && p.defence.fire >= 0.0 &&
+  p.defence.lightning >= 0.0 && p.defence.holy >= 0.0
 )
 """
 
-# A status the boss is immune to carries no resistance number, so the two can never be read as
+# `weak_to` is exactly the types this phase's negation is negative for, so "weak to" is a
+# checked claim rather than a reading of the table.
+[[ensures]]
+expr = """
+result.phases.all(p, p.weak_to.all(d,
+  (d != "physical" || p.negation.physical < 0.0) &&
+  (d != "strike" || p.negation.strike < 0.0) &&
+  (d != "slash" || p.negation.slash < 0.0) &&
+  (d != "pierce" || p.negation.pierce < 0.0) &&
+  (d != "magic" || p.negation.magic < 0.0) &&
+  (d != "fire" || p.negation.fire < 0.0) &&
+  (d != "lightning" || p.negation.lightning < 0.0) &&
+  (d != "holy" || p.negation.holy < 0.0)
+))
+"""
+
+# A status a phase is immune to carries no resistance number, so the two can never be read as
 # contradicting each other.
 [[ensures]]
 expr = """
-result.immune_to.all(s,
-  (s != "poison" || result.resist.poison == 0.0) &&
-  (s != "scarlet_rot" || result.resist.scarlet_rot == 0.0) &&
-  (s != "bleed" || result.resist.bleed == 0.0) &&
-  (s != "frost" || result.resist.frost == 0.0) &&
-  (s != "sleep" || result.resist.sleep == 0.0) &&
-  (s != "madness" || result.resist.madness == 0.0) &&
-  (s != "death" || result.resist.death == 0.0)
-)
+result.phases.all(p, p.immune_to.all(s,
+  (s != "poison" || p.resist.poison == 0.0) &&
+  (s != "scarlet_rot" || p.resist.scarlet_rot == 0.0) &&
+  (s != "bleed" || p.resist.bleed == 0.0) &&
+  (s != "frost" || p.resist.frost == 0.0) &&
+  (s != "sleep" || p.resist.sleep == 0.0) &&
+  (s != "madness" || p.resist.madness == 0.0) &&
+  (s != "death" || p.resist.death == 0.0)
+))
 """
 
 [[examples]]
 ask = "what damage should I bring to Rennala?"
-call = { query = "Rennala, Queen of the Full Moon (Phase 1)" }
+call = { query = "rennala" }
 
 [[examples]]
-ask = "does bleed work on Malenia?"
-call = { query = "malenia" }
+ask = "how much health does the Death Rite Bird at Warmaster's Shack have?"
+call = { query = "death rite bird", location = "Stormhill" }

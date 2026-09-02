@@ -42,7 +42,7 @@
     },
     "focus": {
       "type": "string",
-      "description": "What to maximise: 'attack' for total AR, or a status \u2014 bleed, frost, poison, scarlet_rot, sleep, madness. Default 'attack'."
+      "description": "What to maximise: 'attack' for total AR, 'spell' for what a named spell hits for out of this catalyst, or a status \u2014 bleed, frost, poison, scarlet_rot, sleep, madness. Default 'attack'."
     },
     "two_hand": {
       "type": "boolean",
@@ -91,6 +91,10 @@
         }
       },
       "description": "Minimums the rest of the loadout needs: a shield's strength, a second weapon's dexterity, a seal's faith. Real requirements from weapon-lookup or attack-power, not a judgement \u2014 the search spends above them."
+    },
+    "spell": {
+      "type": "string",
+      "description": "The spell to maximise, exactly as spell-power resolves it. Required when focus is 'spell'; with any other focus it is priced at the chosen spread and reported beside the weapon's figures."
     }
   }
 }

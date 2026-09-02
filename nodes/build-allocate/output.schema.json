@@ -32,6 +32,15 @@
     "attack_shown",
     "status",
     "status_shown",
+    "spell",
+    "spell_attack",
+    "spell_attack_shown",
+    "spell_buff",
+    "spell_damage_types",
+    "spell_castable",
+    "spell_bonus",
+    "spell_bonus_applied",
+    "spell_bonus_family",
     "objective_value",
     "objective_at_minimum",
     "objective_gain",
@@ -413,6 +422,48 @@
         }
       },
       "description": "What the rest of the loadout required, echoed. Zero means nothing else asked for that stat."
+    },
+    "spell": {
+      "type": "string",
+      "description": "The spell that was priced, empty when none was named."
+    },
+    "spell_attack": {
+      "type": "number",
+      "minimum": 0,
+      "description": "What that spell hits for out of this catalyst at this spread. Zero when no spell was named."
+    },
+    "spell_attack_shown": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "The same figure truncated, as displayed."
+    },
+    "spell_buff": {
+      "type": "number",
+      "minimum": 0,
+      "description": "The catalyst's spell buff at this spread \u2014 the number the game shows on it."
+    },
+    "spell_damage_types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The types the spell deals. Quote one with the figure: an incantation's damage is fire, lightning or holy, not magic."
+    },
+    "spell_castable": {
+      "type": "boolean",
+      "description": "Whether the spread meets the spell's own requirements."
+    },
+    "spell_bonus": {
+      "type": "number",
+      "minimum": 0,
+      "description": "The catalyst's family multiplier for this spell, or 1.0."
+    },
+    "spell_bonus_applied": {
+      "type": "boolean"
+    },
+    "spell_bonus_family": {
+      "type": "string",
+      "description": "The family the bonus was applied for, empty when none was."
     }
   }
 }

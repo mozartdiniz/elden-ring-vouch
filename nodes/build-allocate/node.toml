@@ -66,6 +66,9 @@ guidance = "The rune level the user asked for, e.g. 150. If the build does not f
 [params.focus]
 guidance = "Check `objective_responds_to_stats` in the result: false means nothing the user levels improves this focus, and the honest answer is to say so and suggest a different one rather than reporting the spread as optimised. 'attack' unless the user asked for a status build — 'bleed' for a bleed build, 'frost', 'poison', 'scarlet_rot', 'sleep', 'madness'. It changes the answer: Rivers of Blood at RL150 puts 97 into arcane for bleed and 56 dexterity / 59 arcane for raw attack."
 
+[params.spell]
+guidance = "The spell to build for, when the user named one — 'Comet Azur', 'Rotten Breath'. With focus 'spell' it is what gets maximised; with any other focus it is still priced at the spread that was chosen, so a weapon build that also casts can see both. Its own requirements become floors, so the result is a build that can actually cast it."
+
 [params.two_hand]
 guidance = "True if the user says they two-hand it. It lowers the strength the weapon needs, which frees points for everything else."
 
@@ -80,6 +83,12 @@ guidance = "The minimum endurance. A judgement, like vigor, and it interacts wit
 
 # --- preconditions ---
 
+# A spell build needs a spell. Maximising "spell" with nothing named is a question with no
+# subject, and the catalyst's own attack rating is not the answer to it.
+[[requires]]
+expr = "!has(input.focus) || input.focus != \"spell\" || (has(input.spell) && input.spell != \"\")"
+message = "focus 'spell' needs the spell to maximise; resolve it with spell-power first"
+
 [[requires]]
 expr = '''
 input.affinity in [
@@ -92,10 +101,10 @@ message = "unknown affinity; the thirteen are Standard, Heavy, Keen, Quality, Fi
 [[requires]]
 expr = '''
 !has(input.focus) || input.focus in [
-  "attack", "bleed", "frost", "poison", "scarlet_rot", "sleep", "madness"
+  "attack", "spell", "bleed", "frost", "poison", "scarlet_rot", "sleep", "madness"
 ]
 '''
-message = "focus must be 'attack' or one of the six statuses: bleed, frost, poison, scarlet_rot, sleep, madness"
+message = "focus must be 'attack', 'spell', or one of the six statuses: bleed, frost, poison, scarlet_rot, sleep, madness"
 
 [[requires]]
 expr = '''
@@ -200,12 +209,13 @@ result.floors.endurance == input.endurance && result.floors_are_the_callers_choi
 expr = """
 result.focus == "attack"
   ? result.objective_value == result.total_ar
-  : (result.focus == "bleed" ? result.objective_value == result.status.bleed
+  : (result.focus == "spell" ? result.objective_value == result.spell_attack
+    : (result.focus == "bleed" ? result.objective_value == result.status.bleed
     : (result.focus == "frost" ? result.objective_value == result.status.frost
     : (result.focus == "poison" ? result.objective_value == result.status.poison
     : (result.focus == "scarlet_rot" ? result.objective_value == result.status.scarlet_rot
     : (result.focus == "sleep" ? result.objective_value == result.status.sleep
-    : result.objective_value == result.status.madness)))))
+    : result.objective_value == result.status.madness))))))
 """
 
 # What the levelling bought is the difference it claims to be, and "this focus responds to

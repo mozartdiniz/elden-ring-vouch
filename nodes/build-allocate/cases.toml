@@ -105,3 +105,36 @@ expect = { "result.stats.dexterity" = 66, "result.stats.intelligence" = 50, "res
 name = "the rest of the loadout's requirements are floors too"
 input = { weapon = "Antspur Rapier", affinity = "Keen", upgrade = 25, max_upgrade = 25, starting_class = "Vagabond", target_level = 150, focus = "attack", vigor = 45, mind = 20, endurance = 30, stat_floors = { strength = 48 } }
 expect = { "result.stats.strength" = 48, "result.stats.dexterity" = 61, "result.total_ar" = 459.06227427436136, "result.minimum_level" = 109, "result.stat_floors.strength" = 48 }
+
+# --- building for a spell rather than for the weapon holding it.
+#
+# Questions 1.4, 1.7, 1.8 and 1.12 of the validation battery all asked for a caster's spread,
+# and none of them could be answered: the node maximised a catalyst's own attack rating, which
+# is a different number scaling off different stats. `focus = "spell"` maximises what the
+# spell hits for, with the spell's own requirements as floors so the build can cast it.
+
+[[case]]
+name = "a pure faith incantation build maximises the incantation, not the seal"
+input = { weapon = "Erdtree Seal", affinity = "Standard", upgrade = 10, max_upgrade = 10, starting_class = "Prophet", target_level = 150, focus = "spell", spell = "Black Flame", vigor = 40, mind = 30, endurance = 20 }
+expect = { "result.stats.faith" = 99, "result.spell_attack" = 895.48, "result.spell_buff" = 367.0, "result.spell_damage_types" = ["fire"], "result.spell_castable" = true, "result.objective_responds_to_stats" = true }
+
+# Faith and arcane both move a Dragon Communion Seal, and the split between them is the whole
+# question. Pinned against an exhaustive sweep of 102,340 spreads run through planner.py
+# directly — the node prices 98 of them and finds the same one.
+[[case]]
+name = "a hybrid catalyst splits the points, and the split is computed"
+input = { weapon = "Dragon Communion Seal", affinity = "Standard", upgrade = 10, max_upgrade = 10, starting_class = "Prophet", target_level = 150, focus = "spell", spell = "Rotten Breath", vigor = 40, mind = 30, endurance = 20 }
+expect = { "result.stats.faith" = 43, "result.stats.arcane" = 68, "result.spell_attack" = 544.3912611752413, "result.spell_bonus" = 1.15, "result.spell_bonus_family" = "Dragon Communion" }
+
+# A buff is not a damage spell. Terra Magica has no attack at all, so there is nothing to
+# maximise and the points belong in vigor — the same answer shape as a status that does not
+# scale, and better than a spread presented as optimised for a figure that never moved.
+[[case]]
+name = "a spell with no attack cannot be built toward"
+input = { weapon = "Carian Regal Scepter", affinity = "Standard", upgrade = 10, max_upgrade = 10, starting_class = "Astrologer", target_level = 150, focus = "spell", spell = "Terra Magica", vigor = 40, mind = 30, endurance = 20 }
+expect = { "result.spell_attack" = 0.0, "result.objective_responds_to_stats" = false, "result.stats.intelligence" = 60, "result.spell_castable" = true }
+
+[[case]]
+name = "maximising a spell needs a spell"
+input = { weapon = "Erdtree Seal", affinity = "Standard", upgrade = 10, max_upgrade = 10, starting_class = "Prophet", target_level = 150, focus = "spell", vigor = 40, mind = 30, endurance = 20 }
+expect_code = 11

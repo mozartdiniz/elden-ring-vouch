@@ -17,15 +17,15 @@ reading the answer:
 
 The final step, `attack = base_attack x spell_buff / 100 x bonus` summed over every damage type
 the spell deals, is the one piece of arithmetic in this collection that is not the oracle's:
-the Python scripts stop at the spell buff. It is pinned in `cases.toml` against figures the Prometheux implementation produced
-independently, which is the closest thing to a second opinion available.
+the Python scripts stop at the spell buff. It is pinned in `cases.toml` against figures the
+Prometheux implementation produced independently, which is the closest thing to a second
+opinion available.
 
-A staff whose bonus is already inside its spell buff — Lusat's, which trades FP cost for raw
-power across every school — has a non-numeric rate in the table, and gets a multiplier of 1.
-Applying it again would double-count.
+The tables and that multiply live in `lib/spells.py`, because `build-allocate` searches for
+the spread that maximises a spell and has to compute the same thing. One copy, so the two
+nodes cannot drift.
 """
 
-import csv
 import json
 import os
 import sys
@@ -35,67 +35,10 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(ROOT, "lib"))
 
 import oracle  # noqa: E402
+import spells as spellbook  # noqa: E402
 
 sys.path.insert(0, oracle.SCRIPTS)
 import planner  # noqa: E402
-
-# The five columns a spell's attack can live in. MagicAtk alone covers sorceries and none of
-# the incantations.
-ATTACK_COLUMN = {
-    "physical": "PhysAtk",
-    "magic": "MagicAtk",
-    "fire": "FireAtk",
-    "lightning": "LtngAtk",
-    "holy": "HolyAtk",
-}
-
-MAGIC_CSV = os.path.join(
-    ROOT, "oracle", "extracted", "Build-Planner-v1.19.1", "csv", "MagicData.csv"
-)
-FAMILY_CSV = os.path.join(ROOT, "data", "MagicFamily.csv")
-
-
-def spells():
-    """Spells keyed by their **display** name, which is the one that is unique.
-
-    `Name` is not: "Comet" is three rows — the plain cast at 292 magic attack, and two charged
-    variants at 365. Keying on it silently keeps whichever came last, which is how this node
-    first reported a charged Comet as an ordinary one. `Display Name` distinguishes them
-    ("Comet", "Comet - Charged", "Comet - Charged (AoE)"), so it is the key, and a caller
-    asking for the base name gets the base cast.
-    """
-    with open(MAGIC_CSV, newline="", encoding="utf-8") as handle:
-        rows = [r for r in csv.DictReader(handle) if r.get("ID") and r["Name"]]
-
-    book = {}
-    for row in rows:
-        display = (row.get("Display Name") or row["Name"]).strip()
-        book.setdefault(display, row)
-    return book
-
-
-def variants(book, name):
-    """Every named form of a spell — the plain cast and its charged variants."""
-    return sorted(
-        display
-        for display, row in book.items()
-        if row["Name"] == name or display == name
-    )
-
-
-def families():
-    with open(FAMILY_CSV, newline="", encoding="utf-8") as handle:
-        out = {}
-        for row in csv.DictReader(handle):
-            out.setdefault(row["Name"], []).append(row["Family"])
-    return out
-
-
-def number(value, default=0.0):
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return default
 
 
 def main():
@@ -109,12 +52,12 @@ def main():
         print(f"no weapon named {catalyst!r}", file=sys.stderr)
         sys.exit(1)
 
-    book = spells()
+    book = spellbook.book()
     spell = book.get(spell_name)
     if spell is None:
         print(f"no spell named {spell_name!r}", file=sys.stderr)
         sys.exit(1)
-    forms = variants(book, spell["Name"])
+    forms = spellbook.variants(book, spell["Name"])
 
     build = planner.PlannerInputs(
         starting_class=request.get("starting_class", "Wretch"),
@@ -131,21 +74,13 @@ def main():
     slot = next(w for w in r.weapons if w.slot == "RH1")
     spell_buff = float(slot.spell_buff)
 
-    # A staff boosts one family of spells. `castingBonusRate` is not always a number: Lusat's
-    # reads "1.5x FP cost", because its bonus is already inside the spell buff above.
-    bonus_family = row.get("castingBonusType") or ""
-    bonus_rate = number(row.get("castingBonusRate"), 0.0)
-    spell_families = families().get(spell_name, [])
-    applies = bonus_rate > 0 and bonus_family in spell_families
-    bonus = bonus_rate if applies else 1.0
+    # A staff or seal boosts one family of spells, and which family a spell belongs to is the
+    # one thing here the Build Planner does not publish.
+    spell_families = spellbook.families().get(spell_name, [])
+    bonus, applies, bonus_family = spellbook.bonus(row, spell_name, spell_families)
 
-    # A spell's attack is not one column. Sorceries carry it in MagicAtk, but an incantation
-    # deals fire, lightning or holy and its MagicAtk is zero — Black Flame is 244 fire, and
-    # reading only the magic column priced every incantation in the game at nothing.
-    base_attack = {damage: number(spell.get(column)) for damage, column in ATTACK_COLUMN.items()}
-    attack_by_type = {
-        damage: value * spell_buff / 100.0 * bonus for damage, value in base_attack.items()
-    }
+    base_attack = spellbook.base_attack(spell)
+    attack_by_type = spellbook.attack_by_type(base_attack, spell_buff, bonus)
     attack = sum(attack_by_type.values())
     damage_types = sorted(damage for damage, value in base_attack.items() if value > 0)
     print(
@@ -154,11 +89,7 @@ def main():
         file=sys.stderr,
     )
 
-    requirement = {
-        "intelligence": int(number(spell.get("requirementIntellect"))),
-        "faith": int(number(spell.get("requirementFaith"))),
-        "arcane": int(number(spell.get("requirementLuck"))),
-    }
+    requirement = spellbook.requirement(spell)
     castable = (
         request["intelligence"] >= requirement["intelligence"]
         and request["faith"] >= requirement["faith"]
@@ -183,14 +114,14 @@ def main():
         "bonus": bonus,
         "bonus_applied": applies,
         # Named so an answer can say *why* a staff is better, not just that it is.
-        "bonus_family": bonus_family if applies else "",
+        "bonus_family": bonus_family,
         "spell_families": sorted(spell_families),
         "family_source": "MagicFamily.csv (Prometheux ontology)" if applies else "",
         "attack": attack,
         "attack_shown": int(attack),
         "attack_by_type": attack_by_type,
         "attack_shown_by_type": {damage: int(value) for damage, value in attack_by_type.items()},
-        "fp_cost": number(spell.get("mp")),
+        "fp_cost": spellbook.number(spell.get("mp")),
         "requirement": requirement,
         "castable": castable,
         "unmet": sorted(

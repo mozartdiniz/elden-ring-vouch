@@ -35,6 +35,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__)))), "lib"))
 
 import oracle  # noqa: E402
+import spells as spellbook  # noqa: E402
 
 sys.path.insert(0, oracle.SCRIPTS)
 import ap_calc  # noqa: E402
@@ -81,6 +82,22 @@ def main():
         print(f"no weapon named {weapon!r}; call weapon-lookup first", file=sys.stderr)
         sys.exit(1)
 
+    # `focus = "spell"` maximises what a spell hits for out of this catalyst, not what the
+    # catalyst hits for. They are different questions with different answers: an Erdtree Seal's
+    # own attack rating and the incantation it casts do not scale the same way, and building
+    # for the first was the only thing this node could do until now.
+    spell_name = request.get("spell", "")
+    spell_row = None
+    if focus == "spell":
+        if not spell_name:
+            print("focus 'spell' needs a spell to maximise", file=sys.stderr)
+            sys.exit(1)
+        spell_row = spellbook.book().get(spell_name)
+        if spell_row is None:
+            print(f"no spell named {spell_name!r}; call spell-power to resolve it",
+                  file=sys.stderr)
+            sys.exit(1)
+
     import planner
 
     classes = planner.load_starting_classes()
@@ -113,6 +130,38 @@ def main():
             )
         )
 
+    # --- the spell objective. The catalyst's spell buff comes from `planner.py` unmodified;
+    # the multiply that turns it into a spell's attack is `lib/spells.py`, the same one
+    # spell-power uses.
+    spell_families = spellbook.families().get(spell_name, []) if spell_row else []
+    spell_bonus, spell_bonus_applied, spell_bonus_family = (
+        spellbook.bonus(row, spell_name, spell_families) if spell_row else (1.0, False, "")
+    )
+    spell_base = spellbook.base_attack(spell_row) if spell_row else {}
+    spell_requirement = spellbook.requirement(spell_row) if spell_row else {}
+    spell_planner = planner.Planner()
+
+    def spell_buff_at(stats):
+        build = planner.PlannerInputs(
+            starting_class=starting_class,
+            rh1=planner.WeaponSlotIn(
+                weapon=weapon, affinity=affinity, upgrade=request["upgrade"]
+            ),
+            **{s: stats[s] for s in COMBAT},
+        )
+        result = spell_planner.calculate(build)
+        return float(next(w for w in result.weapons if w.slot == "RH1").spell_buff)
+
+    def spell_attack_at(stats):
+        buff = spell_buff_at(stats)
+        return sum(spellbook.attack_by_type(spell_base, buff, spell_bonus).values()), buff
+
+    def score(stats):
+        """The figure the search maximises, for whichever focus was asked for."""
+        if focus == "spell":
+            return spell_attack_at(stats)[0]
+        return objective(evaluate(stats), focus)
+
     # --- the floor: class minimums, then the caller's survivability floors, then the
     # weapon's own requirements. Everything here is forced; nothing is a choice.
     stats = dict(minimums)
@@ -144,6 +193,12 @@ def main():
                 need = -(-int(need) * 2 // 3)
             stats[stat] = max(stats[stat], min(int(need), MAX_STAT))
 
+    # A spell has its own requirements, and a build that cannot cast it is not an answer to
+    # "make me a Comet Azur build".
+    for stat, need in spell_requirement.items():
+        if need:
+            stats[stat] = max(stats[stat], min(int(need), MAX_STAT))
+
     minimum_level = sum(stats.values()) - LEVEL_BASE
     feasible = minimum_level <= target_level
     budget = max(0, target_level - minimum_level)
@@ -158,7 +213,7 @@ def main():
     # What the objective is worth before a single point is spent on it. If the search cannot
     # beat this, nothing the caller levels improves what they asked to maximise — true of
     # every weapon whose status buildup is flat, like Star Fist's frost.
-    at_minimum = objective(evaluate(stats), focus)
+    at_minimum = score(stats)
     best = at_minimum
     if feasible and budget:
         searched += 1
@@ -167,11 +222,28 @@ def main():
         # buys nothing but its own requirement, and sweeping it multiplies the search for
         # no gain. `floor_stats` is where each of them starts, and no search goes below it.
         floor_stats = {stat: stats[stat] for stat in COMBAT}
-        live = [
-            stat for stat in COMBAT
-            if float((requirements_scaling or {}).get(stat) or 0.0) > 0
-            and stats[stat] < MAX_STAT
-        ]
+        if focus == "spell":
+            # A catalyst's spell buff does not follow its attack scaling — an Erdtree Seal's
+            # AR is a faith weapon's and its spell buff is a seal's — so liveness is measured
+            # rather than read off the table: spend a few points and see whether the spell
+            # got stronger.
+            live = []
+            for stat in COMBAT:
+                if stats[stat] >= MAX_STAT:
+                    continue
+                for step in (1, 10, 30):
+                    trial = dict(stats)
+                    trial[stat] = min(MAX_STAT, trial[stat] + step)
+                    searched += 1
+                    if score(trial) > at_minimum:
+                        live.append(stat)
+                        break
+        else:
+            live = [
+                stat for stat in COMBAT
+                if float((requirements_scaling or {}).get(stat) or 0.0) > 0
+                and stats[stat] < MAX_STAT
+            ]
 
         # A greedy climb finds a local optimum and a one-point swap cannot always leave it:
         # Moonveil at RL150 stalls at dexterity 59 / intelligence 57 when dexterity 66 /
@@ -199,7 +271,7 @@ def main():
                 for stat, spend in zip(live, extra):
                     trial[stat] += spend
                 searched += 1
-                value = objective(evaluate(trial), focus)
+                value = score(trial)
                 if value > best:
                     best, best_stats = value, trial
             stats = best_stats
@@ -214,7 +286,7 @@ def main():
                     trial = dict(stats)
                     trial[stat] -= 1
                     searched += 1
-                    if objective(evaluate(trial), focus) < best:
+                    if score(trial) < best:
                         break
                     stats = trial
         else:
@@ -225,7 +297,7 @@ def main():
                         continue
                     trial = dict(stats)
                     trial[stat] += 1
-                    gains.append((objective(evaluate(trial), focus), stat))
+                    gains.append((score(trial), stat))
                 searched += len(gains)
                 if not gains:
                     break
@@ -254,7 +326,7 @@ def main():
                             trial[take] -= size
                             trial[give] += size
                             searched += 1
-                            value = objective(evaluate(trial), focus)
+                            value = score(trial)
                             if value > best:
                                 best, stats, improved = value, trial, True
 
@@ -273,6 +345,18 @@ def main():
     final = evaluate(stats)
     attack = {d: float((final.total or {}).get(d) or 0.0) for d in DAMAGE}
     status = {s: float((final.total or {}).get(s) or 0.0) for s in STATUS}
+
+    # What the spell is worth out of this catalyst at the spread that was chosen. Reported
+    # whenever a spell was named, whether or not it was the thing maximised, so a weapon
+    # build that also casts can see what it casts for.
+    if spell_row is not None:
+        spell_attack, spell_buff = spell_attack_at(stats)
+        spell_by_type = spellbook.attack_by_type(spell_base, spell_buff, spell_bonus)
+        spell_castable = all(stats[stat] >= need for stat, need in spell_requirement.items())
+        spell_damage_types = sorted(d for d, v in spell_base.items() if v > 0)
+    else:
+        spell_attack, spell_buff, spell_by_type = 0.0, 0.0, {}
+        spell_castable, spell_damage_types = False, []
 
     result = {
         "weapon": weapon,
@@ -307,13 +391,26 @@ def main():
         "attack_shown": {d: int(attack[d]) for d in DAMAGE},
         "status": status,
         "status_shown": {s: int(status[s]) for s in STATUS},
-        "objective_value": objective(final, focus),
+        "spell": spell_name,
+        "spell_attack": spell_attack,
+        "spell_attack_shown": int(spell_attack),
+        "spell_buff": spell_buff,
+        "spell_damage_types": spell_damage_types,
+        "spell_castable": spell_castable,
+        "spell_bonus": spell_bonus,
+        "spell_bonus_applied": spell_bonus_applied,
+        "spell_bonus_family": spell_bonus_family,
+        "objective_value": spell_attack if focus == "spell" else objective(final, focus),
         "objective_at_minimum": at_minimum,
-        "objective_gain": round(objective(final, focus) - at_minimum, 9),
+        "objective_gain": round(
+            (spell_attack if focus == "spell" else objective(final, focus)) - at_minimum, 9
+        ),
         # False means the focus does not respond to levelling at all: the spread below is the
         # floor plus points that had nowhere useful to go. Say so rather than presenting it as
         # an optimised build.
-        "objective_responds_to_stats": objective(final, focus) > at_minimum,
+        "objective_responds_to_stats": (
+            spell_attack if focus == "spell" else objective(final, focus)
+        ) > at_minimum,
         "requirements_met": all(final.req_met.get(s, True) for s in COMBAT),
         "searched": searched,
     }

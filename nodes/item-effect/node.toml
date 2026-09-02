@@ -46,7 +46,32 @@ message = "pass between one and eight item names; a character wears four talisma
 expr = 'input.items.all(name, size(name) > 0)'
 message = "an item name cannot be empty"
 
+[params.assume]
+guidance = "The items whose conditions you are asserting for the hit in question, and only those. Shard of Alexander multiplies weapon skills, so it belongs here for a Corpse Piler and not for a normal swing; Lord of Blood's Exultation needs a bleed proc first. Asserting a condition the user did not describe is inventing a buff."
+
+[params.pvp]
+guidance = "Only when the user asked about PvP. Several talismans state a lower figure there, and some note that holy is not multiplied at all."
+
 # --- postconditions ---
+
+# The stack is exactly what the caller asserted, no more. Everything here multiplies damage
+# under a condition, and a factor nobody claimed is a buff nobody has.
+[[ensures]]
+expr = "result.stack_factors.all(f, f.item in result.assumed && f.item in result.items)"
+
+[[ensures]]
+expr = "result.conditional_available.all(c, !(c.item in result.assumed))"
+
+[[ensures]]
+expr = "size(result.stack_factors) == 0 ? result.stacked_multiplier == 1.0 : result.stacked_multiplier >= 1.0"
+
+# Every parsed multiplier came out of a sentence a reader can check, and the condition is that
+# sentence's, not ours.
+[[ensures]]
+expr = """
+result.effects.all(e, e.conditional == null ||
+  (e.conditional.multiplier > 0.0 && e.conditional.source_text != ""))
+"""
 
 [[ensures]]
 expr = "size(result.effects) == size(result.items) && size(result.kinds) == size(result.items)"

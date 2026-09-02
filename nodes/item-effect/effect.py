@@ -25,6 +25,7 @@ to do it with are all returned.
 import csv
 import json
 import os
+import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -101,13 +102,68 @@ def kinds():
     return out
 
 
+# "Increases damage by 1.15x (1.075x in PvP) with jump attacks" — the multiplier a talisman
+# is chosen for lives in the description, not in a column. 144 of the 157 items that carry one
+# say it in exactly this shape; the other 13 quote two or more figures for different targets
+# and are left as prose, because picking one of them would be a guess.
+CONDITIONAL = re.compile(
+    r"^Increases damage by (?P<rate>\d+(?:\.\d+)?)x"
+    r"(?:\s*\((?P<paren>[^)]*)\))?"
+    r"\s*(?P<condition>.*)$"
+)
+PVP_RATE = re.compile(r"^(?P<rate>\d+(?:\.\d+)?)x in PvP$")
+FIGURE = re.compile(r"\d+(?:\.\d+)?x")
+
+
+def conditional_multiplier(text):
+    """The damage multiplier a description states, with the condition it states it under.
+
+    This is the one place in the collection that reads a number out of prose, and it is here
+    because the alternative is worse. Every Pattern 4 question asks for a stacked multiplier —
+    "Shard of Alexander x Godfrey Icon x Lord of Blood's Exultation, me mostra o multiplicador
+    total" — and a node that returns three sentences has handed that multiply to a model. The
+    figures are the extraction's own; what this adds is refusing to apply one whose condition
+    the caller has not asserted.
+
+    Anything that does not match exactly is left alone. A miss costs an unquantified item; a
+    wrong parse would cost a wrong number, and those are not the same mistake.
+    """
+    text = (text or "").strip()
+    if not text.startswith("Increases damage by"):
+        return None
+    match = CONDITIONAL.match(text)
+    if not match:
+        return None
+
+    paren = (match.group("paren") or "").strip()
+    condition = (match.group("condition") or "").strip()
+    # More than one figure outside the PvP parenthetical means the item quotes different
+    # multipliers for different targets. Which one applies is not something to guess at.
+    if FIGURE.findall(condition):
+        return None
+
+    pvp_match = PVP_RATE.match(paren)
+    note = "" if (pvp_match or not paren) else paren
+    return {
+        "multiplier": float(match.group("rate")),
+        "pvp_multiplier": float(pvp_match.group("rate")) if pvp_match else None,
+        "condition": condition,
+        "pvp_note": note,
+        "source_text": text,
+    }
+
+
 def describe(name, record):
     stats = {s: int(number(record.get(c))) for s, c in STAT_COLUMN.items()}
     attack = {e: number(record.get(c), 1.0) or 1.0 for e, c in ATTACK_COLUMN.items()}
 
+    text = (record.get("Effects") or "").strip()
     return {
         "item": name,
-        "text": (record.get("Effects") or "").strip(),
+        "text": text,
+        # The multiplier stated in the description, when it states one unambiguously. Not
+        # applied to anything: `conditional_multiplier` explains why it is separate.
+        "conditional": conditional_multiplier(text),
         "stats": stats,
         # Expanded to the eight kinds optimal-affinity's damage_multiplier expects: a physical
         # bonus applies to strike, slash and pierce as well.
@@ -156,8 +212,52 @@ def main():
         rate: _product(d["rates"][rate] for d in described) for rate in RATE_COLUMN
     }
 
+    # --- the stack. Multiplying conditional bonuses together is the arithmetic every Pattern 4
+    # question asks for, and the one a caller would otherwise do in prose. The node does it,
+    # and only for the items whose conditions the caller has explicitly asserted: a talisman
+    # that multiplies "with weapon skills" is worth nothing to a normal swing, and applying it
+    # anyway would be a number for a hit that did not happen.
+    pvp = bool(request.get("pvp", False))
+    assumed = list(request.get("assume", []))
+    unknown = [name for name in assumed if name not in items]
+    if unknown:
+        print(f"not among the items given: {', '.join(unknown)}", file=sys.stderr)
+        sys.exit(1)
+
+    factors = []
+    for described_item in described:
+        conditional = described_item["conditional"]
+        if conditional is None or described_item["item"] not in assumed:
+            continue
+        rate = conditional["multiplier"]
+        if pvp and conditional["pvp_multiplier"] is not None:
+            rate = conditional["pvp_multiplier"]
+        factors.append({
+            "item": described_item["item"],
+            "multiplier": rate,
+            "condition": conditional["condition"],
+            "pvp_note": conditional["pvp_note"],
+        })
+    stacked = _product(f["multiplier"] for f in factors)
+
     result = {
         "items": list(items),
+        "pvp": pvp,
+        "assumed": assumed,
+        "stack_factors": factors,
+        "stacked_multiplier": stacked,
+        # What was stated and *not* counted, because the caller did not say its condition
+        # holds. An answer that lists these is an answer a player can act on.
+        "conditional_available": [
+            {
+                "item": d["item"],
+                "multiplier": d["conditional"]["multiplier"],
+                "pvp_multiplier": d["conditional"]["pvp_multiplier"],
+                "condition": d["conditional"]["condition"],
+            }
+            for d in described
+            if d["conditional"] is not None and d["item"] not in assumed
+        ],
         "kinds": [catalogue.get(name, "other") for name in items],
         "effects": described,
         "combined": {

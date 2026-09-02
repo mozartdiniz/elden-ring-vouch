@@ -3,14 +3,29 @@
   "title": "item-effect input",
   "type": "object",
   "additionalProperties": false,
-  "required": ["items"],
+  "required": [
+    "items"
+  ],
   "properties": {
     "items": {
       "type": "array",
       "minItems": 1,
       "maxItems": 8,
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "Exact names of talismans, crystal tears or great runes. Pass every item the user named at once, so the combined effect is a returned figure rather than one you work out."
+    },
+    "assume": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The items whose conditions you are asserting hold for the hit being asked about \u2014 'Shard of Alexander' only if the hit is a weapon skill, 'Lord of Blood's Exultation' only after a bleed proc. Only these are multiplied into stacked_multiplier. Every item must also appear in `items`."
+    },
+    "pvp": {
+      "type": "boolean",
+      "description": "Use the PvP figure where the description gives a separate one. Default false."
     }
   }
 }

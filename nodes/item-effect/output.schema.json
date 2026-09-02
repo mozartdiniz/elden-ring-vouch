@@ -10,7 +10,12 @@
     "combined",
     "quantified",
     "text_only",
-    "applied_to_a_build"
+    "applied_to_a_build",
+    "pvp",
+    "assumed",
+    "stack_factors",
+    "stacked_multiplier",
+    "conditional_available"
   ],
   "properties": {
     "items": {
@@ -39,7 +44,8 @@
           "attack_multiplier",
           "damage_taken",
           "resist",
-          "rates"
+          "rates",
+          "conditional"
         ],
         "properties": {
           "item": {
@@ -253,6 +259,45 @@
                 "exclusiveMinimum": 0
               }
             }
+          },
+          "conditional": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": false,
+            "required": [
+              "multiplier",
+              "pvp_multiplier",
+              "condition",
+              "pvp_note",
+              "source_text"
+            ],
+            "properties": {
+              "multiplier": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "pvp_multiplier": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "condition": {
+                "type": "string",
+                "description": "When it applies, quoted from the description. 'with weapon skills' is worth nothing to a normal swing."
+              },
+              "pvp_note": {
+                "type": "string",
+                "description": "A PvP caveat the description gives that is not a plain multiplier, e.g. holy not being multiplied."
+              },
+              "source_text": {
+                "type": "string",
+                "description": "The sentence the figure was read out of, so a reader can check the parse."
+              }
+            },
+            "description": "The damage multiplier this item's description states, when it states one unambiguously. Null when it does not, or when it quotes several for different targets. Never applied on its own \u2014 see stacked_multiplier."
           }
         }
       }
@@ -493,6 +538,82 @@
     "applied_to_a_build": {
       "type": "boolean",
       "description": "Always false. Nothing in this collection applies these automatically; character-build, equip-load and defence all report figures before them."
+    },
+    "pvp": {
+      "type": "boolean"
+    },
+    "assumed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The items whose conditions the caller asserted. The stack is exactly these."
+    },
+    "stack_factors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "item",
+          "multiplier",
+          "condition",
+          "pvp_note"
+        ],
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "multiplier": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "condition": {
+            "type": "string"
+          },
+          "pvp_note": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "What went into the product, each with the condition it needs. Quote these beside the total: a stack is only as true as its conditions."
+    },
+    "stacked_multiplier": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "The product of the asserted multipliers. 1.0 when nothing was asserted, which is the honest answer to 'what do these talismans multiply my damage by' when the caller has not said what kind of hit it is."
+    },
+    "conditional_available": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "item",
+          "multiplier",
+          "pvp_multiplier",
+          "condition"
+        ],
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "multiplier": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "pvp_multiplier": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "condition": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Multipliers these items state that were NOT counted, because the caller did not assert their conditions. List them in an answer: they are what the player would have to do to get them."
     }
   }
 }

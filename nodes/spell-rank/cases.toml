@@ -1,0 +1,41 @@
+# Node fixtures (§7.1).
+#
+# Question 3.6 of the validation battery — "quais as melhores incantations de fogo pra uma
+# build de 60 Faith" — is a ranking over 384 spells, and the collection could only price them
+# one at a time. Same shape as weapon-rank and the same reason: a list nobody can compute is a
+# list a model makes up.
+
+[[case]]
+name = "the best fire incantations for 60 faith"
+input = { catalyst = "Erdtree Seal", strength = 12, dexterity = 12, intelligence = 9, faith = 60, arcane = 9, damage_type = "fire", limit = 8 }
+expect = { "result.best" = "Flame of the Fell God", "result.best_attack" = 1135.2325, "result.spell_buff" = 273.55, "result.considered" = 62, "result.castable" = 46, "result.truncated" = true, "result.ranked[0].fp_cost" = 34.0 }
+
+# A seal's family bonus reorders the list, and the table it comes from is the ontology's
+# rather than the Build Planner's — which every row that used it says.
+[[case]]
+name = "a family bonus is applied and its source is named"
+input = { catalyst = "Giant's Seal", strength = 12, dexterity = 12, intelligence = 9, faith = 60, arcane = 9, family = "Giants' Flame", limit = 3 }
+expect = { "result.best" = "Flame of the Fell God", "result.best_attack" = 1360.7849999999999, "result.considered" = 10, "result.ranked[0].bonus" = 1.2, "result.ranked[0].bonus_family" = "Giants' Flame", "result.ranked[0].family_source" = "MagicFamily.csv (Prometheux ontology)" }
+
+# A staff casts sorceries and nothing else, so nothing in this list is an incantation.
+[[case]]
+name = "a staff ranks sorceries only"
+input = { catalyst = "Staff of Loss", strength = 10, dexterity = 12, intelligence = 80, faith = 10, arcane = 9, family = "Night", limit = 3 }
+expect = { "result.catalyst_casts[0]" = "Sorcery", "result.best" = "Night Comet", "result.best_attack" = 1014.806, "result.spell_buff" = 339.4, "result.ranked[0].bonus" = 1.3 }
+
+# A spell the build cannot cast is not a weak spell. Out by default; on request each row
+# carries what it is short by.
+[[case]]
+name = "spells the build cannot cast are absent unless asked for"
+input = { catalyst = "Erdtree Seal", strength = 12, dexterity = 12, intelligence = 9, faith = 20, arcane = 9, damage_type = "lightning", limit = 4, include_uncastable = true }
+expect = { "result.considered" = 39, "result.castable" = 5, "result.uncastable" = 34, "result.ranked[0].castable" = false, "result.ranked[0].shortfall.arcane" = 44 }
+
+[[case]]
+name = "and by default the list is what the build can actually cast"
+input = { catalyst = "Erdtree Seal", strength = 12, dexterity = 12, intelligence = 9, faith = 20, arcane = 9, damage_type = "lightning", limit = 10 }
+expect = { "result.returned" = 5, "result.ranked[0].castable" = true }
+
+[[case]]
+name = "a stat outside 1..99 is refused"
+input = { catalyst = "Erdtree Seal", strength = 120, dexterity = 12, intelligence = 9, faith = 60, arcane = 9 }
+expect_code = 10

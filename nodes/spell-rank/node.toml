@@ -1,0 +1,132 @@
+name = "spell-rank"
+version = "0.1.0"
+
+purpose = "Rank the spells a build can cast from one catalyst, by what they hit for"
+
+use_when = [
+  "the question asks which spells are best for a build — 'melhores incantations de fogo pra 60 faith', 'best ice sorceries'",
+  "the question names a school or a damage type and wants the strongest of it",
+  "the user wants to know what a catalyst is worth casting",
+]
+not_for = [
+  "one spell from one catalyst — call spell-power",
+  "which catalyst to cast a named spell from — call weapon-rank with that spell",
+  "which spread to build for a spell — call build-allocate with focus 'spell'",
+]
+
+run = ["python3", "rank.py"]
+timeout_ms = 60000
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/MagicData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/WeaponData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/EquipParamWeapon.csv"
+
+[[reads]]
+path = "../../data/MagicFamily.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.catalyst]
+guidance = "The staff or seal, from weapon-lookup's `resolved`. The whole ranking is out of this catalyst: a different one reorders it, and a family bonus can move a spell to the top."
+
+[params.upgrade]
+guidance = "Leave it out to use the catalyst's own cap. Comparing spells from a half-upgraded staff answers a question nobody asked."
+
+[params.damage_type]
+guidance = "The filter for 'best fire spells' — what the spell deals, not what school it is in."
+
+[params.family]
+guidance = "The filter for 'best Night sorceries' or 'best Godslayer incantations' — the school a catalyst boosts. Different from damage_type, and the table behind it comes from the Prometheux ontology rather than the Build Planner, which each row says."
+
+[params.include_uncastable]
+guidance = "Leave it false. True answers 'what would I need to cast X', where the row's `shortfall` is the answer."
+
+[params.strength]
+guidance = "The build's strength. Two catalysts scale their spell buff off it — the Clawmark and Frenzied Flame Seals — so it is not always irrelevant."
+
+[params.dexterity]
+guidance = "The build's dexterity."
+
+[params.intelligence]
+guidance = "The build's intelligence."
+
+[params.faith]
+guidance = "The build's faith."
+
+[params.arcane]
+guidance = "The build's arcane."
+
+[[requires]]
+expr = """
+input.strength >= 1 && input.strength <= 99 &&
+input.dexterity >= 1 && input.dexterity <= 99 &&
+input.intelligence >= 1 && input.intelligence <= 99 &&
+input.faith >= 1 && input.faith <= 99 &&
+input.arcane >= 1 && input.arcane <= 99
+"""
+message = "every stat must be between 1 and 99"
+
+# --- postconditions ---
+
+[[ensures]]
+expr = """
+size(result.ranked) == 0 ||
+  (result.ranked[0].spell == result.best && result.ranked[0].attack == result.best_attack)
+"""
+
+[[ensures]]
+expr = "result.ranked.all(r, r.attack <= result.best_attack)"
+
+[[ensures]]
+expr = "result.returned == size(result.ranked) && result.returned <= result.limit"
+
+# Nothing in the list is a cast that cannot happen — not the wrong kind of spell for the
+# catalyst, and not one the build has no stats for.
+[[ensures]]
+expr = "result.ranked.all(r, r.spell_type in result.catalyst_casts)"
+
+[[ensures]]
+expr = "result.include_uncastable || result.ranked.all(r, r.castable)"
+
+[[ensures]]
+expr = "result.ranked.all(r, r.castable == (size(r.shortfall) == 0))"
+
+# The filters are honoured, and reported, so a fire-only ranking cannot be presented as a
+# ranking of everything.
+[[ensures]]
+expr = "result.damage_type == \"\" || result.ranked.all(r, result.damage_type in r.damage_types)"
+
+[[ensures]]
+expr = "result.family == \"\" || result.ranked.all(r, result.family in r.families)"
+
+# A bonus is either applied for a family the spell belongs to, or it is exactly 1.
+[[ensures]]
+expr = """
+result.ranked.all(r,
+  r.bonus_applied
+    ? (r.bonus > 1.0 && r.bonus_family in r.families && r.family_source != "")
+    : (r.bonus == 1.0 && r.bonus_family == "" && r.family_source == ""))
+"""
+
+[[ensures]]
+expr = "result.upgrade <= result.max_upgrade"
+
+[[ensures]]
+expr = "result.castable + result.uncastable == result.considered"
+
+[[examples]]
+ask = "quais as melhores incantations de fogo pra uma build de 60 faith?"
+call = { catalyst = "Erdtree Seal", strength = 12, dexterity = 12, intelligence = 9, faith = 60, arcane = 9, damage_type = "fire", limit = 10 }
+
+[[examples]]
+ask = "best Night sorceries for a pure intelligence build"
+call = { catalyst = "Staff of Loss", strength = 10, dexterity = 12, intelligence = 80, faith = 10, arcane = 9, family = "Night" }

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "spell-rank input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["catalyst", "strength", "dexterity", "intelligence", "faith", "arcane"],
+  "properties": {
+    "catalyst": { "type": "string", "description": "The staff or seal, exactly as weapon-lookup resolved it. The ranking is out of this catalyst and changes with it." },
+    "upgrade": { "type": "integer", "minimum": 0, "maximum": 25, "description": "Defaults to the catalyst's own cap, which is what a comparison usually wants." },
+    "strength": { "type": "integer", "minimum": 1, "maximum": 99 },
+    "dexterity": { "type": "integer", "minimum": 1, "maximum": 99 },
+    "intelligence": { "type": "integer", "minimum": 1, "maximum": 99 },
+    "faith": { "type": "integer", "minimum": 1, "maximum": 99 },
+    "arcane": { "type": "integer", "minimum": 1, "maximum": 99 },
+    "starting_class": { "type": "string", "description": "Only affects the vitals the planner computes, not the spell buff. Defaults to Wretch." },
+    "damage_type": {
+      "type": "string",
+      "enum": ["physical", "magic", "fire", "lightning", "holy"],
+      "description": "What the spell deals. 'fire' finds every fire spell whatever school it belongs to — this is the filter for 'best fire incantations'."
+    },
+    "family": {
+      "type": "string",
+      "description": "What a catalyst boosts — 'Godslayer', 'Night', 'Dragon Communion'. A different question from damage_type, and the table behind it is the Prometheux ontology's rather than the Build Planner's."
+    },
+    "spell_type": { "type": "string", "enum": ["Sorcery", "Incantation"], "description": "Narrow to one kind. Usually unnecessary: a catalyst already only casts one." },
+    "limit": { "type": "integer", "minimum": 1, "maximum": 100, "description": "Default 15." },
+    "include_uncastable": { "type": "boolean", "description": "Keep the spells the build cannot cast, each with its shortfall. Default false." }
+  }
+}

@@ -17,6 +17,12 @@ an out-of-range upgrade produces no value at all.
 ask for a Heavy Moonveil and the sheet quietly prices a Standard one. That is reported here as
 `affinity_ignored`, so a caller cannot repeat the requested affinity as though it applied.
 
+**The gap, not just the verdict.** `req_met` says a requirement is missed; `shortfall` says by
+how much. An eval run answered "you'd need 2 more points" off a requirement of 12 and a
+strength of 10, and attestation refused the 2 — a subtraction is arithmetic, and arithmetic a
+caller does is arithmetic a model does. The stats it is measured against are the *effective*
+ones, so two-handing is already accounted for.
+
 **No nulls.** The oracle uses `null` for elements a weapon does not deal. A null would make
 every contract mentioning that field unevaluable, which fails closed and refuses the call, so
 absent damage is reported as `0.0`. `elements` names the ones the weapon actually has.
@@ -122,6 +128,16 @@ def main():
                 "percent": number(r.scaling_percent.get(stat)),
                 "requirement": int(number(r.requirements.get(stat))),
                 "req_met": bool(r.req_met.get(stat, True)),
+                # Against the effective stat, which already includes the two-handed strength
+                # bonus, so "two more points" means two more points of the raw stat only when
+                # the weapon is held one-handed. Zero whenever the requirement is met.
+                "effective": int(number(r.stats.get(stat))),
+                "shortfall": max(
+                    0,
+                    int(number(r.requirements.get(stat))) - int(number(r.stats.get(stat))),
+                )
+                if not r.req_met.get(stat, True)
+                else 0,
             }
             for stat in STATS
         },

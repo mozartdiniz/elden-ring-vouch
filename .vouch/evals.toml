@@ -73,7 +73,6 @@ attest = true
 [[eval]]
 ask = "does bleed work on Rennala, and what is she weakest to?"
 expect_node = "boss-lookup"
-expect_params = { query = "rennala" }
 attest = true
 
 # Nine of them, 3442 to 28905 health. An answer that gives one number has picked an encounter

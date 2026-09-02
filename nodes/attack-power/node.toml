@@ -185,6 +185,29 @@ result.status_shown.sleep <= result.status.sleep && result.status.sleep < result
 result.status_shown.madness <= result.status.madness && result.status.madness < result.status_shown.madness + 1
 """
 
+# The shortfall is the gap it claims to be, and exists precisely so a caller never computes
+# one: an eval answered "2 more points" from a requirement of 12 and a strength of 10, and
+# attestation refused the 2 because no node had produced it.
+[[ensures]]
+expr = """
+result.scaling.strength.shortfall == (result.scaling.strength.req_met ? 0 : result.scaling.strength.requirement - result.scaling.strength.effective) &&
+result.scaling.dexterity.shortfall == (result.scaling.dexterity.req_met ? 0 : result.scaling.dexterity.requirement - result.scaling.dexterity.effective) &&
+result.scaling.intelligence.shortfall == (result.scaling.intelligence.req_met ? 0 : result.scaling.intelligence.requirement - result.scaling.intelligence.effective) &&
+result.scaling.faith.shortfall == (result.scaling.faith.req_met ? 0 : result.scaling.faith.requirement - result.scaling.faith.effective) &&
+result.scaling.arcane.shortfall == (result.scaling.arcane.req_met ? 0 : result.scaling.arcane.requirement - result.scaling.arcane.effective)
+"""
+
+# A met requirement is exactly a shortfall of zero, so the flag and the number can never tell
+# a caller different things.
+[[ensures]]
+expr = """
+result.scaling.strength.req_met == (result.scaling.strength.shortfall == 0) &&
+result.scaling.dexterity.req_met == (result.scaling.dexterity.shortfall == 0) &&
+result.scaling.intelligence.req_met == (result.scaling.intelligence.shortfall == 0) &&
+result.scaling.faith.req_met == (result.scaling.faith.shortfall == 0) &&
+result.scaling.arcane.req_met == (result.scaling.arcane.shortfall == 0)
+"""
+
 # `requirements_met` must agree with the per-stat flags rather than being set on its own —
 # the summary and the detail cannot be allowed to disagree.
 [[ensures]]

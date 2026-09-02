@@ -101,3 +101,18 @@ expect = { "result.attack_shown.holy" = 259, "result.attack_shown.physical" = 54
 name = "a Longsword's guard figures (Prometheux: 45/30, boost 36, resist 15)"
 input = { weapon = "Longsword", affinity = "Standard", upgrade = 25, strength = 20, dexterity = 13, intelligence = 80, faith = 7, arcane = 9 }
 expect = { "result.guard_negation.physical" = 45.0, "result.guard_negation.magic" = 30.0, "result.guard_boost" = 36, "result.guard_resist.poison" = 15, "result.guard_resist.bleed" = 15, "result.guard_resist.madness" = 15 }
+
+# The intermittent an eval chased for several runs before the failure report started showing
+# the words around an unattested numeral: "you'd need 2 more points", computed by the agent
+# from a requirement of 12 and a strength of 10.
+[[case]]
+name = "a missed requirement reports the gap, not just the verdict"
+input = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 10, strength = 10, dexterity = 40, intelligence = 10, faith = 10, arcane = 50 }
+expect = { "result.scaling.strength.requirement" = 12, "result.scaling.strength.effective" = 10, "result.scaling.strength.shortfall" = 2, "result.scaling.strength.req_met" = false, "result.requirements_met" = false }
+
+# Two-handing raises effective strength, so the same build meets the requirement and the
+# shortfall goes to zero. The gap is measured against the effective stat, not the raw one.
+[[case]]
+name = "two-handing closes the gap, and the shortfall says so"
+input = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 10, strength = 10, dexterity = 40, intelligence = 10, faith = 10, arcane = 50, two_hand = true }
+expect = { "result.scaling.strength.effective" = 15, "result.scaling.strength.shortfall" = 0, "result.requirements_met" = true }

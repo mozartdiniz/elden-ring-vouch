@@ -93,12 +93,14 @@
     "scaling": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["letter", "percent", "requirement", "req_met"],
+      "required": ["letter", "percent", "requirement", "req_met", "effective", "shortfall"],
       "properties": {
         "letter": { "type": "string", "description": "S, A, B, C, D, E, or - for no scaling." },
         "percent": { "type": "number" },
         "requirement": { "type": "integer" },
-        "req_met": { "type": "boolean" }
+        "req_met": { "type": "boolean" },
+        "effective": { "type": "integer", "minimum": 0, "description": "The stat as the weapon sees it, including the two-handed strength bonus." },
+        "shortfall": { "type": "integer", "minimum": 0, "description": "How many points short of the requirement. Zero when it is met. Quote this rather than subtracting the requirement from the stat yourself." }
       }
     }
   }

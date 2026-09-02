@@ -152,7 +152,7 @@ That is what a second implementation is for, and it earned its place on the firs
 
 ```console
 $ vouch -C . test
-35 cases, 35 passed, 0 failed
+80 cases, 80 passed, 0 failed
 ```
 
 `nodes/attack-power/cases.toml` is **generated**, by `scripts/generate_cases.py`, from
@@ -166,12 +166,20 @@ The hand-written cases at the end of that file cover what the oracle has no opin
 because it is what this collection adds: the bounds, the substitutions, and the refusals.
 
 ```console
-$ vouch -C . eval --agent 'claude -p --allowedTools "" -- {prompt}' -n 5 --min-rate 0.8
+$ vouch -C . eval --agent 'claude -p --allowedTools "" -- {prompt}' -n 3 --min-rate 0.9
+...
+27/27 runs passed (100%); the floor is 90%
 ```
 
 Routing evals, with a model in the loop, so a rate rather than a pass. `--allowedTools ""`
 matters: with its own tools the agent may read this repository instead of routing through the
 published context, which measures the wrong thing.
+
+The suite has been at 100% since the last of the fabrications was fixed upstream. It did not
+start there — 89%, then 95%, then 96% — and each gap closed by returning a figure in the form
+a reader quotes rather than by checking the prose harder. The routes are worth reading as much
+as the rate: the agent chains `weapon-lookup → character-build → attack-power` unprompted, and
+calls `spell-power` twice to compare two catalysts.
 
 ## Layout
 

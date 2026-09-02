@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "defence input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["starting_class"],
+  "properties": {
+    "starting_class": { "type": "string", "description": "One of the ten. The valid list is a precondition, not a schema enum, so a wrong one refuses with the list." },
+    "vigor": { "type": "integer", "description": "Omit any stat the user did not name; it becomes the class minimum." },
+    "mind": { "type": "integer" },
+    "endurance": { "type": "integer" },
+    "strength": { "type": "integer" },
+    "dexterity": { "type": "integer" },
+    "intelligence": { "type": "integer" },
+    "faith": { "type": "integer" },
+    "arcane": { "type": "integer" },
+    "head": { "type": "string", "description": "Exact armour name, or omit for a bare slot." },
+    "chest": { "type": "string" },
+    "arms": { "type": "string" },
+    "legs": { "type": "string" }
+  }
+}

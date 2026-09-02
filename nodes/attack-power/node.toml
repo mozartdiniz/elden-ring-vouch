@@ -196,6 +196,19 @@ result.requirements_met == (
 )
 """
 
+# Guard figures are shares and counts, never negative — a blocked hit cannot heal you or add
+# to a status bar.
+[[ensures]]
+expr = """
+result.guard_boost >= 0 &&
+result.guard_negation.physical >= 0.0 && result.guard_negation.magic >= 0.0 &&
+result.guard_negation.fire >= 0.0 && result.guard_negation.lightning >= 0.0 &&
+result.guard_negation.holy >= 0.0 &&
+result.guard_resist.poison >= 0 && result.guard_resist.scarlet_rot >= 0 &&
+result.guard_resist.bleed >= 0 && result.guard_resist.frost >= 0 &&
+result.guard_resist.sleep >= 0 && result.guard_resist.madness >= 0
+"""
+
 [[ensures]]
 expr = "result.upgrade == input.upgrade && result.two_hand == (has(input.two_hand) && input.two_hand)"
 

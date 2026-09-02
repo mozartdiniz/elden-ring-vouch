@@ -54,6 +54,14 @@ expect_node = "spell-power"
 expect_params = { spell = "Comet" }
 attest = true
 
+# Three things called "defence" and they are not interchangeable. An answer that quotes a
+# negation percentage as though it were a defence number has flattened the useful part.
+[[eval]]
+ask = "how tanky is a Vagabond in the full Knight set at 40 vigor? What does it resist?"
+expect_node = "defence"
+expect_params = { starting_class = "Vagabond", vigor = 40 }
+attest = true
+
 # Squarely outside the collection: nothing here knows where anything is, and a model asked
 # this without tools will happily invent a location.
 [[eval]]

@@ -1,0 +1,214 @@
+name = "defence"
+version = "0.1.0"
+
+purpose = "What a build takes: per-element defences, armour damage negation, and the four status resistances"
+
+use_when = [
+  "the question asks how tanky a build is, or what an armour set is worth",
+  "the question compares armour sets — call this once per set on the same stats",
+  "the question asks about immunity, robustness, focus or vitality",
+  "the question asks what a build resists, rather than what it deals",
+]
+not_for = [
+  "whether a loadout can still be rolled in — call equip-load, which owns weight and roll type",
+  "weapon or spell damage — call attack-power or spell-power",
+  "poise, which this collection does not publish",
+  "talisman effects, which are not modelled at all",
+]
+
+run = ["python3", "defence.py"]
+timeout_ms = 30000
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/StartingClassData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/PlayerCommonParam.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/ArmorData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/EquipParamProtector.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.starting_class]
+guidance = "The class, or the one character-build was called with. If the user did not name one, ask — the class sets stat floors that change every figure here."
+
+[params.vigor]
+guidance = "Omit any stat the user did not name; it comes back as the class minimum, and character-build reports which stats that happened to. Never invent one."
+
+[params.mind]
+guidance = "Omit unless the user named it."
+
+[params.endurance]
+guidance = "Omit unless the user named it."
+
+[params.strength]
+guidance = "Omit unless the user named it."
+
+[params.dexterity]
+guidance = "Omit unless the user named it."
+
+[params.intelligence]
+guidance = "Omit unless the user named it."
+
+[params.faith]
+guidance = "Omit unless the user named it."
+
+[params.arcane]
+guidance = "Omit unless the user named it."
+
+[params.head]
+guidance = "Exact armour name. Omit a slot the user is not wearing rather than guessing at a piece."
+
+[params.chest]
+guidance = "Exact armour name, or omit."
+
+[params.arms]
+guidance = "Exact armour name, or omit."
+
+[params.legs]
+guidance = "Exact armour name, or omit."
+
+[[requires]]
+expr = '''
+input.starting_class in [
+  "Vagabond", "Warrior", "Hero", "Bandit", "Astrologer",
+  "Prophet", "Samurai", "Prisoner", "Confessor", "Wretch"
+]
+'''
+message = "unknown starting class; the ten are Vagabond, Warrior, Hero, Bandit, Astrologer, Prophet, Samurai, Prisoner, Confessor and Wretch"
+
+[[requires]]
+expr = """
+(!has(input.vigor) || (input.vigor >= 1 && input.vigor <= 99)) &&
+(!has(input.mind) || (input.mind >= 1 && input.mind <= 99)) &&
+(!has(input.endurance) || (input.endurance >= 1 && input.endurance <= 99)) &&
+(!has(input.strength) || (input.strength >= 1 && input.strength <= 99)) &&
+(!has(input.dexterity) || (input.dexterity >= 1 && input.dexterity <= 99)) &&
+(!has(input.intelligence) || (input.intelligence >= 1 && input.intelligence <= 99)) &&
+(!has(input.faith) || (input.faith >= 1 && input.faith <= 99)) &&
+(!has(input.arcane) || (input.arcane >= 1 && input.arcane <= 99))
+"""
+message = "every stat given must be between 1 and 99; omit a stat entirely rather than passing 0 for one the user did not name"
+
+# --- postconditions ---
+
+# The percentage is the fraction, converted. Publishing both means a reader can quote either
+# without doing the conversion; the contract is what keeps them from drifting apart. The
+# tolerance is the planner's own display rounding, three decimals on the percentage.
+[[ensures]]
+expr = """
+result.negation.physical * 100.0 - result.negation_percent.physical < 0.001 &&
+result.negation_percent.physical - result.negation.physical * 100.0 < 0.001 &&
+result.negation.strike * 100.0 - result.negation_percent.strike < 0.001 &&
+result.negation_percent.strike - result.negation.strike * 100.0 < 0.001 &&
+result.negation.slash * 100.0 - result.negation_percent.slash < 0.001 &&
+result.negation_percent.slash - result.negation.slash * 100.0 < 0.001 &&
+result.negation.pierce * 100.0 - result.negation_percent.pierce < 0.001 &&
+result.negation_percent.pierce - result.negation.pierce * 100.0 < 0.001
+"""
+
+[[ensures]]
+expr = """
+result.negation.magic * 100.0 - result.negation_percent.magic < 0.001 &&
+result.negation_percent.magic - result.negation.magic * 100.0 < 0.001 &&
+result.negation.fire * 100.0 - result.negation_percent.fire < 0.001 &&
+result.negation_percent.fire - result.negation.fire * 100.0 < 0.001 &&
+result.negation.lightning * 100.0 - result.negation_percent.lightning < 0.001 &&
+result.negation_percent.lightning - result.negation.lightning * 100.0 < 0.001 &&
+result.negation.holy * 100.0 - result.negation_percent.holy < 0.001 &&
+result.negation_percent.holy - result.negation.holy * 100.0 < 0.001
+"""
+
+# Absorption and negation are two views of one figure: what gets through, and what is taken
+# off. If they ever disagreed, one of them would be quietly wrong in an answer.
+[[ensures]]
+expr = """
+result.absorb.physical + result.negation.physical - 1.0 < 0.000001 &&
+1.0 - (result.absorb.physical + result.negation.physical) < 0.000001 &&
+result.absorb.magic + result.negation.magic - 1.0 < 0.000001 &&
+1.0 - (result.absorb.magic + result.negation.magic) < 0.000001 &&
+result.absorb.holy + result.negation.holy - 1.0 < 0.000001 &&
+1.0 - (result.absorb.holy + result.negation.holy) < 0.000001
+"""
+
+# Armour cannot remove all of a damage type, nor add to it.
+[[ensures]]
+expr = """
+result.negation.physical >= 0.0 && result.negation.physical < 1.0 &&
+result.negation.magic >= 0.0 && result.negation.magic < 1.0 &&
+result.negation.fire >= 0.0 && result.negation.fire < 1.0 &&
+result.negation.lightning >= 0.0 && result.negation.lightning < 1.0 &&
+result.negation.holy >= 0.0 && result.negation.holy < 1.0
+"""
+
+# Wearing nothing removes nothing. This is the case a reader is most likely to be handed by
+# mistake — an armour name that did not resolve — so it has to be unmistakable.
+[[ensures]]
+expr = 'size(result.armour_worn) > 0 || result.negation.physical == 0.0'
+
+# A character always has some defence and some resistance, whatever they are wearing.
+[[ensures]]
+expr = """
+result.defence.physical > 0 && result.defence.magic > 0 && result.defence.fire > 0 &&
+result.defence.lightning > 0 && result.defence.holy > 0 &&
+result.resist.immunity > 0 && result.resist.robustness > 0 &&
+result.resist.focus > 0 && result.resist.vitality > 0
+"""
+
+# Absorption and negation stay two views of one figure for the split physical types too.
+[[ensures]]
+expr = """
+result.absorb.strike + result.negation.strike - 1.0 < 0.000001 &&
+1.0 - (result.absorb.strike + result.negation.strike) < 0.000001 &&
+result.absorb.slash + result.negation.slash - 1.0 < 0.000001 &&
+1.0 - (result.absorb.slash + result.negation.slash) < 0.000001 &&
+result.absorb.pierce + result.negation.pierce - 1.0 < 0.000001 &&
+1.0 - (result.absorb.pierce + result.negation.pierce) < 0.000001 &&
+result.absorb.fire + result.negation.fire - 1.0 < 0.000001 &&
+1.0 - (result.absorb.fire + result.negation.fire) < 0.000001 &&
+result.absorb.lightning + result.negation.lightning - 1.0 < 0.000001 &&
+1.0 - (result.absorb.lightning + result.negation.lightning) < 0.000001
+"""
+
+# A stat the caller named comes back as given, unless it was below the class floor — in which
+# case it comes back at the floor and is named as raised. Same rule as character-build, and
+# the two nodes must not disagree about a build.
+[[ensures]]
+expr = """
+(!has(input.strength) || result.stats.strength == input.strength || "strength" in result.stats_raised_to_class_minimum) &&
+(!has(input.faith) || result.stats.faith == input.faith || "faith" in result.stats_raised_to_class_minimum) &&
+(!has(input.dexterity) || result.stats.dexterity == input.dexterity || "dexterity" in result.stats_raised_to_class_minimum) &&
+(!has(input.intelligence) || result.stats.intelligence == input.intelligence || "intelligence" in result.stats_raised_to_class_minimum) &&
+(!has(input.arcane) || result.stats.arcane == input.arcane || "arcane" in result.stats_raised_to_class_minimum) &&
+(!has(input.vigor) || result.stats.vigor == input.vigor || "vigor" in result.stats_raised_to_class_minimum) &&
+(!has(input.mind) || result.stats.mind == input.mind || "mind" in result.stats_raised_to_class_minimum) &&
+(!has(input.endurance) || result.stats.endurance == input.endurance || "endurance" in result.stats_raised_to_class_minimum)
+"""
+
+[[ensures]]
+expr = """
+size(result.stats_given) + size(result.stats_from_class_minimum) == 8 &&
+result.stats_raised_to_class_minimum.all(s, s in result.stats_given)
+"""
+
+[[ensures]]
+expr = "result.hp > 0 && result.level >= 1 && result.armour_weight >= 0.0"
+
+[[ensures]]
+expr = "!result.talismans_modelled"
+
+[[examples]]
+ask = "how tanky is a Vagabond in the Knight set at 40 vigor?"
+call = { starting_class = "Vagabond", vigor = 40, head = "Knight Helm", chest = "Knight Armor", arms = "Knight Gauntlets", legs = "Knight Greaves" }
+
+[[examples]]
+ask = "what are a bare Vagabond's defences?"
+call = { starting_class = "Vagabond" }

@@ -8,7 +8,7 @@
     "affinity_ignored", "infusable", "upgrade", "max_upgrade", "two_hand",
     "total_ar", "total_ar_rounded", "attack", "attack_shown", "elements",
     "status", "status_shown", "status_effects",
-    "scaling", "requirements_met", "guard_boost", "guard_negation"
+    "scaling", "requirements_met", "guard_boost", "guard_negation", "guard_resist"
   ],
   "properties": {
     "weapon": { "type": "string" },
@@ -34,7 +34,8 @@
     "status_effects": { "type": "array", "items": { "type": "string" } },
     "requirements_met": { "type": "boolean", "description": "Whether the build meets every stat requirement. False means the attack figures already carry the penalty." },
     "guard_boost": { "type": "integer" },
-    "guard_negation": { "$ref": "#/$defs/damage" },
+    "guard_negation": { "$ref": "#/$defs/damage", "description": "Share of each damage type blocked, as a percentage." },
+    "guard_resist": { "$ref": "#/$defs/status_shown", "description": "Status buildup resisted while blocking with this weapon." },
     "scaling": {
       "type": "object",
       "additionalProperties": false,

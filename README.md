@@ -68,6 +68,7 @@ fixture.
 | `optimal-affinity` | All thirteen affinities of one weapon, ranked by damage against a target |
 | `spell-power` | One spell from one catalyst → attack, family bonus, FP cost, whether the build can cast it |
 | `equip-load` | A loadout against a build's equip load → weight, roll type, and the endurance to change it |
+| `defence` | A build and an armour set → per-element defences, damage negation, status resistances |
 
 The order is the routing: **character-build** when the user described a build by only some of
 its stats, **weapon-lookup** for any question naming a weapon, then **attack-power** for what
@@ -136,6 +137,11 @@ figures:
 | Adula's Moonblade, Carian Glintstone Staff +25 | 503.97 | 503.97 |
 | Ranni's Dark Moon, Carian Regal Scepter +10 | 1356.168 | 1356.168 |
 
+`defence` and `attack-power`'s guard figures are pinned the same way, against the ontology's
+recorded `character_defense`, `resist_base`, geared resists, and `guard_negation` /
+`guard_boost` / `guard_resist` — a bare Vagabond's 79/93/85/75/89, base resists 92/92/92/99,
+the Knight set's 200/224/147/154, and a Longsword's 45/30 block with a boost of 36.
+
 Getting there took a real bug out of this collection. `max_upgrade` was "+25 if infusable, else
 +10", which is right for 512 of the 570 weapons and wrong for 58 — including the Academy and
 Carian Glintstone staves, which take no affinity and still upgrade to +25. Two of the five
@@ -185,8 +191,8 @@ elden-ring-vouch/
 ## What is not ported yet
 
 The Prometheux ontology this collection is a second implementation of still covers more:
-armour damage negation and resistances, poise, guard and status comparison, and the parts of
-loadout planning beyond weight.
+ashes of war and their motion values, boss resistances, consumables and physick tears,
+matchmaking bands, and the effect catalogues behind talismans and crystal tears.
 
 Two things are deliberately absent rather than pending:
 

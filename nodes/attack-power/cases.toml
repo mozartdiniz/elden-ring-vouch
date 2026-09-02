@@ -93,3 +93,11 @@ expect = { "result.max_upgrade" = 0, "result.infusable" = false }
 name = "the displayed per-element figures are returned, not left to the caller"
 input = { weapon = "Ordovis's Greatsword", affinity = "Standard", upgrade = 10, strength = 60, dexterity = 13, intelligence = 10, faith = 60, arcane = 9 }
 expect = { "result.attack_shown.holy" = 259, "result.attack_shown.physical" = 549, "result.total_ar_rounded" = 809 }
+
+# The guard half of the answer, which was incomplete until guard_resist was returned.
+# Prometheux: Longsword Standard +25 blocks 45 physical, 30 elemental, boost 36, and resists
+# 15 of every status.
+[[case]]
+name = "a Longsword's guard figures (Prometheux: 45/30, boost 36, resist 15)"
+input = { weapon = "Longsword", affinity = "Standard", upgrade = 25, strength = 20, dexterity = 13, intelligence = 80, faith = 7, arcane = 9 }
+expect = { "result.guard_negation.physical" = 45.0, "result.guard_negation.magic" = 30.0, "result.guard_boost" = 36, "result.guard_resist.poison" = 15, "result.guard_resist.bleed" = 15, "result.guard_resist.madness" = 15 }

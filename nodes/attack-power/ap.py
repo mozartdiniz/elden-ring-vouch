@@ -128,6 +128,10 @@ def main():
         "requirements_met": all(r.req_met.get(s, True) for s in STATS),
         "guard_boost": int(r.guard_boost),
         "guard_negation": {d: number(r.guard_negation.get(d)) for d in DAMAGE},
+        # What blocking with this weapon resists. Left out until now, which made the guard
+        # half of the answer incomplete: a shield's status resistance is most of why one is
+        # chosen over another.
+        "guard_resist": {s: int(number(r.guard_resist.get(s))) for s in STATUS},
     }
     json.dump(result, sys.stdout)
 

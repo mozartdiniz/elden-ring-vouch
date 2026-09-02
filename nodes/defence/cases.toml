@@ -1,0 +1,67 @@
+# Node fixtures (§7.1).
+#
+# The first three are pinned against figures the **Prometheux Elden Ring Brain** ontology
+# produced independently, recorded in its HANDOFF.md: `character_defense` for a bare Vagabond,
+# `resist_base`, and the geared Knight-set resists. Agreement there is the differential check
+# this collection exists to have.
+
+[[case]]
+name = "a bare Vagabond's defences (Prometheux: 79/93/85/75/89)"
+input = { starting_class = "Vagabond" }
+expect = { "result.defence.physical" = 79, "result.defence.magic" = 93, "result.defence.fire" = 85, "result.defence.lightning" = 75, "result.defence.holy" = 89 }
+
+[[case]]
+name = "base resistances with nothing worn (Prometheux: 92/92/92/99)"
+input = { starting_class = "Vagabond" }
+expect = { "result.resist.immunity" = 92, "result.resist.robustness" = 92, "result.resist.focus" = 92, "result.resist.vitality" = 99 }
+
+[[case]]
+name = "the Knight set's resistances (Prometheux: 200/224/147/154)"
+input = { starting_class = "Vagabond", vigor = 40, endurance = 20, strength = 40, head = "Knight Helm", chest = "Knight Armor", arms = "Knight Gauntlets", legs = "Knight Greaves" }
+expect = { "result.resist.immunity" = 200, "result.resist.robustness" = 224, "result.resist.focus" = 147, "result.resist.vitality" = 154, "result.armour_weight" = 25.3 }
+
+# Physical negation splits three ways, and a set is rarely equally good against all three.
+# Collapsing them to one number would throw away the part worth knowing.
+[[case]]
+name = "physical negation splits into strike, slash and pierce"
+input = { starting_class = "Vagabond", vigor = 40, endurance = 20, strength = 40, head = "Knight Helm", chest = "Knight Armor", arms = "Knight Gauntlets", legs = "Knight Greaves" }
+expect = { "result.negation_percent.physical" = 24.612, "result.negation_percent.strike" = 23.621, "result.negation_percent.slash" = 26.501, "result.negation_percent.pierce" = 26.501 }
+
+# Wearing nothing removes nothing. This is what a caller gets when an armour name failed to
+# resolve, so it has to be unmistakable rather than a small number.
+[[case]]
+name = "wearing nothing negates nothing"
+input = { starting_class = "Vagabond" }
+expect = { "result.negation.physical" = 0.0, "result.absorb.physical" = 1.0, "result.armour_weight" = 0.0 }
+
+[[case]]
+name = "unnamed stats come from the class and are reported as such"
+input = { starting_class = "Hero", vigor = 60 }
+expect = { "result.stats.vigor" = 60, "result.stats.strength" = 16, "result.stats_given[0]" = "vigor", "result.stats_from_class_minimum[0]" = "arcane" }
+
+# The same substitution character-build reports: a stat asked below the class floor comes back
+# raised, and says so rather than being absorbed.
+[[case]]
+name = "a stat below the class floor is raised, and says so"
+input = { starting_class = "Hero", strength = 5 }
+expect = { "result.stats.strength" = 16, "result.stats_raised_to_class_minimum[0]" = "strength" }
+
+[[case]]
+name = "talismans are never modelled"
+input = { starting_class = "Vagabond" }
+expect = { "result.talismans_modelled" = false }
+
+[[case]]
+name = "an unknown starting class is refused with the ten names"
+input = { starting_class = "Paladin" }
+expect_code = 11
+
+[[case]]
+name = "a stat above 99 is refused"
+input = { starting_class = "Vagabond", vigor = 150 }
+expect_code = 11
+
+[[case]]
+name = "a missing starting class is a caller error"
+input = { vigor = 40 }
+expect_code = 10

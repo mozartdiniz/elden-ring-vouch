@@ -281,6 +281,11 @@ elden-ring-vouch/
   scripts/             generate_cases.py
 ```
 
+## Where the work stands
+
+[`HANDOFF.md`](HANDOFF.md) records what is built, what it rests on, what is pending, and the
+traps that have already cost time. Read it before extending anything.
+
 ## What is not ported yet
 
 The Prometheux ontology this collection is a second implementation of still covers ashes of

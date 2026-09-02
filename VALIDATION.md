@@ -64,16 +64,16 @@ a corrected spread that hits the target level exactly.
 eligibility filter is pure calc — requirements met, ranked by AR — and the recommendation on
 top of it is opinion-flavoured.
 
-- [ ] **3.1** Tenho VIG 60 / MND 20 / END 25 / STR 55 / DEX 14 / INT 9 / FTH 60 / ARC 9. Quais as armas mais fortes que eu consigo usar?
-- [ ] **3.2** Qual o melhor staff pra uma build de pure INT em 80, considerando Night sorceries?
-- [ ] **3.3** Qual o melhor seal pra uma build híbrida INT/FTH de Death sorceries?
-- [ ] **3.4** Estou com DEX 50 / ARC 45 no nível 150. Quais as melhores katanas pra mim?
-- [ ] **3.5** What's the best colossal weapon for a 66 STR quality-ish build at RL150?
-- [ ] **3.6** Quais as melhores incantations de fogo pra uma build de 60 Faith no jogo base + DLC?
-- [ ] **3.7** Qual o melhor greatshield pra uma build de STR focada em guard counter?
-- [ ] **3.8** Tenho FTH 80 puro. Qual a melhor arma de melee que escala em Faith sem precisar de INT?
-- [ ] **3.9** Qual a melhor lança/great spear pra uma build de DEX/FTH com Lightning?
-- [ ] **3.10** Melhor arma de Arcane que aproveita bem os 80 ARC sem depender de bleed?
+- [x] **3.1** Tenho VIG 60 / MND 20 / END 25 / STR 55 / DEX 14 / INT 9 / FTH 60 / ARC 9. Quais as armas mais fortes que eu consigo usar?
+- [x] **3.2** Qual o melhor staff pra uma build de pure INT em 80, considerando Night sorceries?
+- [x] **3.3** Qual o melhor seal pra uma build híbrida INT/FTH de Death sorceries?
+- [x] **3.4** Estou com DEX 50 / ARC 45 no nível 150. Quais as melhores katanas pra mim?
+- [x] **3.5** What's the best colossal weapon for a 66 STR quality-ish build at RL150?
+- [x] **3.6** Quais as melhores incantations de fogo pra uma build de 60 Faith no jogo base + DLC?
+- [~] **3.7** Qual o melhor greatshield pra uma build de STR focada em guard counter?
+- [x] **3.8** Tenho FTH 80 puro. Qual a melhor arma de melee que escala em Faith sem precisar de INT?
+- [x] **3.9** Qual a melhor lança/great spear pra uma build de DEX/FTH com Lightning?
+- [x] **3.10** Melhor arma de Arcane que aproveita bem os 80 ARC sem depender de bleed?
 
 ## Pattern 4 — Maximize the damage of a specific weapon skill / Ash of War
 
@@ -357,3 +357,94 @@ the comparison the question implies:
 
 Committing beats splitting by 10% on this weapon. "40/40 quality" is folk wisdom the arithmetic
 disagrees with, which is the sort of thing this collection exists to settle.
+
+## Pattern 3 — the shape the collection could not answer at all
+
+Every node here started from a weapon somebody had already named. Nothing looked across the
+catalogue, and the registry's advice — "comparing weapons means calling attack-power once per
+weapon" — is not advice that survives 489 weapons. An agent given it would rank from memory,
+which is the exact failure the collection exists to prevent.
+
+Two nodes close it. **`weapon-rank`** prices the whole catalogue at a build's stats, each
+weapon at its own upgrade cap, and drops the ones the build cannot hold. **`spell-rank`**
+does the same over the 384 spells from a named catalyst. Writing them turned up three
+defects, all committed with fixtures:
+
+- **A seal cannot cast a sorcery, and nothing knew that.** `spell-power` priced Comet from an
+  Erdtree Seal at 798.766 — arithmetically correct, about a cast that cannot happen — and the
+  first ranking for question 3.3 came back led by a sacred seal, above every staff. The check
+  now reads the game's own `enableMagic` / `enableMiracle` flags, which is how the Staff of
+  the Great Beyond comes back casting both.
+- **Eighty-one of the catalogue's 570 rows are consumables**, fifteen with no weapon ID, which
+  crashed the first full ranking. "570 weapons" was never a weapon count; it is 489.
+- **`ap_calc.load_table` re-parses its CSV on every call.** Invisible at one weapon, fatal at
+  489: `max_upgrade` calls it twice each, and the first ranking took two minutes and hit the
+  node timeout. Cached in `lib/oracle.py`, which leaves `oracle/` byte-identical. 0.6 s now.
+
+### 3.1 STR 55 / FTH 60, what can I wield — done
+
+489 weapons considered, **280 usable**. Top of the list: Shadow Sunflower Blossom 931.41,
+Maliketh's Black Blade 927.89, Staff of the Avatar 908.25, Golden Halberd 871.98. The
+half-usable figure is the useful part of the answer as much as the ranking is.
+
+### 3.2 Best staff for Night sorceries, pure INT 80 — done
+
+**Staff of Loss**, 1014.81 for Night Comet, on a spell buff of 339.4 — beating Lusat's, whose
+spell buff is 413.5, because the ×1.3 Night bonus applies and Lusat's does not have one. A
+ranking on spell buff alone gets this backwards, which is why the family table earns its
+keep.
+
+### 3.3 Best seal for Death sorceries — done, after correcting the premise
+
+Death sorceries are sorceries, so there is no seal in the answer. Out of a staff, for an
+INT 50 / FTH 50 hybrid: **Staff of the Great Beyond** 154.66, then Prince of Death's Staff
+154.38 — 0.28 apart, a coin toss, and the second one carries a ×1.1 Death bonus while the
+first is simply a better hybrid staff.
+
+### 3.4 Best katanas at DEX 50 / ARC 45 — done
+
+Ten katanas, **six usable**. Rivers of Blood 644.64 (72 bleed), Sword of Night 625.60,
+Hand of Malenia 547.86, Serpentbone Blade 522.00, Dragonscale Blade 493.10. Moonveil,
+Nagakiba, Star-Lined Sword and Meteoric Ore Blade are out on requirements — and priced with a
+penalty rather than excluded, they would have ranked *above* usable weapons, which is why they
+are dropped and not shown as weak.
+
+### 3.5 Best colossal weapon, 66 STR — done
+
+With `affinity: "best"`: **Giant-Crusher, Fire +25, 917.34**, then Prelate's Inferno Crozier
+889.96 and Duelist Greataxe 872.69. Great Club is fourth on 858.55 as Standard — it is one of
+the 58 weapons that take no affinity and still reach +25.
+
+### 3.6 Best fire incantations at 60 Faith — done
+
+62 fire incantations castable from an Erdtree Seal, **46 within reach**. Flame of the Fell God
+1135.23 for 34 FP, Giantsflame Take Thee - Charged 1064.11 for 30, **O, Flame! - Charged
+1053.17 for 16** — which is the answer a damage-only ranking hides.
+
+### 3.7 Best greatshield for guard counters — partial
+
+The shield list is right and it is not ranked on the thing the question asked about.
+`weapon-rank` returns guard boost and the negation split beside the attack rating, so:
+Verdigris Greatshield blocks 100% physical at 90 stability, Fingerprint Stone Shield 95% at
+77 but with the highest attack rating and 70 madness. What is **not** modelled is guard
+counter damage — a guard counter is an attack with its own motion value, and nothing in the
+extraction carries one.
+
+### 3.8 FTH 80, melee that scales faith without intelligence — done
+
+**Gargoyle's Blackblade 759.34**, then Golden Epitaph 600.31 and Sentry's Torch 599.02. 193 of
+489 usable at those stats. Reading the intelligence requirement off each row is what makes the
+"sem precisar de INT" half of the question answerable.
+
+### 3.9 Best great spear, DEX/FTH lightning — done
+
+Ten great spears, seven usable. **Treespear 723.67** — Standard, because Treespear is another
+of the somber-but-+25 weapons and takes no infusion at all — then Spear of the Impaler 709.97
+and Vyke's War Spear 697.01 (65 madness). The best actually-Lightning-infused entry is
+Messmer Soldier's Spear at 669.31, which is the honest correction to the question.
+
+### 3.10 Best arcane weapon at 80 ARC that is not about bleed — done
+
+Occult sweeps the list. The top row, Great Katana at 712.44, carries 108 bleed and so is
+exactly what the question excluded; the answer is **Iron Greatsword, Occult +25, 700.18**,
+with no status at all. Reading the exclusion off `status_shown` is the whole trick.

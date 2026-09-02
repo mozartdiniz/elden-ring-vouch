@@ -4,7 +4,8 @@
 # ontology, the independent implementation this collection is a second version of. Its figures
 # are recorded in `prometheux-workspace/HANDOFF.md`, and they are the only check available on
 # the one piece of arithmetic here that the Python oracle does not do: the scripts stop at the
-# spell buff, and `attack = magic_attack x spell_buff / 100 x bonus` is ours.
+# spell buff, and `attack = base_attack x spell_buff / 100 x bonus`, summed over every damage
+# type the spell deals, is ours.
 #
 # All five agree to six significant figures. Getting there took a real bug out of this
 # collection: the Academy and Carian Glintstone staves reach +25 without taking any affinity,
@@ -13,7 +14,7 @@
 [[case]]
 name = "Comet from a Carian Regal Scepter (Prometheux: 1090.912)"
 input = { spell = "Comet", catalyst = "Carian Regal Scepter", upgrade = 10, strength = 10, dexterity = 10, intelligence = 80, faith = 10, arcane = 10 }
-expect = { "result.attack" = 1090.912, "result.spell_buff" = 373.6, "result.magic_attack" = 292.0, "result.bonus" = 1.0 }
+expect = { "result.attack" = 1090.912, "result.spell_buff" = 373.6, "result.base_attack.magic" = 292.0, "result.bonus" = 1.0 }
 
 [[case]]
 name = "Comet from Lusat's Glintstone Staff (Prometheux: 1207.42)"
@@ -51,7 +52,7 @@ expect = { "result.attack" = 1356.168, "result.bonus" = 1.1, "result.bonus_famil
 [[case]]
 name = "a charged variant is a different spell, and both are reachable"
 input = { spell = "Comet - Charged", catalyst = "Carian Regal Scepter", upgrade = 10, strength = 10, dexterity = 10, intelligence = 80, faith = 10, arcane = 10 }
-expect = { "result.magic_attack" = 365.0, "result.forms[0]" = "Comet", "result.forms[1]" = "Comet - Charged" }
+expect = { "result.base_attack.magic" = 365.0, "result.forms[0]" = "Comet", "result.forms[1]" = "Comet - Charged" }
 
 [[case]]
 name = "a spell the build cannot cast says what is short"
@@ -67,3 +68,37 @@ expect_code = 11
 name = "an upgrade past the catalyst's cap is refused"
 input = { spell = "Comet", catalyst = "Carian Regal Scepter", upgrade = 25, max_upgrade = 10, strength = 10, dexterity = 10, intelligence = 80, faith = 10, arcane = 10 }
 expect_code = 11
+
+# --- incantations, and the reason they are here.
+#
+# Every one of these returned zero before September 2026: the node read `MagicAtk` and nothing
+# else, so a spell whose damage is in the fire, lightning, holy or physical column priced at
+# nothing. It surfaced as a schema defect rather than a wrong number, which is the only reason
+# it was not quoted at somebody — but it meant no incantation in the game could be answered.
+#
+# The differential check could not have found it: the Prometheux ontology computes
+# `MagicAtk x SB / 100 x Mult` too, so both implementations were wrong in the same place. It
+# took a real question — "pure Faith incantation build with the Erdtree Seal" — to surface it.
+
+[[case]]
+name = "an incantation's damage is not in the magic column"
+input = { spell = "Black Flame", catalyst = "Erdtree Seal", upgrade = 10, strength = 11, dexterity = 10, intelligence = 7, faith = 60, arcane = 10 }
+expect = { "result.attack" = 667.462, "result.attack_by_type.fire" = 667.462, "result.base_attack.fire" = 244.0, "result.base_attack.magic" = 0.0, "result.spell_buff" = 273.55, "result.spell_type" = "Incantation" }
+
+[[case]]
+name = "a seal's family bonus applies to an incantation"
+input = { spell = "Black Flame", catalyst = "Godslayer's Seal", upgrade = 10, strength = 11, dexterity = 10, intelligence = 7, faith = 60, arcane = 10 }
+expect = { "result.attack" = 576.389, "result.bonus" = 1.1, "result.bonus_applied" = true, "result.bonus_family" = "Godslayer" }
+
+[[case]]
+name = "lightning is its own column too"
+input = { spell = "Lightning Spear", catalyst = "Erdtree Seal", upgrade = 10, strength = 11, dexterity = 10, intelligence = 7, faith = 60, arcane = 10 }
+expect = { "result.attack" = 640.107, "result.attack_by_type.lightning" = 640.107, "result.damage_types" = ["lightning"] }
+
+# A spell can deal two types, and the total is both of them. Reading one column called this
+# 373.6 when it is 1046.08 — the same bug, in a sorcery, where it is easy to miss because the
+# figure that comes back looks plausible.
+[[case]]
+name = "a spell that deals two damage types is both of them"
+input = { spell = "Meteorite", catalyst = "Carian Regal Scepter", upgrade = 10, strength = 10, dexterity = 10, intelligence = 80, faith = 10, arcane = 10 }
+expect = { "result.attack" = 1046.08, "result.attack_by_type.physical" = 672.48, "result.attack_by_type.magic" = 373.6, "result.damage_types" = ["magic", "physical"] }

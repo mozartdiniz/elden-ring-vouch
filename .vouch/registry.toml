@@ -27,6 +27,7 @@ notes = [
   "optimal-affinity scores against a target. Without real defences it uses a standard reference and says target=default; say so too. Never invent an enemy's defences to make a ranking look specific.",
   "For spells, call spell-power with the catalyst weapon-lookup resolved, and pass its weapon_class and max_upgrade. Catalyst upgrade caps are not guessable: the Academy and Carian Glintstone staves reach +25 while taking no affinity, and the Carian Regal Scepter stops at +10.",
   "A charged cast is a different spell with a different attack. spell-power reports every form of a spell it was asked about; say which one the figure is for.",
+  "A spell's attack is per damage type, and spell-power returns the split: an incantation deals fire, lightning or holy rather than magic, and Meteorite deals physical and magic at once. Quote the type with the figure — a number alone cannot be checked against an enemy's negation.",
   "Comparing weapons means calling attack-power once per weapon on the same stats, then ranking what came back. Say what you ranked on: total_ar alone ignores status buildup, reach, and whether the build meets the requirements.",
   "Every figure is for the stat spread you passed. Two-handing changes strength, so a one-handed and a two-handed answer are different questions — say which one you computed.",
   "These numbers come from the Build Planner spreadsheet at patch 1.19.1, not from the live game.",

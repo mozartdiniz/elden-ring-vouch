@@ -206,9 +206,9 @@ it; not making the caller invent it stops it.
 ## The second implementation, actually used
 
 `spell-power` is the one node whose arithmetic is not the oracle's. The Python scripts stop at
-a catalyst's spell buff; `attack = magic_attack x spell_buff / 100 x bonus` is ours, and the
-family bonus needs `data/MagicFamily.csv`, which comes from the Prometheux ontology rather than
-the spreadsheet.
+a catalyst's spell buff; `attack = base_attack x spell_buff / 100 x bonus`, summed over every
+damage type the spell deals, is ours, and the family bonus needs `data/MagicFamily.csv`, which
+comes from the Prometheux ontology rather than the spreadsheet.
 
 So its fixtures are pinned against **that ontology's own recorded figures** — the independent
 implementation this collection is a second version of. All five agree to six significant

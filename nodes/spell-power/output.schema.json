@@ -5,8 +5,8 @@
   "additionalProperties": false,
   "required": [
     "spell", "spell_type", "forms", "catalyst", "catalyst_class", "upgrade", "max_upgrade",
-    "spell_buff", "magic_attack", "bonus", "bonus_applied", "bonus_family", "spell_families",
-    "family_source", "attack", "attack_shown", "fp_cost", "requirement", "castable", "unmet"
+    "spell_buff", "base_attack", "damage_types", "bonus", "bonus_applied", "bonus_family", "spell_families",
+    "family_source", "attack", "attack_shown", "attack_by_type", "attack_shown_by_type", "fp_cost", "requirement", "castable", "unmet"
   ],
   "properties": {
     "spell": { "type": "string" },
@@ -20,14 +20,51 @@
     "upgrade": { "type": "integer", "minimum": 0, "maximum": 25 },
     "max_upgrade": { "type": "integer", "minimum": 0, "maximum": 25 },
     "spell_buff": { "type": "number", "exclusiveMinimum": 0, "description": "The catalyst's spell buff, the figure the game shows on it. Carries all the stat scaling." },
-    "magic_attack": { "type": "number", "exclusiveMinimum": 0, "description": "The spell's own attack value, before the catalyst." },
+    "base_attack": {
+      "type": "object", "additionalProperties": false,
+      "required": ["physical", "magic", "fire", "lightning", "holy"],
+      "properties": {
+        "physical": { "type": "number", "minimum": 0 },
+        "magic": { "type": "number", "minimum": 0 },
+        "fire": { "type": "number", "minimum": 0 },
+        "lightning": { "type": "number", "minimum": 0 },
+        "holy": { "type": "number", "minimum": 0 }
+      },
+      "description": "The spell's own attack per damage type, before the catalyst. A sorcery is normally magic and an incantation fire, lightning or holy."
+    },
+    "damage_types": {
+      "type": "array", "items": { "type": "string" },
+      "description": "The types this spell actually deals. Quote it: 'Black Flame does 1013 fire' is an answer, '1013' is not."
+    },
     "bonus": { "type": "number", "exclusiveMinimum": 0, "description": "The catalyst's family multiplier, or 1.0 when none applies." },
     "bonus_applied": { "type": "boolean" },
     "bonus_family": { "type": "string", "description": "The family the bonus was applied for, empty when none was." },
     "spell_families": { "type": "array", "items": { "type": "string" } },
     "family_source": { "type": "string", "description": "Where the family membership came from, when a bonus was applied. Not the Build Planner: say so if it matters." },
-    "attack": { "type": "number", "exclusiveMinimum": 0, "description": "magic_attack x spell_buff / 100 x bonus." },
+    "attack": { "type": "number", "exclusiveMinimum": 0, "description": "The whole spell: every type's base_attack x spell_buff / 100 x bonus, added up." },
     "attack_shown": { "type": "integer", "description": "The same figure truncated, as displayed." },
+    "attack_by_type": {
+      "type": "object", "additionalProperties": false,
+      "required": ["physical", "magic", "fire", "lightning", "holy"],
+      "properties": {
+        "physical": { "type": "number", "minimum": 0 },
+        "magic": { "type": "number", "minimum": 0 },
+        "fire": { "type": "number", "minimum": 0 },
+        "lightning": { "type": "number", "minimum": 0 },
+        "holy": { "type": "number", "minimum": 0 }
+      },
+      "description": "Where that total comes from. A spell that deals two types is two figures and one of them is what a resistant enemy takes."
+    },
+    "attack_shown_by_type": {
+      "type": "object", "additionalProperties": false,
+      "required": ["physical", "magic", "fire", "lightning", "holy"],
+      "properties": {
+        "physical": { "type": "integer" }, "magic": { "type": "integer" },
+        "fire": { "type": "integer" }, "lightning": { "type": "integer" },
+        "holy": { "type": "integer" }
+      },
+      "description": "The same figures truncated, as displayed."
+    },
     "fp_cost": { "type": "number", "minimum": 0 },
     "castable": { "type": "boolean", "description": "Whether the build meets every requirement. False means the spell cannot be cast at all — not that it is weaker." },
     "unmet": { "type": "array", "items": { "type": "string" } },

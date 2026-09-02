@@ -108,10 +108,37 @@ expr = "!has(input.max_upgrade) || input.max_upgrade == result.max_upgrade"
 # The one piece of arithmetic in this collection that is not the oracle's: the Python scripts
 # stop at the spell buff. Stating it as a contract means the multiply is checked on every
 # call, not just in the fixtures that pin it against the Prometheux figures.
+#
+# It sums all five damage types, because a spell's attack is not one column: reading only the
+# magic one priced Black Flame's 244 fire at zero and every other incantation with it.
 [[ensures]]
 expr = """
-result.attack - result.magic_attack * result.spell_buff / 100.0 * result.bonus < 0.000001 &&
-result.magic_attack * result.spell_buff / 100.0 * result.bonus - result.attack < 0.000001
+(result.base_attack.physical + result.base_attack.magic + result.base_attack.fire +
+ result.base_attack.lightning + result.base_attack.holy) *
+  result.spell_buff / 100.0 * result.bonus - result.attack < 0.000001 &&
+result.attack -
+  (result.base_attack.physical + result.base_attack.magic + result.base_attack.fire +
+   result.base_attack.lightning + result.base_attack.holy) *
+  result.spell_buff / 100.0 * result.bonus < 0.000001
+"""
+
+# The split has to add up to the total, or an answer could quote a type and a sum that
+# disagree.
+[[ensures]]
+expr = """
+result.attack -
+  (result.attack_by_type.physical + result.attack_by_type.magic + result.attack_by_type.fire +
+   result.attack_by_type.lightning + result.attack_by_type.holy) < 0.000001 &&
+(result.attack_by_type.physical + result.attack_by_type.magic + result.attack_by_type.fire +
+ result.attack_by_type.lightning + result.attack_by_type.holy) - result.attack < 0.000001
+"""
+
+# Every type the spell deals is named, and nothing else is. A reader quoting "fire" needs the
+# list to be the truth about the spell, not about which column happened to be non-zero.
+[[ensures]]
+expr = """
+result.damage_types.size() > 0 &&
+result.damage_types.all(d, result.base_attack[d] > 0.0)
 """
 
 [[ensures]]

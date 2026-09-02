@@ -15,9 +15,9 @@ reading the answer:
   does, and it came from the Prometheux ontology rather than the spreadsheet. `bonus_source`
   says when a bonus was applied, so an answer can be as sure as its weakest table.
 
-The final step, `attack = magic_attack x spell_buff / 100 x bonus`, is the one piece of
-arithmetic in this collection that is not the oracle's: the Python scripts stop at the spell
-buff. It is pinned in `cases.toml` against figures the Prometheux implementation produced
+The final step, `attack = base_attack x spell_buff / 100 x bonus` summed over every damage type
+the spell deals, is the one piece of arithmetic in this collection that is not the oracle's:
+the Python scripts stop at the spell buff. It is pinned in `cases.toml` against figures the Prometheux implementation produced
 independently, which is the closest thing to a second opinion available.
 
 A staff whose bonus is already inside its spell buff — Lusat's, which trades FP cost for raw
@@ -38,6 +38,16 @@ import oracle  # noqa: E402
 
 sys.path.insert(0, oracle.SCRIPTS)
 import planner  # noqa: E402
+
+# The five columns a spell's attack can live in. MagicAtk alone covers sorceries and none of
+# the incantations.
+ATTACK_COLUMN = {
+    "physical": "PhysAtk",
+    "magic": "MagicAtk",
+    "fire": "FireAtk",
+    "lightning": "LtngAtk",
+    "holy": "HolyAtk",
+}
 
 MAGIC_CSV = os.path.join(
     ROOT, "oracle", "extracted", "Build-Planner-v1.19.1", "csv", "MagicData.csv"
@@ -129,11 +139,18 @@ def main():
     applies = bonus_rate > 0 and bonus_family in spell_families
     bonus = bonus_rate if applies else 1.0
 
-    magic_attack = number(spell.get("MagicAtk"))
-    attack = magic_attack * spell_buff / 100.0 * bonus
+    # A spell's attack is not one column. Sorceries carry it in MagicAtk, but an incantation
+    # deals fire, lightning or holy and its MagicAtk is zero — Black Flame is 244 fire, and
+    # reading only the magic column priced every incantation in the game at nothing.
+    base_attack = {damage: number(spell.get(column)) for damage, column in ATTACK_COLUMN.items()}
+    attack_by_type = {
+        damage: value * spell_buff / 100.0 * bonus for damage, value in base_attack.items()
+    }
+    attack = sum(attack_by_type.values())
+    damage_types = sorted(damage for damage, value in base_attack.items() if value > 0)
     print(
         f"{spell_name} from {catalyst} +{request['upgrade']}: "
-        f"SB {spell_buff:.1f} x {bonus}",
+        f"SB {spell_buff:.1f} x {bonus} over {', '.join(damage_types) or 'nothing'}",
         file=sys.stderr,
     )
 
@@ -159,7 +176,10 @@ def main():
         "upgrade": int(request["upgrade"]),
         "max_upgrade": oracle.max_upgrade(row),
         "spell_buff": spell_buff,
-        "magic_attack": magic_attack,
+        # Per damage type, because a spell that deals two is not one number and an
+        # incantation's figure is not in the magic column at all.
+        "base_attack": base_attack,
+        "damage_types": damage_types,
         "bonus": bonus,
         "bonus_applied": applies,
         # Named so an answer can say *why* a staff is better, not just that it is.
@@ -168,6 +188,8 @@ def main():
         "family_source": "MagicFamily.csv (Prometheux ontology)" if applies else "",
         "attack": attack,
         "attack_shown": int(attack),
+        "attack_by_type": attack_by_type,
+        "attack_shown_by_type": {damage: int(value) for damage, value in attack_by_type.items()},
         "fp_cost": number(spell.get("mp")),
         "requirement": requirement,
         "castable": castable,

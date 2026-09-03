@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "boss-coverage output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "fights", "damage_types", "statuses", "summary", "status_summary", "best_on_average",
+    "dlc", "bosses", "sort_by", "catalog_size", "phases", "limit", "returned", "truncated"
+  ],
+  "properties": {
+    "fights": {
+      "type": "array",
+      "description": "One row per phase, not per boss: Rennala's bubble negates everything and her first phase takes extra physical, so a single row for 'Rennala' would be about a fight that does not exist.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "fight", "location", "is_dlc", "health", "negation", "best_type", "best_types",
+          "best_negation", "worst_type", "worst_negation", "takes_extra_from", "resist", "immune_to"
+        ],
+        "properties": {
+          "fight": { "type": "string", "description": "The phase's own name, as the table labels it." },
+          "location": { "type": "string", "description": "Where it is fought. A name is not an identity: nine Death Rite Birds differ by location." },
+          "is_dlc": { "type": "boolean" },
+          "health": { "type": "number", "minimum": 0 },
+          "negation": {
+            "type": "object", "additionalProperties": { "type": "number" },
+            "description": "Percentage negated, per requested type. Higher is worse for the attacker; negative means the fight takes extra."
+          },
+          "best_type": { "type": "string", "description": "The type this fight takes most, empty when two or more tie." },
+          "best_types": { "type": "array", "items": { "type": "string" }, "description": "Every type tied for best. One entry means an outright winner." },
+          "best_negation": { "type": "number" },
+          "worst_type": { "type": "string" },
+          "worst_negation": { "type": "number" },
+          "takes_extra_from": { "type": "array", "items": { "type": "string" }, "description": "Types with negative negation — the fight takes more than face value." },
+          "resist": { "type": "object", "additionalProperties": { "type": "number" }, "description": "Status buildup resisted. Zero here for an immunity, which `immune_to` carries instead." },
+          "immune_to": { "type": "array", "items": { "type": "string" }, "description": "Statuses that cannot be applied at all. Immune is not 'tough': no buildup does anything." }
+        }
+      }
+    },
+    "damage_types": { "type": "array", "items": { "type": "string" } },
+    "statuses": { "type": "array", "items": { "type": "string" } },
+    "summary": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object", "additionalProperties": false,
+        "required": ["best_against", "tied_best_against", "takes_extra", "resisted_50_or_more", "fully_negated", "average_negation"],
+        "properties": {
+          "best_against": { "type": "integer", "minimum": 0, "description": "Fights where this type is the outright best of those asked about." },
+          "tied_best_against": { "type": "integer", "minimum": 0, "description": "Fights where it ties for best. Counting a tie as a win inflates whichever type sorts first." },
+          "takes_extra": { "type": "integer", "minimum": 0 },
+          "resisted_50_or_more": { "type": "integer", "minimum": 0 },
+          "fully_negated": { "type": "integer", "minimum": 0 },
+          "average_negation": { "type": "number" }
+        }
+      },
+      "description": "Counted over every fight that passed the filters, not just the rows returned."
+    },
+    "status_summary": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object", "additionalProperties": false,
+        "required": ["immune", "usable", "average_resist"],
+        "properties": {
+          "immune": { "type": "integer", "minimum": 0 },
+          "usable": { "type": "integer", "minimum": 0 },
+          "average_resist": { "type": "number" }
+        }
+      }
+    },
+    "best_on_average": { "type": "string", "description": "Lowest average negation across the fights asked about. A coverage answer: the winner on average can still be the worst pick for one fight, and the rows are there to check that." },
+    "dlc": { "type": ["boolean", "null"] },
+    "bosses": { "type": "array", "items": { "type": "string" } },
+    "sort_by": { "type": "string" },
+    "catalog_size": { "type": "integer", "minimum": 1 },
+    "phases": { "type": "integer", "minimum": 0, "description": "How many phases passed the filters. The summary is over all of them." },
+    "limit": { "type": "integer" },
+    "returned": { "type": "integer", "minimum": 0 },
+    "truncated": { "type": "boolean" }
+  }
+}

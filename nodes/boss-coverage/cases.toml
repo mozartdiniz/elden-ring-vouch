@@ -1,0 +1,44 @@
+# Node fixtures (§7.1).
+#
+# Pattern 7 of the validation battery asks across the whole table — "qual elemento cobre mais
+# lutas", "which DLC bosses are immune to frostbite" — and boss-lookup answers one fight at a
+# time. An agent told to call it 238 times answers from memory instead.
+
+[[case]]
+name = "which of fire, lightning and holy covers the DLC"
+input = { damage_types = ["fire", "lightning", "holy"], dlc = true, limit = 5 }
+expect = { "result.phases" = 42, "result.best_on_average" = "fire", "result.summary.fire.average_negation" = 10.5952, "result.summary.lightning.average_negation" = 18.3333, "result.summary.holy.average_negation" = 15.7143, "result.truncated" = true }
+
+# A fight that negates three elements equally has no best element, and counting the
+# alphabetically first as a win would have handed fire nine victories it did not earn.
+[[case]]
+name = "a tie is not a win"
+input = { damage_types = ["fire", "lightning", "holy"], dlc = true, limit = 1 }
+expect = { "result.summary.fire.best_against" = 14, "result.summary.fire.tied_best_against" = 9, "result.summary.holy.best_against" = 11 }
+
+[[case]]
+name = "which statuses stop working, and on how many fights"
+input = { statuses = ["frost", "bleed", "poison"], dlc = true, limit = 1 }
+expect = { "result.status_summary.bleed.immune" = 14, "result.status_summary.bleed.usable" = 28, "result.status_summary.frost.immune" = 7, "result.phases" = 42 }
+
+# The base game and the DLC are different questions and mixing them is rarely the one asked.
+[[case]]
+name = "the base game is a different table"
+input = { damage_types = ["fire", "lightning", "holy"], dlc = false, limit = 1 }
+expect = { "result.phases" = 196, "result.catalog_size" = 238 }
+
+[[case]]
+name = "and both together is every phase in the table"
+input = { damage_types = ["fire"], limit = 1 }
+expect = { "result.phases" = 238 }
+
+# A summon pool is one call, not five.
+[[case]]
+name = "a named set of fights"
+input = { bosses = ["Malenia", "Mohg", "Maliketh", "Godfrey"], damage_types = ["physical", "fire", "holy"], limit = 25 }
+expect = { "result.sort_by" = "health", "result.damage_types[0]" = "physical" }
+
+[[case]]
+name = "an immunity is not a resistance of zero"
+input = { statuses = ["death"], bosses = ["Rennala"], limit = 10 }
+expect = { "result.fights[0].immune_to[0]" = "death", "result.fights[0].resist.death" = 0.0 }

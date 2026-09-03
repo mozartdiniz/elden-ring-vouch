@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "boss-coverage input",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "damage_types": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["physical", "strike", "slash", "pierce", "magic", "fire", "lightning", "holy"] },
+      "description": "The types to compare. Defaults to the five elements. The summary counts which of them each fight takes most."
+    },
+    "statuses": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["poison", "scarlet_rot", "bleed", "frost", "sleep", "madness", "death"] },
+      "description": "Statuses to report instead of, or alongside, damage. This is the 'which bosses are immune to frostbite' question."
+    },
+    "dlc": { "type": "boolean", "description": "True for the DLC's fights only, false for the base game's, omitted for both." },
+    "bosses": {
+      "type": "array", "items": { "type": "string" },
+      "description": "Substrings of fight names to restrict to — a summon pool, or the two fights a question names. Matching is loose on purpose: 'radahn' finds every Radahn."
+    },
+    "min_health": { "type": "number", "minimum": 0, "description": "Drop the small fights. Useful for 'endgame bosses', where a threshold beats a guess at a list." },
+    "sort_by": { "type": "string", "enum": ["health", "name", "best_negation"], "description": "Default 'health', which puts the fights that matter first." },
+    "limit": { "type": "integer", "minimum": 1, "maximum": 250, "description": "Rows returned. The summary always counts every fight that passed the filters, not just these. Default 25." }
+  }
+}

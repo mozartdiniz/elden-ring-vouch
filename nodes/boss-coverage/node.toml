@@ -1,0 +1,92 @@
+name = "boss-coverage"
+version = "0.1.0"
+
+purpose = "Which damage type or status works across a set of fights, and which fights it does not work on"
+
+use_when = [
+  "the question compares elements across many bosses — 'qual elemento cobre mais lutas'",
+  "the question asks which bosses are immune to or resist a status",
+  "the question is about a summon pool or a group of fights rather than one",
+  "a build has to cover several bosses without swapping gear",
+]
+not_for = [
+  "one fight's numbers — call boss-lookup, which gives every phase in full",
+  "what a weapon hits that fight for — boss-lookup's negation into optimal-affinity",
+  "picking a weapon — call weapon-rank",
+]
+
+run = ["python3", "coverage.py"]
+timeout_ms = 30000
+
+[[reads]]
+path = "../../data/BossResist.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.damage_types]
+guidance = "The types the user is choosing between. Leave it out for all five elements. Quote `average_negation` and the per-fight rows together: an element can win on average and still be the wrong answer for the one boss they care about."
+
+[params.statuses]
+guidance = "For 'when does my bleed build stop working'. `immune_to` is the part to say out loud — immune is not resistant, and no amount of buildup changes it."
+
+[params.dlc]
+guidance = "Set it when the user said base game or DLC. Leaving it out mixes 238 phases of both, which is rarely the question."
+
+[params.bosses]
+guidance = "The names the user listed, as substrings. Use it for a summon pool — five names in, one table out — rather than calling boss-lookup five times."
+
+[params.min_health]
+guidance = "A stand-in for 'endgame': a threshold is checkable where a list of which bosses count is a judgement."
+
+[params.limit]
+guidance = "The summary is over every fight that passed the filters however few rows come back, so a small limit is fine when the question is about coverage rather than about particular fights."
+
+# --- postconditions ---
+
+[[ensures]]
+expr = "result.returned == size(result.fights) && result.returned <= result.limit"
+
+[[ensures]]
+expr = "result.truncated == (result.phases > result.returned)"
+
+[[ensures]]
+expr = "result.phases <= result.catalog_size"
+
+# A fight's best type is an outright winner or nothing. Counting a tie as a win would inflate
+# whichever type happens to sort first.
+[[ensures]]
+expr = """
+result.fights.all(f, f.best_type == "" ? size(f.best_types) != 1 : f.best_types == [f.best_type])
+"""
+
+[[ensures]]
+expr = "result.fights.all(f, f.best_negation <= f.worst_negation)"
+
+# Every type asked about is in every row and in the summary; nothing else is.
+[[ensures]]
+expr = "result.damage_types.all(d, result.summary.exists(k, k == d))"
+
+# The DLC filter is honoured.
+[[ensures]]
+expr = "!has(input.dlc) || result.fights.all(f, f.is_dlc == input.dlc)"
+
+# An immunity is not a resistance of zero: it is reported separately, and the resist figure is
+# zeroed so nobody reads the table's 9999 sentinel as a number.
+[[ensures]]
+expr = "result.fights.all(f, f.immune_to.all(s, f.resist[s] == 0.0))"
+
+[[examples]]
+ask = "quais bosses do DLC são imunes a Frostbite?"
+call = { statuses = ["frost"], dlc = true, limit = 60 }
+
+[[examples]]
+ask = "fogo, raio ou sagrado: qual cobre mais lutas do DLC?"
+call = { damage_types = ["fire", "lightning", "holy"], dlc = true, limit = 10 }
+
+[[examples]]
+ask = "me chamam pra Malenia, Mohg, Maliketh e Godfrey — o que cobre os quatro?"
+call = { bosses = ["Malenia", "Mohg", "Maliketh", "Godfrey"], limit = 25 }

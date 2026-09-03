@@ -763,7 +763,7 @@ bonus is not modelled anywhere in this collection. Saying that is better than a 
 | 15 — spell loadouts | 2 | 5 |
 | **total** | **91** | **31** |
 
-Nothing in 122 questions was unanswerable. **Twenty-one bugs**, tracked in `BUGS.md` with what
+Nothing in 122 questions was unanswerable. **Twenty-two bugs**, tracked in `BUGS.md` with what
 each returned instead of an error; four would have handed a reader a well-formed number for
 something that does not exist.
 

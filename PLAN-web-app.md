@@ -177,6 +177,85 @@ faster. `vouch call` *is* the contract boundary: without it there is no schema c
 postcondition, no exit-code taxonomy and no ledger — and therefore nothing to attest against.
 What is left is a chatbot with CSVs. If process start-up hurts, use a warm subprocess pool.
 
+## Concurrency, and the one thing that breaks quietly
+
+Two places want it, and they want it for the same reason: almost all the wall time is spent
+waiting on a model, not computing.
+
+**In the app.** Several questions in flight at once. A question is two to four model calls —
+call it eight to thirty seconds of network — wrapped around node calls that take between 0.02
+and 2.77 seconds of CPU. Serving those serially would waste the machine entirely.
+
+**In `vouch eval`.** It is serial today: no `-j`, no concurrency flag, cases × `-n` runs one
+after another. That is why an early run went six silent minutes over eighteen model calls. A
+refreshed suite covering all nineteen nodes is perhaps forty cases; at `-n 3` that is 120 model
+calls, twenty minutes serially. At eight in flight it is two or three. **That is the difference
+between running the evals before every change and running them once a month**, which is the
+whole argument — the suite being stale is already the top item on the pending list, and part of
+why it is stale is that running it hurts.
+
+### The rule: one `VOUCH_SESSION` per unit of work
+
+`ledger::session_id()` falls back to **today's date** when `VOUCH_SESSION` is unset, so
+everything run on one day appends to one `session-YYYYMMDD.jsonl`. That is fine for a person at
+a terminal and wrong for anything concurrent. Set it per conversation in the app, and per case
+run in the eval harness.
+
+Two hazards follow from not doing it, and they are not equally obvious:
+
+**The loud one: interleaved writes.** Every `vouch call` appends a line to the session file.
+The entries are large — one sampled here carried dozens of scalars and ran well past four
+kilobytes — so an append is not atomic under the usual POSIX guarantee. Two processes writing
+the same file can interleave mid-line and corrupt it. This one at least fails visibly.
+
+**The quiet one, which is worse: attestation silently loosens.** `attest` accounts for a
+numeral if *some call in the session* produced it. Share a session across two conversations and
+a figure fabricated in one can be accounted for by a call made in the other. Nothing errors.
+The check does not fail — **it stops checking**, and the report still says the answer was
+attested. For a system whose entire claim is "every number came from a node", that is the
+failure mode to design against first.
+
+A smaller ledger is a stricter check. Concurrency makes that a correctness requirement rather
+than a nicety.
+
+### The shape: wide on the model, narrow on the nodes
+
+A request is I/O-bound with short CPU bursts, so the two limits are different by an order of
+magnitude:
+
+- **Model calls: many in flight.** Bounded by the provider's rate limit, not by the box. Needs
+  backoff on 429s; a burst of parallel evals is exactly what trips them.
+- **Node calls: a semaphore at roughly the core count.** Measured, `build-allocate` is 2.77 s
+  and 79 MB at its worst. On two cores, three of those at once is already queueing, and twenty
+  is how the box falls over.
+
+Same rule for both the app and a parallel eval harness.
+
+### Parallel results must equal serial results
+
+Nodes are pure functions of their input plus read-only CSVs. Nothing is shared but the ledger,
+and per-session ledgers remove even that. So concurrency must not change a single figure, and
+that is testable rather than assumed: run the suite once serially, once at `-j 8`, and diff.
+If they differ, something is sharing state that should not be.
+
+The same property is what makes the 122 questions in `VALIDATION.md` usable as a parallel
+regression suite — the answers are already written down, and they cannot legitimately move.
+
+### Where it lands is a fork
+
+**In the runtime** as `vouch eval -j N`: everyone gets it, it belongs next to the serial
+implementation, and the session-per-case rule can be enforced there rather than remembered by
+each harness. It is also a change to a tool that is otherwise stable, and the runtime has never
+served concurrent work — see `DECISIONS.md`.
+
+**In the app's own harness**, ported from `examples/ask.py`: no runtime change, and the app
+needs its own concurrency control anyway for live traffic. The cost is that the eval suite and
+the app then run two different loops, which is precisely what `ask.py`'s own docstring warns
+against — "building a second, eval-only description would measure a context nobody ships".
+
+Leaning towards the runtime for `eval -j`, because the session-per-case rule is the kind of
+thing that should be impossible to forget rather than documented.
+
 ## The first slice
 
 One endpoint, no chat history, no accounts: question in, then plan → call → narrate → attest,

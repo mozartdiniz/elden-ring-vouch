@@ -331,9 +331,60 @@ Neither is a bug in the runtime and neither would have shown up in a fixture. Th
 boundary of what "every number came from a node" actually buys, and the app is where you find
 it, because the app is the first thing that lets a model choose parameters unsupervised.
 
-**Still to point at the 122 questions in `VALIDATION.md`** as a live regression suite — the
-correct answers are already written down, and it would finally put the eight never-evaluated
-nodes in front of a live model.
+## The battery, pointed at the running app
+
+`scripts/run_battery.py` reads all 122 questions out of `VALIDATION.md`, runs them through the
+same `engine.answer` the web app uses, and checks the four things that are mechanical: it
+routed, nothing broke a contract, it attested, and it reached for the nodes the recorded entry
+names. Figures are printed side by side rather than compared, because the recorded answers are
+prose and tables and no automatic comparison would be trustworthy.
+
+**Each question gets its own `VOUCH_SESSION`, which is what makes running them at once safe.**
+This is the concurrency requirement, exercised for real rather than argued about: a shared
+ledger would have every question attesting against every other question's numbers, which is
+exactly what `scripts/stress_attest.py` measured the cost of.
+
+### What the first questions through it showed
+
+**1.1 reproduced exactly.** Rivers of Blood RL150 came back DEX 56 / ARC 59, AR 675, bleed 76,
+against a record of 675.826 and 76.4. That is the regression suite working.
+
+**Three of seven questions returned no answer, and all three are recorded `[x]` done.** This is
+the finding, and it is not a bug:
+
+- **2.8** — *"is 40/40 worth it or should I commit to one?"* The model declined: no node can
+  compare stat spreads without knowing the weapon, and it would not invent one. The recorded
+  answer is *"40/40 quality loses to committing, 416 against 458 on a Longsword"* — and the
+  Longsword is a weapon **I chose** while working the question by hand.
+- **1.4** — a pure Faith build needs an incantation named before `build-allocate` can maximise
+  for one; with none named, `focus: attack` would have optimised the seal's *melee* rating.
+- **1.2** — Transient Moonlight resolves to two skills, R1 and R2, and the model would not pick.
+
+In every case the model was **more honest than the hand-working was.** The difference between a
+done answer and no answer is a parameter a human chose without noticing they had chosen it.
+That re-reads the 91 `[x]` answers in a harsher light and it makes the clarification chips the
+next thing to build rather than a nicety: these are not failures, they are the collection
+asking a question, and the app currently renders that as a shrug.
+
+**`MAX_DECISIONS` was too low.** Question 7.1 spent all six of `ask.py`'s decisions on calls —
+a weapon, three bosses, a build, an affinity — and never reached the narration, which needs a
+decision of its own. Ten, and it answers in seven calls, attested.
+
+### The ceiling is the provider, not the box
+
+The Claude CLI backend manages four or five questions before the session limit, and at
+concurrency 4 it burns quota four times faster. Two runs of pattern 1 ended that way, the
+second after four questions. **The 122-question run needs OpenRouter**, where the cost is
+money rather than a wall.
+
+The runner now treats that properly: a limit stops the whole run instead of failing every
+remaining question in turn — pattern 1 once produced ten "errors" in fifteen seconds, all the
+same session limit, each looking like a question that had been tried — and `--resume` retries
+errored questions while skipping only what finished.
+
+This is also the first thing that made `llm.py`'s error handling matter. The Claude CLI reports
+a session limit on *stdout* with an empty stderr, so the original message was the entirely
+useless `claude exited 1:`. It now says *"You've hit your session limit · resets 5pm."*
 
 ---
 

@@ -22,9 +22,11 @@ import re
 
 VOUCH = os.environ.get("VOUCH_BIN", "vouch")
 
-# How many decisions the model may make before the loop gives up. Enough for a couple of
-# chained calls plus a correction, and low enough that a confused model cannot spin.
-MAX_DECISIONS = int(os.environ.get("MAX_DECISIONS", "6"))
+# How many decisions the model may make before the loop gives up. Six was ask.py's figure and
+# it is too few here: battery question 7.1 spent all six on calls — a weapon, three bosses, a
+# build, an affinity — and never reached the narration, which needs a decision of its own. Ten
+# leaves room for a chain that long plus a correction, and still cannot spin.
+MAX_DECISIONS = int(os.environ.get("MAX_DECISIONS", "10"))
 
 REFUSAL = {11, 14, 15}
 DEFECT = {12, 13, 20, 21}

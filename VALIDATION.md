@@ -19,6 +19,15 @@ paper over: record what is missing and leave it unchecked.
 Status: `[ ]` untested · `[x]` answered and cross-checked · `[~]` partially answered (gap
 recorded) · `[!]` cannot answer today.
 
+**A caveat on `[x]`, added 3 September after running the battery through the live app.** These
+questions were worked by hand, and working a question by hand means choosing the parameters it
+leaves open — a weapon for 2.8, an incantation for 1.4, R1 or R2 for 1.2 — often without
+noticing the choice was made. A model driving the same nodes declines instead, and it is right
+to: the answer to 2.8 is *"416 against 458 on a Longsword"*, and nobody asked about a
+Longsword. Read `[x]` as *the collection can compute this once someone settles the question*,
+not as *the collection answers this as asked*. `scripts/run_battery.py` is what tells the two
+apart.
+
 ---
 
 ## Pattern 1 — Build stat distribution for a target level

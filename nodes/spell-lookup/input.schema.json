@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "spell-lookup input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["query"],
+  "properties": {
+    "query": { "type": "string", "description": "A spell name as the user wrote it: partial, misspelled, or exact." },
+    "spell_type": { "type": "string", "enum": ["Sorcery", "Incantation"], "description": "Narrow to one kind when the user said which. Use it to disambiguate, never to guess." }
+  }
+}

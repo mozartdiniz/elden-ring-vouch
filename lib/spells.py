@@ -11,7 +11,9 @@ this collection's, which is why it is in one place with the reasoning attached.
 """
 
 import csv
+import math
 import os
+import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -90,6 +92,23 @@ def bonus(catalyst_row, spell_name, spell_families):
     rate = number(catalyst_row.get("castingBonusRate"), 0.0)
     applies = rate > 0 and family in spell_families
     return (rate if applies else 1.0), applies, (family if applies else "")
+
+
+FP_RATE = re.compile(r"^(?P<rate>\d+(?:\.\d+)?)x FP cost$")
+
+
+def fp_rate(catalyst_row):
+    """What this catalyst multiplies a spell's FP cost by.
+
+    Two staves charge for what they give: Lusat's is 1.5x and Azur's 1.2x, and both say so in
+    `castingBonusRate` where every other catalyst puts a number. Reporting a spell's base FP
+    beside Lusat's damage answers "vale o custo de FP?" with the wrong cost — which is exactly
+    what question 9.6 asks.
+
+    The game rounds the result up.
+    """
+    match = FP_RATE.match(str(catalyst_row.get("castingBonusRate") or "").strip())
+    return float(match.group("rate")) if match else 1.0
 
 
 def requirement(spell):

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "spell-lookup output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "query", "resolved", "match_count", "candidates", "candidates_truncated", "ambiguous",
+    "catalog_size", "spell_type", "forms", "families", "base_attack", "damage_types",
+    "requirement", "fp_cost", "cast_from"
+  ],
+  "properties": {
+    "query": { "type": "string" },
+    "resolved": { "type": "string", "description": "The exact display name, empty when the query matched nothing or more than one thing." },
+    "match_count": { "type": "integer", "minimum": 0 },
+    "candidates": { "type": "array", "items": { "type": "string" }, "description": "What matched. More than one is a question for the user, not a list to pick from." },
+    "candidates_truncated": { "type": "boolean" },
+    "ambiguous": { "type": "boolean" },
+    "catalog_size": { "type": "integer", "minimum": 1 },
+    "spell_type": { "type": "string", "description": "Sorcery or Incantation. It decides which catalysts can cast it." },
+    "forms": { "type": "array", "items": { "type": "string" }, "description": "Every named form of this spell — the plain cast, its charged variants, and each numbered hit of a multi-hit one. They have different attack values." },
+    "families": { "type": "array", "items": { "type": "string" }, "description": "The schools it belongs to, which is what a catalyst's family bonus keys on." },
+    "base_attack": {
+      "type": "object", "additionalProperties": false,
+      "required": ["physical", "magic", "fire", "lightning", "holy"],
+      "properties": {
+        "physical": { "type": "number" }, "magic": { "type": "number" },
+        "fire": { "type": "number" }, "lightning": { "type": "number" }, "holy": { "type": "number" }
+      },
+      "description": "Its own attack per damage type, before any catalyst. All zero for a buff."
+    },
+    "damage_types": { "type": "array", "items": { "type": "string" } },
+    "requirement": {
+      "type": "object", "additionalProperties": false,
+      "required": ["intelligence", "faith", "arcane"],
+      "properties": {
+        "intelligence": { "type": "integer", "minimum": 0 },
+        "faith": { "type": "integer", "minimum": 0 },
+        "arcane": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "fp_cost": { "type": "number", "minimum": 0, "description": "The spell's own cost. What a catalyst charges is spell-power's fp_cost_actual." },
+    "cast_from": { "type": "string", "description": "The kind of catalyst that can cast it, so the next call is not an impossible one." }
+  }
+}

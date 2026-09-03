@@ -1,0 +1,80 @@
+name = "spell-lookup"
+version = "0.1.0"
+
+purpose = "Resolve a spell name, and report its type, forms, families, requirements and damage types"
+
+use_when = [
+  "any question naming a spell, before pricing it",
+  "the user's spelling is partial or uncertain",
+  "you need to know whether a spell is a sorcery or an incantation before choosing a catalyst",
+]
+not_for = [
+  "what the spell hits for — call spell-power with the resolved name",
+  "which spells are best — call spell-rank",
+  "resolving a weapon or a catalyst — call weapon-lookup",
+]
+
+run = ["python3", "lookup.py"]
+timeout_ms = 30000
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/MagicData.csv"
+
+[[reads]]
+path = "../../data/MagicFamily.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.query]
+guidance = "What the user wrote. The node handles partial names and punctuation; it will not guess between candidates."
+
+[params.spell_type]
+guidance = "Only when the user said sorcery or incantation. It narrows an ambiguous query without choosing for them."
+
+[[requires]]
+expr = "size(input.query) >= 3"
+message = "a query shorter than three characters matches most of the catalogue; ask which spell was meant"
+
+# --- postconditions ---
+
+[[ensures]]
+expr = 'result.ambiguous == (result.match_count > 1)'
+
+[[ensures]]
+expr = 'result.resolved != "" || result.match_count != 1'
+
+# Nothing resolved means nothing reported about it: no type, no forms, no requirement above
+# zero. A half-filled result invites a caller to use figures for a spell it did not identify.
+[[ensures]]
+expr = '''
+result.resolved != "" ||
+  (result.spell_type == "" && size(result.forms) == 0 && result.fp_cost == 0.0 &&
+   result.cast_from == "")
+'''
+
+[[ensures]]
+expr = 'result.resolved == "" || result.resolved in result.forms'
+
+# A sorcery is cast from a staff and an incantation from a seal, so the next call cannot be an
+# impossible cast.
+[[ensures]]
+expr = '''
+result.resolved == "" ||
+  (result.spell_type == "Sorcery" ? result.cast_from == "Glintstone Staff"
+                                  : result.cast_from == "Sacred Seal")
+'''
+
+[[ensures]]
+expr = "result.candidates_truncated == (result.match_count > size(result.candidates))"
+
+[[examples]]
+ask = "Rennala's Full Moon vs Ranni's Dark Moon vs Rellana's Twin Moons — qual é a melhor?"
+call = { query = "Rellana's Twin Moons" }
+
+[[examples]]
+ask = "how much does Comet do?"
+call = { query = "comet" }

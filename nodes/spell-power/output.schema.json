@@ -26,6 +26,8 @@
     "attack_by_type",
     "attack_shown_by_type",
     "fp_cost",
+    "fp_cost_actual",
+    "fp_rate",
     "requirement",
     "castable",
     "unmet"
@@ -203,7 +205,8 @@
     },
     "fp_cost": {
       "type": "number",
-      "minimum": 0
+      "minimum": 0,
+      "description": "The spell's own FP cost, before the catalyst."
     },
     "castable": {
       "type": "boolean",
@@ -248,6 +251,16 @@
     "catalyst_can_cast_this": {
       "type": "boolean",
       "description": "Whether this catalyst can cast this spell at all. False makes every figure here about a cast that cannot happen."
+    },
+    "fp_cost_actual": {
+      "type": "number",
+      "minimum": 0,
+      "description": "What it costs out of this catalyst, rounded up. Lusat's charges 1.5x for its spell buff and Azur's 1.2x; quote this one when comparing catalysts."
+    },
+    "fp_rate": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "The catalyst's FP multiplier, 1.0 for all but two staves."
     }
   }
 }

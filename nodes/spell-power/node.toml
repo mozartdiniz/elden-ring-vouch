@@ -114,6 +114,15 @@ message = "every stat must be between 1 and 99"
 
 # --- postconditions ---
 
+# The FP a caster pays is the spell's cost times the catalyst's rate, rounded up. Lusat's
+# trades 1.5x FP for its spell buff, and a damage figure beside the base cost is an answer to
+# a question nobody asked.
+[[ensures]]
+expr = """
+result.fp_cost_actual >= result.fp_cost &&
+result.fp_cost_actual < result.fp_cost * result.fp_rate + 1.0
+"""
+
 # The cast has to be one the game allows. Everything else in this result is arithmetic that
 # does not care: the spell buff is a number, the spell's attack is a number, and multiplying
 # them gives a figure for Comet cast from a seal that reads exactly like a real one.

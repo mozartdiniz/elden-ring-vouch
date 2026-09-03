@@ -1,0 +1,42 @@
+# Node fixtures (§7.1).
+#
+# Question 9.1 compares three moon spells and the third one broke: "Rellana's Twin Moons" is
+# stored as three hits, `[1]`, `[2]` and `[3]`, and `spell-power` matched display names exactly
+# and exited otherwise. A crash-shaped defect where weapon-lookup would have listed candidates.
+
+[[case]]
+name = "a spell stored as several hits resolves to none of them, and names all three"
+input = { query = "Rellana's Twin Moons" }
+expect = { "result.resolved" = "", "result.ambiguous" = true, "result.match_count" = 3, "result.candidates[0]" = "Rellana's Twin Moons [1]", "result.candidates[2]" = "Rellana's Twin Moons [3]" }
+
+# An exact name beats the names that contain it: Comet is a spell and also a prefix of Comet
+# Azur and of two charged variants.
+[[case]]
+name = "an exact name beats the names containing it"
+input = { query = "Comet" }
+expect = { "result.resolved" = "Comet", "result.ambiguous" = false, "result.spell_type" = "Sorcery", "result.cast_from" = "Glintstone Staff", "result.forms[1]" = "Comet - Charged", "result.requirement.intelligence" = 52 }
+
+[[case]]
+name = "an incantation is cast from a seal"
+input = { query = "black flame" }
+expect = { "result.resolved" = "Black Flame", "result.spell_type" = "Incantation", "result.cast_from" = "Sacred Seal", "result.base_attack.fire" = 244.0, "result.damage_types[0]" = "fire", "result.families[0]" = "Godslayer" }
+
+[[case]]
+name = "a partial name that matches many resolves to nothing"
+input = { query = "moon" }
+expect = { "result.resolved" = "", "result.ambiguous" = true, "result.match_count" = 12 }
+
+[[case]]
+name = "narrowing by type disambiguates without choosing"
+input = { query = "comet azur" }
+expect = { "result.resolved" = "Comet Azur", "result.requirement.intelligence" = 60, "result.fp_cost" = 40.0 }
+
+[[case]]
+name = "a spell that is not in the game matches nothing"
+input = { query = "Dark Souls" }
+expect = { "result.resolved" = "", "result.match_count" = 0, "result.ambiguous" = false, "result.spell_type" = "" }
+
+[[case]]
+name = "a query too short to resolve anything is refused"
+input = { query = "co" }
+expect_code = 11

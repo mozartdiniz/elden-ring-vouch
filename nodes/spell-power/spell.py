@@ -97,6 +97,9 @@ def main():
     )
 
     requirement = spellbook.requirement(spell)
+    fp_cost = spellbook.number(spell.get("mp"))
+    fp_rate = spellbook.fp_rate(row)
+    fp_actual = float(__import__("math").ceil(fp_cost * fp_rate))
     castable = (
         request["intelligence"] >= requirement["intelligence"]
         and request["faith"] >= requirement["faith"]
@@ -130,7 +133,11 @@ def main():
         "attack_shown": int(attack),
         "attack_by_type": attack_by_type,
         "attack_shown_by_type": {damage: int(value) for damage, value in attack_by_type.items()},
-        "fp_cost": spellbook.number(spell.get("mp")),
+        "fp_cost": fp_cost,
+        # What it actually costs out of this catalyst. Lusat's charges 1.5x and Azur's 1.2x,
+        # and a damage figure quoted beside the base cost answers the wrong question.
+        "fp_cost_actual": fp_actual,
+        "fp_rate": fp_rate,
         "requirement": requirement,
         "castable": castable,
         "unmet": sorted(

@@ -57,6 +57,7 @@ def resolve(query, names):
 
 def main():
     request = json.load(sys.stdin)
+    affinity = (request.get("affinity") or "Standard").strip()
     query = request["query"]
     weapon_class = request.get("weapon_class", "")
 
@@ -72,6 +73,8 @@ def main():
 
     resolved = candidates[0] if len(candidates) == 1 else ""
     row = catalog[resolved] if resolved else None
+    status_buffs = oracle.status_buffs(row, affinity) if row else []
+    buffable = any(b["applies"] for b in status_buffs)
 
     result = {
         "query": query,
@@ -84,6 +87,14 @@ def main():
         "candidates_truncated": len(candidates) > MAX_CANDIDATES,
         "ambiguous": len(candidates) > 1,
         "catalog_size": len(names),
+        # What can be put on it: greases, armament buffs, the mist skills. Three conditions
+        # decide it — the buff lists the class, the buff lists the affinity, and the weapon can
+        # be buffed at all — and each is a different reason for a no. A somber weapon usually
+        # refuses everything, and a Blood-affinity weapon loses every grease.
+        "affinity_asked": affinity,
+        "buffable": buffable,
+        "status_buffs": status_buffs,
+        "status_buffs_accepted": [b["buff"] for b in status_buffs if b["applies"]],
         # The bounds attack-power cannot check for itself.
         "infusable": bool(row["isInfuse"]) if row else False,
         "max_upgrade": oracle.max_upgrade(row) if row else 0,

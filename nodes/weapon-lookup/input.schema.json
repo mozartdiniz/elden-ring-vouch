@@ -3,7 +3,9 @@
   "title": "weapon-lookup input",
   "type": "object",
   "additionalProperties": false,
-  "required": ["query"],
+  "required": [
+    "query"
+  ],
   "properties": {
     "query": {
       "type": "string",
@@ -12,6 +14,25 @@
     "weapon_class": {
       "type": "string",
       "description": "Optional. Restrict the search to one weapon class, e.g. 'Katana' or 'Colossal Sword'. Use it to narrow an ambiguous query, never to guess at one."
+    },
+    "affinity": {
+      "type": "string",
+      "enum": [
+        "Standard",
+        "Heavy",
+        "Keen",
+        "Quality",
+        "Fire",
+        "Flame Art",
+        "Lightning",
+        "Sacred",
+        "Magic",
+        "Cold",
+        "Poison",
+        "Blood",
+        "Occult"
+      ],
+      "description": "The affinity the weapon is or would be infused with. It changes which greases and armament buffs it accepts \u2014 a Blood weapon loses every grease \u2014 and defaults to Standard."
     }
   }
 }

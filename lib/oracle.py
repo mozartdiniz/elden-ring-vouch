@@ -111,3 +111,55 @@ def casts(row):
     if flag("enableMiracle"):
         out.append("Incantation")
     return out
+
+
+def status_buffs(row, affinity="Standard"):
+    """Which greases and armament buffs this weapon can take, with the reason when it cannot.
+
+    The rule is `ap_calc`'s own — `_status_buff_effect_id`, ported from the spreadsheet — and it
+    is three conditions, not one: the buff has to list the weapon's class, it has to list the
+    affinity, and the weapon has to be buffable at all (`isEnhance`), unless the buff ignores
+    that (`isEnhanceIgnore`) in which case the weapon must not block it (`disableGemAttr`).
+
+    That is the whole of Pattern 12. Two results are worth knowing before anyone asks:
+    **Bloodflame Blade lists only Standard, Heavy, Keen and Quality**, so it cannot go on a
+    Blood-affinity weapon — they do not stack, the buff simply does not apply — and a somber
+    weapon usually has `isEnhance` false, which is why greases slide off most unique weapons.
+    """
+    import ap_calc
+
+    if row.get("ID") is None:
+        return []
+    equip = _table("EquipParamWeapon").get(float(row["ID"])) or {}
+    weapon_class = str(row.get("Weapon Class") or "")
+    can_enhance = bool(equip.get("isEnhance"))
+    blocks_gem = bool(equip.get("disableGemAttr"))
+
+    out = []
+    for name, buff in ap_calc.load_by_name("StatusBuffData").items():
+        if name == "None":
+            continue
+        class_ok = bool(buff.get(weapon_class))
+        affinity_ok = bool(buff.get(affinity))
+        ignores = bool(buff.get("isEnhanceIgnore"))
+        applies = (
+            (class_ok and affinity_ok and not blocks_gem) if ignores
+            else (can_enhance and class_ok and affinity_ok)
+        )
+        why = ""
+        if not applies:
+            if not class_ok:
+                why = f"not for a {weapon_class}"
+            elif not affinity_ok:
+                why = f"not on a {affinity} weapon"
+            elif ignores and blocks_gem:
+                why = "this weapon blocks it"
+            else:
+                why = "this weapon cannot be buffed"
+        out.append({
+            "buff": name,
+            "applies": applies,
+            "reason": why,
+            "ignores_enhance": ignores,
+        })
+    return out

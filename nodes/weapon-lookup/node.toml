@@ -32,6 +32,9 @@ schema = "output.schema.json"
 [params.query]
 guidance = "The weapon name exactly as the user wrote it. Do not tidy it up or guess at a fuller name first — resolving it is this node's job, and the guess is the thing being prevented."
 
+[params.affinity]
+guidance = "Pass the affinity the user's weapon has or would have. It decides which greases and buffs stick: Bloodflame Blade lists only Standard, Heavy, Keen and Quality, so on a Blood-affinity weapon it does not stack — it does not apply at all."
+
 [params.weapon_class]
 guidance = "Optional, e.g. 'Katana', 'Colossal Sword', 'Straight Sword'. Use it only when the user named a class themselves; do not invent one to force an ambiguous query to resolve."
 

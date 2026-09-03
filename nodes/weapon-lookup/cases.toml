@@ -62,3 +62,34 @@ expect_code = 11
 name = "a missing query is a caller error, not a refusal"
 input = { }
 expect_code = 10
+
+# --- what can be put on it.
+#
+# Pattern 12 asks eight times "is there a way to make this weapon proc that", and the answer is
+# three conditions the oracle already checked and nothing exposed: the buff lists the weapon's
+# class, the buff lists the affinity, and the weapon can be buffed at all.
+
+# The Marais Executioner's Sword and the Godslayer's Greatsword are the two the battery names,
+# and for both the answer is no — not "use a grease", but no. A refusal is the answer.
+[[case]]
+name = "a unique weapon that takes nothing"
+input = { query = "Marais Executioner's Sword" }
+expect = { "result.resolved" = "Marais Executioner's Sword", "result.buffable" = false, "result.affinity_asked" = "Standard" }
+
+[[case]]
+name = "and another"
+input = { query = "Godslayer's Greatsword" }
+expect = { "result.buffable" = false }
+
+# The affinity decides it. A Keen Uchigatana takes fifteen buffs; the same weapon infused with
+# Blood takes two, because every grease lists only Standard, Heavy, Keen and Quality — so
+# Bloodflame Blade on a Blood weapon does not stack, it does not apply.
+[[case]]
+name = "a keen katana takes the greases"
+input = { query = "Uchigatana", affinity = "Keen" }
+expect = { "result.buffable" = true, "result.status_buffs_accepted[0]" = "Poison Grease", "result.status_buffs_accepted[1]" = "Rot Grease" }
+
+[[case]]
+name = "the same katana infused with Blood takes almost none"
+input = { query = "Uchigatana", affinity = "Blood" }
+expect = { "result.status_buffs_accepted[0]" = "Seppuku (only bleed; +30 phys AP)", "result.status_buffs_accepted[1]" = "Poisonous Mist" }

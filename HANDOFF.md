@@ -38,9 +38,9 @@ elden-ring-vouch/
   lib/spells.py            the spell tables, and the one multiply that is not the oracle's
   lib/buffs.py             what a buff multiplies per hit kind, and whether two of them stack
   lib/ashes.py             which affinities an ash accepts, and its hits on one weapon class
-  nodes/                   seventeen nodes
+  nodes/                   nineteen nodes
   scripts/generate_cases.py  regenerates attack-power fixtures from the oracle
-  VALIDATION.md            83 questions, worked one at a time — read this next
+  VALIDATION.md            122 questions, worked one at a time — read this next
   BUGS.md                  what the questions found, open and fixed — the work list
 ```
 
@@ -70,8 +70,10 @@ came from the Prometheux workspace, which is a different provenance and is decla
 | `spell-power` | one spell from one catalyst → attack per type, family bonus, FP actually charged | 17 |
 | `defence` | a build and armour → defences, negation, status resistances | 11 |
 | `equip-load` | a loadout → weight, roll type, endurance to change it | 9 |
+| `matchmaking` | **who a character can play with, and the upgrade bracket that keeps them there** | 9 |
+| `stat-curve` | **what each point in a stat buys, and where the curve bends** | 7 |
 
-`vouch -C . test` → **205 cases, 205 passed**.
+`vouch -C . test` → **225 cases, 225 passed**.
 
 ## State of the evals
 
@@ -224,7 +226,7 @@ unanswerable**, and the nine partials come down to four things:
 
 ### Not ported at all
 
-Matchmaking bands and item locations. Those tables live only in
+Item locations. Those tables live only in
 `prometheux-workspace/files/elden-ring-brain/`; vendor into `data/` with provenance.
 
 ---

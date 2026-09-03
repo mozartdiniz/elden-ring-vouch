@@ -79,6 +79,8 @@ fixture.
 | `ash-rank` | A weapon class and an affinity → the ashes that fit, by status, poise, hits or motion |
 | `boss-coverage` | Many fights at once → which damage type covers them, and which are immune to what |
 | `buff-stack` | Talismans, tears and buff spells → what they multiply for one kind of hit, and which do not stack |
+| `matchmaking` | A level and an upgrade → who they can play with, and which areas the level is built for |
+| `stat-curve` | A stat → what each point buys and where the curve bends, soft caps computed rather than recited |
 
 The order is the routing: **character-build** when the user described a build by only some of
 its stats, **weapon-lookup** for any question naming a weapon, then **attack-power** for what

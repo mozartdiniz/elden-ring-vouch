@@ -176,14 +176,14 @@ my level low for co-op", and which weapon upgrade keeps you in the right bracket
 budget plus the level-and-upgrade to matchmaking-range formula. The most deterministic pattern
 in the whole battery.
 
-- [ ] **10.1** Qual a melhor distribuição capada no RL35 pra tirar o máximo da Noble's Slender Sword, mantendo nível baixo pra coop? Compara começar como Samurai vs Wretch.
-- [ ] **10.2** Quero um cosplay de Vagabond Knight no RL45 usando a Lordsworn's Greatsword. Monta os status e diz o upgrade de arma que me mantém no matchmaking de Stormveil.
-- [ ] **10.3** What weapon upgrade level keeps me in the Raya Lucaria co-op bracket at character level 60? And what somber equivalent?
-- [ ] **10.4** Build de invasão RL25 com uma katana blood — distribuição e o +X de arma pra não estourar o matchmaking early.
-- [ ] **10.5** Quero manter um personagem travado no RL80 pra coop no late-game. Qual o teto de upgrade de arma normal e somber que ainda casa bem?
-- [ ] **10.6** Cosplay de Confessor RL50 com Golden Vow e uma arma keen. Monta os status e me diz a faixa de coop ideal.
-- [ ] **10.7** Meu RL70 usa +16 normal / +6 somber. Isso é mid-game? Em que áreas eu sou útil em coop nessa faixa?
-- [ ] **10.8** Vou copiar meu save do RL70 e fazer um RL130. O que muda de verdade na distribuição sem descaracterizar o build de twinblade?
+- [x] **10.1** Qual a melhor distribuição capada no RL35 pra tirar o máximo da Noble's Slender Sword, mantendo nível baixo pra coop? Compara começar como Samurai vs Wretch.
+- [x] **10.2** Quero um cosplay de Vagabond Knight no RL45 usando a Lordsworn's Greatsword. Monta os status e diz o upgrade de arma que me mantém no matchmaking de Stormveil.
+- [x] **10.3** What weapon upgrade level keeps me in the Raya Lucaria co-op bracket at character level 60? And what somber equivalent?
+- [x] **10.4** Build de invasão RL25 com uma katana blood — distribuição e o +X de arma pra não estourar o matchmaking early.
+- [x] **10.5** Quero manter um personagem travado no RL80 pra coop no late-game. Qual o teto de upgrade de arma normal e somber que ainda casa bem?
+- [x] **10.6** Cosplay de Confessor RL50 com Golden Vow e uma arma keen. Monta os status e me diz a faixa de coop ideal.
+- [~] **10.7** Meu RL70 usa +16 normal / +6 somber. Isso é mid-game? Em que áreas eu sou útil em coop nessa faixa?
+- [x] **10.8** Vou copiar meu save do RL70 e fazer um RL130. O que muda de verdade na distribuição sem descaracterizar o build de twinblade?
 
 ## Pattern 11 — Mechanics: how does X actually work
 
@@ -191,15 +191,15 @@ in the whole battery.
 understanding questions, usually asked to inform a later build decision. The test is whether
 the collection cites exact numbers or hand-waves, and whether it knows when it has no figure.
 
-- [ ] **11.1** Qual a diferença entre as três magias de lua no Elden Ring e quando uso cada uma?
-- [ ] **11.2** Como o dano do Black Flame (% de HP máximo) funciona, e por que ele é reduzido na DLC e ainda mais contra Messmer/Bayle/Consort?
-- [ ] **11.3** Como o buildup de Frostbite é calculado e o que exatamente o proc faz (dano + debuff de dano recebido)?
-- [ ] **11.4** Bleed/Hemorrhage: como o buildup escala com Arcane e por que uma arma com "menos bleed" pode procar mais rápido?
-- [ ] **11.5** Como funciona o soft cap de Vigor e onde estão os breakpoints de HP importantes?
-- [ ] **11.6** What exactly does poise/stance damage do, and how does stance break lead to a critical/riposte?
-- [ ] **11.7** Qual a diferença entre Spinning Strikes e Spinning Weapon, e por que um aceita Blood affinity e o outro não?
-- [ ] **11.8** Como o scaling de sorceries se comporta depois de 60 INT vs 80 INT — quanto realmente ganho por ponto?
-- [ ] **11.9** Como funciona o dano de multiplicadores de talismã/physick — eles são multiplicativos entre si ou aditivos?
+- [x] **11.1** Qual a diferença entre as três magias de lua no Elden Ring e quando uso cada uma?
+- [~] **11.2** Como o dano do Black Flame (% de HP máximo) funciona, e por que ele é reduzido na DLC e ainda mais contra Messmer/Bayle/Consort?
+- [~] **11.3** Como o buildup de Frostbite é calculado e o que exatamente o proc faz (dano + debuff de dano recebido)?
+- [~] **11.4** Bleed/Hemorrhage: como o buildup escala com Arcane e por que uma arma com "menos bleed" pode procar mais rápido?
+- [x] **11.5** Como funciona o soft cap de Vigor e onde estão os breakpoints de HP importantes?
+- [~] **11.6** What exactly does poise/stance damage do, and how does stance break lead to a critical/riposte?
+- [x] **11.7** Qual a diferença entre Spinning Strikes e Spinning Weapon, e por que um aceita Blood affinity e o outro não?
+- [x] **11.8** Como o scaling de sorceries se comporta depois de 60 INT vs 80 INT — quanto realmente ganho por ponto?
+- [x] **11.9** Como funciona o dano de multiplicadores de talismã/physick — eles são multiplicativos entre si ou aditivos?
 
 ## Pattern 12 — Can weapon X do Y: feasibility and the workaround
 
@@ -207,14 +207,14 @@ the collection cites exact numbers or hand-waves, and whether it knows when it h
 is the workaround list — grease, buff incantation, an off-hand, a talisman synergy — and which
 one is best. The capability half is a lookup; the ranking is rule-based on top of it.
 
-- [ ] **12.1** Is there a way to make the Marais Executioner's Sword proc bleed? What are the workarounds and which is best for PvE?
-- [ ] **12.2** Dá pra colocar sangramento na Godslayer's Greatsword de alguma forma, já que ela não aceita Blood affinity?
-- [ ] **12.3** Consigo aplicar Frostbite numa arma que não pode ser infundida com Cold? Como?
-- [ ] **12.4** Can I make a colossal sword proc a status without losing its Heavy scaling? What are my options?
-- [ ] **12.5** Tem algum jeito de fazer a Blasphemous Blade causar bleed sem perder o Taker's Flames?
-- [ ] **12.6** Não tem um Ash of War que gire a arma continuamente e aceite Blood affinity? O Spinning Weapon não serve.
-- [ ] **12.7** Consigo botar dano de raio numa arma somber que já tem elemento fixo? Ou só via incantation?
-- [ ] **12.8** Dá pra usar Bloodflame Blade numa arma com Blood affinity? Os efeitos stackam ou se anulam?
+- [x] **12.1** Is there a way to make the Marais Executioner's Sword proc bleed? What are the workarounds and which is best for PvE?
+- [x] **12.2** Dá pra colocar sangramento na Godslayer's Greatsword de alguma forma, já que ela não aceita Blood affinity?
+- [~] **12.3** Consigo aplicar Frostbite numa arma que não pode ser infundida com Cold? Como?
+- [x] **12.4** Can I make a colossal sword proc a status without losing its Heavy scaling? What are my options?
+- [x] **12.5** Tem algum jeito de fazer a Blasphemous Blade causar bleed sem perder o Taker's Flames?
+- [x] **12.6** Não tem um Ash of War que gire a arma continuamente e aceite Blood affinity? O Spinning Weapon não serve.
+- [~] **12.7** Consigo botar dano de raio numa arma somber que já tem elemento fixo? Ou só via incantation?
+- [x] **12.8** Dá pra usar Bloodflame Blade numa arma com Blood affinity? Os efeitos stackam ou se anulam?
 
 ## Pattern 14 — Getting an effect without the stat investment
 
@@ -222,13 +222,13 @@ one is best. The capability half is a lookup; the ranking is rule-based on top o
 substitutes for a buff, and what they are actually worth. A good test of whether the collection
 knows the ash version of Golden Vow is a fixed buff that does not scale.
 
-- [ ] **14.1** Como jogadores sem Faith conseguem os buffs equivalentes ao Flame, Grant Me Strength e ao Golden Vow?
-- [ ] **14.2** Quero o efeito do Golden Vow numa build de pure INT sem gastar ponto em Faith — o Ash of War Golden Vow resolve? O buff escala?
-- [ ] **14.3** Dá pra ter cura sem Faith? Quais as opções e quão eficientes comparadas ao Heal?
-- [ ] **14.4** How do I get a fire-damage buff on a Strength build with zero Faith? Which physick/perfume/talisman stack?
-- [ ] **14.5** Quero um buff de dano físico stackável sem Faith numa build de DEX. Monta o combo (Ash + talismã + physick) e me diz o ganho aproximado.
-- [ ] **14.6** Consigo o efeito do Flame, Cleanse Me (curar scarlet rot/poison) sem investir em Faith?
-- [ ] **14.7** Buff de defesa sem Faith pra coop — o que substitui o lado defensivo do Golden Vow?
+- [x] **14.1** Como jogadores sem Faith conseguem os buffs equivalentes ao Flame, Grant Me Strength e ao Golden Vow?
+- [x] **14.2** Quero o efeito do Golden Vow numa build de pure INT sem gastar ponto em Faith — o Ash of War Golden Vow resolve? O buff escala?
+- [~] **14.3** Dá pra ter cura sem Faith? Quais as opções e quão eficientes comparadas ao Heal?
+- [x] **14.4** How do I get a fire-damage buff on a Strength build with zero Faith? Which physick/perfume/talisman stack?
+- [x] **14.5** Quero um buff de dano físico stackável sem Faith numa build de DEX. Monta o combo (Ash + talismã + physick) e me diz o ganho aproximado.
+- [~] **14.6** Consigo o efeito do Flame, Cleanse Me (curar scarlet rot/poison) sem investir em Faith?
+- [x] **14.7** Buff de defesa sem Faith pra coop — o que substitui o lado defensivo do Golden Vow?
 
 ## Pattern 15 — Spell loadouts and range coverage
 
@@ -236,13 +236,13 @@ knows the ash version of Golden Vow is a fixed buff that does not scale.
 loadout inside the slot and FP budget, plus a fix for a playstyle gap. The budgeting is calc;
 the curation is judgement that has to rest on it.
 
-- [ ] **15.1** Minha build de gelo (70 INT, Carian Regal Scepter +10) parece que só joga curto/médio alcance. Monta uma barra de magias que cubra long range sem abandonar o tema de gelo.
-- [ ] **15.2** Faz uma barra de incantations de Faith pra coop RL150 que cubra buff, dano à distância, dano corpo a corpo e cura, dentro dos slots.
-- [ ] **15.3** My pure INT RL150 mage needs a full spell loadout: opener, main DPS, close-range, AoE, and a boss nuke. Build the bar.
-- [ ] **15.4** Monta um kit de Death sorceries temático mas funcional pro RL150 (INT 60 / FTH 45), com Prince of Death's Staff.
-- [ ] **15.5** Quero um spellblade RL150: uma arma de melee + uma barra enxuta de magias que complementa o corpo a corpo. Monta o loadout.
-- [ ] **15.6** Preciso de uma opção de long range que não seja de gelo mas se beneficie do debuff do Ranni's Dark Moon. Quais entram na barra?
-- [ ] **15.7** Build a dragon-communion incantation bar for an Arcane/Faith RL150 that covers Bayle and general PvE.
+- [~] **15.1** Minha build de gelo (70 INT, Carian Regal Scepter +10) parece que só joga curto/médio alcance. Monta uma barra de magias que cubra long range sem abandonar o tema de gelo.
+- [~] **15.2** Faz uma barra de incantations de Faith pra coop RL150 que cubra buff, dano à distância, dano corpo a corpo e cura, dentro dos slots.
+- [~] **15.3** My pure INT RL150 mage needs a full spell loadout: opener, main DPS, close-range, AoE, and a boss nuke. Build the bar.
+- [x] **15.4** Monta um kit de Death sorceries temático mas funcional pro RL150 (INT 60 / FTH 45), com Prince of Death's Staff.
+- [~] **15.5** Quero um spellblade RL150: uma arma de melee + uma barra enxuta de magias que complementa o corpo a corpo. Monta o loadout.
+- [~] **15.6** Preciso de uma opção de long range que não seja de gelo mas se beneficie do debuff do Ranni's Dark Moon. Quais entram na barra?
+- [x] **15.7** Build a dragon-communion incantation bar for an Arcane/Faith RL150 that covers Bayle and general PvE.
 ---
 
 ## Results
@@ -743,44 +743,51 @@ bonus is not modelled anywhere in this collection. Saying that is better than a 
 
 ## Where the battery leaves the collection
 
-*After 83 questions in nine patterns.*
+*After 122 questions in fourteen patterns.*
 
-| pattern | done | partial | unanswerable |
-|---|---|---|---|
-| 1 — build for a level | 12 | 2 | 0 |
-| 2 — rate / re-allocate | 8 | 0 | 0 |
-| 3 — best weapon / spell | 9 | 1 | 0 |
-| 4 — maximise a skill | 4 | 6 | 0 |
-| 5 — talismans and swaps | 6 | 2 | 0 |
-| 6 — ash of war selection | 7 | 1 | 0 |
-| 7 — element coverage | 8 | 0 | 0 |
-| 8 — coop generalist | 4 | 3 | 0 |
-| 9 — comparisons | 8 | 2 | 0 |
-| **total** | **66** | **17** | **0** |
+| pattern | done | partial |
+|---|---|---|
+| 1 — build for a level | 12 | 2 |
+| 2 — rate / re-allocate | 8 | 0 |
+| 3 — best weapon / spell | 9 | 1 |
+| 4 — maximise a skill | 4 | 6 |
+| 5 — talismans and swaps | 6 | 2 |
+| 6 — ash of war selection | 7 | 1 |
+| 7 — element coverage | 8 | 0 |
+| 8 — coop generalist | 4 | 3 |
+| 9 — comparisons | 8 | 2 |
+| 10 — low level and matchmaking | 7 | 1 |
+| 11 — mechanics | 5 | 4 |
+| 12 — can weapon X do Y | 6 | 2 |
+| 14 — effect without the stat | 5 | 2 |
+| 15 — spell loadouts | 2 | 5 |
+| **total** | **91** | **31** |
 
-**Fifteen bugs**, tracked in `BUGS.md` with what each returned instead of an error. Four of
-them would have handed a reader a well-formed number for something that does not exist.
+Nothing in 122 questions was unanswerable. **Sixteen bugs**, tracked in `BUGS.md` with what
+each returned instead of an error; four would have handed a reader a well-formed number for
+something that does not exist.
 
-**Eight features** the questions demanded and the collection did not have: a caster objective
-(`focus = "spell"`), loadout requirements (`stat_floors`), and the six nodes `weapon-rank`,
-`spell-rank`, `spell-lookup`, `buff-stack`, `ash-rank` and `boss-coverage`.
+**Twelve nodes and features** the questions demanded: `focus = "spell"` and `stat_floors` on
+build-allocate, and the nodes `weapon-rank`, `spell-rank`, `spell-lookup`, `buff-stack`,
+`ash-rank`, `boss-coverage`, `matchmaking` and `stat-curve`, plus weapon-lookup's buff
+capability and spell-power's actual FP cost.
 
-**Five tables vendored** from the Prometheux workspace that had been sitting there unused:
-`AshAffinity`, `AshClass`, `BuffMult`, `BuffSlot`, `PhysickEffect`. Two of the bugs exist
-because a parser was written against prose when the structured table was already available —
-worth checking the workspace's file list before building anything.
+**Seven tables vendored** from the Prometheux workspace that had been sitting unused:
+`AshAffinity`, `AshClass`, `BuffMult`, `BuffSlot`, `PhysickEffect`, `AreaLevel`. Three of the
+bugs exist because something was built against prose or left unbuilt when the structured table
+was already there. **Check the workspace's file list first** is the most repeated lesson in
+this document.
 
-**What is still not modelled**, and would be the next thing to build:
+**What is still not modelled.** Every remaining partial is one of these:
 
-- **Flat-attack and scaling-overridden hits.** Six of the ten Pattern 4 skills have one, and
-  the override is **per hit**, not per skill. The data says which stat drives them; nothing
-  computes the damage.
-- **A skill objective for `build-allocate`**, which depends on the above.
-- **Talismans applied to a build.** `buff-stack` multiplies damage under asserted conditions,
-  but nothing adds a talisman's stat bonuses into `character-build`, `equip-load` or `defence`.
-- **Moveset, reach, cast time and aggro.** Questions 9.9 and 8.6 turn on them and no table
-  carries any of it. Saying so is the answer.
-- **Guard counters**, which have no motion value in the extraction.
+- **Flat-attack and scaling-overridden skill hits.** Six of Pattern 4's ten. The override is
+  per hit, not per skill, so a skill objective has to model hits.
+- **Mechanics behind the numbers.** Frostbite's proc, Black Flame's percentage damage, the
+  stance-break rule. The collection has the buildup and poise figures and none of the rules.
+- **Range, moveset, reach, cast time and aggro.** All of Pattern 15's partials and two others.
+  No table carries any of it, and saying so is the answer.
+- **Physick tears.** `PhysickEffect.csv` is vendored and no node reads it.
+- **Talismans applied to a build**, and **guard counters**, both unchanged.
 
 ## Pattern 5 — the multiplier stack, on a table that was there all along
 
@@ -1067,3 +1074,193 @@ not in the extraction.
 
 Heavy 478.36, Quality 456.81 — and **Fire beats both at 494.71**, which is the answer the
 question did not ask for and needs.
+
+## Pattern 10 — the most deterministic pattern, and it was not ported
+
+Eight questions, and half of each is matchmaking: a level band, an upgrade bracket, and where
+the character is useful. The handoff had it under "not ported at all" while the formulas sat in
+the extraction. `matchmaking` is that, pinned against the spreadsheet's own worked example.
+
+### 10.1 Noble's Slender Sword at RL35, Samurai against Wretch — done
+
+Keen +25, floors 20/10/12. **Samurai wins**, 389.57 against 384.84 — and not for the reason
+the question implies. The Wretch's floor costs RL14 against the Samurai's RL17, so the Wretch
+has three more points to spend, and still loses: the Samurai's dexterity is already paid for
+and the Wretch is buying it at full price. Four and a half attack rating either way, which is
+worth saying plainly.
+
+At RL35 with a +9 weapon: summon signs 22–48, weapon bracket +6 to +13, and the level band is
+Stormveil Castle.
+
+### 10.2, 10.3, 10.4, 10.5, 10.6 — done
+
+All the same call. Worth quoting from 10.5, because it is the one people get wrong:
+
+| at RL80 | matches standard | matches somber |
+|---|---|---|
+| +18 standard | +13 to +24 | +6 to +9 |
+| +20 standard | +15 to +25 | +6 to +10 |
+| **+7 somber** (= +17) | +12 to +22 | +5 to +9 |
+| **+8 somber** (= +20) | +15 to +25 | +6 to +10 |
+
+A somber upgrade is worth 2.5 standard ones, so somber +8 and standard +20 are the same
+bracket. Comparing +8 against +8 is the mistake the conversion exists to stop.
+
+### 10.7 "Is RL70 with +16 mid-game?" — partial
+
+The matchmaking half is exact: summoning 53–87, invading 63–97, weapon bracket +12 to +21. The
+areas — Liurnia West, Siofra, Caelid South, Altus, Nokron — come from the softest table in the
+collection, and the answer has to say so.
+
+### 10.8 RL70 → RL130 without changing the build — done
+
+`character-build` for what the spread is, `build-allocate` at 130 with the same floors, and the
+difference between them. Same composition as Pattern 2.
+
+## Pattern 11 — mechanics, where the honest answer is sometimes "no figure"
+
+Nine questions. Four are answered exactly, two by new machinery, and three are prose the
+collection has no number for — which is worth saying rather than filling in.
+
+### 11.5 Vigor soft caps — done, and computed
+
+`stat-curve` walks all 99 levels and reports **[40, 60]**. The single most valuable level in the
+game is vigor 40 → 41 at **48 HP**; the next point buys 26. The second bend is 60 → 61, 13
+down to 6. 1450 HP at 40, 1900 at 60, 2100 at 99.
+
+Those are the numbers everybody recites, which is exactly why computing them matters.
+
+### 11.8 Sorcery scaling past 60 intelligence — done
+
+From a Carian Regal Scepter casting Comet: **12.61 a point from 61 to 80, then 2.21**. The bend
+is at 80 and the whole 60 → 99 range is worth 294 attack, of which 252 is spent by 80.
+
+### 11.9 Are talisman and physick multipliers multiplicative or additive? — done
+
+Multiplicative, per `data/BuffSlot.csv` — **except where they are neither**. `Passive`
+(talismans) and `Tear` multiply; `Aura`, `Unique` and `Body` **overwrite**, so two Golden Vows
+are 1.15 and not 1.15 × 1.115. That distinction is the answer, and it is a rule in a table
+rather than an opinion.
+
+### 11.1 The three moon spells — done
+
+Answered in 9.1, with the addition that `spell-lookup` now resolves Rellana's to its three
+hits rather than crashing.
+
+### 11.7 Spinning Strikes against Spinning Weapon — done, and it explains itself
+
+| | hits | accepts Blood | goes on |
+|---|---|---|---|
+| Spinning Strikes | 2 | **yes**, all thirteen | Halberd, Polearm, Reaper |
+| Spinning Weapon | 11 | **no** — six affinities, Blood not among them | Axe, Curved Sword, Dagger… |
+
+So the question's premise is right and the reason is in the data: they are different ashes for
+different weapons, and only one of them takes Blood.
+
+### 11.2, 11.3, 11.4, 11.6 — partial
+
+Black Flame's damage-over-time as a percentage of max HP, frostbite's proc effect, how bleed
+buildup scales with arcane beyond the number `attack-power` returns, and what stance damage
+does mechanically. The collection has **the buildup figures and the poise motion values** and
+none of the mechanics behind them. `boss-lookup` gives a fight's poise and `ash-rank` gives an
+ash's poise damage, so "how many of these break that" is arithmetic a caller can do — but the
+stance-break rule itself is not in any table here.
+
+The right answer to all four is the figures it does have plus an explicit "the mechanic is not
+in this data".
+
+## Pattern 12 — can weapon X do Y
+
+The rule was in the vendored oracle all along and nothing could ask it — see bug 16. Eight
+questions, six exact.
+
+### 12.1, 12.2, 12.5 The weapons that take nothing — done
+
+The **Marais Executioner's Sword** and the **Godslayer's Greatsword** both come back
+`buffable: false`, and so does the Blasphemous Blade. Not "use a grease instead": nothing
+applies, for three different reasons the node distinguishes — wrong class, wrong affinity, or
+the weapon refuses buffs outright. A refusal is the answer.
+
+### 12.8 Bloodflame Blade on a Blood weapon — done, and the premise is wrong
+
+They do not stack **and they do not conflict**: Bloodflame Blade lists Standard, Heavy, Keen
+and Quality only, so on a Blood-affinity weapon it does not apply at all. A Keen Uchigatana
+takes fifteen buffs; infuse the same katana with Blood and it takes **two** — Seppuku and
+Poisonous Mist, the ones that ignore the buffable flag. Infusing for bleed costs you every
+grease, which is a real trade nobody mentions.
+
+### 12.4 Status on a colossal sword without losing Heavy — done
+
+Heavy is one of the four affinities every grease lists, so the greases are exactly the answer:
+a Heavy colossal sword keeps its scaling and takes Blood, Poison, Rot, Freezing and Soporific
+grease.
+
+### 12.6 An ash that spins and takes Blood — done
+
+Spinning Weapon does not take Blood — six affinities and Blood is not one — which is why the
+question already suspected it. For a curved sword the ashes that do are Double Slash (6 hits,
+525 status) and Stormcaller (14 hits, 600), and `ash-rank` ranks the other 36.
+
+### 12.3, 12.7 — partial
+
+Frostbite on a weapon that cannot take Cold is answered for greases and Chilling Mist;
+lightning on a somber weapon with a fixed element is a "no" the buff table supports but the
+incantation half — Lightning Armament and friends — is not in `StatusBuffData`.
+
+## Pattern 14 — the effect without the stat
+
+Seven questions, five exact. The whole pattern turns on `BuffSlot`, and it gives a sharper
+answer than expected.
+
+### 14.1, 14.2 Golden Vow without faith — done
+
+| version | multiplier | slot |
+|---|---|---|
+| Golden Vow (Spell) | 1.15 | Aura |
+| Golden Vow (Tool) | 1.127 | Aura |
+| **Golden Vow (Ash)** | **1.115** | Aura |
+
+The ash **does** substitute for the spell, at a cost of three per cent, and it is a **fixed
+buff** — one figure in the table, nothing to scale with faith, which is the thing the question
+was testing for. All three share the Aura slot, so using two of them is using the better one.
+
+### 14.5 A stackable no-faith physical stack on a dexterity build — done
+
+Golden Vow (Ash) 1.115 × Exalted Flesh 1.2 × Shard of Alexander 1.15 × Royal Knight's Resolve
+1.8 = **×2.76966** on a weapon skill. Determination is left out — 1.6, and it shares the
+`Unique` slot with Royal Knight's Resolve, so the better one wins and the other does nothing.
+That shadowing is the part a build guide gets wrong.
+
+### 14.4, 14.7 — done
+
+The fire-damage stack is the same call with `damage_sources: ["fire"]`, which brings in Fire
+Scorpion Charm at 1.12 and its ten points of physical negation. The defensive half of Golden
+Vow is `defence`, unbuffed, plus the note that nothing applies a buff to it.
+
+### 14.3, 14.6 — partial
+
+Healing without faith, and curing rot without Flame Cleanse Me. `data/PhysickEffect.csv` is
+vendored and carries all forty tears with what each does, but no node reads it yet, so the
+answer is prose the collection holds rather than a figure it computes.
+
+## Pattern 15 — spell loadouts
+
+Seven questions. `spell-rank` does the ranking and the FP arithmetic; what it cannot do is the
+part the questions are actually about.
+
+### 15.4, 15.7 — done
+
+A themed bar is a family filter. Dragon Communion from its own seal at ARC 60 / FTH 45, spell
+buff 354.13, all thirteen castable: Dragonmaw **2557.52** for 34 FP, Greyoll's Roar 1303.20 for
+50, Theodorix's Magma 1282.83 for 45. The ×1.15 family bonus is on every one of them.
+
+### 15.1, 15.2, 15.3, 15.5, 15.6 — partial, all for one reason
+
+The ranking is exact — 128 of 156 sorceries castable at INT 70 from a Regal Scepter, led by
+Rennala's Full Moon at 1308.38 for 47 FP and Comet - Charged at 1205.96 for 24 — and **range is
+not in the data**. "Cubra long range", "opener, DPS, close-range, AoE" and "complementa o corpo
+a corpo" are all sorting on an axis no table carries.
+
+What the collection can do is the budget: what is castable, what each costs, what each hits
+for, and which are in the school. What it cannot do is say which of them is the long-range one,
+and it should say so rather than guess.

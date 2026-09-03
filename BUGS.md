@@ -72,6 +72,11 @@ was wrong by the time Pattern 5 asked a sharper question, and the table that mad
 unnecessary had been sitting unvendored in the workspace the whole time. Worth checking the
 workspace's file list before building a parser — #15 is the same lesson a second time.
 
+**Four of the twenty-one came from auditing rather than from a question** — 18 through 21. Once
+17 showed that a silent default could rewrite the question, checking every other default in
+every node took an hour and found four more. Two of them returned a well-formed wrong number.
+When a bug turns out to be a *kind* of bug, look for the rest of its kind before moving on.
+
 **#17 is the one no question found.** Fourteen patterns and 122 questions did not surface it,
 because every figure was internally consistent and nothing to compare against was outside the
 collection. It took three PDFs of the source spreadsheet, and a 0.43 discrepancy in the fourth

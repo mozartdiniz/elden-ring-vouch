@@ -73,7 +73,7 @@ came from the Prometheux workspace, which is a different provenance and is decla
 | `matchmaking` | **who a character can play with, and the upgrade bracket that keeps them there** | 9 |
 | `stat-curve` | **what each point in a stat buys, and where the curve bends** | 7 |
 
-`vouch -C . test` → **240 cases, 240 passed**.
+`vouch -C . test` → **243 cases, 243 passed**.
 
 `python3 scripts/check_spreadsheet.py` → **22 of 22 match**, against the Build Planner workbook
 itself rather than against the extraction. Run it after touching anything that reaches

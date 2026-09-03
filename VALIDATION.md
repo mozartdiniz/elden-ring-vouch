@@ -763,7 +763,7 @@ bonus is not modelled anywhere in this collection. Saying that is better than a 
 | 15 — spell loadouts | 2 | 5 |
 | **total** | **91** | **31** |
 
-Nothing in 122 questions was unanswerable. **Sixteen bugs**, tracked in `BUGS.md` with what
+Nothing in 122 questions was unanswerable. **Twenty-one bugs**, tracked in `BUGS.md` with what
 each returned instead of an error; four would have handed a reader a well-formed number for
 something that does not exist.
 
@@ -786,7 +786,6 @@ this document.
   stance-break rule. The collection has the buildup and poise figures and none of the rules.
 - **Range, moveset, reach, cast time and aggro.** All of Pattern 15's partials and two others.
   No table carries any of it, and saying so is the answer.
-- **Physick tears.** `PhysickEffect.csv` is vendored and no node reads it.
 - **Talismans applied to a build**, and **guard counters**, both unchanged.
 
 ## Pattern 5 — the multiplier stack, on a table that was there all along

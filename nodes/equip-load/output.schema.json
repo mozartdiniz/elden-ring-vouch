@@ -4,32 +4,110 @@
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "endurance", "equip_load", "equipped_weight", "load_remaining", "weight_before_roll_change", "encumbrance_percent",
-    "roll", "armour", "weapons", "end_for_light_roll", "end_for_mid_roll", "talismans_modelled"
+    "endurance",
+    "endurance_given",
+    "starting_class",
+    "endurance_raised_by_class",
+    "equip_load",
+    "equipped_weight",
+    "load_remaining",
+    "weight_before_roll_change",
+    "encumbrance_percent",
+    "roll",
+    "armour",
+    "weapons",
+    "end_for_light_roll",
+    "end_for_mid_roll",
+    "talismans_modelled"
   ],
   "properties": {
-    "endurance": { "type": "integer", "minimum": 1, "maximum": 99 },
-    "equip_load": { "type": "number", "exclusiveMinimum": 0, "description": "The weight this build can carry." },
-    "equipped_weight": { "type": "number", "minimum": 0, "description": "What the loadout weighs." },
-    "load_remaining": { "type": "number", "description": "equip_load minus equipped_weight: unused capacity. Negative means overloaded." },
-    "weight_before_roll_change": { "type": "number", "description": "How much more can be carried before the roll drops to the next category — the threshold is a share of the cap, not all of it. This is the figure to quote for 'can I still pick up X'." },
-    "encumbrance_percent": { "type": "number", "minimum": 0, "description": "Share of the load used, as the planner rounds it." },
-    "roll": { "type": "string", "description": "The roll this leaves: Light Load, Med. Load, Heavy Load, or Overloaded." },
-    "end_for_light_roll": { "type": "integer", "minimum": 0, "description": "Endurance needed to light-roll with this loadout. Zero means unreachable even at 99 — drop weight instead." },
-    "end_for_mid_roll": { "type": "integer", "minimum": 0, "description": "Endurance needed to medium-roll with this loadout. Zero means unreachable." },
+    "endurance": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99
+    },
+    "equip_load": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "The weight this build can carry."
+    },
+    "equipped_weight": {
+      "type": "number",
+      "minimum": 0,
+      "description": "What the loadout weighs."
+    },
+    "load_remaining": {
+      "type": "number",
+      "description": "equip_load minus equipped_weight: unused capacity. Negative means overloaded."
+    },
+    "weight_before_roll_change": {
+      "type": "number",
+      "description": "How much more can be carried before the roll drops to the next category \u2014 the threshold is a share of the cap, not all of it. This is the figure to quote for 'can I still pick up X'."
+    },
+    "encumbrance_percent": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Share of the load used, as the planner rounds it."
+    },
+    "roll": {
+      "type": "string",
+      "description": "The roll this leaves: Light Load, Med. Load, Heavy Load, or Overloaded."
+    },
+    "end_for_light_roll": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Endurance needed to light-roll with this loadout. Zero means unreachable even at 99 \u2014 drop weight instead."
+    },
+    "end_for_mid_roll": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Endurance needed to medium-roll with this loadout. Zero means unreachable."
+    },
     "talismans_modelled": {
       "type": "boolean",
       "description": "Always false. The Build Planner port does not model talisman effects, so this figure is before Great-Jar's Arsenal and its like. Say so when it could change the answer."
     },
-    "weapons": { "type": "array", "items": { "type": "string" } },
+    "weapons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "armour": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["head", "chest", "arms", "legs"],
+      "required": [
+        "head",
+        "chest",
+        "arms",
+        "legs"
+      ],
       "properties": {
-        "head": { "type": "string" }, "chest": { "type": "string" },
-        "arms": { "type": "string" }, "legs": { "type": "string" }
+        "head": {
+          "type": "string"
+        },
+        "chest": {
+          "type": "string"
+        },
+        "arms": {
+          "type": "string"
+        },
+        "legs": {
+          "type": "string"
+        }
       }
+    },
+    "endurance_given": {
+      "type": "integer",
+      "description": "The endurance asked for."
+    },
+    "starting_class": {
+      "type": "string",
+      "description": "The class this was computed as. planner.py floors every stat at the class's, so it is not a label."
+    },
+    "endurance_raised_by_class": {
+      "type": "boolean",
+      "description": "True when the class floor lifted the endurance above what was asked for, which makes every figure here one for a slightly different character."
     }
   }
 }

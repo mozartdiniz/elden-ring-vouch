@@ -206,6 +206,12 @@ def main():
         "value_at_to": points[-1]["value"] if points else 0.0,
         "weapon": request.get("weapon", ""),
         "spell": request.get("spell", ""),
+        # A curve is for a weapon at an upgrade and an affinity, and saying which is the
+        # difference between a figure somebody can check and a figure they cannot.
+        "affinity": request.get("affinity", "Standard") if row else "",
+        "upgrade": int(request.get("upgrade", oracle.max_upgrade(row))) if row else None,
+        "two_hand": bool(request.get("two_hand", False)),
+        "held_stats": {s: stats[s] for s in COMBAT},
         "starting_class": starting_class,
         # Stats the class floor lifted above what was asked for. planner.py treats a class's
         # stats as a minimum, so a vitals or spell curve for a Wretch never dips below ten.

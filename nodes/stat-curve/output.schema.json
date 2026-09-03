@@ -22,7 +22,11 @@
     "spell",
     "starting_class",
     "requirements_unmet",
-    "stats_raised_by_class"
+    "stats_raised_by_class",
+    "affinity",
+    "upgrade",
+    "two_hand",
+    "held_stats"
   ],
   "properties": {
     "stat": {
@@ -159,6 +163,49 @@
         "type": "string"
       },
       "description": "Stats the starting class floored above what was given. A vitals or spell curve for a Wretch never dips below ten."
+    },
+    "affinity": {
+      "type": "string",
+      "description": "The affinity the weapon or catalyst was priced with, empty for a vitals curve."
+    },
+    "upgrade": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "The upgrade level it was priced at. Defaults to the weapon's own cap, so saying which matters."
+    },
+    "two_hand": {
+      "type": "boolean"
+    },
+    "held_stats": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "strength",
+        "dexterity",
+        "intelligence",
+        "faith",
+        "arcane"
+      ],
+      "properties": {
+        "strength": {
+          "type": "integer"
+        },
+        "dexterity": {
+          "type": "integer"
+        },
+        "intelligence": {
+          "type": "integer"
+        },
+        "faith": {
+          "type": "integer"
+        },
+        "arcane": {
+          "type": "integer"
+        }
+      },
+      "description": "The stats held fixed while the walked one moved. A curve is for one build, and this is that build."
     }
   }
 }

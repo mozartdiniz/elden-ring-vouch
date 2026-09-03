@@ -147,6 +147,15 @@ expr = 'result.infusable || result.affinity_applied == "Standard"'
 [[ensures]]
 expr = "result.affinity_ignored == (result.affinity_requested != result.affinity_applied)"
 
+# A buff that did not apply says so, and says why. The oracle drops an impossible one silently,
+# so without this a greased weapon and an ungreased one return the same figures and nothing
+# distinguishes them.
+[[ensures]]
+expr = "result.status_buff_applied == (result.status_buff_ignored_because == \"\")"
+
+[[ensures]]
+expr = "result.status_buff != \"None\" || result.status_buff_applied"
+
 [[ensures]]
 expr = "result.total_ar > 0.0"
 

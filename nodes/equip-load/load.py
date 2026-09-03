@@ -45,6 +45,9 @@ def reachable(value):
 
 def main():
     request = json.load(sys.stdin)
+    # planner.py floors every stat at the starting class's, so the class is not a label here
+    # either: an endurance below the class's own is quietly raised, and the roll this node
+    # reports would be a roll the character does not have.
     starting_class = request.get("starting_class", "Wretch")
     endurance = request["endurance"]
     weapons = request.get("weapons", [])
@@ -74,6 +77,11 @@ def main():
 
     result = {
         "endurance": int(r.final_stats["endurance"]),
+        # What was asked for, and the class that may have raised it. Every figure below is for
+        # the endurance actually used, which is not always the one passed in.
+        "endurance_given": int(endurance),
+        "starting_class": starting_class,
+        "endurance_raised_by_class": int(r.final_stats["endurance"]) != int(endurance),
         "equip_load": float(r.equip_load),
         "equipped_weight": float(r.equipped_weight),
         # Two different margins, and conflating them is easy: `load_remaining` is how much

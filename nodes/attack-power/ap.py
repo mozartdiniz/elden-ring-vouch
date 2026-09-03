@@ -78,6 +78,23 @@ def main():
     # affinity was actually used is what keeps the caller from quoting the other one.
     applied = affinity if infusable else "Standard"
 
+    # A buff a weapon cannot take is silently dropped by the oracle: `_status_buff_effect_id`
+    # returns -1 and the figures come back unbuffed, identical to a call that named no buff at
+    # all. Blood Grease on a Rivers of Blood is 76 bleed either way, and a caller quoting that
+    # as a greased figure would be wrong in the same way quoting an ignored affinity is.
+    status_buff = request.get("status_buff", "None")
+    buff_applies = status_buff == "None" or any(
+        b["buff"] == status_buff and b["applies"]
+        for b in oracle.status_buffs(row, applied)
+    )
+    buff_reason = ""
+    if not buff_applies:
+        buff_reason = next(
+            (b["reason"] for b in oracle.status_buffs(row, applied)
+             if b["buff"] == status_buff),
+            f"{status_buff!r} is not one of the buffs in the table",
+        )
+
     inputs = ap_calc.Inputs(
         weapon_class=row["Weapon Class"],
         weapon=weapon,
@@ -108,6 +125,11 @@ def main():
         "affinity_requested": affinity,
         "affinity_applied": applied,
         "affinity_ignored": applied != affinity,
+        "status_buff": status_buff,
+        # False means the figures below are unbuffed however the call was written. Quoting them
+        # as buffed is the same mistake as quoting an affinity that was ignored.
+        "status_buff_applied": buff_applies,
+        "status_buff_ignored_because": buff_reason,
         "infusable": infusable,
         "upgrade": inputs.upgrade,
         "max_upgrade": oracle.max_upgrade(row),

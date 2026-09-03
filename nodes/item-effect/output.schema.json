@@ -10,7 +10,9 @@
     "combined",
     "quantified",
     "text_only",
-    "applied_to_a_build"
+    "applied_to_a_build",
+    "resolved",
+    "resolved_from"
   ],
   "properties": {
     "items": {
@@ -39,7 +41,8 @@
           "attack_multiplier",
           "damage_taken",
           "resist",
-          "rates"
+          "rates",
+          "physick"
         ],
         "properties": {
           "item": {
@@ -253,6 +256,41 @@
                 "exclusiveMinimum": 0
               }
             }
+          },
+          "physick": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": false,
+            "required": [
+              "listed",
+              "effect",
+              "pvp_alter",
+              "duration",
+              "notes"
+            ],
+            "properties": {
+              "listed": {
+                "type": "string",
+                "description": "What the game's own description says."
+              },
+              "effect": {
+                "type": "string",
+                "description": "What it does, in the form the game states it: floor(MaxHP * 0.5), 7 HP/s, 1.09x/1.13x/1.2x."
+              },
+              "pvp_alter": {
+                "type": "string"
+              },
+              "duration": {
+                "type": "string",
+                "description": "Seconds, or 'N/A' for an instant effect."
+              },
+              "notes": {
+                "type": "string"
+              }
+            },
+            "description": "For a crystal tear, what it actually does \u2014 from data/PhysickEffect.csv, which is the Prometheux workspace's compilation rather than the Build Planner's. Null for anything that is not a tear."
           }
         }
       }
@@ -493,6 +531,20 @@
     "applied_to_a_build": {
       "type": "boolean",
       "description": "Always false. Nothing in this collection applies these automatically; character-build, equip-load and defence all report figures before them."
+    },
+    "resolved": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The catalogue names the query resolved to."
+    },
+    "resolved_from": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "What each name was taken to mean. 'Crimson Crystal Tear' is the catalogue's 'Crimson Crystal Tear 1' \u2014 the two copies you can find are one item, and nobody types the number."
     }
   }
 }

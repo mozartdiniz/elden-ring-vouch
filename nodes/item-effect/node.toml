@@ -48,6 +48,13 @@ message = "an item name cannot be empty"
 
 # --- postconditions ---
 
+# Every name given resolved to exactly one item, and the map says which.
+[[ensures]]
+expr = "size(result.resolved) == size(result.items) && size(result.resolved_from) == size(result.items)"
+
+[[ensures]]
+expr = "result.effects.all(e, e.item in result.resolved)"
+
 [[ensures]]
 expr = "size(result.effects) == size(result.items) && size(result.kinds) == size(result.items)"
 

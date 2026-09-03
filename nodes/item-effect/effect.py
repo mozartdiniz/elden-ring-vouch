@@ -25,10 +25,14 @@ to do it with are all returned.
 import csv
 import json
 import os
+import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
+sys.path.insert(0, os.path.join(ROOT, "lib"))
+
+import physick  # noqa: E402
 CSV_DIR = os.path.join(ROOT, "oracle", "extracted", "Build-Planner-v1.19.1", "csv")
 
 STAT_COLUMN = {
@@ -124,19 +128,82 @@ def describe(name, record):
     }
 
 
+NUMBERED = re.compile(r"^(?P<base>.+?) (?P<copy>\d+)$")
+
+
+def resolve(query, names):
+    """The item this name means, or every candidate when it means more than one.
+
+    `item-effect` matched exactly and exited otherwise, so "Crimson Crystal Tear" — the most
+    common physick tear in the game — was a defect: the catalogue holds `Crimson Crystal Tear 1`
+    and `Crimson Crystal Tear 2`, the two copies you can find, and nobody types the number.
+
+    Numbered copies of one item are resolved to the first of them, because they are the same
+    item and choosing between them is not a question anybody has. Anything else that matches
+    more than one is reported rather than picked.
+    """
+    if query in names:
+        return [query]
+    lowered = query.lower()
+    exact = [n for n in names if n.lower() == lowered]
+    if exact:
+        return exact
+    copies = sorted(
+        n for n in names
+        if (NUMBERED.match(n) or {}) and NUMBERED.match(n).group("base").lower() == lowered
+    )
+    if copies:
+        return [copies[0]]
+    tokens = lowered.split()
+    return sorted(n for n in names if all(t in n.lower() for t in tokens))
+
+
 def main():
     request = json.load(sys.stdin)
     items = request["items"]
 
     book = effects()
     catalogue = kinds()
+    tears = physick.table()
 
-    missing = [name for name in items if name not in book]
+    resolved, ambiguous, missing = [], {}, []
+    for name in items:
+        candidates = resolve(name, list(book))
+        if len(candidates) == 1:
+            resolved.append(candidates[0])
+        elif candidates:
+            ambiguous[name] = candidates[:8]
+        elif name in tears:
+            # In the physick table and not in the effect table: a real tear the extraction
+            # names differently or not at all. It has no stat columns, so it is described from
+            # the physick table alone.
+            resolved.append(name)
+        else:
+            missing.append(name)
     if missing:
         print(f"no effect table entry for: {', '.join(missing)}", file=sys.stderr)
         sys.exit(1)
+    if ambiguous:
+        for name, candidates in ambiguous.items():
+            print(f"{name!r} matches {len(candidates)}: {', '.join(candidates)}",
+                  file=sys.stderr)
+        sys.exit(1)
 
-    described = [describe(name, book[name]) for name in items]
+    described = [
+        describe(name, book.get(name, {})) for name in resolved
+    ]
+    for entry in described:
+        # What the tear does, in the form the game states it. The effect tables carry stat
+        # columns and say nothing about "restores half your HP".
+        #
+        # Looked up under the unnumbered name as well: the catalogue's `Crimson Crystal Tear 1`
+        # is the physick table's `Crimson Crystal Tear`, because the number is which copy you
+        # picked up and not which tear it is.
+        name = entry["item"]
+        base = NUMBERED.match(name)
+        entry["physick"] = tears.get(name) or (
+            tears.get(base.group("base")) if base else None
+        )
     print(f"{len(described)} item(s)", file=sys.stderr)
 
     combined_stats = {
@@ -158,6 +225,11 @@ def main():
 
     result = {
         "items": list(items),
+        "resolved": resolved,
+        # What each name was taken to mean. "Crimson Crystal Tear" is the catalogue's
+        # "Crimson Crystal Tear 1", and an answer should use the name the user typed while
+        # knowing which row it came from.
+        "resolved_from": dict(zip(items, resolved)),
         "kinds": [catalogue.get(name, "other") for name in items],
         "effects": described,
         "combined": {

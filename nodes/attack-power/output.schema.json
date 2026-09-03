@@ -4,103 +4,320 @@
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "weapon", "weapon_class", "label", "affinity_requested", "affinity_applied",
-    "affinity_ignored", "infusable", "upgrade", "max_upgrade", "two_hand",
-    "total_ar", "total_ar_rounded", "attack", "attack_shown", "elements",
-    "status", "status_shown", "status_effects",
-    "scaling", "requirements_met", "guard_boost", "guard_negation", "guard_resist"
+    "weapon",
+    "weapon_class",
+    "label",
+    "affinity_requested",
+    "affinity_applied",
+    "affinity_ignored",
+    "status_buff",
+    "status_buff_applied",
+    "status_buff_ignored_because",
+    "infusable",
+    "upgrade",
+    "max_upgrade",
+    "two_hand",
+    "total_ar",
+    "total_ar_rounded",
+    "attack",
+    "attack_shown",
+    "elements",
+    "status",
+    "status_shown",
+    "status_effects",
+    "scaling",
+    "requirements_met",
+    "guard_boost",
+    "guard_negation",
+    "guard_resist"
   ],
   "properties": {
-    "weapon": { "type": "string" },
-    "weapon_class": { "type": "string" },
-    "label": { "type": "string", "description": "How the game names this, e.g. 'Longsword +25'." },
-    "affinity_requested": { "type": "string", "description": "The affinity asked for." },
+    "weapon": {
+      "type": "string"
+    },
+    "weapon_class": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string",
+      "description": "How the game names this, e.g. 'Longsword +25'."
+    },
+    "affinity_requested": {
+      "type": "string",
+      "description": "The affinity asked for."
+    },
     "affinity_applied": {
       "type": "string",
       "description": "The affinity actually priced. Differs from the request on a non-infusable weapon, which is always Standard. Quote this one, never the request."
     },
-    "affinity_ignored": { "type": "boolean", "description": "True when the requested affinity was not the one applied." },
-    "infusable": { "type": "boolean" },
-    "upgrade": { "type": "integer", "minimum": 0, "maximum": 25 },
-    "max_upgrade": { "type": "integer", "minimum": 0, "maximum": 25, "description": "This weapon's real cap. A postcondition rejects an upgrade above it." },
-    "two_hand": { "type": "boolean" },
-    "total_ar": { "type": "number", "description": "Attack rating, full precision, summed over the five damage types." },
-    "total_ar_rounded": { "type": "integer", "description": "What the game displays: total_ar truncated toward zero." },
-    "attack": { "$ref": "#/$defs/damage" },
-    "attack_shown": { "$ref": "#/$defs/damage_shown", "description": "Per-element attack as the game displays it, truncated. Quote these, or total_ar_rounded, rather than truncating the precise figures yourself." },
-    "elements": { "type": "array", "items": { "type": "string" }, "description": "Damage types this weapon actually deals." },
-    "status": { "$ref": "#/$defs/status" },
-    "status_shown": { "$ref": "#/$defs/status_shown", "description": "Status buildup as the game displays it, truncated." },
-    "status_effects": { "type": "array", "items": { "type": "string" } },
-    "requirements_met": { "type": "boolean", "description": "Whether the build meets every stat requirement. False means the attack figures already carry the penalty." },
-    "guard_boost": { "type": "integer" },
-    "guard_negation": { "$ref": "#/$defs/damage", "description": "Share of each damage type blocked, as a percentage." },
-    "guard_resist": { "$ref": "#/$defs/status_shown", "description": "Status buildup resisted while blocking with this weapon." },
+    "affinity_ignored": {
+      "type": "boolean",
+      "description": "True when the requested affinity was not the one applied."
+    },
+    "infusable": {
+      "type": "boolean"
+    },
+    "upgrade": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 25
+    },
+    "max_upgrade": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 25,
+      "description": "This weapon's real cap. A postcondition rejects an upgrade above it."
+    },
+    "two_hand": {
+      "type": "boolean"
+    },
+    "total_ar": {
+      "type": "number",
+      "description": "Attack rating, full precision, summed over the five damage types."
+    },
+    "total_ar_rounded": {
+      "type": "integer",
+      "description": "What the game displays: total_ar truncated toward zero."
+    },
+    "attack": {
+      "$ref": "#/$defs/damage"
+    },
+    "attack_shown": {
+      "$ref": "#/$defs/damage_shown",
+      "description": "Per-element attack as the game displays it, truncated. Quote these, or total_ar_rounded, rather than truncating the precise figures yourself."
+    },
+    "elements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Damage types this weapon actually deals."
+    },
+    "status": {
+      "$ref": "#/$defs/status"
+    },
+    "status_shown": {
+      "$ref": "#/$defs/status_shown",
+      "description": "Status buildup as the game displays it, truncated."
+    },
+    "status_effects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requirements_met": {
+      "type": "boolean",
+      "description": "Whether the build meets every stat requirement. False means the attack figures already carry the penalty."
+    },
+    "guard_boost": {
+      "type": "integer"
+    },
+    "guard_negation": {
+      "$ref": "#/$defs/damage",
+      "description": "Share of each damage type blocked, as a percentage."
+    },
+    "guard_resist": {
+      "$ref": "#/$defs/status_shown",
+      "description": "Status buildup resisted while blocking with this weapon."
+    },
     "scaling": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["strength", "dexterity", "intelligence", "faith", "arcane"],
+      "required": [
+        "strength",
+        "dexterity",
+        "intelligence",
+        "faith",
+        "arcane"
+      ],
       "properties": {
-        "strength": { "$ref": "#/$defs/scaling" },
-        "dexterity": { "$ref": "#/$defs/scaling" },
-        "intelligence": { "$ref": "#/$defs/scaling" },
-        "faith": { "$ref": "#/$defs/scaling" },
-        "arcane": { "$ref": "#/$defs/scaling" }
+        "strength": {
+          "$ref": "#/$defs/scaling"
+        },
+        "dexterity": {
+          "$ref": "#/$defs/scaling"
+        },
+        "intelligence": {
+          "$ref": "#/$defs/scaling"
+        },
+        "faith": {
+          "$ref": "#/$defs/scaling"
+        },
+        "arcane": {
+          "$ref": "#/$defs/scaling"
+        }
       }
+    },
+    "status_buff": {
+      "type": "string",
+      "description": "The grease or armament buff asked for, 'None' when none was."
+    },
+    "status_buff_applied": {
+      "type": "boolean",
+      "description": "Whether it actually applied. False means every figure here is unbuffed, and the oracle drops an impossible buff silently \u2014 a greased Rivers of Blood reads exactly like an ungreased one."
+    },
+    "status_buff_ignored_because": {
+      "type": "string",
+      "description": "Why it did not apply: wrong class, wrong affinity, or the weapon cannot be buffed. Empty when it did."
     }
   },
   "$defs": {
     "damage": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["physical", "magic", "fire", "lightning", "holy"],
+      "required": [
+        "physical",
+        "magic",
+        "fire",
+        "lightning",
+        "holy"
+      ],
       "properties": {
-        "physical": { "type": "number" }, "magic": { "type": "number" },
-        "fire": { "type": "number" }, "lightning": { "type": "number" },
-        "holy": { "type": "number" }
+        "physical": {
+          "type": "number"
+        },
+        "magic": {
+          "type": "number"
+        },
+        "fire": {
+          "type": "number"
+        },
+        "lightning": {
+          "type": "number"
+        },
+        "holy": {
+          "type": "number"
+        }
       }
     },
     "damage_shown": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["physical", "magic", "fire", "lightning", "holy"],
+      "required": [
+        "physical",
+        "magic",
+        "fire",
+        "lightning",
+        "holy"
+      ],
       "properties": {
-        "physical": { "type": "integer" }, "magic": { "type": "integer" },
-        "fire": { "type": "integer" }, "lightning": { "type": "integer" },
-        "holy": { "type": "integer" }
+        "physical": {
+          "type": "integer"
+        },
+        "magic": {
+          "type": "integer"
+        },
+        "fire": {
+          "type": "integer"
+        },
+        "lightning": {
+          "type": "integer"
+        },
+        "holy": {
+          "type": "integer"
+        }
       }
     },
     "status_shown": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["poison", "scarlet_rot", "bleed", "frost", "sleep", "madness"],
+      "required": [
+        "poison",
+        "scarlet_rot",
+        "bleed",
+        "frost",
+        "sleep",
+        "madness"
+      ],
       "properties": {
-        "poison": { "type": "integer" }, "scarlet_rot": { "type": "integer" },
-        "bleed": { "type": "integer" }, "frost": { "type": "integer" },
-        "sleep": { "type": "integer" }, "madness": { "type": "integer" }
+        "poison": {
+          "type": "integer"
+        },
+        "scarlet_rot": {
+          "type": "integer"
+        },
+        "bleed": {
+          "type": "integer"
+        },
+        "frost": {
+          "type": "integer"
+        },
+        "sleep": {
+          "type": "integer"
+        },
+        "madness": {
+          "type": "integer"
+        }
       }
     },
     "status": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["poison", "scarlet_rot", "bleed", "frost", "sleep", "madness"],
+      "required": [
+        "poison",
+        "scarlet_rot",
+        "bleed",
+        "frost",
+        "sleep",
+        "madness"
+      ],
       "properties": {
-        "poison": { "type": "number" }, "scarlet_rot": { "type": "number" },
-        "bleed": { "type": "number" }, "frost": { "type": "number" },
-        "sleep": { "type": "number" }, "madness": { "type": "number" }
+        "poison": {
+          "type": "number"
+        },
+        "scarlet_rot": {
+          "type": "number"
+        },
+        "bleed": {
+          "type": "number"
+        },
+        "frost": {
+          "type": "number"
+        },
+        "sleep": {
+          "type": "number"
+        },
+        "madness": {
+          "type": "number"
+        }
       }
     },
     "scaling": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["letter", "percent", "requirement", "req_met", "effective", "shortfall"],
+      "required": [
+        "letter",
+        "percent",
+        "requirement",
+        "req_met",
+        "effective",
+        "shortfall"
+      ],
       "properties": {
-        "letter": { "type": "string", "description": "S, A, B, C, D, E, or - for no scaling." },
-        "percent": { "type": "number" },
-        "requirement": { "type": "integer" },
-        "req_met": { "type": "boolean" },
-        "effective": { "type": "integer", "minimum": 0, "description": "The stat as the weapon sees it, including the two-handed strength bonus." },
-        "shortfall": { "type": "integer", "minimum": 0, "description": "How many points short of the requirement. Zero when it is met. Quote this rather than subtracting the requirement from the stat yourself." }
+        "letter": {
+          "type": "string",
+          "description": "S, A, B, C, D, E, or - for no scaling."
+        },
+        "percent": {
+          "type": "number"
+        },
+        "requirement": {
+          "type": "integer"
+        },
+        "req_met": {
+          "type": "boolean"
+        },
+        "effective": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The stat as the weapon sees it, including the two-handed strength bonus."
+        },
+        "shortfall": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "How many points short of the requirement. Zero when it is met. Quote this rather than subtracting the requirement from the stat yourself."
+        }
       }
     }
   }

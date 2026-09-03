@@ -65,3 +65,28 @@ expect_code = 10
 name = "a ninth item is a caller error"
 input = { items = ["a", "b", "c", "d", "e", "f", "g", "h", "i"] }
 expect_code = 10
+
+# --- crystal tears, which this node's purpose line has always claimed and could not do.
+#
+# "Crimson Crystal Tear" — the most common physick tear in the game — was a defect: the node
+# matched catalogue names exactly, and the catalogue holds `Crimson Crystal Tear 1` and
+# `Crimson Crystal Tear 2`, the two copies you can find. Nobody types the number.
+
+[[case]]
+name = "the name a player types resolves to the copy the catalogue holds"
+input = { items = ["Crimson Crystal Tear"] }
+expect = { "result.resolved[0]" = "Crimson Crystal Tear 1", "result.effects[0].physick.effect" = "Restores ⌊MaxHP * 0.5⌋ HP", "result.effects[0].physick.duration" = "N/A" }
+
+# And what a tear does was in a vendored table nothing read. The effect tables carry stat
+# columns and say nothing about restoring half your HP.
+[[case]]
+name = "a tear's effect and duration"
+input = { items = ["Opaline Hardtear", "Thorny Cracked Tear"] }
+expect = { "result.effects[0].physick.effect" = "Increase all damage negation by 15%", "result.effects[0].physick.duration" = "180.0", "result.effects[1].physick.effect" = "1.09x/1.13x/1.2x damage with continuous attacks" }
+
+# A talisman is not a tear, and the physick block is absent rather than empty — pinned through
+# the resolution map, since a fixture cannot express a null.
+[[case]]
+name = "a talisman resolves to itself and carries no physick"
+input = { items = ["Shard of Alexander"] }
+expect = { "result.resolved[0]" = "Shard of Alexander", "result.resolved_from.Shard of Alexander" = "Shard of Alexander" }

@@ -93,6 +93,82 @@ and no node applies a talisman.
 - [~] **4.9** Qual o maior dano possível do Gravitas / Nebula em armas de INT no RL150? Quais talismans e physick multiplicam isso?
 - [~] **4.10** Como maximizar o Blood Blade / Seppuku-boosted hit numa katana blood no RL150? Mostra os multiplicadores.
 
+## Pattern 5 — Talisman selection and per-boss swaps
+
+"Best 4 talismans for [weapon/skill]", then "what do I swap [X] for against a boss that
+doesn't allow crits / resists holy?" A fixed core plus one flex slot. Ranking talismans by the
+multiplier they add to *your* damage source is calc; the swap logic is rule-based on top of an
+immunity lookup.
+
+- [x] **5.1** Quais 4 talismans maximizam o dano da minha Blasphemous Blade focada em Taker's Flames no RL150?
+- [x] **5.2** Tô usando Shard of Alexander + Godfrey Icon + Ritual Sword + Dagger Talisman na Godslayer's Greatsword. Contra um dragão que não deixa fazer critical, troco o Dagger por qual?
+- [~] **5.3** Best talisman package for a Cold Milady Wing Stance build — and what's the flex slot for bosses immune to Frostbite?
+- [x] **5.4** Meu core é Graven-Mass + Graven-School + Magic Scorpion Charm no mago de gelo. Qual o quarto talismã? E ele stacka com os graven?
+- [~] **5.5** Quais talismans pra uma build de bleed com Eleonora's Poleblade? Preciso de um pra quando o boss é imune a sangramento?
+- [x] **5.6** Ranking dos talismans pra maximizar incantations de fogo (Giantsflame, Burn O Flame) num caster Faith RL150.
+- [x] **5.7** I run Shard of Alexander + Rotten Winged Sword + Millicent's Prosthesis on a dual-twinblade build. Is the 4th slot better as Lord of Blood's Exultation or Ritual Sword?
+- [x] **5.8** Contra Radagon/Elden Beast, quais talismans eu tiro do meu setup de bleed e quais entram?
+
+## Pattern 6 — Ash of War selection for a weapon and a playstyle goal
+
+"Which Ash for [weapon] if I want multi-hit for a fast bleed proc / stance break?" Hit count,
+speed and affinity compatibility, not raw ash damage. A good test of whether the collection
+knows which ashes accept which affinities.
+
+- [x] **6.1** Quero uma foice (Grave Scythe) com afinidade de sangue e um Ash que bata várias vezes pra procar bleed rápido. Qual Ash aceita Blood e dá mais hits?
+- [x] **6.2** Pra uma Twinblade blood, qual Ash of War acumula Hemorrhage mais rápido: Seppuku, Spinning Strikes ou Bloody Slash?
+- [x] **6.3** Which Ash of War on a Cold Nagakiba gives the fastest Frostbite proc while still accepting Cold affinity?
+- [x] **6.4** Qual Ash of War numa great hammer de STR dá mais stance/poise damage pra quebrar postura em coop?
+- [~] **6.5** Pra uma lança de DEX/FTH, qual Ash de raio (Lightning Spear? Storm Stomp?) rende mais dano e aceita a afinidade certa?
+- [x] **6.6** Quero girar uma curved sword continuamente com sangue. Qual Ash faz isso e aceita Blood affinity — Spinning Slash não serve?
+- [x] **6.7** Numa greatsword de fogo, qual Ash of War combina melhor pra multi-hit + Fire buildup?
+- [x] **6.8** Best Ash of War for fast poise damage on a colossal weapon that still lets me keep Heavy scaling?
+
+## Pattern 7 — Affinity and element coverage against boss resistances
+
+"My status doesn't work on [boss] — what do I use instead?", and the big-picture version:
+"which element covers the most bosses?" A resistance and immunity lookup across the table plus
+an AR recomputation per affinity. The most deterministic pattern in the set.
+
+- [x] **7.1** Meu build de bleed na Gargoyle's Twinblade (STR 40/DEX 23/ARC 12) não funciona no Radagon e na Elden Beast. Qual affinity eu troco pra esses dois?
+- [x] **7.2** Considerando jogo base + DLC, qual elemento tem a maior cobertura de bosses pra uma build de Faith: Fogo, Raio ou Sagrado? Quero uma resposta baseada nas resistências, não em opinião.
+- [x] **7.3** Which bosses in the DLC are immune or highly resistant to Frostbite? I run a Cold build and want to know when to swap.
+- [x] **7.4** Holy é ruim contra quais bosses do endgame? Vale a pena uma arma Holy secundária ou é armadilha?
+- [x] **7.5** Tenho uma build de raio. Quais bosses do DLC resistem bastante a Lightning e o que eu levo contra eles?
+- [x] **7.6** Monta uma matriz de Fire / Lightning / Holy × os bosses do DLC e me diz qual escola cobre mais lutas em RL150.
+- [x] **7.7** Bleed, Frost e Poison: contra quais bosses cada um é inútil? Quero saber quando meu status hunter não vai ajudar.
+- [x] **7.8** Elden Beast e Radagon: qual affinity dá mais AR real na minha arma quando não posso usar status? Compara Heavy vs Fire vs Quality.
+
+## Pattern 8 — Co-op generalist for a specific boss pool
+
+"People summon me for these five bosses. Build one character that does well against all of
+them without swapping gear." Coverage plus survivability, not peak single-target damage — the
+element-coverage calc of Pattern 7 framed as a build.
+
+- [x] **8.1** No coop me chamam muito pra Malenia, Mohg, Maliketh e Godfrey. Monta um único personagem RL150 que vai bem em todos sem eu trocar equipamento.
+- [x] **8.2** Meu summon pool é praticamente só DLC: Rellana, Messmer, Romina, Bayle, Consort Radahn. Que build cobre todos esses no RL150?
+- [~] **8.3** Quero um "boss killer" de coop RL150 que eu equipo e esqueço que existe menu. Contra bosses aleatórios do jogo todo, que arma(s) + incantations você monta?
+- [x] **8.4** I get summoned mostly for Fire Giant, Godskin Duo, and Astel. One RL150 build that handles all three — what is it?
+- [~] **8.5** Monta uma build de coop RL138 focada em sobrevivência + stance break que seja útil em qualquer boss do late game.
+- [~] **8.6** Quero um personagem que seja o "seguro de vida" do host: stagger, espaço e agro, dano secundário. Que build e que arma no RL150?
+- [x] **8.7** Preciso de um generalista RL125 pra ajudar amigos travados no mid-game (Rennala, Radahn, Morgott). Qual build não trivializa mas ajuda?
+
+## Pattern 9 — Compare two options: which is better, and when
+
+"Is X better than Y?" — weapon, spell, ash, build path. The answer wanted is conditional (X for
+exploration, Y for big bosses), not a flat winner. The numeric half is calc; the "when" is a
+judgement that has to rest on it.
+
+- [x] **9.1** Rennala's Full Moon vs Ranni's Dark Moon vs Rellana's Twin Moons — qual é a melhor pra PvE e em que situação cada uma ganha?
+- [x] **9.2** Blasphemous Blade vs Sword of Night and Flame pra uma build de coop RL150 — qual você escolhe e por quê?
+- [x] **9.3** Loretta's Greatbow vs Loretta's Mastery: qual é mais consistente pra sniping vs bosses grandes?
+- [~] **9.4** STR/FTH vs DEX/FTH como generalista de coop no RL150 — qual cobre mais e qual dá mais dano por golpe?
+- [x] **9.5** Rivers of Blood vs Nagakiba (blood) pra proc rápido de sangramento — qual acumula Hemorrhage mais rápido no mesmo Arcane?
+- [x] **9.6** Carian Regal Scepter vs Lusat's Glintstone Staff em 70 INT: quanto de dano a mais o Lusat dá e vale o custo de FP?
+- [x] **9.7** Dagger Talisman vs Godfrey Icon na Ordovis: qual dá mais dano real por ciclo, considerando que nem todo boss deixa riposte?
+- [x] **9.8** Cold affinity vs Blood affinity numa Sword Lance pro meu status hunter — qual proca mais rápido contra bosses não-imunes?
+- [~] **9.9** Great Katana vs Nagakiba pra uma build de DEX/bleed no DLC — moveset, alcance e proc, qual ganha?
+- [x] **9.10** Heavy vs Quality na Gargoyle's Twinblade com STR 50/DEX 30 — qual dá mais AR de verdade?
 ---
 
 ## Results
@@ -593,28 +669,327 @@ bonus is not modelled anywhere in this collection. Saying that is better than a 
 
 ## Where the battery leaves the collection
 
+*After 83 questions in nine patterns.*
+
 | pattern | done | partial | unanswerable |
 |---|---|---|---|
 | 1 — build for a level | 12 | 2 | 0 |
 | 2 — rate / re-allocate | 8 | 0 | 0 |
 | 3 — best weapon / spell | 9 | 1 | 0 |
 | 4 — maximise a skill | 4 | 6 | 0 |
-| **total** | **33** | **9** | **0** |
+| 5 — talismans and swaps | 6 | 2 | 0 |
+| 6 — ash of war selection | 7 | 1 | 0 |
+| 7 — element coverage | 8 | 0 | 0 |
+| 8 — coop generalist | 4 | 3 | 0 |
+| 9 — comparisons | 8 | 2 | 0 |
+| **total** | **66** | **17** | **0** |
 
-Ten bugs, three of which returned a number rather than an error. They are tracked in
-`BUGS.md`, which is the work list — this file is the per-question record.
+**Fifteen bugs**, tracked in `BUGS.md` with what each returned instead of an error. Four of
+them would have handed a reader a well-formed number for something that does not exist.
 
-Four features the questions demanded and the collection did not have: a caster objective
-(`focus = "spell"`), loadout requirements (`stat_floors`), `weapon-rank`, and `spell-rank`.
+**Eight features** the questions demanded and the collection did not have: a caster objective
+(`focus = "spell"`), loadout requirements (`stat_floors`), and the six nodes `weapon-rank`,
+`spell-rank`, `spell-lookup`, `buff-stack`, `ash-rank` and `boss-coverage`.
+
+**Five tables vendored** from the Prometheux workspace that had been sitting there unused:
+`AshAffinity`, `AshClass`, `BuffMult`, `BuffSlot`, `PhysickEffect`. Two of the bugs exist
+because a parser was written against prose when the structured table was already available —
+worth checking the workspace's file list before building anything.
 
 **What is still not modelled**, and would be the next thing to build:
 
-- **Flat-attack and scaling-overridden hits.** Six of the ten Pattern 4 skills have one. The
-  data says which stat drives them; nothing computes the damage.
-- **A skill objective for `build-allocate`.** When a skill overrides the weapon's scaling, the
-  weapon-optimal spread is the wrong build, and the node can only say so.
-- **Talismans applied to a build.** Unchanged and deliberate: `item-effect` now multiplies
-  damage bonuses under asserted conditions, but nothing adds a talisman's stat bonuses into
-  `character-build`, `equip-load` or `defence`.
-- **Guard counters**, which question 3.7 asked about and which have no motion value in the
-  extraction.
+- **Flat-attack and scaling-overridden hits.** Six of the ten Pattern 4 skills have one, and
+  the override is **per hit**, not per skill. The data says which stat drives them; nothing
+  computes the damage.
+- **A skill objective for `build-allocate`**, which depends on the above.
+- **Talismans applied to a build.** `buff-stack` multiplies damage under asserted conditions,
+  but nothing adds a talisman's stat bonuses into `character-build`, `equip-load` or `defence`.
+- **Moveset, reach, cast time and aggro.** Questions 9.9 and 8.6 turn on them and no table
+  carries any of it. Saying so is the answer.
+- **Guard counters**, which have no motion value in the extraction.
+
+## Pattern 5 — the multiplier stack, on a table that was there all along
+
+Eight questions about which talismans to wear and what to swap. Working the first one found
+that the multiplier stack built for Pattern 4 was wrong: it multiplied **any** buffs a caller
+asserted, including two that overwrite each other, and it read figures out of prose when
+`BuffMult.csv` and `BuffSlot.csv` were sitting unvendored in the workspace. `buff-stack`
+replaced it — see bug 11 — and then needed a second axis for the caster questions.
+
+**Two axes, and a hit is usually both.** `hit_kind` is how you hit; `damage_sources` is what
+the damage is. A Comet cast is a *sorcery* dealing *magic*, so Graven-Mass and Magic Scorpion
+Charm both apply, which is what the game does and what one value would have made exclusive.
+
+### 5.1 Blasphemous Blade, Taker's Flames, RL150 — done
+
+Taker's Flames is a weapon skill, so `hit_kind = "Skill"`. Of the eleven talismans in the
+table, three do anything at all:
+
+| talisman | × | condition |
+|---|---|---|
+| Shard of Alexander | 1.15 | all weapon skills |
+| Warrior Jar Shard | 1.1 | — |
+| Ritual Sword Talisman | 1.1 | at full HP |
+| **total** | **1.3915** | |
+
+The fourth slot has no damage multiplier left for this hit, and that is the answer: Dagger
+Talisman, Godfrey Icon, Claw, Axe, the three Successive ones are each worth exactly 1.0 here,
+with `not_counted` saying which hit they *do* want. Spend the slot on survivability.
+
+Also: Taker's Flames reports `motion_values_uniform: false`, so its 510 motion value cannot go
+through `optimal-affinity`'s scalar `attack_mv` — the guard from bug 10 firing on a real
+question.
+
+### 5.2 Godslayer's Greatsword, dragon that allows no crits — done
+
+The setup is Shard + Godfrey + Ritual + Dagger. On a plain weapon skill, **only two of the
+four do anything**: Shard 1.15 and Ritual 1.1, total 1.265. Dagger Talisman is out because it
+is a critical-only 1.17, and Godfrey Icon is out because it wants a *charged* skill — so the
+answer is not "swap the Dagger", it is "two of your four slots are already dead unless you
+charge the skill". Charge it and Godfrey adds 1.15.
+
+### 5.3 Cold Milady Wing Stance, flex slot for frost-immune bosses — partial
+
+Milady resolves (Light Greatsword, infusable, +25) and Wing Stance resolves with six accepted
+affinities and **no damaging hits of its own** — it is a stance, like Seppuku. The frost half
+is answerable: seven of the DLC's 42 phases are outright immune to frost, and
+`boss-coverage` names them. What is not answerable is the flex slot itself, because the
+stance's follow-up attacks are not separable in the table.
+
+### 5.4 Graven-Mass + Graven-School + Magic Scorpion Charm — done, and yes they stack
+
+All three are `Passive`, and `BuffSlot` says Passive multiplies. For a magic sorcery:
+1.08 × 1.04 × 1.12 = **1.257984**. The Scorpion Charm's price comes with it — ten points of
+physical negation, fifteen in PvP — because quoting the bonus alone is half an answer.
+
+### 5.5 Eleonora's Poleblade, bleed, flex for bleed-immune bosses — partial
+
+The weapon resolves (Twinblade, somber, +10). The bleed-immunity half is exact: **84 of the
+game's 238 phases are immune to bleed**, and the list is one call. The talisman half is thin,
+because `BuffMult` carries eleven talismans and the ones a bleed build actually swaps to are
+mostly not among them.
+
+### 5.6 Best talismans for fire incantations at 60 Faith — done
+
+`damage_sources = ["incantation", "fire"]`: Flock's Canvas 1.08, Faithful's Canvas 1.04, Fire
+Scorpion Charm 1.12 → **1.257984**, the same product as the sorcery package and for the same
+reason. Graven-Mass is excluded with "it multiplies sorcery damage, and this hit is incantation
+and fire".
+
+### 5.7 Fourth slot: Lord of Blood's Exultation or Ritual Sword? — done
+
+On successive twinblade hits, with Rotten Winged Sword Insignia and Millicent's Prosthesis
+already on:
+
+| fourth slot | total |
+|---|---|
+| Lord of Blood's Exultation | **1.50516** |
+| Ritual Sword Talisman | 1.37973 |
+
+Lord of Blood's wins by nine per cent — conditional on a bleed having procced, which for a
+twinblade build it will have. The node makes that condition an assertion rather than an
+assumption.
+
+### 5.8 Radagon and Elden Beast: what a bleed setup loses — done
+
+| fight | immune to | takes most |
+|---|---|---|
+| Radagon of the Golden Order | bleed, madness, sleep | fire (0% negation) |
+| Elden Beast | **every status except death** | physical (10%) |
+
+So the bleed talismans come off for both, Lord of Blood's Exultation included since nothing
+will proc. Radagon negates 35% physical and 0% fire; Elden Beast negates 40% of every element
+and 10% physical. They want opposite answers, which is why one recommendation for "Radagon and
+Elden Beast" is wrong.
+
+## Pattern 6 — the affinity an ash accepts, which was in no table
+
+Eight questions turning on "qual Ash aceita Blood?", and `AshCompat` carries only the affinity
+an ash *arrives with*. `data/AshAffinity.csv` — 982 rows of skill-and-affinity — closes it, and
+`ash-rank` sorts what fits four different ways. Writing it found bugs 12 and 13.
+
+The four rankings matter: **Stormcaller tops nearly every list on raw totals** (14 hits, 600
+status, 1540 poise) and **overrides the weapon's scaling to Str/Dex**, which the node reports,
+so on a build that is not Str/Dex it is the wrong answer despite the numbers.
+
+| # | question | answer |
+|---|---|---|
+| 6.1 | Grave Scythe, Blood, most hits | Stormcaller 600 status / Double Slash 525 over 6 hits — 35 ashes fit |
+| 6.2 | Twinblade blood: Seppuku vs Spinning Strikes vs Bloody Slash | none of the three: **Seppuku has no damaging hits at all** (self-buff), and Double Slash at 525 beats Bloody Slash. Spinning Strikes does not go on a twinblade |
+| 6.3 | Cold Nagakiba, fastest frost proc | **Spinning Weapon**, 750 status over 11 hits — ahead of Stormcaller's 600 |
+| 6.4 | Great hammer, stance break | Stormcaller 1540, then **Savage Lion's Claw 850** without a scaling override |
+| 6.5 | DEX/FTH spear, lightning ash | partial — "Lightning Spear" as an ash is ambiguous with the incantations; Lightning Slash resolves, 4 hits, six affinities |
+| 6.6 | Curved sword, Blood, continuous spin | **Spinning Slash does serve**: it accepts all thirteen affinities including Blood and goes on curved swords. It is Keen by default, which is what the question mistook for a restriction |
+| 6.7 | Greatsword, Fire, multi-hit | **Spinning Gravity Thrust**, 9 hits and 585 status, behind Stormcaller only |
+| 6.8 | Colossal, poise, keeping Heavy | **Savage Lion's Claw** — Stormcaller has more poise damage but overrides scaling to Str/Dex, which throws the Heavy scaling away |
+
+## Pattern 7 — the pattern the collection was furthest from, and now closest to
+
+Eight questions across the whole boss table. `boss-coverage` answers all of them in one call
+each.
+
+### 7.1 Gargoyle's Twinblade against Radagon and the Elden Beast — done
+
+Two fights, two different answers, both computed against the real negation:
+
+| fight | negation | best infusion |
+|---|---|---|
+| Radagon | 35 phys / 0 fire / 20 ltng / 80 holy | **Fire, 377** |
+| Elden Beast | 10 phys / 40 fire / 40 ltng / 80 holy | **Heavy, 394** |
+
+### 7.2 Fire, lightning or holy for faith, base game and DLC — done
+
+Over all 238 phases: **fire**, on 18.98% average negation against lightning's 22.03 and holy's
+25.43, and 50 outright wins to lightning's 49 and holy's 32. Holy is resisted 50% or more on
+16 phases and fully negated on one.
+
+### 7.3 DLC fights immune to frost — done
+
+**Seven of 42**: three Ghostflame Dragons, a Death Rite Bird, a Fallingstar Beast, and both
+phases of the Putrescent Knight. Toughest non-immune is Bayle the Dread at 744 resistance.
+
+### 7.4 Where holy is bad — done
+
+Same call as 7.2 with the summary read the other way: holy is the worst of the three on
+average, 16 phases resist it at 50% or more, and Radagon and the Elden Beast — the fights a
+holy weapon is most often carried for — negate 80% of it apiece. The secondary-holy-weapon idea
+is the trap the question suspected.
+
+### 7.5 DLC fights that resist lightning — done
+
+Ancient Dragon Senessax at 80%, then Promised Consort Radahn, Metyr, Bayle and the Ghostflame
+Dragons at 40. Against Senessax the answer is physical; against Radahn, holy.
+
+### 7.6 A fire/lightning/holy matrix of the DLC — done
+
+42 rows, one per phase, with each fight's best type and the summary above. Fire wins.
+
+### 7.7 Where bleed, frost and poison are useless — done
+
+Of 238 phases: **bleed immune on 84**, frost on 49, poison on 49, scarlet rot on 41. A bleed
+build is switched off for a third of the game's fights, which is a larger number than the
+question expected.
+
+### 7.8 Elden Beast and Radagon: Heavy vs Fire vs Quality — done
+
+Answered by 7.1's second table: Heavy wins on the Elden Beast, Fire on Radagon, and the gap
+between them is the 35%-versus-10% physical negation. One weapon cannot be best against both.
+
+## Pattern 8 — a build for a pool of fights
+
+Seven questions, and every one is Pattern 7's coverage call feeding `build-allocate`. Four
+answer cleanly; three are partial, and for the same reason each time.
+
+### 8.1 Malenia, Mohg, Maliketh, Godfrey — done
+
+Seven phases. **Physical is best on average at 13.57% negation**, against lightning's 22.86 and
+holy's 45.71 — and holy wins none of the seven. Two of the seven, Mohg's second form and
+Godfrey's, are immune to bleed *and* frost, so a status build is off for a third of the pool.
+The build is a physical one; `weapon-rank` and `build-allocate` do the rest.
+
+### 8.2 DLC pool: Rellana, Messmer, Romina, Bayle, Consort Radahn — done
+
+Same shape, the DLC table, and fire's coverage from 7.2 with Bayle's lightning resistance
+called out.
+
+### 8.3 "Any boss in the game" — partial
+
+The coverage call works over all 238 phases and says fire. What the question wants beyond that
+— one loadout, no menu — is a judgement the collection has no figure for.
+
+### 8.4 Fire Giant, Godskin Duo, Astel — done
+
+Five phases, and **physical wins outright on three of the five at 6% average negation**, against
+fire's 44 and holy's 32. Fire against the Fire Giant is the trap the numbers catch. Nothing in
+the pool is immune to bleed.
+
+### 8.5, 8.6 Survivability, stance break, aggro — partial
+
+Stance break is answerable through `ash-rank`'s poise ranking. Survivability is
+`character-build` and `defence`. **Aggro is not in the data at all**, and neither is the
+threat a summon draws, so the "seguro de vida" half of 8.6 has no computed answer.
+
+### 8.7 Mid-game generalist at RL125 — done
+
+Rennala, Radahn and Morgott through `boss-coverage`, then a spread at RL125. Rennala's bubble
+negating 100% of everything is the one that shapes the answer.
+
+## Pattern 9 — comparisons, and two bugs on the way
+
+Ten head-to-heads. Eight land cleanly, and working them found bugs 14 and 15.
+
+### 9.1 Rennala's Full Moon vs Ranni's Dark Moon vs Rellana's Twin Moons — done
+
+From a Carian Regal Scepter at 80 intelligence:
+
+| spell | attack | FP | family bonus |
+|---|---|---|---|
+| Rennala's Full Moon | **1479.46** | 47 | ×1.1 Full Moon |
+| Ranni's Dark Moon | 1356.17 | 57 | ×1.1 Full Moon |
+| Rellana's Twin Moons | three separate hits | — | — |
+
+Full Moon wins on damage *and* costs ten less FP, which is not the usual expectation. Rellana's
+is the one that broke: it is stored as `[1]`, `[2]` and `[3]`, and asking for the bare name used
+to be a crash. Now it resolves to three candidates.
+
+### 9.2 Blasphemous Blade vs Sword of Night and Flame — done
+
+At RL150 from a Confessor with 45/25/25 floors: Blasphemous Blade **796.51** (STR 40 · DEX 40 ·
+FTH 36, 499 physical / 296 fire) against Sword of Night and Flame **701.92** (INT 50 · FTH 50,
+three damage types of about 230 each). The Blasphemous Blade also leaves 80 points in strength
+and dexterity, which is a different build to live in.
+
+### 9.3 Loretta's Greatbow vs Loretta's Mastery — done
+
+270 magic for 24 FP against 108 magic for 39 FP. The Greatbow is two and a half times the
+damage for two thirds the cost per cast; Mastery's case has to be its multi-hit pattern, which
+the spell table does not carry.
+
+### 9.4 STR/FTH vs DEX/FTH as a coop generalist — partial
+
+Both spreads compute, and `weapon-rank` ranks what each can hold. "Which covers more" is
+Pattern 7 and answered; "more damage per hit" depends on the weapon, and the honest answer is
+the ranking rather than a single number.
+
+### 9.5 Rivers of Blood vs Nagakiba for a fast proc — done
+
+At ARC 60 / DEX 30: Rivers of Blood 637.85 AR and **76 bleed**; Nagakiba Blood +25 441.59 AR
+and **114 bleed**. The Nagakiba procs half again as fast and hits a third softer — which is the
+conditional answer the question wanted.
+
+### 9.6 Carian Regal Scepter vs Lusat's at 70 INT — done, and the FP was wrong
+
+Lusat's gives **+10.2% damage for +50% FP**: 1062.88 at 36 FP against 964.77 at 24. That is
+**29.5 damage per FP against 40.2** — the Regal Scepter is 36% more efficient, the opposite of
+what the figures said before bug 15 was fixed.
+
+### 9.7 Dagger Talisman vs Godfrey Icon on Ordovis — done
+
+The best answer in the pattern, because it is three answers:
+
+| the hit | multiplier | which talisman |
+|---|---|---|
+| uncharged Ordovis's Vortex | 1.0 | **neither** |
+| charged | 1.15 | Godfrey Icon |
+| riposte | 1.17 | Dagger Talisman |
+
+So "considerando que nem todo boss deixa riposte" is exactly right, and the answer is that
+against a boss with no riposte you charge the skill and wear Godfrey.
+
+### 9.8 Sword Lance, Cold vs Blood — done
+
+At STR 21 / DEX 40 / INT 20 / ARC 40: Cold **547.47 AR with 153 frost**, Blood 434.73 with 150
+bleed. Cold wins on both counts. The first run of this at strength 20 returned 162 AR for
+Blood — the weapon needs 21, and `shortfall: strength 1` is the node catching a one-point miss
+that costs 60% of the attack rating.
+
+### 9.9 Great Katana vs Nagakiba for DEX/bleed — partial
+
+At DEX 50 / ARC 45, both Blood +25: Great Katana **597.78 AR and 132 bleed**, Nagakiba 485.97
+and 108. The Great Katana wins both. Moveset and reach, which the question also asks about, are
+not in the extraction.
+
+### 9.10 Heavy vs Quality on a Gargoyle's Twinblade at STR 50 / DEX 30 — done
+
+Heavy 478.36, Quality 456.81 — and **Fire beats both at 494.71**, which is the answer the
+question did not ask for and needs.

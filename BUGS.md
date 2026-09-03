@@ -60,7 +60,11 @@ been a fourth: it was caught by the next batch of questions arriving before anyo
 **#11 is also the first entry against work done in this pass.** A stopgap built for Pattern 4
 was wrong by the time Pattern 5 asked a sharper question, and the table that made it
 unnecessary had been sitting unvendored in the workspace the whole time. Worth checking the
-workspace's file list before building a parser.
+workspace's file list before building a parser — #15 is the same lesson a second time.
+
+**Five of the fifteen are the same mistake**: #2, #4, #5, #9, #12, #13 and #15 are all *the
+table already knew and the code did not look*. That is the single most productive thing to
+check when something looks wrong.
 
 ---
 

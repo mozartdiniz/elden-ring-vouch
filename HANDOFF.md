@@ -50,6 +50,7 @@ elden-ring-vouch/
                             change reaching planner.py or ap_calc.py
   VALIDATION.md            122 questions, worked one at a time — read this next
   BUGS.md                  what the questions found, open and fixed — the work list
+  PLAN-web-app.md          serving this publicly: the loop, the costs, the open decisions
 ```
 
 **The `oracle/` vs `data/` split is the important one.** `oracle/` is a byte-identical copy of

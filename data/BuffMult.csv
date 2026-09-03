@@ -1,0 +1,169 @@
+Name,Kind,Slot,HitKind,MultPve,MultPvp,Notes
+none,None,None,All,1.0,1.0,Unused product slot.
+none,None,None,Skill,1.0,1.0,Unused product slot.
+none,None,None,ChargedSkill,1.0,1.0,Unused product slot.
+none,None,None,Crit,1.0,1.0,Unused product slot.
+none,None,None,Jump,1.0,1.0,Unused product slot.
+none,None,None,ChargedR2,1.0,1.0,Unused product slot.
+none,None,None,Successive,1.0,1.0,Unused product slot.
+none,None,None,Physical,1.0,1.0,Unused product slot.
+Dagger Talisman,Talisman,Passive,All,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,Skill,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,ChargedSkill,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,Crit,1.17,1.16,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,Jump,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,ChargedR2,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,Successive,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,Physical,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Godfrey Icon,Talisman,Passive,All,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,Skill,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,ChargedSkill,1.15,1.15,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,Crit,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,Jump,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,ChargedR2,1.15,1.15,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,Successive,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,Physical,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Shard of Alexander,Talisman,Passive,All,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,Skill,1.15,1.15,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,ChargedSkill,1.15,1.15,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,Crit,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,Jump,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,ChargedR2,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,Successive,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,Physical,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Warrior Jar Shard,Talisman,Passive,All,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,Skill,1.1,1.1,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,ChargedSkill,1.1,1.1,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,Crit,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,Jump,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,ChargedR2,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,Successive,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,Physical,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Claw Talisman,Talisman,Passive,All,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,Skill,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,ChargedSkill,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,Crit,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,Jump,1.15,1.075,Jump attacks only.
+Claw Talisman,Talisman,Passive,ChargedR2,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,Successive,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,Physical,1.0,1.0,Jump attacks only.
+Axe Talisman,Talisman,Passive,All,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,Skill,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,ChargedSkill,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,Crit,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,Jump,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,ChargedR2,1.1,1.1,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,Successive,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,Physical,1.0,1.0,"Charged R2 only, not skills."
+Ritual Sword Talisman,Talisman,Passive,All,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,Skill,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,ChargedSkill,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,Crit,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,Jump,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,ChargedR2,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,Successive,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,Physical,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Rotten Winged Sword Insignia,Talisman,Passive,All,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,Skill,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,ChargedSkill,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,Crit,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,Jump,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,ChargedR2,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,Successive,1.13,1.13,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,Physical,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Millicent's Prosthesis,Talisman,Passive,All,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,Skill,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,ChargedSkill,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,Crit,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,Jump,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,ChargedR2,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,Successive,1.11,1.11,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,Physical,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Winged Sword Insignia,Talisman,Passive,All,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,Skill,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,ChargedSkill,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,Crit,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,Jump,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,ChargedR2,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,Successive,1.1,1.1,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,Physical,1.0,1.0,Max successive 1.10x.
+Lord of Blood's Exultation,Talisman,Passive,All,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,Skill,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,ChargedSkill,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,Crit,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,Jump,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,ChargedR2,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,Successive,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,Physical,1.2,1.12,While the bleed-proc aura is active (20s).
+Golden Vow (Spell),Spell,Aura,All,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,Skill,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,ChargedSkill,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,Crit,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,Jump,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,ChargedR2,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,Successive,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,Physical,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Ash),Ash,Aura,All,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,Skill,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,ChargedSkill,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,Crit,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,Jump,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,ChargedR2,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,Successive,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,Physical,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Tool),Consumable,Aura,All,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,Skill,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,ChargedSkill,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,Crit,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,Jump,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,ChargedR2,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,Successive,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,Physical,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Determination,Ash,Unique,All,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,Skill,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,ChargedSkill,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,Crit,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,Jump,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,ChargedR2,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,Successive,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,Physical,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Royal Knight's Resolve,Ash,Unique,All,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,Skill,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,ChargedSkill,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,Crit,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,Jump,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,ChargedR2,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,Successive,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,Physical,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Exalted Flesh,Consumable,Body,All,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,Skill,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,ChargedSkill,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,Crit,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,Jump,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,ChargedR2,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,Successive,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,Physical,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Thorny Cracked Tear,Tear,Tear,All,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,Skill,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,ChargedSkill,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,Crit,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,Jump,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,ChargedR2,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,Successive,1.2,1.2,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,Physical,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Spiked Cracked Tear,Tear,Tear,All,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,Skill,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,ChargedSkill,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,Crit,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,Jump,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,ChargedR2,1.15,1.15,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,Successive,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,Physical,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Bloodsucking Cracked Tear,Tear,Tear,All,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,Skill,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,ChargedSkill,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,Crit,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,Jump,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,ChargedR2,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,Successive,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,Physical,1.2,1.125,All damage 1.2x; HP drain. 180s.

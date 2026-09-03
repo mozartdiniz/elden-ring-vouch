@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "buff-stack output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "buffs", "hit_kind", "pvp", "assumed", "multiplier", "applied", "not_counted",
+    "slot_rules", "damage_multiplier", "hit_kinds", "catalog_size"
+  ],
+  "$defs": {
+    "factor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["buff", "kind", "slot", "multiplier", "applies_on", "state_conditional", "note"],
+      "properties": {
+        "buff": { "type": "string" },
+        "kind": { "type": "string", "description": "Talisman, Ash, Tear, Consumable or Spell." },
+        "slot": { "type": "string", "description": "Which slot it occupies, and so whether it multiplies with the others." },
+        "multiplier": { "type": "number", "exclusiveMinimum": 0, "description": "Its figure for this hit kind." },
+        "applies_on": {
+          "type": "array", "items": { "type": "string" },
+          "description": "The hit kinds it is worth more than 1.0 on. Quote it when saying why a buff did not count."
+        },
+        "state_conditional": { "type": "boolean", "description": "True when it is above 1.0 on every hit kind, which means its condition is a state — a bleed proc, full HP — and not the kind of hit." },
+        "note": { "type": "string", "description": "The table's own wording for when it applies." },
+        "excluded_because": { "type": "string", "description": "Present only in not_counted." }
+      }
+    }
+  },
+  "properties": {
+    "buffs": { "type": "array", "items": { "type": "string" } },
+    "hit_kind": { "type": "string" },
+    "pvp": { "type": "boolean" },
+    "assumed": { "type": "array", "items": { "type": "string" } },
+    "multiplier": {
+      "type": "number", "exclusiveMinimum": 0,
+      "description": "The product of what applied. 1.0 when nothing did, which is the honest answer for a hit none of these buffs touches."
+    },
+    "applied": { "type": "array", "items": { "$ref": "#/$defs/factor" } },
+    "not_counted": {
+      "type": "array", "items": { "$ref": "#/$defs/factor" },
+      "description": "Buffs held that did not go into the product, each with why — wrong kind of hit, a state not asserted, or overwritten by another buff in the same slot. This is the actionable half of the answer."
+    },
+    "slot_rules": {
+      "type": "object", "additionalProperties": { "type": "string" },
+      "description": "Multiply, Overwrite or Identity, per slot. The reason two Golden Vows are not 1.15 x 1.15."
+    },
+    "damage_multiplier": {
+      "type": "object", "additionalProperties": false,
+      "required": ["physical", "strike", "slash", "pierce", "magic", "fire", "lightning", "holy"],
+      "properties": {
+        "physical": { "type": "number" }, "strike": { "type": "number" },
+        "slash": { "type": "number" }, "pierce": { "type": "number" },
+        "magic": { "type": "number" }, "fire": { "type": "number" },
+        "lightning": { "type": "number" }, "holy": { "type": "number" }
+      },
+      "description": "The same figure shaped for optimal-affinity's damage_multiplier, so nothing reshapes it downstream."
+    },
+    "hit_kinds": { "type": "array", "items": { "type": "string" }, "description": "Every hit kind the table distinguishes." },
+    "catalog_size": { "type": "integer", "minimum": 1 }
+  }
+}

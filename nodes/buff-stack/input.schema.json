@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "buff-stack input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["buffs"],
+  "properties": {
+    "buffs": {
+      "type": "array", "minItems": 1, "maxItems": 12,
+      "items": { "type": "string" },
+      "description": "The buffs held or cast, by their names in BuffMult — talismans, ashes, physick tears, spells and tools. A name it does not know is a caller error listing every name it does."
+    },
+    "hit_kind": {
+      "type": "string",
+      "enum": ["All", "Skill", "ChargedSkill", "Crit", "Jump", "ChargedR2", "Successive", "Physical"],
+      "description": "The kind of hit being asked about. This is the assertion: Shard of Alexander is 1.15 on a Skill and 1.0 on anything else. Default 'All', which counts only the buffs that apply to everything."
+    },
+    "pvp": { "type": "boolean", "description": "Use the PvP figures. Default false." },
+    "assume": {
+      "type": "array", "items": { "type": "string" },
+      "description": "Buffs whose *state* you are asserting — a bleed has procced, HP is full, the successive-hit tier is maxed, the aura is up. Only needed for buffs worth more than 1.0 on every hit kind, which is how the table says the condition is not about the hit. Every name must also be in `buffs`."
+    }
+  }
+}

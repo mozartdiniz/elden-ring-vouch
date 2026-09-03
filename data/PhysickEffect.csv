@@ -1,0 +1,41 @@
+Name,Listed,Effect,PvpAlter,Duration,Notes
+Crimson Crystal Tear,Restores half of total HP in mixed physick,Restores ⌊MaxHP * 0.5⌋ HP,,N/A,"There are two of these, so you can combine them for a 100% restore."
+Crimson Crystal Tear,,,,,
+Crimsonspill Crystal Tear,Temporarily boosts max HP in mixed physick,⌊MaxHP * 1.1⌋,,180.0,
+Crimsonburst Crystal Tear,Steadily restores HP for a time in mixed physick,Restores 7 HP/s,,180.0,
+Crimsonburst Dried Tear,,Restores 7 HP/s to allies within 7m,,180.0,
+Cerulean Crystal Tear,Restores half of total FP in mixed physick,Restores ⌊MaxFP * 0.5⌋ FP,,N/A,"There are two of these, so you can combine them for a 100% restore."
+Cerulean Crystal Tear,,,,,
+Greenspill Crystal Tear,Temporarily boosts stamina in mixed physick,⌊MaxStamina * 1.15⌋,,180.0,
+Greenburst Crystal Tear,Temporarily boosts stamina recovery speed in mixed physick,Increases stamina regen by 15/s,,180.0,
+Strength-knot Crystal Tear,Temporarily boosts strength in mixed physick,Increase str by 10,,180.0,
+Dexterity-knot Crystal Tear,Temporarily boosts dexterity in mixed physick,Increase dex by 10,,180.0,
+Intelligence-knot Crystal Tear,Temporarily boosts intelligence in mixed physick,Increase int by 10,,180.0,
+Faith-knot Crystal Tear,Temporarily boosts faith in mixed physick,Increase faith by 10,,180.0,
+Opaline Hardtear,Temporarily boosts all damage negation in physick,Increase all damage negation by 15%,0.1,180.0,
+Speckled Hardtear,Boosts resistance and heals status in mixed physick,Increase resistances by 90 and sets build-up to 0,,180.0,
+Leaden Hardtear,Temporarily boosts poise in mixed physick,"Prevents stagger from Damage Level 1, 2, 3, 5, and 8 attacks",,10.0,
+Deflecting Hardtear,Enhances spontaneous guard in mixed physick,"For 300 seconds: guarding will increase physical guard negation by 100%, elemental guard negations by 75%, and decrease incoming stamina damage by 65% for 6 frames (30 fps); spamming block will reduce deflect frames to 3, 2, then 0. If an attack is blocked within those 6 frames: guard counters will recieve a buff that has multiple tiers. Subsequent deflects while the buff is still active will increase the current tier and some attacks being deflected can gain multiple tiers at a time. - Tier 1: increases damage by 1.2x (1.15x in PvP), stamina damage by 1.2x, and poise damage by 1.15x for 5 seconds - Tier 2: increases damage by 1.4x (1.28x in PvP), stamina damage by 1.4x, and poise damage by 1.23x for 5 seconds - Tier 3: increases damage by 1.6x (1.36x in PvP), stamina damage by 1.6x, and poise damage by 1.31x for 5 seconds - Tier 4: increases damage by 1.8x (1.45x in PvP), stamina damage by 1.8x, and poise damage by 1.39x for 5 seconds",,300.0,
+Magic-Shrouding Cracked Tear,Temporarily boosts magic attacks in mixed physick,1.2x magic damage,1.125x,180.0,
+Flame-Shrouding Cracked Tear,Temporarily boosts fire attacks in mixed physick,1.2x fire damage,1.125x,180.0,
+Lightning-Shrouding Cracked Tear,Temporarily boosts lightning attacks in mixed physick,1.2x lightning damage,1.125x,180.0,
+Holy-Shrouding Cracked Tear,Temporarily boosts holy attacks in mixed physick,1.2x holy damage,1.125x,180.0,
+Stonebarb Cracked Tear,Makes attacks more likely to break enemy stances in a mixed physick,1.3x poise damage and 1.3x stamina damage,,30.0,
+Spiked Cracked Tear,Enhances charged attacks for a time in mixed physick,1.15x charged R2 damage,,180.0,
+Thorny Cracked Tear,Makes consecutive attacks grow stronger in mixed physick,1.09x/1.13x/1.2x damage with continuous attacks,,180.0,"More information about all ""successive attack"" effects can be found here"
+Crimson-Sapping Cracked Tear,,Restores ⌊MaxHP * 0.008⌋ HP every hit,,45.0,
+Cerulean-Sapping Cracked Tear,,Restores 5 FP every hit,,45.0,
+Bloodsucking Cracked Tear,,"Increases damage by 1.2x, but drains ⌊MaxHP * 0.002⌋ + 20 HP/s for the duration",1.125x,180.0,
+Twiggy Cracked Tear,Briefly stop rune loss on death in mixed physick,Self-explanatory,,180.0,
+Winged Crystal Tear,Temporarily reduces equip load in mixed physick,MaxEquipLoad * 4.5,,180.0,
+Windy Crystal Tear,Enhances dodge rolls for a time in mixed physick,Adds 3 iframes (30 fps) to roll; -15% damage negations (iframe bonus does not stack with Crucible Feather Talisman),,180.0,
+Glovewort Crystal Tear,,1.075x spirit ash damage,,180.0,
+Crimson Bubbletear,Restores HP when near death in mixed physick,Restores ⌊MaxHP * 0.3⌋ HP when below 21% MaxHP,,180.0,Effect ends when triggered.
+Crimsonwhorl Bubbletear,Converts damage recieved into HP in mixed physick,Restores ⌊MaxHP * 0.05⌋ HP when hit,,15.0,
+Opaline Bubbletear,Significantly negates damage in mixed physick,Increase damage negation by 90%,,180.0,Effect ends when hit.
+Cerulean Hidden Tear,Eliminates all FP consumption in mixed physick,Disables FP consumption,,10.0,
+Viridian Hidden Tear,,Disables stamina consumption,,15.0,
+Purifying Crystal Tear,Purifies the Lord of Blood's curse in a mixed physick,Prevents blood loss during phase 2 transition,,∞,
+Ruptured Crystal Tear,Causes concoction to explode in mixed physick,Explode after 2.7 seconds; 2.9 if both equipped,,2.7 | 2.9,"800 holy attack, 135 stamina damage, and 10 poise damage (1750/450/15 if both); 300 damage to user (700 if both)"
+Ruptured Crystal Tear,Causes concoction to explode in mixed physick,Explode after 2.9 seconds; 2.9 if both equipped,,2.9,"800 holy attack, 135 stamina damage, and 10 poise damage (1750/450/15 if both); 300 damage to user (700 if both)"
+Oil-Soaked Tear,,Applies oil debuff within 1m to user and enemies that decreases fire damage negation by -20%,,30.0,

@@ -1,0 +1,7 @@
+Slot,Rule,Notes
+Passive,Multiply,Talismans multiply with each other and with every other slot. Never additive.
+Tear,Multiply,Two different tears multiply. Same-name doubles are a special case (two Crimson).
+Aura,Overwrite,"Golden Vow spell, ash, and tool share Aura — last one wins, they do not multiply."
+Unique,Overwrite,Determination and Royal Knight's Resolve overwrite each other.
+Body,Overwrite,Exalted Flesh overwrites Flame Grant Me Strength. Multiplies with Aura and Passive.
+None,Identity,Unused product slot is 1.0.

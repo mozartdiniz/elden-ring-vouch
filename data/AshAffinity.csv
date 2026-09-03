@@ -1,0 +1,983 @@
+Skill,Affinity
+Dryleaf Whirlwind,Standard
+Dryleaf Whirlwind,Lightning
+Dryleaf Whirlwind,Blood
+Dryleaf Whirlwind,Poison
+Dryleaf Whirlwind,Sacred
+Aspects of the Crucible: Wings,Standard
+Aspects of the Crucible: Wings,Heavy
+Aspects of the Crucible: Wings,Keen
+Aspects of the Crucible: Wings,Quality
+Aspects of the Crucible: Wings,Lightning
+Aspects of the Crucible: Wings,Sacred
+Spinning Gravity Thrust,Standard
+Spinning Gravity Thrust,Heavy
+Spinning Gravity Thrust,Keen
+Spinning Gravity Thrust,Quality
+Spinning Gravity Thrust,Magic
+Spinning Gravity Thrust,Fire
+Spinning Gravity Thrust,Flame Art
+Spinning Gravity Thrust,Lightning
+Spinning Gravity Thrust,Sacred
+Spinning Gravity Thrust,Poison
+Spinning Gravity Thrust,Blood
+Spinning Gravity Thrust,Occult
+Spinning Gravity Thrust,Cold
+Palm Blast,Standard
+Palm Blast,Blood
+Palm Blast,Lightning
+Palm Blast,Poison
+Palm Blast,Sacred
+Piercing Throw,Keen
+Piercing Throw,Blood
+Piercing Throw,Lightning
+Piercing Throw,Poison
+Piercing Throw,Sacred
+Scattershot Throw,Keen
+Scattershot Throw,Blood
+Scattershot Throw,Lightning
+Scattershot Throw,Poison
+Scattershot Throw,Sacred
+Wall of Sparks,Standard
+Wall of Sparks,Blood
+Wall of Sparks,Lightning
+Wall of Sparks,Poison
+Wall of Sparks,Sacred
+Rolling Sparks,Standard
+Rolling Sparks,Blood
+Rolling Sparks,Lightning
+Rolling Sparks,Poison
+Rolling Sparks,Sacred
+Raging Beast,Keen
+Raging Beast,Blood
+Raging Beast,Lightning
+Raging Beast,Poison
+Raging Beast,Sacred
+Savage Claws,Keen
+Savage Claws,Blood
+Savage Claws,Lightning
+Savage Claws,Poison
+Savage Claws,Sacred
+Blind Spot,Keen
+Blind Spot,Blood
+Blind Spot,Lightning
+Blind Spot,Poison
+Blind Spot,Sacred
+Swift Slash,Standard
+Swift Slash,Heavy
+Swift Slash,Keen
+Swift Slash,Quality
+Swift Slash,Magic
+Swift Slash,Fire
+Swift Slash,Flame Art
+Swift Slash,Lightning
+Swift Slash,Sacred
+Swift Slash,Poison
+Swift Slash,Blood
+Swift Slash,Occult
+Swift Slash,Cold
+Overhead Stance,Keen
+Overhead Stance,Heavy
+Overhead Stance,Blood
+Overhead Stance,Lightning
+Overhead Stance,Poison
+Overhead Stance,Sacred
+Wing Stance,Quality
+Wing Stance,Heavy
+Wing Stance,Blood
+Wing Stance,Lightning
+Wing Stance,Poison
+Wing Stance,Sacred
+Blinkbolt,Lightning
+Blinkbolt,Heavy
+Blinkbolt,Blood
+Blinkbolt,Poison
+Blinkbolt,Sacred
+Flame Skewer,Flame Art
+Flame Skewer,Fire
+Flame Skewer,Heavy
+Flame Skewer,Blood
+Flame Skewer,Lightning
+Flame Skewer,Poison
+Flame Skewer,Sacred
+Savage Lion's Claw,Heavy
+Savage Lion's Claw,Blood
+Savage Lion's Claw,Lightning
+Savage Lion's Claw,Poison
+Savage Lion's Claw,Sacred
+Divine Beast Frost Stomp,Cold
+Divine Beast Frost Stomp,Heavy
+Divine Beast Frost Stomp,Magic
+Divine Beast Frost Stomp,Blood
+Divine Beast Frost Stomp,Lightning
+Divine Beast Frost Stomp,Poison
+Divine Beast Frost Stomp,Sacred
+Flame Spear,Flame Art
+Flame Spear,Fire
+Flame Spear,Heavy
+Flame Spear,Blood
+Flame Spear,Lightning
+Flame Spear,Poison
+Flame Spear,Sacred
+Carian Sovereignty,Standard
+Carian Sovereignty,Heavy
+Carian Sovereignty,Keen
+Carian Sovereignty,Quality
+Carian Sovereignty,Magic
+Carian Sovereignty,Cold
+Shriek of Sorrow,Occult
+Shriek of Sorrow,Fire
+Shriek of Sorrow,Heavy
+Shriek of Sorrow,Blood
+Ghostflame Call,Cold
+Ghostflame Call,Heavy
+Ghostflame Call,Magic
+Ghostflame Call,Fire
+Ghostflame Call,Blood
+Ghostflame Call,Lightning
+Ghostflame Call,Poison
+Ghostflame Call,Sacred
+The Poison Flower Blooms Twice,Standard
+The Poison Flower Blooms Twice,Heavy
+The Poison Flower Blooms Twice,Keen
+The Poison Flower Blooms Twice,Quality
+The Poison Flower Blooms Twice,Poison
+The Poison Flower Blooms Twice,Blood
+The Poison Flower Blooms Twice,Occult
+Igon's Drake Hunt,Standard
+Igon's Drake Hunt,Heavy
+Igon's Drake Hunt,Blood
+Igon's Drake Hunt,Lightning
+Igon's Drake Hunt,Poison
+Igon's Drake Hunt,Sacred
+Shield Strike,Standard
+Shield Strike,Blood
+Shield Strike,Lightning
+Shield Strike,Poison
+Shield Strike,Sacred
+Stamp (Upward Cut),Standard
+Stamp (Upward Cut),Heavy
+Stamp (Upward Cut),Keen
+Stamp (Upward Cut),Quality
+Stamp (Upward Cut),Magic
+Stamp (Upward Cut),Fire
+Stamp (Upward Cut),Flame Art
+Stamp (Upward Cut),Lightning
+Stamp (Upward Cut),Sacred
+Stamp (Upward Cut),Poison
+Stamp (Upward Cut),Blood
+Stamp (Upward Cut),Occult
+Stamp (Upward Cut),Cold
+Stamp (Sweep),Standard
+Stamp (Sweep),Heavy
+Stamp (Sweep),Keen
+Stamp (Sweep),Quality
+Stamp (Sweep),Magic
+Stamp (Sweep),Fire
+Stamp (Sweep),Flame Art
+Stamp (Sweep),Lightning
+Stamp (Sweep),Sacred
+Stamp (Sweep),Poison
+Stamp (Sweep),Blood
+Stamp (Sweep),Occult
+Stamp (Sweep),Cold
+Wild Strikes,Standard
+Wild Strikes,Heavy
+Wild Strikes,Keen
+Wild Strikes,Quality
+Wild Strikes,Magic
+Wild Strikes,Fire
+Wild Strikes,Flame Art
+Wild Strikes,Lightning
+Wild Strikes,Sacred
+Wild Strikes,Poison
+Wild Strikes,Blood
+Wild Strikes,Occult
+Wild Strikes,Cold
+Lion's Claw,Standard
+Lion's Claw,Heavy
+Lion's Claw,Keen
+Lion's Claw,Quality
+Lion's Claw,Magic
+Lion's Claw,Fire
+Lion's Claw,Flame Art
+Lion's Claw,Lightning
+Lion's Claw,Sacred
+Lion's Claw,Poison
+Lion's Claw,Blood
+Lion's Claw,Occult
+Lion's Claw,Cold
+Cragblade,Standard
+Cragblade,Heavy
+Cragblade,Keen
+Cragblade,Quality
+Cragblade,Magic
+Cragblade,Fire
+Cragblade,Flame Art
+Cragblade,Lightning
+Cragblade,Sacred
+Cragblade,Poison
+Cragblade,Blood
+Cragblade,Occult
+Cragblade,Cold
+Kick,Standard
+Kick,Heavy
+Kick,Keen
+Kick,Quality
+Kick,Magic
+Kick,Fire
+Kick,Flame Art
+Kick,Lightning
+Kick,Sacred
+Kick,Poison
+Kick,Blood
+Kick,Occult
+Kick,Cold
+Endure,Standard
+Endure,Heavy
+Endure,Keen
+Endure,Quality
+Endure,Magic
+Endure,Fire
+Endure,Flame Art
+Endure,Lightning
+Endure,Sacred
+Endure,Poison
+Endure,Blood
+Endure,Occult
+Endure,Cold
+Ground Slam,Standard
+Ground Slam,Heavy
+Ground Slam,Keen
+Ground Slam,Quality
+Ground Slam,Magic
+Ground Slam,Fire
+Ground Slam,Flame Art
+Ground Slam,Lightning
+Ground Slam,Sacred
+Ground Slam,Poison
+Ground Slam,Blood
+Ground Slam,Occult
+Ground Slam,Cold
+Earthshaker,Standard
+Earthshaker,Heavy
+Earthshaker,Keen
+Earthshaker,Quality
+Earthshaker,Magic
+Earthshaker,Fire
+Earthshaker,Flame Art
+Earthshaker,Lightning
+Earthshaker,Sacred
+Earthshaker,Poison
+Earthshaker,Blood
+Earthshaker,Occult
+Earthshaker,Cold
+Hoarah Loux's Earthshaker,Standard
+Hoarah Loux's Earthshaker,Heavy
+Hoarah Loux's Earthshaker,Keen
+Hoarah Loux's Earthshaker,Quality
+Hoarah Loux's Earthshaker,Magic
+Hoarah Loux's Earthshaker,Fire
+Hoarah Loux's Earthshaker,Flame Art
+Hoarah Loux's Earthshaker,Lightning
+Hoarah Loux's Earthshaker,Sacred
+Hoarah Loux's Earthshaker,Poison
+Hoarah Loux's Earthshaker,Blood
+Hoarah Loux's Earthshaker,Occult
+Hoarah Loux's Earthshaker,Cold
+War Cry,Standard
+War Cry,Heavy
+War Cry,Keen
+War Cry,Quality
+War Cry,Magic
+War Cry,Fire
+War Cry,Flame Art
+War Cry,Lightning
+War Cry,Sacred
+War Cry,Poison
+War Cry,Blood
+War Cry,Occult
+War Cry,Cold
+Barbaric Roar,Standard
+Barbaric Roar,Heavy
+Barbaric Roar,Keen
+Barbaric Roar,Quality
+Barbaric Roar,Magic
+Barbaric Roar,Fire
+Barbaric Roar,Flame Art
+Barbaric Roar,Lightning
+Barbaric Roar,Sacred
+Barbaric Roar,Poison
+Barbaric Roar,Blood
+Barbaric Roar,Occult
+Barbaric Roar,Cold
+Braggart's Roar,Standard
+Braggart's Roar,Heavy
+Braggart's Roar,Keen
+Braggart's Roar,Quality
+Braggart's Roar,Magic
+Braggart's Roar,Fire
+Braggart's Roar,Flame Art
+Braggart's Roar,Lightning
+Braggart's Roar,Sacred
+Braggart's Roar,Poison
+Braggart's Roar,Blood
+Braggart's Roar,Occult
+Braggart's Roar,Cold
+Troll's Roar,Standard
+Troll's Roar,Heavy
+Troll's Roar,Keen
+Troll's Roar,Quality
+Troll's Roar,Magic
+Troll's Roar,Fire
+Troll's Roar,Flame Art
+Troll's Roar,Lightning
+Troll's Roar,Sacred
+Troll's Roar,Poison
+Troll's Roar,Blood
+Troll's Roar,Occult
+Troll's Roar,Cold
+Spinning Slash,Standard
+Spinning Slash,Heavy
+Spinning Slash,Keen
+Spinning Slash,Quality
+Spinning Slash,Magic
+Spinning Slash,Fire
+Spinning Slash,Flame Art
+Spinning Slash,Lightning
+Spinning Slash,Sacred
+Spinning Slash,Poison
+Spinning Slash,Blood
+Spinning Slash,Occult
+Spinning Slash,Cold
+Impaling Thrust,Standard
+Impaling Thrust,Heavy
+Impaling Thrust,Keen
+Impaling Thrust,Quality
+Impaling Thrust,Magic
+Impaling Thrust,Fire
+Impaling Thrust,Flame Art
+Impaling Thrust,Lightning
+Impaling Thrust,Sacred
+Impaling Thrust,Poison
+Impaling Thrust,Blood
+Impaling Thrust,Occult
+Impaling Thrust,Cold
+Piercing Fang,Standard
+Piercing Fang,Heavy
+Piercing Fang,Keen
+Piercing Fang,Quality
+Piercing Fang,Magic
+Piercing Fang,Fire
+Piercing Fang,Flame Art
+Piercing Fang,Lightning
+Piercing Fang,Sacred
+Piercing Fang,Poison
+Piercing Fang,Blood
+Piercing Fang,Occult
+Piercing Fang,Cold
+Repeating Thrust,Standard
+Repeating Thrust,Heavy
+Repeating Thrust,Keen
+Repeating Thrust,Quality
+Repeating Thrust,Magic
+Repeating Thrust,Fire
+Repeating Thrust,Flame Art
+Repeating Thrust,Lightning
+Repeating Thrust,Sacred
+Repeating Thrust,Poison
+Repeating Thrust,Blood
+Repeating Thrust,Occult
+Repeating Thrust,Cold
+Double Slash,Standard
+Double Slash,Heavy
+Double Slash,Keen
+Double Slash,Quality
+Double Slash,Magic
+Double Slash,Fire
+Double Slash,Flame Art
+Double Slash,Lightning
+Double Slash,Sacred
+Double Slash,Poison
+Double Slash,Blood
+Double Slash,Occult
+Double Slash,Cold
+Sword Dance,Standard
+Sword Dance,Heavy
+Sword Dance,Keen
+Sword Dance,Quality
+Sword Dance,Magic
+Sword Dance,Fire
+Sword Dance,Flame Art
+Sword Dance,Lightning
+Sword Dance,Sacred
+Sword Dance,Poison
+Sword Dance,Blood
+Sword Dance,Occult
+Sword Dance,Cold
+Unsheathe,Standard
+Unsheathe,Heavy
+Unsheathe,Keen
+Unsheathe,Quality
+Unsheathe,Magic
+Unsheathe,Fire
+Unsheathe,Flame Art
+Unsheathe,Lightning
+Unsheathe,Sacred
+Unsheathe,Poison
+Unsheathe,Blood
+Unsheathe,Occult
+Unsheathe,Cold
+Quickstep,Standard
+Quickstep,Heavy
+Quickstep,Keen
+Quickstep,Quality
+Quickstep,Magic
+Quickstep,Fire
+Quickstep,Flame Art
+Quickstep,Lightning
+Quickstep,Sacred
+Quickstep,Poison
+Quickstep,Blood
+Quickstep,Occult
+Quickstep,Cold
+Bloodhound's Step,Standard
+Bloodhound's Step,Heavy
+Bloodhound's Step,Keen
+Bloodhound's Step,Quality
+Bloodhound's Step,Magic
+Bloodhound's Step,Fire
+Bloodhound's Step,Flame Art
+Bloodhound's Step,Lightning
+Bloodhound's Step,Sacred
+Bloodhound's Step,Poison
+Bloodhound's Step,Blood
+Bloodhound's Step,Occult
+Bloodhound's Step,Cold
+Raptor of the Mists,Standard
+Raptor of the Mists,Heavy
+Raptor of the Mists,Keen
+Raptor of the Mists,Quality
+Raptor of the Mists,Magic
+Raptor of the Mists,Fire
+Raptor of the Mists,Flame Art
+Raptor of the Mists,Lightning
+Raptor of the Mists,Sacred
+Raptor of the Mists,Poison
+Raptor of the Mists,Blood
+Raptor of the Mists,Occult
+Raptor of the Mists,Cold
+Beast's Roar,Standard
+Beast's Roar,Heavy
+Beast's Roar,Keen
+Beast's Roar,Quality
+Beast's Roar,Magic
+Beast's Roar,Fire
+Beast's Roar,Flame Art
+Beast's Roar,Lightning
+Beast's Roar,Sacred
+Beast's Roar,Poison
+Beast's Roar,Blood
+Beast's Roar,Occult
+Beast's Roar,Cold
+Square Off,Standard
+Square Off,Heavy
+Square Off,Keen
+Square Off,Quality
+Square Off,Magic
+Square Off,Fire
+Square Off,Flame Art
+Square Off,Lightning
+Square Off,Sacred
+Square Off,Poison
+Square Off,Blood
+Square Off,Occult
+Square Off,Cold
+Charge Forth,Standard
+Charge Forth,Heavy
+Charge Forth,Keen
+Charge Forth,Quality
+Charge Forth,Magic
+Charge Forth,Fire
+Charge Forth,Flame Art
+Charge Forth,Lightning
+Charge Forth,Sacred
+Charge Forth,Poison
+Charge Forth,Blood
+Charge Forth,Occult
+Charge Forth,Cold
+Spinning Strikes,Standard
+Spinning Strikes,Heavy
+Spinning Strikes,Keen
+Spinning Strikes,Quality
+Spinning Strikes,Magic
+Spinning Strikes,Fire
+Spinning Strikes,Flame Art
+Spinning Strikes,Lightning
+Spinning Strikes,Sacred
+Spinning Strikes,Poison
+Spinning Strikes,Blood
+Spinning Strikes,Occult
+Spinning Strikes,Cold
+Giant Hunt,Standard
+Giant Hunt,Heavy
+Giant Hunt,Keen
+Giant Hunt,Quality
+Giant Hunt,Magic
+Giant Hunt,Fire
+Giant Hunt,Flame Art
+Giant Hunt,Lightning
+Giant Hunt,Sacred
+Giant Hunt,Poison
+Giant Hunt,Blood
+Giant Hunt,Occult
+Giant Hunt,Cold
+Storm Blade,Standard
+Storm Blade,Heavy
+Storm Blade,Keen
+Storm Blade,Quality
+Storm Blade,Magic
+Storm Blade,Fire
+Storm Blade,Flame Art
+Storm Blade,Lightning
+Storm Blade,Sacred
+Storm Blade,Poison
+Storm Blade,Blood
+Storm Blade,Occult
+Storm Blade,Cold
+Storm Assault,Standard
+Storm Assault,Heavy
+Storm Assault,Keen
+Storm Assault,Quality
+Storm Assault,Magic
+Storm Assault,Fire
+Storm Assault,Flame Art
+Storm Assault,Lightning
+Storm Assault,Sacred
+Storm Assault,Poison
+Storm Assault,Blood
+Storm Assault,Occult
+Storm Assault,Cold
+Stormcaller,Standard
+Stormcaller,Heavy
+Stormcaller,Keen
+Stormcaller,Quality
+Stormcaller,Magic
+Stormcaller,Fire
+Stormcaller,Flame Art
+Stormcaller,Lightning
+Stormcaller,Sacred
+Stormcaller,Poison
+Stormcaller,Blood
+Stormcaller,Occult
+Stormcaller,Cold
+Storm Stomp,Standard
+Storm Stomp,Heavy
+Storm Stomp,Keen
+Storm Stomp,Quality
+Storm Stomp,Magic
+Storm Stomp,Fire
+Storm Stomp,Flame Art
+Storm Stomp,Lightning
+Storm Stomp,Sacred
+Storm Stomp,Poison
+Storm Stomp,Blood
+Storm Stomp,Occult
+Storm Stomp,Cold
+Vacuum Slice,Standard
+Vacuum Slice,Heavy
+Vacuum Slice,Keen
+Vacuum Slice,Quality
+Vacuum Slice,Magic
+Vacuum Slice,Fire
+Vacuum Slice,Flame Art
+Vacuum Slice,Lightning
+Vacuum Slice,Sacred
+Vacuum Slice,Poison
+Vacuum Slice,Blood
+Vacuum Slice,Occult
+Vacuum Slice,Cold
+Phantom Slash,Standard
+Phantom Slash,Heavy
+Phantom Slash,Keen
+Phantom Slash,Quality
+Phantom Slash,Magic
+Phantom Slash,Fire
+Phantom Slash,Flame Art
+Phantom Slash,Lightning
+Phantom Slash,Sacred
+Phantom Slash,Poison
+Phantom Slash,Blood
+Phantom Slash,Occult
+Phantom Slash,Cold
+Determination,Standard
+Determination,Heavy
+Determination,Keen
+Determination,Quality
+Determination,Magic
+Determination,Fire
+Determination,Flame Art
+Determination,Lightning
+Determination,Sacred
+Determination,Poison
+Determination,Blood
+Determination,Occult
+Determination,Cold
+Royal Knight's Resolve,Standard
+Royal Knight's Resolve,Heavy
+Royal Knight's Resolve,Keen
+Royal Knight's Resolve,Quality
+Royal Knight's Resolve,Magic
+Royal Knight's Resolve,Fire
+Royal Knight's Resolve,Flame Art
+Royal Knight's Resolve,Lightning
+Royal Knight's Resolve,Sacred
+Royal Knight's Resolve,Poison
+Royal Knight's Resolve,Blood
+Royal Knight's Resolve,Occult
+Royal Knight's Resolve,Cold
+Glintstone Pebble,Standard
+Glintstone Pebble,Heavy
+Glintstone Pebble,Keen
+Glintstone Pebble,Quality
+Glintstone Pebble,Magic
+Glintstone Pebble,Cold
+Glintblade Phalanx,Standard
+Glintblade Phalanx,Heavy
+Glintblade Phalanx,Keen
+Glintblade Phalanx,Quality
+Glintblade Phalanx,Magic
+Glintblade Phalanx,Cold
+Carian Greatsword,Standard
+Carian Greatsword,Heavy
+Carian Greatsword,Keen
+Carian Greatsword,Quality
+Carian Greatsword,Magic
+Carian Greatsword,Cold
+Carian Grandeur,Standard
+Carian Grandeur,Heavy
+Carian Grandeur,Keen
+Carian Grandeur,Quality
+Carian Grandeur,Magic
+Carian Grandeur,Cold
+Spinning Weapon,Standard
+Spinning Weapon,Heavy
+Spinning Weapon,Keen
+Spinning Weapon,Quality
+Spinning Weapon,Magic
+Spinning Weapon,Cold
+Loretta's Slash,Standard
+Loretta's Slash,Heavy
+Loretta's Slash,Keen
+Loretta's Slash,Quality
+Loretta's Slash,Magic
+Loretta's Slash,Cold
+Gravitas,Standard
+Gravitas,Heavy
+Gravitas,Keen
+Gravitas,Quality
+Gravitas,Magic
+Gravitas,Cold
+Waves of Darkness,Standard
+Waves of Darkness,Heavy
+Waves of Darkness,Keen
+Waves of Darkness,Quality
+Waves of Darkness,Magic
+Waves of Darkness,Cold
+Thops's Barrier,Standard
+Thops's Barrier,Heavy
+Thops's Barrier,Keen
+Thops's Barrier,Quality
+Thops's Barrier,Magic
+Thops's Barrier,Cold
+Carian Retaliation,Standard
+Carian Retaliation,Heavy
+Carian Retaliation,Keen
+Carian Retaliation,Quality
+Carian Retaliation,Magic
+Carian Retaliation,Cold
+Flaming Strike,Standard
+Flaming Strike,Heavy
+Flaming Strike,Keen
+Flaming Strike,Quality
+Flaming Strike,Fire
+Flaming Strike,Flame Art
+Flame of the Redmanes,Standard
+Flame of the Redmanes,Heavy
+Flame of the Redmanes,Keen
+Flame of the Redmanes,Quality
+Flame of the Redmanes,Fire
+Flame of the Redmanes,Flame Art
+Eruption,Standard
+Eruption,Heavy
+Eruption,Keen
+Eruption,Quality
+Eruption,Fire
+Eruption,Flame Art
+Prelate's Charge,Standard
+Prelate's Charge,Heavy
+Prelate's Charge,Keen
+Prelate's Charge,Quality
+Prelate's Charge,Fire
+Prelate's Charge,Flame Art
+Prelate's Charge,Blood
+Prelate's Charge,Lightning
+Prelate's Charge,Poison
+Prelate's Charge,Sacred
+Black Flame Tornado,Standard
+Black Flame Tornado,Heavy
+Black Flame Tornado,Keen
+Black Flame Tornado,Quality
+Black Flame Tornado,Fire
+Black Flame Tornado,Flame Art
+Thunderbolt,Standard
+Thunderbolt,Heavy
+Thunderbolt,Keen
+Thunderbolt,Quality
+Thunderbolt,Lightning
+Thunderbolt,Sacred
+Lightning Slash,Standard
+Lightning Slash,Heavy
+Lightning Slash,Keen
+Lightning Slash,Quality
+Lightning Slash,Lightning
+Lightning Slash,Sacred
+Lightning Ram,Standard
+Lightning Ram,Heavy
+Lightning Ram,Keen
+Lightning Ram,Quality
+Lightning Ram,Lightning
+Lightning Ram,Sacred
+Sacred Blade,Standard
+Sacred Blade,Heavy
+Sacred Blade,Keen
+Sacred Blade,Quality
+Sacred Blade,Lightning
+Sacred Blade,Sacred
+Prayerful Strike,Standard
+Prayerful Strike,Heavy
+Prayerful Strike,Keen
+Prayerful Strike,Quality
+Prayerful Strike,Lightning
+Prayerful Strike,Sacred
+Sacred Ring of Light,Standard
+Sacred Ring of Light,Heavy
+Sacred Ring of Light,Keen
+Sacred Ring of Light,Quality
+Sacred Ring of Light,Lightning
+Sacred Ring of Light,Sacred
+Sacred Ring of Light,Blood
+Sacred Ring of Light,Poison
+Sacred Order,Standard
+Sacred Order,Heavy
+Sacred Order,Keen
+Sacred Order,Quality
+Sacred Order,Lightning
+Sacred Order,Sacred
+Shared Order,Standard
+Shared Order,Heavy
+Shared Order,Keen
+Shared Order,Quality
+Shared Order,Lightning
+Shared Order,Sacred
+Golden Land,Standard
+Golden Land,Heavy
+Golden Land,Keen
+Golden Land,Quality
+Golden Land,Lightning
+Golden Land,Sacred
+Golden Land,Fire
+Golden Slam,Standard
+Golden Slam,Heavy
+Golden Slam,Keen
+Golden Slam,Quality
+Golden Slam,Lightning
+Golden Slam,Sacred
+Golden Slam,Blood
+Golden Slam,Poison
+Golden Vow,Standard
+Golden Vow,Heavy
+Golden Vow,Keen
+Golden Vow,Quality
+Golden Vow,Lightning
+Golden Vow,Sacred
+Golden Vow,Fire
+Golden Vow,Cold
+Golden Vow,Blood
+Golden Parry,Standard
+Golden Parry,Heavy
+Golden Parry,Keen
+Golden Parry,Quality
+Golden Parry,Lightning
+Golden Parry,Sacred
+Vow of the Indomitable,Standard
+Vow of the Indomitable,Heavy
+Vow of the Indomitable,Keen
+Vow of the Indomitable,Quality
+Vow of the Indomitable,Lightning
+Vow of the Indomitable,Sacred
+Holy Ground,Standard
+Holy Ground,Heavy
+Holy Ground,Keen
+Holy Ground,Quality
+Holy Ground,Lightning
+Holy Ground,Sacred
+Poisonous Mist,Standard
+Poisonous Mist,Heavy
+Poisonous Mist,Keen
+Poisonous Mist,Quality
+Poisonous Mist,Poison
+Poisonous Mist,Blood
+Poisonous Mist,Occult
+Poison Moth Flight,Standard
+Poison Moth Flight,Heavy
+Poison Moth Flight,Keen
+Poison Moth Flight,Quality
+Poison Moth Flight,Poison
+Poison Moth Flight,Blood
+Poison Moth Flight,Occult
+Blood Blade,Standard
+Blood Blade,Heavy
+Blood Blade,Keen
+Blood Blade,Quality
+Blood Blade,Poison
+Blood Blade,Blood
+Blood Blade,Occult
+Bloody Slash,Standard
+Bloody Slash,Heavy
+Bloody Slash,Keen
+Bloody Slash,Quality
+Bloody Slash,Poison
+Bloody Slash,Blood
+Bloody Slash,Occult
+Blood Tax,Standard
+Blood Tax,Heavy
+Blood Tax,Keen
+Blood Tax,Quality
+Blood Tax,Poison
+Blood Tax,Blood
+Blood Tax,Occult
+Seppuku,Standard
+Seppuku,Heavy
+Seppuku,Keen
+Seppuku,Quality
+Seppuku,Poison
+Seppuku,Blood
+Seppuku,Occult
+Ice Spear,Standard
+Ice Spear,Heavy
+Ice Spear,Keen
+Ice Spear,Quality
+Ice Spear,Magic
+Ice Spear,Cold
+Chilling Mist,Standard
+Chilling Mist,Heavy
+Chilling Mist,Keen
+Chilling Mist,Quality
+Chilling Mist,Magic
+Chilling Mist,Cold
+Hoarfrost Stomp,Standard
+Hoarfrost Stomp,Heavy
+Hoarfrost Stomp,Keen
+Hoarfrost Stomp,Quality
+Hoarfrost Stomp,Magic
+Hoarfrost Stomp,Cold
+Spectral Lance,Standard
+Spectral Lance,Heavy
+Spectral Lance,Keen
+Spectral Lance,Quality
+Spectral Lance,Poison
+Spectral Lance,Blood
+Spectral Lance,Occult
+Lifesteal Fist,Standard
+Lifesteal Fist,Heavy
+Lifesteal Fist,Keen
+Lifesteal Fist,Quality
+Lifesteal Fist,Poison
+Lifesteal Fist,Blood
+Lifesteal Fist,Occult
+White Shadow's Lure,Standard
+White Shadow's Lure,Heavy
+White Shadow's Lure,Keen
+White Shadow's Lure,Quality
+White Shadow's Lure,Poison
+White Shadow's Lure,Blood
+White Shadow's Lure,Occult
+Assassin's Gambit,Standard
+Assassin's Gambit,Heavy
+Assassin's Gambit,Keen
+Assassin's Gambit,Quality
+Assassin's Gambit,Poison
+Assassin's Gambit,Blood
+Assassin's Gambit,Occult
+Mighty Shot,Standard
+Through and Through,Standard
+Barrage,Standard
+Sky Shot,Standard
+Enchanted Shot,Standard
+Rain of Arrows,Standard
+Parry,Standard
+Parry,Heavy
+Parry,Keen
+Parry,Quality
+Parry,Magic
+Parry,Fire
+Parry,Flame Art
+Parry,Lightning
+Parry,Sacred
+Parry,Poison
+Parry,Blood
+Parry,Occult
+Parry,Cold
+Storm Wall,Standard
+Storm Wall,Heavy
+Storm Wall,Keen
+Storm Wall,Quality
+Storm Wall,Magic
+Storm Wall,Fire
+Storm Wall,Flame Art
+Storm Wall,Lightning
+Storm Wall,Sacred
+Storm Wall,Poison
+Storm Wall,Blood
+Storm Wall,Occult
+Storm Wall,Cold
+Shield Bash,Standard
+Shield Bash,Heavy
+Shield Bash,Keen
+Shield Bash,Quality
+Shield Bash,Magic
+Shield Bash,Fire
+Shield Bash,Flame Art
+Shield Bash,Lightning
+Shield Bash,Sacred
+Shield Bash,Poison
+Shield Bash,Blood
+Shield Bash,Occult
+Shield Bash,Cold
+Shield Crash,Standard
+Shield Crash,Heavy
+Shield Crash,Keen
+Shield Crash,Quality
+Shield Crash,Magic
+Shield Crash,Fire
+Shield Crash,Flame Art
+Shield Crash,Lightning
+Shield Crash,Sacred
+Shield Crash,Poison
+Shield Crash,Blood
+Shield Crash,Occult
+Shield Crash,Cold
+Barricade Shield,Standard
+Barricade Shield,Heavy
+Barricade Shield,Keen
+Barricade Shield,Quality
+Barricade Shield,Magic
+Barricade Shield,Fire
+Barricade Shield,Flame Art
+Barricade Shield,Lightning
+Barricade Shield,Sacred
+Barricade Shield,Poison
+Barricade Shield,Blood
+Barricade Shield,Occult
+Barricade Shield,Cold

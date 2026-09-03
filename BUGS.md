@@ -25,6 +25,7 @@ a defect, a decision that left a caller doing arithmetic.
 
 | # | what was wrong | found by | kind | commit |
 |---|---|---|---|---|
+| 11 | `item-effect`'s multiplier stack multiplied **any** buffs the caller asserted, including two that overwrite each other. Golden Vow as a spell and as an ash share the `Aura` slot — the last one wins — so it would have returned 1.15 × 1.115 for a stack the game does not allow. It also read the figure out of prose when a structured per-hit-kind table existed in the workspace and had not been vendored. Replaced by `buff-stack`. | 5.7 | design + unread data | `pending` |
 | 1 | `build-allocate`'s greedy climb stalled at a local optimum. Moonveil RL150 returned dexterity 59 / intelligence 57 for **709.7631** where dexterity 66 / intelligence 50 is **709.8569** — no single point moved between the two pays for itself, only the seventh does. | 1.2 | algorithm | `91f4938` |
 | 2 | `spell-power` read `MagicAtk` and nothing else, so **every incantation in the game priced at zero** — Black Flame's 244 is in `FireAtk`. Meteorite, a sorcery, returned 373.6 where it is 1046.08. Surfaced as a schema defect, which is the only reason it was never quoted. | 1.4 | unread data | `767aaba` |
 | 3 | `build-allocate` returned `"affinity": "Lightning"` over figures for the Standard weapon. Dragon Halberd takes no affinity at all. `attack-power` had reported `affinity_ignored` since it was written; its sibling passed the request straight through. | 1.6 | missing check | `0912393` |

@@ -1,0 +1,69 @@
+# Node fixtures (§7.1).
+#
+# Pattern 4 and Pattern 5 of the validation battery both end on a stacked multiplier —
+# "1.15 x 1.12 x 1.10 x 1.15" — and before this node that multiply was the caller's, which
+# means a model's. The figures come from `data/BuffMult.csv`, which is per hit kind, and the
+# stacking rule from `data/BuffSlot.csv`, which is what says two of them do not always combine.
+
+[[case]]
+name = "the hit kind is the condition, and a talisman for another hit is worth nothing"
+input = { buffs = ["Dagger Talisman", "Shard of Alexander"], hit_kind = "Skill" }
+expect = { "result.multiplier" = 1.15, "result.applied[0].buff" = "Shard of Alexander", "result.not_counted[0].buff" = "Dagger Talisman", "result.not_counted[0].excluded_because" = "worth 1.0 on a Skill hit" }
+
+[[case]]
+name = "and the same two on a critical swap places"
+input = { buffs = ["Dagger Talisman", "Shard of Alexander"], hit_kind = "Crit" }
+expect = { "result.multiplier" = 1.17, "result.applied[0].buff" = "Dagger Talisman", "result.not_counted[0].buff" = "Shard of Alexander" }
+
+# Alexander and Godfrey both apply to a charged skill and both are Passive, so they multiply —
+# the table says so in as many words.
+[[case]]
+name = "two talismans on a charged skill multiply"
+input = { buffs = ["Shard of Alexander", "Godfrey Icon"], hit_kind = "ChargedSkill" }
+expect = { "result.multiplier" = 1.3225 }
+
+# The reason this node exists rather than a product in a caller: Golden Vow as a spell and as
+# an ash share the Aura slot, the last one wins, and 1.15 x 1.115 is a number for a buff stack
+# the game does not allow.
+[[case]]
+name = "two buffs in an overwriting slot do not stack"
+input = { buffs = ["Golden Vow (Spell)", "Golden Vow (Ash)"], hit_kind = "All", assume = ["Golden Vow (Spell)", "Golden Vow (Ash)"] }
+expect = { "result.multiplier" = 1.15, "result.applied[0].buff" = "Golden Vow (Spell)", "result.not_counted[0].buff" = "Golden Vow (Ash)", "result.not_counted[0].excluded_because" = "the Aura slot overwrites rather than multiplies", "result.slot_rules.Aura" = "Overwrite" }
+
+# A buff above 1.0 on every hit kind is waiting on a state the tables cannot see. It is out
+# until the caller says the state holds.
+[[case]]
+name = "a state nobody asserted is not a buff"
+input = { buffs = ["Lord of Blood's Exultation"], hit_kind = "Skill" }
+expect = { "result.multiplier" = 1.0, "result.not_counted[0].state_conditional" = true, "result.not_counted[0].excluded_because" = "its condition is a state you did not assert" }
+
+[[case]]
+name = "and asserting it counts it"
+input = { buffs = ["Lord of Blood's Exultation"], hit_kind = "Skill", assume = ["Lord of Blood's Exultation"] }
+expect = { "result.multiplier" = 1.2, "result.applied[0].note" = "While the bleed-proc aura is active (20s)." }
+
+# The whole Corpse Piler package from question 4.2, at the hit it is actually about.
+[[case]]
+name = "the flagship stack: a weapon skill with a bleed proc up"
+input = { buffs = ["Shard of Alexander", "Lord of Blood's Exultation", "Ritual Sword Talisman"], hit_kind = "Skill", assume = ["Lord of Blood's Exultation", "Ritual Sword Talisman"] }
+expect = { "result.multiplier" = 1.518, "result.damage_multiplier.physical" = 1.518 }
+
+[[case]]
+name = "PvP figures where the table gives them"
+input = { buffs = ["Claw Talisman"], hit_kind = "Jump", pvp = true }
+expect = { "result.multiplier" = 1.075 }
+
+[[case]]
+name = "and PvE otherwise"
+input = { buffs = ["Claw Talisman"], hit_kind = "Jump" }
+expect = { "result.multiplier" = 1.15 }
+
+[[case]]
+name = "a buff the table does not carry is a caller error naming the ones it does"
+input = { buffs = ["Blessed Dew Talisman"], hit_kind = "All" }
+expect_code = 20
+
+[[case]]
+name = "asserting the state of something not held is refused"
+input = { buffs = ["Shard of Alexander"], hit_kind = "Skill", assume = ["Ritual Sword Talisman"] }
+expect_code = 11

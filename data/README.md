@@ -49,3 +49,37 @@ case a skill is in is more useful than a number.
 
 Motion values are percentages on the scale `optimal-affinity`'s `attack_mv` expects, so a
 skill's hit can be priced through the same maths as a normal swing.
+
+## AshAffinity.csv, AshClass.csv
+
+Which affinities an ash of war accepts, and which weapon classes it can go on. `AshCompat`
+carries only the affinity an ash *comes with* and whether it fits any weapon, which is not the
+same question: "qual Ash aceita Blood?" is answered by `AshAffinity`'s 982 rows, one per
+skill-and-affinity pair, and by nothing in the Build Planner extraction.
+
+Same provenance as the rest of this directory: the Prometheux workspace, compiled from the
+community tables rather than published by the spreadsheet.
+
+## BuffMult.csv, BuffSlot.csv
+
+What a buff multiplies, **per kind of hit**, and whether two of them stack.
+
+`BuffMult` is 20 items across eight hit kinds — All, Skill, ChargedSkill, Crit, Jump,
+ChargedR2, Successive, Physical — with separate PvE and PvP figures. That shape is the whole
+point: Shard of Alexander is 1.15 on a `Skill` and 1.0 on everything else, and Dagger Talisman
+is 1.17 on a `Crit` and 1.0 elsewhere. A single multiplier per talisman cannot say that, which
+is why reading the figure out of `EffectData`'s prose was only ever a stopgap.
+
+`BuffSlot` is the rule that says whether two buffs combine at all: `Passive` (talismans) and
+`Tear` multiply, while `Aura`, `Unique` and `Body` **overwrite** — Golden Vow as a spell, as an
+ash and as a tool all occupy Aura, so the last one wins and stacking all three is not a thing.
+Without that table, a node multiplying everything a caller names quietly produces a number for
+a buff stack the game does not allow.
+
+Both are the Prometheux workspace's own compilation. The Build Planner publishes neither.
+
+## PhysickEffect.csv
+
+The forty crystal tears, with what each does and how long it lasts. Every Pattern 4 and 5
+question in `VALIDATION.md` names a physick, and `CrystalTearData.csv` in the extraction covers
+only the ones with a stat column.

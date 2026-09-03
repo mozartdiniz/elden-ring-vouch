@@ -1,0 +1,104 @@
+name = "buff-stack"
+version = "0.1.0"
+
+purpose = "What a set of buffs multiplies damage by, for one kind of hit — and which of them do not stack"
+
+use_when = [
+  "the question asks for a total multiplier from talismans, physick tears, ashes or buff spells",
+  "the question is which talismans to wear for a particular attack — a weapon skill, a critical, a jump",
+  "the question asks whether two buffs stack",
+  "a damage figure has to be buffed before it is quoted",
+]
+not_for = [
+  "what a talisman is worth in stats, weight or resistances — call item-effect",
+  "the damage itself — this returns a multiplier, and optimal-affinity takes it as damage_multiplier",
+  "buffs that add stats rather than multiply damage; item-effect has those",
+]
+
+run = ["python3", "stack.py"]
+timeout_ms = 30000
+
+[[reads]]
+path = "../../data/BuffMult.csv"
+
+[[reads]]
+path = "../../data/BuffSlot.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.buffs]
+guidance = "Everything the character is wearing or has cast that could multiply this hit. Naming a buff that turns out not to apply is fine and useful — it comes back in `not_counted` with the reason, which is what the user needs to hear."
+
+[params.hit_kind]
+guidance = "The attack the user is asking about, and the thing that decides most of the answer: a Corpse Piler or a Taker's Flames is `Skill`, a fully charged one `ChargedSkill`, a riposte `Crit`, a jump attack `Jump`, a charged heavy `ChargedR2`, the third hit of a chain `Successive`. Leave it `All` only when the question is about ordinary swings — most talismans are worth 1.0 there and the answer will say so."
+
+[params.pvp]
+guidance = "Only when the user asked about PvP. Several buffs are weaker there."
+
+[params.assume]
+guidance = "The states the user has described, and nothing more. A buff worth more than 1.0 on every hit kind is waiting on a state — Lord of Blood's Exultation on a bleed proc, Ritual Sword Talisman on full HP, Millicent's Prosthesis on a run of hits — and asserting one the user did not mention invents a buff. `not_counted` names the ones you left out."
+
+[[requires]]
+expr = "size(input.buffs) >= 1 && size(input.buffs) <= 12"
+message = "give between one and twelve buffs"
+
+[[requires]]
+expr = "!has(input.assume) || input.assume.all(a, a in input.buffs)"
+message = "every asserted buff must also be in `buffs`: you cannot assert the state of something the character is not carrying"
+
+# --- postconditions ---
+
+# The product is what it says it is, checked at every size the stack can be. CEL has no fold,
+# so this is written out rather than looped.
+[[ensures]]
+expr = """
+size(result.applied) == 0 ? result.multiplier == 1.0 : (
+size(result.applied) == 1 ? result.multiplier == result.applied[0].multiplier :
+  result.multiplier > 1.0)
+"""
+
+# Nothing that did not apply is in the product, and everything that did is above 1.0.
+[[ensures]]
+expr = "result.applied.all(f, f.multiplier > 1.0)"
+
+# Every buff given came back exactly once, in one list or the other.
+[[ensures]]
+expr = "size(result.applied) + size(result.not_counted) == size(result.buffs)"
+
+[[ensures]]
+expr = "result.applied.all(f, f.buff in result.buffs) && result.not_counted.all(f, f.buff in result.buffs)"
+
+# Anything left out says why. A buff silently missing from a total is the failure this node
+# exists to prevent.
+[[ensures]]
+expr = "result.not_counted.all(f, has(f.excluded_because) && f.excluded_because != \"\")"
+
+# A state-conditional buff is in the product only when the caller asserted it.
+[[ensures]]
+expr = "result.applied.all(f, !f.state_conditional || f.buff in result.assumed)"
+
+# Two buffs sharing an overwriting slot cannot both be in the product.
+[[ensures]]
+expr = """
+result.applied.all(f, result.slot_rules[f.slot] == "Multiply" ||
+  size(result.applied.filter(g, g.slot == f.slot)) == 1)
+"""
+
+[[ensures]]
+expr = "result.damage_multiplier.physical == result.multiplier && result.damage_multiplier.holy == result.multiplier"
+
+[[examples]]
+ask = "quais talismans maximizam o dano do Corpse Piler, e qual o multiplicador total?"
+call = { buffs = ["Shard of Alexander", "Lord of Blood's Exultation", "Ritual Sword Talisman"], hit_kind = "Skill", assume = ["Lord of Blood's Exultation", "Ritual Sword Talisman"] }
+
+[[examples]]
+ask = "Golden Vow do feitiço e da cinza stackam?"
+call = { buffs = ["Golden Vow (Spell)", "Golden Vow (Ash)"], hit_kind = "All", assume = ["Golden Vow (Spell)", "Golden Vow (Ash)"] }
+
+[[examples]]
+ask = "contra um boss que não deixa fazer critical, o Dagger Talisman vale alguma coisa?"
+call = { buffs = ["Dagger Talisman", "Shard of Alexander"], hit_kind = "Skill" }

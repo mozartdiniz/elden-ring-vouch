@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elden Ring, computed</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <h1>Elden Ring, computed</h1>
+  <p>Every number below came out of a function, not a language model. The steps are shown so you can check.</p>
+</header>
+
+<main id="thread"></main>
+
+<form id="composer" autocomplete="off">
+  <textarea id="question" rows="1" maxlength="500"
+            placeholder="What is the attack power of a Blood Uchigatana +10 at 40 dex?"></textarea>
+  <button type="submit" id="send">Ask</button>
+</form>
+
+<footer id="examples"></footer>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

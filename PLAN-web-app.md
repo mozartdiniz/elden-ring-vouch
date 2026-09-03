@@ -307,14 +307,33 @@ against — "building a second, eval-only description would measure a context no
 Leaning towards the runtime for `eval -j`, because the session-per-case rule is the kind of
 thing that should be impossible to forget rather than documented.
 
-## The first slice
+## The first slice — built, 3 September
 
-One endpoint, no chat history, no accounts: question in, then plan → call → narrate → attest,
-and out comes the answer plus the trace of calls behind it.
+`web/`, four files and a static page. `app.py` is one endpoint streaming NDJSON; `engine.py`
+is `ask.py` with its I/O ends changed and its prompts copied verbatim; `llm.py` puts the
+Claude CLI and OpenRouter behind one signature; `static/` has no build step. `VOUCH_SESSION`
+is set per conversation and the ledger named explicitly, as the stress test required.
 
-Point it at the 122 questions in `VALIDATION.md` as a live regression suite — the correct
-answers are already written down. That also finally does the thing at the top of the pending
-list: it puts the eight nodes that have never been in front of a live model in front of one.
+**Three questions through it found two things, and both are about attestation's edges.**
+
+1. *"Does Bloodflame Blade stack with a Blood affinity?"* produced a correct answer that was
+   **withheld**. `weapon-lookup` returns `buff: "Seppuku (only bleed; +30 phys AP)"` — the 30
+   is inside a label, the ledger holds scalars, so `attest` exited 1 on a true figure. The
+   large version of this is `item-effect`, whose whole payload is effect prose full of
+   numbers, none of them traceable. Now in `BUGS.md`; the app works around the small case in
+   its narration prompt, which is a guard living in one place again.
+2. *"What levels for a level 125 Zweihander build?"* produced an answer that **attested and
+   should not have**. The model invented `vigor 40, mind 12, endurance 20` and
+   `starting_class: "Wretch"`, and `build-allocate` returned them in `stats`, so they traced.
+   Attestation cannot tell a computed figure from a guess a node echoed back.
+
+Neither is a bug in the runtime and neither would have shown up in a fixture. They are the
+boundary of what "every number came from a node" actually buys, and the app is where you find
+it, because the app is the first thing that lets a model choose parameters unsupervised.
+
+**Still to point at the 122 questions in `VALIDATION.md`** as a live regression suite — the
+correct answers are already written down, and it would finally put the eight never-evaluated
+nodes in front of a live model.
 
 ---
 

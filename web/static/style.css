@@ -1,0 +1,91 @@
+:root {
+  --bg: #14120e;
+  --panel: #1c1a15;
+  --line: #322d23;
+  --ink: #e8e2d4;
+  --dim: #9a9283;
+  --gold: #c8a951;
+  --good: #7fa86a;
+  --bad: #c96a5c;
+  --warn: #c9a05c;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0 auto;
+  padding: 0 1rem 8rem;
+  max-width: 46rem;
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.6 ui-sans-serif, system-ui, sans-serif;
+}
+
+header { padding: 2.5rem 0 1.5rem; border-bottom: 1px solid var(--line); }
+header h1 { margin: 0; font-size: 1.4rem; font-weight: 600; color: var(--gold); letter-spacing: .01em; }
+header p { margin: .4rem 0 0; color: var(--dim); font-size: .9rem; }
+
+.turn { padding: 1.5rem 0; border-bottom: 1px solid var(--line); }
+.asked { font-weight: 600; margin: 0 0 1rem; }
+.asked::before { content: "› "; color: var(--gold); }
+
+/* --- the trace ------------------------------------------------------------ */
+
+details.trace { margin-bottom: 1rem; }
+details.trace summary {
+  cursor: pointer; color: var(--dim); font-size: .85rem;
+  list-style: none; user-select: none;
+}
+details.trace summary::-webkit-details-marker { display: none; }
+details.trace summary::before { content: "▸ "; }
+details.trace[open] summary::before { content: "▾ "; }
+
+.steps { margin: .6rem 0 0; padding: .6rem .9rem; background: var(--panel); border-radius: 6px;
+         border: 1px solid var(--line); font-family: ui-monospace, monospace; font-size: .8rem; }
+.step { padding: .25rem 0; color: var(--dim); white-space: pre-wrap; word-break: break-word; }
+.step b { color: var(--ink); font-weight: 600; }
+.step.result { color: var(--good); }
+.step.refusal { color: var(--warn); }
+.step.thinking { font-style: italic; opacity: .75; }
+
+/* --- the answer ----------------------------------------------------------- */
+
+.answer { white-space: pre-wrap; }
+.badge { display: inline-block; margin-top: .8rem; padding: .2rem .55rem; border-radius: 4px;
+         font-size: .75rem; letter-spacing: .02em; border: 1px solid; }
+.badge.attested  { color: var(--good); border-color: var(--good); }
+.badge.unchecked { color: var(--warn); border-color: var(--warn); }
+.badge.failed    { color: var(--bad);  border-color: var(--bad); }
+
+.notice { padding: .8rem 1rem; border-radius: 6px; border: 1px solid var(--line);
+          background: var(--panel); }
+.notice.bad { border-color: var(--bad); color: var(--bad); }
+.notice.dim { color: var(--dim); }
+.notice p { margin: .4rem 0 0; font-size: .85rem; }
+
+/* --- the composer --------------------------------------------------------- */
+
+#composer {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  display: flex; gap: .5rem; padding: 1rem;
+  margin: 0 auto; max-width: 46rem;
+  background: linear-gradient(to top, var(--bg) 70%, transparent);
+}
+#question {
+  flex: 1; resize: none; padding: .7rem .9rem; border-radius: 6px;
+  border: 1px solid var(--line); background: var(--panel); color: var(--ink);
+  font: inherit; max-height: 8rem;
+}
+#question:focus { outline: none; border-color: var(--gold); }
+#send {
+  padding: .7rem 1.2rem; border-radius: 6px; border: 1px solid var(--gold);
+  background: transparent; color: var(--gold); font: inherit; cursor: pointer;
+}
+#send:disabled { opacity: .4; cursor: default; }
+
+#examples { padding-top: 1.5rem; color: var(--dim); font-size: .85rem; }
+#examples button {
+  display: block; margin: .3rem 0; padding: 0; border: 0; background: none;
+  color: var(--dim); font: inherit; text-align: left; cursor: pointer;
+}
+#examples button:hover { color: var(--gold); }

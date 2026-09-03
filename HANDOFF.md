@@ -38,7 +38,8 @@ elden-ring-vouch/
   lib/spells.py            the spell tables, and the one multiply that is not the oracle's
   nodes/                   thirteen nodes
   scripts/generate_cases.py  regenerates attack-power fixtures from the oracle
-  VALIDATION.md            the 42-question battery, worked one at a time — read this next
+  VALIDATION.md            the question battery, worked one at a time — read this next
+  BUGS.md                  what the questions found, open and fixed — the work list
 ```
 
 **The `oracle/` vs `data/` split is the important one.** `oracle/` is a byte-identical copy of

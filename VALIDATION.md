@@ -601,17 +601,8 @@ bonus is not modelled anywhere in this collection. Saying that is better than a 
 | 4 — maximise a skill | 4 | 6 | 0 |
 | **total** | **33** | **9** | **0** |
 
-Nine bugs, three of which returned a number rather than an error:
-
-1. `build-allocate` stalled at a local optimum — Moonveil, `91f4938`.
-2. `spell-power` priced **every incantation in the game at zero** — `767aaba`.
-3. `build-allocate` reported an affinity the weapon cannot take — `0912393`.
-4. `spell-power` priced **Comet cast from a sacred seal** at 798.766 — `be34ad3`.
-5. Eighty-one catalogue rows are consumables, and pricing them crashed — `be34ad3`.
-6. `ap_calc.load_table` re-parsed a 1.3 MB CSV per call — `be34ad3`.
-7. The greedy fallback stalled 17 points short on the Frenzied Flame Seal — `be34ad3`.
-8. `item-effect` left the multiplier stack to the caller — `70713e5`.
-9. Seven skills were ambiguous with themselves — `b4f735d`.
+Ten bugs, three of which returned a number rather than an error. They are tracked in
+`BUGS.md`, which is the work list — this file is the per-question record.
 
 Four features the questions demanded and the collection did not have: a caster objective
 (`focus = "spell"`), loadout requirements (`stat_floors`), `weapon-rank`, and `spell-rank`.

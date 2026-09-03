@@ -19,7 +19,12 @@ a defect, a decision that left a caller doing arithmetic.
 
 ## Open
 
-*(none)*
+Not defects, but the two things most likely to become one.
+
+| what | why it matters |
+|---|---|
+| **The routing preamble is 58 notes**, against nineteen when the handoff first said it would need pruning. An agent carries all of it every turn. Past some size the notes stop being read rather than stop being true, and nothing measures that. | every answer |
+| **`data/PhysickEffect.csv` is vendored and no node reads it.** Questions 14.3 and 14.6 are partial because of it, and a vendored table nobody reads is the shape bug 11 had. | 14.3, 14.6 |
 
 ## Fixed
 

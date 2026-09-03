@@ -239,10 +239,12 @@ Item locations. Those tables live only in
 - **Pin new nodes against the ontology** wherever `prometheux-workspace/HANDOFF.md` records a
   figure. Its "Default checks that already persisted" section is a fixture source, and it is
   how the upgrade-cap bug was found.
-- **The routing pack has grown and nobody has re-measured it.** The preamble is **38 notes,
-  ~10 KB on its own**, against nineteen when this note first said pruning would eventually be
-  needed — and there are thirteen nodes now rather than eleven. Measure the real pack before
-  adding another note; `vouch describe` is not it, because the pack omits contracts.
+- **The routing pack has grown three times over and nobody has re-measured it.** The preamble is
+  **58 notes** against nineteen when this note first said pruning would eventually be needed,
+  and there are nineteen nodes rather than eleven. This is now the most likely thing to be
+  quietly wrong: an agent carries the whole preamble every turn, and past some size the notes
+  stop being read rather than stop being true. Measure the real pack — `vouch describe` is not
+  it, because the pack omits contracts — and prune before adding another note.
 - **`vouch <cmd> | head` can panic** on a broken pipe. Recorded in the runtime's `DECISIONS.md`
   as known roughness; it is a race and rarely reproduces.
 - Contracts have caught genuine mistakes in this repository more than once — rune level is stat

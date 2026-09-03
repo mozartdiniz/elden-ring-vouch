@@ -1,0 +1,47 @@
+# Node fixtures (§7.1).
+#
+# Pattern 6 of the validation battery is eight questions of the shape "which ash for this
+# weapon if I want X", and the collection could answer none of them: weapon-skill resolves one
+# ash by name, and the affinity an ash *accepts* was not in any vendored table until
+# `data/AshAffinity.csv` arrived.
+
+[[case]]
+name = "a bleed reaper wants the ash with the most status buildup"
+input = { weapon_class = "Reaper", affinity = "Blood", rank_on = "status", limit = 5 }
+expect = { "result.best" = "Stormcaller", "result.ranked[0].total_status_motion_value" = 600.0, "result.ranked[1].skill" = "Double Slash", "result.ranked[1].total_status_motion_value" = 525.0, "result.considered" = 35 }
+
+# Four rankings, four winners. Saying which one was used is half the answer.
+[[case]]
+name = "the same weapon ranked on poise is a different list"
+input = { weapon_class = "Reaper", affinity = "Blood", rank_on = "poise", limit = 3 }
+expect = { "result.ranked[0].total_poise_motion_value" = 1540.0 }
+
+[[case]]
+name = "a great hammer for stance breaking"
+input = { weapon_class = "Great Hammer", rank_on = "poise", limit = 4 }
+expect = { "result.best" = "Stormcaller", "result.ranked[1].skill" = "Savage Lion's Claw", "result.ranked[1].total_poise_motion_value" = 850.0 }
+
+# The affinity filter is on what an ash *accepts*, not what it comes with. Seppuku takes seven
+# of the thirteen and Cold is not one of them: a katana build asking for Cold gets 38 ashes and
+# a bleed one gets 44, with Seppuku only in the second.
+[[case]]
+name = "an affinity an ash does not accept keeps it out"
+input = { weapon_class = "Katana", affinity = "Cold", rank_on = "status", limit = 60 }
+expect = { "result.considered" = 38, "result.returned" = 38 }
+
+[[case]]
+name = "and the affinity it does accept lets it in"
+input = { weapon_class = "Katana", affinity = "Blood", rank_on = "status", limit = 60 }
+expect = { "result.considered" = 44, "result.ranked[37].skill" = "Seppuku", "result.ranked[37].hits" = 0, "result.ranked[37].priced" = false }
+
+# Every figure is for one weapon class. Sword Dance's rows are per class, and summing them made
+# it 48 hits and 4,400 status motion value where on a reaper it is three hits and 275.
+[[case]]
+name = "figures are for one weapon class, not summed across all of them"
+input = { weapon_class = "Reaper", rank_on = "hits", limit = 60 }
+expect = { "result.ranked[11].skill" = "Sword Dance", "result.ranked[11].hits" = 3, "result.ranked[11].total_status_motion_value" = 275.0, "result.ranked[11].varies_by_variant" = true }
+
+[[case]]
+name = "a weapon class is required"
+input = { weapon_class = "", rank_on = "status" }
+expect_code = 11

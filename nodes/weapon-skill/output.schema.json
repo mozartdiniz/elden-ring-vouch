@@ -13,7 +13,13 @@
     "ambiguous",
     "catalog_size",
     "hits",
+    "affinities",
+    "weapon_classes",
+    "weapon_class",
+    "variants",
+    "variant_used",
     "hit_count",
+    "hit_count_lacking_fp",
     "motion_values_uniform",
     "highest_motion_value",
     "total_stamina_cost",
@@ -199,6 +205,40 @@
     "motion_values_uniform": {
       "type": "boolean",
       "description": "True when every hit is uniform across damage types, which is when highest_motion_value can be passed to optimal-affinity as attack_mv."
+    },
+    "affinities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Every affinity this ash accepts, from data/AshAffinity.csv. `default_affinity` is only the one it comes with \u2014 'does it take Blood?' is answered here."
+    },
+    "weapon_classes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The weapon classes it can be put on. `AllMelee`, `Sword` and `Polearm` stand for groups."
+    },
+    "weapon_class": {
+      "type": "string",
+      "description": "The class asked about, empty when none was."
+    },
+    "variants": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The variant groups this ash's hit table carries \u2014 weapon classes mostly, and a few other forms like Slow or Luster Tier. Empty means it hits the same whatever it is on."
+    },
+    "variant_used": {
+      "type": "string",
+      "description": "Which variant the hits below are for. Empty means the unprefixed set."
+    },
+    "hit_count_lacking_fp": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "How many rows the table gives for the same ash used with no FP left. They are not further hits and are not in `hits`."
     }
   }
 }

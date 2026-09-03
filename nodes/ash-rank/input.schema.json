@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ash-rank input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["weapon_class"],
+  "properties": {
+    "weapon_class": {
+      "type": "string",
+      "description": "The class of weapon the ash is going on, from weapon-lookup. Required, and not a filter you can skip: twenty-odd ashes hit differently per class, and a ranking without one is a ranking for no weapon."
+    },
+    "affinity": {
+      "type": "string",
+      "enum": ["Standard", "Heavy", "Keen", "Quality", "Fire", "Flame Art", "Lightning", "Sacred", "Magic", "Cold", "Poison", "Blood", "Occult"],
+      "description": "Keep only ashes that accept this affinity. This is the 'qual Ash aceita Blood?' filter, and it is not the same as the affinity an ash comes with."
+    },
+    "rank_on": {
+      "type": "string",
+      "enum": ["status", "poise", "hits", "motion"],
+      "description": "status — status buildup over one full use, the proc-speed question. poise — stance breaking. hits — how many times it connects. motion — total motion value, closest to damage. Default 'status'."
+    },
+    "limit": { "type": "integer", "minimum": 1, "maximum": 60, "description": "Default 10." }
+  }
+}

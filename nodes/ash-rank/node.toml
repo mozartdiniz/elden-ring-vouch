@@ -1,0 +1,107 @@
+name = "ash-rank"
+version = "0.1.0"
+
+purpose = "Rank the ashes of war a weapon can take, by status buildup, poise damage, hits or motion value"
+
+use_when = [
+  "the question is which ash of war to put on a weapon",
+  "the question names a goal — fast bleed proc, stance break, multi-hit — rather than a skill",
+  "the question asks which ashes accept an affinity",
+]
+not_for = [
+  "what one named ash does — call weapon-skill",
+  "what a skill hits for on a specific weapon — weapon-skill's motion value into optimal-affinity's attack_mv",
+  "which weapon to use — call weapon-rank",
+]
+
+run = ["python3", "rank.py"]
+timeout_ms = 30000
+
+[[reads]]
+path = "../../data/AshAttack.csv"
+
+[[reads]]
+path = "../../data/AshCompat.csv"
+
+[[reads]]
+path = "../../data/AshAffinity.csv"
+
+[[reads]]
+path = "../../data/AshClass.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.weapon_class]
+guidance = "From weapon-lookup's `weapon_class`. Required: an ash's hits can differ per weapon class, so a ranking without one is a ranking for no weapon in particular."
+
+[params.affinity]
+guidance = "When the user has an affinity in mind — a blood build, a cold build. It filters on what each ash *accepts*, which `default_affinity` does not tell you: Spinning Slash comes as Keen and takes all thirteen."
+
+[params.rank_on]
+guidance = "Match it to the goal in the question. 'procar bleed rápido' is `status`, 'quebrar postura' is `poise`, 'bata várias vezes' is `hits`, raw damage is `motion` — and say which you ranked on, because the four give different winners."
+
+[params.limit]
+guidance = "Ten unless the user wants the field. `truncated` says whether more qualified."
+
+[[requires]]
+expr = "input.weapon_class != \"\""
+message = "a weapon class is required: an ash's hits differ by the weapon it is on, so a ranking without one is about no weapon"
+
+# --- postconditions ---
+
+[[ensures]]
+expr = """
+size(result.ranked) == 0 || result.ranked[0].skill == result.best
+"""
+
+[[ensures]]
+expr = "result.returned == size(result.ranked) && result.returned <= result.limit"
+
+# The order is the order it claims to be.
+[[ensures]]
+expr = """
+result.rank_on != "status" ||
+  result.ranked.all(r, r.total_status_motion_value <= result.ranked[0].total_status_motion_value)
+"""
+
+[[ensures]]
+expr = """
+result.rank_on != "poise" ||
+  result.ranked.all(r, r.total_poise_motion_value <= result.ranked[0].total_poise_motion_value)
+"""
+
+[[ensures]]
+expr = """
+result.rank_on != "hits" || result.ranked.all(r, r.hits <= result.ranked[0].hits)
+"""
+
+[[ensures]]
+expr = """
+result.rank_on != "motion" ||
+  result.ranked.all(r, r.total_motion_value <= result.ranked[0].total_motion_value)
+"""
+
+# The affinity filter is on what an ash accepts, and every row honours it.
+[[ensures]]
+expr = "result.affinity == \"\" || result.ranked.all(r, result.affinity in r.affinities)"
+
+# Every row is an ash that can actually go on this weapon.
+[[ensures]]
+expr = """
+result.ranked.all(r, size(r.weapon_classes) > 0)
+"""
+
+[[ensures]]
+expr = "result.considered <= result.catalog_size"
+
+[[examples]]
+ask = "quero uma foice com sangue e um Ash que bata várias vezes pra procar bleed rápido"
+call = { weapon_class = "Reaper", affinity = "Blood", rank_on = "status" }
+
+[[examples]]
+ask = "qual Ash numa great hammer dá mais poise damage pra quebrar postura?"
+call = { weapon_class = "Great Hammer", rank_on = "poise" }

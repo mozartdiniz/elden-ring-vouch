@@ -7,7 +7,7 @@
 [[case]]
 name = "Corpse Piler is unique to Rivers of Blood and keeps its scaling"
 input = { query = "Corpse Piler" }
-expect = { "result.skill" = "Corpse Piler", "result.hit_count" = 18, "result.unique_to[0]" = "Rivers of Blood", "result.any_weapon" = false, "result.overrides_weapon_scaling" = false, "result.highest_motion_value" = 155.0 }
+expect = { "result.skill" = "Corpse Piler", "result.hit_count" = 12, "result.hit_count_lacking_fp" = 6, "result.unique_to[0]" = "Rivers of Blood", "result.any_weapon" = false, "result.overrides_weapon_scaling" = false, "result.highest_motion_value" = 155.0 }
 
 # And the case that matters in the other direction: a skill that replaces the weapon's scaling
 # with a single stat, so a spread optimised for the weapon is not one optimised for the skill.
@@ -56,7 +56,7 @@ expect_code = 10
 [[case]]
 name = "a name is not ambiguous with itself plus a question mark"
 input = { query = "Loretta's Slash" }
-expect = { "result.skill" = "Loretta's Slash", "result.ambiguous" = false, "result.hit_count" = 24, "result.highest_motion_value" = 172.0, "result.uncertain" = false }
+expect = { "result.skill" = "Loretta's Slash", "result.ambiguous" = false, "result.hit_count" = 2, "result.variant_used" = "", "result.highest_motion_value" = 172.0, "result.uncertain" = false }
 
 [[case]]
 name = "and the flagged row is still reachable, and says it is flagged"
@@ -66,7 +66,7 @@ expect = { "result.skill" = "Loretta's Slash ?", "result.hit_count" = 1, "result
 [[case]]
 name = "the Golden Order Greatsword's ash, one of the other six"
 input = { query = "Establish Order" }
-expect = { "result.skill" = "Establish Order", "result.ambiguous" = false, "result.hit_count" = 7, "result.highest_motion_value" = 300.0, "result.unique_to[0]" = "Golden Order Greatsword", "result.motion_values_uniform" = false }
+expect = { "result.skill" = "Establish Order", "result.ambiguous" = false, "result.hit_count" = 5, "result.highest_motion_value" = 300.0, "result.unique_to[0]" = "Golden Order Greatsword", "result.motion_values_uniform" = false }
 
 # A motion value is per damage type, and optimal-affinity's `attack_mv` is one number. Establish
 # Order's big hit is 300 holy and 0 physical: handing 300 to the scalar triples a physical
@@ -76,3 +76,32 @@ expect = { "result.skill" = "Establish Order", "result.ambiguous" = false, "resu
 name = "a uniform hit can be priced with one motion value"
 input = { query = "Corpse Piler" }
 expect = { "result.motion_values_uniform" = true, "result.highest_motion_value" = 155.0 }
+
+# A family's rows come in variant groups and they are alternatives, not a sequence. Sword Dance
+# carries a set of hits per weapon class, and adding them together made it 48 hits and 4,400
+# status motion value where on a reaper it is three hits and 275 — a fact about no weapon.
+[[case]]
+name = "an ash that hits differently per weapon is reported for one weapon"
+input = { query = "Sword Dance", weapon_class = "Reaper" }
+expect = { "result.hit_count" = 3, "result.variant_used" = "Reaper", "result.highest_motion_value" = 155.0 }
+
+[[case]]
+name = "and without a class it says which variant it chose"
+input = { query = "Sword Dance" }
+expect = { "result.hit_count" = 3, "result.variant_used" = "Axe", "result.highest_motion_value" = 150.0 }
+
+# "Does this ash take Blood?" is not what `default_affinity` answers — that is only the affinity
+# it arrives with. Spinning Slash comes as Keen and accepts all thirteen, which is the answer to
+# question 6.6's "Spinning Slash não serve?".
+[[case]]
+name = "the affinities an ash accepts are not the one it comes with"
+input = { query = "Spinning Slash" }
+expect = { "result.default_affinity" = "Keen", "result.affinities[0]" = "Blood", "result.affinities[1]" = "Cold" }
+
+# An ash that deals no damage has no rows in the hit table and used to resolve to nothing at
+# all. Seppuku is a self-buff, question 6.2 names it beside two ashes that do hit, and "it has
+# no damaging hits, and it takes these affinities" is the answer.
+[[case]]
+name = "an ash with no damaging hits still resolves"
+input = { query = "Seppuku" }
+expect = { "result.skill" = "Seppuku", "result.hit_count" = 0, "result.affinities[0]" = "Blood", "result.affinities[1]" = "Heavy", "result.affinities[2]" = "Keen", "result.default_affinity" = "Blood" }

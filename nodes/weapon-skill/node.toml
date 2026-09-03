@@ -57,8 +57,15 @@ expr = "result.candidates_truncated == (result.match_count > size(result.candida
 [[ensures]]
 expr = "result.catalog_size >= result.match_count"
 
+# Resolving to nothing means no hits; resolving to something does not guarantee hits, because
+# an ash that deals no damage — Seppuku is a self-buff — has no rows in the hit table and is
+# still a real ash with real affinities.
 [[ensures]]
-expr = '(result.skill != "") == (result.hit_count > 0)'
+expr = 'result.skill != "" || result.hit_count == 0'
+
+# An ash that resolved says what it accepts, whether or not it hits anything.
+[[ensures]]
+expr = 'result.skill == "" || size(result.affinities) > 0 || result.hit_count > 0'
 
 [[ensures]]
 expr = "result.hit_count == size(result.hits)"

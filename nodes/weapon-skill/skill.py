@@ -23,6 +23,11 @@ import json
 import os
 import sys
 
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
+    os.path.abspath(__file__)))), "lib"))
+
+import ashes  # noqa: E402
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 ATTACK_CSV = os.path.join(ROOT, "data", "AshAttack.csv")
@@ -77,6 +82,7 @@ def resolve(query, names):
 def main():
     request = json.load(sys.stdin)
     query = request["query"]
+    weapon_class = (request.get("weapon_class") or "").strip()
 
     with open(ATTACK_CSV, newline="", encoding="utf-8") as handle:
         rows = [r for r in csv.DictReader(handle) if r.get("SkillFamily")]
@@ -86,13 +92,37 @@ def main():
     families = {}
     for row in rows:
         families.setdefault(row["SkillFamily"], []).append(row)
+    # An ash that deals no damage has no rows in AshAttack and was invisible: Seppuku is a
+    # self-buff and question 6.2 names it alongside two ashes that do hit. The catalogue is the
+    # union of the three tables, and an ash with no damaging hits comes back with none rather
+    # than not at all.
+    for name in list(compat) + list(ashes.affinities()):
+        families.setdefault(name, [])
 
     candidates = resolve(query, list(families))
     resolved = candidates[0] if len(candidates) == 1 else ""
     print(f"{query!r} matched {len(candidates)} of {len(families)}", file=sys.stderr)
 
+    # A family's rows come in variant groups and they are alternatives, not a sequence: most
+    # are weapon classes, and adding two together describes a use nobody makes. Sword Dance
+    # summed across classes was 48 hits where on a reaper it is three.
+    family_rows = families.get(resolved, [])
+    variants = ashes.variants(family_rows)
+    chosen = ashes.hits_for(family_rows, weapon_class)
+    # What the same ash does with the FP gone. Not further hits of it, so out of the count —
+    # but a real thing a player sees, so counted separately rather than dropped.
+    lacking_fp = [
+        row for row in ashes.hits_for(family_rows, weapon_class, lacking_fp=True)
+        if "(Lacking FP)" in row["Hit"]
+    ]
+    variant_used = ""
+    if variants:
+        variant_used = weapon_class if weapon_class in variants else (
+            "" if any(not ashes._prefix(r["Hit"]) for r in family_rows) else sorted(variants)[0]
+        )
+
     hits = []
-    for row in families.get(resolved, []):
+    for row in chosen:
         hits.append(
             {
                 "hit": row["Hit"],
@@ -116,7 +146,7 @@ def main():
     overrides = sorted(
         {h["scaling_override"] for h in hits if h["scaling_override"] != NO_OVERRIDE}
     )
-    weapons = sorted({r["UniqueWeapon"] for r in families.get(resolved, [])}) if resolved else []
+    weapons = sorted({r["UniqueWeapon"] for r in family_rows}) if resolved else []
     # "Any" in that column means the skill is not tied to one weapon.
     unique_to = [w for w in weapons if w and w != "Any"]
 
@@ -133,8 +163,19 @@ def main():
         "candidates_truncated": len(candidates) > MAX_CANDIDATES,
         "ambiguous": len(candidates) > 1,
         "catalog_size": len(families),
+        # Which affinities the ash accepts and which weapons it goes on. `AshCompat`'s
+        # `default_affinity` is only the one it arrives with; "does this take Blood?" is a
+        # different question and `data/AshAffinity.csv` is what answers it.
+        "affinities": sorted(ashes.affinities().get(resolved, set())) if resolved else [],
+        "weapon_classes": sorted(ashes.classes().get(resolved, set())) if resolved else [],
+        "weapon_class": weapon_class,
+        # The variant these hits are for, and the ones they are not. Empty means the ash hits
+        # the same whatever it is on.
+        "variants": variants,
+        "variant_used": variant_used,
         "hits": hits,
         "hit_count": len(hits),
+        "hit_count_lacking_fp": len(lacking_fp),
         # False means at least one hit's motion values differ by damage type, and
         # optimal-affinity's single `attack_mv` cannot express it. Pricing such a hit with the
         # highest figure inflates the damage types the skill does not deal.

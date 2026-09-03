@@ -10,6 +10,10 @@
     "query": {
       "type": "string",
       "description": "The skill or ash-of-war name as the user wrote it. Variants are separate families \u2014 'Transient Moonlight' is R1 and R2 \u2014 so a bare name is often ambiguous."
+    },
+    "weapon_class": {
+      "type": "string",
+      "description": "The class of weapon the ash is going on. It matters for the twenty-odd ashes whose hits differ by weapon: Sword Dance is three hits on a reaper and three different ones on a dagger. Without it, an ash that varies is reported for one variant and `variant_used` says which."
     }
   }
 }

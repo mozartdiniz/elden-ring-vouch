@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ash-rank output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ranked", "rank_on", "rank_on_note", "weapon_class", "affinity", "catalog_size",
+    "considered", "limit", "returned", "truncated", "best"
+  ],
+  "properties": {
+    "ranked": {
+      "type": "array",
+      "description": "Best first. Every figure is for one full use of the ash on `weapon_class`, never summed across variants.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "skill", "hits", "rows", "total_status_motion_value", "total_poise_motion_value",
+          "total_motion_value", "highest_motion_value", "total_stamina_cost",
+          "default_affinity", "affinities", "weapon_classes", "scaling_overrides",
+          "overrides_weapon_scaling", "priced", "variants", "varies_by_variant"
+        ],
+        "properties": {
+          "skill": { "type": "string" },
+          "hits": { "type": "integer", "minimum": 0, "description": "Damaging hits in one full use — every press of the ash, the (Lacking FP) rows excluded." },
+          "rows": { "type": "integer", "minimum": 0 },
+          "total_status_motion_value": { "type": "number", "minimum": 0 },
+          "total_poise_motion_value": { "type": "number", "minimum": 0 },
+          "total_motion_value": { "type": "number", "minimum": 0 },
+          "highest_motion_value": { "type": "number", "minimum": 0, "description": "The biggest single hit — what optimal-affinity's attack_mv takes, when the hit is uniform across damage types." },
+          "total_stamina_cost": { "type": "number", "minimum": 0 },
+          "default_affinity": { "type": "string", "description": "The affinity it comes with. Not the set it accepts." },
+          "affinities": { "type": "array", "items": { "type": "string" }, "description": "Every affinity it accepts." },
+          "weapon_classes": { "type": "array", "items": { "type": "string" } },
+          "scaling_overrides": { "type": "array", "items": { "type": "string" } },
+          "overrides_weapon_scaling": { "type": "boolean", "description": "True when at least one hit replaces the weapon's scaling, which makes the weapon-optimal spread the wrong build for it." },
+          "priced": { "type": "boolean", "description": "False for an ash with no rows in the hit table — a self-buff like Seppuku, which is real and does no damage of its own." },
+          "variants": { "type": "array", "items": { "type": "string" }, "description": "The variant groups the table carries for this ash. Non-empty means the figures are for this weapon class and would differ on another." },
+          "varies_by_variant": { "type": "boolean" }
+        }
+      }
+    },
+    "rank_on": { "type": "string" },
+    "rank_on_note": { "type": "string", "description": "What the ordering means and what it leaves out. Say it in the answer." },
+    "weapon_class": { "type": "string" },
+    "affinity": { "type": "string" },
+    "catalog_size": { "type": "integer", "minimum": 1 },
+    "considered": { "type": "integer", "minimum": 0, "description": "How many ashes passed the class and affinity filters." },
+    "limit": { "type": "integer" },
+    "returned": { "type": "integer", "minimum": 0 },
+    "truncated": { "type": "boolean" },
+    "best": { "type": "string" }
+  }
+}

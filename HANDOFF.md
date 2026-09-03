@@ -73,7 +73,11 @@ came from the Prometheux workspace, which is a different provenance and is decla
 | `matchmaking` | **who a character can play with, and the upgrade bracket that keeps them there** | 9 |
 | `stat-curve` | **what each point in a stat buys, and where the curve bends** | 7 |
 
-`vouch -C . test` → **225 cases, 225 passed**.
+`vouch -C . test` → **240 cases, 240 passed**.
+
+`python3 scripts/check_spreadsheet.py` → **22 of 22 match**, against the Build Planner workbook
+itself rather than against the extraction. Run it after touching anything that reaches
+`planner.py` or `ap_calc.py`; it found the one bug 122 real questions did not.
 
 ## State of the evals
 
@@ -233,6 +237,10 @@ Item locations. Those tables live only in
 
 ## Working notes
 
+- **Check against the workbook, not just the extraction.** `scripts/check_spreadsheet.py` holds
+  twenty-two figures read off three of the Build Planner's own saved builds. The fixtures pin
+  the collection against `oracle/` and cannot catch a mistake in how the collection *uses* it —
+  which is exactly what bug 17 was, and what 122 questions missed.
 - **Regenerate `attack-power` fixtures** with `python3 scripts/generate_cases.py` after
   re-vendoring `oracle/`. They come from `ap_calc.SCREENSHOT_CASES`, the only figures here that
   trace to the game rather than to code.

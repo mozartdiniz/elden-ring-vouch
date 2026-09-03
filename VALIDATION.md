@@ -1264,3 +1264,42 @@ a corpo" are all sorting on an axis no table carries.
 What the collection can do is the budget: what is castable, what each costs, what each hits
 for, and which are in the school. What it cannot do is say which of them is the long-range one,
 and it should say so rather than guess.
+
+---
+
+## The spreadsheet check
+
+*3 September 2026.* Three of the Build Planner's own saved builds, exported to PDF from the
+workbook and read off by hand: **PvP - Faith RL150**, **PvE - Strength RL150** and **PvP -
+Intelligence RL150**, all from a Confessor. Kept as `scripts/check_spreadsheet.py`.
+
+This is a different check from everything above. The 240 fixtures pin the collection against
+the *extraction* — the CSVs in `oracle/` — and by construction they cannot catch a mistake in
+how the collection uses them. These twenty-two figures come from upstream of the extraction.
+
+**Twenty of twenty-two matched on the first run.** Rune levels, HP, FP, stamina, equip load,
+three catalysts' attack ratings, Treespear's 387.07 physical and 292.32 holy, a Heavy
+Broadsword's 572.31, and all eight of an armour set's negation percentages to three decimals.
+
+The two misses:
+
+**One was display rounding.** The sheet shows the Erdtree Seal's spell buff as 349.65; the node
+has 349.645. Excel rounds halves away from zero for display and the node holds the exact value.
+Nothing to fix, though it is worth noting the collection has `attack_shown` for attack power and
+no equivalent for a spell buff.
+
+**One was real, and it is bug 17.** The sheet's strength build reads 222.87 for its Frenzied
+Flame Seal; the collection said 223.30. `planner.py` treats a starting class's stats as a
+*floor* — `max(user, class_value)` — and `spell-power`, `spell-rank` and `stat-curve` defaulted
+that class to Wretch, whose stats are flat tens. That build has 9 intelligence and 9 arcane, so
+both were lifted to 10 and every figure was for a character nobody had described.
+`weapon-rank` had it hard-coded. spell-power's own parameter guidance said *"leave it out
+unless the user named a class"*, which is the advice that caused it.
+
+**A hundred and twenty-two questions across fourteen patterns did not find this.** Every figure
+was internally consistent, the fixtures agreed with the oracle, and the oracle agreed with
+itself. Nothing inside the collection could have caught it. Three PDFs and a 0.43 discrepancy
+in a spell buff did.
+
+That is the argument for checking against the thing upstream of your oracle rather than against
+your oracle, and it is now a script that runs in a second.

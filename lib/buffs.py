@@ -114,3 +114,77 @@ def stack(factors, rules):
             applied.append(group[0])
             shadowed.extend(group[1:])
     return round(total, 9), applied, shadowed
+
+
+# The other axis a buff can be conditional on. `BuffMult` is about *how you hit* — a skill, a
+# critical, a jump — and says nothing about *what the damage is*: Graven-Mass multiplies
+# sorceries, Fire Scorpion Charm multiplies fire, and neither is a hit kind. Eleven talismans
+# state one of these in their description, in one shape, and the figure is the extraction's own.
+import csv as _csv
+import re as _re
+
+EFFECT_CSV = os.path.join(
+    ROOT, "oracle", "extracted", "Build-Planner-v1.19.1", "csv", "EffectData.csv"
+)
+TALISMAN_CSV = os.path.join(
+    ROOT, "oracle", "extracted", "Build-Planner-v1.19.1", "csv", "TalismanData.csv"
+)
+
+SOURCE = _re.compile(
+    r"^Increases (?P<source>[a-z ]+?) damage by (?P<rate>\d+(?:\.\d+)?)x"
+    r"(?:\s*\((?P<paren>[^)]*)\))?(?P<rest>.*)$"
+)
+SOURCE_PVP = _re.compile(r"^(?P<rate>\d+(?:\.\d+)?)x in PvP$")
+# "stamina damage" is not damage to a health bar and does not belong in a damage multiplier.
+NOT_DAMAGE = {"stamina"}
+
+
+def _talisman_names():
+    names = set()
+    with open(TALISMAN_CSV, newline="", encoding="utf-8") as handle:
+        for row in _csv.reader(handle):
+            if row and row[0] and row[0] != "Talisman" and not row[0].startswith("//"):
+                names.add(row[0])
+    return names
+
+
+def source_table():
+    """`{name: {source, multiplier, pvp_multiplier, cost, note}}` for the school and element
+    talismans — the ones whose condition is what the damage *is* rather than how it was dealt.
+
+    Kept apart from `BuffMult` because it is a different axis and a different provenance: these
+    figures are read out of `EffectData`'s own description column, and `source` is the word that
+    description uses. Anything that does not match the shape exactly is left out; a miss costs
+    an unquantified talisman, a wrong parse would cost a wrong number.
+    """
+    talismans = _talisman_names()
+    with open(EFFECT_CSV, newline="", encoding="utf-8") as handle:
+        rows = list(_csv.reader(handle))
+    header = rows[1]
+    out = {}
+    for row in rows[2:]:
+        record = dict(zip(header, row))
+        name = (record.get("Name") or "").strip()
+        if not name or name not in talismans or name in out:
+            continue
+        text = (record.get("Effects") or "").strip()
+        match = SOURCE.match(text)
+        if not match:
+            continue
+        source = match.group("source").strip()
+        if source in NOT_DAMAGE:
+            continue
+        paren = (match.group("paren") or "").strip()
+        pvp_match = SOURCE_PVP.match(paren)
+        rest = (match.group("rest") or "").strip(" ,")
+        out[name] = {
+            "source": source,
+            "multiplier": float(match.group("rate")),
+            "pvp_multiplier": float(pvp_match.group("rate")) if pvp_match else None,
+            # What it costs. The Scorpion Charms buy their 1.12 with worse negation, and an
+            # answer that quotes the bonus without the cost is half an answer.
+            "cost": rest.lstrip("but ").strip() if rest.startswith("but") else "",
+            "note": paren if not pvp_match else "",
+            "source_text": text,
+        }
+    return out

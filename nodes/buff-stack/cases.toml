@@ -67,3 +67,31 @@ expect_code = 20
 name = "asserting the state of something not held is refused"
 input = { buffs = ["Shard of Alexander"], hit_kind = "Skill", assume = ["Ritual Sword Talisman"] }
 expect_code = 11
+
+# --- the other axis: what the damage *is*, not how it was dealt.
+#
+# `BuffMult` has nothing about Graven-Mass or the Scorpion Charms, because multiplying
+# sorceries or fire is not a hit kind. Questions 5.4 and 5.6 are entirely about those, and
+# without this axis both hand the multiply back to a model.
+
+[[case]]
+name = "a cast is more than one thing, and both talismans count"
+input = { buffs = ["Graven-Mass Talisman", "Graven-School Talisman", "Magic Scorpion Charm", "Flock's Canvas Talisman"], damage_sources = ["sorcery", "magic"], hit_kind = "All" }
+expect = { "result.multiplier" = 1.257984, "result.not_counted[0].buff" = "Flock's Canvas Talisman", "result.not_counted[0].excluded_because" = "it multiplies incantation damage, and this hit is sorcery and magic" }
+
+[[case]]
+name = "the same shape for a fire incantation"
+input = { buffs = ["Flock's Canvas Talisman", "Faithful's Canvas Talisman", "Fire Scorpion Charm", "Graven-Mass Talisman"], damage_sources = ["incantation", "fire"], hit_kind = "All" }
+expect = { "result.multiplier" = 1.257984, "result.applied[0].buff" = "Flock's Canvas Talisman" }
+
+# A bonus with a price says the price. Quoting 1.12 without the ten points of physical
+# negation it costs is half an answer.
+[[case]]
+name = "a Scorpion Charm's cost comes with its bonus"
+input = { buffs = ["Fire Scorpion Charm"], damage_sources = ["fire"], hit_kind = "All" }
+expect = { "result.multiplier" = 1.12, "result.applied[0].cost" = "decreases physical damage negations by -10% (-15% in PvP)" }
+
+[[case]]
+name = "and without a damage source it says what it would have multiplied"
+input = { buffs = ["Fire Scorpion Charm"], hit_kind = "All" }
+expect = { "result.multiplier" = 1.0, "result.not_counted[0].excluded_because" = "it multiplies fire damage and no damage_sources were given" }

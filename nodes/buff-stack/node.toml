@@ -36,6 +36,9 @@ guidance = "Everything the character is wearing or has cast that could multiply 
 [params.hit_kind]
 guidance = "The attack the user is asking about, and the thing that decides most of the answer: a Corpse Piler or a Taker's Flames is `Skill`, a fully charged one `ChargedSkill`, a riposte `Crit`, a jump attack `Jump`, a charged heavy `ChargedR2`, the third hit of a chain `Successive`. Leave it `All` only when the question is about ordinary swings — most talismans are worth 1.0 there and the answer will say so."
 
+[params.damage_sources]
+guidance = "Everything the hit *is*, not just one thing: a Comet cast is `[\"sorcery\", \"magic\"]` and both Graven-Mass and Magic Scorpion Charm apply. Fire incantations are `[\"incantation\", \"fire\"]`. Leave it out for a plain weapon hit and the school talismans will all say they did not apply, with what they multiply instead."
+
 [params.pvp]
 guidance = "Only when the user asked about PvP. Several buffs are weaker there."
 

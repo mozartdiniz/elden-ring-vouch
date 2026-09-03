@@ -45,13 +45,19 @@ def main():
     assumed = list(request.get("assume", []))
 
     table = buffs.table()
+    sources = buffs.source_table()
     rules = buffs.slot_rules()
+    # A cast is more than one thing at once: Comet is a *sorcery* and it deals *magic*, and
+    # Graven-Mass keys on the first while Magic Scorpion Charm keys on the second. One string
+    # here would make the two talismans exclusive when the game stacks them.
+    damage_sources = [s.strip().lower() for s in (request.get("damage_sources") or [])]
 
-    unknown = [name for name in names if name not in table]
+    unknown = [name for name in names if name not in table and name not in sources]
     if unknown:
         print(
             "not in BuffMult.csv: " + ", ".join(unknown)
-            + f"; the {len(table)} it knows are: " + ", ".join(sorted(table)),
+            + f"; the {len(table) + len(sources)} it knows are: "
+            + ", ".join(sorted(set(table) | set(sources))),
             file=sys.stderr,
         )
         sys.exit(1)
@@ -62,6 +68,36 @@ def main():
 
     factors, not_counted = [], []
     for name in names:
+        # The other axis: a talisman conditional on what the damage *is* rather than on how it
+        # was dealt. Graven-Mass multiplies sorceries and Fire Scorpion Charm multiplies fire,
+        # and neither is a hit kind — `BuffMult` has nothing to say about either.
+        if name in sources and name not in table:
+            entry = sources[name]
+            rate = entry["multiplier"]
+            if pvp and entry["pvp_multiplier"] is not None:
+                rate = entry["pvp_multiplier"]
+            row = {
+                "buff": name,
+                "kind": "Talisman",
+                "slot": "Passive",
+                "multiplier": rate,
+                "applies_on": [entry["source"]],
+                "state_conditional": False,
+                "note": entry["source_text"],
+                "cost": entry["cost"],
+            }
+            if entry["source"] not in damage_sources:
+                row["excluded_because"] = (
+                    f"it multiplies {entry['source']} damage"
+                    + (f", and this hit is " + " and ".join(damage_sources)
+                       if damage_sources else " and no damage_sources were given")
+                )
+                row["multiplier"] = 1.0
+                not_counted.append(row)
+            else:
+                factors.append(dict(row, item=name))
+            continue
+
         entry = table[name]
         rate = buffs.multiplier(entry, hit_kind, pvp)
         state = buffs.state_conditional(entry, pvp)
@@ -95,6 +131,7 @@ def main():
     result = {
         "buffs": names,
         "hit_kind": hit_kind,
+        "damage_sources": damage_sources,
         "pvp": pvp,
         "assumed": assumed,
         "multiplier": total,

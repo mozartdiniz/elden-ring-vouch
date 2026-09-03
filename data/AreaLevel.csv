@@ -1,0 +1,34 @@
+Area,LevelMin,LevelMax,SmithingHint
+Limgrave West,1.0,15.0,
+Stormhill,10.0,20.0,
+Limgrave East,10.0,20.0,
+Weeping Peninsula,20.0,30.0,
+Stormveil Castle,30.0,40.0,
+Liurnia of the Lakes (South),40.0,50.0,
+Academy of Raya Lucaria,50.0,60.0,
+Liurnia of the Lakes (East),50.0,60.0,
+Ainsel River,50.0,60.0,
+Liurnia of the Lakes (West),60.0,70.0,
+Siofra River,60.0,70.0,
+Caelid South,60.0,70.0,
+Altus Plateau,60.0,70.0,
+"Nokron, Eternal City",70.0,80.0,
+Siofra Aqueduct,70.0,80.0,
+Deeproot Depths,80.0,90.0,
+Capital Outskirts,80.0,90.0,
+Mt Gelmir,80.0,100.0,
+Lake of Rot,80.0,100.0,
+Dragonbarrow,90.0,110.0,
+"Leyndell, Royal Capital",90.0,110.0,
+Forbidden Lands,100.0,120.0,
+Mountaintops of the Giants,100.0,120.0,
+Consecrated Snowfield,100.0,120.0,
+Mohgwyn Palace,110.0,140.0,
+Miquella's Haligtree,120.0,150.0,
+Crumbling Farum Azula,120.0,150.0,
+"Leyndell, Ashen Capital",120.0,150.0,
+Limgrave,1.0,15.0,alias Limgrave West
+Caelid,60.0,70.0,alias Caelid South
+Raya Lucaria,50.0,60.0,alias Academy of Raya Lucaria
+Leyndell,90.0,110.0,"alias Leyndell, Royal Capital"
+Farum Azula,120.0,150.0,alias Crumbling Farum Azula

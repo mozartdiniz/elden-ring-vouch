@@ -169,6 +169,80 @@ judgement that has to rest on it.
 - [x] **9.8** Cold affinity vs Blood affinity numa Sword Lance pro meu status hunter — qual proca mais rápido contra bosses não-imunes?
 - [~] **9.9** Great Katana vs Nagakiba pra uma build de DEX/bleed no DLC — moveset, alcance e proc, qual ganha?
 - [x] **9.10** Heavy vs Quality na Gargoyle's Twinblade com STR 50/DEX 30 — qual dá mais AR de verdade?
+## Pattern 10 — Low-level and capped builds, and matchmaking tiers
+
+"Best distribution capped at RL[low] to get the most out of [weapon], because I want to keep
+my level low for co-op", and which weapon upgrade keeps you in the right bracket. A tight point
+budget plus the level-and-upgrade to matchmaking-range formula. The most deterministic pattern
+in the whole battery.
+
+- [ ] **10.1** Qual a melhor distribuição capada no RL35 pra tirar o máximo da Noble's Slender Sword, mantendo nível baixo pra coop? Compara começar como Samurai vs Wretch.
+- [ ] **10.2** Quero um cosplay de Vagabond Knight no RL45 usando a Lordsworn's Greatsword. Monta os status e diz o upgrade de arma que me mantém no matchmaking de Stormveil.
+- [ ] **10.3** What weapon upgrade level keeps me in the Raya Lucaria co-op bracket at character level 60? And what somber equivalent?
+- [ ] **10.4** Build de invasão RL25 com uma katana blood — distribuição e o +X de arma pra não estourar o matchmaking early.
+- [ ] **10.5** Quero manter um personagem travado no RL80 pra coop no late-game. Qual o teto de upgrade de arma normal e somber que ainda casa bem?
+- [ ] **10.6** Cosplay de Confessor RL50 com Golden Vow e uma arma keen. Monta os status e me diz a faixa de coop ideal.
+- [ ] **10.7** Meu RL70 usa +16 normal / +6 somber. Isso é mid-game? Em que áreas eu sou útil em coop nessa faixa?
+- [ ] **10.8** Vou copiar meu save do RL70 e fazer um RL130. O que muda de verdade na distribuição sem descaracterizar o build de twinblade?
+
+## Pattern 11 — Mechanics: how does X actually work
+
+"What is the difference between these spells?", "how does frostbite buildup work?" Pure
+understanding questions, usually asked to inform a later build decision. The test is whether
+the collection cites exact numbers or hand-waves, and whether it knows when it has no figure.
+
+- [ ] **11.1** Qual a diferença entre as três magias de lua no Elden Ring e quando uso cada uma?
+- [ ] **11.2** Como o dano do Black Flame (% de HP máximo) funciona, e por que ele é reduzido na DLC e ainda mais contra Messmer/Bayle/Consort?
+- [ ] **11.3** Como o buildup de Frostbite é calculado e o que exatamente o proc faz (dano + debuff de dano recebido)?
+- [ ] **11.4** Bleed/Hemorrhage: como o buildup escala com Arcane e por que uma arma com "menos bleed" pode procar mais rápido?
+- [ ] **11.5** Como funciona o soft cap de Vigor e onde estão os breakpoints de HP importantes?
+- [ ] **11.6** What exactly does poise/stance damage do, and how does stance break lead to a critical/riposte?
+- [ ] **11.7** Qual a diferença entre Spinning Strikes e Spinning Weapon, e por que um aceita Blood affinity e o outro não?
+- [ ] **11.8** Como o scaling de sorceries se comporta depois de 60 INT vs 80 INT — quanto realmente ganho por ponto?
+- [ ] **11.9** Como funciona o dano de multiplicadores de talismã/physick — eles são multiplicativos entre si ou aditivos?
+
+## Pattern 12 — Can weapon X do Y: feasibility and the workaround
+
+"Is there a way to make [weapon] proc [status]?" The weapon cannot natively, so what is wanted
+is the workaround list — grease, buff incantation, an off-hand, a talisman synergy — and which
+one is best. The capability half is a lookup; the ranking is rule-based on top of it.
+
+- [ ] **12.1** Is there a way to make the Marais Executioner's Sword proc bleed? What are the workarounds and which is best for PvE?
+- [ ] **12.2** Dá pra colocar sangramento na Godslayer's Greatsword de alguma forma, já que ela não aceita Blood affinity?
+- [ ] **12.3** Consigo aplicar Frostbite numa arma que não pode ser infundida com Cold? Como?
+- [ ] **12.4** Can I make a colossal sword proc a status without losing its Heavy scaling? What are my options?
+- [ ] **12.5** Tem algum jeito de fazer a Blasphemous Blade causar bleed sem perder o Taker's Flames?
+- [ ] **12.6** Não tem um Ash of War que gire a arma continuamente e aceite Blood affinity? O Spinning Weapon não serve.
+- [ ] **12.7** Consigo botar dano de raio numa arma somber que já tem elemento fixo? Ou só via incantation?
+- [ ] **12.8** Dá pra usar Bloodflame Blade numa arma com Blood affinity? Os efeitos stackam ou se anulam?
+
+## Pattern 14 — Getting an effect without the stat investment
+
+"How do players with no Faith get Golden Vow or Flame, Grant Me Strength?" Stat-free
+substitutes for a buff, and what they are actually worth. A good test of whether the collection
+knows the ash version of Golden Vow is a fixed buff that does not scale.
+
+- [ ] **14.1** Como jogadores sem Faith conseguem os buffs equivalentes ao Flame, Grant Me Strength e ao Golden Vow?
+- [ ] **14.2** Quero o efeito do Golden Vow numa build de pure INT sem gastar ponto em Faith — o Ash of War Golden Vow resolve? O buff escala?
+- [ ] **14.3** Dá pra ter cura sem Faith? Quais as opções e quão eficientes comparadas ao Heal?
+- [ ] **14.4** How do I get a fire-damage buff on a Strength build with zero Faith? Which physick/perfume/talisman stack?
+- [ ] **14.5** Quero um buff de dano físico stackável sem Faith numa build de DEX. Monta o combo (Ash + talismã + physick) e me diz o ganho aproximado.
+- [ ] **14.6** Consigo o efeito do Flame, Cleanse Me (curar scarlet rot/poison) sem investir em Faith?
+- [ ] **14.7** Buff de defesa sem Faith pra coop — o que substitui o lado defensivo do Golden Vow?
+
+## Pattern 15 — Spell loadouts and range coverage
+
+"Build me a spell bar", or "my school feels too short-range, how do I cover long range?" A full
+loadout inside the slot and FP budget, plus a fix for a playstyle gap. The budgeting is calc;
+the curation is judgement that has to rest on it.
+
+- [ ] **15.1** Minha build de gelo (70 INT, Carian Regal Scepter +10) parece que só joga curto/médio alcance. Monta uma barra de magias que cubra long range sem abandonar o tema de gelo.
+- [ ] **15.2** Faz uma barra de incantations de Faith pra coop RL150 que cubra buff, dano à distância, dano corpo a corpo e cura, dentro dos slots.
+- [ ] **15.3** My pure INT RL150 mage needs a full spell loadout: opener, main DPS, close-range, AoE, and a boss nuke. Build the bar.
+- [ ] **15.4** Monta um kit de Death sorceries temático mas funcional pro RL150 (INT 60 / FTH 45), com Prince of Death's Staff.
+- [ ] **15.5** Quero um spellblade RL150: uma arma de melee + uma barra enxuta de magias que complementa o corpo a corpo. Monta o loadout.
+- [ ] **15.6** Preciso de uma opção de long range que não seja de gelo mas se beneficie do debuff do Ranni's Dark Moon. Quais entram na barra?
+- [ ] **15.7** Build a dragon-communion incantation bar for an Arcane/Faith RL150 that covers Bayle and general PvE.
 ---
 
 ## Results

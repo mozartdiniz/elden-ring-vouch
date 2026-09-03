@@ -1,0 +1,113 @@
+name = "matchmaking"
+version = "0.1.0"
+
+purpose = "The levels and weapon upgrades a character matches with, and the areas its level is built for"
+
+use_when = [
+  "the question is about keeping a level low for co-op or invasions",
+  "the question asks which weapon upgrade keeps someone in a bracket",
+  "a build is capped at a level and the point of the cap is who they can play with",
+  "the user asks which areas they are useful in at their level",
+]
+not_for = [
+  "the stat spread itself — call build-allocate with the capped target_level",
+  "what the weapon hits for at that upgrade — call attack-power",
+  "which weapon to use — call weapon-rank",
+]
+
+run = ["python3", "match.py"]
+timeout_ms = 30000
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/MatchmakingCalcData.csv"
+
+[[reads]]
+path = "../../data/AreaLevel.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.level]
+guidance = "The rune level, from character-build or build-allocate. If the user gave a spread rather than a level, get the level from character-build rather than adding the stats up."
+
+[params.upgrade]
+guidance = "The weapon's upgrade. Without it there is no bracket, only level bands."
+
+[params.somber]
+guidance = "True whenever weapon-lookup reported max_upgrade 10 — that is a somber weapon and its upgrades count 2.5x. Getting this wrong is the single easiest way to give someone the wrong bracket."
+
+[params.area]
+guidance = "Only when the user named a place. The answer that comes back is from the softest table in the collection and has to be quoted as a level band somebody chose, not as a rule the game enforces."
+
+[[requires]]
+expr = "input.level >= 1 && input.level <= 713"
+message = "rune level runs from 1 to 713"
+
+[[requires]]
+expr = "!has(input.upgrade) || (input.upgrade >= 0 && input.upgrade <= 25)"
+message = "upgrade runs from 0 to 25; a somber weapon stops at 10"
+
+[[requires]]
+expr = "!has(input.somber) || !input.somber || !has(input.upgrade) || input.upgrade <= 10"
+message = "a somber weapon cannot go past +10; check weapon-lookup's max_upgrade"
+
+# --- postconditions ---
+
+[[ensures]]
+expr = "result.level == input.level"
+
+# Every range runs the right way round.
+[[ensures]]
+expr = """
+result.summon_signs.summoning.lower <= result.summon_signs.summoning.upper &&
+result.summon_signs.summoned_by.lower <= result.summon_signs.summoned_by.upper &&
+result.cipher_ring.summoning.lower <= result.cipher_ring.summoning.upper &&
+result.invasions.invading.lower <= result.invasions.invading.upper
+"""
+
+# A cipher ring is a wider net than a summon sign, never a narrower one.
+[[ensures]]
+expr = """
+result.cipher_ring.summoning.lower <= result.summon_signs.summoning.lower &&
+result.cipher_ring.summoning.upper >= result.summon_signs.summoning.upper
+"""
+
+# A character is always inside their own summoning range.
+[[ensures]]
+expr = """
+result.level >= result.summon_signs.summoning.lower &&
+result.level <= result.summon_signs.summoning.upper
+"""
+
+# The somber conversion is the sheet's, and it is only applied to somber weapons.
+[[ensures]]
+expr = """
+!has(input.upgrade) ? result.effective_upgrade == null :
+  (result.somber ? result.effective_upgrade == int(double(input.upgrade) * 2.5)
+                 : result.effective_upgrade == input.upgrade)
+"""
+
+[[ensures]]
+expr = "has(input.upgrade) == (result.weapon_range != null)"
+
+# The area answer is labelled as the judgement it is.
+[[ensures]]
+expr = "result.area_source != \"\""
+
+[[ensures]]
+expr = "result.areas_in_band.all(a, a.level_min <= double(result.level) && double(result.level) <= a.level_max)"
+
+[[examples]]
+ask = "quero manter um personagem no RL80 pra coop no late-game — qual o teto de upgrade normal e somber?"
+call = { level = 80, upgrade = 18 }
+
+[[examples]]
+ask = "meu RL70 usa +16 normal. isso é mid-game? onde sou útil?"
+call = { level = 70, upgrade = 16 }
+
+[[examples]]
+ask = "what upgrade keeps me in the Raya Lucaria bracket at level 60?"
+call = { level = 60, upgrade = 12, area = "Raya Lucaria" }

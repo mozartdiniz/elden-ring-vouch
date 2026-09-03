@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "matchmaking input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["level"],
+  "properties": {
+    "level": { "type": "integer", "minimum": 1, "maximum": 713, "description": "Rune level. character-build and build-allocate both return it as `level`." },
+    "upgrade": { "type": "integer", "minimum": 0, "maximum": 25, "description": "The weapon's upgrade level. Leave it out for the level bands alone." },
+    "somber": { "type": "boolean", "description": "True when that upgrade is on a somber weapon, which counts as two and a half standard levels. weapon-lookup's max_upgrade of 10 is the tell." },
+    "area": { "type": "string", "description": "An area name, when the user named one — 'Stormveil', 'Raya Lucaria'. Matched loosely, and answered from the softest table here." }
+  }
+}

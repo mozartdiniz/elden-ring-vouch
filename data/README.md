@@ -83,3 +83,15 @@ Both are the Prometheux workspace's own compilation. The Build Planner publishes
 The forty crystal tears, with what each does and how long it lasts. Every Pattern 4 and 5
 question in `VALIDATION.md` names a physick, and `CrystalTearData.csv` in the extraction covers
 only the ones with a stat column.
+
+## AreaLevel.csv
+
+The level band each area of the game is built for, with aliases. Not a matchmaking rule — the
+brackets come from `MatchmakingCalcData` in the extraction — but the thing a coop question
+actually asks: "meu RL70 é útil em que áreas?" and "o upgrade que me mantém no matchmaking de
+Stormveil" both need a level to be attached to a place, and no table in the Build Planner does
+that.
+
+The Prometheux workspace's own compilation, and the softest data in this directory: a level
+band for an area is a judgement somebody made, where a negation figure is not. `source` says
+so on every row that uses it.

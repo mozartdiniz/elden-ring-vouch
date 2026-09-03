@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "matchmaking output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "level",
+    "upgrade",
+    "somber",
+    "effective_upgrade",
+    "summon_signs",
+    "cipher_ring",
+    "invasions",
+    "weapon_range",
+    "areas_in_band",
+    "area",
+    "area_source",
+    "max_level"
+  ],
+  "$defs": {
+    "range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lower",
+        "upper"
+      ],
+      "properties": {
+        "lower": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "upper": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "area_row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "area",
+        "level_min",
+        "level_max"
+      ],
+      "properties": {
+        "area": {
+          "type": "string"
+        },
+        "level_min": {
+          "type": "number"
+        },
+        "level_max": {
+          "type": "number"
+        },
+        "note": {
+          "type": "string"
+        },
+        "level_fits": {
+          "type": "boolean"
+        }
+      }
+    },
+    "upgrade_range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lower",
+        "upper"
+      ],
+      "properties": {
+        "lower": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "upper": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "description": "An upgrade range, which starts at +0 where a level range starts at 1."
+    }
+  },
+  "properties": {
+    "level": {
+      "type": "integer"
+    },
+    "upgrade": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "somber": {
+      "type": "boolean"
+    },
+    "effective_upgrade": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "The standard-upgrade equivalent. A somber level is worth 2.5 of them, so a somber +6 matches like a standard +15 \u2014 comparing +6 against +6 is the mistake this exists to stop."
+    },
+    "summon_signs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summoning",
+        "summoned_by"
+      ],
+      "properties": {
+        "summoning": {
+          "$ref": "#/$defs/range",
+          "description": "Levels this character can put a sign down for."
+        },
+        "summoned_by": {
+          "$ref": "#/$defs/range",
+          "description": "Levels that can call them. A different range, and the one people get wrong."
+        }
+      }
+    },
+    "cipher_ring": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summoning",
+        "summoned_by"
+      ],
+      "properties": {
+        "summoning": {
+          "$ref": "#/$defs/range"
+        },
+        "summoned_by": {
+          "$ref": "#/$defs/range"
+        }
+      },
+      "description": "Wider than a summon sign by five levels either way."
+    },
+    "invasions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "invading",
+        "invaded_by"
+      ],
+      "properties": {
+        "invading": {
+          "$ref": "#/$defs/range"
+        },
+        "invaded_by": {
+          "$ref": "#/$defs/range"
+        }
+      },
+      "description": "Asymmetric on purpose: an invader reaches twenty levels up and only ten per cent down."
+    },
+    "weapon_range": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "standard",
+        "somber"
+      ],
+      "properties": {
+        "standard": {
+          "$ref": "#/$defs/upgrade_range",
+          "description": "Standard upgrade levels this weapon matches with."
+        },
+        "somber": {
+          "$ref": "#/$defs/upgrade_range",
+          "description": "Somber upgrade levels it matches with."
+        }
+      },
+      "description": "Null when no upgrade was given. This is the bracket, and it is a lookup rather than a formula."
+    },
+    "areas_in_band": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/area_row"
+      },
+      "description": "Areas whose level band contains this character \u2014 'where am I useful in coop'. Softer than everything else here: see area_source."
+    },
+    "area": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/area_row"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "area_source": {
+      "type": "string",
+      "description": "Where the area bands came from, and that they are a judgement rather than a matchmaking rule. Say it."
+    },
+    "max_level": {
+      "type": "integer"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+# Node fixtures (§7.1).
+#
+# Pattern 10 is eight questions half of which are this, and matchmaking was on the handoff's
+# "not ported at all" list. It is the most deterministic thing in the game — two formulas and a
+# lookup — and all of it was in the extraction.
+#
+# The first case is the spreadsheet's own cached values for its default inputs, which is the
+# closest thing to a hand-checked figure this node can have.
+
+[[case]]
+name = "the sheet's own worked example: level 9, +1"
+input = { level = 9, upgrade = 1 }
+expect = { "result.summon_signs.summoning.lower" = 1, "result.summon_signs.summoning.upper" = 20, "result.summon_signs.summoned_by.upper" = 21, "result.cipher_ring.summoning.upper" = 25, "result.cipher_ring.summoned_by.upper" = 27, "result.invasions.invading.lower" = 8, "result.invasions.invading.upper" = 30, "result.invasions.invaded_by.upper" = 10, "result.weapon_range.standard.upper" = 4, "result.weapon_range.somber.upper" = 1 }
+
+# Summoning and being summoned are different ranges, which is the part people get wrong.
+[[case]]
+name = "the two directions are not the same range"
+input = { level = 60 }
+expect = { "result.summon_signs.summoning.lower" = 44, "result.summon_signs.summoning.upper" = 76, "result.summon_signs.summoned_by.lower" = 46, "result.summon_signs.summoned_by.upper" = 78 }
+
+# A somber upgrade is worth two and a half standard ones. Comparing +6 against +6 is the
+# easiest way to hand someone the wrong bracket.
+[[case]]
+name = "a somber upgrade counts two and a half times"
+input = { level = 60, upgrade = 6, somber = true }
+expect = { "result.effective_upgrade" = 15, "result.weapon_range.standard.lower" = 11, "result.weapon_range.standard.upper" = 20, "result.weapon_range.somber.lower" = 5, "result.weapon_range.somber.upper" = 8 }
+
+[[case]]
+name = "and a standard one counts once"
+input = { level = 60, upgrade = 6 }
+expect = { "result.effective_upgrade" = 6, "result.weapon_range.standard.lower" = 3, "result.weapon_range.standard.upper" = 10 }
+
+# An invader reaches twenty levels up and only ten per cent down, so the two directions are
+# lopsided in a way the summon ranges are not.
+[[case]]
+name = "invasion ranges are asymmetric"
+input = { level = 100 }
+expect = { "result.invasions.invading.lower" = 90, "result.invasions.invading.upper" = 130, "result.invasions.invaded_by.lower" = 73, "result.invasions.invaded_by.upper" = 111 }
+
+[[case]]
+name = "an area's band is answered and labelled as the judgement it is"
+input = { level = 60, upgrade = 12, area = "Raya Lucaria" }
+expect = { "result.area.area" = "Academy of Raya Lucaria", "result.area.level_min" = 50.0, "result.area.level_max" = 60.0, "result.area.level_fits" = true }
+
+# Without an upgrade there is no bracket, only level bands — and the postcondition ties the two
+# together, so a null here is a claim rather than a gap.
+[[case]]
+name = "no upgrade means no bracket, only level bands"
+input = { level = 35 }
+expect = { "result.summon_signs.summoning.lower" = 22, "result.summon_signs.summoning.upper" = 48 }
+
+[[case]]
+name = "a somber weapon past +10 is refused"
+input = { level = 60, upgrade = 12, somber = true }
+expect_code = 11
+
+[[case]]
+name = "a level past 713 is a caller error"
+input = { level = 800 }
+expect_code = 10

@@ -50,5 +50,9 @@ notes = [
   "A spell's attack is per damage type, and spell-power returns the split: an incantation deals fire, lightning or holy rather than magic, and Meteorite deals physical and magic at once. Quote the type with the figure — a number alone cannot be checked against an enemy's negation.",
   "Comparing weapons means calling attack-power once per weapon on the same stats, then ranking what came back. Say what you ranked on: total_ar alone ignores status buildup, reach, and whether the build meets the requirements.",
   "Every figure is for the stat spread you passed. Two-handing changes strength, so a one-handed and a two-handed answer are different questions — say which one you computed.",
+  "When a level is a *choice* rather than a target — capped for coop, an invasion build, a cosplay — call matchmaking as well as build-allocate. It gives the levels the character matches with, the upgrade bracket, and which areas the level is built for.",
+  "A somber upgrade counts 2.5 standard levels for matchmaking, so pass matchmaking `somber: true` whenever weapon-lookup reported max_upgrade 10. Comparing a somber +6 against a standard +6 is the easiest way to give someone the wrong bracket: the somber one matches like a +15.",
+  "Summoning and being summoned are different ranges and matchmaking returns both. Quote the one the user asked about — a host looking for help and a phantom looking for a host are not the same question.",
+  "matchmaking's area bands come from the softest table in the collection: a level band for an area is somebody's judgement where a matchmaking range is arithmetic. `area_source` says so and an answer should too.",
   "These numbers come from the Build Planner spreadsheet at patch 1.19.1, not from the live game.",
 ]

@@ -66,13 +66,19 @@ def main():
         sys.exit(1)
     forms = spellbook.variants(book, spell["Name"])
 
+    # A starting class is a *floor* in planner.py, not a baseline: a build with 9 intelligence
+    # computed as a Wretch is computed at 10, because Wretch is flat tens. So the class is
+    # reported and so is anything it lifted — a spell buff for a build nobody described is the
+    # failure this collection exists to prevent, and it is 0.4 of a point, which is worse than
+    # a large one because nobody would notice.
+    starting_class = request.get("starting_class", "Wretch")
+    given = {stat: request[stat] for stat in
+             ("strength", "dexterity", "intelligence", "faith", "arcane")}
+    stats_used, raised_by_class = oracle.class_floor(starting_class, given)
+
     build = planner.PlannerInputs(
-        starting_class=request.get("starting_class", "Wretch"),
-        strength=request["strength"],
-        dexterity=request["dexterity"],
-        intelligence=request["intelligence"],
-        faith=request["faith"],
-        arcane=request["arcane"],
+        starting_class=starting_class,
+        **given,
         rh1=planner.WeaponSlotIn(
             weapon=catalyst, affinity="Standard", upgrade=request["upgrade"]
         ),
@@ -114,6 +120,11 @@ def main():
         "forms": forms,
         "catalyst": catalyst,
         "catalyst_class": row["Weapon Class"],
+        "starting_class": starting_class,
+        "stats_used": stats_used,
+        # Stats the starting class raised above what the caller gave. Non-empty means this
+        # figure is for a slightly different character than the one asked about.
+        "stats_raised_by_class": raised_by_class,
         "catalyst_casts": catalyst_casts,
         "catalyst_can_cast_this": spell.get("Type") in catalyst_casts,
         "upgrade": int(request["upgrade"]),

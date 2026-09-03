@@ -184,6 +184,10 @@ def main():
         file=sys.stderr,
     )
 
+    stats_raised = oracle.class_floor(
+        starting_class, {s: stats[s] for s in COMBAT}
+    )[1] if subject != "weapon" else []
+
     result = {
         "stat": stat,
         "subject": subject,
@@ -203,6 +207,9 @@ def main():
         "weapon": request.get("weapon", ""),
         "spell": request.get("spell", ""),
         "starting_class": starting_class,
+        # Stats the class floor lifted above what was asked for. planner.py treats a class's
+        # stats as a minimum, so a vitals or spell curve for a Wretch never dips below ten.
+        "stats_raised_by_class": stats_raised,
         # Stats whose requirement is unmet somewhere in the range. While one is, the curve is
         # flat for a reason that has nothing to do with the stat being walked.
         "requirements_unmet": sorted({

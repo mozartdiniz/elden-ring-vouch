@@ -116,3 +116,41 @@ expect = { "result.scaling.strength.requirement" = 12, "result.scaling.strength.
 name = "two-handing closes the gap, and the shortfall says so"
 input = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 10, strength = 10, dexterity = 40, intelligence = 10, faith = 10, arcane = 50, two_hand = true }
 expect = { "result.scaling.strength.effective" = 15, "result.scaling.strength.shortfall" = 0, "result.requirements_met" = true }
+
+# --- the spreadsheet's own saved builds.
+#
+# Three default builds exported from the Build Planner itself, read off the sheet rather than
+# computed here. Every other fixture in this collection traces to the extraction; these trace
+# to the thing the extraction was made from, which is as close to a hand-check as it gets.
+
+# "[Default] PvP - Faith RL150" — Confessor, VIG 60 / MND 13 / END 25 / STR 15 / DEX 24 /
+# INT 9 / FTH 79 / ARC 9. The sheet shows 387.07 physical, 292.32 holy, 679.39 total.
+[[case]]
+name = "the sheet's faith build: Treespear +25"
+input = { weapon = "Treespear", affinity = "Standard", upgrade = 25, strength = 15, dexterity = 24, intelligence = 9, faith = 79, arcane = 9 }
+expect = { "result.attack.physical" = 387.0742062404928, "result.attack.holy" = 292.31856500000004, "result.total_ar" = 679.3927712404928, "result.attack_shown.physical" = 387, "result.attack_shown.holy" = 292 }
+
+# "[Default] PvE - Strength RL150" — dexterity 17 on the sheet is 12 levelled plus Millicent's
+# Prosthesis, which this collection does not apply, so the 17 is passed in by hand. That is the
+# deliberate talisman gap showing up in one of the spreadsheet's own builds.
+[[case]]
+name = "the sheet's strength build: Heavy Broadsword +25"
+input = { weapon = "Broadsword", affinity = "Heavy", upgrade = 25, strength = 79, dexterity = 17, intelligence = 9, faith = 27, arcane = 9 }
+expect = { "result.total_ar" = 572.3095840000001, "result.attack_shown.physical" = 572 }
+
+# "[Default] PvP - Intelligence RL150" — the three catalysts it carries, and the madness the
+# Frenzied Flame Seal brings with it.
+[[case]]
+name = "the sheet's intelligence build: Lusat's +10 attack rating"
+input = { weapon = "Lusat's Glintstone Staff", affinity = "Standard", upgrade = 10, strength = 12, dexterity = 13, intelligence = 80, faith = 14, arcane = 9 }
+expect = { "result.total_ar" = 243.13800000000006 }
+
+[[case]]
+name = "and Azur's beside it"
+input = { weapon = "Azur's Glintstone Staff", affinity = "Standard", upgrade = 10, strength = 12, dexterity = 13, intelligence = 80, faith = 14, arcane = 9 }
+expect = { "result.total_ar" = 212.97360000000003 }
+
+[[case]]
+name = "and the Frenzied Flame Seal, which carries 55 madness"
+input = { weapon = "Frenzied Flame Seal", affinity = "Standard", upgrade = 10, strength = 12, dexterity = 13, intelligence = 80, faith = 14, arcane = 9 }
+expect = { "result.total_ar" = 107.74531249895003, "result.status.madness" = 55.0 }

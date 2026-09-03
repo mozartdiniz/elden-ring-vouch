@@ -65,3 +65,25 @@ expect_code = 11
 name = "a missing starting class is a caller error"
 input = { vigor = 40 }
 expect_code = 10
+
+# --- the spreadsheet's own armour set, on two of its saved builds.
+#
+# Crucible Axe Helm, Tree Sentinel Armor, Briar Gauntlets, Tree Sentinel Greaves. Neither build
+# wears a talisman that touches negation, so every figure here is directly comparable, and all
+# eight negation percentages and all four resistances match the sheet exactly.
+[[case]]
+name = "the sheet's faith build: defence, negation and resistance"
+input = { starting_class = "Confessor", vigor = 60, mind = 13, endurance = 25, strength = 15, dexterity = 24, intelligence = 9, faith = 79, arcane = 9, head = "Crucible Axe Helm", chest = "Tree Sentinel Armor", arms = "Briar Gauntlets", legs = "Tree Sentinel Greaves" }
+expect = { "result.defence.physical" = 138, "result.defence.magic" = 151, "result.defence.fire" = 193, "result.defence.lightning" = 133, "result.defence.holy" = 151, "result.resist.immunity" = 340, "result.resist.robustness" = 359, "result.resist.focus" = 249, "result.resist.vitality" = 265 }
+
+[[case]]
+name = "the sheet's intelligence build: the same armour, different stats"
+input = { starting_class = "Confessor", vigor = 60, mind = 25, endurance = 24, strength = 12, dexterity = 13, intelligence = 80, faith = 14, arcane = 9, head = "Crucible Axe Helm", chest = "Tree Sentinel Armor", arms = "Briar Gauntlets", legs = "Tree Sentinel Greaves" }
+expect = { "result.defence.magic" = 199, "result.defence.fire" = 194, "result.defence.lightning" = 134, "result.defence.holy" = 152, "result.resist.immunity" = 341, "result.resist.robustness" = 360, "result.resist.focus" = 250, "result.resist.vitality" = 266 }
+
+# Negation comes from the armour alone, so it is identical on both builds — 34.224% physical,
+# 28.261 strike, 34.151 slash, 32.516 pierce, and the sheet says the same to three decimals.
+[[case]]
+name = "and the eight negation percentages the armour gives"
+input = { starting_class = "Confessor", vigor = 60, mind = 13, endurance = 25, strength = 15, dexterity = 24, intelligence = 9, faith = 79, arcane = 9, head = "Crucible Axe Helm", chest = "Tree Sentinel Armor", arms = "Briar Gauntlets", legs = "Tree Sentinel Greaves" }
+expect = { "result.negation_percent.physical" = 34.224, "result.negation_percent.strike" = 28.261, "result.negation_percent.slash" = 34.151, "result.negation_percent.pierce" = 32.516, "result.negation_percent.magic" = 25.219, "result.negation_percent.fire" = 30.952, "result.negation_percent.lightning" = 23.772, "result.negation_percent.holy" = 26.876 }

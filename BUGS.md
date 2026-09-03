@@ -30,6 +30,7 @@ Not defects, but the two things most likely to become one.
 
 | # | what was wrong | found by | kind | commit |
 |---|---|---|---|---|
+| 17 | **The starting class silently changed the stats.** `planner.py` treats a class's stats as a *floor* — `max(user, class_value)` — and `spell-power`, `spell-rank` and `stat-curve` defaulted it to Wretch, whose flat tens lift anything below 10. `weapon-rank` hard-coded it. So a build with 9 intelligence was priced at 10, and spell-power's own parameter guidance said "leave it out unless the user named a class". Caught by the Build Planner's own saved strength build: its Frenzied Flame Seal is **222.87 on the sheet and 223.30 as a Wretch**. Small, systematic, and invisible — every spell figure the collection had ever produced was a Wretch's. | spreadsheet | unread data | `pending` |
 | 16 | **The weapon-buff rule was computed and never exposed.** `ap_calc` has taken a `status_buff` since it was vendored and checks three conditions to accept it — class, affinity, and whether the weapon can be buffed — but nothing could ask *which* buffs a weapon takes. Pattern 12 is eight questions of exactly that, and the answers were sitting behind an input nobody could enumerate. Not a wrong number, a capability with no question shape attached. | 12.1 | design | `fac2fa0` |
 | 15 | `spell-power` reported a spell's **base FP cost** as though it were what the caster pays. Lusat's Glintstone Staff charges 1.5x and Azur's 1.2x, both stated in `castingBonusRate` where every other catalyst puts a number. Question 9.6 asks "vale o custo de FP?" and the figures said the two staves cost the same: Comet at 70 intelligence is 24 FP from a Regal Scepter and 36 from Lusat's. | 9.6 | unread data | `a42dead` |
 | 14 | **Spell names had no lookup.** `spell-power` matched the display name exactly and exited otherwise, so "Rellana's Twin Moons" — three rows in the table, `[1]`, `[2]`, `[3]` — came back as a crash-shaped defect where `weapon-lookup` would have listed three candidates. Question 9.1 compares three moon spells and broke on the third. | 9.1 | missing check | `a42dead` |
@@ -68,7 +69,13 @@ was wrong by the time Pattern 5 asked a sharper question, and the table that mad
 unnecessary had been sitting unvendored in the workspace the whole time. Worth checking the
 workspace's file list before building a parser — #15 is the same lesson a second time.
 
-**Five of the fifteen are the same mistake**: #2, #4, #5, #9, #12, #13 and #15 are all *the
+**#17 is the one no question found.** Fourteen patterns and 122 questions did not surface it,
+because every figure was internally consistent and nothing to compare against was outside the
+collection. It took three PDFs of the source spreadsheet, and a 0.43 discrepancy in the fourth
+decimal place of a spell buff. That is the argument for checking against the thing upstream of
+your oracle, not just against your oracle.
+
+**Six of the seventeen are the same mistake**: #2, #4, #5, #9, #12, #13 and #15 are all *the
 table already knew and the code did not look*. That is the single most productive thing to
 check when something looks wrong.
 

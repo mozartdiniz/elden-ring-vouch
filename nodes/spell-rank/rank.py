@@ -60,8 +60,13 @@ def main():
     casts = oracle.casts(row)
     upgrade = int(request.get("upgrade", oracle.max_upgrade(row)))
 
+    # The starting class is a floor on every stat inside planner.py, so leaving it out computes
+    # a build with 9 intelligence as one with 10 and ranks a slightly different character's
+    # spells. Reported, along with anything it lifted.
+    starting_class = request.get("starting_class", "Wretch")
+    stats_used, raised_by_class = oracle.class_floor(starting_class, stats)
     build = planner.PlannerInputs(
-        starting_class=request.get("starting_class", "Wretch"),
+        starting_class=starting_class,
         rh1=planner.WeaponSlotIn(weapon=catalyst, affinity="Standard", upgrade=upgrade),
         **stats,
     )
@@ -155,6 +160,9 @@ def main():
         "uncastable": uncastable,
         "include_uncastable": include_uncastable,
         "stats": stats,
+        "starting_class": starting_class,
+        "stats_used": stats_used,
+        "stats_raised_by_class": raised_by_class,
         "limit": limit,
         "returned": len(ranked),
         "truncated": truncated,

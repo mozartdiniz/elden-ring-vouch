@@ -3,13 +3,39 @@
   "title": "weapon-rank input",
   "type": "object",
   "additionalProperties": false,
-  "required": ["strength", "dexterity", "intelligence", "faith", "arcane"],
+  "required": [
+    "strength",
+    "dexterity",
+    "intelligence",
+    "faith",
+    "arcane"
+  ],
   "properties": {
-    "strength": { "type": "integer", "minimum": 1, "maximum": 99 },
-    "dexterity": { "type": "integer", "minimum": 1, "maximum": 99 },
-    "intelligence": { "type": "integer", "minimum": 1, "maximum": 99 },
-    "faith": { "type": "integer", "minimum": 1, "maximum": 99 },
-    "arcane": { "type": "integer", "minimum": 1, "maximum": 99 },
+    "strength": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99
+    },
+    "dexterity": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99
+    },
+    "intelligence": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99
+    },
+    "faith": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99
+    },
+    "arcane": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99
+    },
     "weapon_class": {
       "type": "string",
       "description": "Restrict to one class, e.g. 'Katana', 'Colossal Sword', 'Greatshield'. Without it the ranking is across all 570 weapons, shields and catalysts included."
@@ -18,15 +44,27 @@
       "type": "string",
       "description": "'Standard' (default) prices every weapon as found. 'best' prices all thirteen infusions of each infusable weapon and keeps its winner, which is a different question and a higher list. A named affinity prices every infusable weapon with it."
     },
-    "two_hand": { "type": "boolean", "description": "True if the build two-hands, which lowers the strength each weapon needs." },
-    "limit": { "type": "integer", "minimum": 1, "maximum": 100, "description": "How many rows to return, best first. Default 15." },
+    "two_hand": {
+      "type": "boolean",
+      "description": "True if the build two-hands, which lowers the strength each weapon needs."
+    },
+    "limit": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100,
+      "description": "How many rows to return, best first. Default 15."
+    },
     "include_unusable": {
       "type": "boolean",
-      "description": "Keep the weapons whose requirements the build does not meet, each with its shortfall. Default false — a weapon that cannot be held is not a weak option, it is not an option."
+      "description": "Keep the weapons whose requirements the build does not meet, each with its shortfall. Default false \u2014 a weapon that cannot be held is not a weak option, it is not an option."
     },
     "spell": {
       "type": "string",
       "description": "Rank catalysts by what this spell hits for out of each, instead of ranking weapons by attack rating. Resolve the name with spell-power first."
+    },
+    "starting_class": {
+      "type": "string",
+      "description": "Needed only when ranking catalysts for a spell: planner.py floors every stat at the class's, so the wrong class ranks a slightly different build. Default Wretch, whose flat tens lift anything below 10."
     }
   }
 }

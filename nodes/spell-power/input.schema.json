@@ -37,7 +37,7 @@
     },
     "starting_class": {
       "type": "string",
-      "description": "Only affects stat floors. Default Wretch, whose floors are the lowest."
+      "description": "The class the character started as. Not cosmetic: planner.py uses a class's stats as a floor, so a build with 9 intelligence computed as a Wretch is computed at 10. Pass the real class \u2014 the default is Wretch and it lifts every stat below ten."
     },
     "strength": {
       "type": "integer"

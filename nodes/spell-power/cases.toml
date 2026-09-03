@@ -124,3 +124,42 @@ expect_code = 11
 name = "one catalyst casts both, and the flags say so"
 input = { spell = "Comet", catalyst = "Staff of the Great Beyond", upgrade = 10, strength = 10, dexterity = 10, intelligence = 80, faith = 10, arcane = 10 }
 expect = { "result.catalyst_can_cast_this" = true, "result.catalyst_casts[0]" = "Sorcery", "result.catalyst_casts[1]" = "Incantation" }
+
+# --- spell buffs from the spreadsheet's own saved builds.
+#
+# Read off the sheet, and the reason the starting class is passed on every one of them: the
+# Frenzied Flame Seal on the strength build is 222.87 as a Confessor and 223.30 as a Wretch,
+# because that build has 9 intelligence and 9 arcane and planner.py floors both at a Wretch's
+# ten. Getting 222.87 out of this node meant admitting the class was doing that.
+
+[[case]]
+name = "the sheet's faith build: Erdtree Seal +10 spell buff"
+input = { spell = "Black Flame", catalyst = "Erdtree Seal", upgrade = 10, starting_class = "Confessor", strength = 15, dexterity = 24, intelligence = 9, faith = 79, arcane = 9 }
+expect = { "result.spell_buff" = 349.645, "result.stats_raised_by_class" = [] }
+
+[[case]]
+name = "the sheet's intelligence build: Lusat's +10 spell buff"
+input = { spell = "Comet", catalyst = "Lusat's Glintstone Staff", upgrade = 10, starting_class = "Confessor", strength = 12, dexterity = 13, intelligence = 80, faith = 14, arcane = 9 }
+expect = { "result.spell_buff" = 413.5, "result.fp_rate" = 1.5, "result.fp_cost_actual" = 36.0 }
+
+[[case]]
+name = "Azur's beside it"
+input = { spell = "Comet", catalyst = "Azur's Glintstone Staff", upgrade = 10, starting_class = "Confessor", strength = 12, dexterity = 13, intelligence = 80, faith = 14, arcane = 9 }
+expect = { "result.spell_buff" = 362.20000000000005, "result.fp_rate" = 1.2 }
+
+[[case]]
+name = "and the Frenzied Flame Seal on the same build"
+input = { spell = "Black Flame", catalyst = "Frenzied Flame Seal", upgrade = 10, starting_class = "Confessor", strength = 12, dexterity = 13, intelligence = 80, faith = 14, arcane = 9 }
+expect = { "result.spell_buff" = 175.910714284 }
+
+# The one that found the bug. Dexterity 17 is the sheet's total — 12 levelled plus Millicent's
+# +5 — and the Frenzied Flame Seal is one of the two catalysts whose spell buff takes dexterity.
+[[case]]
+name = "the strength build's seal, where the starting class is worth 0.43"
+input = { spell = "Black Flame", catalyst = "Frenzied Flame Seal", upgrade = 10, starting_class = "Confessor", strength = 79, dexterity = 17, intelligence = 9, faith = 27, arcane = 9 }
+expect = { "result.spell_buff" = 222.87142857039998, "result.starting_class" = "Confessor", "result.stats_raised_by_class" = [] }
+
+[[case]]
+name = "and as a Wretch it is a different character"
+input = { spell = "Black Flame", catalyst = "Frenzied Flame Seal", upgrade = 10, starting_class = "Wretch", strength = 79, dexterity = 17, intelligence = 9, faith = 27, arcane = 9 }
+expect = { "result.spell_buff" = 223.2999999994, "result.stats_raised_by_class[0]" = "arcane", "result.stats_raised_by_class[1]" = "intelligence", "result.stats_used.intelligence" = 10 }

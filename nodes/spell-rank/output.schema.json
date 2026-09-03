@@ -4,10 +4,30 @@
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "ranked", "catalyst", "catalyst_class", "catalyst_casts", "upgrade", "max_upgrade",
-    "spell_buff", "best", "best_attack", "damage_type", "family", "spell_type",
-    "catalog_size", "considered", "castable", "uncastable", "include_uncastable", "stats",
-    "limit", "returned", "truncated"
+    "ranked",
+    "catalyst",
+    "catalyst_class",
+    "catalyst_casts",
+    "upgrade",
+    "max_upgrade",
+    "spell_buff",
+    "best",
+    "best_attack",
+    "damage_type",
+    "family",
+    "spell_type",
+    "catalog_size",
+    "considered",
+    "castable",
+    "uncastable",
+    "include_uncastable",
+    "stats",
+    "starting_class",
+    "stats_used",
+    "stats_raised_by_class",
+    "limit",
+    "returned",
+    "truncated"
   ],
   "properties": {
     "ranked": {
@@ -17,81 +37,301 @@
         "type": "object",
         "additionalProperties": false,
         "required": [
-          "spell", "spell_type", "damage_types", "base_attack", "attack", "attack_shown",
-          "attack_by_type", "fp_cost", "bonus", "bonus_applied", "bonus_family", "families",
-          "family_source", "requirement", "castable", "shortfall"
+          "spell",
+          "spell_type",
+          "damage_types",
+          "base_attack",
+          "attack",
+          "attack_shown",
+          "attack_by_type",
+          "fp_cost",
+          "bonus",
+          "bonus_applied",
+          "bonus_family",
+          "families",
+          "family_source",
+          "requirement",
+          "castable",
+          "shortfall"
         ],
         "properties": {
-          "spell": { "type": "string", "description": "The display name, which is the unique one: 'Comet' and 'Comet - Charged' are different spells." },
-          "spell_type": { "type": "string" },
-          "damage_types": { "type": "array", "items": { "type": "string" }, "description": "Quote one with the figure. An incantation's damage is fire, lightning or holy, not magic." },
+          "spell": {
+            "type": "string",
+            "description": "The display name, which is the unique one: 'Comet' and 'Comet - Charged' are different spells."
+          },
+          "spell_type": {
+            "type": "string"
+          },
+          "damage_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Quote one with the figure. An incantation's damage is fire, lightning or holy, not magic."
+          },
           "base_attack": {
-            "type": "object", "additionalProperties": false,
-            "required": ["physical", "magic", "fire", "lightning", "holy"],
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "physical",
+              "magic",
+              "fire",
+              "lightning",
+              "holy"
+            ],
             "properties": {
-              "physical": { "type": "number" }, "magic": { "type": "number" },
-              "fire": { "type": "number" }, "lightning": { "type": "number" },
-              "holy": { "type": "number" }
+              "physical": {
+                "type": "number"
+              },
+              "magic": {
+                "type": "number"
+              },
+              "fire": {
+                "type": "number"
+              },
+              "lightning": {
+                "type": "number"
+              },
+              "holy": {
+                "type": "number"
+              }
             }
           },
-          "attack": { "type": "number", "minimum": 0 },
-          "attack_shown": { "type": "integer", "minimum": 0 },
+          "attack": {
+            "type": "number",
+            "minimum": 0
+          },
+          "attack_shown": {
+            "type": "integer",
+            "minimum": 0
+          },
           "attack_by_type": {
-            "type": "object", "additionalProperties": false,
-            "required": ["physical", "magic", "fire", "lightning", "holy"],
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "physical",
+              "magic",
+              "fire",
+              "lightning",
+              "holy"
+            ],
             "properties": {
-              "physical": { "type": "number" }, "magic": { "type": "number" },
-              "fire": { "type": "number" }, "lightning": { "type": "number" },
-              "holy": { "type": "number" }
+              "physical": {
+                "type": "number"
+              },
+              "magic": {
+                "type": "number"
+              },
+              "fire": {
+                "type": "number"
+              },
+              "lightning": {
+                "type": "number"
+              },
+              "holy": {
+                "type": "number"
+              }
             }
           },
-          "fp_cost": { "type": "number", "minimum": 0, "description": "What it costs to cast. A ranking on damage alone hides that the top spell costs three times the FP of the second." },
-          "bonus": { "type": "number", "minimum": 0 },
-          "bonus_applied": { "type": "boolean" },
-          "bonus_family": { "type": "string" },
-          "families": { "type": "array", "items": { "type": "string" } },
-          "family_source": { "type": "string" },
+          "fp_cost": {
+            "type": "number",
+            "minimum": 0,
+            "description": "What it costs to cast. A ranking on damage alone hides that the top spell costs three times the FP of the second."
+          },
+          "bonus": {
+            "type": "number",
+            "minimum": 0
+          },
+          "bonus_applied": {
+            "type": "boolean"
+          },
+          "bonus_family": {
+            "type": "string"
+          },
+          "families": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "family_source": {
+            "type": "string"
+          },
           "requirement": {
-            "type": "object", "additionalProperties": false,
-            "required": ["intelligence", "faith", "arcane"],
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "intelligence",
+              "faith",
+              "arcane"
+            ],
             "properties": {
-              "intelligence": { "type": "integer", "minimum": 0 },
-              "faith": { "type": "integer", "minimum": 0 },
-              "arcane": { "type": "integer", "minimum": 0 }
+              "intelligence": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "faith": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "arcane": {
+                "type": "integer",
+                "minimum": 0
+              }
             }
           },
-          "castable": { "type": "boolean" },
-          "shortfall": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 1 } }
+          "castable": {
+            "type": "boolean"
+          },
+          "shortfall": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
         }
       }
     },
-    "catalyst": { "type": "string" },
-    "catalyst_class": { "type": "string" },
-    "catalyst_casts": { "type": "array", "items": { "type": "string" }, "description": "Sorcery, Incantation, or both. Only spells of a kind it casts are in the list." },
-    "upgrade": { "type": "integer", "minimum": 0, "maximum": 25 },
-    "max_upgrade": { "type": "integer", "minimum": 0, "maximum": 25 },
-    "spell_buff": { "type": "number", "minimum": 0, "description": "The catalyst's spell buff at these stats — the one number every row is scaled by." },
-    "best": { "type": "string" },
-    "best_attack": { "type": "number", "minimum": 0 },
-    "damage_type": { "type": "string" },
-    "family": { "type": "string" },
-    "spell_type": { "type": "string" },
-    "catalog_size": { "type": "integer" },
-    "considered": { "type": "integer", "minimum": 0 },
-    "castable": { "type": "integer", "minimum": 0 },
-    "uncastable": { "type": "integer", "minimum": 0 },
-    "include_uncastable": { "type": "boolean" },
+    "catalyst": {
+      "type": "string"
+    },
+    "catalyst_class": {
+      "type": "string"
+    },
+    "catalyst_casts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Sorcery, Incantation, or both. Only spells of a kind it casts are in the list."
+    },
+    "upgrade": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 25
+    },
+    "max_upgrade": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 25
+    },
+    "spell_buff": {
+      "type": "number",
+      "minimum": 0,
+      "description": "The catalyst's spell buff at these stats \u2014 the one number every row is scaled by."
+    },
+    "best": {
+      "type": "string"
+    },
+    "best_attack": {
+      "type": "number",
+      "minimum": 0
+    },
+    "damage_type": {
+      "type": "string"
+    },
+    "family": {
+      "type": "string"
+    },
+    "spell_type": {
+      "type": "string"
+    },
+    "catalog_size": {
+      "type": "integer"
+    },
+    "considered": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "castable": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "uncastable": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "include_uncastable": {
+      "type": "boolean"
+    },
     "stats": {
-      "type": "object", "additionalProperties": false,
-      "required": ["strength", "dexterity", "intelligence", "faith", "arcane"],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "strength",
+        "dexterity",
+        "intelligence",
+        "faith",
+        "arcane"
+      ],
       "properties": {
-        "strength": { "type": "integer" }, "dexterity": { "type": "integer" },
-        "intelligence": { "type": "integer" }, "faith": { "type": "integer" },
-        "arcane": { "type": "integer" }
+        "strength": {
+          "type": "integer"
+        },
+        "dexterity": {
+          "type": "integer"
+        },
+        "intelligence": {
+          "type": "integer"
+        },
+        "faith": {
+          "type": "integer"
+        },
+        "arcane": {
+          "type": "integer"
+        }
       }
     },
-    "limit": { "type": "integer" },
-    "returned": { "type": "integer", "minimum": 0 },
-    "truncated": { "type": "boolean" }
+    "limit": {
+      "type": "integer"
+    },
+    "returned": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "truncated": {
+      "type": "boolean"
+    },
+    "starting_class": {
+      "type": "string",
+      "description": "The class the ranking was computed as. A floor on every stat, not a label."
+    },
+    "stats_used": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "strength",
+        "dexterity",
+        "intelligence",
+        "faith",
+        "arcane"
+      ],
+      "properties": {
+        "strength": {
+          "type": "integer"
+        },
+        "dexterity": {
+          "type": "integer"
+        },
+        "intelligence": {
+          "type": "integer"
+        },
+        "faith": {
+          "type": "integer"
+        },
+        "arcane": {
+          "type": "integer"
+        }
+      },
+      "description": "The stats after the class floor \u2014 what the figures were actually computed at."
+    },
+    "stats_raised_by_class": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Stats the class lifted above what was asked for."
+    }
   }
 }

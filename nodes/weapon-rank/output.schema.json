@@ -21,6 +21,8 @@
     "affinity_mode",
     "two_hand",
     "stats",
+    "starting_class",
+    "stats_raised_by_class",
     "limit",
     "returned",
     "truncated"
@@ -314,6 +316,16 @@
     "spell_type": {
       "type": "string",
       "description": "The kind of spell the ranking is for, empty when ranking weapons. Only catalysts that can cast that kind are in the list."
+    },
+    "starting_class": {
+      "type": "string"
+    },
+    "stats_raised_by_class": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Stats the class floor lifted. Only ever non-empty for a spell ranking, which is the only path that reaches planner.py."
     }
   }
 }

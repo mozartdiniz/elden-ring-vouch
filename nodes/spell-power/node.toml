@@ -51,6 +51,9 @@ guidance = "The staff or seal, from weapon-lookup's `resolved`."
 [params.spell_type]
 guidance = "Pass 'Sorcery' or 'Incantation' when you know it — from an earlier spell-power result's `spell_type`, or because the user said which. With `catalyst_class` it turns a seal asked for a sorcery into a refusal rather than a defect."
 
+[params.starting_class]
+guidance = "The class the character actually started as, whenever you know it — from character-build or from the user. It is a floor on every stat, so leaving it out computes a build with 9 intelligence as one with 10, and quietly answers about a different character."
+
 [params.catalyst_class]
 guidance = "Pass weapon-lookup's `weapon_class` for the catalyst. It makes casting from a sword a refusal you can act on rather than a puzzling zero."
 
@@ -59,9 +62,6 @@ guidance = "Use weapon-lookup's `max_upgrade`. Catalysts vary more than they loo
 
 [params.max_upgrade]
 guidance = "Copy weapon-lookup's `max_upgrade` for the catalyst."
-
-[params.starting_class]
-guidance = "Only sets the stat floors. Leave it out unless the user named a class."
 
 [params.strength]
 guidance = "The build's strength. Catalysts scale on intelligence, faith and arcane, but the slot still needs a full spread."
@@ -113,6 +113,24 @@ input.arcane >= 1 && input.arcane <= 99
 message = "every stat must be between 1 and 99"
 
 # --- postconditions ---
+
+# The stats the figure was computed at are the ones asked for, or the class raised some and the
+# result says which. The Build Planner's own strength build is 222.87 as a Confessor and 223.30
+# as a Wretch for the same numbers, because it has 9 intelligence and a Wretch has 10.
+[[ensures]]
+expr = """
+size(result.stats_raised_by_class) == 0 ||
+result.stats_raised_by_class.all(s, s in ["strength", "dexterity", "intelligence", "faith", "arcane"])
+"""
+
+[[ensures]]
+expr = """
+(result.stats_used.strength == input.strength || "strength" in result.stats_raised_by_class) &&
+(result.stats_used.dexterity == input.dexterity || "dexterity" in result.stats_raised_by_class) &&
+(result.stats_used.intelligence == input.intelligence || "intelligence" in result.stats_raised_by_class) &&
+(result.stats_used.faith == input.faith || "faith" in result.stats_raised_by_class) &&
+(result.stats_used.arcane == input.arcane || "arcane" in result.stats_raised_by_class)
+"""
 
 # The FP a caster pays is the spell's cost times the catalyst's rate, rounded up. Lusat's
 # trades 1.5x FP for its spell buff, and a damage figure beside the base cost is an answer to

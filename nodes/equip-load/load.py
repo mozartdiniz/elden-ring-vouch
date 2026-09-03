@@ -45,6 +45,7 @@ def reachable(value):
 
 def main():
     request = json.load(sys.stdin)
+    starting_class = request.get("starting_class", "Wretch")
     endurance = request["endurance"]
     weapons = request.get("weapons", [])
 
@@ -56,7 +57,8 @@ def main():
     }
 
     inputs = planner.PlannerInputs(
-        starting_class=request.get("starting_class", "Wretch"),
+        # A floor on every stat, so the class is not cosmetic here either.
+        starting_class=starting_class,
         endurance=endurance,
         **{slot: armour[slot] for slot in SLOTS},
         **slots,

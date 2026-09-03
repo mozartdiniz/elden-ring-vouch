@@ -9,6 +9,9 @@
     "forms",
     "catalyst",
     "catalyst_class",
+    "starting_class",
+    "stats_used",
+    "stats_raised_by_class",
     "catalyst_casts",
     "catalyst_can_cast_this",
     "upgrade",
@@ -261,6 +264,46 @@
       "type": "number",
       "exclusiveMinimum": 0,
       "description": "The catalyst's FP multiplier, 1.0 for all but two staves."
+    },
+    "starting_class": {
+      "type": "string",
+      "description": "The class this was computed as. It is not cosmetic: planner.py treats a class's stats as a floor, so a Wretch's flat tens lift any stat below 10."
+    },
+    "stats_used": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "strength",
+        "dexterity",
+        "intelligence",
+        "faith",
+        "arcane"
+      ],
+      "properties": {
+        "strength": {
+          "type": "integer"
+        },
+        "dexterity": {
+          "type": "integer"
+        },
+        "intelligence": {
+          "type": "integer"
+        },
+        "faith": {
+          "type": "integer"
+        },
+        "arcane": {
+          "type": "integer"
+        }
+      },
+      "description": "The stats the figure was actually computed at, after the class floor."
+    },
+    "stats_raised_by_class": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Stats the class lifted above what was asked for. Non-empty means this figure is for a slightly different character, and an answer has to say so."
     }
   }
 }

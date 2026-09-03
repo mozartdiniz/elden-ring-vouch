@@ -71,6 +71,9 @@ def main():
     limit = int(request.get("limit", 15))
     include_unusable = bool(request.get("include_unusable", False))
     spell_name = request.get("spell", "")
+    # planner.py floors every stat at the starting class's, so a hard-coded Wretch quietly
+    # ranked catalysts for a build with ten intelligence when the caller said nine.
+    starting_class = request.get("starting_class", "Wretch")
 
     catalog, _ = oracle.weapons()
     calc = ap_calc.ApCalc()
@@ -144,7 +147,7 @@ def main():
 
             if spell_row is not None:
                 build = planner.PlannerInputs(
-                    starting_class="Wretch",
+                    starting_class=starting_class,
                     rh1=planner.WeaponSlotIn(weapon=name, affinity=affinity, upgrade=cap),
                     **stats,
                 )
@@ -227,6 +230,8 @@ def main():
         "affinity_mode": affinity_mode,
         "two_hand": two_hand,
         "stats": stats,
+        "starting_class": starting_class,
+        "stats_raised_by_class": oracle.class_floor(starting_class, stats)[1],
         "limit": limit,
         "returned": len(ranked),
         "truncated": truncated,

@@ -163,3 +163,34 @@ def status_buffs(row, affinity="Standard"):
             "ignores_enhance": ignores,
         })
     return out
+
+
+def class_floor(starting_class, stats):
+    """The stats `planner.py` will actually use, and which of them it raised.
+
+    `planner.calculate` treats a starting class's stats as a **floor**, not a baseline:
+    `raw = max(user, class_value)`. So a build with 9 intelligence computed as a Wretch — whose
+    stats are flat tens — is computed at 10, and every figure that comes back is for a character
+    the caller did not describe.
+
+    It is a small difference and a systematic one. The Frenzied Flame Seal's spell buff for the
+    Build Planner's own strength build is 222.87 as a Confessor and 223.30 as a Wretch, because
+    that build has 9 intelligence and 9 arcane and the Wretch floor lifts both.
+
+    Every node that reaches `planner.py` has to say which class it used and what that changed.
+    """
+    import planner
+
+    classes = planner.load_starting_classes()
+    if starting_class not in classes:
+        return dict(stats), []
+    base = classes[starting_class]
+    used, raised = {}, []
+    for stat, value in stats.items():
+        floor = int(base.get(stat, 0))
+        if value < floor:
+            used[stat] = floor
+            raised.append(stat)
+        else:
+            used[stat] = value
+    return used, sorted(raised)

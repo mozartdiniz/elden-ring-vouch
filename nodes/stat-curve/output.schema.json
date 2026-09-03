@@ -4,26 +4,72 @@
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "stat", "subject", "from", "to", "points", "bends", "soft_caps", "bend_threshold",
-    "window", "total_gain", "best_point", "best_point_gain", "value_at_from", "value_at_to",
-    "weapon", "spell", "starting_class", "requirements_unmet"
+    "stat",
+    "subject",
+    "from",
+    "to",
+    "points",
+    "bends",
+    "soft_caps",
+    "bend_threshold",
+    "window",
+    "total_gain",
+    "best_point",
+    "best_point_gain",
+    "value_at_from",
+    "value_at_to",
+    "weapon",
+    "spell",
+    "starting_class",
+    "requirements_unmet",
+    "stats_raised_by_class"
   ],
   "properties": {
-    "stat": { "type": "string" },
-    "subject": { "type": "string" },
-    "from": { "type": "integer" },
-    "to": { "type": "integer" },
+    "stat": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "from": {
+      "type": "integer"
+    },
+    "to": {
+      "type": "integer"
+    },
     "points": {
       "type": "array",
       "description": "One row per level: what the stat is worth there, and what the point that reached it bought.",
       "items": {
-        "type": "object", "additionalProperties": false,
-        "required": ["level", "value", "gain", "requirements_unmet"],
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "level",
+          "value",
+          "gain",
+          "requirements_unmet"
+        ],
         "properties": {
-          "level": { "type": "integer" },
-          "value": { "type": "number" },
-          "gain": { "type": ["number", "null"], "description": "What this point bought over the last. Null on the first row." },
-          "requirements_unmet": { "type": "array", "items": { "type": "string" }, "description": "Stats short of the weapon's requirement here. While any is, the curve is flat for a reason that has nothing to do with the stat being walked." }
+          "level": {
+            "type": "integer"
+          },
+          "value": {
+            "type": "number"
+          },
+          "gain": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "What this point bought over the last. Null on the first row."
+          },
+          "requirements_unmet": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Stats short of the weapon's requirement here. While any is, the curve is flat for a reason that has nothing to do with the stat being walked."
+          }
         }
       }
     },
@@ -31,28 +77,88 @@
       "type": "array",
       "description": "Where the curve turns: the level after which each point buys materially less. This is a soft cap measured rather than recited.",
       "items": {
-        "type": "object", "additionalProperties": false,
-        "required": ["level", "gain_before", "gain_after", "kept", "value"],
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "level",
+          "gain_before",
+          "gain_after",
+          "kept",
+          "value"
+        ],
         "properties": {
-          "level": { "type": "integer", "description": "The last level before the drop." },
-          "gain_before": { "type": "number" },
-          "gain_after": { "type": "number" },
-          "kept": { "type": "number", "description": "The fraction of the gain that survives the bend. 0.5 means each point after is worth half." },
-          "value": { "type": "number" }
+          "level": {
+            "type": "integer",
+            "description": "The last level before the drop."
+          },
+          "gain_before": {
+            "type": "number"
+          },
+          "gain_after": {
+            "type": "number"
+          },
+          "kept": {
+            "type": "number",
+            "description": "The fraction of the gain that survives the bend. 0.5 means each point after is worth half."
+          },
+          "value": {
+            "type": "number"
+          }
         }
       }
     },
-    "soft_caps": { "type": "array", "items": { "type": "integer" }, "description": "Just the bend levels. Vigor comes back [40, 60] — the two everybody names, arrived at rather than repeated." },
-    "bend_threshold": { "type": "number" },
-    "window": { "type": "integer" },
-    "total_gain": { "type": "number", "description": "What the whole range is worth." },
-    "best_point": { "type": "integer", "description": "The single most valuable level in the range." },
-    "best_point_gain": { "type": "number" },
-    "value_at_from": { "type": "number" },
-    "value_at_to": { "type": "number" },
-    "weapon": { "type": "string" },
-    "spell": { "type": "string" },
-    "starting_class": { "type": "string" },
-    "requirements_unmet": { "type": "array", "items": { "type": "string" }, "description": "Stats whose requirement is unmet somewhere in the range. Non-empty is the explanation for a flat curve." }
+    "soft_caps": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "Just the bend levels. Vigor comes back [40, 60] \u2014 the two everybody names, arrived at rather than repeated."
+    },
+    "bend_threshold": {
+      "type": "number"
+    },
+    "window": {
+      "type": "integer"
+    },
+    "total_gain": {
+      "type": "number",
+      "description": "What the whole range is worth."
+    },
+    "best_point": {
+      "type": "integer",
+      "description": "The single most valuable level in the range."
+    },
+    "best_point_gain": {
+      "type": "number"
+    },
+    "value_at_from": {
+      "type": "number"
+    },
+    "value_at_to": {
+      "type": "number"
+    },
+    "weapon": {
+      "type": "string"
+    },
+    "spell": {
+      "type": "string"
+    },
+    "starting_class": {
+      "type": "string"
+    },
+    "requirements_unmet": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Stats whose requirement is unmet somewhere in the range. Non-empty is the explanation for a flat curve."
+    },
+    "stats_raised_by_class": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Stats the starting class floored above what was given. A vitals or spell curve for a Wretch never dips below ten."
+    }
   }
 }

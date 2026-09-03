@@ -35,8 +35,10 @@ elden-ring-vouch/
     AshAttack.csv          2643 skill hits: motion values, scaling overrides
     AshCompat.csv          ash default affinity and weapon compatibility
   lib/oracle.py            the one place that knows where the oracle lives
-  nodes/                   eleven nodes
+  lib/spells.py            the spell tables, and the one multiply that is not the oracle's
+  nodes/                   thirteen nodes
   scripts/generate_cases.py  regenerates attack-power fixtures from the oracle
+  VALIDATION.md            the 42-question battery, worked one at a time — read this next
 ```
 
 **The `oracle/` vs `data/` split is the important one.** `oracle/` is a byte-identical copy of
@@ -48,19 +50,21 @@ came from the Prometheux workspace, which is a different provenance and is decla
 
 | Node | Answers | Cases |
 |---|---|---|
-| `weapon-lookup` | resolve a name across 570 weapons; class, infusability, upgrade cap | 11 |
+| `weapon-lookup` | resolve a name across the catalogue; class, infusability, upgrade cap | 11 |
+| `weapon-rank` | **a stat spread → the weapons it can use, ranked** | 9 |
 | `boss-lookup` | an encounter's every phase: health, poise, defences, negations, immunities | 14 |
-| `weapon-skill` | an ash of war's hits, motion values, and whether it replaces the scaling | 8 |
-| `item-effect` | talismans, crystal tears, great runes — individually and combined | 11 |
+| `weapon-skill` | an ash of war's hits, motion values, and whether it replaces the scaling | 12 |
+| `item-effect` | talismans, tears, runes — and the multiplier stack you assert | 18 |
 | `character-build` | class + named stats → full spread, rune level, HP/FP/stamina/load | 13 |
-| `build-allocate` | **weapon + class + level → the spread**, maximising attack or a status | 13 |
+| `build-allocate` | **weapon or spell + class + level → the spread** | 21 |
 | `attack-power` | one weapon at one spread → AR, scaling, requirements, status, guard | 18 |
 | `optimal-affinity` | all thirteen infusions ranked against a target | 13 |
-| `spell-power` | one spell from one catalyst → attack, family bonus, castability | 10 |
+| `spell-power` | one spell from one catalyst → attack per type, family bonus, castability | 17 |
+| `spell-rank` | **a catalyst + a build → the spells it can cast, ranked** | 6 |
 | `defence` | a build and armour → defences, negation, status resistances | 11 |
 | `equip-load` | a loadout → weight, roll type, endurance to change it | 9 |
 
-`vouch -C . test` → **131 cases, 131 passed**.
+`vouch -C . test` → **172 cases, 172 passed**.
 
 ## State of the evals
 
@@ -80,7 +84,8 @@ routing through the published context, which measures the wrong thing.
 ## The rule this project keeps re-learning
 
 Every fabrication an eval caught was fixed **upstream of where it appeared** — by returning the
-figure in the form a reader quotes, never by checking the prose harder. Six instances so far:
+figure in the form a reader quotes, never by checking the prose harder. Ten instances so far,
+the last four found by the question battery rather than by an eval:
 
 | the agent wrote | because the node | the fix |
 |---|---|---|
@@ -90,6 +95,10 @@ figure in the form a reader quotes, never by checking the prose harder. Six inst
 | `409` out of `"409/0/411/0/0"` | published figures inside a string | `shown` numbers beside it |
 | `2` more points needed | returned `req_met` and not the gap | `scaling.<stat>.shortfall` |
 | — | had no allocator at all | `build-allocate` |
+| a caster's spread | maximised the catalyst, not the spell | `focus = "spell"` |
+| a ranking of 570 weapons | had no ranking node at all | `weapon-rank`, `spell-rank` |
+| `1.15 x 1.2 x 1.13` | returned three sentences with figures in them | `item-effect`'s `stacked_multiplier` |
+| a spread that cannot hold the shield | heard only about the weapon | `stat_floors` |
 
 **If a node leaves a caller one small sum, it has handed that sum to a model.** That is the
 first thing to check when writing a new node.
@@ -99,6 +108,36 @@ node, never from what it looked like on screen. Two fixture figures were written
 truncated display and completed from memory; both failed and both were caught.
 
 ## Findings worth not rediscovering
+
+**A number that is arithmetically right can be about nothing.** `spell-power` priced Comet cast
+from an Erdtree Seal at 798.766. The spell buff was right, the multiply was right, and a sacred
+seal cannot cast a sorcery. Three of the nine bugs the battery found are this shape: a
+well-formed figure for a thing that does not exist. Contracts caught none of them, because
+nothing in the schema knew the cast, the affinity or the weapon had to be possible.
+
+**Both implementations can be wrong in the same place.** Every incantation in the game priced
+at zero, because `spell-power` read `MagicAtk` and Black Flame's 244 is in `FireAtk`. The
+Prometheux ontology computes `MagicAtk x SB / 100 x Mult` too, so the differential check agreed
+with itself. It took a question a player would actually ask.
+
+**The catalogue is 489 weapons, not 570.** Eighty-one rows are consumables, fifteen of them
+without a weapon ID at all, which is what made the first full ranking crash rather than return
+nonsense.
+
+**`ap_calc.load_table` re-parses its CSV on every call** — a tenth of a second for the 1.3 MB
+`EquipParamWeapon`. Invisible when a node prices one weapon, fatal at 489. Cached in
+`lib/oracle.py`; `oracle/` stays byte-identical.
+
+**A motion value is per damage type.** Establish Order's big hit is 300 holy and 0 physical,
+and `optimal-affinity`'s `attack_mv` is one number. `weapon-skill` reports
+`motion_values_uniform` so the scalar is only used where it means something.
+
+**Two catalysts scale their spell buff off strength and dexterity** — the Clawmark Seal and the
+Frenzied Flame Seal. A "pure faith" Frenzied Flame build is the wrong build: the optimum at
+RL150 is strength 26 / dexterity 30 / intelligence 30 / faith 43.
+
+**Seven ash-of-war families are a name plus " ?"**, the source marking a hit it could not
+confirm. Normalising the punctuation away made all seven ambiguous with themselves.
 
 **The upgrade cap is not derivable from `isInfuse`.** It was "+25 if infusable, else +10",
 which is right for 512 of 570 weapons and wrong for 58 — the Academy and Carian Glintstone
@@ -137,29 +176,38 @@ lives here, not in `oracle/`.
 
 ### First: measure the suite
 
-Run the evals end to end. Three cases (`build-allocate` ×2, `weapon-skill` ×1) have never been
-seen by a live model.
+Run the evals end to end. They have not been measured since `build-allocate` and `weapon-skill`
+were added, and **nothing in `.vouch/evals.toml` covers the four nodes and features the
+question battery added** — no eval asks for a caster's spread, a weapon ranking, a spell
+ranking, or a multiplier stack. Writing those cases is the other half of this job.
 
-### Second: the two question shapes still unanswered
+### Second: what the battery left open
 
-Tested against fourteen real questions. Eleven are answerable end to end. The two gaps:
+`VALIDATION.md` has all 42 questions worked one at a time, with the calls, the figures and the
+cross-checks. Thirty-three answer end to end and nine are partial. **No question is
+unanswerable**, and the nine partials come down to four things:
 
-1. **Skill damage is reported but never priced.** `weapon-skill` gives motion values and
-   `optimal-affinity` takes an `attack_mv`, so the pieces exist and are not wired. Until they
-   are, "build focused on Transient Moonlight" gets a spread optimal for the *weapon*, with a
-   note that the skill was not modelled. Needs care: 173 of 2643 hits override the weapon's
-   scaling, and for those the weapon-optimal spread is the wrong answer.
+1. **Flat-attack and scaling-overridden hits are read, not priced.** Six of the ten Pattern 4
+   skills have one. `optimal-affinity` prices a hit through the weapon's attack rating, so a
+   hit that carries flat attack (Ghostflame Ignition's 140 magic) or replaces the weapon's
+   scaling (Sacred Blade's bullet off Faith) has no path. The data says *which stat drives it*,
+   which is worth quoting, and the damage is not computed.
 
-2. **`build-allocate` cannot build a caster.** It maximises weapon attack or a status. A
-   question like "distribuição pra Comet Azur full INT" gets requirements and spell AR from
-   `spell-power`, but no optimised spread. The objective would be spell attack through a
-   catalyst, which `spell-power` already computes — the search is the same, the objective is
-   different.
+2. **The override is per hit, not per skill.** Sacred Blade's slash uses the weapon and its
+   bullet does not. Any future skill objective has to model hits, not skills.
+
+3. **`build-allocate` cannot optimise for a skill.** When a skill overrides the weapon's
+   scaling the weapon-optimal spread is the wrong build, and the node can only say so. This is
+   the natural next `focus`, and it needs (1) first.
+
+4. **Guard counters have no motion value in the extraction**, so "best greatshield for guard
+   counters" is answered on guard boost and negation instead.
 
 ### Deliberately absent, not pending
 
-- **Applying talisman effects.** `item-effect` says what an item is worth and combines several.
-  Nothing *applies* one: `planner.py` stubbed `EffectData_Active`, so `character-build`,
+- **Applying talisman effects to a build.** `item-effect` says what an item is worth, combines
+  several, and now multiplies the damage bonuses whose conditions the caller asserts. Nothing
+  *applies* one to a build: `planner.py` stubbed `EffectData_Active`, so `character-build`,
   `equip-load` and `defence` all report figures before talismans. `equip-load` refuses to take
   one rather than ignoring it; `item-effect` pins `applied_to_a_build: false`. Closing this
   means either modelling the effects, which has no oracle, or having the caller add them and
@@ -169,7 +217,7 @@ Tested against fourteen real questions. Eleven are answerable end to end. The tw
 
 ### Not ported at all
 
-Consumables, matchmaking bands, item locations. Those tables live only in
+Matchmaking bands and item locations. Those tables live only in
 `prometheux-workspace/files/elden-ring-brain/`; vendor into `data/` with provenance.
 
 ---
@@ -182,9 +230,10 @@ Consumables, matchmaking bands, item locations. Those tables live only in
 - **Pin new nodes against the ontology** wherever `prometheux-workspace/HANDOFF.md` records a
   figure. Its "Default checks that already persisted" section is a fixture source, and it is
   how the upgrade-cap bug was found.
-- **The routing pack is 404 lines / 26 KB** (~7k tokens) with nineteen preamble notes. Fine
-  today. It grows with every node, and at some point the preamble needs pruning rather than
-  appending.
+- **The routing pack has grown and nobody has re-measured it.** The preamble is **38 notes,
+  ~10 KB on its own**, against nineteen when this note first said pruning would eventually be
+  needed — and there are thirteen nodes now rather than eleven. Measure the real pack before
+  adding another note; `vouch describe` is not it, because the pack omits contracts.
 - **`vouch <cmd> | head` can panic** on a broken pipe. Recorded in the runtime's `DECISIONS.md`
   as known roughness; it is a race and rarely reproduces.
 - Contracts have caught genuine mistakes in this repository more than once — rune level is stat
@@ -196,11 +245,16 @@ Consumables, matchmaking bands, item locations. Those tables live only in
 
 ```console
 $ cd ~/Dev/elden-ring-vouch
-$ vouch test                                    # 131 cases, no model
+$ vouch test                                    # 172 cases, no model
 $ vouch call boss-lookup --input '{"query":"rennala"}'
 $ vouch call build-allocate --input '{"weapon":"Rivers of Blood","affinity":"Standard",
     "upgrade":10,"max_upgrade":10,"starting_class":"Samurai","target_level":150,
     "focus":"bleed","vigor":40,"mind":20,"endurance":25}'
+$ vouch call weapon-rank --input '{"strength":55,"dexterity":14,"intelligence":9,"faith":60,
+    "arcane":9,"limit":10}'
+$ vouch call build-allocate --input '{"weapon":"Dragon Communion Seal","affinity":"Standard",
+    "upgrade":10,"max_upgrade":10,"starting_class":"Prophet","target_level":150,
+    "focus":"spell","spell":"Rotten Breath","vigor":40,"mind":30,"endurance":20}'
 $ vouch eval --agent 'claude -p --allowedTools "" -- {prompt}' -n 3 --min-rate 0.9
 ```
 

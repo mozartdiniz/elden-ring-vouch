@@ -62,21 +62,25 @@ fixture.
 
 | | |
 |---|---|
-| `weapon-lookup` | Resolve a name across 570 weapons; report class, infusability and upgrade cap |
+| `weapon-lookup` | Resolve a name across the catalogue; report class, infusability and upgrade cap |
 | `character-build` | A starting class plus the stats a user named → the full spread, rune level, HP, FP, stamina, equip load |
 | `attack-power` | One weapon at one upgrade and stat spread → attack rating, scaling grades, requirements, status, guard |
 | `optimal-affinity` | All thirteen affinities of one weapon, ranked by damage against a target |
 | `spell-power` | One spell from one catalyst → attack, family bonus, FP cost, whether the build can cast it |
 | `equip-load` | A loadout against a build's equip load → weight, roll type, and the endurance to change it |
 | `defence` | A build and an armour set → per-element defences, damage negation, status resistances |
-| `build-allocate` | A weapon, class and rune level → the stat spread, maximising attack or a status |
+| `build-allocate` | A weapon, class and rune level → the stat spread, maximising attack, a spell, or a status |
 | `boss-lookup` | A boss encounter → every phase, each with its own health, poise, defences, negations and immunities |
 | `weapon-skill` | An ash of war → its hits, motion values, and whether it replaces the weapon's scaling |
-| `item-effect` | Talismans, crystal tears and great runes → what they do, individually and combined |
+| `item-effect` | Talismans, crystal tears and great runes → what they do, combined, and the multiplier stack under the conditions you assert |
+| `weapon-rank` | A stat spread → the weapons it can actually use, ranked by what they hit for |
+| `spell-rank` | A catalyst and a build → the spells it can cast, ranked, filtered by damage type or family |
 
 The order is the routing: **character-build** when the user described a build by only some of
 its stats, **weapon-lookup** for any question naming a weapon, then **attack-power** for what
-it hits for, or **optimal-affinity** for what to infuse it with.
+it hits for, or **optimal-affinity** for what to infuse it with. When the question does not
+name a weapon at all — "what are the strongest weapons I can use" — it starts at
+**weapon-rank** instead.
 
 ### The question people actually ask
 

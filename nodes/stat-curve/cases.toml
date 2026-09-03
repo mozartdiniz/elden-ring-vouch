@@ -46,3 +46,16 @@ expect_code = 11
 name = "a weapon curve without a weapon is refused"
 input = { stat = "strength", subject = "weapon" }
 expect_code = 11
+
+# A curve for a cast that cannot happen climbs perfectly smoothly and means nothing.
+[[case]]
+name = "a staff walked through faith for an incantation is refused"
+input = { stat = "faith", subject = "spell", weapon = "Carian Regal Scepter", spell = "Black Flame", upgrade = 10, from = 20, to = 40 }
+expect_code = 20
+
+# And a curve now says what it priced: the upgrade it defaulted to, the affinity, and the stats
+# held fixed while the walked one moved.
+[[case]]
+name = "a weapon curve says what it was priced with"
+input = { stat = "strength", subject = "weapon", weapon = "Zweihander", affinity = "Heavy", upgrade = 25, dexterity = 19, from = 19, to = 25 }
+expect = { "result.affinity" = "Heavy", "result.upgrade" = 25, "result.two_hand" = false, "result.held_stats.dexterity" = 19 }

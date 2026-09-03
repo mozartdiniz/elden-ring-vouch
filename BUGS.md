@@ -29,6 +29,7 @@ Not a defect, but the thing most likely to become one.
 
 | # | what was wrong | found by | kind | commit |
 |---|---|---|---|---|
+| 22 | **`build-allocate` and `stat-curve` priced a cast that cannot happen.** A Carian Regal Scepter told to maximise Black Flame returned **926.38 and a spread built around 88 intelligence** — a staff casting an incantation. The same bug as 4, in the two nodes that reach `planner.py` for a spell and were written after the fix rather than with it. | audit | missing check | `pending` |
 | 21 | **`item-effect` could not resolve a crystal tear**, though its purpose line has always claimed them. The catalogue holds `Crimson Crystal Tear 1` and `Crimson Crystal Tear 2` — the two copies you can find — and the node matched exactly, so the most common physick tear in the game was a crash. `data/PhysickEffect.csv` had been vendored and read by nothing, which is the shape bug 11 had. | audit | missing check | `d37638a` |
 | 20 | **`stat-curve` did not say what it priced.** A weapon curve defaults the upgrade to the weapon's cap and the affinity to Standard, and reported neither, nor the stats held fixed while one moved. Every figure was for a weapon at an unstated upgrade. | audit | design | `d37638a` |
 | 19 | **`equip-load` did not report the class floor.** Same root as 17: it reported the endurance it used rather than the one it was given, with nothing to say they differed. | audit | missing check | `d37638a` |
@@ -72,10 +73,15 @@ was wrong by the time Pattern 5 asked a sharper question, and the table that mad
 unnecessary had been sitting unvendored in the workspace the whole time. Worth checking the
 workspace's file list before building a parser — #15 is the same lesson a second time.
 
-**Four of the twenty-one came from auditing rather than from a question** — 18 through 21. Once
+**Five of the twenty-two came from auditing rather than from a question** — 18 through 22. Once
 17 showed that a silent default could rewrite the question, checking every other default in
-every node took an hour and found four more. Two of them returned a well-formed wrong number.
-When a bug turns out to be a *kind* of bug, look for the rest of its kind before moving on.
+every node found four more, and asking the older question — *which nodes can still return a
+well-formed number for a thing that does not exist?* — found the fifth. Three of the five
+returned exactly that.
+
+Both audits are worth repeating whenever a node is added, and the second is the sharper one:
+bug 22 is bug 4 in two nodes written **after** bug 4 was fixed. A guard that lives in one node
+is not a guard.
 
 **#17 is the one no question found.** Fourteen patterns and 122 questions did not surface it,
 because every figure was internally consistent and nothing to compare against was outside the

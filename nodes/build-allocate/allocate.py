@@ -90,13 +90,17 @@ def main():
     # for the first was the only thing this node could do until now.
     spell_name = request.get("spell", "")
     spell_row = None
+    # A staff casts sorceries and a seal casts incantations. Nothing in the search knows that:
+    # a Carian Regal Scepter told to maximise Black Flame returned 926.38 and a spread built
+    # around 88 intelligence, for a cast the game does not allow. The same bug spell-power had.
+    catalyst_casts = oracle.casts(row)
     if focus == "spell":
         if not spell_name:
             print("focus 'spell' needs a spell to maximise", file=sys.stderr)
             sys.exit(1)
         spell_row = spellbook.book().get(spell_name)
         if spell_row is None:
-            print(f"no spell named {spell_name!r}; call spell-power to resolve it",
+            print(f"no spell named {spell_name!r}; call spell-lookup to resolve it",
                   file=sys.stderr)
             sys.exit(1)
 
@@ -423,6 +427,10 @@ def main():
         "status": status,
         "status_shown": {s: int(status[s]) for s in STATUS},
         "spell": spell_name,
+        "catalyst_casts": catalyst_casts,
+        "spell_castable_from_catalyst": (
+            spell_row is None or (spell_row.get("Type") or "") in catalyst_casts
+        ),
         "spell_attack": spell_attack,
         "spell_attack_shown": int(spell_attack),
         "spell_buff": spell_buff,

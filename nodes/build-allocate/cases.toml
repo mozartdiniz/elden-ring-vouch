@@ -151,3 +151,16 @@ expect_code = 11
 name = "a catalyst whose spell buff is not pure faith"
 input = { weapon = "Frenzied Flame Seal", affinity = "Standard", upgrade = 10, max_upgrade = 10, starting_class = "Prophet", target_level = 150, focus = "spell", spell = "Frenzied Burst", vigor = 40, mind = 30, endurance = 20 }
 expect = { "result.stats.strength" = 26, "result.stats.dexterity" = 30, "result.stats.intelligence" = 30, "result.stats.faith" = 43, "result.spell_attack" = 845.4 }
+
+# A staff casts sorceries and a seal casts incantations, and the search knew neither: a Carian
+# Regal Scepter told to maximise Black Flame returned 926.38 and a spread built around 88
+# intelligence, for a cast the game does not allow. The same bug spell-power had.
+[[case]]
+name = "a staff cannot be built around an incantation"
+input = { weapon = "Carian Regal Scepter", affinity = "Standard", upgrade = 10, max_upgrade = 10, starting_class = "Prophet", target_level = 150, focus = "spell", spell = "Black Flame", vigor = 40, mind = 30, endurance = 20 }
+expect_code = 13
+
+[[case]]
+name = "and the cast it can make is unaffected"
+input = { weapon = "Carian Regal Scepter", affinity = "Standard", upgrade = 10, max_upgrade = 10, starting_class = "Astrologer", target_level = 150, focus = "spell", spell = "Comet", vigor = 40, mind = 30, endurance = 20 }
+expect = { "result.spell_castable_from_catalyst" = true, "result.catalyst_casts[0]" = "Sorcery", "result.stats.intelligence" = 99 }

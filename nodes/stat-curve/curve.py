@@ -69,11 +69,21 @@ def main():
             sys.exit(1)
 
     spell_row = None
+    catalyst_casts = oracle.casts(row) if row else []
     if subject == "spell":
         spell_row = spellbook.book().get(request["spell"])
         if spell_row is None:
             print(f"no spell named {request['spell']!r}; call spell-lookup first",
                   file=sys.stderr)
+            sys.exit(1)
+        # A curve for a cast that cannot happen is a curve about nothing: a staff walked
+        # through faith for an incantation climbs perfectly smoothly and means nothing.
+        if (spell_row.get("Type") or "") not in catalyst_casts:
+            print(
+                f"{request['weapon']} casts {', '.join(catalyst_casts) or 'nothing'}, "
+                f"and {request['spell']} is a {spell_row.get('Type')}",
+                file=sys.stderr,
+            )
             sys.exit(1)
         families = spellbook.families().get(request["spell"], [])
         bonus, _, _ = spellbook.bonus(row, request["spell"], families)
@@ -212,6 +222,7 @@ def main():
         "upgrade": int(request.get("upgrade", oracle.max_upgrade(row))) if row else None,
         "two_hand": bool(request.get("two_hand", False)),
         "held_stats": {s: stats[s] for s in COMBAT},
+        "catalyst_casts": catalyst_casts,
         "starting_class": starting_class,
         # Stats the class floor lifted above what was asked for. planner.py treats a class's
         # stats as a minimum, so a vitals or spell curve for a Wretch never dips below ten.

@@ -143,6 +143,12 @@ message = "each floor must be between 1 and 99; these are the minimums to hold b
 [[ensures]]
 expr = "result.affinity_ignored == (result.affinity != result.affinity_requested)"
 
+# A staff casts sorceries and a seal casts incantations. Without this the node will happily
+# build a spread around a cast the game does not allow — a Carian Regal Scepter maximising
+# Black Flame came back at 926.38 with 88 intelligence behind it.
+[[ensures]]
+expr = "result.spell_castable_from_catalyst"
+
 # Every floor the rest of the loadout needs is met. A spread that cannot hold the shield it
 # was built around is not an answer to the question that was asked.
 [[ensures]]

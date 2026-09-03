@@ -26,7 +26,8 @@
     "affinity",
     "upgrade",
     "two_hand",
-    "held_stats"
+    "held_stats",
+    "catalyst_casts"
   ],
   "properties": {
     "stat": {
@@ -206,6 +207,13 @@
         }
       },
       "description": "The stats held fixed while the walked one moved. A curve is for one build, and this is that build."
+    },
+    "catalyst_casts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "What the weapon can cast, empty for one that casts nothing. A spell curve for a cast the game does not allow is refused rather than drawn."
     }
   }
 }

@@ -33,6 +33,8 @@
     "status",
     "status_shown",
     "spell",
+    "catalyst_casts",
+    "spell_castable_from_catalyst",
     "spell_attack",
     "spell_attack_shown",
     "spell_buff",
@@ -464,6 +466,17 @@
     "spell_bonus_family": {
       "type": "string",
       "description": "The family the bonus was applied for, empty when none was."
+    },
+    "catalyst_casts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "What the weapon can cast \u2014 Sorcery, Incantation, both, or nothing at all for an ordinary weapon."
+    },
+    "spell_castable_from_catalyst": {
+      "type": "boolean",
+      "description": "False makes every spell figure here one for a cast that cannot happen. True when no spell was named."
     }
   }
 }

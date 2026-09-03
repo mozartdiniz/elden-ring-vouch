@@ -63,6 +63,25 @@ day-sized ledger 96 of the integers 1–99 are already present. A fabricated *"y
 points"* would attest clean. A ledger per conversation is both the correct scope and a
 strictly better check.
 
+## What is checked, and what is not
+
+```console
+$ node test_client.mjs      # the client, against a stub DOM. No browser, no network.
+```
+
+Nine checks, one per event branch plus the fragile one: a JSON event split across two network
+chunks, and again at one byte per chunk. Two of them exist to hold a line rather than to catch
+a typo — **a failed attestation must show no answer text**, and **a defect must end the turn** —
+because those are the behaviours that would be easiest to soften later and are the only reason
+any of this is worth more than a chatbot with a database.
+
+The server's request path is checked by hand with `LLM_BACKEND` set to a nonsense value, which
+exercises rejection, rate limiting and the streaming error branch without spending a model
+call. Conversation ids are checked against traversal, since they become ledger filenames.
+
+**Not checked: how the page looks.** Nothing here has ever run in a browser — no layout, no
+textarea autosize, no scrolling. Open it and see.
+
 ## What this slice does not do
 
 - **No clarification chips.** `weapon-lookup` and `spell-lookup` already return `ambiguous`

@@ -1,0 +1,48 @@
+# Node fixtures (§7.1).
+#
+# Two of Pattern 11's questions are "where is the soft cap" and "what is a point still worth",
+# and those are the numbers everybody recites — "40 and 60", "60 then 80". Reciting them is
+# exactly what a model does whether or not they are true. They are computable.
+
+# Vigor comes back [40, 60] from a walk of all 99 levels, and the single most valuable point in
+# the game is the one that takes vigor from 40 to 41: 48 HP, against 26 for the one after.
+[[case]]
+name = "the vigor soft caps, arrived at rather than recited"
+input = { stat = "vigor", subject = "vitals", from = 1, to = 99 }
+expect = { "result.soft_caps[0]" = 40, "result.soft_caps[1]" = 60, "result.best_point" = 40, "result.best_point_gain" = 48.0, "result.value_at_to" = 2100.0, "result.total_gain" = 1686.0 }
+
+[[case]]
+name = "and the HP figures either side of the first one"
+input = { stat = "vigor", subject = "vitals", from = 39, to = 42 }
+expect = { "result.points[1].value" = 1450.0, "result.points[2].value" = 1476.0, "result.points[2].gain" = 26.0, "result.points[1].gain" = 48.0 }
+
+# Sorceries bend at 80, and the figure is the answer to "quanto realmente ganho por ponto":
+# 12.61 a point up to it, 2.21 after.
+[[case]]
+name = "sorcery scaling past 60 intelligence"
+input = { stat = "intelligence", subject = "spell", weapon = "Carian Regal Scepter", spell = "Comet", upgrade = 10, from = 60, to = 99 }
+expect = { "result.soft_caps[0]" = 80, "result.points[1].gain" = 12.614400000000001, "result.points[21].gain" = 2.213053, "result.value_at_to" = 1132.96 }
+
+# A weapon curve is a third shape again.
+[[case]]
+name = "strength on a heavy colossal sword"
+input = { stat = "strength", subject = "weapon", weapon = "Zweihander", affinity = "Heavy", upgrade = 25, dexterity = 19, from = 19, to = 99 }
+expect = { "result.soft_caps[0]" = 20, "result.soft_caps[1]" = 80, "result.requirements_unmet" = [] }
+
+# The trap this node has to avoid: a flat curve that looks like "this stat does nothing" when
+# the real reason is a different stat's requirement. The Zweihander needs 11 dexterity, and at
+# 10 its attack rating is 191.76 at every strength from 16 to 99.
+[[case]]
+name = "a flat curve says why it is flat"
+input = { stat = "strength", subject = "weapon", weapon = "Zweihander", affinity = "Heavy", upgrade = 25, dexterity = 10, from = 16, to = 99 }
+expect = { "result.total_gain" = 0.0, "result.requirements_unmet[0]" = "dexterity", "result.value_at_to" = 191.76 }
+
+[[case]]
+name = "a vitals curve for a combat stat is refused"
+input = { stat = "strength", subject = "vitals" }
+expect_code = 11
+
+[[case]]
+name = "a weapon curve without a weapon is refused"
+input = { stat = "strength", subject = "weapon" }
+expect_code = 11

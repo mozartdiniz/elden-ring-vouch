@@ -1,0 +1,109 @@
+name = "stat-curve"
+version = "0.1.0"
+
+purpose = "What each point in a stat buys, and where the curve bends"
+
+use_when = [
+  "the question asks where a soft cap is, or what a breakpoint is worth",
+  "the question asks how much a stat is still worth past some level",
+  "someone is deciding between levelling one stat and another",
+]
+not_for = [
+  "the spread itself — call build-allocate, which searches rather than walking one stat",
+  "one build's HP and FP — call character-build",
+  "one weapon's attack rating — call attack-power",
+]
+
+run = ["python3", "curve.py"]
+timeout_ms = 60000
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/CalcCorrectGraphEz.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/WeaponData.csv"
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/MagicData.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.stat]
+guidance = "The one the user is asking about. Everything else stays where it is, so the curve is for their build rather than a generic one."
+
+[params.subject]
+guidance = "'vitals' for HP, FP or stamina. 'weapon' for an attack rating, which needs the weapon. 'spell' for what a spell hits for, which needs both the catalyst and the spell — and is a different curve from the catalyst's own attack rating, so do not substitute one for the other."
+
+[params.from]
+guidance = "Start where the user is, not at 1, when the question is 'is it still worth levelling'."
+
+[params.bend_threshold]
+guidance = "Leave it. A quarter of the gain lost is what makes vigor come back as 40 and 60 rather than as twenty-two levels of rounding noise."
+
+[params.window]
+guidance = "Leave it. Three levels either side is what stops integer rounding in HP and stamina from looking like a cliff."
+
+[[requires]]
+expr = "input.from <= input.to || !has(input.from) || !has(input.to)"
+message = "the range runs from low to high"
+
+[[requires]]
+expr = "input.subject != \"weapon\" || has(input.weapon)"
+message = "a weapon curve needs a weapon; resolve it with weapon-lookup"
+
+[[requires]]
+expr = "input.subject != \"spell\" || (has(input.weapon) && has(input.spell))"
+message = "a spell curve needs both the catalyst and the spell; resolve them with weapon-lookup and spell-lookup"
+
+[[requires]]
+expr = """
+!has(input.subject) || input.subject != "vitals" ||
+  input.stat in ["vigor", "mind", "endurance"]
+"""
+message = "vitals curves are vigor, mind and endurance; for a combat stat ask for a weapon or spell curve"
+
+# --- postconditions ---
+
+[[ensures]]
+expr = "size(result.points) == result.to - result.from + 1"
+
+[[ensures]]
+expr = "result.points[0].level == result.from && result.points[0].gain == null"
+
+[[ensures]]
+expr = "result.points.all(p, p.level >= result.from && p.level <= result.to)"
+
+# A bend is a real drop, and every one of them is inside the range walked.
+[[ensures]]
+expr = "result.bends.all(b, b.gain_after < b.gain_before && b.kept < result.bend_threshold)"
+
+[[ensures]]
+expr = "result.bends.all(b, b.level >= result.from && b.level <= result.to)"
+
+[[ensures]]
+expr = "size(result.soft_caps) == size(result.bends)"
+
+# The headline figures agree with the walk.
+[[ensures]]
+expr = """
+result.value_at_from == result.points[0].value &&
+result.value_at_to == result.points[size(result.points) - 1].value
+"""
+
+[[ensures]]
+expr = """
+result.total_gain - (result.value_at_to - result.value_at_from) < 0.000001 &&
+(result.value_at_to - result.value_at_from) - result.total_gain < 0.000001
+"""
+
+[[examples]]
+ask = "como funciona o soft cap de vigor e onde estão os breakpoints de HP?"
+call = { stat = "vigor", subject = "vitals", from = 1, to = 99 }
+
+[[examples]]
+ask = "quanto realmente ganho por ponto de INT depois de 60?"
+call = { stat = "intelligence", subject = "spell", weapon = "Carian Regal Scepter", spell = "Comet", upgrade = 10, from = 60, to = 99 }

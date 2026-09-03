@@ -5,7 +5,7 @@ known to be missing, and the traps that have already cost time.
 
 `README.md` says how to use the collection. This file says where the work stands.
 
-*Last worked on 2 September 2026. Both repositories clean.*
+*Last worked on 3 September 2026. Both repositories clean, 40 commits pushed.*
 
 ---
 
@@ -34,12 +34,20 @@ elden-ring-vouch/
     BossResist.csv         boss health/defences/negations/resistances, per encounter
     AshAttack.csv          2643 skill hits: motion values, scaling overrides
     AshCompat.csv          ash default affinity and weapon compatibility
+    AshAffinity.csv        which affinities each ash accepts — not the same question
+    AshClass.csv           which weapon classes each ash goes on
+    BuffMult.csv           what a buff multiplies, per hit kind, PvE and PvP
+    BuffSlot.csv           whether two buffs stack or overwrite each other
+    PhysickEffect.csv      the forty crystal tears, and what each does
+    AreaLevel.csv          the level band each area is built for — the softest table here
   lib/oracle.py            the one place that knows where the oracle lives
   lib/spells.py            the spell tables, and the one multiply that is not the oracle's
   lib/buffs.py             what a buff multiplies per hit kind, and whether two of them stack
   lib/ashes.py             which affinities an ash accepts, and its hits on one weapon class
   nodes/                   nineteen nodes
   scripts/generate_cases.py  regenerates attack-power fixtures from the oracle
+  scripts/check_spreadsheet.py  22 figures read off the workbook itself — run after any
+                            change reaching planner.py or ap_calc.py
   VALIDATION.md            122 questions, worked one at a time — read this next
   BUGS.md                  what the questions found, open and fixed — the work list
 ```
@@ -53,25 +61,25 @@ came from the Prometheux workspace, which is a different provenance and is decla
 
 | Node | Answers | Cases |
 |---|---|---|
-| `weapon-lookup` | resolve a name across the catalogue; class, infusability, upgrade cap | 11 |
+| `weapon-lookup` | resolve a name; class, infusability, upgrade cap, and what can be put on it | 15 |
 | `weapon-rank` | a stat spread → the weapons it can use, ranked | 9 |
 | `spell-lookup` | resolve a spell name; type, forms, families, requirements | 7 |
 | `spell-rank` | a catalyst + a build → the spells it can cast, ranked | 6 |
-| `ash-rank` | **a weapon class + an affinity → the ashes that fit, ranked four ways** | 7 |
+| `ash-rank` | a weapon class + an affinity → the ashes that fit, ranked four ways | 7 |
 | `boss-lookup` | an encounter's every phase: health, poise, defences, negations, immunities | 14 |
-| `boss-coverage` | **many fights at once: which element covers them, which are immune** | 7 |
-| `weapon-skill` | an ash of war's hits, motion values, affinities, and whether it replaces the scaling | 16 |
-| `item-effect` | talismans, tears and runes: stats, weight, resistances | 11 |
-| `buff-stack` | **what a set of buffs multiplies, for one kind of hit — and which do not stack** | 15 |
-| `character-build` | class + named stats → full spread, rune level, HP/FP/stamina/load | 13 |
-| `build-allocate` | weapon or spell + class + level → the spread | 21 |
-| `attack-power` | one weapon at one spread → AR, scaling, requirements, status, guard | 18 |
+| `boss-coverage` | many fights at once: which element covers them, which are immune | 7 |
+| `weapon-skill` | an ash's hits, motion values, affinities, and whether it replaces the scaling | 16 |
+| `item-effect` | talismans, tears and runes: stats, weight, resistances, what a tear does | 14 |
+| `buff-stack` | what a set of buffs multiplies for one kind of hit — and which do not stack | 15 |
+| `character-build` | class + named stats → full spread, rune level, HP/FP/stamina/load | 14 |
+| `build-allocate` | weapon or spell + class + level → the spread | 23 |
+| `attack-power` | one weapon at one spread → AR, scaling, requirements, status, guard | 23 |
 | `optimal-affinity` | all thirteen infusions ranked against a target | 13 |
-| `spell-power` | one spell from one catalyst → attack per type, family bonus, FP actually charged | 17 |
-| `defence` | a build and armour → defences, negation, status resistances | 11 |
+| `spell-power` | one spell from one catalyst → attack per type, family bonus, FP charged | 23 |
+| `defence` | a build and armour → defences, negation, status resistances | 14 |
 | `equip-load` | a loadout → weight, roll type, endurance to change it | 9 |
-| `matchmaking` | **who a character can play with, and the upgrade bracket that keeps them there** | 9 |
-| `stat-curve` | **what each point in a stat buys, and where the curve bends** | 7 |
+| `matchmaking` | who a character can play with, and the upgrade bracket that keeps them there | 9 |
+| `stat-curve` | what each point in a stat buys, and where the curve bends | 9 |
 
 `vouch -C . test` → **247 cases, 247 passed**.
 
@@ -79,15 +87,45 @@ came from the Prometheux workspace, which is a different provenance and is decla
 itself rather than against the extraction. Run it after touching anything that reaches
 `planner.py` or `ap_calc.py`; it found the one bug 122 real questions did not.
 
+## How this is checked, and what each check cannot catch
+
+Three layers, and the point is that they fail differently.
+
+**247 fixtures** (`vouch test`) pin every node against the extraction in `oracle/`. They are
+fast, they run on every change, and *by construction they cannot catch a mistake in how the
+collection uses the extraction* — which is what bug 17 was.
+
+**122 questions** (`VALIDATION.md`) are the outside view: what a player actually types, worked
+one at a time in fourteen patterns. They found seventeen bugs, four of which returned a
+well-formed number rather than an error. They are the only check that finds a *missing*
+capability, because a fixture cannot fail for a question nobody can ask.
+
+**22 spreadsheet figures** (`scripts/check_spreadsheet.py`) come from three of the Build
+Planner's own saved builds, read off PDFs of the workbook. This is the only check that sits
+upstream of the oracle, and it found the one bug 122 questions did not.
+
+Two audits found five more (bugs 18–22) and are worth repeating whenever a node is added:
+
+1. **Which defaults change the question** rather than choosing a mode?
+2. **Which nodes can still return a well-formed number for a thing that does not exist?**
+
+The second is the sharper one. Bug 22 is bug 4 in two nodes written *after* bug 4 was fixed:
+a guard that lives in one node is not a guard.
+
 ## State of the evals
 
 `vouch -C . eval --agent 'claude -p --allowedTools "" -- {prompt}' -n 3 --min-rate 0.9`
 
-The last complete measurement was **24/24 across the 8 cases that ran** before a usage limit
-cut the run short at case 9. Earlier complete runs went 89% → 95% → 96% → 100% as fabrications
-were fixed. **The suite has not been measured end to end since `build-allocate` and
-`weapon-skill` were added**, and three eval cases for them are unverified against a live model.
-That is the first thing to do with a fresh token budget.
+**This is the biggest gap in the project and it has grown.** The last complete measurement was
+24/24 across the 8 cases that ran before a usage limit cut it short; earlier complete runs went
+89% → 95% → 96% → 100% as fabrications were fixed. Since then the collection has gone from
+eleven nodes to nineteen, and **`.vouch/evals.toml` still has its original 16 cases**. Nothing
+in it asks for a caster's spread, a weapon or spell or ash ranking, a buff stack, a matchmaking
+bracket, a stat curve, or a boss-coverage answer. Eight nodes have never been in front of a
+live model at all.
+
+Writing those cases and measuring the suite end to end is the first thing to do with a fresh
+token budget.
 
 `--allowedTools ""` matters: with its own tools the agent reads the repository instead of
 routing through the published context, which measures the wrong thing.
@@ -96,9 +134,9 @@ routing through the published context, which measures the wrong thing.
 
 ## The rule this project keeps re-learning
 
-Every fabrication an eval caught was fixed **upstream of where it appeared** — by returning the
-figure in the form a reader quotes, never by checking the prose harder. Ten instances so far,
-the last four found by the question battery rather than by an eval:
+Every fabrication was fixed **upstream of where it appeared** — by returning the figure in the
+form a reader quotes, never by checking the prose harder. Fourteen instances, of which the
+first five came from evals and the rest from working real questions:
 
 | the agent wrote | because the node | the fix |
 |---|---|---|
@@ -112,9 +150,18 @@ the last four found by the question battery rather than by an eval:
 | a ranking of 570 weapons | had no ranking node at all | `weapon-rank`, `spell-rank` |
 | `1.15 x 1.2 x 1.13` | returned three sentences with figures in them | `item-effect`'s `stacked_multiplier` |
 | a spread that cannot hold the shield | heard only about the weapon | `stat_floors` |
+| a stacked multiplier by hand | returned buffs and left the multiply | `buff-stack`, on `BuffMult` |
+| "the ash accepts Blood" | had only the affinity it comes with | `ash-rank`, on `AshAffinity` |
+| an element's coverage from memory | answered one fight at a time | `boss-coverage` |
+| "soft cap at 40" | had the curve and never walked it | `stat-curve` |
 
 **If a node leaves a caller one small sum, it has handed that sum to a model.** That is the
 first thing to check when writing a new node.
+
+The second thing to check is the one bugs 4 and 22 are about: **if a node can be asked about
+something that does not exist, it will eventually be asked.** A staff casting an incantation,
+an affinity a weapon cannot take, a grease that slides off, a cast a seal cannot make — each of
+those returned a well-formed number until something refused it.
 
 The corollary, learned twice the hard way while writing fixtures here: take a number from the
 node, never from what it looked like on screen. Two fixture figures were written from a
@@ -187,34 +234,46 @@ lives here, not in `oracle/`.
 
 ## What is pending
 
-### First: measure the suite
+### First: the evals
 
-Run the evals end to end. They have not been measured since `build-allocate` and `weapon-skill`
-were added, and **nothing in `.vouch/evals.toml` covers the four nodes and features the
-question battery added** — no eval asks for a caster's spread, a weapon ranking, a spell
-ranking, or a multiplier stack. Writing those cases is the other half of this job.
+See *State of the evals* above. Nineteen nodes, sixteen eval cases, eight nodes never seen by a
+live model. This is the largest gap in the project and the only one that measures whether an
+agent can actually route to what has been built.
 
-### Second: what the battery left open
+### Second: the routing preamble
 
-`VALIDATION.md` has all 42 questions worked one at a time, with the calls, the figures and the
-cross-checks. Thirty-three answer end to end and nine are partial. **No question is
-unanswerable**, and the nine partials come down to four things:
+**Sixty notes**, against nineteen when this file first said pruning would eventually be needed.
+An agent carries all of it every turn, and past some size the notes stop being read rather than
+stop being true — nothing measures which. Prune before adding another one. `vouch describe` is
+not the pack; the pack omits contracts.
+
+### Third: what the battery left open
+
+`VALIDATION.md` has all 122 questions worked one at a time, with the calls, the figures and the
+cross-checks. Ninety-one answer end to end and thirty-one are partial. **No question is
+unanswerable**, and every partial is one of these five:
 
 1. **Flat-attack and scaling-overridden hits are read, not priced.** Six of the ten Pattern 4
    skills have one. `optimal-affinity` prices a hit through the weapon's attack rating, so a
-   hit that carries flat attack (Ghostflame Ignition's 140 magic) or replaces the weapon's
-   scaling (Sacred Blade's bullet off Faith) has no path. The data says *which stat drives it*,
-   which is worth quoting, and the damage is not computed.
+   hit carrying flat attack (Ghostflame Ignition's 140 magic) or replacing the weapon's scaling
+   (Sacred Blade's bullet off Faith) has no path. The data says *which stat drives it*, which is
+   worth quoting, and the damage is not computed. **The override is per hit, not per skill** —
+   Sacred Blade's slash uses the weapon and its bullet does not — so any fix has to model hits.
 
-2. **The override is per hit, not per skill.** Sacred Blade's slash uses the weapon and its
-   bullet does not. Any future skill objective has to model hits, not skills.
+2. **`build-allocate` cannot optimise for a skill**, which needs (1) first. It is the natural
+   next `focus` after `spell`.
 
-3. **`build-allocate` cannot optimise for a skill.** When a skill overrides the weapon's
-   scaling the weapon-optimal spread is the wrong build, and the node can only say so. This is
-   the natural next `focus`, and it needs (1) first.
+3. **The mechanics behind the numbers.** Frostbite's proc, Black Flame's percentage damage, the
+   stance-break rule. The collection has the buildup figures and the poise motion values and
+   none of the rules that turn them into effects. `boss-lookup` gives a fight's poise and
+   `ash-rank` gives an ash's poise damage, so "how many of these break that" is arithmetic a
+   caller can do; the rule itself is in no table here.
 
-4. **Guard counters have no motion value in the extraction**, so "best greatshield for guard
-   counters" is answered on guard boost and negation instead.
+4. **Range, moveset, reach, cast time and aggro.** All of Pattern 15's partials and two others
+   turn on them, and no table carries any of it. Saying so is the answer.
+
+5. **Guard counters have no motion value in the extraction**, so "best greatshield for guard
+   counters" is answered on guard boost and the negation split instead.
 
 ### Deliberately absent, not pending
 
@@ -230,8 +289,11 @@ unanswerable**, and the nine partials come down to four things:
 
 ### Not ported at all
 
-Item locations. Those tables live only in
-`prometheux-workspace/files/elden-ring-brain/`; vendor into `data/` with provenance.
+Item locations, and `ConsumableEffect.csv`. Both live only in
+`prometheux-workspace/files/elden-ring-brain/`; vendor into `data/` with provenance the way the
+other six were. **Read that directory's file list before building anything** — three of the
+twenty-two bugs exist because a parser was written against prose, or a node was left unbuilt,
+while the structured table sat there unused.
 
 ---
 
@@ -247,12 +309,13 @@ Item locations. Those tables live only in
 - **Pin new nodes against the ontology** wherever `prometheux-workspace/HANDOFF.md` records a
   figure. Its "Default checks that already persisted" section is a fixture source, and it is
   how the upgrade-cap bug was found.
-- **The routing pack has grown three times over and nobody has re-measured it.** The preamble is
-  **58 notes** against nineteen when this note first said pruning would eventually be needed,
-  and there are nineteen nodes rather than eleven. This is now the most likely thing to be
-  quietly wrong: an agent carries the whole preamble every turn, and past some size the notes
-  stop being read rather than stop being true. Measure the real pack — `vouch describe` is not
-  it, because the pack omits contracts — and prune before adding another note.
+- **The routing preamble needs pruning before it needs anything else.** Sixty notes; see
+  *What is pending*. Measure the real pack rather than `vouch describe`, which includes the
+  contracts the pack leaves out.
+- **Look for the rest of a bug's kind.** Five of the twenty-two in `BUGS.md` came from asking
+  two questions of every node rather than from a player's question: *which defaults change
+  what was asked?* and *which nodes can still return a well-formed number for a thing that
+  does not exist?* Both are cheap and both found defects that returned numbers.
 - **`vouch <cmd> | head` can panic** on a broken pipe. Recorded in the runtime's `DECISIONS.md`
   as known roughness; it is a race and rarely reproduces.
 - Contracts have caught genuine mistakes in this repository more than once — rune level is stat
@@ -264,7 +327,8 @@ Item locations. Those tables live only in
 
 ```console
 $ cd ~/Dev/elden-ring-vouch
-$ vouch test                                    # 172 cases, no model
+$ vouch test                                    # 247 cases, no model
+$ python3 scripts/check_spreadsheet.py          # 22 figures from the workbook itself
 $ vouch call boss-lookup --input '{"query":"rennala"}'
 $ vouch call build-allocate --input '{"weapon":"Rivers of Blood","affinity":"Standard",
     "upgrade":10,"max_upgrade":10,"starting_class":"Samurai","target_level":150,
@@ -274,7 +338,14 @@ $ vouch call weapon-rank --input '{"strength":55,"dexterity":14,"intelligence":9
 $ vouch call build-allocate --input '{"weapon":"Dragon Communion Seal","affinity":"Standard",
     "upgrade":10,"max_upgrade":10,"starting_class":"Prophet","target_level":150,
     "focus":"spell","spell":"Rotten Breath","vigor":40,"mind":30,"endurance":20}'
+$ vouch call matchmaking --input '{"level":80,"upgrade":7,"somber":true}'
+$ vouch call buff-stack --input '{"buffs":["Shard of Alexander","Lord of Blood'"'"'s Exultation"],
+    "hit_kind":"Skill","assume":["Lord of Blood'"'"'s Exultation"]}'
 $ vouch eval --agent 'claude -p --allowedTools "" -- {prompt}' -n 3 --min-rate 0.9
 ```
+
+**Read `BUGS.md` before changing a node.** Twenty-two entries, each with what it returned
+instead of an error, and the two audit questions at the bottom are the ones worth re-asking
+every time a node is added.
 
 The runtime is at `~/Dev/vouch`; its own `DECISIONS.md` covers where that stands.

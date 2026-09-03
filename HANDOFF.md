@@ -36,9 +36,11 @@ elden-ring-vouch/
     AshCompat.csv          ash default affinity and weapon compatibility
   lib/oracle.py            the one place that knows where the oracle lives
   lib/spells.py            the spell tables, and the one multiply that is not the oracle's
-  nodes/                   thirteen nodes
+  lib/buffs.py             what a buff multiplies per hit kind, and whether two of them stack
+  lib/ashes.py             which affinities an ash accepts, and its hits on one weapon class
+  nodes/                   seventeen nodes
   scripts/generate_cases.py  regenerates attack-power fixtures from the oracle
-  VALIDATION.md            the question battery, worked one at a time — read this next
+  VALIDATION.md            83 questions, worked one at a time — read this next
   BUGS.md                  what the questions found, open and fixed — the work list
 ```
 
@@ -52,20 +54,24 @@ came from the Prometheux workspace, which is a different provenance and is decla
 | Node | Answers | Cases |
 |---|---|---|
 | `weapon-lookup` | resolve a name across the catalogue; class, infusability, upgrade cap | 11 |
-| `weapon-rank` | **a stat spread → the weapons it can use, ranked** | 9 |
+| `weapon-rank` | a stat spread → the weapons it can use, ranked | 9 |
+| `spell-lookup` | resolve a spell name; type, forms, families, requirements | 7 |
+| `spell-rank` | a catalyst + a build → the spells it can cast, ranked | 6 |
+| `ash-rank` | **a weapon class + an affinity → the ashes that fit, ranked four ways** | 7 |
 | `boss-lookup` | an encounter's every phase: health, poise, defences, negations, immunities | 14 |
-| `weapon-skill` | an ash of war's hits, motion values, and whether it replaces the scaling | 12 |
-| `item-effect` | talismans, tears, runes — and the multiplier stack you assert | 18 |
+| `boss-coverage` | **many fights at once: which element covers them, which are immune** | 7 |
+| `weapon-skill` | an ash of war's hits, motion values, affinities, and whether it replaces the scaling | 16 |
+| `item-effect` | talismans, tears and runes: stats, weight, resistances | 11 |
+| `buff-stack` | **what a set of buffs multiplies, for one kind of hit — and which do not stack** | 15 |
 | `character-build` | class + named stats → full spread, rune level, HP/FP/stamina/load | 13 |
-| `build-allocate` | **weapon or spell + class + level → the spread** | 21 |
+| `build-allocate` | weapon or spell + class + level → the spread | 21 |
 | `attack-power` | one weapon at one spread → AR, scaling, requirements, status, guard | 18 |
 | `optimal-affinity` | all thirteen infusions ranked against a target | 13 |
-| `spell-power` | one spell from one catalyst → attack per type, family bonus, castability | 17 |
-| `spell-rank` | **a catalyst + a build → the spells it can cast, ranked** | 6 |
+| `spell-power` | one spell from one catalyst → attack per type, family bonus, FP actually charged | 17 |
 | `defence` | a build and armour → defences, negation, status resistances | 11 |
 | `equip-load` | a loadout → weight, roll type, endurance to change it | 9 |
 
-`vouch -C . test` → **172 cases, 172 passed**.
+`vouch -C . test` → **205 cases, 205 passed**.
 
 ## State of the evals
 

@@ -74,7 +74,11 @@ fixture.
 | `weapon-skill` | An ash of war → its hits, motion values, and whether it replaces the weapon's scaling |
 | `item-effect` | Talismans, crystal tears and great runes → what they do, combined, and the multiplier stack under the conditions you assert |
 | `weapon-rank` | A stat spread → the weapons it can actually use, ranked by what they hit for |
+| `spell-lookup` | Resolve a spell name → its type, forms, families, requirements and damage types |
 | `spell-rank` | A catalyst and a build → the spells it can cast, ranked, filtered by damage type or family |
+| `ash-rank` | A weapon class and an affinity → the ashes that fit, by status, poise, hits or motion |
+| `boss-coverage` | Many fights at once → which damage type covers them, and which are immune to what |
+| `buff-stack` | Talismans, tears and buff spells → what they multiply for one kind of hit, and which do not stack |
 
 The order is the routing: **character-build** when the user described a build by only some of
 its stats, **weapon-lookup** for any question naming a weapon, then **attack-power** for what

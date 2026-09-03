@@ -48,6 +48,8 @@ elden-ring-vouch/
   scripts/generate_cases.py  regenerates attack-power fixtures from the oracle
   scripts/check_spreadsheet.py  22 figures read off the workbook itself — run after any
                             change reaching planner.py or ap_calc.py
+  scripts/stress_attest.py  exercises `vouch attest` without a model: behaviour matrix,
+                            mutation sweep, and collision against ledger size
   VALIDATION.md            122 questions, worked one at a time — read this next
   BUGS.md                  what the questions found, open and fixed — the work list
   PLAN-web-app.md          serving this publicly: the loop, the costs, the open decisions
@@ -104,6 +106,14 @@ capability, because a fixture cannot fail for a question nobody can ask.
 **22 spreadsheet figures** (`scripts/check_spreadsheet.py`) come from three of the Build
 Planner's own saved builds, read off PDFs of the workbook. This is the only check that sits
 upstream of the oracle, and it found the one bug 122 questions did not.
+
+**The attestation stress test** (`scripts/stress_attest.py`) exercises the last line, which
+needs no model and so had never been run. It catches 23 of 24 mutations of a real answer, and
+the one it misses shows the shape of the hole: **a numeral attests if *some* call in the
+session returned it**, so a wrong value that collides with another figure is invisible. That
+degrades fast with session size — 19% of integers 1–99 collide in a two-call ledger, 96% in a
+day's. `VOUCH_SESSION` defaults to the *date*, so the default is the loose end of that range.
+Set it per conversation.
 
 Two audits found five more (bugs 18–22) and are worth repeating whenever a node is added:
 

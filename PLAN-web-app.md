@@ -177,6 +177,57 @@ faster. `vouch call` *is* the contract boundary: without it there is no schema c
 postcondition, no exit-code taxonomy and no ledger — and therefore nothing to attest against.
 What is left is a chatbot with CSVs. If process start-up hurts, use a warm subprocess pool.
 
+## Attestation was stress-tested before any of this was built
+
+`vouch attest` needs no model, so it did not need the app to be exercised. `scripts/stress_attest.py`
+runs three things for free, and they changed what this document asks for.
+
+**The precision rule is exactly right.** Against a real attack rating of 853.1751…:
+
+| quoted as | verdict |
+|---|---|
+| 853.18, 853.2, **853** | attested — a rounded or truncated quotation of a real figure |
+| 850, 854 | rejected |
+
+So the app can let the narrator quote the number the game shows without the check tripping,
+and it still catches the adjacent integer.
+
+**A mutation sweep caught 23 of 24.** Take a paragraph every numeral of which came from a node,
+mutate each numeral four ways — adjacent digit, adjacent whole, extra decimal, +0.1% — and
+attest each mutant. Twenty-three rejected.
+
+**The one miss is the failure mode the app has to design around.** It was `faith 70 → 80`, and
+80 slipped through *because the ledger contained an 80* from another call in the same session.
+A numeral attests if **some** call in the session returned it, so a value that collides with
+any other figure is invisible. Which leads to the measurement that matters:
+
+| ledger | calls | distinct scalars | integers 1–99 that collide |
+|---|---|---|---|
+| one conversation | 2 | 29 | **19%** |
+| a small run | 29 | 165 | 40% |
+| **one day's work** | 238 | 1,186 | **96%** |
+| **one day's work** | 277 | 989 | **99%** |
+
+`ledger::session_id()` falls back to the **date** when `VOUCH_SESSION` is unset. So the default
+configuration, for a single user with no concurrency at all, already accounts for essentially
+every small integer: a fabricated *"you need 7 more points"* or *"go to 40 vigor"* attests
+clean. Per-conversation sessions are not hygiene, they are the difference between the check
+working and not, and the effect is quantified above.
+
+**Two consequences for the app:**
+
+1. **`VOUCH_SESSION` per conversation, enforced in code, never defaulted.** This was already the
+   concurrency rule below; it turns out to matter single-threaded too.
+2. **The narrator must be told to write no numeral it did not take from a result.** Ordinals
+   and asides — "ranked 1st", "around 850" — are rejected, correctly, and would fail an
+   otherwise good answer. Either forbid them in the prompt or pass `--question` so figures the
+   user supplied are not counted as fabrication.
+
+**And one thing worth knowing about the check's reach.** The paragraph first fed to the sweep
+failed its baseline, on `97.73` — a figure this assistant produced by subtracting two node
+results while writing the build evaluation, unprompted and without noticing. Nothing else in
+the pipeline would have caught it. That is the whole argument for the last line existing.
+
 ## Concurrency, and the one thing that breaks quietly
 
 Two places want it, and they want it for the same reason: almost all the wall time is spent

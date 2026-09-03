@@ -25,7 +25,7 @@ a defect, a decision that left a caller doing arithmetic.
 
 | # | what was wrong | found by | kind | commit |
 |---|---|---|---|---|
-| 11 | `item-effect`'s multiplier stack multiplied **any** buffs the caller asserted, including two that overwrite each other. Golden Vow as a spell and as an ash share the `Aura` slot — the last one wins — so it would have returned 1.15 × 1.115 for a stack the game does not allow. It also read the figure out of prose when a structured per-hit-kind table existed in the workspace and had not been vendored. Replaced by `buff-stack`. | 5.7 | design + unread data | `pending` |
+| 11 | `item-effect`'s multiplier stack multiplied **any** buffs the caller asserted, including two that overwrite each other. Golden Vow as a spell and as an ash share the `Aura` slot — the last one wins — so it would have returned 1.15 × 1.115 for a stack the game does not allow. It also read the figure out of prose when a structured per-hit-kind table existed in the workspace and had not been vendored. Replaced by `buff-stack`. | 5.7 | design + unread data | `15ae25d` |
 | 1 | `build-allocate`'s greedy climb stalled at a local optimum. Moonveil RL150 returned dexterity 59 / intelligence 57 for **709.7631** where dexterity 66 / intelligence 50 is **709.8569** — no single point moved between the two pays for itself, only the seventh does. | 1.2 | algorithm | `91f4938` |
 | 2 | `spell-power` read `MagicAtk` and nothing else, so **every incantation in the game priced at zero** — Black Flame's 244 is in `FireAtk`. Meteorite, a sorcery, returned 373.6 where it is 1046.08. Surfaced as a schema defect, which is the only reason it was never quoted. | 1.4 | unread data | `767aaba` |
 | 3 | `build-allocate` returned `"affinity": "Lightning"` over figures for the Standard weapon. Dragon Halberd takes no affinity at all. `attack-power` had reported `affinity_ignored` since it was written; its sibling passed the request straight through. | 1.6 | missing check | `0912393` |
@@ -50,7 +50,13 @@ knew and the code did not look*: `FireAtk` was populated, the consumables were l
 were sitting there. The fix each time was to read a column that was already present.
 
 **Three returned a number rather than an error** — #1, #4 and #7 — which is the failure mode
-this collection exists to prevent, and the one fixtures and evals both missed.
+this collection exists to prevent, and the one fixtures and evals both missed. #11 would have
+been a fourth: it was caught by the next batch of questions arriving before anyone quoted it.
+
+**#11 is also the first entry against work done in this pass.** A stopgap built for Pattern 4
+was wrong by the time Pattern 5 asked a sharper question, and the table that made it
+unnecessary had been sitting unvendored in the workspace the whole time. Worth checking the
+workspace's file list before building a parser.
 
 ---
 

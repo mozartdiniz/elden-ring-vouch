@@ -217,6 +217,72 @@ def _():
     assert not any(e["type"] == "answer" for e in events)
 
 
+# ------------------------------------------------------- did it answer the question
+
+
+@check("an answer that drops one of two named bosses is flagged")
+def _():
+    import completeness
+
+    question = ("Meu build na Gargoyle's Twinblade nao funciona no Radagon e na Elden Beast. "
+                "Qual affinity eu troco pra esses dois?")
+    results = [
+        ("weapon-lookup", {"query": "Gargoyle's Twinblade", "resolved": "Gargoyle's Twinblade",
+                           "ambiguous": False}),
+        ("boss-lookup", {"query": "Radagon", "resolved": "Radagon of the Golden Order",
+                         "ambiguous": False}),
+        ("boss-lookup", {"query": "Elden Beast", "resolved": "Elden Beast", "ambiguous": False}),
+    ]
+    # The real failure: attested, and about one boss out of two.
+    whole, omitted, _ = completeness.check(question, results, "Fire is optimal, 342 damage.")
+    assert not whole
+    assert "Elden Beast" in omitted
+
+    whole, omitted, _ = completeness.check(
+        question, results, "Contra Radagon use Fire; contra a Elden Beast, Heavy."
+    )
+    assert whole, omitted
+
+
+@check("the one weapon in a question need not be named again")
+def _():
+    import completeness
+
+    # A single entity of a kind is the subject and can be left implicit. Demanding it back
+    # would flag good answers, and a check that cries wolf gets switched off.
+    question = "What is the attack power of the Uchigatana at 40 dexterity?"
+    results = [("weapon-lookup", {"query": "Uchigatana", "resolved": "Uchigatana",
+                                  "ambiguous": False})]
+    whole, omitted, owed = completeness.check(question, results, "It comes to 229 physical.")
+    assert whole, omitted
+    assert owed == []
+
+
+@check("an entity the model looked up but the user never named is not owed")
+def _():
+    import completeness
+
+    question = "What is the best affinity for the Uchigatana?"
+    results = [
+        ("weapon-lookup", {"query": "Uchigatana", "resolved": "Uchigatana", "ambiguous": False}),
+        # The model went looking for these; the user did not ask about them.
+        ("weapon-lookup", {"query": "Nagakiba", "resolved": "Nagakiba", "ambiguous": False}),
+    ]
+    assert completeness.check(question, results, "Blood, at 229.")[2] == []
+
+
+@check("an ambiguous or missed lookup is owed nothing")
+def _():
+    import completeness
+
+    question = "How does the Uchigatana compare to the Nagakiba?"
+    results = [
+        ("weapon-lookup", {"query": "Uchigatana", "resolved": "", "ambiguous": True}),
+        ("weapon-lookup", {"query": "Nagakiba", "resolved": "", "ambiguous": False}),
+    ]
+    assert completeness.check(question, results, "")[2] == []
+
+
 def main():
     if os.path.exists(LEDGER):
         os.remove(LEDGER)

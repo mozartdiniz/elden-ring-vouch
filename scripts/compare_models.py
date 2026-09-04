@@ -31,6 +31,7 @@ import time
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "web"))
 
+import completeness  # noqa: E402
 import engine  # noqa: E402
 from llm import LLMError, ask_model  # noqa: E402
 
@@ -41,14 +42,16 @@ RUNS = os.path.join(ROOT, "runs")
 # long one that needed the decision budget raised.
 DEFAULT_QUESTIONS = ["3.1", "1.1", "7.1"]
 
-# Roughly what one decision costs, measured. Only used by --estimate.
+# Measured cost per decision over 28 runs, *including* the effect of prompt caching, which is
+# most of the spread: kimi's headline rate is the highest here and it caches 87% of a 26k-token
+# prompt, so it lands at a third of sol's cost. A first-call figure would overstate it by 4x.
 SEEN_COST = {
-    "openai/gpt-5.6-sol": 0.065,
-    "openai/gpt-5.6-luna": 0.0065,
-    "x-ai/grok-4.6": 0.056,
-    "moonshotai/kimi-k3": 0.088,
+    "openai/gpt-5.6-luna": 0.006,
+    "moonshotai/kimi-k3": 0.021,
+    "x-ai/grok-4.6": 0.044,
+    "openai/gpt-5.6-sol": 0.048,
 }
-DECISIONS_PER_QUESTION = 4
+DECISIONS_PER_QUESTION = 9
 
 
 def models():
@@ -129,6 +132,7 @@ async def run(model, question, collection, catalog, node_names, repeat=0):
         "detail": [],
         "asked": None,
         "answered_with": None,
+        "results": [],
     }
 
     # The repeat index is in the session id on purpose. Repeats sharing a ledger would make
@@ -151,6 +155,8 @@ async def run(model, question, collection, catalog, node_names, repeat=0):
                 if event["type"] == "call":
                     outcome["called"].append(event["node"])
                     calls.append({"node": event["node"], "input": event["input"]})
+                elif event["type"] == "result":
+                    outcome["results"].append((event["node"], event["result"]))
                 elif event["type"] == "answer":
                     outcome["outcome"] = "answered"
                     outcome["attestation"] = event["attestation"]
@@ -183,8 +189,14 @@ async def run(model, question, collection, catalog, node_names, repeat=0):
 
     recorded = [n for n in question.get("recorded_nodes", []) if n in node_names]
     found = numerals(outcome["answer"])
+    whole, omitted, owed = completeness.check(
+        question["question"], outcome["results"], outcome["answer"]
+    )
     outcome.update(
         repeat=repeat,
+        complete=whole,
+        omitted=omitted,
+        owed=owed,
         figures=sorted(found, key=lambda n: float(n)),
         figures_shared=sorted(
             found & set(question.get("recorded_figures", [])), key=lambda n: float(n)
@@ -204,7 +216,10 @@ def verdict(outcome):
         mark = {"attested": "ok", "unchecked": "UNCHECKED", "failed": "UNATTESTED"}[
             outcome["attestation"]
         ]
-        # An answer reached by asking first is still an answer, and the asking is the point.
+        # Attested but incomplete is the failure attestation cannot see, so it outranks the
+        # attestation mark in the one word this column has room for.
+        if not outcome.get("complete", True):
+            mark = "OMITS"
         return f"{mark} (asked)" if outcome["asked"] else mark
     return outcome["outcome"].upper()
 
@@ -232,6 +247,13 @@ def consistency(results, expect):
                 drifted = sorted(set.union(*(set(s) for s in sets)) - shared, key=float)
                 print(f"  {model:<24} DIFFERED — {len(shared)} figure(s) held, "
                       f"{len(drifted)} moved: {', '.join(drifted[:10])}")
+
+    dropped = [r for r in results if r["outcome"] == "answered" and not r.get("complete", True)]
+    if dropped:
+        print("\nAttested, but did not name something the question asked about:")
+        for outcome in dropped:
+            print(f"  {outcome['model']:<24} r{outcome['repeat']}  omits {', '.join(outcome['omitted'])}")
+            print(f"  {'':<24}      {(outcome['answer'] or '')[:150]}")
 
     answered = [r for r in results if r["outcome"] == "answered"]
     if len(answered) > 1:
@@ -261,8 +283,8 @@ def report(results, chosen, expect):
             f"${outcome['cost']:>7.4f} {outcome['seconds']:>5.0f}"
         )
 
-    print(f"\n{'model':<24} {'answered':>9} {'attested':>9} {'cost/q':>9} {'cached':>8}")
-    print("-" * 63)
+    print(f"\n{'model':<24} {'answered':>9} {'attested':>9} {'complete':>9} {'cost/q':>9} {'cached':>8}")
+    print("-" * 73)
     for model in dict.fromkeys(r["model"] for r in results):
         mine = [r for r in results if r["model"] == model]
         answered = sum(1 for r in mine if r["outcome"] == "answered")
@@ -271,9 +293,10 @@ def report(results, chosen, expect):
         prompt_tokens = sum(r["usage"].get("prompt_tokens", 0) for r in mine)
         cached = sum(r["usage"].get("cached_tokens", 0) for r in mine)
         share = f"{100 * cached / prompt_tokens:.0f}%" if prompt_tokens else "-"
+        whole = sum(1 for r in mine if r["outcome"] == "answered" and r.get("complete", True))
         print(
             f"{model:<24} {answered:>6}/{len(mine)} {attested:>6}/{len(mine)} "
-            f"${cost:>8.4f} {share:>8}"
+            f"{whole:>6}/{len(mine)} ${cost:>8.4f} {share:>8}"
         )
 
     consistency(results, expect)
@@ -345,7 +368,7 @@ async def main():
             flush=True,
         )
         with open(path, "a", encoding="utf-8") as out:
-            out.write(json.dumps(outcome) + "\n")
+            out.write(json.dumps({k: v for k, v in outcome.items() if k != "results"}) + "\n")
 
     await asyncio.gather(
         *(

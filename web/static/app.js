@@ -114,6 +114,46 @@ function answerBlock(event) {
   return wrap;
 }
 
+// What picking an option is taken to have said. Mirrors chosen_text in engine.py, and the
+// reason it is not just the label: models caption their options "recommended default" and
+// put the actual numbers in `value`, so sending the label back asks the same question again.
+// The composer is filled with this, so the chat shows exactly what was sent.
+function chosenText(option) {
+  const label = String(option.label ?? "").trim();
+  const value = option.value;
+  if (value === undefined || value === null || value === "") return label || "the first option";
+
+  let spelled;
+  if (Array.isArray(value)) spelled = value.join(", ");
+  else if (typeof value === "object") spelled = Object.entries(value).map(([k, v]) => `${k} ${v}`).join(", ");
+  else spelled = String(value);
+
+  if (!label) return spelled;
+  return label.includes(spelled) ? label : `${label} (${spelled})`;
+}
+
+function askBlock(event) {
+  const wrap = el("div", "notice ask");
+  wrap.append(el("div", null, event.question));
+
+  const choices = el("div", "choices");
+  for (const option of event.options || []) {
+    const button = el("button", null, option.label);
+    if (option.note) button.title = option.note;
+    // Answering is just the next message, so the conversation carries the question with it
+    // and the model sees what was asked alongside what was chosen.
+    // Returning it is a no-op in a browser, where requestSubmit gives back undefined; it is
+    // what lets test_client.mjs await the follow-up.
+    button.onclick = () => {
+      box.value = chosenText(option);
+      return form.requestSubmit();
+    };
+    choices.append(button);
+  }
+  if (choices.children.length) wrap.append(choices);
+  return wrap;
+}
+
 function render(turn, event) {
   switch (event.type) {
     case "session":
@@ -143,6 +183,18 @@ function render(turn, event) {
 
     case "answer":
       turn.finish(answerBlock(event));
+      break;
+
+    // Not a failure: the collection needs one value that is the user's to decide. Rendered
+    // as buttons, which is both a better interaction than free text and free of tokens.
+    case "ask":
+      turn.finish(askBlock(event));
+      break;
+
+    // The model's reply would not parse and it is being asked again. Worth showing — a model
+    // that does this every turn is a model to stop paying for.
+    case "malformed":
+      turn.step("refusal", "unparseable", event.reason);
       break;
 
     case "no_answer":

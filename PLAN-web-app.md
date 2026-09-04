@@ -356,6 +356,88 @@ two calls, 40% at twenty-nine. `KEEP_TURNS` bounds the prompt; only starting a n
 bounds the ledger. That makes the reset button part of the correctness story rather than a
 convenience, which is worth saying out loud in the UI eventually.
 
+## Which models can drive this, and what they cost
+
+The suspicion was that only Anthropic models could work the collection. The suspicion was
+wrong, and what it was hiding is more useful.
+
+**The protocol is not the problem.** All four of `openai/gpt-5.6-sol`, `openai/gpt-5.6-luna`,
+`x-ai/grok-4.6` and `moonshotai/kimi-k3` return clean, correct JSON on the first decision.
+
+**The problem was that the collection offered a move the app could not make.** `build-allocate`'s
+vigor guidance reads *"This is a judgement and the node will not make it: **ask the user**, or
+state the figure you assumed and why."* Two legal moves. kimi and grok assumed and disclosed;
+both OpenAI models chose to ask — and the app had no way to ask, so their correct behaviour
+arrived as a shrug. The same sentence explains battery questions 2.8, 1.4 and 1.2.
+
+So `ask` is now a fourth decision shape alongside `call`, `done` and `stop`, carrying a
+parameter and two to four options with the conventional one first, rendered as chips. It is
+not an error path: it is the question the collection needs answered before it can compute
+anything, and every model that was failing now reaches an attested answer through it.
+
+### Three bugs found by pointing other vendors' models at it
+
+1. **The ledger path was built by string interpolation.** `x-ai/grok-4.6` contains a dot;
+   vouch rewrites that when it names the file; `attest` then looked for a ledger that did not
+   exist, exited 2, and the answer was shown as **UNCHECKED**. A silent downgrade of the only
+   check that matters, and no Anthropic-only run would ever have produced it. Sessions are now
+   sanitised at the source, and a missing ledger is a loud error rather than a shrug.
+2. **Picking an option sent its caption, not its values.** Models label options *"Padrão
+   recomendado"* and put `{vigor: 40, mind: 20, endurance: 25}` in `value`. Sending the caption
+   back asks the same question again — which is how `gpt-5.6-luna` asked three times and then
+   emitted `"vigor": fifty` as JSON. Both the harness and the browser now send the values.
+3. **Reasoning tokens come out of `max_tokens`.** `kimi-k3` spent 663 of 707 completion tokens
+   thinking and returned empty `content`, which read downstream as "the model said nothing".
+   The budget is now 6,000, and an empty reply is an explicit error rather than an empty string
+   flowing into the parser.
+
+A malformed reply is also no longer fatal. The loop already knew how to say *"that was
+rejected, try again"* for runtime refusals; a parser complaint now goes back the same way,
+costing one decision instead of the whole question.
+
+### With `ask` available, all four work — and two reproduce the record exactly
+
+Question 1.1, Rivers of Blood at RL150, after the fixes: **4 of 4 answered, 4 of 4 attested.**
+The interesting part is that they did not give the same answer, and every difference traces to
+the judgement each model made at the `ask` — which it then disclosed.
+
+| model | chose | answered | against the record |
+|---|---|---|---|
+| `x-ai/grok-4.6` | 40/20/25, attack | STR 12 · DEX 56 · ARC 59, **675** AR, 76 bleed | the attack row: 675.826 / 76.4 |
+| `moonshotai/kimi-k3` | 40/20/25, **bleed** | STR 12 · DEX 18 · ARC 97, **644** AR, 79 bleed | the bleed row: 644.748 / 79.5 |
+| `openai/gpt-5.6-sol` | vigor **50**, attack | 662 AR at a different spread | correct for its own premise |
+| `openai/gpt-5.6-luna` | 40/20/25 | 396 physical / 279 fire / 76 bleed | grok's build, narrated without the spread |
+
+The recorded entry for 1.1 has **two** rows, one per focus, and two different models reproduced
+one each to the digit. Neither is wrong; they answered different readings of a question that
+did not say which it meant. That is the whole argument for `ask` in one table — and it is also
+the sharpest evidence yet for the caveat now sitting under `VALIDATION.md`'s status legend,
+that a `[x]` records a question someone had already settled.
+
+`luna`'s answer is the weak one, and not because a number is wrong: it never states the spread
+the user asked for. Cheapest is not free.
+
+### Cost is the real differentiator, and it is not subtle
+
+Measured per decision on the same 26k-token planning prompt:
+
+| model | cost per decision | note |
+|---|---|---|
+| **openai/gpt-5.6-luna** | **$0.0065** | ten times cheaper than anything else here |
+| x-ai/grok-4.6 | $0.056 | |
+| openai/gpt-5.6-sol | $0.065 | |
+| moonshotai/kimi-k3 | $0.088 | but cached 73–100% of the prompt on later calls |
+
+Per *question*, once the `ask` round trip is included: **luna $0.040**, kimi $0.143, sol
+$0.315, grok $0.325. Luna is eight times cheaper than either frontier option and answered in
+41 seconds against grok's 126 and kimi's 274.
+
+**The prompt is 26,000 tokens and it is re-sent on every decision.** Six decisions is a
+question, so the catalog dominates everything: 61 notes and nineteen nodes with full schemas
+and examples. Two levers follow directly, and both are worth more than any model choice —
+prompt caching, which kimi already gets 73–100% of and the OpenAI models get 41% of, and
+pruning the preamble, which has been the top item in `BUGS.md` for weeks.
+
 ## The battery, pointed at the running app
 
 `scripts/run_battery.py` reads all 122 questions out of `VALIDATION.md`, runs them through the

@@ -31,6 +31,17 @@ MAX_DECISIONS = int(os.environ.get("MAX_DECISIONS", "10"))
 REFUSAL = {11, 14, 15}
 DEFECT = {12, 13, 20, 21}
 
+# vouch rewrites anything outside this set when it names the ledger file, so a session id of
+# "models-x-ai-grok-4.6" is written to session-models-x-ai-grok-4-6.jsonl. Building the path
+# by interpolation therefore pointed at a file that did not exist, attestation exited 2, and
+# the answer was shown as UNCHECKED — a silent downgrade of the one check that matters.
+# Sanitising here means the name we pass and the name vouch writes are the same string.
+UNSAFE = re.compile(r"[^a-z0-9-]+")
+
+
+def safe_session(raw):
+    return UNSAFE.sub("-", str(raw).lower()).strip("-") or "session"
+
 
 class Defect(Exception):
     """A node violated its own contract. The loop stops and no answer is shown."""
@@ -40,7 +51,7 @@ class Defect(Exception):
 
 
 async def _vouch(collection, session, *args):
-    env = dict(os.environ, VOUCH_SESSION=session)
+    env = dict(os.environ, VOUCH_SESSION=safe_session(session))
     proc = await asyncio.create_subprocess_exec(
         VOUCH,
         "-C",
@@ -96,6 +107,32 @@ async def load_catalog(collection):
 # ------------------------------------------------------------------------ the model
 
 
+def chosen_text(option):
+    """What the user is taken to have said when they pick an option from an `ask`.
+
+    The label alone is not it. Models label their options "Padrão recomendado" and put the
+    numbers in `value`, so sending the label back asks the same question again — which is
+    exactly how one model spiralled into asking three times and then emitting `"vigor": fifty`
+    as JSON. The values are the answer; the label is the caption.
+
+    static/app.js does the same thing, so the chat shows precisely what was sent.
+    """
+    label = str(option.get("label", "")).strip()
+    value = option.get("value")
+    if value is None or value == "":
+        return label or "the first option"
+    if isinstance(value, dict):
+        spelled = ", ".join(f"{k} {v}" for k, v in value.items())
+    elif isinstance(value, list):
+        spelled = ", ".join(str(v) for v in value)
+    else:
+        spelled = str(value)
+    if not label:
+        return spelled
+    # "40 vigor (typical) (40)" helps nobody.
+    return label if spelled in label else f"{label} ({spelled})"
+
+
 def parse_json_reply(text):
     """Models sometimes wrap JSON in a fence or a sentence. Take the outermost object."""
     fenced = re.search(r"```(?:json)?\s*(.+?)```", text, re.S)
@@ -121,9 +158,26 @@ Reply with ONLY a JSON object, in one of three shapes:
   {"done": true}
       The verified results so far are enough to answer the question.
 
+  {"ask": {"question": "<one sentence>",
+           "parameter": "<the parameter you cannot fill>",
+           "options": [{"label": "<what the user would pick>", "value": <the value>,
+                        "note": "<why, one clause>"}]}}
+      A node needs a judgement that is the user's to make, not yours — a floor like vigor, a
+      weapon the question never named, which of two forms of a spell was meant. Ask for it.
+      Offer two to four options with the conventional one first. This is not failure: it is
+      the question the collection needs answered before it can compute anything.
+
+      Ask ONCE, for everything you are missing. If a node needs three floors, one question
+      offering three complete sets beats three questions in a row; each option's `value` may
+      be an object carrying all of them. Nobody wants to be interviewed.
+
   {"stop": "<one sentence>"}
       No node can answer this, or a node has told you the answer does not exist. Say what you
       cannot answer and why.
+
+Use `ask` when a value is missing and a person could supply it. Use `stop` only when no
+answer exists at all — a weapon that is not in the game, a figure nothing computes. A missing
+judgement is never a `stop`.
 
 Stopping is a good answer when it is the true one. Never pick a node that is merely close,
 and never fill a parameter with a number you invented — a wrong answer is worse than none.
@@ -156,6 +210,10 @@ def earlier_turns(history):
             lines.append(f"     called: {call['node']}({json.dumps(call['input'])})\n")
         if turn.get("answer"):
             lines.append(f'     answered: "{turn["answer"]}"\n')
+        elif turn.get("asked"):
+            # The user's next message is very often the answer to this, and without it that
+            # message is a bare number with nothing to attach to.
+            lines.append(f'     asked the user: "{turn["asked"]}"\n')
         else:
             lines.append(f'     gave no answer: "{turn.get("outcome_reason", "")}"\n')
     return "".join(lines)
@@ -227,6 +285,10 @@ The user asked: {question}
 # --------------------------------------------------------------------- attestation
 
 
+def ledger_path(collection, session):
+    return os.path.join(collection, ".vouch", "ledger", f"session-{safe_session(session)}.jsonl")
+
+
 async def attest(collection, session, prose, question):
     """Check the model's sentences against this conversation's ledger.
 
@@ -237,7 +299,13 @@ async def attest(collection, session, prose, question):
 
     Returns one of "attested", "failed", "unchecked", plus the lines explaining a failure.
     """
-    ledger = os.path.join(collection, ".vouch", "ledger", f"session-{session}.jsonl")
+    ledger = ledger_path(collection, session)
+
+    # If calls were made, this file exists. Its absence means our idea of where the ledger
+    # lives disagrees with vouch's, which is a bug here and must not pass as "unchecked".
+    if not os.path.exists(ledger):
+        return "missing-ledger", [f"no ledger at {ledger}"]
+
     code, _, err = await _vouch(
         collection,
         session,
@@ -270,6 +338,8 @@ async def answer(question, collection, session, catalog, ask_model, history=()):
         result     it came back verified
         refusal    a precondition said no — a correction, fed back to the model
         answer     prose, with `attestation` set to attested | failed | unchecked
+        ask        a judgement is needed that belongs to the user; options come with it
+        malformed  the model's reply would not parse; it is being told so and asked again
         no_answer  the honest out: nothing computed, or the model declined
         defect     a node broke its own contract; nothing is shown
         error      the loop itself could not continue
@@ -285,7 +355,36 @@ async def answer(question, collection, session, catalog, ask_model, history=()):
         try:
             decision = parse_json_reply(reply)
         except (ValueError, json.JSONDecodeError) as failure:
-            yield {"type": "error", "reason": str(failure)}
+            # Not fatal. Models do emit near-JSON — `{"vigor": fifty}` was a real reply — and
+            # the loop already has a way to say "that was rejected, try again". Handing the
+            # parser's complaint back costs one decision and recovers the question, where
+            # giving up costs the whole question and everything already spent on it.
+            trouble = str(failure)
+            yield {"type": "malformed", "reason": trouble}
+            correction = {
+                "node": "(your last reply)",
+                "input": {},
+                "reason": (
+                    f"that was not valid JSON: {trouble}. Reply with one JSON object and "
+                    "nothing else. Every number must be a numeral — 40, not 'forty'."
+                ),
+            }
+            continue
+
+        # A judgement the nodes will not make. Distinct from `stop`, because there is an
+        # answer here — it is waiting on one value that belongs to the person asking. This is
+        # the branch that lets a model obey "ask the user, or state what you assumed" without
+        # the app turning the first half of that sentence into a dead end.
+        if "ask" in decision:
+            request = decision["ask"]
+            if isinstance(request, str):
+                request = {"question": request}
+            yield {
+                "type": "ask",
+                "question": request.get("question", "I need one more detail."),
+                "parameter": request.get("parameter"),
+                "options": [o for o in request.get("options", []) if isinstance(o, dict)][:4],
+            }
             return
 
         # The model declined. This is the honest out-of-scope path — and when it follows a
@@ -303,6 +402,9 @@ async def answer(question, collection, session, catalog, ask_model, history=()):
             prose = await ask_model(narration_prompt(question, steps, history))
 
             verdict, detail = await attest(collection, session, prose, question)
+            if verdict == "missing-ledger":
+                yield {"type": "error", "reason": f"attestation could not find its ledger: {detail[0]}"}
+                return
             if verdict == "failed":
                 yield {"type": "answer", "attestation": "failed", "text": None, "detail": detail}
                 return

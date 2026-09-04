@@ -23,7 +23,11 @@ class Node {
   get textContent() { return this._text + this.children.map((c) => c.textContent ?? c).join(""); }
   append(...items) { this.children.push(...items); }
   addEventListener() {}
-  requestSubmit() { return this.onsubmit({ preventDefault() {} }); }
+  requestSubmit() {
+    // app.js clears the box as it submits, so remember what was actually sent.
+    byId.question.sent = byId.question.value;
+    return this.onsubmit({ preventDefault() {} });
+  }
   focus() {}
 }
 
@@ -145,6 +149,62 @@ check("a refusal is a step, and the turn still answers", async () => {
   ]);
   assert.match(text, /vigor is required/);
   assert.match(text, /Level 125\./);
+});
+
+check("an ask is rendered as buttons, and clicking one sends it", async () => {
+  const text = await turn([
+    { type: "ask", question: "How much vigor should I hold back?", parameter: "vigor",
+      options: [{ label: "40", value: 40, note: "the usual answer at RL150" },
+                { label: "50", value: 50, note: "for tougher fights" }] },
+  ]);
+  assert.match(text, /How much vigor should I hold back\?/);
+  assert.match(text, /40/);
+  assert.match(text, /50/);
+
+  // The buttons must actually ask the follow-up, not just look clickable.
+  const buttons = [];
+  (function walk(node) {
+    if (node.tag === "button") buttons.push(node);
+    for (const child of node.children || []) if (typeof child !== "string") walk(child);
+  })(byId.thread);
+  assert.ok(buttons.length >= 2, `expected option buttons, found ${buttons.length}`);
+
+  nextResponse = streamed([{ type: "answer", attestation: "attested", text: "Vigor 40.", detail: [] }]);
+  await buttons[0].onclick();
+  assert.match(byId.thread.textContent, /Vigor 40\./);
+});
+
+check("picking an option sends its values, not just its caption", async () => {
+  await turn([
+    { type: "ask", question: "Which floors?", parameter: "floors",
+      options: [{ label: "Padrão recomendado", value: { vigor: 40, mind: 20, endurance: 25 } }] },
+  ]);
+  const buttons = [];
+  (function walk(node) {
+    if (node.tag === "button") buttons.push(node);
+    for (const child of node.children || []) if (typeof child !== "string") walk(child);
+  })(byId.thread);
+
+  nextResponse = streamed([{ type: "answer", attestation: "attested", text: "Done.", detail: [] }]);
+  await buttons[0].onclick();
+  // The caption alone would ask the same question again — the numbers must travel with it.
+  assert.equal(box.sent, "Padrão recomendado (vigor 40, mind 20, endurance 25)");
+});
+
+check("a caption that already spells the value is not doubled", async () => {
+  await turn([
+    { type: "ask", question: "How much vigor?", parameter: "vigor",
+      options: [{ label: "40", value: 40 }] },
+  ]);
+  const buttons = [];
+  (function walk(node) {
+    if (node.tag === "button") buttons.push(node);
+    for (const child of node.children || []) if (typeof child !== "string") walk(child);
+  })(byId.thread);
+
+  nextResponse = streamed([{ type: "answer", attestation: "attested", text: "Done.", detail: [] }]);
+  await buttons[0].onclick();
+  assert.equal(box.sent, "40");
 });
 
 check("no_answer is shown as a concession", async () => {

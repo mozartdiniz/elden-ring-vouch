@@ -189,7 +189,7 @@ async def ask(request: Request):
         # the same ledger the first one wrote to.
         yield json.dumps({"type": "session", "conversation": session[len("web-") :]}) + "\n"
 
-        turn = {"question": question, "calls": [], "answer": None, "outcome_reason": ""}
+        turn = {"question": question, "calls": [], "answer": None, "asked": "", "outcome_reason": ""}
         try:
             async for event in engine.answer(
                 question, COLLECTION, session, CATALOG["value"], ask_model, history
@@ -198,6 +198,8 @@ async def ask(request: Request):
                     turn["calls"].append({"node": event["node"], "input": event["input"]})
                 elif event["type"] == "answer" and event["attestation"] != "failed":
                     turn["answer"] = event["text"]
+                elif event["type"] == "ask":
+                    turn["asked"] = event["question"]
                 elif event["type"] in ("no_answer", "defect"):
                     turn["outcome_reason"] = event.get("reason", "")
                 yield json.dumps(event) + "\n"

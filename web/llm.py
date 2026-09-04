@@ -24,7 +24,7 @@ class LLMError(RuntimeError):
     """The model could not be reached or refused to reply. Never a wrong answer — just no answer."""
 
 
-async def _claude(prompt):
+async def _claude(prompt, model=None, usage=None):
     """The Claude CLI, using whatever session is logged in on this machine.
 
     Good for development and for the 122-question regression run; not for a public box,
@@ -50,7 +50,7 @@ async def _claude(prompt):
     return out.decode().strip()
 
 
-async def _openrouter(prompt):
+async def _openrouter(prompt, model=None, usage=None):
     import httpx
 
     key = os.environ.get("OPENROUTER_API_KEY")
@@ -58,12 +58,17 @@ async def _openrouter(prompt):
         raise LLMError("OPENROUTER_API_KEY is not set")
 
     body = {
-        "model": os.environ.get("OPENROUTER_MODEL", "anthropic/claude-sonnet-5"),
+        "model": model or os.environ.get("OPENROUTER_MODEL", "anthropic/claude-sonnet-5"),
         "messages": [{"role": "user", "content": prompt}],
-        # The model's job here is routing and narration, not prose. Long replies are a
-        # symptom of it trying to answer by itself.
-        "max_tokens": int(os.environ.get("OPENROUTER_MAX_TOKENS", "1500")),
+        # Reasoning tokens are drawn from this same budget, and a model that spends it all
+        # thinking returns an empty `content` — which is how moonshotai/kimi-k3 failed, with
+        # 663 of 707 completion tokens going to reasoning. The replies wanted here are still
+        # small; the headroom is for the thinking in front of them.
+        "max_tokens": int(os.environ.get("OPENROUTER_MAX_TOKENS", "6000")),
         "temperature": 0,
+        # Ask for token counts and the actual charge. Without this the reply carries no cost,
+        # and a model comparison with no cost in it is not a comparison.
+        "usage": {"include": True},
     }
     headers = {"Authorization": f"Bearer {key}"}
     # Optional attribution headers OpenRouter shows on its dashboard.
@@ -85,15 +90,30 @@ async def _openrouter(prompt):
 
     try:
         payload = reply.json()
-        return payload["choices"][0]["message"]["content"].strip()
+        content = payload["choices"][0]["message"]["content"]
     except (json.JSONDecodeError, KeyError, IndexError):
         raise LLMError(f"openrouter sent no usable reply: {reply.text[:300]}")
+
+    if usage is not None:
+        spent = payload.get("usage") or {}
+        usage["calls"] = usage.get("calls", 0) + 1
+        for field in ("prompt_tokens", "completion_tokens", "cost"):
+            usage[field] = usage.get(field, 0) + (spent.get(field) or 0)
+        cached = (spent.get("prompt_tokens_details") or {}).get("cached_tokens") or 0
+        usage["cached_tokens"] = usage.get("cached_tokens", 0) + cached
+
+    # A reasoning model can return an empty content with everything in the reasoning field,
+    # which reads downstream as "the model said nothing" rather than as the failure it is.
+    if not (content or "").strip():
+        raise LLMError(f"{body['model']} returned an empty reply")
+    return content.strip()
 
 
 BACKENDS = {"claude": _claude, "openrouter": _openrouter}
 
 
-async def ask_model(prompt):
+async def ask_model(prompt, model=None, usage=None):
+    """Ask once. `model` overrides the configured one; `usage` accumulates tokens and cost."""
     if BACKEND not in BACKENDS:
         raise LLMError(f"unknown LLM_BACKEND {BACKEND!r}; expected one of {', '.join(BACKENDS)}")
-    return await BACKENDS[BACKEND](prompt)
+    return await BACKENDS[BACKEND](prompt, model, usage)

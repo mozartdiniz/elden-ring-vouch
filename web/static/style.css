@@ -77,6 +77,14 @@ details.trace[open] summary::before { content: "▾ "; }
 .notice { padding: .8rem 1rem; border-radius: 6px; border: 1px solid var(--line);
           background: var(--panel); }
 .notice.bad { border-color: var(--bad); color: var(--bad); }
+.notice.ask { border-color: var(--gold); }
+
+.choices { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .8rem; }
+.choices button {
+  padding: .35rem .8rem; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--bg); color: var(--ink); font: inherit; font-size: .85rem; cursor: pointer;
+}
+.choices button:hover { border-color: var(--gold); color: var(--gold); }
 .notice.dim { color: var(--dim); }
 .notice p { margin: .4rem 0 0; font-size: .85rem; }
 

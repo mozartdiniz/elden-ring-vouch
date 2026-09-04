@@ -417,6 +417,53 @@ that a `[x]` records a question someone had already settled.
 `luna`'s answer is the weak one, and not because a number is wrong: it never states the spread
 the user asked for. Cheapest is not free.
 
+### The stress test: one hard question, four models, twice each
+
+Question 7.1 was the right one to pick because it **states its own stats** — *"my bleed build
+on the Gargoyle's Twinblade (STR 40 / DEX 23 / ARC 12) doesn't work on Radagon and the Elden
+Beast, which affinity do I switch to?"* — so there is no judgement to make and the answers are
+directly comparable. It needs seven to ten calls across `weapon-lookup`, `boss-lookup` twice
+and `optimal-affinity` twice.
+
+**8 of 8 answered. 8 of 8 attested. 8 of 8 gave the same answer: Fire for Radagon, Heavy for
+the Elden Beast** — which is what the record says too.
+
+The numbers behind that agreement did not agree, and every difference traces to a parameter
+the question never supplied:
+
+| model | repeats | what it did |
+|---|---|---|
+| `x-ai/grok-4.6` | **identical** | filled int/faith at 10, one-handed, never asked |
+| `moonshotai/kimi-k3` | **identical** | the same, byte for byte — 342 and 357 |
+| `openai/gpt-5.6-sol` | **differed** | asked about class and grip; took *"Vagabond, two-handed"* in one run and not the other, giving 383 / 423 once and no figures at all the second time |
+| `openai/gpt-5.6-luna` | **differed** | asked for a starting class, got Wretch, and passed `faith: 1, intelligence: 1` on one call before correcting itself |
+
+Two of the four are **bit-identical across repeats**, with byte-identical inputs to
+`optimal-affinity`. The two that drifted are the two that used `ask` — and the drift is not in
+which option was chosen (the harness always takes the first) but in **which options the model
+offered**. So `ask` buys honesty about a missing parameter and spends determinism to get it.
+That is the right trade for a person at a keyboard and the wrong one for a regression suite,
+which is worth knowing before the 122 questions are run this way.
+
+Every figure produced was reproducible: 342.18 one-handed and 383.50 two-handed, straight from
+the node. `two_hand` is now demonstrably a parameter that changes the answer by 12% and that a
+model will fill in silently — the same shape as `starting_class` in bug 17.
+
+### And the record was wrong
+
+None of the eight produced the recorded 377 and 394. Neither does the collection, at the stats
+the question states, and neither does **the code at the commit that recorded the entry** — so
+it is not a since-fixed bug. A sweep of strength 46–57 against dexterity 24–35 finds no spread
+producing both; `STR 50 / DEX 30` yields Heavy 394.6 and Fire 369.7, reproducing one and not
+the other. The entry was almost certainly priced at a re-allocated spread rather than the
+question's, with its two rows not even priced at the same one.
+
+`VALIDATION.md` 7.1 is corrected and annotated. The general point is the uncomfortable one:
+**nothing in the suite checks the record against the code.** 247 fixtures check the nodes, the
+spreadsheet checks the oracle, attestation checks the prose — and the file that says what the
+right answers are has never been re-run since the day each entry was written. Eight model runs
+found that in one question.
+
 ### Cost is the real differentiator, and it is not subtle
 
 Measured per decision on the same 26k-token planning prompt:
@@ -429,7 +476,9 @@ Measured per decision on the same 26k-token planning prompt:
 | moonshotai/kimi-k3 | $0.088 | but cached 73–100% of the prompt on later calls |
 
 Per *question*, once the `ask` round trip is included: **luna $0.040**, kimi $0.143, sol
-$0.315, grok $0.325. Luna is eight times cheaper than either frontier option and answered in
+$0.315, grok $0.325. On the heavier question 7.1, per run: **luna $0.044**, kimi $0.126, grok
+$0.232, sol $0.366 — and kimi cached 93% of its prompt against sol's 0%, which is most of why
+the gap narrows. Luna is eight times cheaper than either frontier option and answered in
 41 seconds against grok's 126 and kimi's 274.
 
 **The prompt is 26,000 tokens and it is re-sent on every decision.** Six decisions is a

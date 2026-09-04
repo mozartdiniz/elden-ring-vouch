@@ -24,6 +24,7 @@ import argparse
 import asyncio
 import json
 import os
+import re
 import sys
 import time
 
@@ -93,7 +94,21 @@ class Recorder:
         return reply
 
 
-async def run(model, question, collection, catalog, node_names):
+NUMERAL = re.compile(r"\d[\d,]*(?:\.\d+)?")
+
+
+def numerals(text):
+    """Every figure in an answer, as strings, so two answers can be compared without parsing
+    prose. Trailing zeros and thousands separators are normalised, since 377 and 377.0 and
+    "1,377" are the same claim written three ways."""
+    found = set()
+    for match in NUMERAL.finditer(text or ""):
+        raw = match.group(0).replace(",", "")
+        found.add(str(int(float(raw))) if float(raw) == int(float(raw)) else raw)
+    return found
+
+
+async def run(model, question, collection, catalog, node_names, repeat=0):
     """One question, and if the model asks for a judgement, the first option it offered.
 
     A model that asks has not failed — it has done the thing the guidance tells it to do. But
@@ -116,7 +131,12 @@ async def run(model, question, collection, catalog, node_names):
         "answered_with": None,
     }
 
-    session = f"models-{model.replace('/', '-')}-{question['number'].replace('.', '-')}"
+    # The repeat index is in the session id on purpose. Repeats sharing a ledger would make
+    # each run attest against the previous run's numbers, which is the collision the
+    # attestation stress test measured — and it would make a consistency test meaningless.
+    session = (
+        f"models-{model.replace('/', '-')}-{question['number'].replace('.', '-')}-r{repeat}"
+    )
     asking, history = question["question"], []
 
     try:
@@ -162,7 +182,13 @@ async def run(model, question, collection, catalog, node_names):
         outcome["detail"] = [str(failure)]
 
     recorded = [n for n in question.get("recorded_nodes", []) if n in node_names]
+    found = numerals(outcome["answer"])
     outcome.update(
+        repeat=repeat,
+        figures=sorted(found, key=lambda n: float(n)),
+        figures_shared=sorted(
+            found & set(question.get("recorded_figures", [])), key=lambda n: float(n)
+        ),
         seconds=round(time.monotonic() - started, 1),
         decisions=len(recorder.exchanges),
         usage=recorder.usage,
@@ -183,7 +209,49 @@ def verdict(outcome):
     return outcome["outcome"].upper()
 
 
-def report(results, chosen):
+def consistency(results, expect):
+    """Two questions the table cannot answer: does a model repeat itself, and do models agree?
+
+    Both are judged on the figures in the answer rather than its wording, because the wording
+    is in whatever language the question was asked in and the figures are the claim.
+    """
+    by_model = {}
+    for outcome in results:
+        by_model.setdefault(outcome["model"], []).append(outcome)
+
+    if any(len(runs) > 1 for runs in by_model.values()):
+        print(f"\nSame model, same question, {max(len(r) for r in by_model.values())} runs:")
+        for model, runs in by_model.items():
+            sets = [frozenset(r["figures"]) for r in runs if r["outcome"] == "answered"]
+            if not sets:
+                print(f"  {model:<24} never answered")
+            elif len(set(sets)) == 1:
+                print(f"  {model:<24} identical across {len(sets)} run(s)")
+            else:
+                shared = set.intersection(*(set(s) for s in sets))
+                drifted = sorted(set.union(*(set(s) for s in sets)) - shared, key=float)
+                print(f"  {model:<24} DIFFERED — {len(shared)} figure(s) held, "
+                      f"{len(drifted)} moved: {', '.join(drifted[:10])}")
+
+    answered = [r for r in results if r["outcome"] == "answered"]
+    if len(answered) > 1:
+        everyones = set.intersection(*(set(r["figures"]) for r in answered))
+        print(f"\nFigures every answer contains: {', '.join(sorted(everyones, key=float)) or '(none)'}")
+
+    if expect:
+        print(f"\nAgainst the recorded answer ({', '.join(expect)}):")
+        for outcome in results:
+            if outcome["outcome"] != "answered":
+                print(f"  {outcome['model']:<24} r{outcome['repeat']}  {outcome['outcome']}")
+                continue
+            hit = [figure for figure in expect if figure in outcome["figures"]]
+            mark = "ALL" if len(hit) == len(expect) else f"{len(hit)}/{len(expect)}"
+            missing = [f for f in expect if f not in hit]
+            note = f"  missing {', '.join(missing)}" if missing else ""
+            print(f"  {outcome['model']:<24} r{outcome['repeat']}  {mark}{note}")
+
+
+def report(results, chosen, expect):
     print(f"\n{'model':<24} {'q':<5} {'verdict':<18} {'calls':>5} {'dec':>4} {'cost':>8}  {'s':>5}")
     print("-" * 81)
     for outcome in results:
@@ -208,6 +276,8 @@ def report(results, chosen):
             f"${cost:>8.4f} {share:>8}"
         )
 
+    consistency(results, expect)
+
     print("\nWhere a model asked before answering, and what it offered first:")
     for outcome in (r for r in results if r["asked"]):
         print(f"  {outcome['model']:<24} {outcome['asked'][:90]}")
@@ -230,6 +300,11 @@ async def main():
     parser.add_argument("--models", help="comma-separated; default is openrouter_models.txt")
     parser.add_argument("--questions", help=f"comma-separated; default {','.join(DEFAULT_QUESTIONS)}")
     parser.add_argument("--concurrency", type=int, default=2)
+    parser.add_argument("--repeat", type=int, default=1, help="run each pairing N times")
+    parser.add_argument(
+        "--expect",
+        help="comma-separated figures the right answer contains, e.g. 377,394",
+    )
     parser.add_argument("--estimate", action="store_true", help="print the likely cost and stop")
     parser.add_argument("--yes", action="store_true", help="run even if the estimate is over $1")
     args = parser.parse_args()
@@ -240,10 +315,11 @@ async def main():
         sys.exit("no such question in VALIDATION.md")
 
     likely = sum(
-        SEEN_COST.get(m, 0.05) * DECISIONS_PER_QUESTION * len(chosen) for m in chosen_models
+        SEEN_COST.get(m, 0.05) * DECISIONS_PER_QUESTION * len(chosen) * args.repeat
+        for m in chosen_models
     )
     print(
-        f"{len(chosen_models)} model(s) x {len(chosen)} question(s) "
+        f"{len(chosen_models)} model(s) x {len(chosen)} question(s) x {args.repeat} run(s) "
         f"~ ${likely:.2f} at roughly {DECISIONS_PER_QUESTION} decisions each"
     )
     if args.estimate:
@@ -259,24 +335,29 @@ async def main():
     gate = asyncio.Semaphore(args.concurrency)
     results = []
 
-    async def guarded(model, question):
+    async def guarded(model, question, repeat):
         async with gate:
-            outcome = await run(model, question, ROOT, catalog, node_names)
+            outcome = await run(model, question, ROOT, catalog, node_names, repeat)
         results.append(outcome)
         print(
-            f"  {outcome['model']:<24} {outcome['number']:<5} {verdict(outcome):<18} "
-            f"${outcome['cost']:.4f}",
+            f"  {outcome['model']:<24} {outcome['number']:<5} r{outcome['repeat']} "
+            f"{verdict(outcome):<18} ${outcome['cost']:.4f}",
             flush=True,
         )
         with open(path, "a", encoding="utf-8") as out:
             out.write(json.dumps(outcome) + "\n")
 
     await asyncio.gather(
-        *(guarded(m, q) for m in chosen_models for q in chosen)
+        *(
+            guarded(m, q, r)
+            for m in chosen_models
+            for q in chosen
+            for r in range(args.repeat)
+        )
     )
 
-    results.sort(key=lambda r: (chosen_models.index(r["model"]), r["number"]))
-    report(results, chosen)
+    results.sort(key=lambda r: (chosen_models.index(r["model"]), r["number"], r["repeat"]))
+    report(results, chosen, [f.strip() for f in (args.expect or "").split(",") if f.strip()])
     print(f"\nevery prompt and reply in {os.path.relpath(path, ROOT)}")
     return 0
 

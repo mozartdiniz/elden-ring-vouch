@@ -917,14 +917,27 @@ so on a build that is not Str/Dex it is the wrong answer despite the numbers.
 Eight questions across the whole boss table. `boss-coverage` answers all of them in one call
 each.
 
-### 7.1 Gargoyle's Twinblade against Radagon and the Elden Beast — done
+### 7.1 Gargoyle's Twinblade against Radagon and the Elden Beast — done, with a correction
 
 Two fights, two different answers, both computed against the real negation:
 
 | fight | negation | best infusion |
 |---|---|---|
-| Radagon | 35 phys / 0 fire / 20 ltng / 80 holy | **Fire, 377** |
-| Elden Beast | 10 phys / 40 fire / 40 ltng / 80 holy | **Heavy, 394** |
+| Radagon | 35 phys / 0 fire / 20 ltng / 80 holy | **Fire, 342** |
+| Elden Beast | 10 phys / 40 fire / 40 ltng / 80 holy | **Heavy, 357** |
+
+**The figures here were originally recorded as 377 and 394, and they are not reproducible.**
+Four models were pointed at this question twice each on 4 September; all eight agreed on the
+infusions and none produced either number. At the question's stated stats — STR 40 / DEX 23 /
+ARC 12, +25, one-handed — the node returns 342.18 and 357.50, which is also what the code at
+the commit that recorded this entry returns, so the difference is not a since-fixed bug. A
+sweep of strength 46–57 against dexterity 24–35 finds **no** spread that yields both 377 and
+394; `STR 50 / DEX 30` gives Heavy 394.6 and Fire 369.7, which reproduces one and not the
+other. The likely explanation is that the original was priced at a re-allocated spread rather
+than the one the question states, and that the two rows were not priced at the same spread.
+
+Two-handing gives 383.5 and 423.5 at the stated stats, which is worth knowing because it is
+what one model assumed when it filled the parameter itself.
 
 ### 7.2 Fire, lightning or holy for faith, base game and DLC — done
 

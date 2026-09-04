@@ -50,9 +50,20 @@ elden-ring-vouch/
                             change reaching planner.py or ap_calc.py
   scripts/stress_attest.py  exercises `vouch attest` without a model: behaviour matrix,
                             mutation sweep, and collision against ledger size
+  scripts/run_battery.py    the 122 questions through the live loop, concurrently, one
+                            ledger each — costs model calls, stops on a provider limit
+  scripts/compare_models.py the same questions across OpenRouter models: answered,
+                            attested, complete, cost. --estimate before --yes
+  web/                     the chat app. Four files and a static page, no build step
+    app.py                 one endpoint streaming NDJSON, rate limit, access token
+    engine.py              the loop — ask.py with its I/O ends changed, prompts verbatim
+    llm.py                 Claude CLI or OpenRouter behind one signature, with retries
+    completeness.py        did the answer name what the user asked about — no model
+    test_server.py         15 checks, model replies canned, everything else real
+    test_client.mjs        14 checks of static/app.js against a stub DOM, via node
   VALIDATION.md            122 questions, worked one at a time — read this next
   BUGS.md                  what the questions found, open and fixed — the work list
-  PLAN-web-app.md          serving this publicly: the loop, the costs, the open decisions
+  PLAN-web-app.md          serving this publicly: the loop, the costs, the model results
 ```
 
 **The `oracle/` vs `data/` split is the important one.** `oracle/` is a byte-identical copy of
@@ -94,9 +105,11 @@ itself rather than against the extraction. Run it after touching anything that r
 
 Three layers, and the point is that they fail differently.
 
-**247 fixtures** (`vouch test`) pin every node against the extraction in `oracle/`. They are
+**250 fixtures** (`vouch test`) pin every node against the extraction in `oracle/`. They are
 fast, they run on every change, and *by construction they cannot catch a mistake in how the
-collection uses the extraction* — which is what bug 17 was.
+collection uses the extraction* — which is what bug 17 was. Worse, a fixture can pin the wrong
+behaviour: one asserted that `buff-stack` exiting 20 on an unknown name was correct, so 250
+green fixtures were affirming a bug until a model tripped over it.
 
 **122 questions** (`VALIDATION.md`) are the outside view: what a player actually types, worked
 one at a time in fourteen patterns. They found seventeen bugs, four of which returned a
@@ -115,6 +128,18 @@ degrades fast with session size — 19% of integers 1–99 collide in a two-call
 day's. `VOUCH_SESSION` defaults to the *date*, so the default is the loose end of that range.
 Set it per conversation.
 
+**The web app** (`web/`, and `scripts/compare_models.py`) is the newest layer and the only one
+where a model chooses the parameters. That is what it catches. In roughly forty runs across
+four models it found: `buff-stack` crashing where it should have refused; the ledger path built
+by string interpolation, so a model name containing a dot silently downgraded an answer to
+UNCHECKED; a recorded answer in `VALIDATION.md` whose figures nothing reproduces; and the fact
+that `two_hand` and `starting_class` get filled in silently and move results by 12%.
+
+Its own two checks are `web/completeness.py` — the lookup nodes resolve what the user named, so
+an answer that never mentions a resolved entity dropped something, which **attestation cannot
+see** — and the four mechanical columns in `compare_models.py`: answered, attested, complete,
+cost. Neither needs the recorded answers to be right, which matters, because one of them wasn't.
+
 Two audits found five more (bugs 18–22) and are worth repeating whenever a node is added:
 
 1. **Which defaults change the question** rather than choosing a mode?
@@ -122,6 +147,15 @@ Two audits found five more (bugs 18–22) and are worth repeating whenever a nod
 
 The second is the sharper one. Bug 22 is bug 4 in two nodes written *after* bug 4 was fixed:
 a guard that lives in one node is not a guard.
+
+A third has since earned its place, and nothing automated covers it:
+
+3. **Which recorded answers still reproduce?** Nothing checks `VALIDATION.md` against the code.
+   Fixtures check the nodes, the spreadsheet checks the oracle, attestation checks the prose —
+   and the file that says what the right answers *are* had never been re-run since each entry
+   was written. 7.1 said Fire 377 and Heavy 394; the collection says 342 and 357, and so does
+   the code at the commit that recorded it. Eighty-four entries remain unverified, and the ones
+   with pinned inputs cost nothing to check.
 
 ## State of the evals
 
@@ -241,24 +275,59 @@ upgrade level that does not exist, and *lower* than its real +10 figure of 643, 
 even look wrong. Out-of-range stats are computed rather than rejected. Every guard against that
 lives here, not in `oracle/`.
 
+**A model will not recover from a name that does not exist.** Question 4.1 asks for a
+"Distinguished Greatsword", which is not in the game — the catalogue has a Distinguished
+*Greatshield*. The recorded entry recovers by noting that Wave of Destruction is unique to the
+Ruins Greatsword and pricing that. Neither model tried it: one declined, one exhausted its
+decisions. `weapon-skill` can go from a skill to its weapon, and nothing tells a caller to
+reach for it when a weapon lookup misses.
+
+**`two_hand` and `starting_class` get filled in silently, and both move the answer.** On 7.1 a
+model assumed two-handing and returned 383 where one-handed is 342 — internally consistent,
+attested, and answering a question nobody asked. `starting_class` is bug 17's parameter doing
+the same thing. Any parameter a model can invent that changes the result belongs in an `ask`.
+
 ---
 
 ## What is pending
 
-### First: the evals
+### First: verify the record
+
+`VALIDATION.md` is the file that says what the right answers are, and **nothing has ever
+checked it against the code**. 7.1 was found wrong the first time a model re-ran it. Eighty-four
+recorded entries remain, and the ones whose inputs are pinned in the entry cost nothing to
+re-run — no model needed, just the nodes. Do this before trusting the battery as a scoring key,
+because it is currently the scoring key for `scripts/compare_models.py`.
+
+### Second: the model comparison is unfinished
+
+`scripts/compare_models.py` works and the account ran out of credit mid-run. What is settled:
+all four models drive the collection correctly once `ask` exists; `grok-4.6` and `kimi-k3` are
+bit-identical across repeats and the two that used `ask` were not; every figure any model
+printed was reproducible. What is **not** settled is which to ship. The best evidence is 8
+genuine kimi attempts (6 answered, 6/6 attested, 6/6 complete, $0.202/question, 103s median)
+against 4 luna attempts (3 answered, 3/3 attested, 3/3 complete, $0.042, 42s median). Kimi
+looks better and costs five times more and runs two to three times slower; four runs is not a
+basis for either claim. Resume with `--models`/`--questions` and a credit ceiling in mind: the
+harness now stops on 402 rather than marking every remaining question a failure.
+
+### Third: the evals
 
 See *State of the evals* above. Nineteen nodes, sixteen eval cases, eight nodes never seen by a
 live model. This is the largest gap in the project and the only one that measures whether an
 agent can actually route to what has been built.
 
-### Second: the routing preamble
+### Fourth: the routing preamble
 
-**Sixty notes**, against nineteen when this file first said pruning would eventually be needed.
+**Sixty-one notes**, against nineteen when this file first said pruning would eventually be
+needed, and now with a measured cost: the planning prompt is **26,000 tokens and it is re-sent
+on every decision**, six to sixteen decisions per question. It dominates every bill — pruning it
+and prompt caching are each worth more than the choice of model.
 An agent carries all of it every turn, and past some size the notes stop being read rather than
 stop being true — nothing measures which. Prune before adding another one. `vouch describe` is
 not the pack; the pack omits contracts.
 
-### Third: what the battery left open
+### Fifth: what the battery left open
 
 `VALIDATION.md` has all 122 questions worked one at a time, with the calls, the figures and the
 cross-checks. Ninety-one answer end to end and thirty-one are partial. **No question is
@@ -338,7 +407,7 @@ while the structured table sat there unused.
 
 ```console
 $ cd ~/Dev/elden-ring-vouch
-$ vouch test                                    # 247 cases, no model
+$ vouch test                                    # 250 cases, no model
 $ python3 scripts/check_spreadsheet.py          # 22 figures from the workbook itself
 $ vouch call boss-lookup --input '{"query":"rennala"}'
 $ vouch call build-allocate --input '{"weapon":"Rivers of Blood","affinity":"Standard",
@@ -355,8 +424,19 @@ $ vouch call buff-stack --input '{"buffs":["Shard of Alexander","Lord of Blood'"
 $ vouch eval --agent 'claude -p --allowedTools "" -- {prompt}' -n 3 --min-rate 0.9
 ```
 
-**Read `BUGS.md` before changing a node.** Twenty-two entries, each with what it returned
-instead of an error, and the two audit questions at the bottom are the ones worth re-asking
+And the app, which needs no model to test and a key to run:
+
+```console
+$ cd web
+$ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+$ .venv/bin/python test_server.py               # 15 checks, canned model, real nodes
+$ node test_client.mjs                          # 14 checks, stub DOM
+$ ./run.sh                                      # localhost:8000
+$ cd .. && ./scripts/compare_models.py --questions 7.1 --estimate
+```
+
+**Read `BUGS.md` before changing a node.** Twenty-six entries, each with what it returned
+instead of an error, and the three audit questions at the bottom are the ones worth re-asking
 every time a node is added.
 
 The runtime is at `~/Dev/vouch`; its own `DECISIONS.md` covers where that stands.

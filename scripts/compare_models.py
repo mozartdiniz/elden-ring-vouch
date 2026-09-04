@@ -318,6 +318,20 @@ def report(results, chosen, expect):
                 print(f"    last reply: {last['reply'][:300]}")
 
 
+BROKE = ("402", "insufficient", "exceed your available credits", "quota")
+
+
+def out_of_credit(reason):
+    """Did the account run dry, rather than this question failing?
+
+    Worth telling apart, and worth stopping on: a run that keeps going after 402 turns every
+    remaining question into a "failure" that was never attempted, which is exactly what makes
+    a results file untrustworthy later.
+    """
+    lowered = reason.lower()
+    return any(word in lowered for word in BROKE)
+
+
 async def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--models", help="comma-separated; default is openrouter_models.txt")
@@ -358,9 +372,20 @@ async def main():
     gate = asyncio.Semaphore(args.concurrency)
     results = []
 
+    halted = asyncio.Event()
+
     async def guarded(model, question, repeat):
+        if halted.is_set():
+            return
         async with gate:
+            if halted.is_set():
+                return
             outcome = await run(model, question, ROOT, catalog, node_names, repeat)
+        if outcome["outcome"] == "error" and out_of_credit(" ".join(outcome["detail"])):
+            if not halted.is_set():
+                halted.set()
+                print(f"\n  stopping: {'; '.join(outcome['detail'])[:200]}", flush=True)
+            return
         results.append(outcome)
         print(
             f"  {outcome['model']:<24} {outcome['number']:<5} r{outcome['repeat']} "
@@ -382,6 +407,11 @@ async def main():
     results.sort(key=lambda r: (chosen_models.index(r["model"]), r["number"], r["repeat"]))
     report(results, chosen, [f.strip() for f in (args.expect or "").split(",") if f.strip()])
     print(f"\nevery prompt and reply in {os.path.relpath(path, ROOT)}")
+    if halted.is_set():
+        print(
+            f"{len(chosen_models) * len(chosen) * args.repeat - len(results)} pairing(s) never "
+            "ran — the account ran out of credit, which is not a result about any model."
+        )
     return 0
 
 

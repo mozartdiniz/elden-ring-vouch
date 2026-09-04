@@ -497,6 +497,36 @@ That is the argument for running this at all, in one line: **250 fixtures, 122 h
 questions and three spreadsheet PDFs did not find it, and fourteen questions in front of two
 models did.**
 
+### The re-run, stopped by the credit ceiling
+
+With the retries in and concurrency at 2, the empty replies and the 429s both went away — 2.1
+and 5.1, which had failed as empty, both answered and attested. Then the OpenRouter credit ran
+out and the run was stopped by hand at 18 of 28. Of the runs that were genuine attempts rather
+than 402s:
+
+| | attempts | answered | attested | complete | cost/q | median |
+|---|---|---|---|---|---|---|
+| `moonshotai/kimi-k3` | 8 | 6 | **6/6** | **6/6** | $0.202 | 103s |
+| `openai/gpt-5.6-luna` | 4 | 3 | **3/3** | **3/3** | $0.042 | 42s |
+
+**Everything either model answered, it attested and it answered fully.** The completeness check
+flagged nothing across ten answers, having fired on luna's 7.1 in development.
+
+It also corrected the cost picture. Kimi's earlier $0.152 average was cheap because the
+expensive questions were failing for free; with the budget raised, 2.1 cost **$0.442 and took
+five and a half minutes**. That is the real shape of a hard question on a reasoning model.
+
+Two of kimi's failures were *"ran out of attempts"* on 4.1 and 9.1 — the ten-decision budget,
+not an error. And 4.1 is worth its own note: it asks about a "Distinguished Greatsword", which
+does not exist. The recorded entry recovers by knowing Wave of Destruction is unique to the
+Ruins Greatsword; neither model tried going from the skill to the weapon, and nothing tells a
+caller that `weapon-skill` can.
+
+**Not settled: which model to ship.** Kimi looks better on every quality axis and costs five
+times more and runs two to three times slower. Four luna attempts and eight kimi attempts do
+not support a decision. The harness now halts on 402 rather than marking every remaining
+question a failure, so the next run's file will mean what it says.
+
 ### Cost is the real differentiator, and it is not subtle
 
 Measured per decision on the same 26k-token planning prompt:

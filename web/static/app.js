@@ -170,7 +170,9 @@ async function ask(question) {
 
   let reply;
   try {
-    reply = await fetch("/ask", {
+    // Carry whatever key opened this page through to the request, so a shared link works
+    // without a login and a bare /ask still does not.
+    reply = await fetch("/ask" + window.location.search, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ question, conversation }),

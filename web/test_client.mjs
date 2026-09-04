@@ -40,7 +40,7 @@ globalThis.sessionStorage = {
   setItem(k, v) { this.store[k] = v; },
   removeItem(k) { delete this.store[k]; },
 };
-globalThis.window = { scrollTo() {} };
+globalThis.window = { scrollTo() {}, location: { search: "" } };
 globalThis.document.body = { scrollHeight: 0 };
 
 // --- a response whose lines do not line up with its chunks ------------------
@@ -69,7 +69,9 @@ function streamed(events, { status = 200, splitAt = 7 } = {}) {
 globalThis.TextDecoderStream = class {};
 
 let nextResponse = null;
-globalThis.fetch = async () => {
+let lastUrl = null;
+globalThis.fetch = async (url) => {
+  lastUrl = url;
   if (nextResponse instanceof Error) throw nextResponse;
   return nextResponse;
 };
@@ -171,6 +173,17 @@ check("a conversation id is kept and sent back, until it is reset", async () => 
   assert.equal(sessionStorage.getItem("conversation"), null, "reset must drop the id");
   assert.equal(byId.reset.hidden, true);
   assert.match(byId.thread.textContent, /new conversation/);
+});
+
+check("the key that opened the page is carried to /ask", async () => {
+  window.location.search = "";
+  await turn([{ type: "answer", attestation: "attested", text: "229.", detail: [] }]);
+  assert.equal(lastUrl, "/ask");
+
+  window.location.search = "?k=s3cret";
+  await turn([{ type: "answer", attestation: "attested", text: "229.", detail: [] }]);
+  assert.equal(lastUrl, "/ask?k=s3cret");
+  window.location.search = "";
 });
 
 check("an unreachable server is reported", async () => {

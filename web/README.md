@@ -35,6 +35,24 @@ $ .venv/bin/uvicorn app:app --reload --port 8000
 
 `vouch` must be on `PATH`, or `VOUCH_BIN` must point at it.
 
+### Reaching it from another machine
+
+The default is `127.0.0.1`, so nothing off the box can see it. To open it up:
+
+```console
+$ ACCESS_TOKEN=$(openssl rand -hex 16) HOST=0.0.0.0 ./run.sh
+$ sudo firewall-cmd --add-port=8000/tcp        # this boot only; add --permanent to keep it
+```
+
+then visit `http://<the box's LAN address>:8000/?k=<the token>`. `run.sh` refuses to bind
+anything but the loopback without `ACCESS_TOKEN`, because this endpoint spends model calls on
+somebody's account and has no other authentication; the page carries the key through to `/ask`,
+so one link is enough to share and a bare `/ask` is still 403.
+
+That is a LAN, not the internet. From another network the honest options are an SSH tunnel
+(`ssh -L 8000:localhost:8000 <the box>`, which needs no server change and no open port) or a
+tunnelling service such as Cloudflare Tunnel or Tailscale. Do not port-forward this.
+
 With `LLM_BACKEND=claude` it shells out to the Claude CLI session already on this machine,
 which costs nothing extra and is how it was developed. That is not a deployment: on a public
 box every visitor would be sharing one logged-in account. Deployed, it is

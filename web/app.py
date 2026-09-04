@@ -12,6 +12,7 @@ Environment:
     RATE_PER_MIN    questions per IP per minute    (default: 6)
 """
 
+import hmac
 import os
 import json
 import re
@@ -41,6 +42,12 @@ MAX_QUESTION = 500
 KEEP_TURNS = int(os.environ.get("KEEP_TURNS", "6"))
 KEEP_CONVERSATIONS = int(os.environ.get("KEEP_CONVERSATIONS", "500"))
 CONVERSATION_TTL = float(os.environ.get("CONVERSATION_TTL", "3600"))
+
+# Unset, everything is open — which is right for localhost. Set, every request must carry
+# ?k=<token>, which is what makes it safe to listen on anything but 127.0.0.1: this endpoint
+# spends model calls on someone else's account and has no other authentication. run.sh will
+# not bind a non-local address without it.
+ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN", "")
 
 CATALOG = {}
 
@@ -137,6 +144,14 @@ def over_budget():
 SAFE = re.compile(r"^[a-z0-9-]{1,40}$")
 
 
+def admitted(request):
+    # compare_digest rather than ==, so the check does not leak the token one character at a
+    # time to anyone willing to measure.
+    if not ACCESS_TOKEN:
+        return True
+    return hmac.compare_digest(request.query_params.get("k", ""), ACCESS_TOKEN)
+
+
 def session_for(raw):
     return f"web-{raw}" if isinstance(raw, str) and SAFE.match(raw) else f"web-{uuid.uuid4().hex}"
 
@@ -146,6 +161,9 @@ def session_for(raw):
 
 @app.post("/ask")
 async def ask(request: Request):
+    if not admitted(request):
+        return JSONResponse({"error": "not for you"}, status_code=403)
+
     body = await request.json()
     question = (body.get("question") or "").strip()
 
@@ -207,7 +225,9 @@ async def nodes():
 
 
 @app.get("/")
-async def index():
+async def index(request: Request):
+    if not admitted(request):
+        return JSONResponse({"error": "not for you"}, status_code=403)
     return FileResponse(os.path.join(HERE, "static", "index.html"))
 
 

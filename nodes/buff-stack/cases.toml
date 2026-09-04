@@ -58,10 +58,13 @@ name = "and PvE otherwise"
 input = { buffs = ["Claw Talisman"], hit_kind = "Jump" }
 expect = { "result.multiplier" = 1.15 }
 
+# This case used to expect exit 20 — it asserted the crash was the design. It was not: a
+# defect ends the conversation and tells the caller the node is broken, when the node is fine
+# and the name is not. The miss is data now, and the tables it does know come back with it.
 [[case]]
-name = "a buff the table does not carry is a caller error naming the ones it does"
+name = "a buff the table does not carry is reported, with the ones it does"
 input = { buffs = ["Blessed Dew Talisman"], hit_kind = "All" }
-expect_code = 20
+expect = { "result.unknown[0]" = "Blessed Dew Talisman", "result.multiplier" = 1.0, "result.known_buffs[0]" = "Axe Talisman" }
 
 [[case]]
 name = "asserting the state of something not held is refused"
@@ -95,3 +98,25 @@ expect = { "result.multiplier" = 1.12, "result.applied[0].cost" = "decreases phy
 name = "and without a damage source it says what it would have multiplied"
 input = { buffs = ["Fire Scorpion Charm"], hit_kind = "All" }
 expect = { "result.multiplier" = 1.0, "result.not_counted[0].excluded_because" = "it multiplies fire damage and no damage_sources were given" }
+
+# Cragblade is a real Ash of War, in four other tables this collection ships, and absent from
+# BuffMult because it is not modelled as a multiplier. Naming it used to exit 1 — read by the
+# runtime as exit 20, a defect — which told the caller the node was broken and ended the
+# conversation. It comes back as data now. Found by a live model on question 14.5.
+[[case]]
+name = "an unrecognised buff is reported, not a crash"
+input = { buffs = ["Cragblade", "Ritual Sword Talisman"], hit_kind = "Physical" }
+expect = { "result.unknown[0]" = "Cragblade", "result.multiplier" = 1.0, "result.not_counted[0].excluded_because" = "no such buff in the tables" }
+
+# And no product is offered while a name is unaccounted for: a multiplier over the buffs that
+# happened to parse is a well-formed number for a combination nobody asked about, and it would
+# attest against the ledger like any other.
+[[case]]
+name = "an unrecognised buff suppresses the stack entirely"
+input = { buffs = ["Cragblade", "Shard of Alexander"], hit_kind = "Skill" }
+expect = { "result.multiplier" = 1.0, "result.unknown[0]" = "Cragblade", "result.damage_multiplier.physical" = 1.0 }
+
+[[case]]
+name = "a known stack is unaffected by the new field"
+input = { buffs = ["Ritual Sword Talisman", "Shard of Alexander"], hit_kind = "Skill" }
+expect = { "result.multiplier" = 1.15, "result.applied[0].buff" = "Shard of Alexander" }

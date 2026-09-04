@@ -52,15 +52,58 @@ def main():
     # here would make the two talismans exclusive when the game stacks them.
     damage_sources = [s.strip().lower() for s in (request.get("damage_sources") or [])]
 
+    known = sorted(set(table) | set(sources))
     unknown = [name for name in names if name not in table and name not in sources]
     if unknown:
+        # A name the tables do not carry used to exit 1, which the runtime reads as exit 20 —
+        # a defect. That tells the caller the node is broken when the node is fine and the
+        # name is not, and it ends the conversation instead of correcting it. Cragblade found
+        # this: a real Ash of War, present in four other tables the collection ships, absent
+        # from BuffMult because it is not modelled as a multiplier.
+        #
+        # So the miss comes back as data, the way weapon-lookup reports match_count 0. What
+        # does NOT come back is a stack: with a buff unaccounted for, a product over the
+        # remaining ones is a well-formed number for a combination nobody asked about, and it
+        # would attest. `multiplier` stays 1.0 and `applied` stays empty on purpose.
         print(
-            "not in BuffMult.csv: " + ", ".join(unknown)
-            + f"; the {len(table) + len(sources)} it knows are: "
-            + ", ".join(sorted(set(table) | set(sources))),
-            file=sys.stderr,
+            json.dumps(
+                {
+                    "buffs": names,
+                    "hit_kind": hit_kind,
+                    "damage_sources": damage_sources,
+                    "pvp": pvp,
+                    "assumed": assumed,
+                    "unknown": unknown,
+                    "known_buffs": known,
+                    "multiplier": 1.0,
+                    "damage_multiplier": {kind: 1.0 for kind in DAMAGE_KINDS},
+                    "applied": [],
+                    # Every buff given has to appear in applied or not_counted — the node's
+                    # own postcondition says so, and it is right to. An unrecognised name is
+                    # not counted, and saying that explicitly is better than the list being
+                    # short by one.
+                    "not_counted": [
+                        {
+                            "buff": name,
+                            "kind": "",
+                            "slot": "None",
+                            "multiplier": 1.0,
+                            "applies_on": [],
+                            "state_conditional": False,
+                            "note": "",
+                            "excluded_because": "no such buff in the tables"
+                            if name in unknown
+                            else "no product is computed while another name is unrecognised",
+                        }
+                        for name in names
+                    ],
+                    "slot_rules": {slot: rule for slot, (rule, _) in sorted(rules.items())},
+                    "hit_kinds": list(buffs.HIT_KINDS),
+                    "catalog_size": len(table),
+                }
+            )
         )
-        sys.exit(1)
+        return
     not_held = [name for name in assumed if name not in names]
     if not_held:
         print(f"asserted but not among the buffs given: {', '.join(not_held)}", file=sys.stderr)
@@ -135,6 +178,7 @@ def main():
         "pvp": pvp,
         "assumed": assumed,
         "multiplier": total,
+        "unknown": [],
         "applied": [
             {k: v for k, v in row.items() if k != "item"} for row in applied
         ],

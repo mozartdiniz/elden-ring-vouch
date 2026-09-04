@@ -464,6 +464,39 @@ spreadsheet checks the oracle, attestation checks the prose — and the file tha
 right answers are has never been re-run since the day each entry was written. Eight model runs
 found that in one question.
 
+### The 14-question slice mostly measured the harness, and found a node bug
+
+Fourteen questions, one per pattern, on kimi-k3 and gpt-5.6-luna. The headline is that **most
+of it failed for reasons that have nothing to do with either model**:
+
+| | answered | attested | complete | cost/q | median |
+|---|---|---|---|---|---|
+| `moonshotai/kimi-k3` | 8/14 | 8/14 | **8/8 of what it answered** | $0.152 | 133s |
+| `openai/gpt-5.6-luna` | 2/14 | 2/14 | 2/2 | $0.011 | — |
+
+- **Eleven of luna's fourteen hit OpenRouter's `new-account-rpm` limit.** That is the account,
+  not the model, and four concurrent requests is what triggered it.
+- **Five of kimi's were empty replies**, at 6,657 to 14,710 completion tokens over two to five
+  decisions — the 6,000 cap was still too low for a model that reasons this much.
+
+Both are now retried rather than reported as answers that could not be had: 429 and 5xx back
+off (honouring `Retry-After`, because guessing shorter than the provider asked is how a rate
+limit becomes a ban), an empty reply is retried once, and the budget is 20,000.
+
+**Completeness flagged nothing.** Every answer that came back named everything it owed, which
+is the check behaving: it fired on luna's 7.1 in development and stayed quiet here.
+
+**And it found a node bug on 14.5.** `buff-stack` exited 1 — read as exit 20, a defect — on
+`Cragblade`, which is a real Ash of War present in four other tables this collection ships and
+absent from `BuffMult` because it is not modelled as a multiplier. So the caller was told the
+node was broken, and the conversation ended, over a name the model was right to try. It reports
+the miss as data now and offers the 29 names it does carry. A fixture existed asserting exit 20
+was correct — the bug was written down as the design.
+
+That is the argument for running this at all, in one line: **250 fixtures, 122 hand-worked
+questions and three spreadsheet PDFs did not find it, and fourteen questions in front of two
+models did.**
+
 ### Cost is the real differentiator, and it is not subtle
 
 Measured per decision on the same 26k-token planning prompt:

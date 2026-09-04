@@ -15,7 +15,8 @@
     "slot_rules",
     "damage_multiplier",
     "hit_kinds",
-    "catalog_size"
+    "catalog_size",
+    "unknown"
   ],
   "$defs": {
     "factor": {
@@ -174,6 +175,20 @@
       "items": {
         "type": "string"
       }
+    },
+    "unknown": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Names given that BuffMult.csv and the damage-source table have never heard of. Non-empty means no stack was computed: `multiplier` is 1.0 and `applied` is empty, because a product that quietly leaves a buff out is worse than no product at all."
+    },
+    "known_buffs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Every buff name the tables do know, returned only when `unknown` is non-empty so the caller can correct the name without a second call."
     }
   }
 }

@@ -19,6 +19,13 @@ import os
 BACKEND = os.environ.get("LLM_BACKEND", "claude")
 TIMEOUT = float(os.environ.get("LLM_TIMEOUT", "120"))
 
+# Two transient failures are worth waiting out rather than reporting as an answer that could
+# not be had. Both were measured, not imagined: a 14-question run lost eleven questions to
+# OpenRouter's new-account rate limit, and five more to a reasoning model returning empty
+# content — neither of which says anything about whether the question was answerable.
+ATTEMPTS = int(os.environ.get("LLM_ATTEMPTS", "4"))
+BACKOFF = float(os.environ.get("LLM_BACKOFF", "4"))
+
 
 class LLMError(RuntimeError):
     """The model could not be reached or refused to reply. Never a wrong answer — just no answer."""
@@ -64,7 +71,7 @@ async def _openrouter(prompt, model=None, usage=None):
         # thinking returns an empty `content` — which is how moonshotai/kimi-k3 failed, with
         # 663 of 707 completion tokens going to reasoning. The replies wanted here are still
         # small; the headroom is for the thinking in front of them.
-        "max_tokens": int(os.environ.get("OPENROUTER_MAX_TOKENS", "6000")),
+        "max_tokens": int(os.environ.get("OPENROUTER_MAX_TOKENS", "20000")),
         "temperature": 0,
         # Ask for token counts and the actual charge. Without this the reply carries no cost,
         # and a model comparison with no cost in it is not a comparison.
@@ -78,21 +85,44 @@ async def _openrouter(prompt, model=None, usage=None):
         headers["X-Title"] = os.environ["APP_NAME"]
 
     async with httpx.AsyncClient(timeout=TIMEOUT) as client:
-        try:
-            reply = await client.post(
-                "https://openrouter.ai/api/v1/chat/completions", json=body, headers=headers
-            )
-        except httpx.HTTPError as failure:
-            raise LLMError(f"openrouter unreachable: {failure}")
+        for attempt in range(ATTEMPTS):
+            last = attempt == ATTEMPTS - 1
+            try:
+                reply = await client.post(
+                    "https://openrouter.ai/api/v1/chat/completions", json=body, headers=headers
+                )
+            except httpx.HTTPError as failure:
+                raise LLMError(f"openrouter unreachable: {failure}")
 
-    if reply.status_code != 200:
-        raise LLMError(f"openrouter returned {reply.status_code}: {reply.text[:300]}")
+            # 429 is the account's rate limit and 5xx is the provider having a moment. Both
+            # pass. Honour Retry-After when it is given, since guessing shorter than the
+            # provider asked for is how a rate limit becomes a ban.
+            if reply.status_code == 429 or reply.status_code >= 500:
+                if last:
+                    raise LLMError(f"openrouter returned {reply.status_code}: {reply.text[:300]}")
+                pause = BACKOFF * (2**attempt)
+                try:
+                    pause = max(pause, float(reply.headers.get("retry-after", 0)))
+                except ValueError:
+                    pass
+                await asyncio.sleep(pause)
+                continue
 
-    try:
-        payload = reply.json()
-        content = payload["choices"][0]["message"]["content"]
-    except (json.JSONDecodeError, KeyError, IndexError):
-        raise LLMError(f"openrouter sent no usable reply: {reply.text[:300]}")
+            if reply.status_code != 200:
+                raise LLMError(f"openrouter returned {reply.status_code}: {reply.text[:300]}")
+
+            try:
+                payload = reply.json()
+                content = payload["choices"][0]["message"]["content"]
+            except (json.JSONDecodeError, KeyError, IndexError):
+                raise LLMError(f"openrouter sent no usable reply: {reply.text[:300]}")
+
+            # A reasoning model that spends its whole completion budget thinking returns an
+            # empty `content` and a large `completion_tokens`. Retrying costs a call; not
+            # retrying costs the question.
+            if (content or "").strip() or last:
+                break
+            await asyncio.sleep(BACKOFF)
 
     if usage is not None:
         spent = payload.get("usage") or {}
@@ -102,10 +132,12 @@ async def _openrouter(prompt, model=None, usage=None):
         cached = (spent.get("prompt_tokens_details") or {}).get("cached_tokens") or 0
         usage["cached_tokens"] = usage.get("cached_tokens", 0) + cached
 
-    # A reasoning model can return an empty content with everything in the reasoning field,
-    # which reads downstream as "the model said nothing" rather than as the failure it is.
     if not (content or "").strip():
-        raise LLMError(f"{body['model']} returned an empty reply")
+        spent = (payload.get("usage") or {}).get("completion_tokens")
+        raise LLMError(
+            f"{body['model']} returned an empty reply after {ATTEMPTS} attempts"
+            + (f" (spent {spent} completion tokens on the last one)" if spent else "")
+        )
     return content.strip()
 
 

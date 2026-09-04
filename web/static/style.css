@@ -25,7 +25,24 @@ header { padding: 2.5rem 0 1.5rem; border-bottom: 1px solid var(--line); }
 header h1 { margin: 0; font-size: 1.4rem; font-weight: 600; color: var(--gold); letter-spacing: .01em; }
 header p { margin: .4rem 0 0; color: var(--dim); font-size: .9rem; }
 
+#reset {
+  margin-top: .9rem; padding: .3rem .7rem; border-radius: 4px;
+  border: 1px solid var(--line); background: transparent; color: var(--dim);
+  font: inherit; font-size: .8rem; cursor: pointer;
+}
+#reset:hover { color: var(--gold); border-color: var(--gold); }
+
 .turn { padding: 1.5rem 0; border-bottom: 1px solid var(--line); }
+
+/* A follow-up is answered with the earlier turns in front of the model, and checked against
+   the same ledger. The divider is where that stops being true. */
+.divider {
+  display: flex; align-items: center; gap: .8rem;
+  margin: 1.5rem 0; color: var(--dim); font-size: .75rem; letter-spacing: .04em;
+}
+.divider::before, .divider::after {
+  content: ""; flex: 1; height: 1px; background: var(--line);
+}
 .asked { font-weight: 600; margin: 0 0 1rem; }
 .asked::before { content: "› "; color: var(--gold); }
 

@@ -34,6 +34,14 @@ DAILY_BUDGET = int(os.environ.get("DAILY_BUDGET", "200"))
 RATE_PER_MIN = int(os.environ.get("RATE_PER_MIN", "6"))
 MAX_QUESTION = 500
 
+# How much of a conversation is carried into the next question. Six turns is enough for the
+# shape this exists for — ask for a spread, then ask what changes if dexterity replaces
+# strength — and it bounds two things that would otherwise grow without limit: the planning
+# prompt, and the ledger a follow-up is attested against. See the note in README.md.
+KEEP_TURNS = int(os.environ.get("KEEP_TURNS", "6"))
+KEEP_CONVERSATIONS = int(os.environ.get("KEEP_CONVERSATIONS", "500"))
+CONVERSATION_TTL = float(os.environ.get("CONVERSATION_TTL", "3600"))
+
 CATALOG = {}
 
 
@@ -56,6 +64,45 @@ app = FastAPI(title="Elden Ring, computed", lifespan=lifespan)
 
 SEEN = defaultdict(deque)
 SPENT = {"day": None, "count": 0}
+
+
+class Conversations:
+    """What each conversation has already asked, so a follow-up knows what "it" refers to.
+
+    In memory, capped both ways, and gone on restart. The durable half of a conversation is
+    its ledger on disk — which is what the answers are checked against — and this is only the
+    prompt context needed to route the next question. Losing it costs a user their thread,
+    not the correctness of anything.
+    """
+
+    def __init__(self):
+        self.turns = {}
+        self.touched = {}
+
+    def _evict(self):
+        now = time.monotonic()
+        for session in [s for s, at in self.touched.items() if now - at > CONVERSATION_TTL]:
+            self.turns.pop(session, None)
+            self.touched.pop(session, None)
+        while len(self.turns) > KEEP_CONVERSATIONS:
+            oldest = min(self.touched, key=self.touched.get)
+            self.turns.pop(oldest, None)
+            self.touched.pop(oldest, None)
+
+    def history(self, session):
+        self._evict()
+        self.touched[session] = time.monotonic()
+        return list(self.turns.get(session, ()))
+
+    def remember(self, session, turn):
+        # A turn that gave no answer is kept too, and is the more useful of the two: when a
+        # node refused for want of a weapon, the next message is usually the weapon.
+        kept = self.turns.setdefault(session, deque(maxlen=KEEP_TURNS))
+        kept.append(turn)
+        self.touched[session] = time.monotonic()
+
+
+CONVERSATIONS = Conversations()
 
 
 def rate_limited(ip):
@@ -117,17 +164,33 @@ async def ask(request: Request):
 
     session = session_for(body.get("conversation"))
 
+    history = CONVERSATIONS.history(session)
+
     async def stream():
         # The client stores this and sends it back, so a follow-up question attests against
         # the same ledger the first one wrote to.
         yield json.dumps({"type": "session", "conversation": session[len("web-") :]}) + "\n"
+
+        turn = {"question": question, "calls": [], "answer": None, "outcome_reason": ""}
         try:
             async for event in engine.answer(
-                question, COLLECTION, session, CATALOG["value"], ask_model
+                question, COLLECTION, session, CATALOG["value"], ask_model, history
             ):
+                if event["type"] == "call":
+                    turn["calls"].append({"node": event["node"], "input": event["input"]})
+                elif event["type"] == "answer" and event["attestation"] != "failed":
+                    turn["answer"] = event["text"]
+                elif event["type"] in ("no_answer", "defect"):
+                    turn["outcome_reason"] = event.get("reason", "")
                 yield json.dumps(event) + "\n"
         except LLMError as failure:
             yield json.dumps({"type": "error", "reason": str(failure)}) + "\n"
+            return
+
+        # An answer that failed attestation is deliberately not remembered as an answer: it
+        # was never shown, and carrying it forward would put unverified figures in the next
+        # prompt through the back door.
+        CONVERSATIONS.remember(session, turn)
 
     return StreamingResponse(stream(), media_type="application/x-ndjson")
 

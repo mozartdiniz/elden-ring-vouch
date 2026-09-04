@@ -331,6 +331,31 @@ Neither is a bug in the runtime and neither would have shown up in a fixture. Th
 boundary of what "every number came from a node" actually buys, and the app is where you find
 it, because the app is the first thing that lets a model choose parameters unsupervised.
 
+## Follow-up questions, and what the ledger was already doing
+
+Each question was planned from scratch, so *"and if I moved those points to dexterity?"* had
+nothing to refer to. The fix turned out to be smaller than expected, because **the ledger was
+already per-conversation** — only the prompts were not. Adding the memory to the prompts made
+multi-turn comparison attest for free:
+
+> **turn 1** — *"best weapons at STR 55 / DEX 14?"* → Great Club, 820 total AR.
+> **turn 2** — *"and if I moved those points to dexterity?"* → weapon-rank called again at
+> STR 14 / DEX 55; Rakshasa's Great Katana at 694, *"a lower ceiling than the strength
+> build's 820"*. **Attested** — 820 came from turn 1's call, in the same ledger.
+
+What is carried is the earlier questions, the calls **with their inputs**, and the answers.
+Deliberately **not** the earlier results: a follow-up is almost always a change, and handing
+back the previous numbers invites narration from stale results instead of a fresh call, which
+is the one way an answer could be wrong while every contract still held. Turns that gave *no*
+answer are carried too, and are the more useful half — a node refusing for want of a weapon is
+usually followed by the user naming one, which is the clarification loop arriving early.
+
+**The trade is real and measurable.** A numeral attests if any call in the ledger returned it,
+so a longer conversation accounts for more numbers by accident: 19% of the integers 1–99 at
+two calls, 40% at twenty-nine. `KEEP_TURNS` bounds the prompt; only starting a new conversation
+bounds the ledger. That makes the reset button part of the correctness story rather than a
+convenience, which is worth saying out loud in the UI eventually.
+
 ## The battery, pointed at the running app
 
 `scripts/run_battery.py` reads all 122 questions out of `VALIDATION.md`, runs them through the

@@ -63,11 +63,44 @@ day-sized ledger 96 of the integers 1–99 are already present. A fabricated *"y
 points"* would attest clean. A ledger per conversation is both the correct scope and a
 strictly better check.
 
+## Follow-up questions
+
+A conversation is carried forward, so *"and if I moved those points to dexterity instead?"*
+works. What gets carried is deliberately partial:
+
+- **the earlier questions, and the calls with their inputs** — which is where *"the Longsword,
+  at this spread"* actually lives;
+- **the answers that were given**, including the turns that gave none, since a node refusing
+  for want of a weapon is usually followed by the user naming one;
+- **not the earlier results.** A follow-up is nearly always a change, and handing back the
+  previous turn's numbers invites the model to narrate from them instead of calling again with
+  the new values — the one way an answer could be wrong while every contract still held.
+
+The narrator *may* quote figures from an earlier answer, and is told why it may: those came
+from node calls in this same conversation, so they are in this conversation's ledger and will
+attest. That is what lets a follow-up say *"820 before, 694 now"* and pass the check.
+
+**The cost is that attestation gets looser as a conversation grows.** A numeral attests if any
+call in the ledger returned it, so a longer ledger accounts for more numbers by accident —
+`scripts/stress_attest.py` measured 19% of the integers 1–99 at two calls and 40% at
+twenty-nine. `KEEP_TURNS` bounds the prompt; starting a new conversation is what bounds the
+ledger, and the button in the header is therefore a real reset rather than a cosmetic one.
+
+Conversations live in memory, capped by `KEEP_TURNS`, `KEEP_CONVERSATIONS` and
+`CONVERSATION_TTL`, and are gone on restart. The durable half is the ledger on disk, which is
+what answers are checked against; losing the rest costs a user their thread, not correctness.
+
 ## What is checked, and what is not
 
 ```console
-$ node test_client.mjs      # the client, against a stub DOM. No browser, no network.
+$ node test_client.mjs           # the client, against a stub DOM. No browser, no network.
+$ .venv/bin/python test_server.py  # the loop and the store, with a scripted model.
 ```
+
+`test_server.py` cans the model's replies and lets everything else be real: real `vouch call`
+subprocesses, real contracts, real attestation against a real ledger. So it checks that a
+fabricated figure is caught and that the second turn is planned with the first in front of the
+model, and it costs nothing to run as often as you like — which the battery does not.
 
 Nine checks, one per event branch plus the fragile one: a JSON event split across two network
 chunks, and again at one byte per chunk. Two of them exist to hold a line rather than to catch
@@ -88,8 +121,6 @@ textarea autosize, no scrolling. Open it and see.
   with `candidates`, and `ash-rank` returns `rank_on` — four questions with four different
   winners. Rendering those as buttons is a better interaction than free text *and* costs no
   tokens. It is the next thing to build.
-- **No conversation history.** Each question is planned from scratch. The ledger persists per
-  conversation, the transcript does not.
 - **No static answers.** `VALIDATION.md` holds 122 questions with verified answers that could
   be served with no model in the loop at all.
 - **Nothing durable behind the rate limit.** It is a dict in memory and resets on restart.

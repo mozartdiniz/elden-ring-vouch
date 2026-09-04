@@ -28,7 +28,7 @@ class Node {
 }
 
 const byId = {};
-for (const id of ["thread", "composer", "question", "send", "examples"]) byId[id] = new Node(id);
+for (const id of ["thread", "composer", "question", "send", "examples", "reset"]) byId[id] = new Node(id);
 
 globalThis.document = {
   getElementById: (id) => byId[id],
@@ -38,6 +38,7 @@ globalThis.sessionStorage = {
   store: {},
   getItem(k) { return this.store[k] ?? null; },
   setItem(k, v) { this.store[k] = v; },
+  removeItem(k) { delete this.store[k]; },
 };
 globalThis.window = { scrollTo() {} };
 globalThis.document.body = { scrollHeight: 0 };
@@ -155,6 +156,21 @@ check("a rate limit shows the server's message, not a crash", async () => {
   box.value = "again";
   await form.requestSubmit();
   assert.match(byId.thread.textContent, /slow down/);
+});
+
+check("a conversation id is kept and sent back, until it is reset", async () => {
+  sessionStorage.store = {};
+  await turn([
+    { type: "session", conversation: "keepme" },
+    { type: "answer", attestation: "attested", text: "229.", detail: [] },
+  ]);
+  assert.equal(sessionStorage.getItem("conversation"), "keepme");
+  assert.equal(byId.reset.hidden, false, "the reset control should appear");
+
+  byId.reset.onclick();
+  assert.equal(sessionStorage.getItem("conversation"), null, "reset must drop the id");
+  assert.equal(byId.reset.hidden, true);
+  assert.match(byId.thread.textContent, /new conversation/);
 });
 
 check("an unreachable server is reported", async () => {

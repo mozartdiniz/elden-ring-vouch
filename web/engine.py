@@ -130,11 +130,43 @@ and never fill a parameter with a number you invented — a wrong answer is wors
 """
 
 
-def planning_prompt(question, catalog, steps, correction):
+def earlier_turns(history):
+    """The conversation so far, as context for routing — deliberately without its results.
+
+    A follow-up is nearly always a change: *the same question with dexterity instead of
+    strength*. Handing back the previous turn's raw results invites the model to narrate from
+    them rather than call the nodes again with the new values, which is the one thing that
+    would make an answer wrong while every contract still held.
+
+    So each earlier turn carries what the user asked, the calls that were made **with their
+    inputs** — which is where "the Longsword, at this spread" actually lives — and what was
+    answered. Not the numbers. Those get recomputed.
+    """
+    if not history:
+        return ""
+
+    lines = [
+        "\nEarlier in this conversation, oldest first. This is context for understanding what",
+        "\nthe user is now asking, NOT results you may reuse. If they are changing a stat, a",
+        "\nweapon or a level, call the nodes again with the new values.\n\n",
+    ]
+    for position, turn in enumerate(history, 1):
+        lines.append(f'  {position}. asked: "{turn["question"]}"\n')
+        for call in turn["calls"]:
+            lines.append(f"     called: {call['node']}({json.dumps(call['input'])})\n")
+        if turn.get("answer"):
+            lines.append(f'     answered: "{turn["answer"]}"\n')
+        else:
+            lines.append(f'     gave no answer: "{turn.get("outcome_reason", "")}"\n')
+    return "".join(lines)
+
+
+def planning_prompt(question, catalog, steps, correction, history=()):
     prompt = [
         PLANNING_RULES,
         "\nThe collection you are working with:\n",
         json.dumps(catalog, indent=2),
+        earlier_turns(history),
         f"\n\nThe user asked: {question}\n",
     ]
 
@@ -158,11 +190,24 @@ def planning_prompt(question, catalog, steps, correction):
     return "".join(prompt)
 
 
-def narration_prompt(question, steps):
+def narration_prompt(question, steps, history=()):
     verified = "\n".join(
         f"From {step['node']}:\n{json.dumps(step['result'], indent=2)}" for step in steps
     )
-    return f"""\
+
+    # Figures in an earlier answer are quotable: they came from node calls in this same
+    # conversation, so they are in this conversation's ledger and will attest. That is the
+    # whole reason a follow-up can say "229 before, 245 now" without the check rejecting it.
+    previous = ""
+    answered = [turn for turn in history if turn.get("answer")]
+    if answered:
+        previous = (
+            "\nAnswers already given in this conversation. Every figure in them came from a "
+            "node call, so you may quote them when the user is asking what changed:\n\n"
+            + "".join(f'  asked: "{t["question"]}"\n  answered: {t["answer"]}\n\n' for t in answered)
+        )
+
+    return previous + f"""\
 Answer the user's question in one to three plain sentences, using ONLY the values in the
 verified results below.
 
@@ -216,7 +261,7 @@ async def attest(collection, session, prose, question):
 # ------------------------------------------------------------------------- the loop
 
 
-async def answer(question, collection, session, catalog, ask_model):
+async def answer(question, collection, session, catalog, ask_model, history=()):
     """Yield events for one question. The caller decides how to render them.
 
     Event types:
@@ -234,7 +279,7 @@ async def answer(question, collection, session, catalog, ask_model):
 
     for _ in range(MAX_DECISIONS):
         yield {"type": "thinking", "what": "choosing a node"}
-        reply = await ask_model(planning_prompt(question, catalog, steps, correction))
+        reply = await ask_model(planning_prompt(question, catalog, steps, correction, history))
         correction = None
 
         try:
@@ -255,7 +300,7 @@ async def answer(question, collection, session, catalog, ask_model):
                 return
 
             yield {"type": "thinking", "what": "writing the answer from verified results"}
-            prose = await ask_model(narration_prompt(question, steps))
+            prose = await ask_model(narration_prompt(question, steps, history))
 
             verdict, detail = await attest(collection, session, prose, question)
             if verdict == "failed":

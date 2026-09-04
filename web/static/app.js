@@ -8,9 +8,15 @@ const thread = document.getElementById("thread");
 const form = document.getElementById("composer");
 const box = document.getElementById("question");
 const send = document.getElementById("send");
+const reset = document.getElementById("reset");
 
-// One conversation, one ledger. The server decides the id; we keep it for follow-ups so
-// they attest against the same calls.
+// One conversation, one ledger, and one thread of context. The server decides the id; we
+// keep it and send it back, so a follow-up is planned with the earlier turns in front of the
+// model and attested against the same calls.
+//
+// Dropping it is how you change the subject. That is a real reset, not a cosmetic one: the
+// next question starts from nothing and is checked against a fresh ledger, which is also a
+// stricter check, because a smaller ledger has fewer numbers for a wrong one to collide with.
 let conversation = sessionStorage.getItem("conversation") || null;
 
 const EXAMPLES = [
@@ -28,6 +34,14 @@ for (const text of EXAMPLES) {
   button.onclick = () => { box.value = text; box.focus(); };
   examples.append(button);
 }
+
+reset.onclick = () => {
+  conversation = null;
+  sessionStorage.removeItem("conversation");
+  reset.hidden = true;
+  if (thread.children.length) thread.append(el("div", "divider", "new conversation"));
+  box.focus();
+};
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
@@ -105,6 +119,7 @@ function render(turn, event) {
     case "session":
       conversation = event.conversation;
       sessionStorage.setItem("conversation", conversation);
+      reset.hidden = false;
       break;
 
     case "thinking":

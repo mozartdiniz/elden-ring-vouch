@@ -403,6 +403,38 @@ def _():
     assert len(model.prompts) == 1, model.prompts
 
 
+@check("a node that keeps refusing is called exhausted, not searched")
+def _():
+    """A refusal is a correction, and acting on one can mean retrying with a different value.
+
+    That is right until it is a search. On battery question 10.3 a model called `matchmaking`
+    eleven times with eleven different upgrade levels, hunting for one that would not be
+    refused, and spent the whole decision budget on it — then reported "I ran out of attempts",
+    which is true of the loop and tells the user nothing about their question. The
+    duplicate-call guard saw nothing, because no two calls were the same.
+    """
+    def hunt(upgrade):
+        return json.dumps({"call": {"node": "matchmaking",
+                                    "input": {"level": 60, "upgrade": upgrade, "somber": False}}})
+
+    # Every one of these is refused: the upgrade is out of range, and each is a different
+    # argument, so nothing before this stopped the sequence.
+    model = Script(*[hunt(u) for u in (30, 31, 32, 33, 34)])
+    events = asyncio.run(run("what upgrade keeps me at level 60?", model))
+
+    refusals = [e for e in events if e["type"] == "refusal"]
+    assert len(refusals) == engine.MAX_REFUSALS_PER_NODE, [e["type"] for e in events]
+
+    last = events[-1]
+    assert last["type"] == "no_answer", events[-1]
+    # `declined` prefers the runtime's own words for the reason, which is what a reader can
+    # act on; the loop's account of why it stopped rides along in `relayed`.
+    assert "greater than the maximum" in last["reason"], last
+    assert "refused 3 times" in last["relayed"], last
+    # And the model was stopped rather than left to spend the rest of the budget.
+    assert len(model.prompts) == engine.MAX_REFUSALS_PER_NODE, len(model.prompts)
+
+
 @check("a fabricated figure is caught by attestation, and no answer is shown")
 def _():
     model = Script(

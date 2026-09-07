@@ -32,6 +32,19 @@ MAX_DECISIONS = int(os.environ.get("MAX_DECISIONS", "10"))
 # without passing through attestation, so it is bounded rather than trusted.
 MAX_STOP = int(os.environ.get("MAX_STOP", "400"))
 
+# How many times one node may refuse within a question before the loop calls it exhausted.
+#
+# A refusal is a correction and a model is meant to act on it — that is the whole point of the
+# exit-code families. But acting on it can mean *retrying with a different argument*, and a
+# node that refuses on a value the model is searching for invites an unbounded search. On
+# battery question 10.3 a model called `matchmaking` eleven times with eleven different
+# upgrade levels, hunting for the one that would not be refused, and spent the whole decision
+# budget on it. The duplicate-call guard saw nothing, because no two calls were the same.
+#
+# Three is enough for a genuine correction sequence — wrong argument, fixed, wrong again — and
+# short of a search.
+MAX_REFUSALS_PER_NODE = int(os.environ.get("MAX_REFUSALS_PER_NODE", "3"))
+
 # vouch's taxonomy, for reading the exit code of a call. Only DEFECT is branched on — the
 # loop hands anything that is not a defect back to the model as a correction — but the
 # refusal set is kept accurate because it is the documentation of what those numbers mean.
@@ -170,11 +183,16 @@ Reply with ONLY a JSON object, in one of three shapes:
       offering three complete sets beats three questions in a row; each option's `value` may
       be an object carrying all of them. Nobody wants to be interviewed.
 
-      NEVER offer an option you did not get from a node. If you need to know which weapon,
-      spell or boss was meant, the candidates come from a lookup's `candidates` — never from
-      memory. An option you invented becomes an input, and inputs are the one thing in this
-      loop nothing checks: a made-up name that the user clicks is laundered into an answer
-      where every figure attests and the whole thing is about the wrong weapon.
+      NEVER offer an option you did not get from a node. An option you invented becomes an
+      input, and inputs are the one thing in this loop nothing checks: a made-up name that the
+      user clicks is laundered into an answer where every figure attests and the whole thing
+      is about the wrong weapon.
+
+      So GET THEM FIRST. If you do not know which weapon, spell or boss was meant, call the
+      lookup and offer its `candidates` — asking is not the alternative to guessing, calling
+      is. A lookup costs one decision and a blind question costs the user a turn and tells
+      them nothing they did not already know. Only ask once a node has given you something to
+      offer, or when what is missing is a judgement no lookup can settle.
 
       NEVER ask for a value the user's question already contains. If they wrote "VIG 55 /
       MND 30 / END 20", those are the floors — asking and then substituting your own is how
@@ -452,6 +470,7 @@ async def answer(question, collection, session, catalog, ask_model, history=()):
     """
     steps = []
     correction = None
+    refusals = {}
     # The last thing the runtime actually said no about. `correction` is cleared as soon as it
     # has been shown to the model, and a stop usually arrives a decision later than the
     # refusal that caused it, so the reason worth quoting has to be kept separately.
@@ -599,6 +618,29 @@ async def answer(question, collection, session, catalog, ask_model, history=()):
 
         # A refusal, or an input the schema rejected, is a correction. Hand it back.
         yield {"type": "refusal", "node": node, "reason": reason, "code": code}
+        refusals[node] = refusals.get(node, 0) + 1
+
+        # Refused this many times, it is not going to answer this question. Saying so is
+        # better than letting the decision budget run out, because the reason a caller gets
+        # then is "I ran out of attempts", which is true of the loop and tells them nothing
+        # about their question.
+        if refusals[node] >= MAX_REFUSALS_PER_NODE:
+            yield {
+                "type": "no_answer",
+                **declined(
+                    f"{node} refused {refusals[node]} times; it cannot answer this",
+                    {"node": node, "reason": reason},
+                    steps,
+                ),
+            }
+            return
+
         correction = refused = {"node": node, "input": node_input, "reason": reason}
+        if refusals[node] > 1:
+            correction["reason"] = (
+                f"{reason}\n\nThat is {node}'s {refusals[node]} refusal for this question. "
+                "Trying it again with a different argument is a search, and this node is not "
+                "a search. Call a different node, or stop."
+            )
 
     yield {"type": "no_answer", "reason": "I ran out of attempts before reaching a verified answer."}

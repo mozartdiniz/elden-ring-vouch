@@ -65,9 +65,14 @@ input = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 10, start
 expect_code = 11
 
 [[case]]
-name = "a missing floor is a caller error, not a default"
+# Was "a caller error", exit 10. The half that mattered — not a default — still holds, and
+# the node still will not pick a floor. What changed is which refusal says so: exit 10 says
+# the call was malformed, and exit 17 says the call was fine and this value is the person's
+# to choose, and carries the choices. A caller that cannot tell those apart either scolds
+# the user for a mistake they did not make or invents an answer to a real question.
+name = "a missing floor is the caller's judgement, not a default and not a bad call"
 input = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 10, starting_class = "Samurai", target_level = 150 }
-expect_code = 10
+expect_code = 17
 
 # Some weapons carry a flat status that no stat improves. Maximising it is degenerate: the
 # search finds nothing to buy and the points fall through to vigor, which looks like an

@@ -58,12 +58,21 @@ STARTING_CLASSES = [
 #                   real answer from 342 to 383, so it is a claim about how the weapon is held
 #                   and not a neutral default. False asserts the least.
 #
-# **A parameter belongs here or in CANONICAL below, never both.** The two kinds are answers to
-# different questions — *may the collection decide this?* — and the survivability floors are
-# the case that proves it matters: `build-allocate`'s own docstring says how much vigor a
-# build should hold back is an opinion, and that a node answering it presents opinion as a
-# calculation. Putting `vigor` in this dict would quietly overrule that. Keeping the two kinds
-# disjoint means the mistake cannot be made by accident.
+# **Only the parameters the collection may decide belong here.** The other kind — the ones it
+# must not decide, like the survivability floors — are declared in the manifests now, as
+# `judgement = true` with `options`, and refused at exit 17 with the choices as data. They
+# used to live in this file as prose a `guidance` string carried and a model relayed, which
+# was the best available before the runtime could express the distinction.
+#
+# The difference is where the choices come from. Prose is something a model reads and
+# rewrites: it relayed the values faithfully and the labels differently every run, and on
+# battery question 4.1 a model asked to choose between weapons invented the candidates
+# outright. Options that arrive as data are the collection's, and the model never touches
+# them.
+#
+# Putting a floor in this dict would quietly overrule `build-allocate`'s own reasoning, which
+# is that how much vigor a build should hold back is an opinion and a node answering it
+# presents opinion as a calculation.
 DEFAULTS = {
     "starting_class": LEAST_DISTORTING_CLASS,
     "two_hand": False,
@@ -121,35 +130,3 @@ def guidance(name, what):
 # judgement stays where it belongs and stops being re-invented on the way there.
 #
 # These three sets are what every model offered unprompted, under a dozen different labels.
-CANONICAL = {
-    ("vigor", "mind", "endurance"): [
-        ("balanced PvE", {"vigor": 40, "mind": 20, "endurance": 25}),
-        ("survivability first", {"vigor": 60, "mind": 20, "endurance": 20}),
-        ("caster", {"vigor": 40, "mind": 40, "endurance": 15}),
-        ("minimum floors, spend the rest on damage",
-         {"vigor": 30, "mind": 15, "endurance": 15}),
-    ],
-    ("target_level",): [
-        ("RL150 — the standard co-op and invasion cap", {"target_level": 150}),
-        ("RL125 — the older duelling cap", {"target_level": 125}),
-        ("RL80 — mid-game co-op", {"target_level": 80}),
-    ],
-}
-
-
-def options(*names):
-    """The canonical choices for a set of parameters, as one line for a `guidance` string.
-
-    Written for a model to relay rather than to author. The values are what matter — a label
-    is a caption and models translate captions — so every option spells its values out.
-    """
-    for key, sets in CANONICAL.items():
-        if tuple(names) == key:
-            spelled = "; ".join(
-                f"{label} ({', '.join(f'{k} {v}' for k, v in values.items())})"
-                for label, values in sets
-            )
-            return (f"This is the caller's judgement and the node will not make it. If the user "
-                    f"has not said, offer exactly these and use the first unless they choose "
-                    f"another: {spelled}.")
-    raise KeyError(names)

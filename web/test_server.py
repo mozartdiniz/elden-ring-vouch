@@ -158,6 +158,27 @@ def _():
         del os.environ["CACHE_BREAKPOINTS"]
 
 
+@check("the compact pack carries what routing needs, and nothing that only a validator reads")
+def _():
+    """This replaced a `trimmed()` in engine.py that did the same job by hand.
+
+    The runtime owns the trimming now, so what is worth checking here is not how it trims but
+    that the collection this app ships against still publishes what the loop depends on —
+    including the judgements map, which the hand-rolled version did not know existed.
+    """
+    catalog = asyncio.run(engine.load_catalog(COLLECTION))
+    assert catalog["nodes"], "the pack has nodes"
+
+    by_name = {n["node"]: n for n in catalog["nodes"]}
+    allocate = by_name["build-allocate"]
+    for needed in ("purpose", "use_when", "not_for", "input_schema", "examples", "judgements"):
+        assert needed in allocate, f"routing needs {needed}"
+    for absent in ("requires", "ensures", "output_schema", "params"):
+        assert absent not in allocate, f"{absent} is not routing context"
+    assert "$schema" not in allocate["input_schema"]
+    assert len(allocate["examples"]) == 1, "one worked call is a shape to copy"
+
+
 # ------------------------------------------------------------------------ the store
 
 
@@ -348,6 +369,38 @@ def _():
     assert "call weapon-lookup" in refusal["reason"], refusal
     # And the turn carried on to an answer, which is the whole point.
     assert events[-1]["type"] == "answer", kinds
+
+
+@check("a judgement the collection will not make is asked with the collection's own options")
+def _():
+    """The one place a model's words become an *input*, and inputs are outside attestation.
+
+    On battery question 4.1 a model looked up a weapon that does not exist, invented a list of
+    plausible-sounding weapons, asked which was meant, and the harness took the first — giving
+    an attested, complete answer about a weapon nobody asked about. Every figure in it traced
+    to a real call; the premise was fabricated one layer above where any check runs.
+
+    So the options for a judgement come from the manifest, through the runtime's exit 17, and
+    the model never writes them.
+    """
+    model = Script(
+        json.dumps({"call": {"node": "build-allocate", "input": {
+            "weapon": "Rivers of Blood", "affinity": "Standard",
+            "upgrade": 10, "max_upgrade": 10, "focus": "bleed"}}}),
+    )
+    events = asyncio.run(run("build me a Rivers of Blood build", model))
+
+    ask = events[-1]
+    assert ask["type"] == "ask", [e["type"] for e in events]
+    assert ask["from"] == "collection", "not authored by the model"
+    assert ask["parameter"] in ("vigor", "mind", "endurance"), ask
+    # The values are the collection's, spelled out, and travel together because they are
+    # chosen together.
+    first = ask["options"][0]
+    assert first["value"] == {"vigor": 40, "mind": 20, "endurance": 25}, first
+    assert "balanced" in first["label"], first
+    # And the model was asked once, not asked and then asked again.
+    assert len(model.prompts) == 1, model.prompts
 
 
 @check("a fabricated figure is caught by attestation, and no answer is shown")

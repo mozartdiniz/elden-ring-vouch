@@ -6,11 +6,7 @@
   "required": [
     "weapon",
     "affinity",
-    "upgrade",
-    "target_level",
-    "vigor",
-    "mind",
-    "endurance"
+    "upgrade"
   ],
   "properties": {
     "weapon": {

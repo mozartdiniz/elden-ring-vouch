@@ -61,7 +61,13 @@ guidance = "Copy weapon-lookup's `max_upgrade`, so an impossible upgrade is refu
 guidance = "Used when the user names one — a class's floors are points already spent, so the same spread costs a different level on a different class. Optional: leave it out and the collection uses Wretch, whose flat tens are the lowest floors of the ten, and reports it in `assumed`. Do not ask the user for it. If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
 
 [params.target_level]
-guidance = "The rune level the user asked for. If the build does not fit, the result says what it would need rather than failing. This is the caller's judgement and the node will not make it. If the user has not said, offer exactly these and use the first unless they choose another: RL150 — the standard co-op and invasion cap (target_level 150); RL125 — the older duelling cap (target_level 125); RL80 — mid-game co-op (target_level 80). If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
+guidance = "The rune level to build to. If the build does not fit, the result says what it would need rather than failing. The choices are in `options`. If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
+judgement = true
+options = [
+  { label = "RL150 — the standard co-op and invasion cap", target_level = 150 },
+  { label = "RL125 — the older duelling cap", target_level = 125 },
+  { label = "RL80 — mid-game co-op", target_level = 80 },
+]
 
 [params.focus]
 guidance = "Check `objective_responds_to_stats` in the result: false means nothing the user levels improves this focus, and the honest answer is to say so and suggest a different one rather than reporting the spread as optimised. 'attack' unless the user asked for a status build — 'bleed' for a bleed build, 'frost', 'poison', 'scarlet_rot', 'sleep', 'madness'. It changes the answer: Rivers of Blood at RL150 puts 97 into arcane for bleed and 56 dexterity / 59 arcane for raw attack."
@@ -73,13 +79,34 @@ guidance = "The spell to build for, when the user named one — 'Comet Azur', 'R
 guidance = "True if the user says they two-hand it. It lowers the strength the weapon needs, which frees points for everything else."
 
 [params.vigor]
-guidance = "The minimum vigor to hold back. This is the caller's judgement and the node will not make it. If the user has not said, offer exactly these and use the first unless they choose another: balanced PvE (vigor 40, mind 20, endurance 25); survivability first (vigor 60, mind 20, endurance 20); caster (vigor 40, mind 40, endurance 15); minimum floors, spend the rest on damage (vigor 30, mind 15, endurance 15). If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
+guidance = "The minimum vigor to hold back. There is no right answer in the data and the node will not invent one; the choices are in `options`. If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
+judgement = true
+options = [
+  { label = "balanced PvE", vigor = 40, mind = 20, endurance = 25 },
+  { label = "survivability first", vigor = 60, mind = 20, endurance = 20 },
+  { label = "caster", vigor = 40, mind = 40, endurance = 15 },
+  { label = "minimum floors, spend the rest on damage", vigor = 30, mind = 15, endurance = 15 },
+]
 
 [params.mind]
-guidance = "The minimum mind. A weapon build with no spells needs little; a caster needs a lot. This is the caller's judgement and the node will not make it. If the user has not said, offer exactly these and use the first unless they choose another: balanced PvE (vigor 40, mind 20, endurance 25); survivability first (vigor 60, mind 20, endurance 20); caster (vigor 40, mind 40, endurance 15); minimum floors, spend the rest on damage (vigor 30, mind 15, endurance 15). If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
+guidance = "The minimum mind. A weapon build with no spells needs little, a caster needs a lot, and which of those you are is not in any table; the choices are in `options`. If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
+judgement = true
+options = [
+  { label = "balanced PvE", vigor = 40, mind = 20, endurance = 25 },
+  { label = "survivability first", vigor = 60, mind = 20, endurance = 20 },
+  { label = "caster", vigor = 40, mind = 40, endurance = 15 },
+  { label = "minimum floors, spend the rest on damage", vigor = 30, mind = 15, endurance = 15 },
+]
 
 [params.endurance]
-guidance = "The minimum endurance. It interacts with equip-load: call that node if the user cares about rolling. This is the caller's judgement and the node will not make it. If the user has not said, offer exactly these and use the first unless they choose another: balanced PvE (vigor 40, mind 20, endurance 25); survivability first (vigor 60, mind 20, endurance 20); caster (vigor 40, mind 40, endurance 15); minimum floors, spend the rest on damage (vigor 30, mind 15, endurance 15). If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
+guidance = "The minimum endurance. It interacts with equip-load: call that node if the user cares about rolling. The choices are in `options`. If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
+judgement = true
+options = [
+  { label = "balanced PvE", vigor = 40, mind = 20, endurance = 25 },
+  { label = "survivability first", vigor = 60, mind = 20, endurance = 20 },
+  { label = "caster", vigor = 40, mind = 40, endurance = 15 },
+  { label = "minimum floors, spend the rest on damage", vigor = 30, mind = 15, endurance = 15 },
+]
 
 # --- preconditions ---
 

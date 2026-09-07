@@ -35,8 +35,10 @@ MAX_STOP = int(os.environ.get("MAX_STOP", "400"))
 # vouch's taxonomy, for reading the exit code of a call. Only DEFECT is branched on — the
 # loop hands anything that is not a defect back to the model as a correction — but the
 # refusal set is kept accurate because it is the documentation of what those numbers mean.
-# 16 is a node refusing on its own data, which it could not do until vouch 43d5317.
-REFUSAL = {11, 14, 15, 16}
+# 16 is a node refusing on its own data; 17 is a judgement the collection will not make,
+# which the loop turns into an `ask` rather than a correction — see JUDGEMENT below.
+JUDGEMENT = 17
+REFUSAL = {11, 14, 15, 16, JUDGEMENT}
 DEFECT = {12, 13, 20, 21}
 
 # vouch rewrites anything outside this set when it names the ledger file, so a session id of
@@ -85,66 +87,20 @@ def _report(stderr):
 async def load_catalog(collection):
     """The routing context a collection publishes about itself.
 
-    Read once at startup and shared by every conversation: it is the same for all of them,
-    and it is 4,000-odd tokens that would otherwise be re-read per question.
+    Read once at startup and shared by every conversation: it is the same for all of them, and
+    it is re-sent on every decision, six to sixteen per question.
+
+    `--compact` is the runtime's own trimming, and this used to be a `trimmed()` in this file
+    doing the same job by hand — dropping `$schema` and `title`, folding `params.*.guidance`
+    into the schema description that duplicated it, one example per node, no whitespace. The
+    two agreed to within 0.8% on this collection, so nothing was lost by deleting ours, and
+    two things were gained: it stops being this app's problem to maintain, and the compact
+    pack carries a `judgements` map that the hand-rolled version had no idea existed.
     """
-    code, out, err = await _vouch(collection, "startup", "describe", "--all", "--json")
+    code, out, err = await _vouch(collection, "startup", "describe", "--all", "--compact")
     if code != 0:
         raise RuntimeError(f"cannot read the collection: {_report(err)['reason']}")
-
-    described = json.loads(out)
-    return {
-        "collection": described["collection"],
-        "about": described.get("description"),
-        "notes": described.get("notes", []),
-        "nodes": [trimmed(node) for node in described["nodes"]],
-    }
-
-
-def trimmed(node):
-    """One node's routing entry, with the same information said once.
-
-    The catalog is re-sent on every decision — six to sixteen per question — so anything
-    carried twice is paid for six to sixteen times. Two things were:
-
-    `params.*.guidance` and the schema's own `description` are both advice about the same
-    parameter, and every property in every schema already had a description. They are folded
-    together here, into the field a model reading a JSON Schema actually looks at. Neither is
-    dropped: where the guidance adds something the description does not say, both survive,
-    because those strings are where the traps are recorded — *"pass max_upgrade from
-    weapon-lookup, or an impossible upgrade is only caught after the fact"*.
-
-    `$schema` and `title` are for a validator and a documentation generator. Nothing routing
-    reads them.
-    """
-    schema = dict(node["input_schema"])
-    schema.pop("$schema", None)
-    schema.pop("title", None)
-
-    properties = {name: dict(spec) for name, spec in (schema.get("properties") or {}).items()}
-    for name, guide in (node.get("params") or {}).items():
-        guidance = (guide or {}).get("guidance", "")
-        if not guidance or name not in properties:
-            continue
-        description = properties[name].get("description", "")
-        if not description:
-            properties[name]["description"] = guidance
-        elif description in guidance:
-            properties[name]["description"] = guidance
-        elif guidance not in description:
-            properties[name]["description"] = f"{description} {guidance}"
-    if properties:
-        schema["properties"] = properties
-
-    return {
-        "node": node["name"],
-        "purpose": node["purpose"],
-        "use_when": node["use_when"],
-        "not_for": node["not_for"],
-        "input_schema": schema,
-        # One worked call is a shape to copy. The rest were paying rent on every decision.
-        "examples": node["examples"][:1],
-    }
+    return json.loads(out)
 
 
 # ------------------------------------------------------------------------ the model
@@ -213,6 +169,12 @@ Reply with ONLY a JSON object, in one of three shapes:
       Ask ONCE, for everything you are missing. If a node needs three floors, one question
       offering three complete sets beats three questions in a row; each option's `value` may
       be an object carrying all of them. Nobody wants to be interviewed.
+
+      NEVER offer an option you did not get from a node. If you need to know which weapon,
+      spell or boss was meant, the candidates come from a lookup's `candidates` — never from
+      memory. An option you invented becomes an input, and inputs are the one thing in this
+      loop nothing checks: a made-up name that the user clicks is laundered into an answer
+      where every figure attests and the whole thing is about the wrong weapon.
 
       NEVER ask for a value the user's question already contains. If they wrote "VIG 55 /
       MND 30 / END 20", those are the floors — asking and then substituting your own is how
@@ -601,6 +563,33 @@ async def answer(question, collection, session, catalog, ask_model, history=()):
 
         report = _report(err)
         reason = report.get("reason", "")
+        details = report.get("details") or {}
+
+        # A judgement the collection will not make is a question for the person, not a
+        # correction for the model — and the options come from the manifest, so the model
+        # never authors them.
+        #
+        # That distinction is not cosmetic. On question 4.1 a model looked up a weapon that
+        # does not exist, invented a list of plausible-sounding weapons, and asked which was
+        # meant; the harness took the first and the run produced an attested, complete answer
+        # about a weapon nobody had asked about. Every figure in it traced to a real call. The
+        # premise was fabricated one layer above where any check runs, because an `ask` the
+        # model writes is the only text in this loop that becomes an *input* — and inputs are
+        # deliberately outside attestation.
+        if code == JUDGEMENT and details.get("judgement"):
+            yield {
+                "type": "ask",
+                "question": details.get("guidance") or reason,
+                "parameter": details["judgement"],
+                "options": [
+                    {"label": option.get("label") or "this one",
+                     "value": {k: v for k, v in option.items() if k != "label"}}
+                    for option in (details.get("options") or [])
+                    if isinstance(option, dict)
+                ][:4],
+                "from": "collection",
+            }
+            return
 
         # A defect means the node is broken. Retrying is pointless and answering anyway would
         # be dishonest, so the loop stops here rather than working around it.

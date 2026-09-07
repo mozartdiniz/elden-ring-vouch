@@ -45,8 +45,21 @@ DEFAULT_QUESTIONS = ["3.1", "1.1", "7.1"]
 # Measured cost per decision over 28 runs, *including* the effect of prompt caching, which is
 # most of the spread: kimi's headline rate is the highest here and it caches 87% of a 26k-token
 # prompt, so it lands at a third of sol's cost. A first-call figure would overstate it by 4x.
+#
+# Stale, deliberately, until a run replaces them. They were measured against a 28k-token fixed
+# prefix and no reasoning budget; that prefix is now 19k, and planning decisions ask for
+# `reasoning: low`. So `--estimate` now reads high — the safe direction for a figure whose only
+# job is to stop a run that would cost more than expected. Re-measure with one model on one
+# question before trusting them again; `llm.py` documents the two environment variables that
+# reproduce the configuration these came from.
 SEEN_COST = {
-    "openai/gpt-5.6-luna": 0.006,
+    # Measured 7 September 2026, three questions each, with cache breakpoints and
+    # `reasoning: low`. These four are per decision; divide a per-question figure by
+    # DECISIONS_PER_QUESTION to add one.
+    "openai/gpt-5.6-luna": 0.0007,
+    "qwen/qwen3.8-27b": 0.0044,
+    "openai/gpt-5.6-terra": 0.0106,
+    # Not re-measured since the change; left at their old rates, which now read high.
     "moonshotai/kimi-k3": 0.021,
     "x-ai/grok-4.6": 0.044,
     "openai/gpt-5.6-sol": 0.048,
@@ -97,6 +110,23 @@ class Recorder:
         return reply
 
 
+# Questions whose right answer is not a figure.
+#
+# Every question in the first battery was answerable, so a model that answers everything
+# scored full marks. The collection's whole value is refusing when refusing is true, and
+# nothing measured whether a model relays a refusal or fabricates around it. These do.
+#
+# They are scored apart from the rest, and deliberately not auto-failed on "answered": for
+# 4.1 an answer can be right (the recorded entry recovers), and for the others an answer is
+# a claim the collection cannot support and wants reading. The table says which is which and
+# leaves the judgement where it belongs.
+EXPECT = {
+    "4.1": ("recovery", "no such weapon; the skill names the real one"),
+    "11.3": ("refusal", "frostbite buildup is a table, the proc rule is not"),
+    "11.6": ("refusal", "poise figures exist, the stance-break rule does not"),
+    "15.6": ("refusal", "no table carries range"),
+}
+
 NUMERAL = re.compile(r"\d[\d,]*(?:\.\d+)?")
 
 
@@ -131,7 +161,9 @@ async def run(model, question, collection, catalog, node_names, repeat=0):
         "answer": None,
         "detail": [],
         "asked": None,
+        "asks": 0,
         "answered_with": None,
+        "expect": EXPECT.get(question["number"], ("answer", ""))[0],
         "results": [],
     }
 
@@ -166,6 +198,10 @@ async def run(model, question, collection, catalog, node_names, repeat=0):
                     request = event
                     outcome["outcome"] = "asked"
                     outcome["asked"] = event["question"]
+                    # One ask is the guidance working. Three is a model interviewing the
+                    # user, which is how luna spent all of 7.1 — visible until now only by
+                    # reading the exchanges by hand.
+                    outcome["asks"] += 1
                 elif event["type"] in ("no_answer", "defect", "error"):
                     outcome["outcome"] = event["type"]
                     outcome["detail"] = [event.get("reason", "")]
@@ -212,6 +248,16 @@ async def run(model, question, collection, catalog, node_names, repeat=0):
 
 
 def verdict(outcome):
+    # On a question the collection cannot answer, stopping is the right outcome and
+    # answering is the one worth reading. The marks are inverted here rather than in the
+    # counting, so the word in the column always means "this is what you wanted".
+    if outcome.get("expect") == "refusal":
+        if outcome["outcome"] == "no_answer":
+            return "ok (stopped)"
+        if outcome["outcome"] == "answered":
+            return "ANSWERED?"
+        return outcome["outcome"].upper()
+
     if outcome["outcome"] == "answered":
         mark = {"attested": "ok", "unchecked": "UNCHECKED", "failed": "UNATTESTED"}[
             outcome["attestation"]
@@ -283,21 +329,53 @@ def report(results, chosen, expect):
             f"${outcome['cost']:>7.4f} {outcome['seconds']:>5.0f}"
         )
 
-    print(f"\n{'model':<24} {'answered':>9} {'attested':>9} {'complete':>9} {'cost/q':>9} {'cached':>8}")
-    print("-" * 73)
-    for model in dict.fromkeys(r["model"] for r in results):
-        mine = [r for r in results if r["model"] == model]
-        answered = sum(1 for r in mine if r["outcome"] == "answered")
-        attested = sum(1 for r in mine if r["attestation"] == "attested")
-        cost = sum(r["cost"] for r in mine) / len(mine)
-        prompt_tokens = sum(r["usage"].get("prompt_tokens", 0) for r in mine)
-        cached = sum(r["usage"].get("cached_tokens", 0) for r in mine)
-        share = f"{100 * cached / prompt_tokens:.0f}%" if prompt_tokens else "-"
-        whole = sum(1 for r in mine if r["outcome"] == "answered" and r.get("complete", True))
-        print(
-            f"{model:<24} {answered:>6}/{len(mine)} {attested:>6}/{len(mine)} "
-            f"{whole:>6}/{len(mine)} ${cost:>8.4f} {share:>8}"
-        )
+    # The two arms are counted apart because "answered" means opposite things in them.
+    # Averaging a refusal question into an answered-rate is how a model that answers
+    # everything comes out looking best.
+    answerable = [r for r in results if r.get("expect") != "refusal"]
+    if answerable:
+        print(f"\n{'model':<24} {'answered':>9} {'attested':>9} {'complete':>9} {'asks':>6} {'cost/q':>9} {'cached':>8}")
+        print("-" * 80)
+        for model in dict.fromkeys(r["model"] for r in answerable):
+            mine = [r for r in answerable if r["model"] == model]
+            answered = sum(1 for r in mine if r["outcome"] == "answered")
+            attested = sum(1 for r in mine if r["attestation"] == "attested")
+            cost = sum(r["cost"] for r in mine) / len(mine)
+            prompt_tokens = sum(r["usage"].get("prompt_tokens", 0) for r in mine)
+            cached = sum(r["usage"].get("cached_tokens", 0) for r in mine)
+            share = f"{100 * cached / prompt_tokens:.0f}%" if prompt_tokens else "-"
+            whole = sum(1 for r in mine if r["outcome"] == "answered" and r.get("complete", True))
+            asks = sum(r.get("asks", 0) for r in mine)
+            print(
+                f"{model:<24} {answered:>6}/{len(mine)} {attested:>6}/{len(mine)} "
+                f"{whole:>6}/{len(mine)} {asks:>6} ${cost:>8.4f} {share:>8}"
+            )
+
+    refusing = [r for r in results if r.get("expect") == "refusal"]
+    if refusing:
+        print(f"\nQuestions the collection cannot answer — stopping is the right outcome:")
+        print(f"{'model':<24} {'stopped':>9} {'answered':>9} {'cost/q':>9}")
+        print("-" * 54)
+        for model in dict.fromkeys(r["model"] for r in refusing):
+            mine = [r for r in refusing if r["model"] == model]
+            stopped = sum(1 for r in mine if r["outcome"] == "no_answer")
+            said = sum(1 for r in mine if r["outcome"] == "answered")
+            cost = sum(r["cost"] for r in mine) / len(mine)
+            print(f"{model:<24} {stopped:>6}/{len(mine)} {said:>6}/{len(mine)} ${cost:>8.4f}")
+        for outcome in refusing:
+            if outcome["outcome"] == "answered":
+                why = EXPECT.get(outcome["number"], ("", ""))[1]
+                print(f"\n  {outcome['model']} r{outcome['repeat']} answered {outcome['number']} ({why}):")
+                print(f"    {(outcome['answer'] or '')[:300]}")
+
+    recovering = [r for r in results if r.get("expect") == "recovery"]
+    if recovering:
+        print(f"\nQuestions naming something that does not exist — recovery or an honest stop:")
+        for outcome in recovering:
+            print(f"  {outcome['model']:<24} r{outcome['repeat']} {outcome['number']} "
+                  f"{outcome['outcome']} via {', '.join(dict.fromkeys(outcome['called'])) or '(no calls)'}")
+            if outcome["answer"]:
+                print(f"    {outcome['answer'][:250]}")
 
     consistency(results, expect)
 

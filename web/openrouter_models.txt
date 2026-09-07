@@ -1,4 +1,6 @@
-openai/gpt-5.6-sol
+# The model the app ships with. Chosen 7 September 2026 over gpt-5.6-terra on an 18-question
+# battery: more answered (33/42 against 25/42), everything it answered attested and complete,
+# and a ninth of the cost. Add a model on the command line to compare against it:
+#
+#   ./scripts/compare_models.py --models openai/gpt-5.6-luna,openai/gpt-5.6-terra
 openai/gpt-5.6-luna
-x-ai/grok-4.6
-moonshotai/kimi-k3

@@ -89,18 +89,53 @@ async def load_catalog(collection):
         "collection": described["collection"],
         "about": described.get("description"),
         "notes": described.get("notes", []),
-        "nodes": [
-            {
-                "node": node["name"],
-                "purpose": node["purpose"],
-                "use_when": node["use_when"],
-                "not_for": node["not_for"],
-                "parameters": node["params"],
-                "input_schema": node["input_schema"],
-                "examples": node["examples"],
-            }
-            for node in described["nodes"]
-        ],
+        "nodes": [trimmed(node) for node in described["nodes"]],
+    }
+
+
+def trimmed(node):
+    """One node's routing entry, with the same information said once.
+
+    The catalog is re-sent on every decision — six to sixteen per question — so anything
+    carried twice is paid for six to sixteen times. Two things were:
+
+    `params.*.guidance` and the schema's own `description` are both advice about the same
+    parameter, and every property in every schema already had a description. They are folded
+    together here, into the field a model reading a JSON Schema actually looks at. Neither is
+    dropped: where the guidance adds something the description does not say, both survive,
+    because those strings are where the traps are recorded — *"pass max_upgrade from
+    weapon-lookup, or an impossible upgrade is only caught after the fact"*.
+
+    `$schema` and `title` are for a validator and a documentation generator. Nothing routing
+    reads them.
+    """
+    schema = dict(node["input_schema"])
+    schema.pop("$schema", None)
+    schema.pop("title", None)
+
+    properties = {name: dict(spec) for name, spec in (schema.get("properties") or {}).items()}
+    for name, guide in (node.get("params") or {}).items():
+        guidance = (guide or {}).get("guidance", "")
+        if not guidance or name not in properties:
+            continue
+        description = properties[name].get("description", "")
+        if not description:
+            properties[name]["description"] = guidance
+        elif description in guidance:
+            properties[name]["description"] = guidance
+        elif guidance not in description:
+            properties[name]["description"] = f"{description} {guidance}"
+    if properties:
+        schema["properties"] = properties
+
+    return {
+        "node": node["name"],
+        "purpose": node["purpose"],
+        "use_when": node["use_when"],
+        "not_for": node["not_for"],
+        "input_schema": schema,
+        # One worked call is a shape to copy. The rest were paying rent on every decision.
+        "examples": node["examples"][:1],
     }
 
 
@@ -219,25 +254,62 @@ def earlier_turns(history):
     return "".join(lines)
 
 
+class Prompt(str):
+    """The text of one prompt, plus where a provider may put a cache breakpoint.
+
+    It **is** a `str`, so everything that logs, measures, slices or greps a prompt keeps
+    working untouched — `test_server.py` reads them, `compare_models.py` records their
+    length, and neither needs to know this exists.
+
+    What `llm.py` needs on top of the text is two things it cannot recover from the string:
+
+      * `segments` — (text, cacheable) pairs, in order. A cacheable segment means
+        *everything up to and including this point is identical on the next call*, which is
+        exactly the condition a prefix cache needs. The planning prompt is built so that is
+        true twice: after the rules and the catalog, which never change at all, and after
+        the calls made so far, which only ever grow.
+      * `kind` — "planning" or "narration". They want different budgets. A routing decision
+        is a fifty-token JSON object that needs no deliberation; the narration is the one
+        reply a person actually reads.
+    """
+
+    def __new__(cls, segments, kind):
+        prompt = super().__new__(cls, "".join(text for text, _ in segments))
+        prompt.segments = [(text, cache) for text, cache in segments if text]
+        prompt.kind = kind
+        return prompt
+
+
 def planning_prompt(question, catalog, steps, correction, history=()):
-    prompt = [
+    # Ordered so that everything stable precedes everything that varies, which is what makes
+    # the two breakpoints below legal: the rules and the catalog are the same for every
+    # question ever asked; the history and the question are the same for every decision
+    # within this question; the calls made so far only ever grow; and the correction — the
+    # one part that can change while the prefix stays fixed — is last.
+    fixed = [
         PLANNING_RULES,
         "\nThe collection you are working with:\n",
-        json.dumps(catalog, indent=2),
+        # Not indented. Pretty-printing this cost 25,000 characters — about 6,000 tokens —
+        # on every single decision, for whitespace no model needs.
+        json.dumps(catalog, separators=(",", ":")),
+    ]
+
+    asked = [
         earlier_turns(history),
         f"\n\nThe user asked: {question}\n",
     ]
 
     if steps:
-        prompt.append("\nCalls made so far, and their verified results:\n")
+        asked.append("\nCalls made so far, and their verified results:\n")
         for step in steps:
-            prompt.append(
+            asked.append(
                 f"  {step['node']}({json.dumps(step['input'])})\n"
                 f"    → {json.dumps(step['result'])}\n"
             )
 
+    varies = []
     if correction:
-        prompt.append(
+        varies.append(
             "\nYour last call was rejected by the runtime.\n"
             f"  you called: {correction['node']}({json.dumps(correction['input'])})\n"
             f"  the runtime said: {correction['reason']}\n\n"
@@ -245,7 +317,18 @@ def planning_prompt(question, catalog, steps, correction, history=()):
             "node, or stop if there is genuinely no answer to be had.\n"
         )
 
-    return "".join(prompt)
+    return Prompt(
+        [
+            # ~18k tokens, byte-identical on every decision of every question.
+            ("".join(fixed), True),
+            # This breakpoint moves forward as calls accumulate. Each decision's prefix is
+            # the previous decision's prefix plus one more result, so the cache is read for
+            # everything already seen and written only for what is new.
+            ("".join(asked), True),
+            ("".join(varies), False),
+        ],
+        "planning",
+    )
 
 
 def narration_prompt(question, steps, history=()):
@@ -265,7 +348,15 @@ def narration_prompt(question, steps, history=()):
             + "".join(f'  asked: "{t["question"]}"\n  answered: {t["answer"]}\n\n' for t in answered)
         )
 
-    return previous + f"""\
+    # The text is left exactly as it was. This is the one prompt where a model writes figures
+    # of its own accord, it is the prompt the whole battery was worked against, and it is one
+    # call in seven to seventeen — so there is very little to save here and a great deal to
+    # confound. `Prompt` is only wrapped around it so `llm.py` can tell the two kinds apart.
+    return Prompt(
+        [
+            (
+                previous
+                + f"""\
 Answer the user's question in one to three plain sentences, using ONLY the values in the
 verified results below.
 
@@ -276,10 +367,18 @@ Numbers written inside a name or a sentence — a label like "Seppuku (only blee
 — are text, not computed figures. Describe them in words or leave them out; do not quote them
 as numbers. Only a value that stands on its own in the results is a figure you may repeat.
 
+Write in the language the user asked in. Weapon, spell, boss, talisman and Ash of War names
+are proper nouns and stay exactly as the results spell them, whatever language you answer in.
+
 The user asked: {question}
 
 {verified}
-"""
+""",
+                False,
+            )
+        ],
+        "narration",
+    )
 
 
 # --------------------------------------------------------------------- attestation
@@ -421,6 +520,24 @@ async def answer(question, collection, session, catalog, ask_model, history=()):
         if not node:
             yield {"type": "error", "reason": f"the model replied with no decision: {reply[:200]}"}
             return
+
+        # A call this question has already made costs twice: the subprocess, and then a
+        # second identical result carried in every remaining decision's prompt. Neither buys
+        # anything — the node is deterministic, and its result is already in front of the
+        # model. Hand back a correction instead, which is also the only thing that breaks the
+        # model out of asking for it again.
+        already = next(
+            (s for s in steps if s["node"] == node and s["input"] == node_input), None
+        )
+        if already is not None:
+            reason = (
+                "you have already called that node with exactly those arguments in this "
+                "question, and its result is listed above. Use it, call something else, or "
+                "say you are done."
+            )
+            yield {"type": "refusal", "node": node, "reason": reason, "code": 0}
+            correction = {"node": node, "input": node_input, "reason": reason}
+            continue
 
         yield {"type": "call", "node": node, "input": node_input}
         code, out, err = await _vouch(

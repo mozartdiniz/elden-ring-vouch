@@ -100,6 +100,64 @@ def _():
     )
 
 
+# ----------------------------------------------------------------------- what it costs
+
+
+@check("the cacheable prefix is byte-identical as a question proceeds")
+def _():
+    """The whole saving rests on this and nothing checks it at runtime.
+
+    A cache breakpoint is a claim that the text up to it is the same as last time. If
+    anything volatile ever drifts above one — a timestamp, a re-serialised dict, a
+    correction moved earlier — the claim silently becomes false, every call pays a cache
+    *write* instead of a read, and the bill goes up rather than down. Nothing in the reply
+    says so.
+    """
+    catalog = {"collection": "c", "notes": ["n"], "nodes": [{"node": "weapon-lookup"}]}
+    first = engine.planning_prompt("how much AR?", catalog, [], None)
+    later = engine.planning_prompt(
+        "how much AR?",
+        catalog,
+        [{"node": "weapon-lookup", "input": {"query": "uchigatana"}, "result": {"ar": 229}}],
+        {"node": "attack-power", "input": {}, "reason": "precondition failed"},
+    )
+
+    assert first.segments[0][1] and later.segments[0][1], "the catalog is the fixed prefix"
+    assert first.segments[0][0] == later.segments[0][0], "the fixed prefix must not drift"
+    # The second breakpoint only ever grows, so the earlier one stays a prefix of it.
+    assert later.segments[1][0].startswith(first.segments[1][0])
+    # And the correction, which is the one part that changes under a fixed prefix, is last
+    # and is not claimed to be cacheable.
+    assert later.segments[-1][1] is False
+    assert "precondition failed" in later.segments[-1][0]
+    # Whatever the segments say, the text a model sees is unchanged.
+    assert str(later) == "".join(text for text, _ in later.segments)
+
+
+@check("a prompt is still a string, and llm.py can place breakpoints on it")
+def _():
+    import llm
+
+    catalog = {"collection": "c", "nodes": []}
+    prompt = engine.planning_prompt("q?", catalog, [], None)
+    assert isinstance(prompt, str) and len(prompt) == len(str(prompt))
+
+    blocks = llm._content(prompt)
+    assert [b["text"] for b in blocks] == [text for text, _ in prompt.segments]
+    assert blocks[0]["cache_control"] == {"type": "ephemeral"}
+
+    # Narration is one uncacheable block, and goes out as a plain string as it always did.
+    assert isinstance(llm._content(engine.narration_prompt("q?", [])), str)
+
+    # CACHE_BREAKPOINTS=0 is a true no-op, so a comparison arm can turn this off and change
+    # nothing else about the request.
+    os.environ["CACHE_BREAKPOINTS"] = "0"
+    try:
+        assert llm._content(prompt) == str(prompt)
+    finally:
+        del os.environ["CACHE_BREAKPOINTS"]
+
+
 # ------------------------------------------------------------------------ the store
 
 
@@ -155,6 +213,27 @@ def _():
     answer = events[-1]
     assert answer["type"] == "answer", answer
     assert answer["attestation"] == "attested", answer
+
+
+@check("the same call twice runs once, and the model is told it already has it")
+def _():
+    call = json.dumps({"call": {"node": "weapon-lookup", "input": {"query": "Uchigatana"}}})
+    model = Script(
+        call,
+        call,  # the same node with the same arguments: nothing new can come of it
+        json.dumps({"done": True}),
+        "The Uchigatana resolves to one weapon, upgradeable to +25.",
+    )
+    events = asyncio.run(run("what is an Uchigatana?", model))
+
+    assert [e["type"] for e in events].count("call") == 1, "the node must not run twice"
+    repeat = next(e for e in events if e["type"] == "refusal")
+    assert "already called that node" in repeat["reason"]
+
+    # A duplicate result would otherwise be carried in every remaining decision's prompt.
+    planning = [p for p in model.prompts if getattr(p, "kind", None) == "planning"]
+    assert planning[-1].count("→ ") == 1, "one call, one result, however often it was asked for"
+    assert events[-1]["attestation"] == "attested", events[-1]
 
 
 @check("a fabricated figure is caught by attestation, and no answer is shown")

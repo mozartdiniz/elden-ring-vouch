@@ -9,7 +9,16 @@ Environment:
     LLM_TIMEOUT         seconds per call             (default: 120)
     CLAUDE_BIN          the CLI to shell out to      (default: claude)
     OPENROUTER_API_KEY  required by the openrouter backend
-    OPENROUTER_MODEL    e.g. anthropic/claude-sonnet-5
+    OPENROUTER_MODEL    the model to drive the loop  (default: openai/gpt-5.6-luna)
+
+Four more govern what a run costs. All have defaults that are the intended shipping
+configuration; the last two exist so an arm of a comparison can reproduce the old numbers.
+
+    OPENROUTER_MAX_TOKENS  ceiling for the narration reply    (default: 20000)
+    PLANNING_MAX_TOKENS    ceiling for a routing decision     (default: 8000)
+    PLANNING_REASONING     low | off | default | <effort>     (default: low)
+    CACHE_TTL              e.g. 1h; empty uses the provider's (default: empty)
+    CACHE_BREAKPOINTS      how many to place, 0 disables      (default: 4)
 """
 
 import asyncio
@@ -23,8 +32,12 @@ TIMEOUT = float(os.environ.get("LLM_TIMEOUT", "120"))
 # not be had. Both were measured, not imagined: a 14-question run lost eleven questions to
 # OpenRouter's new-account rate limit, and five more to a reasoning model returning empty
 # content — neither of which says anything about whether the question was answerable.
-ATTEMPTS = int(os.environ.get("LLM_ATTEMPTS", "4"))
-BACKOFF = float(os.environ.get("LLM_BACKOFF", "4"))
+#
+# Four and four was not enough: an 18-question battery at concurrency 2 still lost a question
+# to `new-account-rpm`, which caps some models at 20 requests a minute and which one question
+# can approach on its own, since a question is eight to fifteen sequential calls.
+ATTEMPTS = int(os.environ.get("LLM_ATTEMPTS", "6"))
+BACKOFF = float(os.environ.get("LLM_BACKOFF", "10"))
 
 
 class LLMError(RuntimeError):
@@ -57,6 +70,50 @@ async def _claude(prompt, model=None, usage=None):
     return out.decode().strip()
 
 
+def _content(prompt):
+    """The user message, with a cache breakpoint wherever the prompt says one is legal.
+
+    `engine.Prompt` marks the points its text is identical to the previous call up to — the
+    rules and the catalog, then the calls made so far. Without a mark, a model pays full
+    price for the same 18,000 tokens on all six to sixteen decisions of every question.
+
+    **Do not assume a provider caches on its own.** It was measured: with the breakpoints
+    turned off, `openai/gpt-5.6-luna` reported 0% cached on a prompt whose first 19k tokens
+    were byte-identical across eight decisions. With them on, the same question came back
+    77% cached and cost a third as much, with an identical answer. Some providers do match
+    the longest prefix automatically — `moonshotai/kimi-k3` was already at 87% before any of
+    this — but that is a property of the provider, not a rule.
+
+    Marking costs nothing where it is not needed: a provider that ignores `cache_control`
+    reads the same text either way. A plain string is sent as a plain string, so nothing that
+    hands this module an ordinary prompt changes shape.
+    """
+    # Anthropic allows four; two is what the planning prompt actually has. Zero is a true
+    # no-op — the request goes out as a plain string, exactly as it did before — so a
+    # comparison can run an arm without caching and change nothing else.
+    breakpoints = int(os.environ.get("CACHE_BREAKPOINTS", "4"))
+    ttl = os.environ.get("CACHE_TTL", "").strip()
+
+    segments = getattr(prompt, "segments", None)
+    if not segments or breakpoints < 1 or not any(cache for _, cache in segments):
+        return str(prompt)
+
+    blocks = []
+    for text, cache in segments:
+        # Adjacent uncacheable text is one block; nothing is gained by splitting it.
+        if blocks and not cache and "cache_control" not in blocks[-1]:
+            blocks[-1]["text"] += text
+            continue
+        block = {"type": "text", "text": text}
+        if cache and breakpoints > 0:
+            block["cache_control"] = {"type": "ephemeral"}
+            if ttl:
+                block["cache_control"]["ttl"] = ttl
+            breakpoints -= 1
+        blocks.append(block)
+    return blocks
+
+
 async def _openrouter(prompt, model=None, usage=None):
     import httpx
 
@@ -64,19 +121,36 @@ async def _openrouter(prompt, model=None, usage=None):
     if not key:
         raise LLMError("OPENROUTER_API_KEY is not set")
 
+    planning = getattr(prompt, "kind", None) == "planning"
+
     body = {
-        "model": model or os.environ.get("OPENROUTER_MODEL", "anthropic/claude-sonnet-5"),
-        "messages": [{"role": "user", "content": prompt}],
+        "model": model or os.environ.get("OPENROUTER_MODEL", "openai/gpt-5.6-luna"),
+        "messages": [{"role": "user", "content": _content(prompt)}],
         # Reasoning tokens are drawn from this same budget, and a model that spends it all
         # thinking returns an empty `content` — which is how moonshotai/kimi-k3 failed, with
         # 663 of 707 completion tokens going to reasoning. The replies wanted here are still
         # small; the headroom is for the thinking in front of them.
-        "max_tokens": int(os.environ.get("OPENROUTER_MAX_TOKENS", "20000")),
+        "max_tokens": int(
+            os.environ.get("PLANNING_MAX_TOKENS", "8000")
+            if planning
+            else os.environ.get("OPENROUTER_MAX_TOKENS", "20000")
+        ),
         "temperature": 0,
         # Ask for token counts and the actual charge. Without this the reply carries no cost,
         # and a model comparison with no cost in it is not a comparison.
         "usage": {"include": True},
     }
+
+    # Completion tokens are the part of the bill no cache touches, and a planning decision
+    # spends them on deliberation it does not need: the reply is one JSON object choosing a
+    # node, and every choice it can make is checked by the runtime — a bad route comes back
+    # as a refusal, not as a wrong number. That is what makes this the safe place to be
+    # cheap, and kimi's 663-of-707 split is what makes it worth doing.
+    #
+    # Set PLANNING_REASONING=default to send nothing and reproduce the earlier measurements.
+    effort = os.environ.get("PLANNING_REASONING", "low").strip()
+    if planning and effort and effort != "default":
+        body["reasoning"] = {"exclude": True} if effort == "off" else {"effort": effort}
     headers = {"Authorization": f"Bearer {key}"}
     # Optional attribution headers OpenRouter shows on its dashboard.
     if os.environ.get("APP_URL"):
@@ -129,8 +203,15 @@ async def _openrouter(prompt, model=None, usage=None):
         usage["calls"] = usage.get("calls", 0) + 1
         for field in ("prompt_tokens", "completion_tokens", "cost"):
             usage[field] = usage.get(field, 0) + (spent.get(field) or 0)
-        cached = (spent.get("prompt_tokens_details") or {}).get("cached_tokens") or 0
-        usage["cached_tokens"] = usage.get("cached_tokens", 0) + cached
+        details = spent.get("prompt_tokens_details") or {}
+        usage["cached_tokens"] = usage.get("cached_tokens", 0) + (details.get("cached_tokens") or 0)
+        # What it cost to put the prefix there in the first place. Anthropic bills a cache
+        # write above the normal input rate, so a run that writes on every call rather than
+        # reading is *worse* than no caching at all — and the cached-token share alone cannot
+        # tell those two apart.
+        usage["cache_write_tokens"] = usage.get("cache_write_tokens", 0) + (
+            details.get("cache_creation_tokens") or details.get("cached_write_tokens") or 0
+        )
 
     if not (content or "").strip():
         spent = (payload.get("usage") or {}).get("completion_tokens")

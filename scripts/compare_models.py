@@ -125,6 +125,25 @@ EXPECT = {
     "11.3": ("refusal", "frostbite buildup is a table, the proc rule is not"),
     "11.6": ("refusal", "poise figures exist, the stance-break rule does not"),
     "15.6": ("refusal", "no table carries range"),
+    # Added 7 September, and the reason they were not here first is worth keeping.
+    #
+    # Both were scored as failures while the models were right about them: nothing in this
+    # collection ranks talismans, which is DATA.md's first entry. VALIDATION.md marks 5.1 as
+    # done, so the recorded answer disagrees with the code — and the scoring key inherited the
+    # record's opinion rather than the collection's behaviour.
+    #
+    # That distinction only started to matter this week. Once refusing got easier, an honest
+    # "no node does this" and a failure scored identically, and the difference was most of the
+    # movement between runs. A key that cannot tell "couldn't" from "wouldn't" measures the
+    # wrong thing at exactly the moment the tool gets better at saying which.
+    "5.1": ("refusal", "no node ranks talismans — DATA.md 1"),
+    # 14.4 was here too and should not have been. It asks how to get a fire buff without
+    # Faith, and the model answers it by naming plausible items and pricing them through
+    # item-effect and buff-stack — no ranking required, and it says which item it could not
+    # verify. 5.1 asks which *four* talismans maximise something, which is a ranking and is
+    # the gap. Being in the refusal arm scores a good answer as a failure, so the line between
+    # "name some and price them" and "rank the whole table" has to be drawn where the data is,
+    # not where the question sounds hard.
 }
 
 NUMERAL = re.compile(r"\d[\d,]*(?:\.\d+)?")

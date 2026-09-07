@@ -5,7 +5,12 @@ known to be missing, and the traps that have already cost time.
 
 `README.md` says how to use the collection. This file says where the work stands.
 
-*Last worked on 7 September 2026. Both repositories clean, 45 commits pushed.*
+*Last worked on 7 September 2026. Both repositories clean.*
+
+**The shipping configuration is `openai/gpt-5.6-luna` on the 18-question battery: 32 of 39
+answerable runs answered, every one attested, 30 complete, and 9 of 12 refusal-arm runs
+stopping correctly.** `DATA.md` holds what is blocked on a table; `~/Dev/vouch/FEEDBACK.md`
+holds what is blocked on the runtime, six of its ten items now done.
 
 ---
 

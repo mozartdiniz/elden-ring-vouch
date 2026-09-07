@@ -61,3 +61,15 @@ expect_code = 11
 name = "a stat outside 1..99 is refused"
 input = { strength = 120, dexterity = 30, intelligence = 9, faith = 9, arcane = 9 }
 expect_code = 10
+
+# Determinism. The same question twice — once without a class, once with — because the drift
+# the battery measured was a model choosing this parameter differently between runs.
+[[case]]
+name = "no class given falls to the least-distorting one, and says so"
+input = { strength = 55, dexterity = 14, intelligence = 9, faith = 60, arcane = 9, limit = 3 }
+expect = { "result.starting_class" = "Wretch", "result.assumed.starting_class" = "Wretch" }
+
+[[case]]
+name = "a class the caller gave is never reported as an assumption"
+input = { strength = 55, dexterity = 14, intelligence = 9, faith = 60, arcane = 9, limit = 3, starting_class = "Prophet", two_hand = false }
+expect = { "result.starting_class" = "Prophet", "result.assumed" = {} }

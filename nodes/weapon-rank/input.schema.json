@@ -64,7 +64,19 @@
     },
     "starting_class": {
       "type": "string",
-      "description": "Needed only when ranking catalysts for a spell: planner.py floors every stat at the class's, so the wrong class ranks a slightly different build. Default Wretch, whose flat tens lift anything below 10."
+      "description": "Which class the character started as. The ten are listed here rather than only in a precondition, which the routing pack does not publish. Optional: without one the collection uses 'Wretch' \u2014 the lowest floors of the ten, so the least distortion \u2014 and reports it in `assumed`.",
+      "enum": [
+        "Astrologer",
+        "Bandit",
+        "Confessor",
+        "Hero",
+        "Prisoner",
+        "Prophet",
+        "Samurai",
+        "Vagabond",
+        "Warrior",
+        "Wretch"
+      ]
     }
   }
 }

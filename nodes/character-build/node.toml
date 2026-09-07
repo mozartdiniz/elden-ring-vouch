@@ -60,9 +60,13 @@ guidance = "Omit unless the user named it."
 [params.arcane]
 guidance = "Omit unless the user named it."
 
+# The schema's enum now does this, and does it earlier and with a better message. Kept, and
+# guarded against absence, because a contract that fails closed on a legal input refuses it:
+# an unevaluable contract is a refusal (exit 15), so the moment the class became optional this
+# expression started rejecting every call that left it out.
 [[requires]]
 expr = '''
-input.starting_class in [
+!has(input.starting_class) || input.starting_class in [
   "Vagabond", "Warrior", "Hero", "Bandit", "Astrologer",
   "Prophet", "Samurai", "Prisoner", "Confessor", "Wretch"
 ]
@@ -168,3 +172,10 @@ call = { starting_class = "Hero", strength = 60, faith = 60, target_level = 150 
 [[examples]]
 ask = "what does an RL150 Astrologer with 60 intelligence and 40 vigor look like?"
 call = { starting_class = "Astrologer", intelligence = 60, vigor = 40 }
+
+# A default that is not reported is bug 17 again: the same class, applied silently, while the
+# parameter's own guidance said to leave it out. Reported, it is an assumption a reader can
+# reject. So the contract is not about the value — it is about the saying.
+[[ensures]]
+expr = 'has(input.starting_class) ? size(result.assumed) == 0 : result.assumed.starting_class == result.starting_class'
+message = "a judgement the collection made for the caller has to appear in `assumed`"

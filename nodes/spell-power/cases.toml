@@ -163,3 +163,15 @@ expect = { "result.spell_buff" = 222.87142857039998, "result.starting_class" = "
 name = "and as a Wretch it is a different character"
 input = { spell = "Black Flame", catalyst = "Frenzied Flame Seal", upgrade = 10, starting_class = "Wretch", strength = 79, dexterity = 17, intelligence = 9, faith = 27, arcane = 9 }
 expect = { "result.spell_buff" = 223.2999999994, "result.stats_raised_by_class[0]" = "arcane", "result.stats_raised_by_class[1]" = "intelligence", "result.stats_used.intelligence" = 10 }
+
+# Determinism. The same question twice — once without a class, once with — because the drift
+# the battery measured was a model choosing this parameter differently between runs.
+[[case]]
+name = "no class given falls to the least-distorting one, and says so"
+input = { spell = "Comet", catalyst = "Academy Glintstone Staff", upgrade = 25, strength = 10, dexterity = 12, intelligence = 60, faith = 10, arcane = 9 }
+expect = { "result.starting_class" = "Wretch", "result.assumed.starting_class" = "Wretch" }
+
+[[case]]
+name = "a class the caller gave is never reported as an assumption"
+input = { spell = "Comet", catalyst = "Academy Glintstone Staff", upgrade = 25, strength = 10, dexterity = 12, intelligence = 60, faith = 10, arcane = 9, starting_class = "Astrologer" }
+expect = { "result.starting_class" = "Astrologer", "result.assumed" = {} }

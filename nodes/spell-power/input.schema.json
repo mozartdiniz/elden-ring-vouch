@@ -37,7 +37,19 @@
     },
     "starting_class": {
       "type": "string",
-      "description": "The class the character started as. Not cosmetic: planner.py uses a class's stats as a floor, so a build with 9 intelligence computed as a Wretch is computed at 10. Pass the real class \u2014 the default is Wretch and it lifts every stat below ten."
+      "description": "Which class the character started as. The ten are listed here rather than only in a precondition, which the routing pack does not publish. Optional: without one the collection uses 'Wretch' \u2014 the lowest floors of the ten, so the least distortion \u2014 and reports it in `assumed`.",
+      "enum": [
+        "Astrologer",
+        "Bandit",
+        "Confessor",
+        "Hero",
+        "Prisoner",
+        "Prophet",
+        "Samurai",
+        "Vagabond",
+        "Warrior",
+        "Wretch"
+      ]
     },
     "strength": {
       "type": "integer"

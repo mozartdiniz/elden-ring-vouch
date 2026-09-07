@@ -40,22 +40,18 @@ input = { starting_class = "Hero", intelligence = 60 }
 expect = { "result.optimal_class" = "Astrologer" }
 
 [[case]]
-name = "an unknown starting class is refused with the ten names"
+name = "an unknown starting class is refused by the enum, before the precondition"
 input = { starting_class = "Paladin" }
-expect_code = 11
+expect_code = 10
 
 [[case]]
 name = "a stat above 99 is refused"
 input = { starting_class = "Hero", strength = 120 }
 expect_code = 11
 
-[[case]]
-name = "a missing starting class is a caller error"
-input = { strength = 60 }
-expect_code = 10
-
-# Added after an eval run wrote "47 levels spare" — a subtraction the agent did itself, which
-# attestation refused because no node had returned it.
+# Was "a missing starting class is a caller error", which stopped being true when the
+# collection took responsibility for the choice. The question it was really asking — does a
+# bare call still produce a defensible answer — is now the determinism case below.
 [[case]]
 name = "a target level makes the levels left a returned figure"
 input = { starting_class = "Hero", strength = 60, faith = 60, target_level = 150 }
@@ -80,3 +76,15 @@ expect = { "result.levels_to_target" = -127 }
 name = "the spreadsheet's strength build, vitals and level"
 input = { starting_class = "Confessor", vigor = 60, mind = 13, endurance = 27, strength = 79, dexterity = 12, intelligence = 9, faith = 27, arcane = 9 }
 expect = { "result.level" = 157, "result.hp" = 1900, "result.fp" = 88, "result.stamina" = 125, "result.equip_load" = 74.06015257 }
+
+# The determinism cases. Same question twice, once with the class and once without: the
+# collection's own choice has to be stable and has to be declared.
+[[case]]
+name = "no class given falls to the least-distorting one, and says so"
+input = { vigor = 40, mind = 20, endurance = 25 }
+expect = { "result.starting_class" = "Wretch", "result.assumed.starting_class" = "Wretch" }
+
+[[case]]
+name = "a class the caller gave is never reported as an assumption"
+input = { starting_class = "Samurai", vigor = 40 }
+expect = { "result.starting_class" = "Samurai", "result.assumed" = {} }

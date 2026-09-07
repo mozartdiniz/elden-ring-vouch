@@ -27,7 +27,8 @@
     "stats_raised_by_class",
     "limit",
     "returned",
-    "truncated"
+    "truncated",
+    "assumed"
   ],
   "properties": {
     "ranked": {
@@ -332,6 +333,10 @@
         "type": "string"
       },
       "description": "Stats the class lifted above what was asked for."
+    },
+    "assumed": {
+      "type": "object",
+      "description": "Judgement parameters the caller did not give, and the value the collection used. Empty when the caller gave them all. Quote these as assumptions, never as the user's choice."
     }
   }
 }

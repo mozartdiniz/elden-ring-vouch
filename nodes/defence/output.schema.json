@@ -4,76 +4,259 @@
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "starting_class", "level", "stats", "stats_given", "stats_from_class_minimum",
-    "stats_raised_to_class_minimum", "armour", "armour_worn", "defence",
-    "negation", "negation_percent", "absorb", "resist", "hp", "armour_weight",
-    "talismans_modelled"
+    "starting_class",
+    "level",
+    "stats",
+    "stats_given",
+    "stats_from_class_minimum",
+    "stats_raised_to_class_minimum",
+    "armour",
+    "armour_worn",
+    "defence",
+    "negation",
+    "negation_percent",
+    "absorb",
+    "resist",
+    "hp",
+    "armour_weight",
+    "talismans_modelled",
+    "assumed"
   ],
   "properties": {
-    "starting_class": { "type": "string" },
-    "level": { "type": "integer", "minimum": 1 },
-    "hp": { "type": "integer", "minimum": 1 },
-    "armour_weight": { "type": "number", "minimum": 0 },
-    "armour_worn": { "type": "array", "items": { "type": "string" }, "description": "Which slots are filled. An empty list means the figures are for a bare character." },
-    "talismans_modelled": { "type": "boolean", "description": "Always false: talisman effects are not modelled. Say so when one would change the answer." },
-    "stats": { "$ref": "#/$defs/stats" },
-    "stats_given": { "type": "array", "items": { "type": "string" }, "description": "Stats the caller specified." },
-    "stats_from_class_minimum": { "type": "array", "items": { "type": "string" }, "description": "Stats nobody chose; these are the class floor, not a decision." },
-    "stats_raised_to_class_minimum": { "type": "array", "items": { "type": "string" }, "description": "Stats asked for below the class floor, which came back raised to it. The user did not get the number they named." },
+    "starting_class": {
+      "type": "string"
+    },
+    "level": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "hp": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "armour_weight": {
+      "type": "number",
+      "minimum": 0
+    },
+    "armour_worn": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Which slots are filled. An empty list means the figures are for a bare character."
+    },
+    "talismans_modelled": {
+      "type": "boolean",
+      "description": "Always false: talisman effects are not modelled. Say so when one would change the answer."
+    },
+    "stats": {
+      "$ref": "#/$defs/stats"
+    },
+    "stats_given": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Stats the caller specified."
+    },
+    "stats_from_class_minimum": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Stats nobody chose; these are the class floor, not a decision."
+    },
+    "stats_raised_to_class_minimum": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Stats asked for below the class floor, which came back raised to it. The user did not get the number they named."
+    },
     "armour": {
-      "type": "object", "additionalProperties": false,
-      "required": ["head", "chest", "arms", "legs"],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "head",
+        "chest",
+        "arms",
+        "legs"
+      ],
       "properties": {
-        "head": { "type": "string" }, "chest": { "type": "string" },
-        "arms": { "type": "string" }, "legs": { "type": "string" }
+        "head": {
+          "type": "string"
+        },
+        "chest": {
+          "type": "string"
+        },
+        "arms": {
+          "type": "string"
+        },
+        "legs": {
+          "type": "string"
+        }
       }
     },
     "defence": {
-      "type": "object", "additionalProperties": false,
+      "type": "object",
+      "additionalProperties": false,
       "description": "Flat per-element defence from stats alone. Not a percentage, and not from armour.",
-      "required": ["physical", "magic", "fire", "lightning", "holy"],
+      "required": [
+        "physical",
+        "magic",
+        "fire",
+        "lightning",
+        "holy"
+      ],
       "properties": {
-        "physical": { "type": "integer" }, "magic": { "type": "integer" },
-        "fire": { "type": "integer" }, "lightning": { "type": "integer" },
-        "holy": { "type": "integer" }
+        "physical": {
+          "type": "integer"
+        },
+        "magic": {
+          "type": "integer"
+        },
+        "fire": {
+          "type": "integer"
+        },
+        "lightning": {
+          "type": "integer"
+        },
+        "holy": {
+          "type": "integer"
+        }
       }
     },
-    "negation": { "$ref": "#/$defs/damage", "description": "Share of incoming damage removed by armour, as a fraction." },
-    "negation_percent": { "$ref": "#/$defs/damage", "description": "The same figures as the equipment screen shows them, rounded the way the planner rounds its own display. Quote these." },
-    "absorb": { "$ref": "#/$defs/damage", "description": "The multiplier damage is scaled by. 1.0 absorbs nothing." },
+    "negation": {
+      "$ref": "#/$defs/damage",
+      "description": "Share of incoming damage removed by armour, as a fraction."
+    },
+    "negation_percent": {
+      "$ref": "#/$defs/damage",
+      "description": "The same figures as the equipment screen shows them, rounded the way the planner rounds its own display. Quote these."
+    },
+    "absorb": {
+      "$ref": "#/$defs/damage",
+      "description": "The multiplier damage is scaled by. 1.0 absorbs nothing."
+    },
     "resist": {
-      "type": "object", "additionalProperties": false,
+      "type": "object",
+      "additionalProperties": false,
       "description": "The four status bars. Not damage: negation does not apply to them.",
-      "required": ["immunity", "robustness", "focus", "vitality"],
+      "required": [
+        "immunity",
+        "robustness",
+        "focus",
+        "vitality"
+      ],
       "properties": {
-        "immunity": { "type": "integer", "minimum": 0 },
-        "robustness": { "type": "integer", "minimum": 0 },
-        "focus": { "type": "integer", "minimum": 0 },
-        "vitality": { "type": "integer", "minimum": 0 }
+        "immunity": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "robustness": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "focus": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "vitality": {
+          "type": "integer",
+          "minimum": 0
+        }
       }
+    },
+    "assumed": {
+      "type": "object",
+      "description": "Judgement parameters the caller did not give, and the value the collection used. Empty when the caller gave them all. Quote these as assumptions, never as the user's choice."
     }
   },
   "$defs": {
     "damage": {
-      "type": "object", "additionalProperties": false,
-      "required": ["physical", "strike", "slash", "pierce", "magic", "fire", "lightning", "holy"],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "physical",
+        "strike",
+        "slash",
+        "pierce",
+        "magic",
+        "fire",
+        "lightning",
+        "holy"
+      ],
       "properties": {
-        "physical": { "type": "number" }, "strike": { "type": "number" },
-        "slash": { "type": "number" }, "pierce": { "type": "number" },
-        "magic": { "type": "number" }, "fire": { "type": "number" },
-        "lightning": { "type": "number" }, "holy": { "type": "number" }
+        "physical": {
+          "type": "number"
+        },
+        "strike": {
+          "type": "number"
+        },
+        "slash": {
+          "type": "number"
+        },
+        "pierce": {
+          "type": "number"
+        },
+        "magic": {
+          "type": "number"
+        },
+        "fire": {
+          "type": "number"
+        },
+        "lightning": {
+          "type": "number"
+        },
+        "holy": {
+          "type": "number"
+        }
       }
     },
     "stats": {
-      "type": "object", "additionalProperties": false,
-      "required": ["vigor", "mind", "endurance", "strength", "dexterity", "intelligence", "faith", "arcane"],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "vigor",
+        "mind",
+        "endurance",
+        "strength",
+        "dexterity",
+        "intelligence",
+        "faith",
+        "arcane"
+      ],
       "properties": {
-        "vigor": { "$ref": "#/$defs/stat" }, "mind": { "$ref": "#/$defs/stat" },
-        "endurance": { "$ref": "#/$defs/stat" }, "strength": { "$ref": "#/$defs/stat" },
-        "dexterity": { "$ref": "#/$defs/stat" }, "intelligence": { "$ref": "#/$defs/stat" },
-        "faith": { "$ref": "#/$defs/stat" }, "arcane": { "$ref": "#/$defs/stat" }
+        "vigor": {
+          "$ref": "#/$defs/stat"
+        },
+        "mind": {
+          "$ref": "#/$defs/stat"
+        },
+        "endurance": {
+          "$ref": "#/$defs/stat"
+        },
+        "strength": {
+          "$ref": "#/$defs/stat"
+        },
+        "dexterity": {
+          "$ref": "#/$defs/stat"
+        },
+        "intelligence": {
+          "$ref": "#/$defs/stat"
+        },
+        "faith": {
+          "$ref": "#/$defs/stat"
+        },
+        "arcane": {
+          "$ref": "#/$defs/stat"
+        }
       }
     },
-    "stat": { "type": "integer", "minimum": 1, "maximum": 99 }
+    "stat": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99
+    }
   }
 }

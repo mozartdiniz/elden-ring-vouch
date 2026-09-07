@@ -52,3 +52,15 @@ expect_code = 10
 name = "a missing endurance is a caller error"
 input = { head = "Knight Helm" }
 expect_code = 10
+
+# Determinism. The same question twice — once without a class, once with — because the drift
+# the battery measured was a model choosing this parameter differently between runs.
+[[case]]
+name = "no class given falls to the least-distorting one, and says so"
+input = { endurance = 25 }
+expect = { "result.starting_class" = "Wretch", "result.assumed.starting_class" = "Wretch" }
+
+[[case]]
+name = "a class the caller gave is never reported as an assumption"
+input = { endurance = 25, starting_class = "Vagabond" }
+expect = { "result.starting_class" = "Vagabond", "result.assumed" = {} }

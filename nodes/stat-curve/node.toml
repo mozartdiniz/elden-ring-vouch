@@ -107,3 +107,13 @@ call = { stat = "vigor", subject = "vitals", from = 1, to = 99 }
 [[examples]]
 ask = "quanto realmente ganho por ponto de INT depois de 60?"
 call = { stat = "intelligence", subject = "spell", weapon = "Carian Regal Scepter", spell = "Comet", upgrade = 10, from = 60, to = 99 }
+
+# A default that is not reported is bug 17 again. The contract is not about the value — it is
+# about the saying.
+[[ensures]]
+expr = 'has(input.starting_class) ? !("starting_class" in result.assumed) : result.assumed.starting_class == result.starting_class'
+message = "a judgement the collection made for the caller has to appear in `assumed`"
+
+[[ensures]]
+expr = 'has(input.two_hand) ? !("two_hand" in result.assumed) : result.assumed.two_hand == result.two_hand'
+message = "whether the weapon is two-handed moves the answer, so an unstated one has to be reported"

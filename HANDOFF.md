@@ -5,7 +5,7 @@ known to be missing, and the traps that have already cost time.
 
 `README.md` says how to use the collection. This file says where the work stands.
 
-*Last worked on 7 September 2026. Both repositories clean, 43 commits pushed.*
+*Last worked on 7 September 2026. Both repositories clean, 45 commits pushed.*
 
 ---
 
@@ -66,6 +66,7 @@ elden-ring-vouch/
     test_client.mjs        14 checks of static/app.js against a stub DOM, via node
   VALIDATION.md            122 questions, worked one at a time — read this next
   BUGS.md                  what the questions found, open and fixed — the work list
+  DATA.md                  the questions blocked on a missing table, and nothing else
   PLAN-web-app.md          serving this publicly: the loop, the costs, the model results
 ```
 
@@ -98,7 +99,7 @@ came from the Prometheux workspace, which is a different provenance and is decla
 | `matchmaking` | who a character can play with, and the upgrade bracket that keeps them there | 9 |
 | `stat-curve` | what each point in a stat buys, and where the curve bends | 9 |
 
-`vouch -C . test` → **253 cases, 253 passed**.
+`vouch -C . test` → **267 cases, 267 passed**.
 
 `python3 scripts/check_spreadsheet.py` → **22 of 22 match**, against the Build Planner workbook
 itself rather than against the extraction. Run it after touching anything that reaches
@@ -337,7 +338,35 @@ Note also that `recorded_nodes` — the key `compare_models.py` scores `nodes_mi
 is extracted by matching backticked names in the entry body, and five nodes are named by no
 entry at all. It is a weak key and worth strengthening while the entries are being re-run.
 
-### Second: determinism — the model is chosen, its variance is not fixed
+### Second: determinism — the collection's half is done, the model's half is not
+
+**Done 7 September.** The drift was a model inventing judgement parameters, and the collection
+now owns them. `lib/judgement.py` holds the reasoning and two kinds, kept deliberately
+disjoint:
+
+  * **the collection may decide** — `starting_class` and `two_hand`. Defaulted, and *reported*
+    in a new `assumed` field on every result, pinned by a contract on each of the ten nodes
+    that take one. The default is not the popular choice but the least-distorting one: Wretch's
+    flat-10 floors are the lowest maximum of the ten classes, so the worst it can do to a stat
+    is raise it to 10, where Astrologer would lift a 5-intelligence build to 16.
+  * **the collection must not decide** — the survivability floors and the target level.
+    `build-allocate`'s own docstring says how much vigor a build should hold back is an opinion
+    and that a node answering it presents opinion as a calculation. That stands. What changed
+    is that the collection now publishes the *option set* — four floor sets, three levels, with
+    their values spelled out — so a model relays a fixed list instead of authoring a new one
+    each run. The judgement stays the caller's and stops being re-invented on the way there.
+
+Two things fell out of doing it. **Five nodes were still silently defaulting `starting_class`
+to Wretch** — bug 17's exact shape, live and unnoticed. And the ten classes were enumerated
+only in a *precondition*, which `markdown.rs` deliberately omits from the routing pack, so the
+closed set the data has always known was invisible to every caller. It is an `enum` now.
+
+`web/llm.py` sends a `seed` where a provider takes one, which is the small half.
+
+**Not yet measured.** Baseline with `--repeat 5` on a fixed set and compare; `consistency()`
+in `compare_models.py` reports it. The claim to test is that the 14-of-15 drift rate collapses.
+
+### Third: the model choice, and what it rested on
 
 **Settled 7 September: the collection ships on `openai/gpt-5.6-luna`.** On the 18-question
 battery at three repeats it answered 33 of 42 answerable runs against `gpt-5.6-terra`'s 25,
@@ -374,13 +403,13 @@ reduce. **The target is 99%, not 100%.**
 Get a baseline with `--repeat 5` on a fixed set before changing anything; `consistency()` in
 `compare_models.py` already reports it.
 
-### Third: the evals
+### Fourth: the evals
 
 See *State of the evals* above. Nineteen nodes, sixteen eval cases, eight nodes never seen by a
 live model. This is the largest gap in the project and the only one that measures whether an
 agent can actually route to what has been built.
 
-### Fourth: the routing preamble — the cost half is done, the reading half is not
+### Fifth: the routing preamble — the cost half is done, the reading half is not
 
 The bill is handled. The fixed prefix went from **28,000 tokens to 18,900** (`engine.trimmed`:
 `$schema` and `title` dropped, `params.*.guidance` folded into the schema `description` that
@@ -400,21 +429,20 @@ question, not a billing one: **sixty-one notes**, 16,755 characters, 23% of the 
 some size notes stop being read rather than stop being true, and nothing measures which. Prune
 before adding another one. `vouch describe` is not the pack; the pack omits contracts.
 
-### Fifth: `item-rank` does not exist, and the answer is data, not a node
+### Sixth: the data — all of it is in `DATA.md`
 
-Pattern 5 is talismans, it is among the most common things a player actually asks, and the
-collection cannot answer the shape *"which four talismans maximise X"*. `weapon-rank`,
-`spell-rank` and `ash-rank` all exist because a table existed to rank against. Nothing says
-what a talisman is worth for a given goal, so there is no `item-rank`.
+Six entries, each with what is missing, which questions it blocks, where to look, and how you
+will know it landed. Deliberately in its own file: it is the one body of work that needs no
+code changed first, and it is picked up cold at a different time from everything else here.
 
-**The decision (7 September) is to fix the data rather than patch a node.** Building a ranking
-over a table that does not carry the quantity being ranked is exactly the well-formed-answer-
-about-nothing this collection exists to prevent. `ConsumableEffect.csv` and the item tables in
-`prometheux-workspace/files/elden-ring-brain/` are the unported material to look at first —
-and the standing rule applies: read that directory's file list before writing a parser, because
-three of twenty-four bugs exist because one was written while the table sat there unused.
+**The decision (7 September) is to fix the data rather than patch a node**, and the reason is
+worth keeping at hand: building a ranking over a table that does not carry the quantity being
+ranked produces exactly the well-formed answer about nothing this collection exists to prevent
+— and it would be attested. Every item in `DATA.md` is currently answered by an honest refusal,
+and three of them are held in place by the battery's refusal arm, so nothing can quietly start
+guessing while the file is unfinished.
 
-### Sixth: what the battery left open
+### Seventh: what the battery left open
 
 `VALIDATION.md` has all 122 questions worked one at a time, with the calls, the figures and the
 cross-checks. Ninety-one answer end to end and thirty-one are partial. **No question is

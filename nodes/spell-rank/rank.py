@@ -31,6 +31,7 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__)))), "lib"))
 
+import judgement  # noqa: E402
 import oracle  # noqa: E402
 import spells as spellbook  # noqa: E402
 
@@ -63,7 +64,10 @@ def main():
     # The starting class is a floor on every stat inside planner.py, so leaving it out computes
     # a build with 9 intelligence as one with 10 and ranks a slightly different character's
     # spells. Reported, along with anything it lifted.
-    starting_class = request.get("starting_class", "Wretch")
+    # Was a silent `.get(..., "Wretch")` — the same default, applied without saying so,
+    # which is precisely bug 17. The value is unchanged; what is new is that it is reported.
+    chosen, assumed = judgement.applied(request, "starting_class")
+    starting_class = chosen["starting_class"]
     stats_used, raised_by_class = oracle.class_floor(starting_class, stats)
     build = planner.PlannerInputs(
         starting_class=starting_class,
@@ -161,6 +165,8 @@ def main():
         "include_uncastable": include_uncastable,
         "stats": stats,
         "starting_class": starting_class,
+        # What the collection decided because nobody else did.
+        "assumed": assumed,
         "stats_used": stats_used,
         "stats_raised_by_class": raised_by_class,
         "limit": limit,

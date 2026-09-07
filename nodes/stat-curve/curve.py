@@ -28,6 +28,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(ROOT, "lib"))
 
+import judgement  # noqa: E402
 import oracle  # noqa: E402
 import spells as spellbook  # noqa: E402
 
@@ -41,11 +42,15 @@ VITALS = {"vigor": "hp", "mind": "fp", "endurance": "stamina"}
 
 def main():
     request = json.load(sys.stdin)
+    # Every judgement this node makes, decided in one place and before anything reads them.
+    # They were previously read at their point of use, which put one of them above its own
+    # definition the moment a second parameter joined it.
+    chosen, assumed = judgement.applied(request, "starting_class", "two_hand")
     stat = request["stat"]
     subject = request.get("subject", "vitals")
     low = int(request.get("from", 1))
     high = int(request.get("to", 99))
-    starting_class = request.get("starting_class", "Wretch")
+    starting_class = chosen["starting_class"]
 
     stats = {s: int(request.get(s, 10)) for s in COMBAT}
     for name in VITALS:
@@ -110,7 +115,7 @@ def main():
                 weapon_class=row["Weapon Class"], weapon=request["weapon"],
                 affinity=request.get("affinity", "Standard"),
                 upgrade=int(request.get("upgrade", oracle.max_upgrade(row))),
-                two_hand=bool(request.get("two_hand", False)),
+                two_hand=bool(chosen["two_hand"]),
                 **{s: here[s] for s in COMBAT},
             ))
             unmet_at[level] = sorted(
@@ -220,10 +225,12 @@ def main():
         # difference between a figure somebody can check and a figure they cannot.
         "affinity": request.get("affinity", "Standard") if row else "",
         "upgrade": int(request.get("upgrade", oracle.max_upgrade(row))) if row else None,
-        "two_hand": bool(request.get("two_hand", False)),
+        "two_hand": bool(chosen["two_hand"]),
         "held_stats": {s: stats[s] for s in COMBAT},
         "catalyst_casts": catalyst_casts,
         "starting_class": starting_class,
+        # What the collection decided because nobody else did.
+        "assumed": assumed,
         # Stats the class floor lifted above what was asked for. planner.py treats a class's
         # stats as a minimum, so a vitals or spell curve for a Wretch never dips below ten.
         "stats_raised_by_class": stats_raised,

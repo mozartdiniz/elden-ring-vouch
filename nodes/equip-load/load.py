@@ -26,6 +26,7 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__)))), "lib"))
 
+import judgement  # noqa: E402
 import oracle  # noqa: E402
 
 sys.path.insert(0, oracle.SCRIPTS)
@@ -48,7 +49,10 @@ def main():
     # planner.py floors every stat at the starting class's, so the class is not a label here
     # either: an endurance below the class's own is quietly raised, and the roll this node
     # reports would be a roll the character does not have.
-    starting_class = request.get("starting_class", "Wretch")
+    # Was a silent `.get(..., "Wretch")` — the same default, applied without saying so,
+    # which is precisely bug 17. The value is unchanged; what is new is that it is reported.
+    chosen, assumed = judgement.applied(request, "starting_class")
+    starting_class = chosen["starting_class"]
     endurance = request["endurance"]
     weapons = request.get("weapons", [])
 
@@ -81,6 +85,8 @@ def main():
         # the endurance actually used, which is not always the one passed in.
         "endurance_given": int(endurance),
         "starting_class": starting_class,
+        # What the collection decided because nobody else did.
+        "assumed": assumed,
         "endurance_raised_by_class": int(r.final_stats["endurance"]) != int(endurance),
         "equip_load": float(r.equip_load),
         "equipped_weight": float(r.equipped_weight),

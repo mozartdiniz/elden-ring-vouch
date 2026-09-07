@@ -258,6 +258,31 @@ def _():
         app.DAILY_SPEND, app.DAILY_BUDGET = was[1], was[2]
 
 
+@check("a stop quotes the runtime, caps the model, and says what it reached")
+def _():
+    """The stop path is the only model-authored prose the page renders.
+
+    So it is bounded, it prefers the words the runtime already wrote — which were written to
+    be acted on, and name the node that said them — and it carries the nodes that did answer,
+    because a quarter of real question shapes end here and a bare no throws that away.
+    """
+    plain = engine.declined("  no  figure   for that ", None, [{"node": "boss-lookup"}])
+    assert plain["reason"] == "no figure for that", plain
+    assert plain["reached"] == ["boss-lookup"]
+    assert "relayed" not in plain
+
+    refused = {"node": "buff-stack", "reason": "no buff named 'Bloodboil Aromatic'"}
+    quoted = engine.declined("I could not find it.", refused,
+                             [{"node": "weapon-lookup"}, {"node": "weapon-lookup"}])
+    assert quoted["reason"] == "buff-stack: no buff named 'Bloodboil Aromatic'", quoted
+    assert quoted["relayed"] == "I could not find it."
+    # A node reached twice is one thing reached, in the order it was first reached.
+    assert quoted["reached"] == ["weapon-lookup"]
+
+    long = engine.declined("x" * 5000, None, [])
+    assert len(long["reason"]) == engine.MAX_STOP
+
+
 # --------------------------------------------------- the loop, against real nodes
 
 

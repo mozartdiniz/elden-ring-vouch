@@ -48,7 +48,8 @@
     "objective_gain",
     "objective_responds_to_stats",
     "requirements_met",
-    "searched"
+    "searched",
+    "assumed"
   ],
   "properties": {
     "weapon": {
@@ -477,6 +478,10 @@
     "spell_castable_from_catalyst": {
       "type": "boolean",
       "description": "False makes every spell figure here one for a cast that cannot happen. True when no spell was named."
+    },
+    "assumed": {
+      "type": "object",
+      "description": "Judgement parameters the caller did not give, and the value the collection used. Empty when the caller gave them all. Quote these as assumptions, never as the user's choice."
     }
   }
 }

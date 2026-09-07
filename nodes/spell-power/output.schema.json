@@ -33,7 +33,8 @@
     "fp_rate",
     "requirement",
     "castable",
-    "unmet"
+    "unmet",
+    "assumed"
   ],
   "properties": {
     "spell": {
@@ -304,6 +305,10 @@
         "type": "string"
       },
       "description": "Stats the class lifted above what was asked for. Non-empty means this figure is for a slightly different character, and an answer has to say so."
+    },
+    "assumed": {
+      "type": "object",
+      "description": "Judgement parameters the caller did not give, and the value the collection used. Empty when the caller gave them all. Quote these as assumptions, never as the user's choice."
     }
   }
 }

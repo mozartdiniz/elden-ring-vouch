@@ -4,52 +4,161 @@
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "starting_class", "level", "stats", "class_minimums", "stats_given",
-    "stats_from_class_minimum", "stats_raised_to_class_minimum", "class_level",
-    "target_level", "levels_to_target", "points_spent", "hp", "fp", "stamina", "equip_load",
-    "optimal_class", "optimal_class_level", "levels_saved_by_optimal_class"
+    "starting_class",
+    "level",
+    "stats",
+    "class_minimums",
+    "stats_given",
+    "stats_from_class_minimum",
+    "stats_raised_to_class_minimum",
+    "class_level",
+    "target_level",
+    "levels_to_target",
+    "points_spent",
+    "hp",
+    "fp",
+    "stamina",
+    "equip_load",
+    "optimal_class",
+    "optimal_class_level",
+    "levels_saved_by_optimal_class",
+    "assumed"
   ],
   "properties": {
-    "starting_class": { "type": "string" },
-    "level": { "type": "integer", "minimum": 1, "description": "The rune level this stat spread costs on this class." },
-    "stats": { "$ref": "#/$defs/stats" },
-    "class_minimums": { "$ref": "#/$defs/stats" },
+    "starting_class": {
+      "type": "string"
+    },
+    "level": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "The rune level this stat spread costs on this class."
+    },
+    "stats": {
+      "$ref": "#/$defs/stats"
+    },
+    "class_minimums": {
+      "$ref": "#/$defs/stats"
+    },
     "stats_given": {
-      "type": "array", "items": { "type": "string" },
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
       "description": "Stats the caller specified. Everything else was filled from the class."
     },
     "stats_from_class_minimum": {
-      "type": "array", "items": { "type": "string" },
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
       "description": "Stats nobody chose. Say so when reporting a build: these are the class's floor, not a decision."
     },
     "stats_raised_to_class_minimum": {
-      "type": "array", "items": { "type": "string" },
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
       "description": "Stats the caller asked for below this class's floor, which came back raised to it. Say so: the user did not get the number they named."
     },
-    "class_level": { "type": "integer", "minimum": 1, "description": "The rune level this class begins at, before any point is spent. Wretch starts at 1, Hero at 7." },
-    "points_spent": { "type": "integer", "minimum": 0, "description": "Stat points above the class's starting spread." },
-    "hp": { "type": "integer", "minimum": 1 },
-    "fp": { "type": "integer", "minimum": 1 },
-    "stamina": { "type": "integer", "minimum": 1 },
-    "equip_load": { "type": "number", "exclusiveMinimum": 0 },
-    "target_level": { "type": "integer", "minimum": 0, "description": "The target that was asked for, or 0 if none was." },
-    "levels_to_target": { "type": "integer", "description": "target_level minus level: how many levels are left to spend. Negative means the build already costs more than the target. Zero when no target was given." },
-    "optimal_class": { "type": "string", "description": "The class that reaches the specified stats at the lowest rune level." },
-    "optimal_class_level": { "type": "integer", "minimum": 1, "description": "The rune level those same stats cost on that class. Comparable to `level`." },
-    "levels_saved_by_optimal_class": { "type": "integer", "minimum": 0, "description": "level minus optimal_class_level. Zero when this class is already optimal." }
+    "class_level": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "The rune level this class begins at, before any point is spent. Wretch starts at 1, Hero at 7."
+    },
+    "points_spent": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Stat points above the class's starting spread."
+    },
+    "hp": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "fp": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "stamina": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "equip_load": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "target_level": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "The target that was asked for, or 0 if none was."
+    },
+    "levels_to_target": {
+      "type": "integer",
+      "description": "target_level minus level: how many levels are left to spend. Negative means the build already costs more than the target. Zero when no target was given."
+    },
+    "optimal_class": {
+      "type": "string",
+      "description": "The class that reaches the specified stats at the lowest rune level."
+    },
+    "optimal_class_level": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "The rune level those same stats cost on that class. Comparable to `level`."
+    },
+    "levels_saved_by_optimal_class": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "level minus optimal_class_level. Zero when this class is already optimal."
+    },
+    "assumed": {
+      "type": "object",
+      "description": "Judgement parameters the caller did not give, and the value the collection used. Empty when the caller gave them all. Quote these as assumptions, never as the user's choice."
+    }
   },
   "$defs": {
     "stats": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["vigor", "mind", "endurance", "strength", "dexterity", "intelligence", "faith", "arcane"],
+      "required": [
+        "vigor",
+        "mind",
+        "endurance",
+        "strength",
+        "dexterity",
+        "intelligence",
+        "faith",
+        "arcane"
+      ],
       "properties": {
-        "vigor": { "$ref": "#/$defs/stat" }, "mind": { "$ref": "#/$defs/stat" },
-        "endurance": { "$ref": "#/$defs/stat" }, "strength": { "$ref": "#/$defs/stat" },
-        "dexterity": { "$ref": "#/$defs/stat" }, "intelligence": { "$ref": "#/$defs/stat" },
-        "faith": { "$ref": "#/$defs/stat" }, "arcane": { "$ref": "#/$defs/stat" }
+        "vigor": {
+          "$ref": "#/$defs/stat"
+        },
+        "mind": {
+          "$ref": "#/$defs/stat"
+        },
+        "endurance": {
+          "$ref": "#/$defs/stat"
+        },
+        "strength": {
+          "$ref": "#/$defs/stat"
+        },
+        "dexterity": {
+          "$ref": "#/$defs/stat"
+        },
+        "intelligence": {
+          "$ref": "#/$defs/stat"
+        },
+        "faith": {
+          "$ref": "#/$defs/stat"
+        },
+        "arcane": {
+          "$ref": "#/$defs/stat"
+        }
       }
     },
-    "stat": { "type": "integer", "minimum": 1, "maximum": 99 }
+    "stat": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99
+    }
   }
 }

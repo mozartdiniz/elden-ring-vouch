@@ -29,6 +29,7 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__)))), "lib"))
 
+import judgement  # noqa: E402
 import oracle  # noqa: E402
 
 sys.path.insert(0, oracle.SCRIPTS)
@@ -46,7 +47,10 @@ RESISTS = ("immunity", "robustness", "focus", "vitality")
 
 def main():
     request = json.load(sys.stdin)
-    starting_class = request["starting_class"]
+    # A judgement, not a fact. See lib/judgement.py: leaving it to the caller meant leaving
+    # it to a model, which chose differently between runs.
+    chosen, assumed = judgement.applied(request, "starting_class")
+    starting_class = chosen["starting_class"]
     armour = {slot: (request.get(slot) or "Empty") for slot in SLOTS}
 
     classes = planner.load_starting_classes()
@@ -67,6 +71,8 @@ def main():
 
     result = {
         "starting_class": starting_class,
+        # What the collection decided because nobody else did.
+        "assumed": assumed,
         "level": int(r.level),
         "stats": {stat: int(r.final_stats[stat]) for stat in STATS},
         # The same reporting character-build does, for the same reason: a stat nobody named is

@@ -29,6 +29,7 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__)))), "lib"))
 
+import judgement  # noqa: E402
 import oracle  # noqa: E402
 
 sys.path.insert(0, oracle.SCRIPTS)
@@ -42,7 +43,10 @@ STATS = (
 
 def main():
     request = json.load(sys.stdin)
-    starting_class = request["starting_class"]
+    # The class is a judgement, not a fact, and leaving it to the caller meant leaving it to a
+    # model — which chose a different one each run. lib/judgement.py has the reasoning.
+    chosen, assumed = judgement.applied(request, "starting_class")
+    starting_class = chosen["starting_class"]
     target_level = request.get("target_level")
 
     classes = planner.load_starting_classes()
@@ -66,6 +70,8 @@ def main():
 
     result = {
         "starting_class": starting_class,
+        # What the collection decided because nobody else did. An answer must say so.
+        "assumed": assumed,
         "level": int(r.level),
         "stats": final,
         "class_minimums": minimums,

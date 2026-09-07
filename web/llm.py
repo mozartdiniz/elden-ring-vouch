@@ -19,6 +19,7 @@ configuration; the last two exist so an arm of a comparison can reproduce the ol
     PLANNING_REASONING     low | off | default | <effort>     (default: low)
     CACHE_TTL              e.g. 1h; empty uses the provider's (default: empty)
     CACHE_BREAKPOINTS      how many to place, 0 disables      (default: 4)
+    LLM_SEED               sampling seed where a provider takes one (default: 20260907)
 """
 
 import asyncio
@@ -136,6 +137,13 @@ async def _openrouter(prompt, model=None, usage=None):
             else os.environ.get("OPENROUTER_MAX_TOKENS", "20000")
         ),
         "temperature": 0,
+        # Determinism, as far as a hosted model offers it. `temperature: 0` is not enough on
+        # its own — batching and non-associative float reduction move a reply between runs —
+        # and `seed` is honoured by some providers and ignored by the rest. Free where it
+        # works, harmless where it does not. It is the small half of the problem: the large
+        # half was a model inventing a different `starting_class` each run, which is fixed in
+        # the collection rather than here (see lib/judgement.py).
+        "seed": int(os.environ.get("LLM_SEED", "20260907")),
         # Ask for token counts and the actual charge. Without this the reply carries no cost,
         # and a model comparison with no cost in it is not a comparison.
         "usage": {"include": True},

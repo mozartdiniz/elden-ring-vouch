@@ -28,6 +28,10 @@ VOUCH = os.environ.get("VOUCH_BIN", "vouch")
 # leaves room for a chain that long plus a correction, and still cannot spin.
 MAX_DECISIONS = int(os.environ.get("MAX_DECISIONS", "10"))
 
+# A stop reason is one sentence. It is also the only text a model writes that reaches the page
+# without passing through attestation, so it is bounded rather than trusted.
+MAX_STOP = int(os.environ.get("MAX_STOP", "400"))
+
 REFUSAL = {11, 14, 15}
 DEFECT = {12, 13, 20, 21}
 
@@ -381,6 +385,35 @@ The user asked: {question}
     )
 
 
+def declined(said, refused, steps):
+    """A stop, said in the runtime's words where there are any, and with what was reached.
+
+    Three things are wrong with relaying the model's sentence as-is.
+
+    It is **the only model-authored prose the page renders**, and therefore the whole surface
+    for anyone trying to use this as a free language model. Everything else the planner emits
+    is a node name and an argument object, and the narrator never sees anything but verified
+    results. Capping it closes that at no cost to a real answer, which is one sentence anyway.
+
+    Where a node refused, the runtime already said why, in words written to be acted on — and
+    those are better than a paraphrase of them. Quoting the paraphrase also loses which node
+    said it.
+
+    And a bare no throws away the work. Thirty-one of 122 question shapes end here, so this is
+    a quarter of what a user sees, and by the time the loop stops it usually knows something:
+    the honest answer to "how does stance-break work" is not "no", it is "no rule for that, but
+    these nodes answered on the way and the arithmetic is yours".
+    """
+    said = " ".join(str(said).split())[:MAX_STOP]
+    reached = list(dict.fromkeys(step["node"] for step in steps))
+
+    out = {"reason": said, "reached": reached}
+    if refused:
+        out["reason"] = f"{refused['node']}: {refused['reason']}"
+        out["relayed"] = said
+    return out
+
+
 # --------------------------------------------------------------------- attestation
 
 
@@ -445,6 +478,10 @@ async def answer(question, collection, session, catalog, ask_model, history=()):
     """
     steps = []
     correction = None
+    # The last thing the runtime actually said no about. `correction` is cleared as soon as it
+    # has been shown to the model, and a stop usually arrives a decision later than the
+    # refusal that caused it, so the reason worth quoting has to be kept separately.
+    refused = None
 
     for _ in range(MAX_DECISIONS):
         yield {"type": "thinking", "what": "choosing a node"}
@@ -489,7 +526,7 @@ async def answer(question, collection, session, catalog, ask_model, history=()):
         # The model declined. This is the honest out-of-scope path — and when it follows a
         # refusal, it is the model relaying a "no" the runtime established.
         if "stop" in decision:
-            yield {"type": "no_answer", "reason": decision["stop"]}
+            yield {"type": "no_answer", **declined(decision["stop"], refused, steps)}
             return
 
         if decision.get("done"):
@@ -561,6 +598,6 @@ async def answer(question, collection, session, catalog, ask_model, history=()):
 
         # A refusal, or an input the schema rejected, is a correction. Hand it back.
         yield {"type": "refusal", "node": node, "reason": reason, "code": code}
-        correction = {"node": node, "input": node_input, "reason": reason}
+        correction = refused = {"node": node, "input": node_input, "reason": reason}
 
     yield {"type": "no_answer", "reason": "I ran out of attempts before reaching a verified answer."}

@@ -29,7 +29,8 @@
     "requirements_met",
     "guard_boost",
     "guard_negation",
-    "guard_resist"
+    "guard_resist",
+    "assumed"
   ],
   "properties": {
     "weapon": {
@@ -160,6 +161,10 @@
     "status_buff_ignored_because": {
       "type": "string",
       "description": "Why it did not apply: wrong class, wrong affinity, or the weapon cannot be buffed. Empty when it did."
+    },
+    "assumed": {
+      "type": "object",
+      "description": "Judgement parameters the caller did not give, and the value the collection used. Empty when the caller gave them all. Quote these as assumptions, never as the user's choice."
     }
   },
   "$defs": {

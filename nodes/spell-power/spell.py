@@ -34,6 +34,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(ROOT, "lib"))
 
+import judgement  # noqa: E402
 import oracle  # noqa: E402
 import spells as spellbook  # noqa: E402
 
@@ -71,7 +72,10 @@ def main():
     # reported and so is anything it lifted — a spell buff for a build nobody described is the
     # failure this collection exists to prevent, and it is 0.4 of a point, which is worse than
     # a large one because nobody would notice.
-    starting_class = request.get("starting_class", "Wretch")
+    # Was a silent `.get(..., "Wretch")` — the same default, applied without saying so,
+    # which is precisely bug 17. The value is unchanged; what is new is that it is reported.
+    chosen, assumed = judgement.applied(request, "starting_class")
+    starting_class = chosen["starting_class"]
     given = {stat: request[stat] for stat in
              ("strength", "dexterity", "intelligence", "faith", "arcane")}
     stats_used, raised_by_class = oracle.class_floor(starting_class, given)
@@ -121,6 +125,8 @@ def main():
         "catalyst": catalyst,
         "catalyst_class": row["Weapon Class"],
         "starting_class": starting_class,
+        # What the collection decided because nobody else did.
+        "assumed": assumed,
         "stats_used": stats_used,
         # Stats the starting class raised above what the caller gave. Non-empty means this
         # figure is for a slightly different character than the one asked about.

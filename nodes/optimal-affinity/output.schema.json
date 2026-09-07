@@ -4,22 +4,70 @@
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "weapon", "weapon_class", "upgrade", "max_upgrade", "two_hand", "infusable",
-    "affinities_available", "best", "best_damage", "runner_up", "best_margin",
-    "ranked", "target", "negation_given", "buffed", "attack_mv"
+    "weapon",
+    "weapon_class",
+    "upgrade",
+    "max_upgrade",
+    "two_hand",
+    "infusable",
+    "affinities_available",
+    "best",
+    "best_damage",
+    "runner_up",
+    "best_margin",
+    "ranked",
+    "target",
+    "negation_given",
+    "buffed",
+    "attack_mv",
+    "assumed"
   ],
   "properties": {
-    "weapon": { "type": "string" },
-    "weapon_class": { "type": "string" },
-    "upgrade": { "type": "integer", "minimum": 0, "maximum": 25 },
-    "max_upgrade": { "type": "integer", "minimum": 0, "maximum": 25 },
-    "two_hand": { "type": "boolean" },
-    "infusable": { "type": "boolean", "description": "False means Standard is the only affinity this weapon has, and the ranking is one row long." },
-    "affinities_available": { "type": "integer", "minimum": 1, "maximum": 13 },
-    "best": { "type": "string", "description": "The highest-damage affinity. A postcondition ties this to the maximum of `ranked`." },
-    "best_damage": { "type": "number", "minimum": 0, "description": "Damage from the best affinity. Zero is possible and correct: a target can negate everything." },
-    "deals_damage": { "type": "boolean", "description": "False when even the best affinity gets nothing through. Say so plainly rather than reporting a winner." },
-    "runner_up": { "type": "string", "description": "Second place, or empty when there is only one affinity." },
+    "weapon": {
+      "type": "string"
+    },
+    "weapon_class": {
+      "type": "string"
+    },
+    "upgrade": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 25
+    },
+    "max_upgrade": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 25
+    },
+    "two_hand": {
+      "type": "boolean"
+    },
+    "infusable": {
+      "type": "boolean",
+      "description": "False means Standard is the only affinity this weapon has, and the ranking is one row long."
+    },
+    "affinities_available": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 13
+    },
+    "best": {
+      "type": "string",
+      "description": "The highest-damage affinity. A postcondition ties this to the maximum of `ranked`."
+    },
+    "best_damage": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Damage from the best affinity. Zero is possible and correct: a target can negate everything."
+    },
+    "deals_damage": {
+      "type": "boolean",
+      "description": "False when even the best affinity gets nothing through. Say so plainly rather than reporting a winner."
+    },
+    "runner_up": {
+      "type": "string",
+      "description": "Second place, or empty when there is only one affinity."
+    },
     "best_margin": {
       "type": "number",
       "minimum": 0,
@@ -29,41 +77,120 @@
       "type": "array",
       "minItems": 1,
       "description": "Every affinity this weapon can take, best first. Affinities it cannot take are absent, not zero.",
-      "items": { "$ref": "#/$defs/row" }
+      "items": {
+        "$ref": "#/$defs/row"
+      }
     },
     "target": {
       "type": "string",
-      "enum": ["default", "given"],
+      "enum": [
+        "default",
+        "given"
+      ],
       "description": "Whether these numbers are against the calculator's standard PvE reference or defences the caller supplied. Say which; the same weapon ranks differently against different enemies."
     },
-    "negation_given": { "type": "boolean", "description": "Whether the target's negation was supplied. Without it the ranking uses the calculator's reference, not this enemy." },
-    "buffed": { "type": "boolean", "description": "Whether any damage multiplier was applied. Say so: a buffed figure is not what the weapon does unbuffed." },
-    "attack_mv": { "type": "number", "exclusiveMinimum": 0 }
+    "negation_given": {
+      "type": "boolean",
+      "description": "Whether the target's negation was supplied. Without it the ranking uses the calculator's reference, not this enemy."
+    },
+    "buffed": {
+      "type": "boolean",
+      "description": "Whether any damage multiplier was applied. Say so: a buffed figure is not what the weapon does unbuffed."
+    },
+    "attack_mv": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "assumed": {
+      "type": "object",
+      "description": "Judgement parameters the caller did not give, and the value the collection used. Empty when the caller gave them all. Quote these as assumptions, never as the user's choice."
+    }
   },
   "$defs": {
     "row": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["affinity", "damage", "total_ap", "split", "shown", "physical", "magic", "fire", "lightning", "holy"],
+      "required": [
+        "affinity",
+        "damage",
+        "total_ap",
+        "split",
+        "shown",
+        "physical",
+        "magic",
+        "fire",
+        "lightning",
+        "holy"
+      ],
       "properties": {
-        "affinity": { "type": "string" },
-        "damage": { "type": "number", "minimum": 0, "description": "Damage actually dealt to the target, after its defences and absorptions. Zero when the target blocks this type entirely." },
-        "total_ap": { "type": "number", "description": "Attack rating before the target is considered." },
-        "split": { "type": "string", "description": "The calculator's display string, e.g. '409/0/411/0/0'. Do not read figures out of it — quote `shown` instead, whose values are numbers a ledger can account for." },
+        "affinity": {
+          "type": "string"
+        },
+        "damage": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Damage actually dealt to the target, after its defences and absorptions. Zero when the target blocks this type entirely."
+        },
+        "total_ap": {
+          "type": "number",
+          "description": "Attack rating before the target is considered."
+        },
+        "split": {
+          "type": "string",
+          "description": "The calculator's display string, e.g. '409/0/411/0/0'. Do not read figures out of it \u2014 quote `shown` instead, whose values are numbers a ledger can account for."
+        },
         "shown": {
           "type": "object",
           "description": "The same figures truncated, as the game displays them. Quote these rather than truncating the precise ones yourself.",
           "additionalProperties": false,
-          "required": ["damage", "total_ap", "physical", "magic", "fire", "lightning", "holy"],
+          "required": [
+            "damage",
+            "total_ap",
+            "physical",
+            "magic",
+            "fire",
+            "lightning",
+            "holy"
+          ],
           "properties": {
-            "damage": { "type": "integer" }, "total_ap": { "type": "integer" },
-            "physical": { "type": "integer" }, "magic": { "type": "integer" },
-            "fire": { "type": "integer" }, "lightning": { "type": "integer" },
-            "holy": { "type": "integer" }
+            "damage": {
+              "type": "integer"
+            },
+            "total_ap": {
+              "type": "integer"
+            },
+            "physical": {
+              "type": "integer"
+            },
+            "magic": {
+              "type": "integer"
+            },
+            "fire": {
+              "type": "integer"
+            },
+            "lightning": {
+              "type": "integer"
+            },
+            "holy": {
+              "type": "integer"
+            }
           }
         },
-        "physical": { "type": "number" }, "magic": { "type": "number" },
-        "fire": { "type": "number" }, "lightning": { "type": "number" }, "holy": { "type": "number" }
+        "physical": {
+          "type": "number"
+        },
+        "magic": {
+          "type": "number"
+        },
+        "fire": {
+          "type": "number"
+        },
+        "lightning": {
+          "type": "number"
+        },
+        "holy": {
+          "type": "number"
+        }
       }
     }
   }

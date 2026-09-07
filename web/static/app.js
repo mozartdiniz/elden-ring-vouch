@@ -197,9 +197,20 @@ function render(turn, event) {
       turn.step("refusal", "unparseable", event.reason);
       break;
 
-    case "no_answer":
-      turn.finish(el("div", "notice dim", "I don't know. " + event.reason));
+    // A quarter of real question shapes end here, so this is not an edge case — it is a
+    // quarter of what anyone sees. A bare "no" throws away everything the loop reached on
+    // the way, and the nodes it did answer are usually the useful half of the reply: no
+    // stance-break rule, but here is the ash's poise damage and the fight's poise.
+    case "no_answer": {
+      const reached = (event.reached || []).filter(Boolean);
+      const note = el("div", "notice dim", "I don't know. " + event.reason);
+      if (reached.length) {
+        note.appendChild(el("div", "dim small",
+          "Answered on the way: " + reached.join(", ") + "."));
+      }
+      turn.finish(note);
       break;
+    }
 
     // A node broke its own contract. No answer is shown, not even a hedged one — that is
     // the behaviour this whole thing exists to have.

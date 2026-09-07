@@ -3,27 +3,133 @@
   "title": "stat-curve input",
   "type": "object",
   "additionalProperties": false,
-  "required": ["stat"],
+  "required": [
+    "stat"
+  ],
   "properties": {
-    "stat": { "type": "string", "enum": ["vigor", "mind", "endurance", "strength", "dexterity", "intelligence", "faith", "arcane"], "description": "The stat to walk." },
-    "subject": { "type": "string", "enum": ["vitals", "weapon", "spell"], "description": "What to measure. vitals is HP, FP or stamina; weapon is one weapon's attack rating; spell is what a spell hits for out of a catalyst, which is a different curve from the catalyst's own attack rating. Default 'vitals'." },
-    "from": { "type": "integer", "minimum": 1, "maximum": 99, "description": "Default 1." },
-    "to": { "type": "integer", "minimum": 1, "maximum": 99, "description": "Default 99." },
-    "weapon": { "type": "string", "description": "Required for 'weapon' and 'spell': the weapon or catalyst, from weapon-lookup." },
-    "spell": { "type": "string", "description": "Required for 'spell': the spell, from spell-lookup." },
-    "affinity": { "type": "string", "description": "Default Standard." },
-    "upgrade": { "type": "integer", "minimum": 0, "maximum": 25, "description": "Defaults to the weapon's own cap." },
-    "two_hand": { "type": "boolean" },
-    "starting_class": { "type": "string", "description": "Only affects the vitals curves. Default Wretch." },
-    "vigor": { "type": "integer", "minimum": 1, "maximum": 99 },
-    "mind": { "type": "integer", "minimum": 1, "maximum": 99 },
-    "endurance": { "type": "integer", "minimum": 1, "maximum": 99 },
-    "strength": { "type": "integer", "minimum": 1, "maximum": 99 },
-    "dexterity": { "type": "integer", "minimum": 1, "maximum": 99 },
-    "intelligence": { "type": "integer", "minimum": 1, "maximum": 99 },
-    "faith": { "type": "integer", "minimum": 1, "maximum": 99 },
-    "arcane": { "type": "integer", "minimum": 1, "maximum": 99 },
-    "bend_threshold": { "type": "number", "exclusiveMinimum": 0, "maximum": 1, "description": "How much of the previous gain has to survive for a step down not to count as a bend. Default 0.75 — a quarter of the gain lost." },
-    "window": { "type": "integer", "minimum": 1, "maximum": 10, "description": "Levels averaged either side before comparing. Default 3, which is what keeps integer rounding from looking like a cliff." }
+    "stat": {
+      "type": "string",
+      "enum": [
+        "vigor",
+        "mind",
+        "endurance",
+        "strength",
+        "dexterity",
+        "intelligence",
+        "faith",
+        "arcane"
+      ],
+      "description": "The stat to walk."
+    },
+    "subject": {
+      "type": "string",
+      "enum": [
+        "vitals",
+        "weapon",
+        "spell"
+      ],
+      "description": "What to measure. vitals is HP, FP or stamina; weapon is one weapon's attack rating; spell is what a spell hits for out of a catalyst, which is a different curve from the catalyst's own attack rating. Default 'vitals'."
+    },
+    "from": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99,
+      "description": "Default 1."
+    },
+    "to": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99,
+      "description": "Default 99."
+    },
+    "weapon": {
+      "type": "string",
+      "description": "Required for 'weapon' and 'spell': the weapon or catalyst, from weapon-lookup."
+    },
+    "spell": {
+      "type": "string",
+      "description": "Required for 'spell': the spell, from spell-lookup."
+    },
+    "affinity": {
+      "type": "string",
+      "description": "Default Standard."
+    },
+    "upgrade": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 25,
+      "description": "Defaults to the weapon's own cap."
+    },
+    "two_hand": {
+      "type": "boolean"
+    },
+    "starting_class": {
+      "type": "string",
+      "description": "Which class the character started as. The ten are listed here rather than only in a precondition, which the routing pack does not publish. Optional: without one the collection uses 'Wretch' \u2014 the lowest floors of the ten, so the least distortion \u2014 and reports it in `assumed`.",
+      "enum": [
+        "Astrologer",
+        "Bandit",
+        "Confessor",
+        "Hero",
+        "Prisoner",
+        "Prophet",
+        "Samurai",
+        "Vagabond",
+        "Warrior",
+        "Wretch"
+      ]
+    },
+    "vigor": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99
+    },
+    "mind": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99
+    },
+    "endurance": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99
+    },
+    "strength": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99
+    },
+    "dexterity": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99
+    },
+    "intelligence": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99
+    },
+    "faith": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99
+    },
+    "arcane": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99
+    },
+    "bend_threshold": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 1,
+      "description": "How much of the previous gain has to survive for a step down not to count as a bend. Default 0.75 \u2014 a quarter of the gain lost."
+    },
+    "window": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10,
+      "description": "Levels averaged either side before comparing. Default 3, which is what keeps integer rounding from looking like a cliff."
+    }
   }
 }

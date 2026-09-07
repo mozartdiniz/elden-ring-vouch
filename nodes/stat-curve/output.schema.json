@@ -27,7 +27,8 @@
     "upgrade",
     "two_hand",
     "held_stats",
-    "catalyst_casts"
+    "catalyst_casts",
+    "assumed"
   ],
   "properties": {
     "stat": {
@@ -214,6 +215,10 @@
         "type": "string"
       },
       "description": "What the weapon can cast, empty for one that casts nothing. A spell curve for a cast the game does not allow is refused rather than drawn."
+    },
+    "assumed": {
+      "type": "object",
+      "description": "Judgement parameters the caller did not give, and the value the collection used. Empty when the caller gave them all. Quote these as assumptions, never as the user's choice."
     }
   }
 }

@@ -119,3 +119,9 @@ call = { endurance = 25, head = "Knight Helm", chest = "Knight Armor", arms = "K
 [[examples]]
 ask = "how much endurance do I need to light-roll naked with a Longsword?"
 call = { endurance = 10, weapons = ["Longsword"] }
+
+# A default that is not reported is bug 17 again. The contract is not about the value — it is
+# about the saying.
+[[ensures]]
+expr = 'has(input.starting_class) ? !("starting_class" in result.assumed) : result.assumed.starting_class == result.starting_class'
+message = "a judgement the collection made for the caller has to appear in `assumed`"

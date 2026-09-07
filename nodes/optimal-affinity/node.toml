@@ -180,3 +180,7 @@ call = { weapon = "Longsword", upgrade = 25, max_upgrade = 25, strength = 60, de
 [[examples]]
 ask = "is Heavy or Keen better on a Zweihander for a strength build?"
 call = { weapon = "Zweihander", upgrade = 25, max_upgrade = 25, strength = 60, dexterity = 12, intelligence = 10, faith = 10, arcane = 10, two_hand = true }
+
+[[ensures]]
+expr = 'has(input.two_hand) ? !("two_hand" in result.assumed) : result.assumed.two_hand == result.two_hand'
+message = "whether the weapon is two-handed moves the answer, so an unstated one has to be reported"

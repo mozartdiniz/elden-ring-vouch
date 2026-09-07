@@ -34,6 +34,7 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__)))), "lib"))
 
+import judgement  # noqa: E402
 import oracle  # noqa: E402
 import spells as spellbook  # noqa: E402
 
@@ -73,10 +74,18 @@ def objective(result, focus):
 
 def main():
     request = json.load(sys.stdin)
+    # Every judgement this node makes, decided in one place and before anything reads them.
+    # They were previously read at their point of use, which put one of them above its own
+    # definition the moment a second parameter joined it.
+    chosen, assumed = judgement.applied(request, "starting_class", "two_hand")
     weapon = request["weapon"]
     focus = request.get("focus", "attack")
     target_level = request["target_level"]
-    two_hand = request.get("two_hand", False)
+    # two_hand is not a neutral default: two-handing multiplies effective strength by 1.5,
+    # and on question 7.1 it moved a real answer from 342 to 383 — internally consistent,
+    # attested, and answering a question nobody asked. False asserts the least, and `assumed`
+    # is what stops it asserting silently.
+    two_hand = chosen["two_hand"]
 
     catalog, _ = oracle.weapons()
     row = catalog.get(weapon)
@@ -107,7 +116,7 @@ def main():
     import planner
 
     classes = planner.load_starting_classes()
-    starting_class = request["starting_class"]
+    starting_class = chosen["starting_class"]
     if starting_class not in classes:
         print(f"no starting class named {starting_class!r}", file=sys.stderr)
         sys.exit(1)
@@ -404,6 +413,8 @@ def main():
         "max_upgrade": oracle.max_upgrade(row),
         "two_hand": bool(two_hand),
         "starting_class": starting_class,
+        # What the collection decided because nobody else did.
+        "assumed": assumed,
         "focus": focus,
         "target_level": int(target_level),
         "level": sum(stats.values()) - LEVEL_BASE,

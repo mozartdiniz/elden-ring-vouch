@@ -18,7 +18,8 @@
     "weapons",
     "end_for_light_roll",
     "end_for_mid_roll",
-    "talismans_modelled"
+    "talismans_modelled",
+    "assumed"
   ],
   "properties": {
     "endurance": {
@@ -108,6 +109,10 @@
     "endurance_raised_by_class": {
       "type": "boolean",
       "description": "True when the class floor lifted the endurance above what was asked for, which makes every figure here one for a slightly different character."
+    },
+    "assumed": {
+      "type": "object",
+      "description": "Judgement parameters the caller did not give, and the value the collection used. Empty when the caller gave them all. Quote these as assumptions, never as the user's choice."
     }
   }
 }

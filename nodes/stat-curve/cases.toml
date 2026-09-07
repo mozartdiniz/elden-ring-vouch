@@ -59,3 +59,15 @@ expect_code = 20
 name = "a weapon curve says what it was priced with"
 input = { stat = "strength", subject = "weapon", weapon = "Zweihander", affinity = "Heavy", upgrade = 25, dexterity = 19, from = 19, to = 25 }
 expect = { "result.affinity" = "Heavy", "result.upgrade" = 25, "result.two_hand" = false, "result.held_stats.dexterity" = 19 }
+
+# Determinism. The same question twice — once without a class, once with — because the drift
+# the battery measured was a model choosing this parameter differently between runs.
+[[case]]
+name = "no class given falls to the least-distorting one, and says so"
+input = { stat = "vigor", subject = "vitals" }
+expect = { "result.starting_class" = "Wretch", "result.assumed.starting_class" = "Wretch" }
+
+[[case]]
+name = "a class the caller gave is never reported as an assumption"
+input = { stat = "vigor", subject = "vitals", starting_class = "Hero", two_hand = false }
+expect = { "result.starting_class" = "Hero", "result.assumed" = {} }

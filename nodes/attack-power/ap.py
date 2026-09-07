@@ -41,6 +41,7 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__)))), "lib"))
 
+import judgement  # noqa: E402
 import oracle  # noqa: E402
 
 sys.path.insert(0, oracle.SCRIPTS)
@@ -58,6 +59,11 @@ def number(value):
 
 def main():
     request = json.load(sys.stdin)
+    # two_hand is not a neutral default: two-handing multiplies effective strength by 1.5,
+    # and on question 7.1 it moved a real answer from 342 to 383 — internally consistent,
+    # attested, and answering a question nobody asked. False asserts the least, and `assumed`
+    # is what stops it asserting silently.
+    chosen, assumed = judgement.applied(request, "two_hand")
     weapon = request["weapon"]
     affinity = request["affinity"]
 
@@ -105,7 +111,7 @@ def main():
         intelligence=request["intelligence"],
         faith=request["faith"],
         arcane=request["arcane"],
-        two_hand=request.get("two_hand", False),
+        two_hand=chosen["two_hand"],
         ignore_require=request.get("ignore_require", False),
         status_buff=request.get("status_buff", "None"),
     )
@@ -134,6 +140,8 @@ def main():
         "upgrade": inputs.upgrade,
         "max_upgrade": oracle.max_upgrade(row),
         "two_hand": bool(inputs.two_hand),
+        # What the collection decided because nobody else did.
+        "assumed": assumed,
         "total_ar": float(r.total_ar),
         "total_ar_rounded": int(r.total_ar_rounded),
         "attack": attack,

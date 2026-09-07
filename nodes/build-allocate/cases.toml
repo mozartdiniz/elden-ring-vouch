@@ -164,3 +164,15 @@ expect_code = 13
 name = "and the cast it can make is unaffected"
 input = { weapon = "Carian Regal Scepter", affinity = "Standard", upgrade = 10, max_upgrade = 10, starting_class = "Astrologer", target_level = 150, focus = "spell", spell = "Comet", vigor = 40, mind = 30, endurance = 20 }
 expect = { "result.spell_castable_from_catalyst" = true, "result.catalyst_casts[0]" = "Sorcery", "result.stats.intelligence" = 99 }
+
+# Determinism. The same question twice — once without a class, once with — because the drift
+# the battery measured was a model choosing this parameter differently between runs.
+[[case]]
+name = "no class given falls to the least-distorting one, and says so"
+input = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 10, max_upgrade = 10, target_level = 150, focus = "bleed", vigor = 40, mind = 20, endurance = 25 }
+expect = { "result.starting_class" = "Wretch", "result.assumed.starting_class" = "Wretch" }
+
+[[case]]
+name = "a class the caller gave is never reported as an assumption"
+input = { weapon = "Rivers of Blood", affinity = "Standard", upgrade = 10, max_upgrade = 10, target_level = 150, focus = "bleed", vigor = 40, mind = 20, endurance = 25, starting_class = "Samurai", two_hand = false }
+expect = { "result.starting_class" = "Samurai", "result.assumed" = {} }

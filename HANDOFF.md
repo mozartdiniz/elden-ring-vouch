@@ -5,7 +5,7 @@ known to be missing, and the traps that have already cost time.
 
 `README.md` says how to use the collection. This file says where the work stands.
 
-*Last worked on 3 September 2026. Both repositories clean, 40 commits pushed.*
+*Last worked on 7 September 2026. Both repositories clean, 43 commits pushed.*
 
 ---
 
@@ -55,11 +55,14 @@ elden-ring-vouch/
   scripts/compare_models.py the same questions across OpenRouter models: answered,
                             attested, complete, cost. --estimate before --yes
   web/                     the chat app. Four files and a static page, no build step
-    app.py                 one endpoint streaming NDJSON, rate limit, access token
-    engine.py              the loop — ask.py with its I/O ends changed, prompts verbatim
-    llm.py                 Claude CLI or OpenRouter behind one signature, with retries
+    app.py                 one endpoint streaming NDJSON, rate limit, two daily ceilings
+    engine.py              the loop — ask.py with its I/O ends changed, prompts verbatim.
+                           `Prompt` marks where a cache breakpoint is legal; `trimmed`
+                           is why the catalog is 18,900 tokens and not 28,000
+    llm.py                 Claude CLI or OpenRouter behind one signature, with retries,
+                           cache breakpoints, and a per-call-kind token budget
     completeness.py        did the answer name what the user asked about — no model
-    test_server.py         15 checks, model replies canned, everything else real
+    test_server.py         20 checks, model replies canned, everything else real
     test_client.mjs        14 checks of static/app.js against a stub DOM, via node
   VALIDATION.md            122 questions, worked one at a time — read this next
   BUGS.md                  what the questions found, open and fixed — the work list
@@ -95,7 +98,7 @@ came from the Prometheux workspace, which is a different provenance and is decla
 | `matchmaking` | who a character can play with, and the upgrade bracket that keeps them there | 9 |
 | `stat-curve` | what each point in a stat buys, and where the curve bends | 9 |
 
-`vouch -C . test` → **247 cases, 247 passed**.
+`vouch -C . test` → **253 cases, 253 passed**.
 
 `python3 scripts/check_spreadsheet.py` → **22 of 22 match**, against the Build Planner workbook
 itself rather than against the extraction. Run it after touching anything that reaches
@@ -105,11 +108,14 @@ itself rather than against the extraction. Run it after touching anything that r
 
 Three layers, and the point is that they fail differently.
 
-**250 fixtures** (`vouch test`) pin every node against the extraction in `oracle/`. They are
+**253 fixtures** (`vouch test`) pin every node against the extraction in `oracle/`. They are
 fast, they run on every change, and *by construction they cannot catch a mistake in how the
 collection uses the extraction* — which is what bug 17 was. Worse, a fixture can pin the wrong
-behaviour: one asserted that `buff-stack` exiting 20 on an unknown name was correct, so 250
-green fixtures were affirming a bug until a model tripped over it.
+behaviour, and it has now happened twice. One asserted that `buff-stack` exiting 20 on an
+unknown name was correct. The other was *named* for what it was protecting — "an item not in
+the effect tables is a defect, not a silent zero" — and half of that was right while the other
+half pinned bug 23 for as long as the node existed. **A fixture expecting exit 20 or 21 is
+nearly always pinning a defect.** There are none left here; grep before adding one.
 
 **122 questions** (`VALIDATION.md`) are the outside view: what a player actually types, worked
 one at a time in fourteen patterns. They found seventeen bugs, four of which returned a
@@ -139,6 +145,27 @@ Its own two checks are `web/completeness.py` — the lookup nodes resolve what t
 an answer that never mentions a resolved entity dropped something, which **attestation cannot
 see** — and the four mechanical columns in `compare_models.py`: answered, attested, complete,
 cost. Neither needs the recorded answers to be right, which matters, because one of them wasn't.
+
+**The 18-question battery** (7 September) is the same layer widened, and widening it is what
+made it useful. One question per pattern chosen to reach the five nodes no recorded entry
+mentions, plus **four questions whose right answer is a refusal** — which nothing had ever
+tested. Every question in the old three-question set was answerable, so a model that answers
+everything scored full marks. `compare_models.py` now scores the two arms separately, because
+"answered" means opposite things in them.
+
+It immediately paid for itself. It found bug 23 and bug 24; it found that no node ranks
+talismans while `VALIDATION.md` marks 5.1 as done; it showed that neither shipping candidate is
+deterministic; and it reversed the model choice the three-question set had implied. Run it
+with:
+
+```console
+$ ./scripts/compare_models.py --questions 1.1,2.1,3.1,4.1,4.2,5.1,6.2,8.1,9.2,10.3,11.3,11.5,11.6,12.8,14.4,15.4,15.6,7.1 --repeat 3
+```
+
+Two things about running it: `--concurrency 1` for models on a new OpenRouter account, which
+are capped at 20 requests a minute and a single question is eight to fifteen sequential calls;
+and `--estimate` first, whose per-decision rates in `SEEN_COST` are only as good as the last
+measurement written into them.
 
 Two audits found five more (bugs 18–22) and are worth repeating whenever a node is added:
 
@@ -299,17 +326,53 @@ recorded entries remain, and the ones whose inputs are pinned in the entry cost 
 re-run — no model needed, just the nodes. Do this before trusting the battery as a scoring key,
 because it is currently the scoring key for `scripts/compare_models.py`.
 
-### Second: the model comparison is unfinished
+**A second entry is now in doubt, and this one was found for free.** 5.1 is marked `[x]`, and
+both shipping candidates across all six runs independently said the same thing: no node ranks
+or selects talismans, `buff-stack` only evaluates a set the caller supplies. They are right —
+see *Fifth* below. So either that entry was worked by hand doing the ranking off-collection, or
+it is wrong. Two of the eighty-five recorded entries have now been checked and both were
+questionable; that is the argument for checking the rest.
 
-`scripts/compare_models.py` works and the account ran out of credit mid-run. What is settled:
-all four models drive the collection correctly once `ask` exists; `grok-4.6` and `kimi-k3` are
-bit-identical across repeats and the two that used `ask` were not; every figure any model
-printed was reproducible. What is **not** settled is which to ship. The best evidence is 8
-genuine kimi attempts (6 answered, 6/6 attested, 6/6 complete, $0.202/question, 103s median)
-against 4 luna attempts (3 answered, 3/3 attested, 3/3 complete, $0.042, 42s median). Kimi
-looks better and costs five times more and runs two to three times slower; four runs is not a
-basis for either claim. Resume with `--models`/`--questions` and a credit ceiling in mind: the
-harness now stops on 402 rather than marking every remaining question a failure.
+Note also that `recorded_nodes` — the key `compare_models.py` scores `nodes_missed` against —
+is extracted by matching backticked names in the entry body, and five nodes are named by no
+entry at all. It is a weak key and worth strengthening while the entries are being re-run.
+
+### Second: determinism — the model is chosen, its variance is not fixed
+
+**Settled 7 September: the collection ships on `openai/gpt-5.6-luna`.** On the 18-question
+battery at three repeats it answered 33 of 42 answerable runs against `gpt-5.6-terra`'s 25,
+everything it answered was attested *and* complete where terra left two incomplete, and it cost
+$0.27 against $2.47. `qwen/qwen3.8-27b` was dropped for latency — 267s on 7.1 against terra's
+46s — after being competitive on the mechanical columns.
+
+**The three-question set had implied the opposite**, and the reason is worth keeping: 3.1, 1.1
+and 7.1 happened to sit inside terra's strengths. Terra collapsed on `matchmaking` (10.3, never
+routed to it at all) and on 12.8, which luna answered three times out of three. A sample chosen
+for *shape* — one call, a chain, a long one — is not a sample chosen for coverage.
+
+What is **not** settled is determinism, and it is now the largest open piece of work:
+
+| | identical across repeats | differed |
+|---|---|---|
+| questions where a model asked | 1 | **14** |
+| questions with no ask | 2 | 3 |
+
+**The drift is the `ask` branch, and it is fixable.** A model invents its option set fresh each
+run — luna offered `(vigor 40, mind 20, endurance 25)` on one run and the same plus
+`focus bleed` on the next — so different parameters reach the node and different figures come
+out. Every one is internally consistent and attested. Nothing is wrong except that the answer
+moved.
+
+The fix is `~/Dev/vouch/FEEDBACK.md` item 5: let the collection declare which parameters are
+judgements and what their canonical options are, so the model relays a fixed list instead of
+authoring one. That removes 14 of the 15 drift cases at the source. Two smaller sources remain
+and should not be confused with it: the narrator choosing *which* figures to quote from a large
+result (11.5 drifted with no ask involved, both models, from an identical `stat-curve` result),
+and provider nondeterminism, which `temperature: 0` does not remove and an untried `seed` may
+reduce. **The target is 99%, not 100%.**
+
+Get a baseline with `--repeat 5` on a fixed set before changing anything; `consistency()` in
+`compare_models.py` already reports it.
 
 ### Third: the evals
 
@@ -317,17 +380,41 @@ See *State of the evals* above. Nineteen nodes, sixteen eval cases, eight nodes 
 live model. This is the largest gap in the project and the only one that measures whether an
 agent can actually route to what has been built.
 
-### Fourth: the routing preamble
+### Fourth: the routing preamble — the cost half is done, the reading half is not
 
-**Sixty-one notes**, against nineteen when this file first said pruning would eventually be
-needed, and now with a measured cost: the planning prompt is **26,000 tokens and it is re-sent
-on every decision**, six to sixteen decisions per question. It dominates every bill — pruning it
-and prompt caching are each worth more than the choice of model.
-An agent carries all of it every turn, and past some size the notes stop being read rather than
-stop being true — nothing measures which. Prune before adding another one. `vouch describe` is
-not the pack; the pack omits contracts.
+The bill is handled. The fixed prefix went from **28,000 tokens to 18,900** (`engine.trimmed`:
+`$schema` and `title` dropped, `params.*.guidance` folded into the schema `description` that
+duplicated it, one example per node, no indentation), and `engine.Prompt` now carries two cache
+breakpoints. Measured on one question with everything else held: **$0.0367 to $0.0119**, same
+decisions, same calls, same answer. Across nine pairings, 66% less. `llm.py` documents the
+environment variables, and `CACHE_BREAKPOINTS=0 PLANNING_REASONING=default` reproduces the old
+behaviour exactly for a control arm.
 
-### Fifth: what the battery left open
+**Do not assume a provider caches on its own.** With breakpoints off, luna reported 0% cached
+on a prefix that was byte-identical across eight decisions; `kimi-k3` was already at 87% before
+any of this. It is a property of the provider.
+
+**Do not prune further for cost.** Cached, the full 18,900-token catalog reads at roughly what
+a thin dynamic index would cost uncached, and it is lossless. What remains is a *reading*
+question, not a billing one: **sixty-one notes**, 16,755 characters, 23% of the catalog. Past
+some size notes stop being read rather than stop being true, and nothing measures which. Prune
+before adding another one. `vouch describe` is not the pack; the pack omits contracts.
+
+### Fifth: `item-rank` does not exist, and the answer is data, not a node
+
+Pattern 5 is talismans, it is among the most common things a player actually asks, and the
+collection cannot answer the shape *"which four talismans maximise X"*. `weapon-rank`,
+`spell-rank` and `ash-rank` all exist because a table existed to rank against. Nothing says
+what a talisman is worth for a given goal, so there is no `item-rank`.
+
+**The decision (7 September) is to fix the data rather than patch a node.** Building a ranking
+over a table that does not carry the quantity being ranked is exactly the well-formed-answer-
+about-nothing this collection exists to prevent. `ConsumableEffect.csv` and the item tables in
+`prometheux-workspace/files/elden-ring-brain/` are the unported material to look at first —
+and the standing rule applies: read that directory's file list before writing a parser, because
+three of twenty-four bugs exist because one was written while the table sat there unused.
+
+### Sixth: what the battery left open
 
 `VALIDATION.md` has all 122 questions worked one at a time, with the calls, the figures and the
 cross-checks. Ninety-one answer end to end and thirty-one are partial. **No question is
@@ -377,6 +464,62 @@ while the structured table sat there unused.
 
 ---
 
+## What is blocking a public launch
+
+Reviewed 7 September, sized for *a few hits if any* rather than a front page. Ranked, with the
+decisions already taken written down so they are not re-litigated.
+
+**1. OpenRouter's rate limit.** New accounts are capped at 20 requests a minute per model, and
+one question is eight to fifteen sequential calls. It cost a question during the 18-question
+battery at concurrency 2. Nothing else on this list matters until the account tier is raised.
+
+**2. Abuse, without building authentication.** *Decided: no account system.* Cloudflare in
+front (free tier, one DNS change) with Turnstile — a script tag and one verify call, no
+accounts, invisible to humans — plus a global concurrency cap, not just the per-IP limit, which
+lives in process memory and resets on restart.
+
+**3. The money ceiling — done.** `DAILY_SPEND` (default $5) now sits beside `DAILY_BUDGET`,
+read from the provider's own cost figure and charged whether the question finished or failed. A
+count of questions bounded nothing: 200 questions is $1.28 on luna and $19 on terra. This is
+what makes a public endpoint tolerable without accounts — the worst case is a number we chose.
+
+**4. Bugs 23 and 24 — done.** See `BUGS.md`.
+
+**5. Data provenance and the Prometheux conversation.** Owner-handled, outside this file. See
+`PLAN-web-app.md`.
+
+**6. Determinism.** See *Second* in the pending list. Two people asking the same question get
+different figures from a tool whose entire claim is that its numbers are computed. This is the
+one that most deserves the effort.
+
+**7. The prose channel.** `stop` reasons and `ask` question and label text are the only
+model-authored strings the page renders, and they are therefore the whole surface for anyone
+trying to use this as a free LLM. The architecture closes the rest: the planner may only emit
+`call`/`done`/`ask`/`stop`, and the narrator sees nothing but verified results. Cap the length
+hard, and where a stop follows a runtime refusal, render **the node's reason** rather than the
+model's paraphrase — those messages were written to be acted on, and it improves the answer as
+well as closing the channel.
+
+**8. Making "I can't" useful.** Thirty-one of 122 question shapes are partial, so a quarter of
+real questions end in a stop, and a stop is currently one sentence. It should say what the
+collection *does* have that is adjacent — on 11.6, "no stance-break rule, but `ash-rank` gives
+an ash's poise damage and `boss-lookup` gives a fight's poise, so the arithmetic is yours".
+The models already called those nodes; the stop path throws it away.
+
+**9. Answers in the wrong language.** 19% of battery answers came back in a language the
+question was not asked in, down from roughly two thirds before a line was added to
+`narration_prompt`. One came back in French. *Decided: parked* — it is cosmetic next to
+determinism. If picked up, try the planning rules too, or restate it last rather than mid-prompt.
+
+**10. Deployment.** `run.sh` is a development server: `uvicorn --reload`, no TLS, no process
+manager. Conversations live in process memory and are lost on deploy. The `vouch` binary must
+be on PATH, which is a deployment script's job. *Decided: a production server is a known,
+accepted piece of work.*
+
+**11. Ledger growth — done.** A conversation now deletes its ledger when it is evicted.
+
+---
+
 ## Working notes
 
 - **Check against the workbook, not just the extraction.** `scripts/check_spreadsheet.py` holds
@@ -407,7 +550,7 @@ while the structured table sat there unused.
 
 ```console
 $ cd ~/Dev/elden-ring-vouch
-$ vouch test                                    # 250 cases, no model
+$ vouch test                                    # 253 cases, no model
 $ python3 scripts/check_spreadsheet.py          # 22 figures from the workbook itself
 $ vouch call boss-lookup --input '{"query":"rennala"}'
 $ vouch call build-allocate --input '{"weapon":"Rivers of Blood","affinity":"Standard",
@@ -429,14 +572,25 @@ And the app, which needs no model to test and a key to run:
 ```console
 $ cd web
 $ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-$ .venv/bin/python test_server.py               # 15 checks, canned model, real nodes
+$ .venv/bin/python test_server.py               # 20 checks, canned model, real nodes
 $ node test_client.mjs                          # 14 checks, stub DOM
-$ ./run.sh                                      # localhost:8000
+$ ./run.sh                                      # localhost:8000, gpt-5.6-luna
 $ cd .. && ./scripts/compare_models.py --questions 7.1 --estimate
 ```
 
-**Read `BUGS.md` before changing a node.** Twenty-six entries, each with what it returned
+The 18-question battery, which is what to run after touching a node, a prompt, or the model.
+`--concurrency 1` because a new OpenRouter account is capped at 20 requests a minute:
+
+```console
+$ ./scripts/compare_models.py --repeat 3 --concurrency 1 --questions \
+    1.1,2.1,3.1,4.1,4.2,5.1,6.2,8.1,9.2,10.3,11.3,11.5,11.6,12.8,14.4,15.4,15.6,7.1
+```
+
+**Read `BUGS.md` before changing a node.** Twenty-eight entries, each with what it returned
 instead of an error, and the three audit questions at the bottom are the ones worth re-asking
-every time a node is added.
+every time a node is added. A fourth has earned its place: **can this node say no?** Bugs 23
+and 24 were both a node with no way to report that the answer does not exist — one crashed and
+one returned a well-formed nothing. `~/Dev/vouch/FEEDBACK.md` item 10 is why that keeps
+happening.
 
 The runtime is at `~/Dev/vouch`; its own `DECISIONS.md` covers where that stands.

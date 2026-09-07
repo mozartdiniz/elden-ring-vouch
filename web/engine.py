@@ -32,7 +32,11 @@ MAX_DECISIONS = int(os.environ.get("MAX_DECISIONS", "10"))
 # without passing through attestation, so it is bounded rather than trusted.
 MAX_STOP = int(os.environ.get("MAX_STOP", "400"))
 
-REFUSAL = {11, 14, 15}
+# vouch's taxonomy, for reading the exit code of a call. Only DEFECT is branched on — the
+# loop hands anything that is not a defect back to the model as a correction — but the
+# refusal set is kept accurate because it is the documentation of what those numbers mean.
+# 16 is a node refusing on its own data, which it could not do until vouch 43d5317.
+REFUSAL = {11, 14, 15, 16}
 DEFECT = {12, 13, 20, 21}
 
 # vouch rewrites anything outside this set when it names the ledger file, so a session id of

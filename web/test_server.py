@@ -322,6 +322,34 @@ def _():
     assert events[-1]["attestation"] == "attested", events[-1]
 
 
+@check("a node that cannot answer refuses, and the turn survives it")
+def _():
+    """The difference between a refusal and a defect, from the user's side.
+
+    Nineteen places in this collection said "no weapon named X; call weapon-lookup first" by
+    exiting 1, which vouch read as a crash — so a mistyped weapon name ended the turn and
+    showed nothing, including nothing about the rest of the question. They exit 3 now, and the
+    reason comes back as the correction it was always written as.
+    """
+    model = Script(
+        json.dumps({"call": {"node": "attack-power", "input": {
+            "weapon": "Distinguished Greatsword", "affinity": "Standard", "upgrade": 10,
+            "strength": 40, "dexterity": 23, "intelligence": 10, "faith": 10, "arcane": 12}}}),
+        json.dumps({"call": {"node": "weapon-lookup", "input": {"query": "Uchigatana"}}}),
+        json.dumps({"done": True}),
+        "The Uchigatana resolves to one weapon, upgradeable to +25.",
+    )
+    events = asyncio.run(run("how much AR on a Distinguished Greatsword?", model))
+    kinds = [e["type"] for e in events]
+
+    assert "defect" not in kinds, "a name that is not in the game is not a broken node"
+    refusal = next(e for e in events if e["type"] == "refusal")
+    assert refusal["code"] == 16, refusal
+    assert "call weapon-lookup" in refusal["reason"], refusal
+    # And the turn carried on to an answer, which is the whole point.
+    assert events[-1]["type"] == "answer", kinds
+
+
 @check("a fabricated figure is caught by attestation, and no answer is shown")
 def _():
     model = Script(

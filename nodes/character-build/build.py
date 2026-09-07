@@ -26,6 +26,12 @@ import json
 import os
 import sys
 
+# The status a node exits with to refuse: it understood the question and there is no answer.
+# vouch turns it into exit 16, a refusal, with this node's stderr as the reason — where every
+# non-zero exit used to become exit 20, a defect, which tells the caller the node is broken
+# and throws away the rest of their question along with the part that had none.
+REFUSE = 3
+
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__)))), "lib"))
 
@@ -53,7 +59,7 @@ def main():
     if starting_class not in classes:
         # Reachable only past the precondition, which lists the ten classes.
         print(f"no starting class named {starting_class!r}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(REFUSE)
 
     # `None` is planner.py's "use the class minimum". A stat the caller left out is one the
     # user did not name, and the minimum is the honest reading of that.

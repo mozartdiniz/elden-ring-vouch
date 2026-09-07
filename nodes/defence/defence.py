@@ -26,6 +26,12 @@ import json
 import os
 import sys
 
+# The status a node exits with to refuse: it understood the question and there is no answer.
+# vouch turns it into exit 16, a refusal, with this node's stderr as the reason — where every
+# non-zero exit used to become exit 20, a defect, which tells the caller the node is broken
+# and throws away the rest of their question along with the part that had none.
+REFUSE = 3
+
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__)))), "lib"))
 
@@ -56,7 +62,7 @@ def main():
     classes = planner.load_starting_classes()
     if starting_class not in classes:
         print(f"no starting class named {starting_class!r}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(REFUSE)
     minimums = {stat: int(classes[starting_class][stat]) for stat in STATS}
     asked = {stat: request.get(stat) for stat in STATS}
 

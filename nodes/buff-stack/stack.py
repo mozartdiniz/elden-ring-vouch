@@ -29,6 +29,12 @@ import json
 import os
 import sys
 
+# The status a node exits with to refuse: it understood the question and there is no answer.
+# vouch turns it into exit 16, a refusal, with this node's stderr as the reason — where every
+# non-zero exit used to become exit 20, a defect, which tells the caller the node is broken
+# and throws away the rest of their question along with the part that had none.
+REFUSE = 3
+
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__)))), "lib"))
 
@@ -107,7 +113,7 @@ def main():
     not_held = [name for name in assumed if name not in names]
     if not_held:
         print(f"asserted but not among the buffs given: {', '.join(not_held)}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(REFUSE)
 
     factors, not_counted = [], []
     for name in names:

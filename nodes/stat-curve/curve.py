@@ -24,6 +24,12 @@ import json
 import os
 import sys
 
+# The status a node exits with to refuse: it understood the question and there is no answer.
+# vouch turns it into exit 16, a refusal, with this node's stderr as the reason — where every
+# non-zero exit used to become exit 20, a defect, which tells the caller the node is broken
+# and throws away the rest of their question along with the part that had none.
+REFUSE = 3
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(ROOT, "lib"))
@@ -59,10 +65,10 @@ def main():
     if subject == "vitals" and stat not in VITALS:
         print(f"vitals curves are vigor, mind and endurance; {stat!r} is not one",
               file=sys.stderr)
-        sys.exit(1)
+        sys.exit(REFUSE)
     if subject != "vitals" and stat not in COMBAT:
         print(f"{stat!r} is not one of the five the oracle scales damage from", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(REFUSE)
 
     catalog, _ = oracle.weapons()
     row = None
@@ -71,7 +77,7 @@ def main():
         row = catalog.get(weapon)
         if row is None:
             print(f"no weapon named {weapon!r}; call weapon-lookup first", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(REFUSE)
 
     spell_row = None
     catalyst_casts = oracle.casts(row) if row else []
@@ -80,7 +86,7 @@ def main():
         if spell_row is None:
             print(f"no spell named {request['spell']!r}; call spell-lookup first",
                   file=sys.stderr)
-            sys.exit(1)
+            sys.exit(REFUSE)
         # A curve for a cast that cannot happen is a curve about nothing: a staff walked
         # through faith for an incantation climbs perfectly smoothly and means nothing.
         if (spell_row.get("Type") or "") not in catalyst_casts:
@@ -89,7 +95,7 @@ def main():
                 f"and {request['spell']} is a {spell_row.get('Type')}",
                 file=sys.stderr,
             )
-            sys.exit(1)
+            sys.exit(REFUSE)
         families = spellbook.families().get(request["spell"], [])
         bonus, _, _ = spellbook.bonus(row, request["spell"], families)
         base = spellbook.base_attack(spell_row)

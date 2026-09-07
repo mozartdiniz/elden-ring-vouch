@@ -29,6 +29,12 @@ import math
 import os
 import sys
 
+# The status a node exits with to refuse: it understood the question and there is no answer.
+# vouch turns it into exit 16, a refusal, with this node's stderr as the reason — where every
+# non-zero exit used to become exit 20, a defect, which tells the caller the node is broken
+# and throws away the rest of their question along with the part that had none.
+REFUSE = 3
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 MATCH_CSV = os.path.join(
@@ -121,7 +127,7 @@ def main():
         row = table.get(effective if somber else upgrade)
         if row is None:
             print(f"no matchmaking row for upgrade {upgrade}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(REFUSE)
         weapon_range = {
             "standard": {"lower": row[0], "upper": row[1]},
             "somber": {"lower": row[2], "upper": row[3]},

@@ -38,6 +38,12 @@ import json
 import os
 import sys
 
+# The status a node exits with to refuse: it understood the question and there is no answer.
+# vouch turns it into exit 16, a refusal, with this node's stderr as the reason — where every
+# non-zero exit used to become exit 20, a defect, which tells the caller the node is broken
+# and throws away the rest of their question along with the part that had none.
+REFUSE = 3
+
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__)))), "lib"))
 
@@ -71,13 +77,14 @@ def main():
     catalog, _ = oracle.weapons()
     row = catalog.get(weapon)
     if row is None:
-        # Reachable only when the caller skipped weapon-lookup. Nothing is broken and there is
-        # no answer either; the runtime has no way to say the second, so this is a crash.
+        # Reachable only when the caller skipped weapon-lookup. Nothing is broken and there
+        # is no answer either — and the runtime can now say the second, which it could not
+        # when this comment ended "so this is a crash".
         print(
             f"no weapon named {weapon!r}; call weapon-lookup to resolve a name first",
             file=sys.stderr,
         )
-        sys.exit(1)
+        sys.exit(REFUSE)
 
     infusable = bool(row["isInfuse"])
     # A non-infusable weapon is priced as Standard whatever it was asked for. Recording which

@@ -49,9 +49,12 @@ expect_code = 11
 
 # A curve for a cast that cannot happen climbs perfectly smoothly and means nothing.
 [[case]]
+# The name always said "is refused" and the code said 20, a defect. It was pinning bug 22's
+# workaround rather than bug 22's fix: the node had no way to refuse, so it crashed, and the
+# fixture recorded the crash as correct. Third fixture in this collection to have done that.
 name = "a staff walked through faith for an incantation is refused"
 input = { stat = "faith", subject = "spell", weapon = "Carian Regal Scepter", spell = "Black Flame", upgrade = 10, from = 20, to = 40 }
-expect_code = 20
+expect_code = 16
 
 # And a curve now says what it priced: the upgrade it defaulted to, the affinity, and the stats
 # held fixed while the walked one moved.

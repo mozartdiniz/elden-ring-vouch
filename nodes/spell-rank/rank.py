@@ -28,6 +28,12 @@ import json
 import os
 import sys
 
+# The status a node exits with to refuse: it understood the question and there is no answer.
+# vouch turns it into exit 16, a refusal, with this node's stderr as the reason — where every
+# non-zero exit used to become exit 20, a defect, which tells the caller the node is broken
+# and throws away the rest of their question along with the part that had none.
+REFUSE = 3
+
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__)))), "lib"))
 
@@ -56,7 +62,7 @@ def main():
     row = catalog.get(catalyst)
     if row is None:
         print(f"no weapon named {catalyst!r}; call weapon-lookup first", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(REFUSE)
 
     casts = oracle.casts(row)
     upgrade = int(request.get("upgrade", oracle.max_upgrade(row)))

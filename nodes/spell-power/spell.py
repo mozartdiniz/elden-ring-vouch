@@ -30,6 +30,12 @@ import json
 import os
 import sys
 
+# The status a node exits with to refuse: it understood the question and there is no answer.
+# vouch turns it into exit 16, a refusal, with this node's stderr as the reason — where every
+# non-zero exit used to become exit 20, a defect, which tells the caller the node is broken
+# and throws away the rest of their question along with the part that had none.
+REFUSE = 3
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(ROOT, "lib"))
@@ -51,7 +57,7 @@ def main():
     row = catalog.get(catalyst)
     if row is None:
         print(f"no weapon named {catalyst!r}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(REFUSE)
 
     # A staff casts sorceries and a seal casts incantations. Nothing in the maths knows that:
     # the spell buff is a number and the multiply does not ask what kind of spell it is, so
@@ -64,7 +70,7 @@ def main():
     spell = book.get(spell_name)
     if spell is None:
         print(f"no spell named {spell_name!r}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(REFUSE)
     forms = spellbook.variants(book, spell["Name"])
 
     # A starting class is a *floor* in planner.py, not a baseline: a build with 9 intelligence

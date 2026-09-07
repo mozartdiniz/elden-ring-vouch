@@ -31,6 +31,12 @@ import math
 import os
 import sys
 
+# The status a node exits with to refuse: it understood the question and there is no answer.
+# vouch turns it into exit 16, a refusal, with this node's stderr as the reason — where every
+# non-zero exit used to become exit 20, a defect, which tells the caller the node is broken
+# and throws away the rest of their question along with the part that had none.
+REFUSE = 3
+
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__)))), "lib"))
 
@@ -91,7 +97,7 @@ def main():
     row = catalog.get(weapon)
     if row is None:
         print(f"no weapon named {weapon!r}; call weapon-lookup first", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(REFUSE)
 
     # `focus = "spell"` maximises what a spell hits for out of this catalyst, not what the
     # catalyst hits for. They are different questions with different answers: an Erdtree Seal's
@@ -106,12 +112,12 @@ def main():
     if focus == "spell":
         if not spell_name:
             print("focus 'spell' needs a spell to maximise", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(REFUSE)
         spell_row = spellbook.book().get(spell_name)
         if spell_row is None:
             print(f"no spell named {spell_name!r}; call spell-lookup to resolve it",
                   file=sys.stderr)
-            sys.exit(1)
+            sys.exit(REFUSE)
 
     import planner
 
@@ -119,7 +125,7 @@ def main():
     starting_class = chosen["starting_class"]
     if starting_class not in classes:
         print(f"no starting class named {starting_class!r}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(REFUSE)
     minimums = {stat: int(classes[starting_class][stat]) for stat in ALL_STATS}
     class_level = sum(minimums.values()) - LEVEL_BASE
 

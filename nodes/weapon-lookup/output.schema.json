@@ -17,7 +17,8 @@
     "affinity_asked",
     "buffable",
     "status_buffs",
-    "status_buffs_accepted"
+    "status_buffs_accepted",
+    "try_next"
   ],
   "properties": {
     "query": {
@@ -111,6 +112,10 @@
         "type": "string"
       },
       "description": "Just the ones that apply."
+    },
+    "try_next": {
+      "type": "string",
+      "description": "On a miss, the node to try instead and what to read from it. Empty when the weapon resolved."
     }
   }
 }

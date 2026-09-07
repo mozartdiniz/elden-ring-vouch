@@ -197,6 +197,67 @@ def _():
     assert "web-0" not in store.turns
 
 
+@check("an evicted conversation takes its ledger with it")
+def _():
+    """One file per visitor, kept forever, is how a box fills its disk overnight.
+
+    The ledger is only read while the conversation is alive — it is what a follow-up is
+    attested against — so the eviction that ends the thread is the right moment to drop it.
+    """
+    session = "web-evict-probe"
+    ledger = engine.ledger_path(COLLECTION, session)
+    os.makedirs(os.path.dirname(ledger), exist_ok=True)
+    with open(ledger, "w") as handle:
+        handle.write('{"node":"weapon-lookup","outcome":"ok"}\n')
+
+    store = app.Conversations()
+    store.remember(session, {"question": "q", "calls": [], "answer": "a"})
+    store.touched[session] -= app.CONVERSATION_TTL + 1
+    store.history("web-someone-else")
+
+    assert session not in store.turns
+    assert not os.path.exists(ledger), "the ledger outlived the conversation that needed it"
+
+    # A conversation that never made a call has no ledger, and evicting it must not raise.
+    store.remember("web-no-calls", {"question": "q", "calls": [], "answer": "a"})
+    store.touched["web-no-calls"] -= app.CONVERSATION_TTL + 1
+    store.history("web-someone-else")
+
+
+@check("the daily ceiling is money, not a count of questions")
+def _():
+    """200 questions is $1.28 on one model and $19 on another, so a count bounds nothing.
+
+    This is what lets the endpoint be public without an account system: the worst case is a
+    number the operator chose.
+    """
+    was = (app.SPENT.copy(), app.DAILY_SPEND, app.DAILY_BUDGET)
+    try:
+        app.DAILY_SPEND, app.DAILY_BUDGET = 0.10, 0
+        app.SPENT.update(day=None, count=0, cost=0.0)
+
+        assert not app.over_budget(), "nothing spent yet"
+        app.record_spend({"cost": 0.04})
+        assert not app.over_budget(), "under the ceiling"
+        app.record_spend({"cost": 0.07})
+        assert app.over_budget(), "over the ceiling and still admitting questions"
+
+        # A new day starts clean.
+        app.SPENT["day"] = "19700101"
+        assert not app.over_budget()
+
+        # The claude backend reports no cost, so the money cap must never fire on it rather
+        # than blocking every question after the first.
+        app.SPENT.update(day=None, count=0, cost=0.0)
+        for _ in range(50):
+            app.record_spend({})
+        assert not app.over_budget()
+    finally:
+        app.SPENT.clear()
+        app.SPENT.update(was[0])
+        app.DAILY_SPEND, app.DAILY_BUDGET = was[1], was[2]
+
+
 # --------------------------------------------------- the loop, against real nodes
 
 

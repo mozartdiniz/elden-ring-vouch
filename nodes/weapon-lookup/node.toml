@@ -91,3 +91,8 @@ call = { query = "rivers of blood" }
 [[examples]]
 ask = "what katana should I use?"
 call = { query = "katana", weapon_class = "Katana" }
+
+# A miss must say where to go next, and a hit must not: an answer that always carries advice
+# trains a caller to ignore it.
+[[ensures]]
+expr = "(result.match_count == 0) == (size(result.try_next) > 0)"

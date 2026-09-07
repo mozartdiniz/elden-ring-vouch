@@ -166,10 +166,15 @@ def main():
     catalogue = kinds()
     tears = physick.table()
 
-    resolved, ambiguous, missing = [], {}, []
+    # `kept` is the names that resolved, in step with `resolved`, so every size contract
+    # below is about the items actually described. A name that resolved to nothing is not a
+    # reason to fail the call — it is the answer to "is this thing in the effect tables", and
+    # the caller can drop it and ask again. See the note above `missing` in the result.
+    kept, resolved, ambiguous, missing = [], [], {}, []
     for name in items:
         candidates = resolve(name, list(book))
         if len(candidates) == 1:
+            kept.append(name)
             resolved.append(candidates[0])
         elif candidates:
             ambiguous[name] = candidates[:8]
@@ -177,17 +182,24 @@ def main():
             # In the physick table and not in the effect table: a real tear the extraction
             # names differently or not at all. It has no stat columns, so it is described from
             # the physick table alone.
+            kept.append(name)
             resolved.append(name)
         else:
             missing.append(name)
-    if missing:
-        print(f"no effect table entry for: {', '.join(missing)}", file=sys.stderr)
-        sys.exit(1)
-    if ambiguous:
-        for name, candidates in ambiguous.items():
-            print(f"{name!r} matches {len(candidates)}: {', '.join(candidates)}",
-                  file=sys.stderr)
-        sys.exit(1)
+
+    # Neither of these exits the node any more. Both used to `sys.exit(1)`, which vouch reads
+    # as a crash (exit 20) — a defect, which stops the loop and shows the user nothing at all.
+    # But an item that is not in the tables is not a broken node, it is a fact about the
+    # tables, and it is exactly what the caller asked. A model given the fact drops the item
+    # and asks again; a model given a defect gets no answer to anything.
+    #
+    # Found by the battery: a real perfume, `Bloodboil Aromatic`, is not in the effect tables,
+    # and asking about it alongside two talismans threw the whole question away. This is bugs
+    # 4 and 22 for the third time — a guard that lives in one node is not a guard.
+    for name in missing:
+        print(f"no effect table entry for: {name}", file=sys.stderr)
+    for name, candidates in ambiguous.items():
+        print(f"{name!r} matches {len(candidates)}: {', '.join(candidates)}", file=sys.stderr)
 
     described = [
         describe(name, book.get(name, {})) for name in resolved
@@ -224,13 +236,18 @@ def main():
     }
 
     result = {
-        "items": list(items),
+        "items": list(kept),
         "resolved": resolved,
+        # What could not be described, and why. `missing` is not in the effect tables at all;
+        # `ambiguous` matched several rows and needs one of them named. Both are empty on the
+        # ordinary path, and a caller that ignores them sees exactly what it saw before.
+        "missing": missing,
+        "ambiguous": {name: list(c) for name, c in ambiguous.items()},
         # What each name was taken to mean. "Crimson Crystal Tear" is the catalogue's
         # "Crimson Crystal Tear 1", and an answer should use the name the user typed while
         # knowing which row it came from.
-        "resolved_from": dict(zip(items, resolved)),
-        "kinds": [catalogue.get(name, "other") for name in items],
+        "resolved_from": dict(zip(kept, resolved)),
+        "kinds": [catalogue.get(name, "other") for name in kept],
         "effects": described,
         "combined": {
             "stats": combined_stats,

@@ -87,6 +87,22 @@ def main():
         "candidates_truncated": len(candidates) > MAX_CANDIDATES,
         "ambiguous": len(candidates) > 1,
         "catalog_size": len(names),
+        # A miss is data, not an error — but on its own it is a dead end, and a caller that
+        # cannot see past it stops. Both models in the battery stopped on "Distinguished
+        # Greatsword" all three runs, when the catalogue has a Distinguished *Greatshield*
+        # and the skill the question named, Wave of Destruction, is `unique_to` the Ruins
+        # Greatsword. `weapon-skill` had the answer the whole time and nothing pointed at it.
+        #
+        # So the node hands back the step rather than leaving the caller to invent it. This
+        # is the rule this collection keeps re-learning: if a node leaves a caller one small
+        # move, it has handed that move to a model.
+        "try_next": (
+            "no weapon matched. If the question named a skill or Ash of War, call "
+            "weapon-skill with that name — its `unique_to` gives the weapon the skill "
+            "belongs to. If it named armour, a talisman or a tear, call item-effect."
+            if not candidates
+            else ""
+        ),
         # What can be put on it: greases, armament buffs, the mist skills. Three conditions
         # decide it — the buff lists the class, the buff lists the affinity, and the weapon can
         # be buffed at all — and each is a different reason for a no. A somber weapon usually

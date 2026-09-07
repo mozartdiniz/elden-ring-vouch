@@ -51,10 +51,20 @@ name = "nothing here is applied to a build automatically"
 input = { items = ["Radagon's Soreseal"] }
 expect = { "result.applied_to_a_build" = false }
 
+# Was `expect_code = 20`, and named "is a defect, not a silent zero". Half of that was
+# right and half of it pinned bug 23: an unknown item must not be silently absorbed into
+# the stack, but it is not a broken node either. It is the answer to a real question —
+# is this thing in the tables — and crashing threw away the rest of the caller's question
+# with it. Now it comes back as data, and the second case checks it changes nothing.
 [[case]]
-name = "an item not in the effect tables is a defect, not a silent zero"
+name = "an item not in the effect tables comes back as missing, not as a crash"
 input = { items = ["Ring of Favor"] }
-expect_code = 20
+expect = { "result.missing[0]" = "Ring of Favor", "result.items" = [], "result.effects" = [] }
+
+[[case]]
+name = "an unknown item alongside real ones costs only itself"
+input = { items = ["Flame-Shrouding Cracked Tear", "Fire Scorpion Charm", "Bloodboil Aromatic"] }
+expect = { "result.missing[0]" = "Bloodboil Aromatic", "result.resolved[1]" = "Fire Scorpion Charm" }
 
 [[case]]
 name = "an empty item list is a caller error"

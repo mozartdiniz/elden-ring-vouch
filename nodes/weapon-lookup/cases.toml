@@ -93,3 +93,16 @@ expect = { "result.buffable" = true, "result.status_buffs_accepted[0]" = "Poison
 name = "the same katana infused with Blood takes almost none"
 input = { query = "Uchigatana", affinity = "Blood" }
 expect = { "result.status_buffs_accepted[0]" = "Seppuku (only bleed; +30 phys AP)", "result.status_buffs_accepted[1]" = "Poisonous Mist" }
+
+# A name that is not in the game is the commonest real input error there is — players
+# misremember, and 4.1's "Distinguished Greatsword" is a Distinguished Greatshield. The miss
+# is still data, and it now carries the way out of it.
+[[case]]
+name = "a miss names the node that can recover from it"
+input = { query = "Distinguished Greatsword" }
+expect = { "result.match_count" = 0, "result.resolved" = "" }
+
+[[case]]
+name = "a hit carries no advice"
+input = { query = "Uchigatana" }
+expect = { "result.try_next" = "" }

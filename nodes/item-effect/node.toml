@@ -52,6 +52,18 @@ message = "an item name cannot be empty"
 [[ensures]]
 expr = "size(result.resolved) == size(result.items) && size(result.resolved_from) == size(result.items)"
 
+# An answer that describes nothing must say why. Before, `effects` simply could not be
+# empty — which is why an item outside the tables crashed the node rather than being
+# reported. Empty is now legal, but only when `missing` or `ambiguous` accounts for it, so
+# "no effects" can never come back meaning nothing at all.
+[[ensures]]
+expr = "size(result.effects) > 0 || size(result.missing) > 0 || size(result.ambiguous) > 0"
+
+# Nothing that failed to resolve may be counted anywhere. This is what the old fixture was
+# really protecting — an unknown item must not quietly contribute a 1.0 to the stack.
+[[ensures]]
+expr = "result.missing.all(name, !(name in result.items) && !(name in result.quantified))"
+
 [[ensures]]
 expr = "result.effects.all(e, e.item in result.resolved)"
 

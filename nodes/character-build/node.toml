@@ -31,19 +31,19 @@ schema = "input.schema.json"
 schema = "output.schema.json"
 
 [params.starting_class]
-guidance = "Vagabond, Warrior, Hero, Bandit, Astrologer, Prophet, Samurai, Prisoner, Confessor, or Wretch. If the user did not name one, ask — or use Wretch, whose stats are all equal, and say that is what you did."
+guidance = "Used when the user names one — a class's floors are points already spent, so the same spread costs a different level on a different class. Optional: leave it out and the collection uses Wretch, whose flat tens are the lowest floors of the ten, and reports it in `assumed`. Do not ask the user for it. If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
 
 [params.target_level]
-guidance = "The rune level the user named, e.g. 150 for 'an RL150 build'. Pass it: the levels left over then come back as a number instead of a subtraction you would have to do yourself."
+guidance = "The rune level the user named, e.g. 150 for 'an RL150 build'. Pass it: the levels left over then come back as a number instead of a subtraction you would have to do yourself. If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
 
 [params.vigor]
-guidance = "Omit any stat the user did not name. It comes back as the class minimum, and the result says which stats that happened to, so an answer can be honest about what was assumed. Never invent a value to fill the gap."
+guidance = "Omit any stat the user did not name. It comes back as the class minimum, and the result says which stats that happened to, so an answer can be honest about what was assumed. Never invent a value to fill the gap. If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
 
 [params.mind]
-guidance = "Omit unless the user named it."
+guidance = "Omit unless the user named it. If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
 
 [params.endurance]
-guidance = "Omit unless the user named it."
+guidance = "Omit unless the user named it. If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
 
 [params.strength]
 guidance = "Omit unless the user named it."

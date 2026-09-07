@@ -38,16 +38,16 @@ schema = "input.schema.json"
 schema = "output.schema.json"
 
 [params.starting_class]
-guidance = "The class, or the one character-build was called with. If the user did not name one, ask — the class sets stat floors that change every figure here."
+guidance = "Used when the user names one — a class's floors are points already spent, so the same spread costs a different level on a different class. Optional: leave it out and the collection uses Wretch, whose flat tens are the lowest floors of the ten, and reports it in `assumed`. Do not ask the user for it. If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
 
 [params.vigor]
-guidance = "Omit any stat the user did not name; it comes back as the class minimum, and character-build reports which stats that happened to. Never invent one."
+guidance = "Omit any stat the user did not name; it comes back as the class minimum, and character-build reports which stats that happened to. Never invent one. If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
 
 [params.mind]
-guidance = "Omit unless the user named it."
+guidance = "Omit unless the user named it. If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
 
 [params.endurance]
-guidance = "Omit unless the user named it."
+guidance = "Omit unless the user named it. If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
 
 [params.strength]
 guidance = "Omit unless the user named it."

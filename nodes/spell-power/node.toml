@@ -52,7 +52,7 @@ guidance = "The staff or seal, from weapon-lookup's `resolved`."
 guidance = "Pass 'Sorcery' or 'Incantation' when you know it — from an earlier spell-power result's `spell_type`, or because the user said which. With `catalyst_class` it turns a seal asked for a sorcery into a refusal rather than a defect."
 
 [params.starting_class]
-guidance = "The class the character actually started as, whenever you know it — from character-build or from the user. It is a floor on every stat, so leaving it out computes a build with 9 intelligence as one with 10, and quietly answers about a different character."
+guidance = "Used when the user names one — a class's floors are points already spent, so the same spread costs a different level on a different class. Optional: leave it out and the collection uses Wretch, whose flat tens are the lowest floors of the ten, and reports it in `assumed`. Do not ask the user for it. If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
 
 [params.catalyst_class]
 guidance = "Pass weapon-lookup's `weapon_class` for the catalyst. It makes casting from a sword a refusal you can act on rather than a puzzling zero."

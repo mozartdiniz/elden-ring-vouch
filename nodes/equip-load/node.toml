@@ -36,10 +36,10 @@ schema = "input.schema.json"
 schema = "output.schema.json"
 
 [params.endurance]
-guidance = "The build's endurance, from character-build's `stats.endurance` if you have it. Nothing else about the build affects equip load."
+guidance = "The build's endurance, from character-build's `stats.endurance` if you have it. Nothing else about the build affects equip load. If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
 
 [params.starting_class]
-guidance = "Only sets the endurance floor. Leave it out unless the user named a class."
+guidance = "Used when the user names one — a class's floors are points already spent, so the same spread costs a different level on a different class. Optional: leave it out and the collection uses Wretch, whose flat tens are the lowest floors of the ten, and reports it in `assumed`. Do not ask the user for it. If the user's question already states a value, use that value and do not ask — asking for something they have already told you and then substituting your own is how an answer stops being about their build."
 
 [params.head]
 guidance = "Exact armour name. Omit any piece the user is not wearing rather than guessing at one — a missing piece weighs nothing, an invented one weighs something."

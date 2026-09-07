@@ -363,8 +363,42 @@ closed set the data has always known was invisible to every caller. It is an `en
 
 `web/llm.py` sends a `seed` where a provider takes one, which is the small half.
 
-**Not yet measured.** Baseline with `--repeat 5` on a fixed set and compare; `consistency()`
-in `compare_models.py` reports it. The claim to test is that the 14-of-15 drift rate collapses.
+**Measured, 7 September, luna at `--repeat 5`.** The claim holds on the axis that matters and
+not on the one that looked like it mattered.
+
+*What the fix did.* The same question now reaches the nodes with the **same arguments every
+time**: across five runs each, 1.1 and 2.1 both show one distinct option-set taken. On 1.1 the
+model still asks in every run — correctly, since that question states no floors — and offers
+and takes the identical canonical set each time. On 2.1 it stopped asking entirely.
+
+*What it did not do.* The figures in the prose still vary, because the narrator chooses which
+ones to quote from an identical verified result. On 2.1 the four runs that never asked all
+reach the same conclusion with the same values — Strength requirement 20 unmet, recommended
+26/58/20 keeping the user's own 55/30/20 — and differ only in how much of it they mention.
+That is a weaker thing than the old drift, where different inputs produced genuinely different
+computed values, and it is the remaining work.
+
+*Two things found while measuring, both of which had been hiding the result.*
+
+`consistency()` grouped by model and not by question, so it had been comparing the figures in
+an answer about talismans against the figures in an answer about boss resistances. It printed
+DIFFERED for every multi-question run ever made and meant nothing by it. Fixed.
+
+And set-comparison conflates the two kinds. A figure quoted in one run and omitted in another
+is the narrator being terser; a run that reached different inputs computed a different answer.
+The report now names which, by comparing what each run was actually told rather than by
+whether it asked — asking is not the test, because a question that states no floor *should* be
+asked about.
+
+*One regression, found and closed.* On 2.1 the user states VIG 55 / MND 30 / END 20 in the
+question, and the canonical option sets gave the model something to offer anyway: one run in
+five asked for floors it had already been given and substituted 40/20/25. Per-parameter
+guidance cut that from five runs to one; the general rule in `PLANNING_RULES` — *never ask for
+a value the user's question already contains* — took it to zero.
+
+**Still open: narrator figure selection.** The likely fix is the rule this project keeps
+re-learning — a node that returns a large result and does not mark which figures are the
+answer has handed that choice to a model. A `headline` subset per node is the shape.
 
 ### Third: the model choice, and what it rested on
 

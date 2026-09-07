@@ -210,6 +210,14 @@ Reply with ONLY a JSON object, in one of three shapes:
       offering three complete sets beats three questions in a row; each option's `value` may
       be an object carrying all of them. Nobody wants to be interviewed.
 
+      NEVER ask for a value the user's question already contains. If they wrote "VIG 55 /
+      MND 30 / END 20", those are the floors — asking and then substituting your own is how
+      an answer stops being about their build. Read the question again before asking.
+
+      A parameter whose description says the collection has a default is not missing. Leave
+      it out and let the collection fill it; it reports what it assumed and the answer will
+      say so.
+
   {"stop": "<one sentence>"}
       No node can answer this, or a node has told you the answer does not exist. Say what you
       cannot answer and why.

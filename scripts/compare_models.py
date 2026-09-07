@@ -276,23 +276,46 @@ def consistency(results, expect):
     Both are judged on the figures in the answer rather than its wording, because the wording
     is in whatever language the question was asked in and the figures are the claim.
     """
-    by_model = {}
+    # Grouped by model **and question**. Grouping by model alone compared the figures in an
+    # answer about talismans against the figures in an answer about boss resistances, so the
+    # line said DIFFERED for every multi-question run ever made and meant nothing.
+    by = {}
     for outcome in results:
-        by_model.setdefault(outcome["model"], []).append(outcome)
+        by.setdefault((outcome["model"], outcome["number"]), []).append(outcome)
 
-    if any(len(runs) > 1 for runs in by_model.values()):
-        print(f"\nSame model, same question, {max(len(r) for r in by_model.values())} runs:")
-        for model, runs in by_model.items():
-            sets = [frozenset(r["figures"]) for r in runs if r["outcome"] == "answered"]
+    repeated = {k: v for k, v in by.items() if len(v) > 1}
+    if repeated:
+        print(f"\nSame model, same question, across repeats:")
+        for (model, number), runs in sorted(repeated.items()):
+            answered = [r for r in runs if r["outcome"] == "answered"]
+            sets = [set(r["figures"]) for r in answered]
             if not sets:
-                print(f"  {model:<24} never answered")
-            elif len(set(sets)) == 1:
-                print(f"  {model:<24} identical across {len(sets)} run(s)")
+                print(f"  {model:<24} {number:<5} never answered")
+                continue
+            shared = set.intersection(*sets)
+            varying = sorted(set.union(*sets) - shared, key=float)
+            # Two very different things look identical in a set comparison, and only one of
+            # them is a problem. A figure quoted in one run and left out of another is the
+            # narrator choosing what to mention from the same verified result — the answer is
+            # the same, the prose is shorter. A run that reached *different inputs* computed a
+            # different answer, and that is the drift worth chasing.
+            #
+            # Asking is not the test for it. A question that genuinely does not state a floor
+            # should be asked about, and 1.1 asks in every run and takes the same option every
+            # time — stable inputs, five asks. What separates them is whether the runs agreed
+            # on what they were told, so that is what is compared.
+            asked = sum(r.get("asks", 0) for r in runs)
+            chosen = {str(r.get("answered_with")) for r in runs}
+            if not varying:
+                print(f"  {model:<24} {number:<5} identical across {len(sets)} run(s)")
             else:
-                shared = set.intersection(*(set(s) for s in sets))
-                drifted = sorted(set.union(*(set(s) for s in sets)) - shared, key=float)
-                print(f"  {model:<24} DIFFERED — {len(shared)} figure(s) held, "
-                      f"{len(drifted)} moved: {', '.join(drifted[:10])}")
+                kind = ("INPUTS DIFFERED" if len(chosen) > 1
+                        else "same inputs, different subset quoted")
+                print(f"  {model:<24} {number:<5} {len(shared)} held, {len(varying)} varied "
+                      f"({kind}; {asked} ask(s)): {', '.join(varying[:8])}")
+                if len(chosen) > 1:
+                    for taken in sorted(chosen):
+                        print(f"  {'':<24} {'':<5}   took: {taken[:80]}")
 
     dropped = [r for r in results if r["outcome"] == "answered" and not r.get("complete", True)]
     if dropped:

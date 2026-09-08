@@ -26,7 +26,22 @@
         "Jump",
         "ChargedR2",
         "Successive",
-        "Physical"
+        "Physical",
+        "GuardCounter",
+        "Horseback",
+        "Dashing",
+        "RollBackstep",
+        "Ranged",
+        "RangedAimed",
+        "TwoHanded",
+        "KickStomp",
+        "ThrownWeapon",
+        "Roar",
+        "Pot",
+        "Perfume",
+        "Storm",
+        "Magma",
+        "FinalLight"
       ],
       "description": "The kind of hit being asked about. This is the assertion: Shard of Alexander is 1.15 on a Skill and 1.0 on anything else. Default 'All', which counts only the buffs that apply to everything."
     },

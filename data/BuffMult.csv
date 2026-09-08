@@ -1,52 +1,73 @@
 Name,Kind,Slot,HitKind,MultPve,MultPvp,Notes
-none,None,None,All,1.0,1.0,Unused product slot.
-none,None,None,Skill,1.0,1.0,Unused product slot.
-none,None,None,ChargedSkill,1.0,1.0,Unused product slot.
-none,None,None,Crit,1.0,1.0,Unused product slot.
-none,None,None,Jump,1.0,1.0,Unused product slot.
-none,None,None,ChargedR2,1.0,1.0,Unused product slot.
-none,None,None,Successive,1.0,1.0,Unused product slot.
-none,None,None,Physical,1.0,1.0,Unused product slot.
-Dagger Talisman,Talisman,Passive,All,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
-Dagger Talisman,Talisman,Passive,Skill,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
-Dagger Talisman,Talisman,Passive,ChargedSkill,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
-Dagger Talisman,Talisman,Passive,Crit,1.17,1.16,Crit/riposte only. EffectData 1.17x (practical 1.16).
-Dagger Talisman,Talisman,Passive,Jump,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
-Dagger Talisman,Talisman,Passive,ChargedR2,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
-Dagger Talisman,Talisman,Passive,Successive,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
-Dagger Talisman,Talisman,Passive,Physical,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
-Godfrey Icon,Talisman,Passive,All,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
-Godfrey Icon,Talisman,Passive,Skill,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
-Godfrey Icon,Talisman,Passive,ChargedSkill,1.15,1.15,Charged skills and charged R2. Stacks with Alexander on charged skills.
-Godfrey Icon,Talisman,Passive,Crit,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
-Godfrey Icon,Talisman,Passive,Jump,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
-Godfrey Icon,Talisman,Passive,ChargedR2,1.15,1.15,Charged skills and charged R2. Stacks with Alexander on charged skills.
-Godfrey Icon,Talisman,Passive,Successive,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
-Godfrey Icon,Talisman,Passive,Physical,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
-Shard of Alexander,Talisman,Passive,All,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
-Shard of Alexander,Talisman,Passive,Skill,1.15,1.15,All weapon skills. Stacks with Godfrey on charged skills.
-Shard of Alexander,Talisman,Passive,ChargedSkill,1.15,1.15,All weapon skills. Stacks with Godfrey on charged skills.
-Shard of Alexander,Talisman,Passive,Crit,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
-Shard of Alexander,Talisman,Passive,Jump,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
-Shard of Alexander,Talisman,Passive,ChargedR2,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
-Shard of Alexander,Talisman,Passive,Successive,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
-Shard of Alexander,Talisman,Passive,Physical,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
-Warrior Jar Shard,Talisman,Passive,All,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
-Warrior Jar Shard,Talisman,Passive,Skill,1.1,1.1,Weaker Alexander. Multiplies with Alexander if both equipped.
-Warrior Jar Shard,Talisman,Passive,ChargedSkill,1.1,1.1,Weaker Alexander. Multiplies with Alexander if both equipped.
-Warrior Jar Shard,Talisman,Passive,Crit,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
-Warrior Jar Shard,Talisman,Passive,Jump,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
-Warrior Jar Shard,Talisman,Passive,ChargedR2,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
-Warrior Jar Shard,Talisman,Passive,Successive,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
-Warrior Jar Shard,Talisman,Passive,Physical,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
-Claw Talisman,Talisman,Passive,All,1.0,1.0,Jump attacks only.
-Claw Talisman,Talisman,Passive,Skill,1.0,1.0,Jump attacks only.
-Claw Talisman,Talisman,Passive,ChargedSkill,1.0,1.0,Jump attacks only.
-Claw Talisman,Talisman,Passive,Crit,1.0,1.0,Jump attacks only.
-Claw Talisman,Talisman,Passive,Jump,1.15,1.075,Jump attacks only.
-Claw Talisman,Talisman,Passive,ChargedR2,1.0,1.0,Jump attacks only.
-Claw Talisman,Talisman,Passive,Successive,1.0,1.0,Jump attacks only.
-Claw Talisman,Talisman,Passive,Physical,1.0,1.0,Jump attacks only.
+Aged One's Exultation,Talisman,Passive,All,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,Skill,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,ChargedSkill,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,Crit,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,Jump,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,ChargedR2,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,Successive,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,Physical,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,Dashing,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,FinalLight,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,GuardCounter,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,Horseback,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,KickStomp,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,Magma,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,Perfume,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,Pot,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,Ranged,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,RangedAimed,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,Roar,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,RollBackstep,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,Storm,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,ThrownWeapon,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Aged One's Exultation,Talisman,Passive,TwoHanded,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m
+Arrow's Soaring Sting Talisman,Talisman,Passive,All,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,Skill,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,ChargedSkill,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,Crit,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,Jump,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,ChargedR2,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,Successive,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,Physical,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,Dashing,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,FinalLight,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,GuardCounter,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,Horseback,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,KickStomp,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,Magma,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,Perfume,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,Pot,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,Ranged,1.08,1.08,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,RangedAimed,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,Roar,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,RollBackstep,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,Storm,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,ThrownWeapon,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Soaring Sting Talisman,Talisman,Passive,TwoHanded,1.0,1.0,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50
+Arrow's Sting Talisman,Talisman,Passive,All,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,Skill,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,ChargedSkill,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,Crit,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,Jump,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,ChargedR2,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,Successive,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,Physical,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,Dashing,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,FinalLight,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,GuardCounter,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,Horseback,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,KickStomp,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,Magma,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,Perfume,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,Pot,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,Ranged,1.1,1.1,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,RangedAimed,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,Roar,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,RollBackstep,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,Storm,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,ThrownWeapon,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
+Arrow's Sting Talisman,Talisman,Passive,TwoHanded,1.0,1.0,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks
 Axe Talisman,Talisman,Passive,All,1.0,1.0,"Charged R2 only, not skills."
 Axe Talisman,Talisman,Passive,Skill,1.0,1.0,"Charged R2 only, not skills."
 Axe Talisman,Talisman,Passive,ChargedSkill,1.0,1.0,"Charged R2 only, not skills."
@@ -55,110 +76,44 @@ Axe Talisman,Talisman,Passive,Jump,1.0,1.0,"Charged R2 only, not skills."
 Axe Talisman,Talisman,Passive,ChargedR2,1.1,1.1,"Charged R2 only, not skills."
 Axe Talisman,Talisman,Passive,Successive,1.0,1.0,"Charged R2 only, not skills."
 Axe Talisman,Talisman,Passive,Physical,1.0,1.0,"Charged R2 only, not skills."
-Ritual Sword Talisman,Talisman,Passive,All,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
-Ritual Sword Talisman,Talisman,Passive,Skill,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
-Ritual Sword Talisman,Talisman,Passive,ChargedSkill,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
-Ritual Sword Talisman,Talisman,Passive,Crit,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
-Ritual Sword Talisman,Talisman,Passive,Jump,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
-Ritual Sword Talisman,Talisman,Passive,ChargedR2,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
-Ritual Sword Talisman,Talisman,Passive,Successive,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
-Ritual Sword Talisman,Talisman,Passive,Physical,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
-Rotten Winged Sword Insignia,Talisman,Passive,All,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
-Rotten Winged Sword Insignia,Talisman,Passive,Skill,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
-Rotten Winged Sword Insignia,Talisman,Passive,ChargedSkill,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
-Rotten Winged Sword Insignia,Talisman,Passive,Crit,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
-Rotten Winged Sword Insignia,Talisman,Passive,Jump,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
-Rotten Winged Sword Insignia,Talisman,Passive,ChargedR2,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
-Rotten Winged Sword Insignia,Talisman,Passive,Successive,1.13,1.13,Max successive tier 1.13x. Multiplies with Thorny (tear).
-Rotten Winged Sword Insignia,Talisman,Passive,Physical,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
-Millicent's Prosthesis,Talisman,Passive,All,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
-Millicent's Prosthesis,Talisman,Passive,Skill,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
-Millicent's Prosthesis,Talisman,Passive,ChargedSkill,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
-Millicent's Prosthesis,Talisman,Passive,Crit,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
-Millicent's Prosthesis,Talisman,Passive,Jump,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
-Millicent's Prosthesis,Talisman,Passive,ChargedR2,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
-Millicent's Prosthesis,Talisman,Passive,Successive,1.11,1.11,Max successive 1.11x plus +5 DEX (DEX not in this product).
-Millicent's Prosthesis,Talisman,Passive,Physical,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
-Winged Sword Insignia,Talisman,Passive,All,1.0,1.0,Max successive 1.10x.
-Winged Sword Insignia,Talisman,Passive,Skill,1.0,1.0,Max successive 1.10x.
-Winged Sword Insignia,Talisman,Passive,ChargedSkill,1.0,1.0,Max successive 1.10x.
-Winged Sword Insignia,Talisman,Passive,Crit,1.0,1.0,Max successive 1.10x.
-Winged Sword Insignia,Talisman,Passive,Jump,1.0,1.0,Max successive 1.10x.
-Winged Sword Insignia,Talisman,Passive,ChargedR2,1.0,1.0,Max successive 1.10x.
-Winged Sword Insignia,Talisman,Passive,Successive,1.1,1.1,Max successive 1.10x.
-Winged Sword Insignia,Talisman,Passive,Physical,1.0,1.0,Max successive 1.10x.
-Lord of Blood's Exultation,Talisman,Passive,All,1.2,1.12,While the bleed-proc aura is active (20s).
-Lord of Blood's Exultation,Talisman,Passive,Skill,1.2,1.12,While the bleed-proc aura is active (20s).
-Lord of Blood's Exultation,Talisman,Passive,ChargedSkill,1.2,1.12,While the bleed-proc aura is active (20s).
-Lord of Blood's Exultation,Talisman,Passive,Crit,1.2,1.12,While the bleed-proc aura is active (20s).
-Lord of Blood's Exultation,Talisman,Passive,Jump,1.2,1.12,While the bleed-proc aura is active (20s).
-Lord of Blood's Exultation,Talisman,Passive,ChargedR2,1.2,1.12,While the bleed-proc aura is active (20s).
-Lord of Blood's Exultation,Talisman,Passive,Successive,1.2,1.12,While the bleed-proc aura is active (20s).
-Lord of Blood's Exultation,Talisman,Passive,Physical,1.2,1.12,While the bleed-proc aura is active (20s).
-Golden Vow (Spell),Spell,Aura,All,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
-Golden Vow (Spell),Spell,Aura,Skill,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
-Golden Vow (Spell),Spell,Aura,ChargedSkill,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
-Golden Vow (Spell),Spell,Aura,Crit,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
-Golden Vow (Spell),Spell,Aura,Jump,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
-Golden Vow (Spell),Spell,Aura,ChargedR2,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
-Golden Vow (Spell),Spell,Aura,Successive,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
-Golden Vow (Spell),Spell,Aura,Physical,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
-Golden Vow (Ash),Ash,Aura,All,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
-Golden Vow (Ash),Ash,Aura,Skill,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
-Golden Vow (Ash),Ash,Aura,ChargedSkill,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
-Golden Vow (Ash),Ash,Aura,Crit,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
-Golden Vow (Ash),Ash,Aura,Jump,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
-Golden Vow (Ash),Ash,Aura,ChargedR2,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
-Golden Vow (Ash),Ash,Aura,Successive,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
-Golden Vow (Ash),Ash,Aura,Physical,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
-Golden Vow (Tool),Consumable,Aura,All,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
-Golden Vow (Tool),Consumable,Aura,Skill,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
-Golden Vow (Tool),Consumable,Aura,ChargedSkill,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
-Golden Vow (Tool),Consumable,Aura,Crit,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
-Golden Vow (Tool),Consumable,Aura,Jump,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
-Golden Vow (Tool),Consumable,Aura,ChargedR2,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
-Golden Vow (Tool),Consumable,Aura,Successive,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
-Golden Vow (Tool),Consumable,Aura,Physical,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
-Determination,Ash,Unique,All,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
-Determination,Ash,Unique,Skill,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
-Determination,Ash,Unique,ChargedSkill,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
-Determination,Ash,Unique,Crit,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
-Determination,Ash,Unique,Jump,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
-Determination,Ash,Unique,ChargedR2,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
-Determination,Ash,Unique,Successive,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
-Determination,Ash,Unique,Physical,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
-Royal Knight's Resolve,Ash,Unique,All,1.8,1.8,10s unique self-buff. Overwrites Determination.
-Royal Knight's Resolve,Ash,Unique,Skill,1.8,1.8,10s unique self-buff. Overwrites Determination.
-Royal Knight's Resolve,Ash,Unique,ChargedSkill,1.8,1.8,10s unique self-buff. Overwrites Determination.
-Royal Knight's Resolve,Ash,Unique,Crit,1.8,1.8,10s unique self-buff. Overwrites Determination.
-Royal Knight's Resolve,Ash,Unique,Jump,1.8,1.8,10s unique self-buff. Overwrites Determination.
-Royal Knight's Resolve,Ash,Unique,ChargedR2,1.8,1.8,10s unique self-buff. Overwrites Determination.
-Royal Knight's Resolve,Ash,Unique,Successive,1.8,1.8,10s unique self-buff. Overwrites Determination.
-Royal Knight's Resolve,Ash,Unique,Physical,1.8,1.8,10s unique self-buff. Overwrites Determination.
-Exalted Flesh,Consumable,Body,All,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
-Exalted Flesh,Consumable,Body,Skill,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
-Exalted Flesh,Consumable,Body,ChargedSkill,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
-Exalted Flesh,Consumable,Body,Crit,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
-Exalted Flesh,Consumable,Body,Jump,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
-Exalted Flesh,Consumable,Body,ChargedR2,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
-Exalted Flesh,Consumable,Body,Successive,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
-Exalted Flesh,Consumable,Body,Physical,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
-Thorny Cracked Tear,Tear,Tear,All,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
-Thorny Cracked Tear,Tear,Tear,Skill,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
-Thorny Cracked Tear,Tear,Tear,ChargedSkill,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
-Thorny Cracked Tear,Tear,Tear,Crit,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
-Thorny Cracked Tear,Tear,Tear,Jump,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
-Thorny Cracked Tear,Tear,Tear,ChargedR2,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
-Thorny Cracked Tear,Tear,Tear,Successive,1.2,1.2,Max successive 1.20x. Multiplies with Rotten Winged.
-Thorny Cracked Tear,Tear,Tear,Physical,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
-Spiked Cracked Tear,Tear,Tear,All,1.0,1.0,Charged R2 1.15x. Does not buff skills.
-Spiked Cracked Tear,Tear,Tear,Skill,1.0,1.0,Charged R2 1.15x. Does not buff skills.
-Spiked Cracked Tear,Tear,Tear,ChargedSkill,1.0,1.0,Charged R2 1.15x. Does not buff skills.
-Spiked Cracked Tear,Tear,Tear,Crit,1.0,1.0,Charged R2 1.15x. Does not buff skills.
-Spiked Cracked Tear,Tear,Tear,Jump,1.0,1.0,Charged R2 1.15x. Does not buff skills.
-Spiked Cracked Tear,Tear,Tear,ChargedR2,1.15,1.15,Charged R2 1.15x. Does not buff skills.
-Spiked Cracked Tear,Tear,Tear,Successive,1.0,1.0,Charged R2 1.15x. Does not buff skills.
-Spiked Cracked Tear,Tear,Tear,Physical,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Axe Talisman,Talisman,Passive,Dashing,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,FinalLight,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,GuardCounter,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,Horseback,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,KickStomp,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,Magma,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,Perfume,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,Pot,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,Ranged,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,RangedAimed,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,Roar,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,RollBackstep,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,Storm,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,ThrownWeapon,1.0,1.0,"Charged R2 only, not skills."
+Axe Talisman,Talisman,Passive,TwoHanded,1.0,1.0,"Charged R2 only, not skills."
+Blade of Mercy,Talisman,Passive,All,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,Skill,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,ChargedSkill,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,Crit,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,Jump,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,ChargedR2,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,Successive,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,Physical,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,Dashing,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,FinalLight,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,GuardCounter,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,Horseback,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,KickStomp,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,Magma,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,Perfume,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,Pot,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,Ranged,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,RangedAimed,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,Roar,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,RollBackstep,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,Storm,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,ThrownWeapon,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
+Blade of Mercy,Talisman,Passive,TwoHanded,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack
 Bloodsucking Cracked Tear,Tear,Tear,All,1.2,1.125,All damage 1.2x; HP drain. 180s.
 Bloodsucking Cracked Tear,Tear,Tear,Skill,1.2,1.125,All damage 1.2x; HP drain. 180s.
 Bloodsucking Cracked Tear,Tear,Tear,ChargedSkill,1.2,1.125,All damage 1.2x; HP drain. 180s.
@@ -167,3 +122,892 @@ Bloodsucking Cracked Tear,Tear,Tear,Jump,1.2,1.125,All damage 1.2x; HP drain. 18
 Bloodsucking Cracked Tear,Tear,Tear,ChargedR2,1.2,1.125,All damage 1.2x; HP drain. 180s.
 Bloodsucking Cracked Tear,Tear,Tear,Successive,1.2,1.125,All damage 1.2x; HP drain. 180s.
 Bloodsucking Cracked Tear,Tear,Tear,Physical,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,Dashing,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,FinalLight,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,GuardCounter,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,Horseback,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,KickStomp,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,Magma,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,Perfume,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,Pot,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,Ranged,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,RangedAimed,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,Roar,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,RollBackstep,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,Storm,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,ThrownWeapon,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Bloodsucking Cracked Tear,Tear,Tear,TwoHanded,1.2,1.125,All damage 1.2x; HP drain. 180s.
+Claw Talisman,Talisman,Passive,All,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,Skill,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,ChargedSkill,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,Crit,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,Jump,1.15,1.075,Jump attacks only.
+Claw Talisman,Talisman,Passive,ChargedR2,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,Successive,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,Physical,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,Dashing,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,FinalLight,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,GuardCounter,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,Horseback,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,KickStomp,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,Magma,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,Perfume,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,Pot,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,Ranged,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,RangedAimed,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,Roar,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,RollBackstep,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,Storm,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,ThrownWeapon,1.0,1.0,Jump attacks only.
+Claw Talisman,Talisman,Passive,TwoHanded,1.0,1.0,Jump attacks only.
+Companion Jar,Talisman,Passive,All,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,Skill,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,ChargedSkill,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,Crit,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,Jump,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,ChargedR2,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,Successive,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,Physical,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,Dashing,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,FinalLight,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,GuardCounter,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,Horseback,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,KickStomp,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,Magma,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,Perfume,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,Pot,1.2,1.2,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,Ranged,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,RangedAimed,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,Roar,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,RollBackstep,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,Storm,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,ThrownWeapon,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Companion Jar,Talisman,Passive,TwoHanded,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks
+Curved Sword Talisman,Talisman,Passive,All,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,Skill,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,ChargedSkill,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,Crit,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,Jump,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,ChargedR2,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,Successive,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,Physical,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,Dashing,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,FinalLight,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,GuardCounter,1.2,1.2,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,Horseback,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,KickStomp,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,Magma,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,Perfume,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,Pot,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,Ranged,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,RangedAimed,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,Roar,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,RollBackstep,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,Storm,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,ThrownWeapon,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Curved Sword Talisman,Talisman,Passive,TwoHanded,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters
+Dagger Talisman,Talisman,Passive,All,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,Skill,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,ChargedSkill,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,Crit,1.17,1.16,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,Jump,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,ChargedR2,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,Successive,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,Physical,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,Dashing,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,FinalLight,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,GuardCounter,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,Horseback,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,KickStomp,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,Magma,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,Perfume,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,Pot,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,Ranged,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,RangedAimed,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,Roar,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,RollBackstep,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,Storm,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,ThrownWeapon,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Dagger Talisman,Talisman,Passive,TwoHanded,1.0,1.0,Crit/riposte only. EffectData 1.17x (practical 1.16).
+Determination,Ash,Unique,All,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,Skill,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,ChargedSkill,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,Crit,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,Jump,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,ChargedR2,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,Successive,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,Physical,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,Dashing,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,FinalLight,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,GuardCounter,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,Horseback,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,KickStomp,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,Magma,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,Perfume,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,Pot,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,Ranged,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,RangedAimed,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,Roar,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,RollBackstep,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,Storm,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,ThrownWeapon,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Determination,Ash,Unique,TwoHanded,1.6,1.6,10s unique self-buff. Overwrites Royal Knight's Resolve.
+Dried Bouquet,Talisman,Passive,All,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,Skill,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,ChargedSkill,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,Crit,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,Jump,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,ChargedR2,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,Successive,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,Physical,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,Dashing,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,FinalLight,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,GuardCounter,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,Horseback,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,KickStomp,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,Magma,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,Perfume,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,Pot,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,Ranged,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,RangedAimed,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,Roar,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,RollBackstep,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,Storm,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,ThrownWeapon,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Dried Bouquet,Talisman,Passive,TwoHanded,1.2,1.2,Increases damage by 1.2x for 30 seconds after spirit ash death
+Enraged Divine Beast,Talisman,Passive,All,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,Skill,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,ChargedSkill,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,Crit,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,Jump,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,ChargedR2,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,Successive,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,Physical,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,Dashing,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,FinalLight,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,GuardCounter,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,Horseback,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,KickStomp,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,Magma,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,Perfume,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,Pot,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,Ranged,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,RangedAimed,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,Roar,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,RollBackstep,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,Storm,1.1,1.1,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,ThrownWeapon,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Enraged Divine Beast,Talisman,Passive,TwoHanded,1.0,1.0,Increases damage by 1.1x  with storm attacks
+Exalted Flesh,Consumable,Body,All,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,Skill,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,ChargedSkill,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,Crit,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,Jump,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,ChargedR2,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,Successive,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,Physical,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,Dashing,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,FinalLight,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,GuardCounter,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,Horseback,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,KickStomp,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,Magma,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,Perfume,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,Pot,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,Ranged,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,RangedAimed,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,Roar,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,RollBackstep,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,Storm,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,ThrownWeapon,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Exalted Flesh,Consumable,Body,TwoHanded,1.2,1.15,Physical 1.2x / 30s. Overwrites Flame Grant Me Strength. No Faith.
+Godfrey Icon,Talisman,Passive,All,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,Skill,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,ChargedSkill,1.15,1.15,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,Crit,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,Jump,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,ChargedR2,1.15,1.15,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,Successive,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,Physical,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,Dashing,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,FinalLight,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,GuardCounter,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,Horseback,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,KickStomp,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,Magma,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,Perfume,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,Pot,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,Ranged,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,RangedAimed,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,Roar,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,RollBackstep,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,Storm,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,ThrownWeapon,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Godfrey Icon,Talisman,Passive,TwoHanded,1.0,1.0,Charged skills and charged R2. Stacks with Alexander on charged skills.
+Golden Vow (Ash),Ash,Aura,All,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,Skill,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,ChargedSkill,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,Crit,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,Jump,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,ChargedR2,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,Successive,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,Physical,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,Dashing,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,FinalLight,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,GuardCounter,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,Horseback,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,KickStomp,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,Magma,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,Perfume,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,Pot,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,Ranged,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,RangedAimed,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,Roar,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,RollBackstep,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,Storm,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,ThrownWeapon,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Ash),Ash,Aura,TwoHanded,1.115,1.075,No Faith. Overwrites spell/tool. ~11.5% AR. Weaker than spell.
+Golden Vow (Spell),Spell,Aura,All,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,Skill,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,ChargedSkill,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,Crit,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,Jump,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,ChargedR2,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,Successive,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,Physical,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,Dashing,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,FinalLight,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,GuardCounter,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,Horseback,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,KickStomp,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,Magma,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,Perfume,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,Pot,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,Ranged,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,RangedAimed,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,Roar,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,RollBackstep,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,Storm,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,ThrownWeapon,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Spell),Spell,Aura,TwoHanded,1.15,1.075,25 FTH. Overwrites Golden Vow ash and tool. 80s. +10% negation not in this product.
+Golden Vow (Tool),Consumable,Aura,All,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,Skill,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,ChargedSkill,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,Crit,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,Jump,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,ChargedR2,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,Successive,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,Physical,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,Dashing,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,FinalLight,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,GuardCounter,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,Horseback,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,KickStomp,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,Magma,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,Perfume,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,Pot,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,Ranged,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,RangedAimed,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,Roar,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,RollBackstep,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,Storm,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,ThrownWeapon,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Golden Vow (Tool),Consumable,Aura,TwoHanded,1.127,1.05,No Faith. EffectData 1.127x / +8.8% neg / 45s. Overwrites spell/ash.
+Kindred of Rot's Exultation,Talisman,Passive,All,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,Skill,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,ChargedSkill,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,Crit,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,Jump,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,ChargedR2,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,Successive,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,Physical,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,Dashing,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,FinalLight,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,GuardCounter,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,Horseback,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,KickStomp,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,Magma,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,Perfume,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,Pot,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,Ranged,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,RangedAimed,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,Roar,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,RollBackstep,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,Storm,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,ThrownWeapon,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Kindred of Rot's Exultation,Talisman,Passive,TwoHanded,1.2,1.2,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m
+Lacerating Crossed-Tree,Talisman,Passive,All,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,Skill,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,ChargedSkill,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,Crit,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,Jump,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,ChargedR2,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,Successive,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,Physical,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,Dashing,1.15,1.075,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,FinalLight,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,GuardCounter,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,Horseback,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,KickStomp,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,Magma,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,Perfume,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,Pot,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,Ranged,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,RangedAimed,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,Roar,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,RollBackstep,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,Storm,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,ThrownWeapon,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lacerating Crossed-Tree,Talisman,Passive,TwoHanded,1.0,1.0,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks
+Lance Talisman,Talisman,Passive,All,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,Skill,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,ChargedSkill,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,Crit,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,Jump,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,ChargedR2,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,Successive,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,Physical,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,Dashing,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,FinalLight,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,GuardCounter,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,Horseback,1.15,1.15,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,KickStomp,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,Magma,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,Perfume,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,Pot,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,Ranged,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,RangedAimed,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,Roar,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,RollBackstep,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,Storm,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,ThrownWeapon,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lance Talisman,Talisman,Passive,TwoHanded,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks
+Lord of Blood's Exultation,Talisman,Passive,All,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,Skill,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,ChargedSkill,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,Crit,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,Jump,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,ChargedR2,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,Successive,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,Physical,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,Dashing,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,FinalLight,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,GuardCounter,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,Horseback,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,KickStomp,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,Magma,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,Perfume,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,Pot,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,Ranged,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,RangedAimed,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,Roar,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,RollBackstep,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,Storm,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,ThrownWeapon,1.2,1.12,While the bleed-proc aura is active (20s).
+Lord of Blood's Exultation,Talisman,Passive,TwoHanded,1.2,1.12,While the bleed-proc aura is active (20s).
+Millicent's Prosthesis,Talisman,Passive,All,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,Skill,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,ChargedSkill,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,Crit,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,Jump,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,ChargedR2,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,Successive,1.11,1.11,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,Physical,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,Dashing,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,FinalLight,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,GuardCounter,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,Horseback,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,KickStomp,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,Magma,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,Perfume,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,Pot,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,Ranged,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,RangedAimed,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,Roar,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,RollBackstep,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,Storm,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,ThrownWeapon,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Millicent's Prosthesis,Talisman,Passive,TwoHanded,1.0,1.0,Max successive 1.11x plus +5 DEX (DEX not in this product).
+Perfumer's Talisman,Talisman,Passive,All,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,Skill,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,ChargedSkill,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,Crit,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,Jump,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,ChargedR2,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,Successive,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,Physical,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,Dashing,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,FinalLight,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,GuardCounter,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,Horseback,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,KickStomp,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,Magma,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,Perfume,1.2,1.2,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,Pot,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,Ranged,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,RangedAimed,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,Roar,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,RollBackstep,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,Storm,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,ThrownWeapon,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Perfumer's Talisman,Talisman,Passive,TwoHanded,1.0,1.0,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks
+Red-Feathered Branchsword,Talisman,Passive,All,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,Skill,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,ChargedSkill,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,Crit,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,Jump,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,ChargedR2,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,Successive,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,Physical,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,Dashing,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,FinalLight,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,GuardCounter,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,Horseback,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,KickStomp,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,Magma,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,Perfume,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,Pot,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,Ranged,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,RangedAimed,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,Roar,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,RollBackstep,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,Storm,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,ThrownWeapon,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Red-Feathered Branchsword,Talisman,Passive,TwoHanded,1.2,1.2,Increases damage by 1.2x while at less than 20% HP
+Rellana's Cameo,Talisman,Passive,All,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,Skill,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,ChargedSkill,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,Crit,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,Jump,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,ChargedR2,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,Successive,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,Physical,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,Dashing,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,FinalLight,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,GuardCounter,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,Horseback,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,KickStomp,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,Magma,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,Perfume,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,Pot,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,Ranged,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,RangedAimed,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,Roar,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,RollBackstep,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,Storm,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,ThrownWeapon,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Rellana's Cameo,Talisman,Passive,TwoHanded,1.45,1.45,Increases damage by 1.45x when stance is held for ? seconds
+Retaliatory Crossed-Tree,Talisman,Passive,All,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,Skill,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,ChargedSkill,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,Crit,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,Jump,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,ChargedR2,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,Successive,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,Physical,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,Dashing,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,FinalLight,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,GuardCounter,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,Horseback,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,KickStomp,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,Magma,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,Perfume,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,Pot,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,Ranged,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,RangedAimed,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,Roar,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,RollBackstep,1.17,1.12,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,Storm,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,ThrownWeapon,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Retaliatory Crossed-Tree,Talisman,Passive,TwoHanded,1.0,1.0,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks
+Ritual Sword Talisman,Talisman,Passive,All,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,Skill,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,ChargedSkill,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,Crit,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,Jump,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,ChargedR2,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,Successive,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,Physical,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,Dashing,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,FinalLight,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,GuardCounter,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,Horseback,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,KickStomp,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,Magma,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,Perfume,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,Pot,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,Ranged,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,RangedAimed,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,Roar,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,RollBackstep,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,Storm,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,ThrownWeapon,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Ritual Sword Talisman,Talisman,Passive,TwoHanded,1.1,1.1,All damage at full HP (CondHpRate 100). Treat as off if not full.
+Roar Medallion,Talisman,Passive,All,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,Skill,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,ChargedSkill,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,Crit,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,Jump,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,ChargedR2,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,Successive,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,Physical,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,Dashing,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,FinalLight,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,GuardCounter,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,Horseback,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,KickStomp,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,Magma,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,Perfume,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,Pot,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,Ranged,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,RangedAimed,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,Roar,1.15,1.05,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,RollBackstep,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,Storm,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,ThrownWeapon,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Roar Medallion,Talisman,Passive,TwoHanded,1.0,1.0,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks
+Rotten Winged Sword Insignia,Talisman,Passive,All,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,Skill,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,ChargedSkill,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,Crit,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,Jump,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,ChargedR2,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,Successive,1.13,1.13,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,Physical,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,Dashing,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,FinalLight,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,GuardCounter,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,Horseback,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,KickStomp,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,Magma,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,Perfume,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,Pot,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,Ranged,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,RangedAimed,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,Roar,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,RollBackstep,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,Storm,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,ThrownWeapon,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Rotten Winged Sword Insignia,Talisman,Passive,TwoHanded,1.0,1.0,Max successive tier 1.13x. Multiplies with Thorny (tear).
+Royal Knight's Resolve,Ash,Unique,All,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,Skill,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,ChargedSkill,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,Crit,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,Jump,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,ChargedR2,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,Successive,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,Physical,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,Dashing,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,FinalLight,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,GuardCounter,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,Horseback,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,KickStomp,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,Magma,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,Perfume,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,Pot,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,Ranged,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,RangedAimed,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,Roar,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,RollBackstep,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,Storm,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,ThrownWeapon,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Royal Knight's Resolve,Ash,Unique,TwoHanded,1.8,1.8,10s unique self-buff. Overwrites Determination.
+Shard of Alexander,Talisman,Passive,All,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,Skill,1.15,1.15,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,ChargedSkill,1.15,1.15,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,Crit,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,Jump,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,ChargedR2,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,Successive,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,Physical,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,Dashing,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,FinalLight,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,GuardCounter,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,Horseback,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,KickStomp,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,Magma,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,Perfume,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,Pot,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,Ranged,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,RangedAimed,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,Roar,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,RollBackstep,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,Storm,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,ThrownWeapon,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Shard of Alexander,Talisman,Passive,TwoHanded,1.0,1.0,All weapon skills. Stacks with Godfrey on charged skills.
+Sharpshot Talisman,Talisman,Passive,All,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,Skill,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,ChargedSkill,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,Crit,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,Jump,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,ChargedR2,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,Successive,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,Physical,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,Dashing,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,FinalLight,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,GuardCounter,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,Horseback,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,KickStomp,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,Magma,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,Perfume,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,Pot,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,Ranged,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,RangedAimed,1.12,1.08,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,Roar,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,RollBackstep,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,Storm,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,ThrownWeapon,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Sharpshot Talisman,Talisman,Passive,TwoHanded,1.0,1.0,Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming)
+Shattered Stone Talisman,Talisman,Passive,All,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,Skill,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,ChargedSkill,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,Crit,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,Jump,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,ChargedR2,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,Successive,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,Physical,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,Dashing,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,FinalLight,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,GuardCounter,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,Horseback,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,KickStomp,1.1,1.05,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,Magma,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,Perfume,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,Pot,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,Ranged,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,RangedAimed,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,Roar,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,RollBackstep,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,Storm,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,ThrownWeapon,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Shattered Stone Talisman,Talisman,Passive,TwoHanded,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills
+Smithing Talisman,Talisman,Passive,All,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,Skill,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,ChargedSkill,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,Crit,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,Jump,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,ChargedR2,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,Successive,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,Physical,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,Dashing,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,FinalLight,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,GuardCounter,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,Horseback,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,KickStomp,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,Magma,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,Perfume,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,Pot,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,Ranged,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,RangedAimed,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,Roar,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,RollBackstep,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,Storm,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,ThrownWeapon,1.1,1.05,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Smithing Talisman,Talisman,Passive,TwoHanded,1.0,1.0,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks
+Spiked Cracked Tear,Tear,Tear,All,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,Skill,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,ChargedSkill,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,Crit,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,Jump,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,ChargedR2,1.15,1.15,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,Successive,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,Physical,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,Dashing,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,FinalLight,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,GuardCounter,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,Horseback,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,KickStomp,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,Magma,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,Perfume,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,Pot,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,Ranged,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,RangedAimed,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,Roar,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,RollBackstep,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,Storm,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,ThrownWeapon,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+Spiked Cracked Tear,Tear,Tear,TwoHanded,1.0,1.0,Charged R2 1.15x. Does not buff skills.
+St. Trina's Smile,Talisman,Passive,All,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,Skill,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,ChargedSkill,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,Crit,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,Jump,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,ChargedR2,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,Successive,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,Physical,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,Dashing,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,FinalLight,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,GuardCounter,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,Horseback,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,KickStomp,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,Magma,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,Perfume,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,Pot,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,Ranged,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,RangedAimed,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,Roar,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,RollBackstep,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,Storm,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,ThrownWeapon,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+St. Trina's Smile,Talisman,Passive,TwoHanded,1.2,1.12,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m
+Talisman of the Dread,Talisman,Passive,All,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,Skill,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,ChargedSkill,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,Crit,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,Jump,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,ChargedR2,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,Successive,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,Physical,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,Dashing,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,FinalLight,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,GuardCounter,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,Horseback,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,KickStomp,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,Magma,1.15,1.1,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,Perfume,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,Pot,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,Ranged,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,RangedAimed,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,Roar,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,RollBackstep,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,Storm,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,ThrownWeapon,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Talisman of the Dread,Talisman,Passive,TwoHanded,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with magma attacks
+Thorny Cracked Tear,Tear,Tear,All,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,Skill,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,ChargedSkill,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,Crit,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,Jump,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,ChargedR2,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,Successive,1.2,1.2,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,Physical,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,Dashing,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,FinalLight,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,GuardCounter,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,Horseback,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,KickStomp,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,Magma,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,Perfume,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,Pot,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,Ranged,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,RangedAimed,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,Roar,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,RollBackstep,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,Storm,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,ThrownWeapon,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Thorny Cracked Tear,Tear,Tear,TwoHanded,1.0,1.0,Max successive 1.20x. Multiplies with Rotten Winged.
+Twinblade Talisman,Talisman,Passive,All,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,Skill,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,ChargedSkill,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,Crit,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,Jump,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,ChargedR2,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,Successive,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,Physical,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,Dashing,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,FinalLight,1.45,1.45,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,GuardCounter,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,Horseback,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,KickStomp,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,Magma,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,Perfume,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,Pot,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,Ranged,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,RangedAimed,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,Roar,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,RollBackstep,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,Storm,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,ThrownWeapon,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Twinblade Talisman,Talisman,Passive,TwoHanded,1.0,1.0,Increases damage by 1.45x  with the final light attack in a chain
+Two-Handed Sword Talisman,Talisman,Passive,All,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,Skill,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,ChargedSkill,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,Crit,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,Jump,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,ChargedR2,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,Successive,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,Physical,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,Dashing,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,FinalLight,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,GuardCounter,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,Horseback,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,KickStomp,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,Magma,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,Perfume,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,Pot,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,Ranged,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,RangedAimed,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,Roar,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,RollBackstep,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,Storm,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,ThrownWeapon,1.0,1.0,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Two-Handed Sword Talisman,Talisman,Passive,TwoHanded,1.15,1.1,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks
+Warrior Jar Shard,Talisman,Passive,All,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,Skill,1.1,1.1,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,ChargedSkill,1.1,1.1,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,Crit,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,Jump,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,ChargedR2,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,Successive,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,Physical,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,Dashing,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,FinalLight,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,GuardCounter,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,Horseback,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,KickStomp,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,Magma,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,Perfume,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,Pot,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,Ranged,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,RangedAimed,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,Roar,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,RollBackstep,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,Storm,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,ThrownWeapon,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Warrior Jar Shard,Talisman,Passive,TwoHanded,1.0,1.0,Weaker Alexander. Multiplies with Alexander if both equipped.
+Winged Sword Insignia,Talisman,Passive,All,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,Skill,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,ChargedSkill,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,Crit,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,Jump,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,ChargedR2,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,Successive,1.1,1.1,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,Physical,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,Dashing,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,FinalLight,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,GuardCounter,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,Horseback,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,KickStomp,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,Magma,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,Perfume,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,Pot,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,Ranged,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,RangedAimed,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,Roar,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,RollBackstep,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,Storm,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,ThrownWeapon,1.0,1.0,Max successive 1.10x.
+Winged Sword Insignia,Talisman,Passive,TwoHanded,1.0,1.0,Max successive 1.10x.
+none,None,None,All,1.0,1.0,Unused product slot.
+none,None,None,Skill,1.0,1.0,Unused product slot.
+none,None,None,ChargedSkill,1.0,1.0,Unused product slot.
+none,None,None,Crit,1.0,1.0,Unused product slot.
+none,None,None,Jump,1.0,1.0,Unused product slot.
+none,None,None,ChargedR2,1.0,1.0,Unused product slot.
+none,None,None,Successive,1.0,1.0,Unused product slot.
+none,None,None,Physical,1.0,1.0,Unused product slot.
+none,None,None,Dashing,1.0,1.0,Unused product slot.
+none,None,None,FinalLight,1.0,1.0,Unused product slot.
+none,None,None,GuardCounter,1.0,1.0,Unused product slot.
+none,None,None,Horseback,1.0,1.0,Unused product slot.
+none,None,None,KickStomp,1.0,1.0,Unused product slot.
+none,None,None,Magma,1.0,1.0,Unused product slot.
+none,None,None,Perfume,1.0,1.0,Unused product slot.
+none,None,None,Pot,1.0,1.0,Unused product slot.
+none,None,None,Ranged,1.0,1.0,Unused product slot.
+none,None,None,RangedAimed,1.0,1.0,Unused product slot.
+none,None,None,Roar,1.0,1.0,Unused product slot.
+none,None,None,RollBackstep,1.0,1.0,Unused product slot.
+none,None,None,Storm,1.0,1.0,Unused product slot.
+none,None,None,ThrownWeapon,1.0,1.0,Unused product slot.
+none,None,None,TwoHanded,1.0,1.0,Unused product slot.

@@ -64,7 +64,12 @@ expect = { "result.multiplier" = 1.15 }
 [[case]]
 name = "a buff the table does not carry is reported, with the ones it does"
 input = { buffs = ["Blessed Dew Talisman"], hit_kind = "All" }
-expect = { "result.unknown[0]" = "Blessed Dew Talisman", "result.multiplier" = 1.0, "result.known_buffs[0]" = "Axe Talisman" }
+# `known_buffs[0]` used to be pinned to "Axe Talisman", which was true only because it sorted
+# first among ten talismans. The table now carries thirty-three and the first is different —
+# a fixture that fails when the collection gets better at its job was testing the wrong thing.
+# What the case is really about is that an unknown name comes back named, with the catalogue
+# offered alongside it.
+expect = { "result.unknown[0]" = "Blessed Dew Talisman", "result.multiplier" = 1.0, "result.known_buffs[0]" = "Aged One's Exultation" }
 
 [[case]]
 name = "asserting the state of something not held is refused"

@@ -25,8 +25,21 @@ ROOT = os.path.dirname(HERE)
 MULT_CSV = os.path.join(ROOT, "data", "BuffMult.csv")
 SLOT_CSV = os.path.join(ROOT, "data", "BuffSlot.csv")
 
+# Every kind of hit a buff can be gated on.
+#
+# The first eight were what `BuffMult.csv` needed for twenty-one buffs. The fifteen after them
+# arrived with the talismans extracted from the oracle's prose, which gate on things the
+# original set had no way to say — a guard counter, a horseback attack, a thrown weapon.
+#
+# **This tuple is load-bearing beyond naming.** `state_conditional` decides a buff is gated on
+# a state rather than a hit by asking whether its figure is above 1 on *every* kind, against
+# this length. Adding a name without adding a row for it to every buff in `BuffMult.csv` makes
+# the state-gated ones stop looking state-gated, and `buff-stack` quietly stops asking the
+# caller to assert a bleed proc. `scripts/merge_talisman_buffs.py` keeps the two in step and
+# refuses to write if any buff would lose the flag.
 HIT_KINDS = (
     "All", "Skill", "ChargedSkill", "Crit", "Jump", "ChargedR2", "Successive", "Physical",
+    "GuardCounter", "Horseback", "Dashing", "RollBackstep", "Ranged", "RangedAimed", "TwoHanded", "KickStomp", "ThrownWeapon", "Roar", "Pot", "Perfume", "Storm", "Magma", "FinalLight",
 )
 
 

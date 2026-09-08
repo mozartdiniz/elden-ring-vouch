@@ -34,165 +34,40 @@ against prose while the structured table sat unused. New tables go in `data/`, n
 
 ---
 
-## 1. No table says what a talisman is worth, so there is no `item-rank`
+## 1. Talismans — done, and `item-rank` is now buildable
 
-**The gap.** `weapon-rank`, `spell-rank` and `ash-rank` all exist because something quantified
-the thing being ranked. Nothing quantifies a talisman against a goal, so the collection cannot
-answer *"which four talismans maximise X"* — which is Pattern 5, eight questions, and among the
-most common things a player actually asks.
+**Closed 8 September 2026.** `data/BuffMult.csv` carries **33 damage talismans** where it
+carried ten, across 23 hit kinds where it carried eight. `buff-stack` handles them with no node
+code changed.
 
-**How it was found, which is the interesting part.** Both shipping candidates, across all six
-runs of question 5.1, independently stopped and said the same thing: *"no node ranks or selects
-talismans; buff-stack only evaluates a set the caller supplies."* They were right. The models
-found a hole in the collection by refusing to invent their way around it.
+The figures were never missing. They were in `oracle/extracted/.../EffectData.csv`'s `Effects`
+column — prose, generated and regular, read by nothing: not by this collection and not by the
+workbook it came from. `scripts/extract_talisman_buffs.py` parses it and
+`scripts/merge_talisman_buffs.py` merges it, both re-runnable so re-vendoring `oracle/` cannot
+leave the table stale.
 
-**Also note:** `VALIDATION.md` marks 5.1 as `[x]` done. Either that entry was worked by hand
-with the ranking done off-collection, or it is wrong. It is the second recorded entry found
-questionable out of two ever checked — see `HANDOFF.md`, *First: verify the record*.
+**What made it safe was the ten rows that already existed.** They were assigned by hand from a
+different source, so the extractor reproducing them — figures *and* hit kinds — is evidence
+rather than tautology. It caught two real errors on the way. The first was mine reading the
+leading value of a stacking ramp where the table records where the ramp lands. The second was
+subtler: *"with weapon skills"* naively means `Skill`, and the table has Shard of Alexander on
+`ChargedSkill` as well, because a charged weapon skill is still a weapon skill. Ten hand-made
+rows knew a domain fact the prose does not state.
 
-**Why the Build Planner does not already do this, which is the thing worth understanding.**
+**And one trap worth keeping in mind for any future widening.** `buffs.state_conditional`
+decides a buff is gated on a *state* rather than a hit by asking whether its figure is above 1
+on every hit kind, against `len(HIT_KINDS)`. Adding names to that tuple without adding a row
+for each to every existing buff would have left nine buffs above 1 on eight of twenty-three —
+so they would have stopped counting as state-gated, and `buff-stack` would have quietly stopped
+asking the caller to assert a bleed proc or full HP. Nothing would have failed; Ritual Sword
+Talisman's 1.1x would just have started applying to builds that are not at full HP. The merge
+script widens every existing buff and refuses to write if any would lose the flag.
 
-The obvious question is how the source workbook manages without this table. The answer is in
-`oracle/extracted/.../formulas/`, and it is not "it does it some other way".
-
-The wiring is real and complete. `EffectData_Active` pulls the user's equipped items from the
-Planner's dropdowns and looks each one up:
-
-```
-C4:  =PlannerData!E3
-E3:  =IF($D3, E$1, IFERROR(VLOOKUP($C3, EffectData!$A:$AW,
-                    MATCH(E$2, EffectData!$2:$2, 0), False), E$1))
-```
-
-Row 25 aggregates the result and `PlannerData` reads it back — `=EffectData_Active!AR25`, which
-is `physicsAttackPowerRate`. So an effect that lands in one of the numeric columns *is* applied
-to the damage figure, automatically, with no user arithmetic.
-
-**And the prose column is read by nothing.** Zero references to `EffectData!B` across every
-sheet in the workbook. The multiplier in *"Increases damage by 1.15x ... with weapon skills"* is
-shown to the person and never enters a calculation.
-
-The reason is structural rather than an oversight. The workbook's effect model has **a
-damage-type axis and no hit-kind axis**: five columns, `physics`/`magic`/`fire`/`thunder`/
-`dark` AttackPowerRate. Shard of Alexander's boost applies to weapon skills, Godfrey Icon's to
-charged attacks, Lord of Blood's Exultation's to everything but only after a bleed proc. None
-of those is a damage type, so there is no cell to put them in, and the author wrote the number
-into the description instead. That is why only two of 530 items carry an attack multiplier: not
-missing data, a model that cannot express the effect.
-
-So the Build Planner **does not apply Shard of Alexander**. It applies that talisman's stat and
-defence columns and silently ignores its damage. The user is expected to know.
-
-Two things follow. `item-effect` pinning `applied_to_a_build: false` and `equip-load` refusing
-to take a talisman are not gaps in the port — they are honest about a limit that is real in the
-source. And `data/BuffMult.csv` having a `HitKind` column is not a stylistic choice: it is the
-axis the workbook lacks, which is why the two tables cannot be merged and why this one has to
-be built rather than extracted.
-
-**Where the numbers are: `oracle/extracted/.../EffectData.csv`, in the prose column.**
-
-This was looked for in the wrong place twice. The quantified columns are no help — of 530
-items, **two** carry an attack multiplier. But the `Effects` column is not free text. It is
-generated, and it is regular:
-
-```
-Shard of Alexander          "Increases damage by 1.15x (holy bugged in PvP: 1x) with weapon skills"
-Godfrey Icon                "Increases damage by 1.15x ... with charged spells and charged weapon skills"
-Lord of Blood's Exultation  "Increases damage by 1.2x (1.12x in PvP) for 20 seconds when bleed is triggered within 7m"
-Ritual Sword Talisman       "Increases damage by 1.1x while at full HP"
-```
-
-**157 of the 530 rows** say *"increases damage by Nx"*. 112 carry a separate PvP figure. 127
-carry a condition clause, and the clauses cluster into a small vocabulary — *with weapon
-skills*, *with jump attacks*, *when bleed is triggered within 7m*, *while at full HP*, *with
-Dragon Cult incantations*. That vocabulary is the `Condition` column, discovered rather than
-invented.
-
-`BuffMult.csv` is still the target shape, and it already has 21 buffs in it:
-
-```
-Name, Kind, Slot, HitKind, MultPve, MultPvp, Notes
-Shard of Alexander, Talisman, Passive, Skill, 1.15, 1.15, All weapon skills...
-```
-
-**The 21 are the differential check, and they already agree.** They were hand-built from a
-different source, and the prose gives the same figures — Shard of Alexander 1.15 on `Skill`,
-Lord of Blood's Exultation 1.2 PvE and 1.12 PvP. So a parser over `Effects` can be verified
-against them before it is trusted for the other 136, which is the same shape of check the two
-implementations gave each other everywhere else in this project.
-
-**Yes, this is writing a parser against prose, which `BUGS.md` warns about twice.** The warning
-is worth re-reading and then overruling here, because it is a warning about writing a parser
-*while the structured table sits unused* — bugs 11 and 15. There is no structured table: the
-quantified columns are empty for exactly these items, upstream publishes names without values,
-and the game data is not on this machine. The prose is machine-generated, regular, and comes
-with a 21-row validation set. Those are different circumstances and they point the other way.
-
-**Extracted, named, and checked.** `scripts/extract_talisman_buffs.py` writes
-`data/BuffMult-talismans.draft.csv` — 33 talismans in `BuffMult.csv`'s exact shape, 759 rows,
-directly appendable once the names are agreed. Re-runnable, so re-vendoring `oracle/` cannot
-leave it stale.
-
-**There is no schema decision. That was my error and the check found it twice.**
-
-I first wrote this entry claiming two decisions were needed — a `Condition` column and a
-representation for stacking ramps. Neither is. `lib/buffs.py` already says so:
-
-> `state_conditional`: *True when the figure is above 1 on every hit kind. Then the condition
-> is not the kind of hit but a state — a bleed proc, full HP, **a successive hit tier** —
-> which nothing here can observe, so the caller has to assert it.*
-
-So a buff gated on a **state** takes its multiplier on all eight hit kinds; that is what makes
-`buff-stack` demand `assume`. Nine of the 33 are like that — the four Exultations, Blade of
-Mercy, the HP gates. A **ramp** is one of those states, and the table records where the ramp
-lands. My extractor was reading the first tier off the prose and the ten known talismans said
-so on its first run; I wrote that up as a difference of convention when it was a bug.
-
-**What is left is one naming pass, against an unchanged schema.** Twenty-one clauses become
-`HitKind` values, of which six already exist. The proposal is in the script, applied to the
-draft, and reproduces all ten known talismans exactly:
-
-| clause | HitKind |
-|---|---|
-| with weapon skills | `Skill`, `ChargedSkill` |
-| with charged spells and charged weapon skills | `ChargedSkill`, `ChargedR2` |
-| with charged R2s / jump attacks / continuous attacks | `ChargedR2` / `Jump` / `Successive` |
-| with guard counters | `GuardCounter` *(new)* |
-| with horseback / dashing / rolling / 2h attacks | `Horseback`, `Dashing`, `RollBackstep`, `TwoHanded` *(new)* |
-| with arrow / bolt, aimed arrow / bolt | `Ranged`, `RangedAimed` *(new)* |
-| with kicking / weapon-throwing / roar / pot / perfume / storm / magma / final light | *(new)* |
-
-**Fifteen new `HIT_KINDS` values.** Adding them touches `lib/buffs.py` and `buff-stack`'s input
-schema, and nothing else.
-
-That check is worth keeping for its own sake: *"with weapon skills"* naively means `Skill`, and
-the table has Shard of Alexander on `ChargedSkill` too, because a charged weapon skill is still
-a weapon skill. The ten hand-assigned rows knew a domain fact the clause does not state, and
-the proposal only reproduces them because the check made it.
-
-**Do not** build a ranking over what exists now. Ranking on a partially populated table would
-produce exactly the well-formed answer about nothing that this collection exists to prevent,
-and it would be attested.
-
-**Done when.** `data/BuffMult.csv` covers the talisman roster in `~/Dev/EldenRing/DataSet`,
-its 21 original rows are unchanged and still agree, `vouch call item-rank` ranks for a stated
-goal and hit kind, and question 5.1 answers end to end — with its `VALIDATION.md` entry
-re-run and corrected, and its line removed from `EXPECT` in `scripts/compare_models.py`, or
-the battery will start scoring a correct answer as a failure.
-
-**A note on where not to get this.** Several online builders do apply talismans, and their
-existence is useful evidence that the classification is tractable. They are still not a source.
-Use one as a *third* check if you like — compute a build with and without a talisman and
-compare the ratio — but never ingest their numbers. Where a builder disagrees with the oracle,
-the oracle wins, because its figure can be traced and theirs cannot.
-
-That is not mainly a licensing point, though `data/README.md` declares provenance for every
-table for a reason. It is that attestation checks a figure came from a node and cannot check
-the table underneath. An untraceable number placed under the guarantee gets certified by it,
-which is the one failure mode with no downstream guard. Fextralife and its kin carry
-community-entered, frequently patch-stale figures; that is exactly the class of number this
-collection exists to replace, and putting it *below* the runtime rather than above it would be
-the worst possible place for it.
+**What is left of this entry:** build `item-rank`. It is now a ranking over
+`buffs.multiplier(entry, hit_kind)`, which exists, against a table that covers the field. When
+it lands, re-run question 5.1, correct its `VALIDATION.md` entry, and remove its line from
+`EXPECT` in `scripts/compare_models.py` — or the battery will score a correct answer as a
+failure.
 
 ## 2. The mechanics rules behind the numbers
 

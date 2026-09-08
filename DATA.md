@@ -8,21 +8,24 @@ Written 7 September 2026, after the node-rules, node-code and app work was done 
 what remained. `HANDOFF.md` has the state of everything else.
 
 **Before starting any of it, read this.** The sourcing plan this file was written with does
-not hold.
+not hold, and for item 1 it turned out not to be needed.
 
 `prometheux-workspace/files/elden-ring-brain/` **is not on this machine.** Three places in the
-documentation said to vendor the missing tables from it. Whatever is written below about where
-data comes from is a description of what is needed, not of a file waiting to be copied. The
-first task in every entry is therefore *find a source*, and that is a different job from
-parsing one.
+documentation said to vendor the missing tables from it. For items 2, 3, 4 and 6 the first
+task is therefore *find a source*, which is a different job from parsing one — and two things
+that looked like sources are not:
 
-Two things that looked like sources and are not:
+- `oracle/extracted/.../EffectData_Active.csv` is a 27-row live panel from the Build Planner,
+  mostly blank, with no header. Not a stubbed effect table; there is nothing to unstub.
+- `~/Dev/EldenRing/paramdex/` holds two files and both are ID-to-name maps. Paramdex upstream
+  is the same: it publishes **definitions and names, not values**. The values live in the
+  game's `regulation.bin`, and there is no Elden Ring install on this machine.
+- `~/Dev/EldenRing/DataSet/` is the fanapis export. 87 base-game talismans plus DLC, with
+  `id, name, image, description, effect` — and `effect` is prose with no numbers in it at all
+  (*"Raises attack power of arrows and bolts"*). Useful as the **roster**, which is the
+  checklist of what any table must cover. Useless as the table.
 
-- `oracle/extracted/.../EffectData_Active.csv` is **not** a stubbed effect table. It is 27
-  rows of the Build Planner's live active-effects panel, mostly blank, with no header. Item 5
-  below used to read as "unstub `planner.py`"; it is the same missing data as item 1.
-- `~/Dev/EldenRing/paramdex/` holds two files and both are ID-to-name maps. No parameters, no
-  motion values.
+**Item 1 needs none of them.** See below: the figures were in `oracle/` the whole time.
 
 **And the standing rule still applies to whatever source is found:** read its file list before
 writing a parser. Three of the twenty-five bugs in `BUGS.md` exist because one was written
@@ -47,43 +50,69 @@ found a hole in the collection by refusing to invent their way around it.
 with the ranking done off-collection, or it is wrong. It is the second recorded entry found
 questionable out of two ever checked — see `HANDOFF.md`, *First: verify the record*.
 
-**What is needed, at column level.** Not a new shape — `data/BuffMult.csv` is already the
-right one and `buff-stack` already works on it:
+**Where the numbers are: `oracle/extracted/.../EffectData.csv`, in the prose column.**
+
+This was looked for in the wrong place twice. The quantified columns are no help — of 530
+items, **two** carry an attack multiplier. But the `Effects` column is not free text. It is
+generated, and it is regular:
+
+```
+Shard of Alexander          "Increases damage by 1.15x (holy bugged in PvP: 1x) with weapon skills"
+Godfrey Icon                "Increases damage by 1.15x ... with charged spells and charged weapon skills"
+Lord of Blood's Exultation  "Increases damage by 1.2x (1.12x in PvP) for 20 seconds when bleed is triggered within 7m"
+Ritual Sword Talisman       "Increases damage by 1.1x while at full HP"
+```
+
+**157 of the 530 rows** say *"increases damage by Nx"*. 112 carry a separate PvP figure. 127
+carry a condition clause, and the clauses cluster into a small vocabulary — *with weapon
+skills*, *with jump attacks*, *when bleed is triggered within 7m*, *while at full HP*, *with
+Dragon Cult incantations*. That vocabulary is the `Condition` column, discovered rather than
+invented.
+
+`BuffMult.csv` is still the target shape, and it already has 21 buffs in it:
 
 ```
 Name, Kind, Slot, HitKind, MultPve, MultPvp, Notes
 Shard of Alexander, Talisman, Passive, Skill, 1.15, 1.15, All weapon skills...
 ```
 
-`HitKind` is what makes ranking possible — `All`, `Skill`, `ChargedSkill`, `ChargedR2`, `Crit`,
-`Jump`, `Successive`, `Physical` — because "best for X" is a question about a hit kind, and one
-row per talisman per hit kind is what lets it be answered by selection rather than by opinion.
-`Slot` joins to `BuffSlot.csv`, which already says whether two things multiply or overwrite.
+**The 21 are the differential check, and they already agree.** They were hand-built from a
+different source, and the prose gives the same figures — Shard of Alexander 1.15 on `Skill`,
+Lord of Blood's Exultation 1.2 PvE and 1.12 PvP. So a parser over `Effects` can be verified
+against them before it is trusted for the other 136, which is the same shape of check the two
+implementations gave each other everywhere else in this project.
 
-**What is missing is coverage, and one column.**
+**Yes, this is writing a parser against prose, which `BUGS.md` warns about twice.** The warning
+is worth re-reading and then overruling here, because it is a warning about writing a parser
+*while the structured table sits unused* — bugs 11 and 15. There is no structured table: the
+quantified columns are empty for exactly these items, upstream publishes names without values,
+and the game data is not on this machine. The prose is machine-generated, regular, and comes
+with a 21-row validation set. Those are different circumstances and they point the other way.
 
-*Coverage.* `BuffMult.csv` holds **21 distinct buffs**, seven of them talismans. The game has
-on the order of a hundred damage-relevant ones. And the oracle cannot fill the gap: of the 530
-items in `EffectData.csv`, **two** carry an attack multiplier — Silver Tear Mask and Blue
-Dancer Charm. 186 carry some quantified effect, but they are stat changes, HP and stamina
-rates, damage cuts and resistances. Every damage boost anyone would rank on — Shard of
-Alexander, Godfrey Icon, Ritual Sword, Lord of Blood's Exultation — is prose in an `Effects`
-column and a number in nobody's. That is why `BuffMult.csv` was hand-built, and why extending
-it is hand work rather than a parse.
-
-*The column.* A machine-readable **condition**. Today it is prose in `Notes` — *"While the
-bleed-proc aura is active (20s)"* — and `buff-stack` sidesteps that by making the caller assert
-it through `assume`. Ranking cannot sidestep it: to rank you must know which candidates apply.
-A `Condition` column with a small controlled vocabulary (`none`, `after-bleed-proc`,
-`full-hp`, `low-hp`, `charged-only`, ...) is enough. It does not need to be evaluable — the
-`assume` mechanism already exists and works — it needs to be *filterable*.
+**What this does not solve.** `HitKind` has to be derived from the condition clause — *"with
+weapon skills"* to `Skill`, *"with charged spells and charged weapon skills"* to `ChargedSkill`
+and `ChargedR2` — and that mapping is judgement, not parsing. It is small, bounded by the
+vocabulary above, and it is where the hand work actually is.
 
 **Do not** build a ranking over what exists now. Ranking on a partially populated table would
 produce exactly the well-formed answer about nothing that this collection exists to prevent,
 and it would be attested.
 
-**Done when.** `vouch call item-rank` ranks the talisman list for a stated goal, question 5.1
-answers end to end without a stop, and the recorded entry for 5.1 has been re-run and corrected.
+**Done when.** `data/BuffMult.csv` covers the talisman roster in `~/Dev/EldenRing/DataSet`,
+its 21 original rows are unchanged and still agree, `vouch call item-rank` ranks for a stated
+goal and hit kind, and question 5.1 answers end to end — with its `VALIDATION.md` entry
+re-run and corrected, and its line removed from `EXPECT` in `scripts/compare_models.py`, or
+the battery will start scoring a correct answer as a failure.
+
+**A note on where not to get this.** Fextralife and the other community wikis do carry these
+numbers, and the answer is still no. Not mainly for licensing — though that is real, and
+`data/README.md` declares provenance for every table for a reason — but because it is the
+wrong source for the argument this collection makes. Wiki figures are community-entered,
+frequently patch-stale, and sometimes simply wrong; ingesting them would put exactly the class
+of number this exists to replace *underneath* the guarantee, where `attest` would then certify
+it. Attestation checks that a figure came from a node. It cannot check that the table under
+the node is right. That is the one failure mode with no downstream guard, and the reason to
+prefer a source the collection can check against something else.
 
 ## 2. The mechanics rules behind the numbers
 

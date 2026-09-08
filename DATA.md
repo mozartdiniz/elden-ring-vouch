@@ -96,16 +96,28 @@ it out in the same commit or the battery will score a correct answer as a failur
 drains. That is the part of 11.4 about why a lower-buildup weapon can proc faster, and it needs
 the source in item 5.
 
-## 3. Consumables and locations — also readable now
+## 3. Consumables and locations — readable, and nothing asks for them
 
-**No source needed for the damage.** `ConsumableData.csv` is vendored and unread: 91 rows,
-`Name, AtkID, attackBase{Physics,Magic,Fire,Thunder,Dark}`. Fire Pot at 230 fire, Redmane Fire
-Pot at 326.
+**The data is here.** `ConsumableData.csv` is vendored and unread: 90 rows, `Name, AtkID,
+attackBase{Physics,Magic,Fire,Thunder,Dark}` — Fire Pot at 230 fire, Giantsflame at 344.
+Locations are in `~/Dev/EldenRing/DataSet`: `locations.csv` (177 rows with region) and
+`items.csv` (462 rows with `obtainedFrom`), of which 39 consumables join to the oracle by name.
 
-**Locations are on the machine**, in `~/Dev/EldenRing/DataSet` — `locations.csv` (177 rows,
-region and description) and `items.csv` (462 rows, with an `obtainedFrom` column). That is the
-fanapis export, a different provenance from `oracle/`, so it goes in `data/` with the
-declaration `data/README.md` requires.
+**And no question in `VALIDATION.md` needs either.** Searched all 122: not one asks where to
+find something, and not one asks a consumable's damage. The single apparent match for
+"location" was the word *allocation*.
+
+**So this is not scheduled, and that is the point of the entry.** Every node in this collection
+exists because a question demanded it — `BUGS.md` keeps a list of them under *"features the
+questions demanded"*. Building one because the data happens to be readable inverts that, and
+`HANDOFF.md` is explicit about why the 122 questions matter: they are *"the only check that
+finds a missing capability, because a fixture cannot fail for a question nobody can ask."* A
+node nobody can ask for would have fixtures that pass forever and tell no one anything.
+
+**Done when** a real question needs it. The data will still be there, and this entry says where.
+If pot damage is ever wanted it belongs in `item-effect` rather than in a node of its own, and
+locations would be the first table with fanapis provenance — a decision for `data/README.md`
+before a decision about code.
 
 ## 4. Three things that need the game's own params
 
@@ -142,9 +154,9 @@ which is a decision about what this collection is willing to publish.
 
 | | needs | closes |
 |---|---|---|
-| 1. talismans | *done* | 5.1, once `item-rank` exists |
-| 2. status procs | read `StatusEffectData.csv` | 11.3, 11.4 |
-| 3. consumables and locations | read `ConsumableData.csv`, vendor the fanapis export | Pattern 13, item questions |
+| 1. talismans | *done* — `item-rank` | 5.1 |
+| 2. status procs | *done* — `status-effect` | 11.3, and 11.4 as far as the data goes |
+| 3. consumables and locations | *readable, and no question asks for it* | nothing |
 
 **Parked, and honestly answered in the meantime:**
 

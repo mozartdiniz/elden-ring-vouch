@@ -34,7 +34,7 @@ structured table sat unused. New tables go in `data/`, never in `oracle/`, and
 
 ---
 
-## 1. Talismans — done, and `item-rank` is now buildable
+## 1. Talismans — done, and `item-rank` is built
 
 **Closed 8 September 2026.** `data/BuffMult.csv` carries **33 damage talismans** where it
 carried ten, across 23 hit kinds where it carried eight. `buff-stack` handles them with no node
@@ -63,11 +63,14 @@ asking the caller to assert a bleed proc or full HP. Nothing would have failed; 
 Talisman's 1.1x would just have started applying to builds that are not at full HP. The merge
 script widens every existing buff and refuses to write if any would lose the flag.
 
-**What is left of this entry:** build `item-rank`. It is now a ranking over
-`buffs.multiplier(entry, hit_kind)`, which exists, against a table that covers the field. When
-it lands, re-run question 5.1, correct its `VALIDATION.md` entry, and remove its line from
-`EXPECT` in `scripts/compare_models.py` — or the battery will score a correct answer as a
-failure.
+**`item-rank` is in**, 10 fixtures, ranking on `buffs.multiplier(entry, hit_kind)` with the
+conditional ones flagged and `unconditional_only` for the question behind most askings of
+"what should I wear". It ranks and does not choose: the slot count and the fight are the
+caller's, and it names `buff-stack` as what prices a chosen set.
+
+**What is left of this entry:** re-run question 5.1 against a live model, correct its
+`VALIDATION.md` entry, and remove its line from `EXPECT` in `scripts/compare_models.py` — or
+the battery will score a correct answer as a failure.
 
 ## 2. Status procs — readable now, from a table nobody reads
 

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "hit_kind"
+  ],
+  "properties": {
+    "hit_kind": {
+      "type": "string",
+      "enum": [
+        "All",
+        "Skill",
+        "ChargedSkill",
+        "Crit",
+        "Jump",
+        "ChargedR2",
+        "Successive",
+        "Physical",
+        "GuardCounter",
+        "Horseback",
+        "Dashing",
+        "RollBackstep",
+        "Ranged",
+        "RangedAimed",
+        "TwoHanded",
+        "KickStomp",
+        "ThrownWeapon",
+        "Roar",
+        "Pot",
+        "Perfume",
+        "Storm",
+        "Magma",
+        "FinalLight"
+      ],
+      "description": "The kind of hit the buff has to apply to."
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "Talisman",
+        "Tear",
+        "Ash",
+        "Spell",
+        "Consumable"
+      ],
+      "description": "Narrow to one source of buff."
+    },
+    "slot": {
+      "type": "string",
+      "enum": [
+        "Passive",
+        "Tear",
+        "Aura",
+        "Unique",
+        "Body"
+      ],
+      "description": "Narrow to one slot."
+    },
+    "unconditional_only": {
+      "type": "boolean",
+      "description": "Leave out buffs gated on a state the caller would have to assert."
+    },
+    "pvp": {
+      "type": "boolean",
+      "description": "Rank on the PvP figures."
+    },
+    "limit": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 50,
+      "description": "How many rows to return."
+    }
+  }
+}

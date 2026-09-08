@@ -1,0 +1,86 @@
+name = "item-rank"
+version = "0.1.0"
+
+purpose = "The buffs worth something on one kind of hit, ranked — talismans, tears, ashes and buff spells"
+
+use_when = [
+  "the question asks which talismans to wear for a particular attack",
+  "the question asks for the best N of something to maximise a hit",
+  "a set has to be chosen before buff-stack can price it",
+]
+
+not_for = [
+  "pricing a set the caller has already chosen — that is buff-stack, and it is what combines them",
+  "anything about a talisman's stats, weight or resistances — that is item-effect",
+  "choosing which four to wear: this ranks, and the slot count and the fight are the caller's",
+]
+
+run = ["python3", "rank.py"]
+timeout_ms = 10000
+
+[[reads]]
+path = "../../data/BuffMult.csv"
+
+[[reads]]
+path = "../../data/BuffSlot.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.hit_kind]
+guidance = "The kind of hit the buff has to apply to — Skill for a weapon skill, ChargedR2 for a charged heavy, GuardCounter, Jump, and so on. `All` ranks what applies to everything. This is the axis the ranking exists for: a talisman worth 1.2x on guard counters is worth nothing on a jump."
+
+[params.kind]
+guidance = "Narrow to one source: Talisman, Tear, Ash, Spell or Consumable. A question about what to wear means Talisman."
+
+[params.slot]
+guidance = "Narrow to one slot: Passive, Tear, Aura, Unique, Body. Buffs in an Overwrite slot do not stack with each other, which `slot_rules` reports."
+
+[params.unconditional_only]
+guidance = "Leave out anything gated on a state the caller would have to assert — a bleed proc, full HP, a hit streak. Use it when the question is what to wear rather than what is theoretically largest, since a conditional 1.8x outranks an unconditional 1.15x and is not available on demand."
+
+[params.pvp]
+guidance = "Rank on the PvP figures instead of PvE. Several buffs are cut in PvP and a few to nothing."
+
+[params.limit]
+guidance = "How many rows to return, highest first. `count` says how many there were."
+
+# --- preconditions ---
+
+[[requires]]
+expr = "!has(input.limit) || (input.limit >= 1 && input.limit <= 50)"
+message = "limit runs from 1 to 50"
+
+# --- postconditions ---
+
+# The ranking is the product. A row out of order is not a smaller mistake than a wrong figure:
+# a caller takes the first N and never looks at the rest.
+[[ensures]]
+expr = "result.ranked.all(r, r.multiplier > 1.0)"
+message = "a buff worth nothing on this hit kind is not a ranking of anything"
+
+[[ensures]]
+expr = "size(result.ranked) <= result.count && result.returned == size(result.ranked)"
+
+[[ensures]]
+expr = "result.truncated == (result.count > result.returned)"
+
+# `best_unconditional` is the figure a caller can quote without asserting anything, so it must
+# never be taken from a conditional row.
+[[ensures]]
+expr = "result.best_unconditional >= 1.0"
+
+[[ensures]]
+expr = "!result.unconditional_only || result.conditional_count == 0"
+message = "unconditional_only must actually exclude the conditional ones"
+
+[[examples]]
+ask = "which talismans should I wear to maximise a weapon skill?"
+call = { hit_kind = "Skill", kind = "Talisman", unconditional_only = true }
+
+[[examples]]
+ask = "best talismans for guard counters"
+call = { hit_kind = "GuardCounter", kind = "Talisman" }

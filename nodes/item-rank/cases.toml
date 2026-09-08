@@ -1,0 +1,60 @@
+# Question 5.1 is what this node exists for: "which four talismans maximise the damage of
+# Taker's Flames". Both shipping models refused it, correctly, across six runs — nothing
+# ranked talismans. These pin the behaviour that makes it answerable.
+
+[[case]]
+name = "the hit kind is the axis: a guard-counter talisman is worth nothing on a jump"
+input = { hit_kind = "GuardCounter", kind = "Talisman", unconditional_only = true }
+expect = { "result.ranked[0].buff" = "Curved Sword Talisman", "result.ranked[0].multiplier" = 1.2 }
+
+[[case]]
+name = "and the same talisman does not appear on a hit it does not cover"
+input = { hit_kind = "Jump", kind = "Talisman", unconditional_only = true }
+expect = { "result.ranked[0].buff" = "Claw Talisman", "result.ranked[0].multiplier" = 1.15 }
+
+# A conditional 1.8x outranks an unconditional 1.15x and is not available on demand. Both
+# figures are true; a caller that takes the first four without reading the flag is the failure
+# this guards.
+[[case]]
+name = "conditional buffs are ranked and flagged, not hidden"
+input = { hit_kind = "Skill", limit = 1 }
+expect = { "result.ranked[0].conditional" = true, "result.best_unconditional" = 1.15 }
+
+[[case]]
+name = "and can be left out entirely when the question is what to wear"
+input = { hit_kind = "Skill", kind = "Talisman", unconditional_only = true }
+expect = { "result.ranked[0].buff" = "Shard of Alexander", "result.conditional_count" = 0 }
+
+[[case]]
+name = "PvP figures where they differ"
+input = { hit_kind = "Jump", kind = "Talisman", pvp = true, unconditional_only = true }
+expect = { "result.ranked[0].buff" = "Claw Talisman", "result.ranked[0].multiplier" = 1.075 }
+
+# Written first as `kind = "Tear"` on Magma and it came back with one row, correctly: the
+# Bloodsucking Cracked Tear is "all damage 1.2x", so it applies on every hit kind including
+# this one. The empty case needs the filter, which is the honest way to reach it — every kind
+# of buff has something state-conditional that applies everywhere.
+[[case]]
+name = "nothing to rank comes back as nothing, not as an error"
+input = { hit_kind = "Magma", kind = "Spell", unconditional_only = true }
+expect = { "result.count" = 0, "result.best_unconditional" = 1.0, "result.truncated" = false }
+
+[[case]]
+name = "the count is the whole field and the rows are the page"
+input = { hit_kind = "All", limit = 2 }
+expect = { "result.returned" = 2, "result.truncated" = true }
+
+[[case]]
+name = "it points at the node that combines a set, because it does not"
+input = { hit_kind = "Skill", limit = 1 }
+expect = { "result.stack_with" = "buff-stack", "result.slot_rules.Passive" = "Multiply" }
+
+[[case]]
+name = "a limit outside the range is a caller error"
+input = { hit_kind = "Skill", limit = 99 }
+expect_code = 10
+
+[[case]]
+name = "a hit kind the table does not know is refused with the list"
+input = { hit_kind = "Backflip" }
+expect_code = 10

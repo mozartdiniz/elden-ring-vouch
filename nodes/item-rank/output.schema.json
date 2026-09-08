@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "hit_kind",
+    "pvp",
+    "unconditional_only",
+    "ranked",
+    "count",
+    "returned",
+    "truncated",
+    "best_unconditional",
+    "conditional_count",
+    "slot_rules",
+    "stack_with",
+    "catalog_size",
+    "hit_kinds"
+  ],
+  "properties": {
+    "hit_kind": {
+      "type": "string"
+    },
+    "pvp": {
+      "type": "boolean"
+    },
+    "unconditional_only": {
+      "type": "boolean"
+    },
+    "ranked": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "buff",
+          "kind",
+          "slot",
+          "multiplier",
+          "conditional",
+          "note"
+        ],
+        "properties": {
+          "buff": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "slot": {
+            "type": "string"
+          },
+          "multiplier": {
+            "type": "number",
+            "exclusiveMinimum": 1.0
+          },
+          "conditional": {
+            "type": "boolean",
+            "description": "True when the figure needs a state the caller must assert to buff-stack."
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Highest first, ties broken by name so the same question gives the same order."
+    },
+    "count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "returned": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "truncated": {
+      "type": "boolean"
+    },
+    "best_unconditional": {
+      "type": "number",
+      "minimum": 1.0,
+      "description": "The largest figure needing no assertion. 1.0 when there is none."
+    },
+    "conditional_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "slot_rules": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "stack_with": {
+      "type": "string",
+      "description": "The node that combines a chosen set. This one does not."
+    },
+    "catalog_size": {
+      "type": "integer"
+    },
+    "hit_kinds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

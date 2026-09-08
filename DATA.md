@@ -50,6 +50,45 @@ found a hole in the collection by refusing to invent their way around it.
 with the ranking done off-collection, or it is wrong. It is the second recorded entry found
 questionable out of two ever checked — see `HANDOFF.md`, *First: verify the record*.
 
+**Why the Build Planner does not already do this, which is the thing worth understanding.**
+
+The obvious question is how the source workbook manages without this table. The answer is in
+`oracle/extracted/.../formulas/`, and it is not "it does it some other way".
+
+The wiring is real and complete. `EffectData_Active` pulls the user's equipped items from the
+Planner's dropdowns and looks each one up:
+
+```
+C4:  =PlannerData!E3
+E3:  =IF($D3, E$1, IFERROR(VLOOKUP($C3, EffectData!$A:$AW,
+                    MATCH(E$2, EffectData!$2:$2, 0), False), E$1))
+```
+
+Row 25 aggregates the result and `PlannerData` reads it back — `=EffectData_Active!AR25`, which
+is `physicsAttackPowerRate`. So an effect that lands in one of the numeric columns *is* applied
+to the damage figure, automatically, with no user arithmetic.
+
+**And the prose column is read by nothing.** Zero references to `EffectData!B` across every
+sheet in the workbook. The multiplier in *"Increases damage by 1.15x ... with weapon skills"* is
+shown to the person and never enters a calculation.
+
+The reason is structural rather than an oversight. The workbook's effect model has **a
+damage-type axis and no hit-kind axis**: five columns, `physics`/`magic`/`fire`/`thunder`/
+`dark` AttackPowerRate. Shard of Alexander's boost applies to weapon skills, Godfrey Icon's to
+charged attacks, Lord of Blood's Exultation's to everything but only after a bleed proc. None
+of those is a damage type, so there is no cell to put them in, and the author wrote the number
+into the description instead. That is why only two of 530 items carry an attack multiplier: not
+missing data, a model that cannot express the effect.
+
+So the Build Planner **does not apply Shard of Alexander**. It applies that talisman's stat and
+defence columns and silently ignores its damage. The user is expected to know.
+
+Two things follow. `item-effect` pinning `applied_to_a_build: false` and `equip-load` refusing
+to take a talisman are not gaps in the port — they are honest about a limit that is real in the
+source. And `data/BuffMult.csv` having a `HitKind` column is not a stylistic choice: it is the
+axis the workbook lacks, which is why the two tables cannot be merged and why this one has to
+be built rather than extracted.
+
 **Where the numbers are: `oracle/extracted/.../EffectData.csv`, in the prose column.**
 
 This was looked for in the wrong place twice. The quantified columns are no help — of 530

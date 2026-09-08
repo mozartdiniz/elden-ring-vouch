@@ -128,10 +128,38 @@ quantified columns are empty for exactly these items, upstream publishes names w
 and the game data is not on this machine. The prose is machine-generated, regular, and comes
 with a 21-row validation set. Those are different circumstances and they point the other way.
 
-**What this does not solve.** `HitKind` has to be derived from the condition clause — *"with
-weapon skills"* to `Skill`, *"with charged spells and charged weapon skills"* to `ChargedSkill`
-and `ChargedR2` — and that mapping is judgement, not parsing. It is small, bounded by the
-vocabulary above, and it is where the hand work actually is.
+**Extracted, and in the repository.** `scripts/extract_talisman_buffs.py` does the parse and
+writes `data/BuffMult-talismans.draft.csv` — 33 talismans, with PvE and PvP figures, stacking
+tiers, proc durations and the raw clause. Re-runnable, so re-vendoring `oracle/` cannot leave
+it stale.
+
+**The ten already in `BuffMult.csv` are the check, and they pass.** They were hand-built from a
+different source. Seven agree to the digit. The other three disagree in one specific way, and
+the script reports it as a convention rather than an error, because it is one:
+
+```
+Winged Sword Insignia   prose "1.03x /1.05x /1.1x /1.1x with continuous attacks"
+                        BuffMult recorded 1.1 — the fully-ramped figure
+```
+
+Both are right about the game. `BuffMult.csv` has one multiplier per row and no way to say
+"this ramps", so whoever built it recorded the end of the ramp. That is the first of the two
+decisions, and it surfaced from the check rather than from anyone anticipating it.
+
+**What is left is two schema decisions, not data collection.**
+
+1. **`HitKind` needs a wider vocabulary.** The prose carries 22 distinct clauses — *with guard
+   counters*, *with horseback attacks*, *with dashing attacks*, *with kicking / stomping
+   skills*, *with Perfume Bottle attacks*, *with weapon-throwing attacks* — against the eight
+   values `BuffMult.csv` uses. Deciding that vocabulary is the job. The draft leaves `HitKind`
+   empty and carries `Clause` beside it so the decision is made against what the oracle said.
+2. **Ramps need a representation.** Three talismans step up over consecutive hits. One column
+   cannot hold four values, and picking one silently is how the existing table came to disagree
+   with its own source.
+
+Six rows are timed procs (*for 20 seconds when bleed is triggered within 7m*) and want a
+`Condition` and a duration; `buff-stack`'s `assume` already handles asserting them, so what is
+missing is only a filterable name.
 
 **Do not** build a ranking over what exists now. Ranking on a partially populated table would
 produce exactly the well-formed answer about nothing that this collection exists to prevent,
@@ -143,15 +171,19 @@ goal and hit kind, and question 5.1 answers end to end — with its `VALIDATION.
 re-run and corrected, and its line removed from `EXPECT` in `scripts/compare_models.py`, or
 the battery will start scoring a correct answer as a failure.
 
-**A note on where not to get this.** Fextralife and the other community wikis do carry these
-numbers, and the answer is still no. Not mainly for licensing — though that is real, and
-`data/README.md` declares provenance for every table for a reason — but because it is the
-wrong source for the argument this collection makes. Wiki figures are community-entered,
-frequently patch-stale, and sometimes simply wrong; ingesting them would put exactly the class
-of number this exists to replace *underneath* the guarantee, where `attest` would then certify
-it. Attestation checks that a figure came from a node. It cannot check that the table under
-the node is right. That is the one failure mode with no downstream guard, and the reason to
-prefer a source the collection can check against something else.
+**A note on where not to get this.** Several online builders do apply talismans, and their
+existence is useful evidence that the classification is tractable. They are still not a source.
+Use one as a *third* check if you like — compute a build with and without a talisman and
+compare the ratio — but never ingest their numbers. Where a builder disagrees with the oracle,
+the oracle wins, because its figure can be traced and theirs cannot.
+
+That is not mainly a licensing point, though `data/README.md` declares provenance for every
+table for a reason. It is that attestation checks a figure came from a node and cannot check
+the table underneath. An untraceable number placed under the guarantee gets certified by it,
+which is the one failure mode with no downstream guard. Fextralife and its kin carry
+community-entered, frequently patch-stale figures; that is exactly the class of number this
+collection exists to replace, and putting it *below* the runtime rather than above it would be
+the worst possible place for it.
 
 ## 2. The mechanics rules behind the numbers
 

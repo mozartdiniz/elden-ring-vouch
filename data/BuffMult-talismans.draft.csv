@@ -1,0 +1,34 @@
+Name,Kind,Slot,HitKind,Condition,MultPve,MultPvp,Tiers,DurationSeconds,Clause,Effect,refId
+Aged One's Exultation,Talisman,Passive,,,1.2,1.12,,30,when madness is triggered within 7m,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when madness is triggered within 7m,20380600.0
+Arrow's Soaring Sting Talisman,Talisman,Passive,,,1.08,1.08,,,with arrow / bolt attacks and bowDistRate by 50,Increases damage by 1.08x (holy bugged in PvP: 1x) with arrow / bolt attacks and bowDistRate by 50,20380700.0
+Arrow's Sting Talisman,Talisman,Passive,,,1.1,1.1,,,with arrow / bolt attacks,Increases damage by 1.1x (holy bugged in PvP: 1x) with arrow / bolt attacks,321500.0
+Axe Talisman,Talisman,Passive,,,1.1,1.1,,,with charged R2s,Increases damage by 1.1x (holy bugged in PvP: 1x) with charged R2s,321300.0
+Blade of Mercy,Talisman,Passive,,,1.2,1.12,,20,after performing a critical attack,Increases damage by 1.2x (1.12x in PvP) for 20 seconds after performing a critical attack,20382300.0
+Claw Talisman,Talisman,Passive,,,1.15,1.075,,,with jump attacks,Increases damage by 1.15x (1.075x in PvP)  with jump attacks,321800.0
+Companion Jar,Talisman,Passive,,,1.2,1.2,,,with Cracked / Ritual Pot attacks & 1,Increases damage by 1.2x (holy bugged in PvP: 1x) with Cracked / Ritual Pot attacks & 1.1x (holy bugged in PvP: 1x) with Hefty Cracked Pot attacks,322100.0
+Curved Sword Talisman,Talisman,Passive,,,1.2,1.2,,,with guard counters,Increases damage by 1.2x (holy bugged in PvP: 1x) with guard counters,322000.0
+Dried Bouquet,Talisman,Passive,,,1.2,1.2,,30,after spirit ash death,Increases damage by 1.2x for 30 seconds after spirit ash death,20381000.0
+Enraged Divine Beast,Talisman,Passive,,,1.1,1.1,,,with storm attacks,Increases damage by 1.1x  with storm attacks,20381800.0
+Godfrey Icon,Talisman,Passive,,,1.15,1.15,,,with charged spells and charged weapon skills,Increases damage by 1.15x (holy bugged in PvP: 1x) with charged spells and charged weapon skills,330900.0
+Kindred of Rot's Exultation,Talisman,Passive,,,1.2,1.2,,20,when poison/scarlet rot is triggered within 7m,Increases damage by 1.2x for 20 seconds when poison/scarlet rot is triggered within 7m,321700.0
+Lacerating Crossed-Tree,Talisman,Passive,,,1.15,1.075,,,with dashing attacks,Increases damage by 1.15x (1.075x in PvP)  with dashing attacks,20381400.0
+Lance Talisman,Talisman,Passive,,,1.15,1.15,,,with horseback attacks,Increases damage by 1.15x (holy bugged in PvP: 1x) with horseback attacks,321400.0
+Lord of Blood's Exultation,Talisman,Passive,,,1.2,1.12,,20,when bleed is triggered within 7m,Increases damage by 1.2x (1.12x in PvP) for 20 seconds when bleed is triggered within 7m,321600.0
+Millicent's Prosthesis,Talisman,Passive,,,1.04,1.04,1.06 1.11 1.11,,with continuous attacks and increases dexterity by 5,Increases damage by 1.04x /1.06x /1.11x /1.11x with continuous attacks and increases dexterity by 5,312500.0
+Perfumer's Talisman,Talisman,Passive,,,1.2,1.2,,,with Perfume Bottle attacks,Increases damage by 1.2x (holy bugged in PvP: 1x) with Perfume Bottle attacks,322200.0
+Red-Feathered Branchsword,Talisman,Passive,,,1.2,1.2,,,while at less than 20% HP,Increases damage by 1.2x while at less than 20% HP,320400.0
+Rellana's Cameo,Talisman,Passive,,,1.45,1.45,,,when stance is held for ? seconds,Increases damage by 1.45x when stance is held for ? seconds,20382200.0
+Retaliatory Crossed-Tree,Talisman,Passive,,,1.17,1.12,,,with rolling / backstep attacks,Increases damage by 1.17x (1.12x in PvP)  with rolling / backstep attacks,20381300.0
+Ritual Sword Talisman,Talisman,Passive,,,1.1,1.1,,,while at full HP,Increases damage by 1.1x while at full HP,320500.0
+Roar Medallion,Talisman,Passive,,,1.15,1.05,,,with roar attacks and Shriek of Milos & 1,Increases damage by 1.15x (holy bugged in PvP: 1x) with roar attacks and Shriek of Milos & 1.1x (1.05x in PvP) with breath attacks,321900.0
+Rotten Winged Sword Insignia,Talisman,Passive,,,1.06,1.06,1.08 1.13 1.13,,with continuous attacks,Increases damage by 1.06x /1.08x /1.13x /1.13x with continuous attacks,320810.0
+Shard of Alexander,Talisman,Passive,,,1.15,1.15,,,with weapon skills,Increases damage by 1.15x (holy bugged in PvP: 1x) with weapon skills,312310.0
+Sharpshot Talisman,Talisman,Passive,,,1.12,1.08,,,with aimed arrow / bolt  attacks (crosshair aiming),Increases damage by 1.12x (1.08x in PvP) with aimed arrow / bolt  attacks (crosshair aiming),19990.0
+Shattered Stone Talisman,Talisman,Passive,,,1.1,1.05,,,with kicking / stomping skills,Increases damage by 1.1x (1.05x in PvP)  with kicking / stomping skills,20380300.0
+Smithing Talisman,Talisman,Passive,,,1.1,1.05,,,with weapon-throwing attacks,Increases damage by 1.1x (1.05x in PvP)  with weapon-throwing attacks,20381100.0
+St. Trina's Smile,Talisman,Passive,,,1.2,1.12,,30,when sleep is triggered within 7m,Increases damage by 1.2x (1.12x in PvP) for 30 seconds when sleep is triggered within 7m,20381600.0
+Talisman of the Dread,Talisman,Passive,,,1.15,1.1,,,with magma attacks,Increases damage by 1.15x (1.1x in PvP)  with magma attacks,20381700.0
+Twinblade Talisman,Talisman,Passive,,,1.45,1.45,,,with the final light attack in a chain,Increases damage by 1.45x  with the final light attack in a chain,321200.0
+Two-Handed Sword Talisman,Talisman,Passive,,,1.15,1.1,,,with 2h attacks,Increases damage by 1.15x (1.1x in PvP)  with 2h attacks,20380400.0
+Warrior Jar Shard,Talisman,Passive,,,1.1,1.1,,,with weapon skills,Increases damage by 1.1x (holy bugged in PvP: 1x) with weapon skills,312300.0
+Winged Sword Insignia,Talisman,Passive,,,1.03,1.03,1.05 1.1 1.1,,with continuous attacks,Increases damage by 1.03x /1.05x /1.1x /1.1x with continuous attacks,320800.0

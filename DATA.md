@@ -7,14 +7,27 @@ this file needs a node rewritten first — that is the point of separating it.
 Written 7 September 2026, after the node-rules, node-code and app work was done and these were
 what remained. `HANDOFF.md` has the state of everything else.
 
-**Before starting any of it:** read the file list in
-`prometheux-workspace/files/elden-ring-brain/` first. Three of the twenty-four bugs in
-`BUGS.md` exist because a parser was written against prose, or a node was left unbuilt, while
-the structured table sat there unused. That has happened often enough to be a rule.
+**Before starting any of it, read this.** The sourcing plan this file was written with does
+not hold.
 
-**And when one lands:** the tables in `data/` come from the Prometheux workspace, which is a
-different provenance from `oracle/`, and `data/README.md` declares it. Anything new goes in
-`data/`, never in `oracle/`, which is re-vendored by copying.
+`prometheux-workspace/files/elden-ring-brain/` **is not on this machine.** Three places in the
+documentation said to vendor the missing tables from it. Whatever is written below about where
+data comes from is a description of what is needed, not of a file waiting to be copied. The
+first task in every entry is therefore *find a source*, and that is a different job from
+parsing one.
+
+Two things that looked like sources and are not:
+
+- `oracle/extracted/.../EffectData_Active.csv` is **not** a stubbed effect table. It is 27
+  rows of the Build Planner's live active-effects panel, mostly blank, with no header. Item 5
+  below used to read as "unstub `planner.py`"; it is the same missing data as item 1.
+- `~/Dev/EldenRing/paramdex/` holds two files and both are ID-to-name maps. No parameters, no
+  motion values.
+
+**And the standing rule still applies to whatever source is found:** read its file list before
+writing a parser. Three of the twenty-five bugs in `BUGS.md` exist because one was written
+against prose while the structured table sat unused. New tables go in `data/`, never in
+`oracle/`, and `data/README.md` declares the provenance.
 
 ---
 
@@ -34,12 +47,36 @@ found a hole in the collection by refusing to invent their way around it.
 with the ranking done off-collection, or it is wrong. It is the second recorded entry found
 questionable out of two ever checked — see `HANDOFF.md`, *First: verify the record*.
 
-**What is needed.** A table mapping each talisman to the quantity it multiplies or adds, under
-the conditions that gate it. `data/BuffMult.csv` does this for buffs and is the shape to copy:
-what it multiplies, per hit kind, PvE and PvP. `item-effect` already reads stat columns and
-attack multipliers from the effect tables, so some of this exists — what is missing is
-*coverage of every talisman* and the conditions, so a ranking can be computed rather than
-asserted.
+**What is needed, at column level.** Not a new shape — `data/BuffMult.csv` is already the
+right one and `buff-stack` already works on it:
+
+```
+Name, Kind, Slot, HitKind, MultPve, MultPvp, Notes
+Shard of Alexander, Talisman, Passive, Skill, 1.15, 1.15, All weapon skills...
+```
+
+`HitKind` is what makes ranking possible — `All`, `Skill`, `ChargedSkill`, `ChargedR2`, `Crit`,
+`Jump`, `Successive`, `Physical` — because "best for X" is a question about a hit kind, and one
+row per talisman per hit kind is what lets it be answered by selection rather than by opinion.
+`Slot` joins to `BuffSlot.csv`, which already says whether two things multiply or overwrite.
+
+**What is missing is coverage, and one column.**
+
+*Coverage.* `BuffMult.csv` holds **21 distinct buffs**, seven of them talismans. The game has
+on the order of a hundred damage-relevant ones. And the oracle cannot fill the gap: of the 530
+items in `EffectData.csv`, **two** carry an attack multiplier — Silver Tear Mask and Blue
+Dancer Charm. 186 carry some quantified effect, but they are stat changes, HP and stamina
+rates, damage cuts and resistances. Every damage boost anyone would rank on — Shard of
+Alexander, Godfrey Icon, Ritual Sword, Lord of Blood's Exultation — is prose in an `Effects`
+column and a number in nobody's. That is why `BuffMult.csv` was hand-built, and why extending
+it is hand work rather than a parse.
+
+*The column.* A machine-readable **condition**. Today it is prose in `Notes` — *"While the
+bleed-proc aura is active (20s)"* — and `buff-stack` sidesteps that by making the caller assert
+it through `assume`. Ranking cannot sidestep it: to rank you must know which candidates apply.
+A `Condition` column with a small controlled vocabulary (`none`, `after-bleed-proc`,
+`full-hp`, `low-hp`, `charged-only`, ...) is enough. It does not need to be evaluable — the
+`assume` mechanism already exists and works — it needs to be *filterable*.
 
 **Do not** build a ranking over what exists now. Ranking on a partially populated table would
 produce exactly the well-formed answer about nothing that this collection exists to prevent,
@@ -100,14 +137,15 @@ the only one of these four that is a single missing column rather than a missing
 
 ## 5. Talismans are still not applied to a build
 
-**Deliberate, and unchanged.** `planner.py` stubbed `EffectData_Active`, so `character-build`,
-`equip-load` and `defence` all report figures *before* talismans. `equip-load` refuses to take
-one rather than ignoring it, and `item-effect` pins `applied_to_a_build: false`, so nothing
-pretends otherwise.
+**Deliberate, and now known to be the same gap as item 1.** `character-build`, `equip-load` and
+`defence` all report figures *before* talismans. `equip-load` refuses to take one rather than
+ignoring it, and `item-effect` pins `applied_to_a_build: false`, so nothing pretends otherwise.
 
-Closing it means either modelling the effects, which has no oracle, or having the caller assert
-them and say so. It is listed here because it is a data-shaped decision, not because it is
-scheduled.
+This used to read as "`planner.py` stubbed `EffectData_Active`, so unstub it". That was wrong:
+`EffectData_Active.csv` is a 27-row live panel from the Build Planner, not a table of effects.
+There is nothing to unstub. Applying a talisman to a build needs the same quantified,
+condition-tagged table item 1 needs, which is why they should be done together and why doing
+this one first would be building on nothing.
 
 ## 6. Not ported at all
 

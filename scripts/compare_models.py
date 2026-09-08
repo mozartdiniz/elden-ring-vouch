@@ -122,7 +122,10 @@ class Recorder:
 # leaves the judgement where it belongs.
 EXPECT = {
     "4.1": ("recovery", "no such weapon; the skill names the real one"),
-    "11.3": ("refusal", "frostbite buildup is a table, the proc rule is not"),
+    # 11.3 was here and is not any more: `status-effect` answers it. The proc rule was in
+    # StatusEffectData.csv the whole time, vendored and read by nothing. Leaving a question in
+    # this arm after the collection learns to answer it scores a correct answer as a failure,
+    # which is the failure mode this map exists to prevent in the other direction.
     "11.6": ("refusal", "poise figures exist, the stance-break rule does not"),
     "15.6": ("refusal", "no table carries range"),
     # Added 7 September, and the reason they were not here first is worth keeping.
@@ -136,7 +139,10 @@ EXPECT = {
     # "no node does this" and a failure scored identically, and the difference was most of the
     # movement between runs. A key that cannot tell "couldn't" from "wouldn't" measures the
     # wrong thing at exactly the moment the tool gets better at saying which.
-    "5.1": ("refusal", "no node ranks talismans — DATA.md 1"),
+    # 5.1 was here for the same reason and leaves for the same reason: `item-rank` ranks
+    # talismans now. This arm is about what the collection can do, not about whether a model
+    # manages it — so if a model still fails 5.1 that is a real failure and should be scored
+    # as one.
     # 14.4 was here too and should not have been. It asks how to get a fire buff without
     # Faith, and the model answers it by naming plausible items and pricing them through
     # item-effect and buff-stack — no ranking required, and it says which item it could not

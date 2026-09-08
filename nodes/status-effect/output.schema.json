@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status",
+    "rows",
+    "typical",
+    "typical_rows",
+    "variants",
+    "variant_count",
+    "buildup_field",
+    "buildup_values",
+    "statuses",
+    "accumulation_modelled",
+    "fields"
+  ],
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "rows": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "typical": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      },
+      "description": "The proc most sources apply. Quote it with typical_rows of rows, which is how much of the table agrees."
+    },
+    "typical_rows": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "variants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "effect",
+          "rows",
+          "inert"
+        ],
+        "properties": {
+          "effect": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number"
+            },
+            "description": "The game's own fields for this proc, neutral values omitted."
+          },
+          "rows": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "How many SpEffect rows apply this exact proc."
+          },
+          "inert": {
+            "type": "boolean",
+            "description": "True when the proc changes no number \u2014 Death is this, because what it does is not a figure."
+          }
+        }
+      },
+      "description": "Every distinct proc, most common first."
+    },
+    "variant_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "buildup_field": {
+      "type": "string",
+      "description": "The column carrying this status's buildup."
+    },
+    "buildup_values": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "statuses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "accumulation_modelled": {
+      "type": "boolean",
+      "description": "Always false. How fast a bar fills and drains is in no table here."
+    },
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

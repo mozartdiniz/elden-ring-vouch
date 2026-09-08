@@ -1,0 +1,44 @@
+# Question 11.3 asks what a frostbite proc does. It was in the battery's refusal arm because
+# the collection had no rule for it — while StatusEffectData.csv sat vendored and unread.
+
+[[case]]
+name = "the frostbite proc: damage, duration, and the debuff that is the whole point"
+input = { status = "Frost" }
+expect = { "result.typical.changeHpPoint" = 30.0, "result.typical.neutralDamageCutRate" = 1.2, "result.typical.effectEndurance" = 30.0 }
+
+[[case]]
+name = "bleed is instant and proportional, which is why it beats a health pool"
+input = { status = "Bleed" }
+expect = { "result.typical.changeHpRate" = 15.0, "result.typical.changeHpPoint" = 100.0, "result.typical.effectEndurance" = 1.0 }
+
+[[case]]
+name = "rot is small and long where poison is smaller and as long"
+input = { status = "Rot" }
+expect = { "result.typical.effectEndurance" = 90.0, "result.typical.changeHpPoint" = 15.0 }
+
+[[case]]
+name = "sleep spends FP rather than HP"
+input = { status = "Sleep" }
+expect = { "result.typical.changeMpPoint" = 30.0, "result.typical.effectEndurance" = 60.0 }
+
+# A status is not one effect. Returning the most common as though it were the only one is the
+# mistake; the count is what lets a reader see how much of the table agrees.
+[[case]]
+name = "the spread is reported, and typical says how typical it is"
+input = { status = "Frost" }
+expect = { "result.rows" = 268, "result.typical_rows" = 256, "result.variant_count" = 6 }
+
+[[case]]
+name = "a proc that changes no number is marked rather than returned as nothing"
+input = { status = "Death" }
+expect = { "result.variants[0].inert" = true }
+
+[[case]]
+name = "what this node does not know, in the result rather than in a comment"
+input = { status = "Bleed" }
+expect = { "result.accumulation_modelled" = false, "result.buildup_field" = "bloodAttackPower" }
+
+[[case]]
+name = "a status the table does not have is refused with the list"
+input = { status = "Curse" }
+expect_code = 16

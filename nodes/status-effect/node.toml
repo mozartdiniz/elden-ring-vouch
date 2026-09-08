@@ -1,0 +1,60 @@
+name = "status-effect"
+version = "0.1.0"
+
+purpose = "What a status proc does when the bar fills — damage, duration, and the damage-taken debuff"
+
+use_when = [
+  "the question asks what happens when frostbite, bleed, rot, poison, sleep or madness procs",
+  "a status's damage or debuff has to be quoted rather than described",
+  "the question is why a status is worth building toward",
+]
+
+not_for = [
+  "how much buildup a weapon applies per hit — that is weapon-lookup and weapon-skill",
+  "which bosses resist or are immune to a status — that is boss-lookup and boss-coverage",
+  "how fast a bar fills or drains: no table here carries that, and `accumulation_modelled` says so",
+]
+
+run = ["python3", "status.py"]
+timeout_ms = 10000
+
+[[reads]]
+path = "../../oracle/extracted/Build-Planner-v1.19.1/csv/StatusEffectData.csv"
+
+[input]
+schema = "input.schema.json"
+
+[output]
+schema = "output.schema.json"
+
+[params.status]
+guidance = "The status whose proc you want: Frost, Bleed, Rot, Poison, Sleep, Madness, Death or Eternal Sleep. `statuses` in the result lists what the table has."
+
+# --- postconditions ---
+
+# The spread is the point. A status is not one effect — frost has six across 268 rows, because
+# a player's weapon and an enemy's attack apply the same status differently — and returning one
+# figure as though it were the figure is the mistake this node exists to avoid.
+[[ensures]]
+expr = "result.variant_count == size(result.variants) && result.variant_count >= 1"
+
+[[ensures]]
+expr = "result.variants.all(v, v.rows >= 1)"
+
+# `typical` has to be the most common variant and has to say how common. A caller quoting it
+# without the count is quoting a figure whose authority it cannot see.
+[[ensures]]
+expr = "result.typical_rows == result.variants[0].rows && result.typical_rows <= result.rows"
+
+[[ensures]]
+expr = "result.variants.all(v, v.rows <= result.typical_rows)"
+message = "typical must be the most common proc, not merely the first one read"
+
+# The one thing this node knows it does not know.
+[[ensures]]
+expr = "result.accumulation_modelled == false"
+message = "no table here carries buildup accumulation or decay; saying otherwise would be a claim"
+
+[[examples]]
+ask = "what does a frostbite proc actually do?"
+call = { status = "Frost" }

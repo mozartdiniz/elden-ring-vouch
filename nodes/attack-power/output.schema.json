@@ -30,7 +30,8 @@
     "guard_boost",
     "guard_negation",
     "guard_resist",
-    "assumed"
+    "assumed",
+    "guard_negation_shown"
   ],
   "properties": {
     "weapon": {
@@ -165,6 +166,13 @@
     "assumed": {
       "type": "object",
       "description": "Judgement parameters the caller did not give, and the value the collection used. Empty when the caller gave them all. Quote these as assumptions, never as the user's choice."
+    },
+    "guard_negation_shown": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      },
+      "description": "Guard negation as the equipment screen prints it: one decimal, truncated. 46.55 reads 46.5."
     }
   },
   "$defs": {

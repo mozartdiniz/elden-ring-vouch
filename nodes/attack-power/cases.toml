@@ -189,3 +189,20 @@ expect = { "result.attack_shown.physical" = 585, "result.attack_shown.holy" = 29
 name = "the game: Siluria's Tree +10, two-handed, RL150"
 input = { weapon = "Siluria's Tree", affinity = "Standard", upgrade = 10, two_hand = true, strength = 53, dexterity = 15, intelligence = 14, faith = 40, arcane = 9 }
 expect = { "result.attack_shown.physical" = 437, "result.attack_shown.holy" = 339 }
+
+# A fourth character, and the first to test things the other three could not: an infusion
+# rather than a somber weapon, magic damage, a status buildup, guard negation, and a
+# one-handed grip. Clayman's Cold Harpoon +25 at intelligence 80.
+#
+# It is also the case that found `guard_negation` had no `shown` form at all — the screen
+# gives a percentage to one decimal, truncated, and this node published 46.55 where a player
+# reads 46.5. Bug 2's lesson in a field that never received it.
+[[case]]
+name = "the game: Clayman's Harpoon Cold +25, one-handed, INT 80"
+input = { weapon = "Clayman's Harpoon", affinity = "Cold", upgrade = 25, max_upgrade = 25, two_hand = false, strength = 12, dexterity = 14, intelligence = 80, faith = 6, arcane = 9 }
+expect = { "result.attack_shown.physical" = 200, "result.attack_shown.magic" = 371, "result.status_shown.frost" = 105, "result.affinity_applied" = "Cold" }
+
+[[case]]
+name = "the game: the same weapon's scaling letters and guard negation"
+input = { weapon = "Clayman's Harpoon", affinity = "Cold", upgrade = 25, max_upgrade = 25, two_hand = false, strength = 12, dexterity = 14, intelligence = 80, faith = 6, arcane = 9 }
+expect = { "result.scaling.strength.letter" = "C", "result.scaling.dexterity.letter" = "E", "result.scaling.intelligence.letter" = "C", "result.guard_negation_shown.physical" = 46.5, "result.guard_negation_shown.magic" = 43.7, "result.guard_boost" = 33 }

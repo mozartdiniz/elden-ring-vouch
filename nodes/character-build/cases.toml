@@ -112,3 +112,10 @@ expect = { "result.level" = 150, "result.hp" = 1772, "result.fp" = 147, "result.
 name = "the game: RL150 arcane build, whose FP on screen includes a headpiece this does not apply"
 input = { starting_class = "Prisoner", vigor = 55, mind = 20, endurance = 25, strength = 30, dexterity = 14, intelligence = 14, faith = 6, arcane = 65 }
 expect = { "result.level" = 150, "result.hp" = 1814, "result.stamina" = 121, "result.fp" = 121 }
+
+# The fourth character, and the cleanest FP reading of the four: mind 35 with nothing worn
+# that changes it.
+[[case]]
+name = "the game: RL150 intelligence build — mind 35 is 200 FP"
+input = { starting_class = "Prisoner", vigor = 53, mind = 35, endurance = 20, strength = 12, dexterity = 14, intelligence = 80, faith = 6, arcane = 9 }
+expect = { "result.level" = 150, "result.hp" = 1772, "result.fp" = 200, "result.stamina" = 113 }

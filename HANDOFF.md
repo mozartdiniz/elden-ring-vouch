@@ -114,7 +114,16 @@ itself rather than against the extraction. Run it after touching anything that r
 
 Three layers, and the point is that they fail differently.
 
-**253 fixtures** (`vouch test`) pin every node against the extraction in `oracle/`. They are
+**Four photographed characters** are the only figures here that come from the game rather than
+from an extraction of it, and they are the last word when anything disagrees. They live as
+fixtures in `attack-power`, `character-build` and `equip-load`, and between them they cover a
+somber weapon and an infusion, one-handed and two-handed, physical, fire, holy and magic
+damage, a status buildup, guard negation, and four different mind values. They confirmed the
+rule everything rests on — three stat points to a level, `sum - 79`, on four independent
+builds all summing to 229 at level 150 — and they found bugs 26 and 27, both of which were
+wrong roundings in the fields that exist to be the number a player reads off the screen.
+
+**296 fixtures** (`vouch test`) pin every node against the extraction in `oracle/`. They are
 fast, they run on every change, and *by construction they cannot catch a mistake in how the
 collection uses the extraction* — which is what bug 17 was. Worse, a fixture can pin the wrong
 behaviour, and it has now happened twice. One asserted that `buff-stack` exiting 20 on an
@@ -617,7 +626,7 @@ accepted piece of work.*
 
 ```console
 $ cd ~/Dev/elden-ring-vouch
-$ vouch test                                    # 253 cases, no model
+$ vouch test                                    # 296 cases, no model
 $ python3 scripts/check_spreadsheet.py          # 22 figures from the workbook itself
 $ vouch call boss-lookup --input '{"query":"rennala"}'
 $ vouch call build-allocate --input '{"weapon":"Rivers of Blood","affinity":"Standard",

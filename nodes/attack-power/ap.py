@@ -158,6 +158,15 @@ def main():
     shown = {d: as_shown(attack, d) for d in DAMAGE}
     status_shown = {s: as_shown(status, s) for s in STATUS}
 
+    # Guard negation is a percentage and the screen gives it to one decimal, truncated: 46.55
+    # reads as 46.5, 23.75 as 23.7. Publishing only full precision is what bug 2 was about —
+    # a reader with 46.55 in front of them writes 46.55, and the game never showed that.
+    #
+    # The rounding to six places first is for float representation, not for the game: the
+    # magic figure arrives as 43.699999999999996, and truncating that directly gives 43.6.
+    def to_one_decimal(value):
+        return math.floor(round(value, 6) * 10) / 10
+
     result = {
         "weapon": weapon,
         "weapon_class": row["Weapon Class"],
@@ -208,6 +217,10 @@ def main():
         "requirements_met": all(r.req_met.get(s, True) for s in STATS),
         "guard_boost": int(r.guard_boost),
         "guard_negation": {d: number(r.guard_negation.get(d)) for d in DAMAGE},
+        # The same figures as the screen prints them. See `to_one_decimal`.
+        "guard_negation_shown": {
+            d: to_one_decimal(number(r.guard_negation.get(d))) for d in DAMAGE
+        },
         # What blocking with this weapon resists. Left out until now, which made the guard
         # half of the answer incomplete: a shield's status resistance is most of why one is
         # chosen over another.

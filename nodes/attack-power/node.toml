@@ -270,3 +270,18 @@ call = { weapon = "Zweihander", affinity = "Heavy", upgrade = 25, strength = 60,
 [[ensures]]
 expr = 'has(input.two_hand) ? !("two_hand" in result.assumed) : result.assumed.two_hand == result.two_hand'
 message = "whether the weapon is two-handed moves the answer, so an unstated one has to be reported"
+
+# Guard negation, as a reader sees it. Bounded by the full-precision figure and never above
+# it — the screen truncates to one decimal and does not round up, so 46.55 reads 46.5.
+#
+# The epsilon is for float representation and nothing else: this weapon's magic negation is
+# exactly 43.7 and arrives as 43.699999999999996, so a bare `shown <= negation` fails by four
+# parts in a quadrillion. The same allowance is made where `total_ar` is checked against the
+# sum of its parts.
+[[ensures]]
+expr = """
+result.guard_negation_shown.physical <= result.guard_negation.physical + 0.000001 &&
+result.guard_negation.physical < result.guard_negation_shown.physical + 0.1 &&
+result.guard_negation_shown.magic <= result.guard_negation.magic + 0.000001 &&
+result.guard_negation.magic < result.guard_negation_shown.magic + 0.1
+"""

@@ -175,13 +175,24 @@ result.attack.lightning + result.attack.holy) < 0.000001
 [[ensures]]
 expr = "result.total_ar_rounded <= result.total_ar && result.total_ar < result.total_ar_rounded + 1"
 
+# `attack_shown` is bounded by the full-precision figure but is **not** its truncation, and
+# the difference is the whole point of the field.
+#
+# The game prints a damage type as two numbers — "291 + 281" — and truncates each before
+# adding. Two truncations lose just under one point each, so the true total can sit up to two
+# above what the screen shows. This contract said `< shown + 1`, which encoded the belief that
+# the screen shows the truncated total, and photographs of three real characters disproved it:
+# Godslayer's Greatsword is 291.550 + 281.914 = 573.464, and the game shows 572.
+#
+# The rule in HANDOFF.md is to check the assumption before changing the contract. The
+# assumption was wrong, and the contract was faithfully enforcing it.
 [[ensures]]
 expr = """
-result.attack_shown.physical <= result.attack.physical && result.attack.physical < result.attack_shown.physical + 1 &&
-result.attack_shown.magic <= result.attack.magic && result.attack.magic < result.attack_shown.magic + 1 &&
-result.attack_shown.fire <= result.attack.fire && result.attack.fire < result.attack_shown.fire + 1 &&
-result.attack_shown.lightning <= result.attack.lightning && result.attack.lightning < result.attack_shown.lightning + 1 &&
-result.attack_shown.holy <= result.attack.holy && result.attack.holy < result.attack_shown.holy + 1
+result.attack_shown.physical <= result.attack.physical && result.attack.physical < result.attack_shown.physical + 2 &&
+result.attack_shown.magic <= result.attack.magic && result.attack.magic < result.attack_shown.magic + 2 &&
+result.attack_shown.fire <= result.attack.fire && result.attack.fire < result.attack_shown.fire + 2 &&
+result.attack_shown.lightning <= result.attack.lightning && result.attack.lightning < result.attack_shown.lightning + 2 &&
+result.attack_shown.holy <= result.attack.holy && result.attack.holy < result.attack_shown.holy + 2
 """
 
 [[ensures]]

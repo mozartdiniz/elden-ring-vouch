@@ -126,9 +126,13 @@ expect = { "result.scaling.strength.effective" = 15, "result.scaling.strength.sh
 # "[Default] PvP - Faith RL150" — Confessor, VIG 60 / MND 13 / END 25 / STR 15 / DEX 24 /
 # INT 9 / FTH 79 / ARC 9. The sheet shows 387.07 physical, 292.32 holy, 679.39 total.
 [[case]]
+# The `attack.*` figures here are the workbook's, to seven decimals, and still are. The
+# `attack_shown` figures were not the workbook's — they were trunc(total), assumed rather than
+# read, and photographs of three real characters say the game shows floor(base) + floor(scaling)
+# instead. Godslayer's Greatsword is 291.550 + 281.914 and the screen reads 572, not 573.
 name = "the sheet's faith build: Treespear +25"
 input = { weapon = "Treespear", affinity = "Standard", upgrade = 25, strength = 15, dexterity = 24, intelligence = 9, faith = 79, arcane = 9 }
-expect = { "result.attack.physical" = 387.0742062404928, "result.attack.holy" = 292.31856500000004, "result.total_ar" = 679.3927712404928, "result.attack_shown.physical" = 387, "result.attack_shown.holy" = 292 }
+expect = { "result.attack.physical" = 387.0742062404928, "result.attack.holy" = 292.31856500000004, "result.total_ar" = 679.3927712404928, "result.attack_shown.physical" = 386, "result.attack_shown.holy" = 291 }
 
 # "[Default] PvE - Strength RL150" — dexterity 17 on the sheet is 12 levelled plus Millicent's
 # Prosthesis, which this collection does not apply, so the 17 is passed in by hand. That is the
@@ -136,7 +140,7 @@ expect = { "result.attack.physical" = 387.0742062404928, "result.attack.holy" = 
 [[case]]
 name = "the sheet's strength build: Heavy Broadsword +25"
 input = { weapon = "Broadsword", affinity = "Heavy", upgrade = 25, strength = 79, dexterity = 17, intelligence = 9, faith = 27, arcane = 9 }
-expect = { "result.total_ar" = 572.3095840000001, "result.attack_shown.physical" = 572 }
+expect = { "result.total_ar" = 572.3095840000001, "result.attack_shown.physical" = 571 }
 
 # "[Default] PvP - Intelligence RL150" — the three catalysts it carries, and the madness the
 # Frenzied Flame Seal brings with it.
@@ -154,3 +158,34 @@ expect = { "result.total_ar" = 212.97360000000003 }
 name = "and the Frenzied Flame Seal, which carries 55 madness"
 input = { weapon = "Frenzied Flame Seal", affinity = "Standard", upgrade = 10, strength = 12, dexterity = 13, intelligence = 80, faith = 14, arcane = 9 }
 expect = { "result.total_ar" = 107.74531249895003, "result.status.madness" = 55.0 }
+
+# ---------------------------------------------------------------- from the game itself
+#
+# Three characters, photographed on the equipment screen, at rune level 150. These are the
+# only figures in this collection that come from the game rather than from a spreadsheet
+# extraction of it or a workbook built on top of one, which makes them the last word when
+# anything disagrees.
+#
+# They found a real defect. `attack_shown` truncated the total, and the game truncates the
+# base and the scaling separately before adding them — so every figure it published could be
+# a point high, in the one field whose entire purpose is to be the number a player reads off
+# the screen and quotes back. The base and scaling underneath were already exact to three
+# decimals on all six damage types; only the rounding was wrong.
+#
+# All three are two-handed, which the equipment screen reflects and which moves physical by
+# 4% to 12% here.
+
+[[case]]
+name = "the game: Godslayer's Greatsword +10, two-handed, RL150"
+input = { weapon = "Godslayer's Greatsword", affinity = "Standard", upgrade = 10, two_hand = true, strength = 20, dexterity = 57, intelligence = 14, faith = 27, arcane = 9 }
+expect = { "result.attack_shown.physical" = 572, "result.attack_shown.fire" = 255 }
+
+[[case]]
+name = "the game: Maliketh's Black Blade +9, two-handed, RL150"
+input = { weapon = "Maliketh's Black Blade", affinity = "Standard", upgrade = 9, two_hand = true, strength = 53, dexterity = 15, intelligence = 14, faith = 40, arcane = 9 }
+expect = { "result.attack_shown.physical" = 585, "result.attack_shown.holy" = 297 }
+
+[[case]]
+name = "the game: Siluria's Tree +10, two-handed, RL150"
+input = { weapon = "Siluria's Tree", affinity = "Standard", upgrade = 10, two_hand = true, strength = 53, dexterity = 15, intelligence = 14, faith = 40, arcane = 9 }
+expect = { "result.attack_shown.physical" = 437, "result.attack_shown.holy" = 339 }

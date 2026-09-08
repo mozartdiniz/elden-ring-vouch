@@ -88,3 +88,27 @@ expect = { "result.starting_class" = "Wretch", "result.assumed.starting_class" =
 name = "a class the caller gave is never reported as an assumption"
 input = { starting_class = "Samurai", vigor = 40 }
 expect = { "result.starting_class" = "Samurai", "result.assumed" = {} }
+
+# ---------------------------------------------------------------- from the game itself
+#
+# The same three characters' status panels. Rune level, HP, FP and stamina, read off the
+# screen rather than derived from anything. All three sum to 229 stat points at level 150,
+# which is the `sum - 79` rule this collection has always used, confirmed by the game.
+
+[[case]]
+name = "the game: RL150 dexterity build — level, HP, FP, stamina"
+input = { starting_class = "Prisoner", vigor = 51, mind = 25, endurance = 26, strength = 20, dexterity = 57, intelligence = 14, faith = 27, arcane = 9 }
+expect = { "result.level" = 150, "result.hp" = 1727, "result.fp" = 147, "result.stamina" = 123 }
+
+[[case]]
+name = "the game: RL150 strength-faith build"
+input = { starting_class = "Prisoner", vigor = 53, mind = 25, endurance = 20, strength = 53, dexterity = 15, intelligence = 14, faith = 40, arcane = 9 }
+expect = { "result.level" = 150, "result.hp" = 1772, "result.fp" = 147, "result.stamina" = 113 }
+
+# The screen shows 128 FP against this node's 121, and the node is right: the character wears
+# St. Trina's Blossom, which is x1.07 FP — 121 x 1.06 = 128.26. `item-effect` pins
+# `applied_to_a_build: false` and this is what that limitation looks like from the outside.
+[[case]]
+name = "the game: RL150 arcane build, whose FP on screen includes a headpiece this does not apply"
+input = { starting_class = "Prisoner", vigor = 55, mind = 20, endurance = 25, strength = 30, dexterity = 14, intelligence = 14, faith = 6, arcane = 65 }
+expect = { "result.level" = 150, "result.hp" = 1814, "result.stamina" = 121, "result.fp" = 121 }

@@ -64,3 +64,14 @@ expect = { "result.starting_class" = "Wretch", "result.assumed.starting_class" =
 name = "a class the caller gave is never reported as an assumption"
 input = { endurance = 25, starting_class = "Vagabond" }
 expect = { "result.starting_class" = "Vagabond", "result.assumed" = {} }
+
+# From the game: three characters' equip-load ceilings, read off the equipment screen.
+[[case]]
+name = "the game: endurance 26 carries 73.0"
+input = { endurance = 26, starting_class = "Prisoner" }
+expect = { "result.roll" = "Light Load" }
+
+[[case]]
+name = "the game: endurance 20 carries 64.1"
+input = { endurance = 20, starting_class = "Prisoner" }
+expect = { "result.roll" = "Light Load" }

@@ -35,6 +35,7 @@ to zero decimals is 260. A figure a reader will quote has to exist as a return v
 """
 
 import json
+import math
 import os
 import sys
 
@@ -127,9 +128,35 @@ def main():
 
     attack = {d: number((r.total or {}).get(d)) for d in DAMAGE}
     status = {s: number((r.total or {}).get(s)) for s in STATUS}
-    # What the game shows: truncated toward zero, never rounded up.
-    shown = {d: int(attack[d]) for d in DAMAGE}
-    status_shown = {s: int(status[s]) for s in STATUS}
+
+    # What the game shows, and it is not the truncated total.
+    #
+    # The equipment screen prints a damage type as two numbers — "291 + 281" — and truncates
+    # **each** before adding them. Truncating the sum instead gives a figure up to one point
+    # higher per damage type, which is what this did: Godslayer's Greatsword at 291.550 base
+    # and 281.914 scaling is 573.464, and the game shows 572.
+    #
+    # Caught by photographs of three real characters. Every base and scaling figure here
+    # matched the screen exactly, to three decimals, on all six damage types — the arithmetic
+    # was never wrong. Only the rounding was, and only in the field whose whole purpose is to
+    # be the number a player sees and quotes back.
+    # `math.floor` and not `int`, which truncates toward zero. When a requirement is unmet the
+    # scaling term is negative — Godslayer's Greatsword at ten dexterity is 291.550 base and
+    # -116.620 scaling — and `int(-116.620)` is -116, which would make the shown figure 175
+    # against a true 174.930. Overstating a penalised weapon is the wrong direction to be
+    # wrong in, and it breaks the invariant that the shown figure never exceeds the real one.
+    #
+    # No screenshot here has an unmet requirement, so the game's own handling of a negative
+    # component is unverified. Flooring is the choice that cannot overstate.
+    def as_shown(figures, key):
+        base = number((r.base or {}).get(key))
+        scale = number((r.scaling or {}).get(key))
+        if base or scale:
+            return math.floor(base) + math.floor(scale)
+        return math.floor(figures[key])
+
+    shown = {d: as_shown(attack, d) for d in DAMAGE}
+    status_shown = {s: as_shown(status, s) for s in STATUS}
 
     result = {
         "weapon": weapon,

@@ -128,38 +128,47 @@ quantified columns are empty for exactly these items, upstream publishes names w
 and the game data is not on this machine. The prose is machine-generated, regular, and comes
 with a 21-row validation set. Those are different circumstances and they point the other way.
 
-**Extracted, and in the repository.** `scripts/extract_talisman_buffs.py` does the parse and
-writes `data/BuffMult-talismans.draft.csv` — 33 talismans, with PvE and PvP figures, stacking
-tiers, proc durations and the raw clause. Re-runnable, so re-vendoring `oracle/` cannot leave
-it stale.
+**Extracted, named, and checked.** `scripts/extract_talisman_buffs.py` writes
+`data/BuffMult-talismans.draft.csv` — 33 talismans in `BuffMult.csv`'s exact shape, 759 rows,
+directly appendable once the names are agreed. Re-runnable, so re-vendoring `oracle/` cannot
+leave it stale.
 
-**The ten already in `BuffMult.csv` are the check, and they pass.** They were hand-built from a
-different source. Seven agree to the digit. The other three disagree in one specific way, and
-the script reports it as a convention rather than an error, because it is one:
+**There is no schema decision. That was my error and the check found it twice.**
 
-```
-Winged Sword Insignia   prose "1.03x /1.05x /1.1x /1.1x with continuous attacks"
-                        BuffMult recorded 1.1 — the fully-ramped figure
-```
+I first wrote this entry claiming two decisions were needed — a `Condition` column and a
+representation for stacking ramps. Neither is. `lib/buffs.py` already says so:
 
-Both are right about the game. `BuffMult.csv` has one multiplier per row and no way to say
-"this ramps", so whoever built it recorded the end of the ramp. That is the first of the two
-decisions, and it surfaced from the check rather than from anyone anticipating it.
+> `state_conditional`: *True when the figure is above 1 on every hit kind. Then the condition
+> is not the kind of hit but a state — a bleed proc, full HP, **a successive hit tier** —
+> which nothing here can observe, so the caller has to assert it.*
 
-**What is left is two schema decisions, not data collection.**
+So a buff gated on a **state** takes its multiplier on all eight hit kinds; that is what makes
+`buff-stack` demand `assume`. Nine of the 33 are like that — the four Exultations, Blade of
+Mercy, the HP gates. A **ramp** is one of those states, and the table records where the ramp
+lands. My extractor was reading the first tier off the prose and the ten known talismans said
+so on its first run; I wrote that up as a difference of convention when it was a bug.
 
-1. **`HitKind` needs a wider vocabulary.** The prose carries 22 distinct clauses — *with guard
-   counters*, *with horseback attacks*, *with dashing attacks*, *with kicking / stomping
-   skills*, *with Perfume Bottle attacks*, *with weapon-throwing attacks* — against the eight
-   values `BuffMult.csv` uses. Deciding that vocabulary is the job. The draft leaves `HitKind`
-   empty and carries `Clause` beside it so the decision is made against what the oracle said.
-2. **Ramps need a representation.** Three talismans step up over consecutive hits. One column
-   cannot hold four values, and picking one silently is how the existing table came to disagree
-   with its own source.
+**What is left is one naming pass, against an unchanged schema.** Twenty-one clauses become
+`HitKind` values, of which six already exist. The proposal is in the script, applied to the
+draft, and reproduces all ten known talismans exactly:
 
-Six rows are timed procs (*for 20 seconds when bleed is triggered within 7m*) and want a
-`Condition` and a duration; `buff-stack`'s `assume` already handles asserting them, so what is
-missing is only a filterable name.
+| clause | HitKind |
+|---|---|
+| with weapon skills | `Skill`, `ChargedSkill` |
+| with charged spells and charged weapon skills | `ChargedSkill`, `ChargedR2` |
+| with charged R2s / jump attacks / continuous attacks | `ChargedR2` / `Jump` / `Successive` |
+| with guard counters | `GuardCounter` *(new)* |
+| with horseback / dashing / rolling / 2h attacks | `Horseback`, `Dashing`, `RollBackstep`, `TwoHanded` *(new)* |
+| with arrow / bolt, aimed arrow / bolt | `Ranged`, `RangedAimed` *(new)* |
+| with kicking / weapon-throwing / roar / pot / perfume / storm / magma / final light | *(new)* |
+
+**Fifteen new `HIT_KINDS` values.** Adding them touches `lib/buffs.py` and `buff-stack`'s input
+schema, and nothing else.
+
+That check is worth keeping for its own sake: *"with weapon skills"* naively means `Skill`, and
+the table has Shard of Alexander on `ChargedSkill` too, because a charged weapon skill is still
+a weapon skill. The ten hand-assigned rows knew a domain fact the clause does not state, and
+the proposal only reproduces them because the check made it.
 
 **Do not** build a ranking over what exists now. Ranking on a partially populated table would
 produce exactly the well-formed answer about nothing that this collection exists to prevent,

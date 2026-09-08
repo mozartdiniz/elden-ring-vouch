@@ -58,6 +58,52 @@ EACH = re.compile(r"([0-9.]+)x")
 PVP = re.compile(r"\(\s*([0-9.]+)x\s*in PvP\s*\)")
 PVP_NOTE = re.compile(r"\([^)]*bugged[^)]*\)")
 
+# The proposal. Each clause the prose uses, and the `HitKind` values it becomes.
+#
+# A clause can name more than one kind — Godfrey Icon's "charged spells and charged weapon
+# skills" is `ChargedSkill` *and* `ChargedR2` in the hand-built table, which is the convention
+# this follows. Four of these names already exist in `lib/buffs.HIT_KINDS`; the rest are the
+# proposal, and are the whole of what is being decided.
+#
+# An empty list means the gate is not a hit kind at all — a state or a proc — and the buff
+# goes on every kind, which is what makes `buffs.state_conditional` fire and makes
+# `buff-stack` demand the caller assert it. That mechanism already exists; nothing is added
+# for it here.
+HIT_KIND_FOR = {
+    # Both, because a charged weapon skill is still a weapon skill. The hand-built table
+    # knows this and a naive reading of the clause does not — which the check caught.
+    "with weapon skills": ["Skill", "ChargedSkill"],
+    "with charged spells and charged weapon skills": ["ChargedSkill", "ChargedR2"],
+    "with charged R2s": ["ChargedR2"],
+    "with jump attacks": ["Jump"],
+    "with continuous attacks": ["Successive"],
+    "with guard counters": ["GuardCounter"],
+    "with horseback attacks": ["Horseback"],
+    "with dashing attacks": ["Dashing"],
+    "with rolling / backstep attacks": ["RollBackstep"],
+    "with arrow / bolt attacks": ["Ranged"],
+    "with aimed arrow / bolt  attacks": ["RangedAimed"],
+    "with 2h attacks": ["TwoHanded"],
+    "with kicking / stomping skills": ["KickStomp"],
+    "with weapon-throwing attacks": ["ThrownWeapon"],
+    "with roar attacks and Shriek of Milos": ["Roar"],
+    "with Cracked / Ritual Pot attacks": ["Pot"],
+    "with Perfume Bottle attacks": ["Perfume"],
+    "with storm attacks": ["Storm"],
+    "with magma attacks": ["Magma"],
+    "with the final light attack in a chain": ["FinalLight"],
+}
+
+# Clauses the prose spells with trailing detail that does not change which kind it is.
+TRIM = re.compile(r"\s*(and bowDistRate.*|and increases dexterity.*|\(crosshair.*|& 1.*)$")
+
+
+def hit_kinds(clause):
+    """The `HitKind` values a clause maps to, or [] when the gate is a state rather than a hit."""
+    key = TRIM.sub("", clause).strip()
+    return HIT_KIND_FOR.get(key, [])
+
+
 # What gates the multiplier: a hit kind, a state, or a proc.
 CLAUSE = re.compile(
     r"\b(with|while|when|after|to)\b\s+(.{3,80}?)(?:\s*$|\s*[.;]|,\s*and increases)",
@@ -87,6 +133,13 @@ def talismans():
             continue
 
         values = EACH.findall(match.group(1))
+        # The LAST of a ramp, not the first. "1.03x /1.05x /1.1x /1.1x with continuous
+        # attacks" is one buff that climbs, and `BuffMult.csv` records where it lands —
+        # because a ramped figure is state-conditional and `buff-stack` already makes the
+        # caller assert the state. Taking values[0] was my bug, and the check against the ten
+        # known talismans caught it on the first run; I then wrote it up as a difference of
+        # convention, which it was not.
+        ramped = values[-1]
         pvp = PVP.search(effect)
         clause = CLAUSE.search(PVP_NOTE.sub("", effect))
         duration = DURATION.search(effect)
@@ -98,9 +151,9 @@ def talismans():
                 "Slot": "Passive",
                 "HitKind": "",
                 "Condition": "",
-                "MultPve": values[0],
-                "MultPvp": pvp.group(1) if pvp else values[0],
-                "Tiers": " ".join(values[1:]),
+                "MultPve": ramped,
+                "MultPvp": pvp.group(1) if pvp else ramped,
+                "Tiers": " ".join(values) if len(values) > 1 else "",
                 "DurationSeconds": duration.group(1) if duration else "",
                 "Clause": f"{clause.group(1)} {clause.group(2)}".strip() if clause else "",
                 "Effect": effect,
@@ -154,6 +207,57 @@ def disagreements(draft):
     return problems, conventions, known
 
 
+def rows_for(entry, kinds_in_use):
+    """One row per hit kind, exactly as `BuffMult.csv` is shaped.
+
+    A buff gated on a hit kind is worth its multiplier on those kinds and 1.0 on the rest. A
+    buff gated on a *state* is worth it everywhere, which is what `buffs.state_conditional`
+    reads to decide the caller must assert the state — so those get the figure on all eight.
+    """
+    kinds = hit_kinds(entry["Clause"])
+    everywhere = not kinds
+    out = []
+    for kind in kinds_in_use:
+        applies = everywhere or kind in kinds
+        out.append({
+            "Name": entry["Name"],
+            "Kind": "Talisman",
+            "Slot": "Passive",
+            "HitKind": kind,
+            "MultPve": entry["MultPve"] if applies else "1.0",
+            "MultPvp": entry["MultPvp"] if applies else "1.0",
+            "Notes": entry["Effect"],
+        })
+    return out
+
+
+def check_kinds(draft):
+    """Do the proposed hit kinds reproduce the ten rows that already exist?
+
+    The strongest check available: the overlap was assigned by hand from a different source, so
+    if the naming is right the generated rows are identical to the ones in the table.
+    """
+    import sys as _sys
+    _sys.path.insert(0, os.path.join(ROOT, "lib"))
+    import buffs
+
+    known = buffs.table()
+    wrong = []
+    for entry in draft:
+        if entry["Name"] not in known:
+            continue
+        theirs = known[entry["Name"]]["pve"]
+        mine = {r["HitKind"]: float(r["MultPve"]) for r in rows_for(entry, buffs.HIT_KINDS)}
+        differing = {k for k in theirs if abs(theirs[k] - mine.get(k, 1.0)) > 1e-9}
+        if differing:
+            wrong.append(
+                f"{entry['Name']}: {sorted(differing)} — "
+                f"table {[theirs[k] for k in sorted(differing)]}, "
+                f"proposed {[mine.get(k, 1.0) for k in sorted(differing)]}"
+            )
+    return wrong
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--check", action="store_true", help="check only, write nothing")
@@ -172,20 +276,37 @@ def main():
     if not problems:
         print(f"  {overlap - len(conventions)} agree exactly, and no figure disagrees")
 
-    blank_hitkind = sum(1 for r in draft if not r["Clause"])
-    tiered = sum(1 for r in draft if r["Tiers"])
-    timed = sum(1 for r in draft if r["DurationSeconds"])
-    print(f"\nleft for a person: {len(draft)} HitKind and Condition values")
-    print(f"  {tiered} carry stacking tiers, which the schema has no column for")
-    print(f"  {timed} are timed procs")
-    print(f"  {blank_hitkind} produced no clause and need reading by hand")
+    import sys as _sys
+    _sys.path.insert(0, os.path.join(ROOT, "lib"))
+    import buffs
+
+    unnamed = [r for r in draft if r["Clause"].startswith("with") and not hit_kinds(r["Clause"])]
+    stateful = [r for r in draft if not hit_kinds(r["Clause"])]
+    proposed = sorted({k for r in draft for k in hit_kinds(r["Clause"])} - set(buffs.HIT_KINDS))
+
+    wrong = check_kinds(draft)
+    print(f"\nhit kinds: the proposal reproduces the ten known talismans"
+          f"{' — EXCEPT:' if wrong else ' exactly'}")
+    for w in wrong:
+        print(f"  WRONG  {w}")
+
+    print(f"\n{len(stateful)} of the 33 are gated on a state, not a hit kind, and go on every")
+    print("  kind — which is what makes buff-stack require the caller to assert them.")
+    if unnamed:
+        print(f"\n{len(unnamed)} 'with ...' clause(s) have no proposed name yet:")
+        for r in unnamed:
+            print(f"  {r['Name']:<32} {r['Clause']}")
+    print(f"\n{len(proposed)} new HIT_KINDS values proposed: {', '.join(proposed)}")
 
     if not args.check:
+        expanded = [row for r in draft for row in rows_for(r, buffs.HIT_KINDS + tuple(proposed))]
         with open(DRAFT, "w", newline="") as handle:
-            writer = csv.DictWriter(handle, fieldnames=list(draft[0]))
+            writer = csv.DictWriter(handle, fieldnames=["Name", "Kind", "Slot", "HitKind",
+                                                        "MultPve", "MultPvp", "Notes"])
             writer.writeheader()
-            writer.writerows(draft)
-        print(f"\nwrote {os.path.relpath(DRAFT, ROOT)}")
+            writer.writerows(expanded)
+        print(f"\nwrote {os.path.relpath(DRAFT, ROOT)} — {len(expanded)} rows, "
+              f"BuffMult.csv's shape exactly")
 
     return 1 if problems else 0
 

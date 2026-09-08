@@ -7,30 +7,30 @@ this file needs a node rewritten first — that is the point of separating it.
 Written 7 September 2026, after the node-rules, node-code and app work was done and these were
 what remained. `HANDOFF.md` has the state of everything else.
 
-**Before starting any of it, read this.** The sourcing plan this file was written with does
-not hold, and for item 1 it turned out not to be needed.
+**Read this first: most of what was written here as missing is not.**
 
-`prometheux-workspace/files/elden-ring-brain/` **is not on this machine.** Three places in the
-documentation said to vendor the missing tables from it. For items 2, 3, 4 and 6 the first
-task is therefore *find a source*, which is a different job from parsing one — and two things
-that looked like sources are not:
+This file originally said every entry needed a table vendored from
+`prometheux-workspace/files/elden-ring-brain/`. That directory is not on this machine, and
+checking each entry against what *is* here changed most of them:
 
-- `oracle/extracted/.../EffectData_Active.csv` is a 27-row live panel from the Build Planner,
-  mostly blank, with no header. Not a stubbed effect table; there is nothing to unstub.
-- `~/Dev/EldenRing/paramdex/` holds two files and both are ID-to-name maps. Paramdex upstream
-  is the same: it publishes **definitions and names, not values**. The values live in the
-  game's `regulation.bin`, and there is no Elden Ring install on this machine.
-- `~/Dev/EldenRing/DataSet/` is the fanapis export. 87 base-game talismans plus DLC, with
-  `id, name, image, description, effect` — and `effect` is prose with no numbers in it at all
-  (*"Raises attack power of arrows and bolts"*). Useful as the **roster**, which is the
-  checklist of what any table must cover. Useless as the table.
+- **Item 1 is done.** The talisman figures were in `EffectData.csv`'s prose the whole time.
+- **Items 2 and 3 need no source.** `StatusEffectData.csv` and `ConsumableData.csv` are
+  vendored and read by nothing.
+- **Item 4 is three things and one source** — `regulation.bin`, unpacked.
+- **Item 5 has no identified source at all.**
 
-**Item 1 needs none of them.** See below: the figures were in `oracle/` the whole time.
+That is the same mistake three times over, and it is `BUGS.md`'s most common bug shape — *the
+table already knew and the code did not look* — appearing in the plan rather than in a node.
+Before writing that something is missing here, grep `oracle/extracted/*/csv/` for it.
 
-**And the standing rule still applies to whatever source is found:** read its file list before
-writing a parser. Three of the twenty-five bugs in `BUGS.md` exist because one was written
-against prose while the structured table sat unused. New tables go in `data/`, never in
-`oracle/`, and `data/README.md` declares the provenance.
+Two things that looked like sources and are not: `EffectData_Active.csv` is a 27-row live panel
+from the Build Planner, and `~/Dev/EldenRing/paramdex/` is two ID-to-name maps. Paramdex
+upstream is the same — it publishes definitions and names, **not values**.
+
+**The standing rule still holds:** read a source's file list before writing a parser. Three of
+the twenty-five bugs in `BUGS.md` exist because one was written against prose while the
+structured table sat unused. New tables go in `data/`, never in `oracle/`, and
+`data/README.md` declares the provenance.
 
 ---
 
@@ -69,83 +69,90 @@ it lands, re-run question 5.1, correct its `VALIDATION.md` entry, and remove its
 `EXPECT` in `scripts/compare_models.py` — or the battery will score a correct answer as a
 failure.
 
-## 2. The mechanics rules behind the numbers
+## 2. Status procs — readable now, from a table nobody reads
 
-**The gap.** The collection has the buildup figures and the poise motion values and none of the
-rules that turn them into effects. Every Pattern 11 partial is this:
+**No source needed.** `oracle/extracted/.../StatusEffectData.csv` is 1,512 rows, vendored, and
+**no node in this collection reads it**. It carries what this entry was written to say was
+missing:
 
-| question | has | missing |
-|---|---|---|
-| 11.2 | Black Flame's attack figures | the percentage-of-max-HP rule, and its DLC reduction |
-| 11.3 | frostbite buildup per hit | how buildup accumulates and decays, what the proc does |
-| 11.4 | bleed buildup, arcane scaling | why a lower-buildup weapon can proc faster |
-| 11.6 | an ash's poise damage, a fight's poise | what stance damage does and how a break becomes a riposte |
+| | frost | bleed | rot |
+|---|---|---|---|
+| `changeHpPoint` / `changeHpRate` | 30 flat | **15% + 100 flat** | 0.18% + 15 |
+| `effectEndurance` | 40s | 1s | 90s |
+| `neutralDamageCutRate` | **1.2** — the +20% damage taken | 1.0 | 1.0 |
 
-**The current behaviour is correct and should not be "fixed" in code.** Both models stopped on
-11.3 and 11.6, three runs each, and said the collection has no rule for it. That is the right
-answer and the refusal arm of the battery now checks it stays the right answer. These become
-answerable when a table carries the rule, not before.
+That is question **11.3** — *"what exactly does the frostbite proc do, damage and the
+damage-taken debuff"* — and **11.4**, answered from disk. Keyed by `SpEffectId` and
+`statusType`, 268 frost rows, 270 bleed, 212 rot, 296 poison.
 
-**What is needed.** Buildup accumulation and decay rates, proc effects and durations, and the
-stance-break rule. None is in the Build Planner extraction. `ConsumableEffect.csv` in the
-workspace is unported and may carry some of the status side.
+**Done when.** A node reports a status's proc — damage, duration, debuff — and 11.3 and 11.4
+answer end to end. `EXPECT` in `scripts/compare_models.py` lists 11.3 in the refusal arm; take
+it out in the same commit or the battery will score a correct answer as a failure.
 
-**Done when.** 11.2, 11.3, 11.4 and 11.6 answer end to end — and the four refusal-arm entries
-in `scripts/compare_models.py`'s `EXPECT` are updated in the same commit, or the battery will
-start reporting correct answers as failures.
+**What is *not* here** is the buildup accumulation and decay rate — how fast a bar fills and
+drains. That is the part of 11.4 about why a lower-buildup weapon can proc faster, and it needs
+the source in item 5.
 
-## 3. Range, moveset, reach, cast time and aggro
+## 3. Consumables and locations — also readable now
 
-**The gap.** No table carries any of it. All of Pattern 15's partials turn on it, plus two
-others: 15.1 (a loadout that is not all short-range), 15.5 (a spellblade bar that complements
-melee), 15.6 (a long-range option that is not ice).
+**No source needed for the damage.** `ConsumableData.csv` is vendored and unread: 91 rows,
+`Name, AtkID, attackBase{Physics,Magic,Fire,Thunder,Dark}`. Fire Pot at 230 fire, Redmane Fire
+Pot at 326.
 
-**Saying so is the answer**, and 15.6 is in the battery's refusal arm for exactly that reason.
+**Locations are on the machine**, in `~/Dev/EldenRing/DataSet` — `locations.csv` (177 rows,
+region and description) and `items.csv` (462 rows, with an `obtainedFrom` column). That is the
+fanapis export, a different provenance from `oracle/`, so it goes in `data/` with the
+declaration `data/README.md` requires.
 
-**What is needed.** Per-spell range bands and cast times; per-weapon reach. Probably not in the
-Build Planner extraction at all — this may be a new source rather than an unported one, and
-that changes the provenance question, so decide where it goes before parsing anything.
+## 4. Three things that need the game's own params
 
-**Done when.** A spell or weapon can be asked for its range band, and Pattern 15 answers.
+These are one task, not three. All of them need `regulation.bin` unpacked — a game install and
+a param tool — and none of them will ever appear in a spreadsheet extraction.
 
-## 4. Guard counters have no motion value
+- **Black Flame's percentage-of-max-HP burn (11.2).** The hook is present and the row is not:
+  `MagicData` gives Black Flame `durationSpEffect` 1626000 and 1627000, and neither resolves in
+  `StatusEffectData`, which only covers status buildup. **Needs `SpEffectParam`.**
+- **Range, reach and cast time (Pattern 15, 15.6).** `MagicData` has a `bulletRange` column and
+  it is a false friend — the values are bullet *ids* like `10402151`, pointing into a `Bullet`
+  param that was not extracted. `EquipParamWeapon` has no reach, range or length column among
+  its 71. **Needs `Bullet`, and something for weapon reach.**
+- **Guard-counter motion values (item 4 as it was).** `EquipParamWeapon` carries guard
+  *defence* — `physGuardCutRate`, `staminaGuardDef`, `guardCutCancelRate` — and no motion value
+  of any kind. No poise, stance or motion column exists. **Needs `AtkParam`.**
 
-**The gap.** The extraction carries no motion value for guard counters, so *"best greatshield
-for guard counters"* is answered on guard boost and the negation split instead — a real answer
-to an adjacent question.
+## 5. The stance-break rule, which is in no table anywhere
 
-**What is needed.** Guard-counter motion values per weapon class. Small, self-contained, and
-the only one of these four that is a single missing column rather than a missing subject.
+`boss-lookup` gives a fight's poise and `ash-rank` gives an ash's poise damage, so *"how many
+of these break that"* is arithmetic a caller can already do. What is missing is the rule that
+makes it meaningful: how stance damage accumulates, how fast it decays, and what a break
+actually does. Same shape as the status buildup rates in item 2.
 
-**Done when.** `weapon-skill` or `optimal-affinity` can price a guard counter.
-
-## 5. Talismans are still not applied to a build
-
-**Deliberate, and now known to be the same gap as item 1.** `character-build`, `equip-load` and
-`defence` all report figures *before* talismans. `equip-load` refuses to take one rather than
-ignoring it, and `item-effect` pins `applied_to_a_build: false`, so nothing pretends otherwise.
-
-This used to read as "`planner.py` stubbed `EffectData_Active`, so unstub it". That was wrong:
-`EffectData_Active.csv` is a 27-row live panel from the Build Planner, not a table of effects.
-There is nothing to unstub. Applying a talisman to a build needs the same quantified,
-condition-tagged table item 1 needs, which is why they should be done together and why doing
-this one first would be building on nothing.
-
-## 6. Not ported at all
-
-Item locations, and `ConsumableEffect.csv`. Both live only in
-`prometheux-workspace/files/elden-ring-brain/`. Vendor into `data/` with provenance the way the
-other six were. `ConsumableEffect.csv` is also a candidate source for item 2.
+This is the only entry with no identified source at all. It may not be extractable from
+anything; it may be community knowledge that would have to be asserted rather than computed,
+which is a decision about what this collection is willing to publish.
 
 ---
 
-## What these have in common
+## Where this leaves the data work
 
-Every one of them is a question the collection currently answers with an honest refusal. That
-is the design working: none of them returns a well-formed number about nothing, and the
-refusal arm of the 18-question battery now holds three of them in place so a future change
-cannot quietly start guessing.
+**Buildable now, with nothing that is not already on this machine:**
 
-Which means none of this is urgent in the way a wrong answer would be. It is the difference
-between a tool that covers less than a player wants and a tool that cannot be trusted, and the
-collection is firmly on the right side of that line while this file is unfinished.
+| | needs | closes |
+|---|---|---|
+| 1. talismans | *done* | 5.1, once `item-rank` exists |
+| 2. status procs | read `StatusEffectData.csv` | 11.3, 11.4 |
+| 3. consumables and locations | read `ConsumableData.csv`, vendor the fanapis export | Pattern 13, item questions |
+
+**Parked, and honestly answered in the meantime:**
+
+| | needs | affects |
+|---|---|---|
+| 4. Black Flame, range, guard counters | `regulation.bin` unpacked — one source, three items | 11.2, Pattern 15, guard-counter questions |
+| 5. stance break | no identified source | 11.6 |
+
+Every parked question is one the collection currently answers with an honest refusal, and
+three of them are held in the battery's refusal arm so a future change cannot quietly start
+guessing. That is the design working. It is the difference between a tool that covers less
+than a player wants and one that cannot be trusted, and the collection stays on the right side
+of that line for as long as this file is unfinished.
+

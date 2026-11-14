@@ -320,3 +320,9 @@ number the game shows, so it is not published. A figure whose meaning is unverif
 than an absent one, because it reads as authoritative.
 
 Nothing here does ashes of war, item locations, or lore, and nothing here should pretend to.
+
+## License
+
+MIT, see [LICENSE](LICENSE). That covers the code and documentation written for this
+repository, not `oracle/`, which is a verbatim copy of the extracted Build Planner spreadsheet and
+stays under the terms of its original authors.
